@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Metallurgy & Blacksmithing — forge building, heat treating, tool making from scrap, casting aluminum and bronze, and working iron and steel without modern infrastructure.">
+  <title>Metallurgy — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9878;</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* ── Metallurgy page-specific ── */
+    .metal-tri {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-md);
+      margin: var(--sp-lg) 0;
+    }
+    .metal-tri-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: var(--sp-lg);
+      text-align: center;
+    }
+    .metal-tri-card .mtc-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--amber);
+      margin-bottom: var(--sp-xs);
+    }
+    .metal-tri-card .mtc-pct {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--amber-light);
+      font-family: var(--mono);
+      display: block;
+      line-height: 1.1;
+    }
+    .metal-tri-card .mtc-note {
+      font-size: 0.78rem;
+      color: var(--text-2);
+      margin-top: var(--sp-xs);
+    }
+    .metal-tri-card.best { border-color: var(--amber-dim); background: rgba(201,169,78,.07); }
+
+    .priority-list {
+      list-style: none;
+      padding: 0;
+      counter-reset: pri;
+    }
+    .priority-list li {
+      counter-increment: pri;
+      display: flex;
+      gap: var(--sp-md);
+      padding: var(--sp-md);
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: var(--sp-sm);
+    }
+    .priority-list li::before {
+      content: counter(pri);
+      background: var(--amber-dim);
+      color: var(--amber-light);
+      font-weight: 800;
+      font-size: 0.85rem;
+      min-width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .priority-list li .pl-title {
+      font-weight: 700;
+      color: var(--text-0);
+      display: block;
+    }
+    .priority-list li .pl-reason {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      margin-top: 2px;
+    }
+
+    /* heat color chip used in table */
+    .heat-swatch {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 3px;
+      vertical-align: middle;
+      border: 1px solid rgba(255,255,255,.15);
+      margin-right: 0.35rem;
+    }
+
+    /* forge diagram label override */
+    .diagram { color: var(--amber); }
+
+    /* SVG diagram wrapper */
+    .svg-wrap {
+      background: var(--bg-0);
+      border: 1px solid var(--border-hi);
+      border-radius: 10px;
+      padding: var(--sp-lg);
+      margin: var(--sp-lg) 0;
+      overflow: hidden;
+    }
+    .svg-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-3);
+      margin-top: var(--sp-sm);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-md);
+      margin: var(--sp-lg) 0;
+    }
+    .process-box {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: var(--sp-md) var(--sp-lg);
+    }
+    .process-box h4 {
+      color: var(--amber);
+      margin-bottom: var(--sp-sm);
+      font-size: 0.95rem;
+    }
+    .process-box p { font-size: 0.88rem; margin-bottom: 0; }
+
+    @media (max-width: 700px) {
+      .metal-tri { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">&#9776;</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Metallurgy</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">ARIA</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>Metallurgy &amp; Blacksmithing</h1>
+    <p class="section-desc">Metal tools are civilization's force multipliers. A blacksmith can turn scrap metal into axes, knives, plows, hooks, springs, hinges, and nails — the hardware of survival. This section covers forge construction, steel identification, basic smithing, heat treatment, step-by-step projects, and casting aluminum and bronze without modern infrastructure.</p>
+    <div class="section-meta">
+      <span class="meta-item">Updated: <span data-updated="2026-06"></span></span>
+      <span class="meta-item">
+        <span class="badge badge-danger">Advanced</span>
+        <span class="badge badge-warning" style="margin-left:.3rem">All Zones</span>
+      </span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#understanding-metal">Understanding Metal: Iron, Steel, Cast Iron</a></li>
+      <li><a href="#building-forge">Building a Forge</a></li>
+      <li><a href="#basic-techniques">Basic Smithing Techniques</a></li>
+      <li><a href="#heat-treating">Heat Treating</a></li>
+      <li><a href="#priority-tools">Priority Tool Making Order</a></li>
+      <li><a href="#knife-making">Step-by-Step: Making a Knife</a></li>
+      <li><a href="#nail-making">Step-by-Step: Making Nails</a></li>
+      <li><a href="#casting">Metal Casting</a></li>
+      <li><a href="#tool-maintenance">Tool Maintenance</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">&#9201;</span>
+    <div class="callout-content">
+      <strong>First 24 Hours — Metallurgy Priorities</strong>
+      <ol style="margin:.5rem 0 0;padding-left:1.2rem">
+        <li>Inventory all existing hand tools — protect and store them immediately; they are irreplaceable.</li>
+        <li>Collect every piece of scrap metal accessible: rebar, car springs, files, railroad spikes, old saw blades.</li>
+        <li>Identify anyone in your community with blacksmithing, welding, or machining experience.</li>
+        <li>Stockpile charcoal or coal before any electrical supply for blowers and fans is lost.</li>
+        <li>Never work galvanized metal in a forge — the zinc oxide fumes cause metal fume fever within hours.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- =================== SECTION 1: UNDERSTANDING METAL =================== -->
+  <section id="understanding-metal">
+    <h2>1. Understanding Metal: Iron, Steel, and Cast Iron</h2>
+
+    <p>All three are iron-carbon alloys. The carbon content determines everything: workability, strength, hardenability, and brittleness. Understanding this triangle is the foundation of all practical metallurgy.</p>
+
+    <div class="metal-tri">
+      <div class="metal-tri-card">
+        <div class="mtc-name">Wrought Iron</div>
+        <span class="mtc-pct">&lt;0.08% C</span>
+        <div class="mtc-note">Soft, ductile, welds easily. Historic fence and decorative ironwork. Cannot be hardened effectively. Good for hardware, hooks, hinges.</div>
+      </div>
+      <div class="metal-tri-card best">
+        <div class="mtc-name">Steel (The Sweet Spot)</div>
+        <span class="mtc-pct">0.2–2% C</span>
+        <div class="mtc-note">Strong, tough, hardenable above ~0.4% carbon. This is what you want for tools, knives, springs, and structural parts. Work it hot.</div>
+      </div>
+      <div class="metal-tri-card">
+        <div class="mtc-name">Cast Iron</div>
+        <span class="mtc-pct">&gt;2% C</span>
+        <div class="mtc-note">Brittle — shatters rather than bends. Cannot be forged. Good for cookware, engine blocks. Castable but not smithable.</div>
+      </div>
+    </div>
+
+    <h3>Spark Test for Steel Identification</h3>
+    <p>Hold metal against a grinding wheel in subdued light and read the sparks. This test takes practice but becomes reliable quickly. High carbon produces more, brighter, and more complex spark bursts.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metal Type</th><th>Spark Character</th><th>Color</th><th>Usefulness</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cast iron</td><td>Short, few sparks. Minimal branching. Very quiet stream.</td><td>Dull orange-red</td><td>Casting only. Cannot forge.</td></tr>
+          <tr><td>Mild / low-carbon steel</td><td>Long straight sparks, very few forks or bursts.</td><td>Pale yellow-orange</td><td>Hardware, nails, garden tools. Cannot harden.</td></tr>
+          <tr><td>Medium carbon steel</td><td>Moderate length, some branching and small bursts.</td><td>Yellow</td><td>Structural tools, moderate heat treat response.</td></tr>
+          <tr><td>High carbon steel (tool steel)</td><td>Short, brilliant sparks with many dense bursts ("flowers"). Very lively.</td><td>Brilliant white</td><td>Knives, axes, chisels, punches. Excellent hardening.</td></tr>
+          <tr><td>Stainless steel</td><td>Very few sparks, almost none. Quiet, sparse stream.</td><td>Dull orange</td><td>Poor for forging. Does not harden easily.</td></tr>
+          <tr><td>High-speed steel (HSS)</td><td>Short, dull sparks. Very few bursts. Reddish.</td><td>Dark red-orange</td><td>Drill bits and taps. Hardens at higher temp; complex.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Other Identification Tests</h3>
+    <ul>
+      <li><strong>Magnet test:</strong> Most steels are magnetic. Austenitic stainless steel (304/316) is non-magnetic — this steel is very difficult to forge and does not harden. If a piece is non-magnetic and gives few sparks, leave it for non-structural uses.</li>
+      <li><strong>Sound test:</strong> Drop a piece on a concrete floor. High-carbon steel rings with a clear tone that lingers. Cast iron gives a dull thud. Wrought iron is in between.</li>
+      <li><strong>Weight:</strong> All steel is approximately the same density (~7.8 g/cm³). Aluminum is about 2.7 g/cm³ — significantly lighter. Never put aluminum in a forge intended for steel temperatures.</li>
+    </ul>
+
+    <h3>Post-Collapse Metal Sources</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Source</th><th>Steel Type</th><th>Approximate Carbon</th><th>Best Use</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Leaf springs (vehicle suspension)</td><td>Spring steel 5160</td><td>0.55–0.65%</td><td>Knives, axes, chisels, swords</td></tr>
+          <tr><td>Coil springs (vehicle, industrial)</td><td>Spring steel 5160/9260</td><td>0.55–0.65%</td><td>Same as leaf spring; uncoil by heating first</td></tr>
+          <tr><td>Files and rasps</td><td>High-carbon tool steel W1/W2</td><td>0.9–1.1%</td><td>Excellent knives; already hardened stock</td></tr>
+          <tr><td>Saw blades (hand and circular)</td><td>High-carbon / alloy</td><td>0.7–1.0%</td><td>Knives; already flat stock, easy to profile</td></tr>
+          <tr><td>Car axles and drive shafts</td><td>Medium alloy steel</td><td>0.35–0.45%</td><td>Good general tool steel; punches, drifts</td></tr>
+          <tr><td>Railroad spikes (HC stamped)</td><td>Medium carbon</td><td>0.3–0.5%</td><td>Knives, small tools; plain spikes are mild steel</td></tr>
+          <tr><td>Ball bearings</td><td>Bearing steel 52100</td><td>0.98–1.10%</td><td>Punches, cold chisels, small cutting tools</td></tr>
+          <tr><td>Rebar (standard)</td><td>Mild steel A615 Gr40/60</td><td>0.06–0.30%</td><td>Hardware, nails, structural — not edge tools</td></tr>
+          <tr><td>Trailer hitch balls</td><td>Hardened steel alloy</td><td>Medium-high</td><td>Punches, mandrels, small tools</td></tr>
+          <tr><td>Chain links (logging/anchor)</td><td>Medium carbon</td><td>0.25–0.45%</td><td>Hardware, links, hooks</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =================== SECTION 2: BUILDING A FORGE =================== -->
+  <section id="building-forge">
+    <h2>2. Building a Forge</h2>
+
+    <h3>JABOD Forge (Just A Box Of Dirt)</h3>
+    <p>The fastest forge to build costs nearly nothing. A wooden box filled with compacted dirt or clay, a steel pipe for the air inlet, and a depression for the firepot. Adequate for learning and small work. Replace the dirt with clay mixed with sand (50/50) for better durability.</p>
+
+    <pre class="diagram">
+JABOD FORGE — CROSS SECTION (top view, then side view)
+
+TOP VIEW:
+  ┌──────────────────────────────┐
+  │    DIRT / CLAY PACK          │
+  │           ┌──┐               │
+  │           │FP│  ← firepot   │
+  │    ───────┤  │               │
+  │   AIR     │  │               │
+  │   PIPE ───┘  │               │
+  └──────────────────────────────┘
+  Box: 30×40cm min; 20cm deep
+
+SIDE VIEW:
+       [WORKPIECE / FUEL]
+            │
+    ┌───────▼───────┐
+    │   ~~FIRE~~    │  ← firepot depression 10–15cm dia.
+    │               │
+    │  ─────●───── │  ← steel pipe tuyere (2–3cm dia.)
+    │               │
+    ╘═══════════════╛  ← wooden box walls
+              │
+         [BELLOWS/FAN]
+
+Build time: 1–2 hours. Cost: near zero.
+    </pre>
+
+    <figure class="svg-diagram" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
+      <svg viewBox="0 0 560 300" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="jabod-title">
+        <title id="jabod-title">JABOD Forge Cross-Section Diagram</title>
+        <desc>Cross-section of a Just-A-Box-Of-Dirt (JABOD) forge showing the wooden box, compacted clay/dirt fill, firepot depression, steel pipe tuyere for air supply, and workpiece position.</desc>
+        <defs><marker id="jb-arr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c9a94e"/></marker></defs>
+        <!-- Labels -->
+        <text x="280" y="16" text-anchor="middle" font-size="13" fill="#c9a94e" font-family="sans-serif" font-weight="700">JABOD FORGE — Side Cross-Section</text>
+        <!-- Box outer -->
+        <rect x="100" y="60" width="360" height="200" rx="4" fill="#0c110f" stroke="#8a9e86" stroke-width="2.5"/>
+        <!-- Wood sides (hatched) -->
+        <rect x="100" y="60" width="18" height="200" fill="#1e2820" stroke="#3a4838" stroke-width="1"/>
+        <rect x="442" y="60" width="18" height="200" fill="#1e2820" stroke="#3a4838" stroke-width="1"/>
+        <rect x="100" y="242" width="360" height="18" fill="#1e2820" stroke="#3a4838" stroke-width="1"/>
+        <text x="50" y="162" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">Wood</text>
+        <text x="50" y="176" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">box</text>
+        <!-- Dirt/clay fill -->
+        <rect x="118" y="120" width="324" height="122" fill="#182016" stroke="none"/>
+        <!-- Dirt texture dots -->
+        <text x="200" y="200" font-size="9" fill="#243028" font-family="sans-serif">·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·</text>
+        <text x="200" y="215" font-size="9" fill="#243028" font-family="sans-serif">·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·</text>
+        <text x="200" y="230" font-size="9" fill="#243028" font-family="sans-serif">·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·</text>
+        <text x="170" y="168" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif">Compacted clay/dirt</text>
+        <text x="170" y="182" text-anchor="middle" font-size="9" fill="#3a4838" font-family="sans-serif">(50% clay, 50% sand)</text>
+        <!-- Firepot depression (bowl shape) -->
+        <ellipse cx="280" cy="122" rx="60" ry="24" fill="#070a09" stroke="#c9a94e" stroke-width="2"/>
+        <text x="280" y="115" text-anchor="middle" font-size="10" fill="#c9a94e" font-family="sans-serif" font-weight="700">FIREPOT</text>
+        <text x="280" y="128" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">10–15 cm dia.</text>
+        <!-- Tuyere pipe -->
+        <rect x="118" y="152" width="172" height="14" rx="3" fill="#4a80b5" stroke="#28486a" stroke-width="1.5"/>
+        <text x="190" y="145" text-anchor="middle" font-size="10" fill="#4a80b5" font-family="sans-serif">Steel pipe tuyere</text>
+        <text x="190" y="157" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(2–3 cm diameter)</text>
+        <!-- Air flow arrow -->
+        <line x1="70" y1="159" x2="114" y2="159" stroke="#4a80b5" stroke-width="2" marker-end="url(#jb-arr)"/>
+        <text x="36" y="155" font-size="10" fill="#4a80b5" font-family="sans-serif">AIR</text>
+        <text x="28" y="168" font-size="9" fill="#8a9e86" font-family="sans-serif">(bellows/fan)</text>
+        <!-- Fire/heat zone -->
+        <text x="280" y="82" text-anchor="middle" font-size="18" fill="#c87a40" font-family="sans-serif" opacity="0.8">🔥</text>
+        <text x="380" y="78" font-size="10" fill="#c87a40" font-family="sans-serif">← Work here</text>
+        <text x="380" y="92" font-size="9" fill="#8a9e86" font-family="sans-serif">orange/yellow heat</text>
+        <!-- Workpiece -->
+        <rect x="258" y="64" width="44" height="14" rx="2" fill="#eceee0" stroke="#8a9e86" stroke-width="1.5"/>
+        <text x="280" y="74" text-anchor="middle" font-size="9" fill="#0c110f" font-family="sans-serif" font-weight="700">WORKPIECE</text>
+        <!-- Dimensions -->
+        <line x1="100" y1="275" x2="460" y2="275" stroke="#3a4838" stroke-width="1"/>
+        <line x1="100" y1="270" x2="100" y2="280" stroke="#3a4838" stroke-width="1"/>
+        <line x1="460" y1="270" x2="460" y2="280" stroke="#3a4838" stroke-width="1"/>
+        <text x="280" y="288" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif">Min. 40 cm wide · 20 cm deep · Low cost · Build time: 1–2 hours</text>
+      </svg>
+      <figcaption>JABOD forge cross-section — the firepot depression concentrates heat at the center. The tuyere pipe enters horizontally through the clay pack from the side. Use forced air (bellows, hair dryer, or shop vac on blow setting) for enough heat to forge mild steel.</figcaption>
+    </figure>
+
+    <div class="callout callout-amber">
+      <span class="callout-icon">&#9888;</span>
+      <div class="callout-content">
+        <strong>JABOD Limitation</strong>
+        <p>A JABOD forge is excellent for getting started but will not hold up to sustained use — the clay erodes and the box can scorch. Build it to learn; upgrade to a brake drum or masonry forge as soon as possible.</p>
+      </div>
+    </div>
+
+    <h3>Brake Drum Forge</h3>
+    <p>A rear brake drum from a heavy truck is a nearly perfect improvised forge firepot: deep, cast iron, and free from auto repair shops. This is the standard beginner's setup and can be built in a few hours with scrap materials.</p>
+
+    <!-- FORGE SVG DIAGRAM -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 560 320" style="width:100%;max-width:560px;display:block;margin:0 auto;" aria-label="Brake drum forge cross-section diagram">
+        <!-- Background -->
+        <rect width="560" height="320" fill="#070a09"/>
+
+        <!-- Stand legs -->
+        <rect x="155" y="210" width="14" height="95" fill="#3a3a3a" rx="2"/>
+        <rect x="391" y="210" width="14" height="95" fill="#3a3a3a" rx="2"/>
+        <rect x="140" y="295" width="45" height="10" fill="#3a3a3a" rx="2"/>
+        <rect x="375" y="295" width="45" height="10" fill="#3a3a3a" rx="2"/>
+
+        <!-- Stand crossbar -->
+        <rect x="155" y="255" width="250" height="10" fill="#555" rx="3"/>
+
+        <!-- Brake drum body (outer) -->
+        <rect x="145" y="130" width="270" height="90" rx="12" fill="#4a4a4a" stroke="#666" stroke-width="2"/>
+        <!-- Drum inner (firepot area) -->
+        <rect x="175" y="140" width="210" height="70" rx="8" fill="#1a1a1a"/>
+        <!-- Drum rim top -->
+        <rect x="145" y="125" width="270" height="12" rx="4" fill="#5a5a5a"/>
+
+        <!-- Fire in firepot -->
+        <ellipse cx="280" cy="170" rx="70" ry="22" fill="#c84800" opacity="0.7"/>
+        <ellipse cx="280" cy="160" rx="50" ry="18" fill="#e86000" opacity="0.8"/>
+        <ellipse cx="270" cy="150" rx="35" ry="14" fill="#ffaa00" opacity="0.9"/>
+        <ellipse cx="285" cy="143" rx="20" ry="10" fill="#ffee88" opacity="0.8"/>
+
+        <!-- Fuel/coal above -->
+        <ellipse cx="240" cy="128" rx="18" ry="7" fill="#333" stroke="#555" stroke-width="1"/>
+        <ellipse cx="280" cy="122" rx="22" ry="8" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
+        <ellipse cx="320" cy="128" rx="16" ry="6" fill="#333" stroke="#555" stroke-width="1"/>
+
+        <!-- Workpiece above fire -->
+        <rect x="230" y="85" width="100" height="14" rx="2" fill="#c87a40" stroke="#e89050" stroke-width="1"/>
+        <!-- glow on workpiece -->
+        <rect x="245" y="86" width="70" height="12" rx="2" fill="#ffaa30" opacity="0.5"/>
+
+        <!-- Air pipe from below drum -->
+        <rect x="262" y="220" width="16" height="55" fill="#666" rx="2"/>
+        <!-- Air direction arrows -->
+        <text x="242" y="238" fill="#c9a94e" font-size="11" font-family="monospace">&#8593;</text>
+        <text x="296" y="238" fill="#c9a94e" font-size="11" font-family="monospace">&#8593;</text>
+
+        <!-- Blower box -->
+        <rect x="230" y="275" width="100" height="30" rx="5" fill="#2a3a2a" stroke="#4a6a4a" stroke-width="1.5"/>
+        <text x="280" y="295" fill="#c9a94e" font-size="11" font-family="monospace" text-anchor="middle">BLOWER / BELLOWS</text>
+
+        <!-- Optional ash dump -->
+        <rect x="365" y="190" width="50" height="14" rx="3" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
+        <text x="390" y="202" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">ASH DUMP</text>
+
+        <!-- Labels -->
+        <text x="22" y="100" fill="#c9a94e" font-size="11" font-family="monospace">WORKPIECE</text>
+        <line x1="100" y1="97" x2="228" y2="92" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
+
+        <text x="422" y="130" fill="#c9a94e" font-size="11" font-family="monospace">BRAKE DRUM</text>
+        <line x1="416" y1="128" x2="415" y2="148" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
+
+        <text x="422" y="165" fill="#c9a94e" font-size="11" font-family="monospace">FUEL + FIRE</text>
+        <line x1="416" y1="163" x2="352" y2="162" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
+
+        <text x="422" y="198" fill="#c9a94e" font-size="11" font-family="monospace">ASH DUMP</text>
+        <line x1="416" y1="196" x2="416" y2="197" stroke="#c9a94e" stroke-width="1"/>
+
+        <text x="22" y="240" fill="#c9a94e" font-size="11" font-family="monospace">AIR TUYERE</text>
+        <text x="22" y="253" fill="#c9a94e" font-size="11" font-family="monospace">(2–3 cm pipe)</text>
+        <line x1="110" y1="240" x2="261" y2="240" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
+
+        <text x="22" y="290" fill="#c9a94e" font-size="11" font-family="monospace">STAND / LEGS</text>
+        <line x1="110" y1="290" x2="155" y2="270" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
+
+        <!-- Title -->
+        <text x="280" y="22" fill="#e8c96e" font-size="13" font-family="monospace" text-anchor="middle" font-weight="bold">BRAKE DRUM FORGE — CROSS SECTION</text>
+      </svg>
+      <div class="svg-caption">Brake drum forge — side cross-section. Drum sits on steel or masonry stand at hip height. Tuyere pipe enters from below; air is forced up through fuel.</div>
+    </div>
+
+    <ol>
+      <li>Obtain a rear brake drum from a truck (heavier = better; cast iron preferred). Auto shops often give these away.</li>
+      <li>Cut or drill a 4–6 cm hole in the center of the drum bottom for the tuyere pipe.</li>
+      <li>Insert a steel pipe (4–6 cm diameter) as the tuyere — this is the air inlet. Weld or pack with refractory clay to seal.</li>
+      <li>Mount the drum on a steel or masonry stand at comfortable working height (hip level, roughly 90 cm).</li>
+      <li>Add a removable grate (steel bar stock) inside the drum to hold coal above the tuyere opening.</li>
+      <li>Connect the tuyere to a hand-crank blower, electric fan, or bellows. An old hair dryer works well.</li>
+      <li>Optional: drill an ash dump hole 2 cm below the grate on the side for clinker removal without disturbing the fire.</li>
+    </ol>
+
+    <h3>Bellows Construction</h3>
+    <p>A bellows provides forced air without electricity. Critical for off-grid smithing. Build a double-action bellows for continuous airflow — one chamber fills while the other delivers air.</p>
+
+    <!-- BELLOWS SVG DIAGRAM -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 560 260" style="width:100%;max-width:560px;display:block;margin:0 auto;" aria-label="Bellows construction diagram">
+        <rect width="560" height="260" fill="#070a09"/>
+
+        <!-- Top board -->
+        <rect x="80" y="30" width="300" height="20" rx="4" fill="#5a3a1a" stroke="#8a6030" stroke-width="1.5"/>
+        <text x="230" y="24" fill="#c9a94e" font-size="11" font-family="monospace" text-anchor="middle">TOP BOARD (30×50 cm wood)</text>
+
+        <!-- Intake valve on top board -->
+        <rect x="190" y="30" width="40" height="8" rx="2" fill="#8a6030"/>
+        <text x="210" y="26" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">INTAKE FLAP</text>
+        <text x="210" y="46" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">(leather valve)</text>
+
+        <!-- Leather sides (pleated) -->
+        <path d="M80,50 Q65,70 70,90 Q65,110 80,130 Q65,150 70,170 Q65,190 80,210" stroke="#8a5020" stroke-width="2.5" fill="none"/>
+        <path d="M380,50 Q395,70 390,90 Q395,110 380,130 Q395,150 390,170 Q395,190 380,210" stroke="#8a5020" stroke-width="2.5" fill="none"/>
+        <!-- Side fill suggestion -->
+        <path d="M80,50 Q65,70 70,90 Q65,110 80,130 Q65,150 70,170 Q65,190 80,210 L380,210 Q395,190 390,170 Q395,150 380,130 Q395,110 390,90 Q395,70 380,50 Z" fill="#3a1a08" opacity="0.5"/>
+
+        <!-- Bottom board -->
+        <rect x="80" y="210" width="300" height="20" rx="4" fill="#5a3a1a" stroke="#8a6030" stroke-width="1.5"/>
+        <text x="230" y="246" fill="#c9a94e" font-size="11" font-family="monospace" text-anchor="middle">BOTTOM BOARD (30×50 cm wood) — fixed</text>
+
+        <!-- Nozzle outlet -->
+        <rect x="380" y="120" width="80" height="18" rx="4" fill="#4a4a4a" stroke="#666" stroke-width="1.5"/>
+        <text x="458" y="126" fill="#c9a94e" font-size="10" font-family="monospace">NOZZLE</text>
+        <text x="458" y="139" fill="#8a9e86" font-size="9" font-family="monospace">(outlet valve</text>
+        <text x="458" y="150" fill="#8a9e86" font-size="9" font-family="monospace"> leather flap)</text>
+        <!-- Arrow showing airflow out -->
+        <text x="506" y="130" fill="#c9a94e" font-size="14" font-family="monospace">&#8594;</text>
+        <text x="515" y="130" fill="#8a9e86" font-size="9" font-family="monospace"> to tuyere</text>
+
+        <!-- Handle on top -->
+        <rect x="355" y="28" width="12" height="24" rx="3" fill="#7a5020" stroke="#9a7030" stroke-width="1"/>
+        <text x="374" y="38" fill="#c9a94e" font-size="10" font-family="monospace">HANDLE</text>
+        <text x="374" y="50" fill="#8a9e86" font-size="9" font-family="monospace">(lift/push)</text>
+
+        <!-- Pivot point -->
+        <circle cx="80" cy="210" r="5" fill="#c9a94e"/>
+        <text x="22" y="215" fill="#c9a94e" font-size="10" font-family="monospace">PIVOT</text>
+
+        <!-- Dimensions -->
+        <line x1="80" y1="20" x2="380" y2="20" stroke="#4d6048" stroke-width="1" stroke-dasharray="4,2"/>
+        <text x="230" y="17" fill="#4d6048" font-size="9" font-family="monospace" text-anchor="middle">50 cm</text>
+
+        <line x1="70" y1="30" x2="70" y2="210" stroke="#4d6048" stroke-width="1" stroke-dasharray="4,2"/>
+        <text x="38" y="125" fill="#4d6048" font-size="9" font-family="monospace">30 cm</text>
+
+        <text x="280" y="17" fill="#e8c96e" font-size="13" font-family="monospace" text-anchor="middle" font-weight="bold">DOUBLE-ACTION BELLOWS</text>
+      </svg>
+      <div class="svg-caption">Bellows construction — hinged at bottom, handle on top board. Leather sides expand and contract. Two flap valves: intake on top board (opens on pull), outlet on nozzle (opens on push).</div>
+    </div>
+
+    <ul>
+      <li><strong>Frame:</strong> Two boards 30 × 50 cm each. Hardwood preferred (oak, ash). Connected by a leather or canvas hinge at one end (the pivot end).</li>
+      <li><strong>Leather sides:</strong> Heavy vegetable-tanned leather, pleated to allow expansion. Glued and tacked around the perimeter of both boards. Old belts and boot leather work.</li>
+      <li><strong>Intake valve:</strong> A hole (5–7 cm dia.) in the top board, covered by a thin leather flap on the inside. The flap opens inward on the pull stroke (intake) and closes on the push stroke.</li>
+      <li><strong>Outlet nozzle:</strong> A tapered wood or steel nozzle at the hinge end, 2–3 cm diameter. Cover with an internal flap valve (thin leather) that closes on pull and opens on push, forcing air out.</li>
+      <li><strong>Double-action:</strong> For continuous airflow, connect two single bellows to the same tuyere pipe with a Y-junction, operated alternately. One fills while one pushes.</li>
+      <li><strong>Output target:</strong> At one stroke per second, a properly built bellows delivers approximately 20–30 liters per stroke, sufficient to maintain forge-welding heat in a charcoal fire.</li>
+    </ul>
+
+    <h3>Fire Management and Heat Colors</h3>
+    <p>Reading forge temperature by color is the foundational skill of blacksmithing. Work in subdued light until you develop the eye — bright sunlight washes out heat colors and leads to overheating. The full heat color progression:</p>
+
+    <!-- HEAT COLOR SVG -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 560 200" style="width:100%;max-width:560px;display:block;margin:0 auto;" aria-label="Heat color chart showing temperature progression">
+        <rect width="560" height="200" fill="#070a09"/>
+        <text x="280" y="20" fill="#e8c96e" font-size="12" font-family="monospace" text-anchor="middle" font-weight="bold">HEAT COLOR CHART — STEEL TEMPERATURE</text>
+
+        <!-- Color bar segments — 8 segments across 520px starting at x=20 -->
+        <!-- 1: Black (room temp) -->
+        <rect x="20" y="35" width="60" height="55" fill="#1a1a1a" rx="3"/>
+        <text x="50" y="56" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">Black</text>
+        <text x="50" y="68" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">room</text>
+        <text x="50" y="80" fill="#4d6048" font-size="8" font-family="monospace" text-anchor="middle">temp</text>
+
+        <!-- 2: Black red ~400°F/200°C -->
+        <rect x="82" y="35" width="60" height="55" fill="#3a0808" rx="3"/>
+        <text x="112" y="56" fill="#c84848" font-size="9" font-family="monospace" text-anchor="middle">Black</text>
+        <text x="112" y="68" fill="#c84848" font-size="8" font-family="monospace" text-anchor="middle">Red</text>
+        <text x="112" y="80" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">400°F</text>
+
+        <!-- 3: Dark cherry ~1200°F/650°C -->
+        <rect x="144" y="35" width="60" height="55" fill="#6a0808" rx="3"/>
+        <text x="174" y="56" fill="#ff6060" font-size="9" font-family="monospace" text-anchor="middle">Dark</text>
+        <text x="174" y="68" fill="#ff6060" font-size="8" font-family="monospace" text-anchor="middle">Cherry</text>
+        <text x="174" y="80" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">1200°F</text>
+
+        <!-- 4: Cherry red ~1400°F/760°C -->
+        <rect x="206" y="35" width="60" height="55" fill="#aa1a1a" rx="3"/>
+        <text x="236" y="56" fill="#ffaaaa" font-size="9" font-family="monospace" text-anchor="middle">Cherry</text>
+        <text x="236" y="68" fill="#ffaaaa" font-size="8" font-family="monospace" text-anchor="middle">Red</text>
+        <text x="236" y="80" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">1400°F</text>
+
+        <!-- 5: Bright cherry ~1600°F/870°C -->
+        <rect x="268" y="35" width="60" height="55" fill="#cc3a00" rx="3"/>
+        <text x="298" y="56" fill="#ffccaa" font-size="9" font-family="monospace" text-anchor="middle">Bright</text>
+        <text x="298" y="68" fill="#ffccaa" font-size="8" font-family="monospace" text-anchor="middle">Cherry</text>
+        <text x="298" y="80" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">1600°F</text>
+
+        <!-- 6: Orange ~1800°F/980°C -->
+        <rect x="330" y="35" width="60" height="55" fill="#cc6000" rx="3"/>
+        <text x="360" y="56" fill="#ffcc88" font-size="9" font-family="monospace" text-anchor="middle">Orange</text>
+        <text x="360" y="80" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">1800°F</text>
+
+        <!-- 7: Yellow-orange / welding ~2000°F/1100°C -->
+        <rect x="392" y="35" width="60" height="55" fill="#cc9900" rx="3"/>
+        <text x="422" y="56" fill="#ffffaa" font-size="9" font-family="monospace" text-anchor="middle">Yellow</text>
+        <text x="422" y="68" fill="#ffffaa" font-size="8" font-family="monospace" text-anchor="middle">Orange</text>
+        <text x="422" y="80" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">2000°F</text>
+
+        <!-- 8: White / burning ~2300°F+ -->
+        <rect x="454" y="35" width="86" height="55" fill="#cccc88" rx="3"/>
+        <text x="497" y="56" fill="#ffffff" font-size="9" font-family="monospace" text-anchor="middle">WHITE</text>
+        <text x="497" y="68" fill="#ffff88" font-size="8" font-family="monospace" text-anchor="middle">BURNING</text>
+        <text x="497" y="80" fill="#ff6060" font-size="8" font-family="monospace" text-anchor="middle">2300°F+</text>
+
+        <!-- Working use labels below -->
+        <text x="50" y="108" fill="#4d6048" font-size="8" font-family="monospace" text-anchor="middle">cold</text>
+        <text x="112" y="108" fill="#4d6048" font-size="8" font-family="monospace" text-anchor="middle">not</text>
+        <text x="112" y="118" fill="#4d6048" font-size="8" font-family="monospace" text-anchor="middle">workable</text>
+        <text x="174" y="108" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">too cool</text>
+        <text x="174" y="118" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">to forge</text>
+        <text x="236" y="108" fill="#c4cebc" font-size="8" font-family="monospace" text-anchor="middle">light</text>
+        <text x="236" y="118" fill="#c4cebc" font-size="8" font-family="monospace" text-anchor="middle">bending</text>
+        <text x="298" y="108" fill="#c4cebc" font-size="8" font-family="monospace" text-anchor="middle">general</text>
+        <text x="298" y="118" fill="#c4cebc" font-size="8" font-family="monospace" text-anchor="middle">forging</text>
+        <text x="360" y="108" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">heavy</text>
+        <text x="360" y="118" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">forging</text>
+        <text x="422" y="108" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">welding</text>
+        <text x="422" y="118" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">heat</text>
+        <text x="497" y="108" fill="#c84848" font-size="8" font-family="monospace" text-anchor="middle">STOP —</text>
+        <text x="497" y="118" fill="#c84848" font-size="8" font-family="monospace" text-anchor="middle">BURNING</text>
+
+        <!-- Temperature axis -->
+        <line x1="20" y1="145" x2="540" y2="145" stroke="#243028" stroke-width="1"/>
+        <text x="20" y="158" fill="#4d6048" font-size="9" font-family="monospace">68°F</text>
+        <text x="200" y="158" fill="#4d6048" font-size="9" font-family="monospace">1400°F / 760°C</text>
+        <text x="380" y="158" fill="#c9a94e" font-size="9" font-family="monospace">1800°F / 980°C</text>
+        <text x="445" y="158" fill="#c9a94e" font-size="9" font-family="monospace">2000°F</text>
+
+        <text x="280" y="185" fill="#4d6048" font-size="10" font-family="monospace" text-anchor="middle">Work in subdued light — sunlight washes out heat colors below orange</text>
+      </svg>
+      <div class="svg-caption">Heat color chart. Work in a shaded area or indoors until you can read colors reliably. Overheating high-carbon steel destroys its grain structure.</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Color Name</th><th>Temp (°F)</th><th>Temp (°C)</th><th>What To Do</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="heat-swatch" style="background:#1a1a1a;"></span>Black heat</td><td>Room temp</td><td>20°C</td><td>Cold work only (filing, drilling, grinding)</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#3a0808;"></span>Black red</td><td>400°F</td><td>200°C</td><td>Too cool to forge; stress can crack tool steel</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#6a0808;"></span>Dark cherry</td><td>1,200°F</td><td>650°C</td><td>Too cool for most forging; mild steel bending only</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#aa1a1a;"></span>Cherry red</td><td>1,400°F</td><td>760°C</td><td>Light forging on mild steel; bends and curves</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#cc3a00;"></span>Bright cherry</td><td>1,600°F</td><td>870°C</td><td>General forging — optimal working range for most steel</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#cc6000;"></span>Orange</td><td>1,800°F</td><td>980°C</td><td>Heavy forging; best range for high-carbon steel work</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#cc9900;"></span>Yellow-orange</td><td>2,000°F</td><td>1,100°C</td><td>Forge-welding approach; maximum forging for most steel</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#e8e8aa;"></span>White / sparking</td><td>2,300°F+</td><td>1,260°C+</td><td>BURNING — pull out immediately; steel is being destroyed</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Coal vs. Charcoal Fire Management</h3>
+    <div class="process-grid">
+      <div class="process-box">
+        <h4>Coal Fire</h4>
+        <p>Coal requires a "nest" of coke built around the firepot before introducing work. Blast air to ignite; reduce to a low blast once a coke fire forms. The sweet spot is a reducing fire (fuel-rich, starved of oxygen) — this protects steel from oxidizing. Coal clinkers (glassy waste) must be removed regularly by raking. Keep the fire compact and deep — work buried in the coke, not sitting on top.</p>
+      </div>
+      <div class="process-box">
+        <h4>Charcoal Fire</h4>
+        <p>Charcoal lights more easily but burns faster and requires more fuel. Does not coke up like bituminous coal — you're burning wood carbon directly. Charcoal is more forgiving: a clean, reducing charcoal fire is naturally low-sulfur. Add charcoal frequently in small amounts. Keep fire deep and the work surrounded by fuel, not exposed above it. Reaches forge-welding temperature with good forced air.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== SECTION 3: BASIC TECHNIQUES =================== -->
+  <section id="basic-techniques">
+    <h2>3. Basic Smithing Techniques</h2>
+
+    <h3>Anvil Anatomy</h3>
+    <p>Know what every surface of the anvil is for before you strike a blow. Using the wrong surface damages both the work and the anvil.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>Description</th><th>Use</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Face (flat top)</td><td>Large, flat, hardened working surface</td><td>All primary forging; drawing, upsetting, flattening</td></tr>
+          <tr><td>Horn (cone)</td><td>Tapered cone projecting from one end</td><td>Bending curves, forming rings, scrollwork, making tongs</td></tr>
+          <tr><td>Step / table</td><td>Unhardened area between horn and face</td><td>Cutting hot metal with a hardy or chisel; soft enough not to damage blades</td></tr>
+          <tr><td>Hardy hole</td><td>Square hole in the face, typically 2–3 cm</td><td>Hardy tools: bottom swages, bottom fullers, bickerns, hold-downs</td></tr>
+          <tr><td>Pritchel hole</td><td>Round hole in the face, 1–2 cm</td><td>Punching holes through metal; the slug falls through; nail headers</td></tr>
+          <tr><td>Heel</td><td>Far end of the face from the horn</td><td>Bending over the edge; cutting with the step</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Hammer Technique</h3>
+    <p>Strike with your whole arm, not just the wrist. Let the hammer rebound — fighting the rebound wastes energy and tires you faster than the work itself. Keep the hammer face parallel to the anvil face on every blow. Angled blows move metal sideways and create surface defects. Work quickly: every blow should be intentional. Indecision in front of the anvil wastes heat.</p>
+
+    <h3>Core Forging Operations</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Operation</th><th>What It Does</th><th>How To Do It</th><th>Used For</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Drawing out</td><td>Lengthens and thins metal</td><td>Strike angled blows across the stock, then rotate 90° and strike again to square up. Use the cross-peen to push metal faster.</td><td>Tapers, points, knife tangs, blade profiles</td></tr>
+          <tr><td>Upsetting</td><td>Shortens and thickens metal</td><td>Strike the end of the bar straight down on the anvil face, or stand the bar upright and hammer the top. Keep metal hot throughout.</td><td>Bolt heads, shoulders, knob ends, building up mass</td></tr>
+          <tr><td>Bending</td><td>Changes angle or curve</td><td>Heat to bright cherry or orange. For curves: work over the horn. For sharp bends: hang over the anvil edge and strike. For right angles: use the hardy.</td><td>Hooks, tongs, hinges, curves on blades</td></tr>
+          <tr><td>Punching</td><td>Creates holes in hot metal</td><td>Drive punch into face 2/3 of the way through on the pritchel hole; flip metal over; drive punch back through from the other side to pop the slug cleanly.</td><td>Eye holes in axes and hammers, chain links, belt holes</td></tr>
+          <tr><td>Cutting (hot)</td><td>Severs metal while hot</td><td>Use a hardy (bottom cutter in hardy hole) or hot chisel. Strike down to cut 80% of the way through; flip and break cleanly to avoid nicking the anvil.</td><td>Cutting stock to length, slitting for forge welds</td></tr>
+          <tr><td>Cutting (cold)</td><td>Severs cold metal</td><td>Cold chisel on a cold piece. Use a backing block. More force required; chisel must be properly hardened.</td><td>Sheet metal, rod cutting without a forge</td></tr>
+          <tr><td>Fullering</td><td>Moves metal to sides; creates shoulders and grooves</td><td>Use a fuller (radiused tool) in the hardy hole, or a top and bottom fuller set. Strike down to drive metal outward.</td><td>Blood grooves in blades, pre-shaping for spreading</td></tr>
+          <tr><td>Swaging</td><td>Shapes to a specific form</td><td>Use a swage block or shaped tooling in the hardy hole. Drive hot metal into or over the form.</td><td>Octagonal stock, nail heads, tenons, uniform shapes</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">&#9888;</span>
+      <div class="callout-content">
+        <strong>Safety: Galvanized Metal = Serious Hazard</strong>
+        <p>Never put galvanized (zinc-coated) metal in a forge. The zinc vaporizes at forge temperatures and oxidizes to zinc oxide fume. Inhaling it causes metal fume fever: chills, fever, nausea, and flu-like symptoms within hours. Severe exposure can cause pulmonary edema. Strip galvanization with acid or grinding before forging, or avoid the material entirely. Common galvanized sources: fence wire, conduit, some bolts, and hardware.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== SECTION 4: HEAT TREATING =================== -->
+  <section id="heat-treating">
+    <h2>4. Heat Treating</h2>
+
+    <p>Heat treatment is what separates a shaped piece of steel from a durable tool. An un-treated high-carbon blade will bend rather than hold an edge. Heat treatment controls the crystalline structure of steel at the atomic level — hardening makes it wear-resistant, tempering makes it tough enough not to shatter. Only high-carbon steel (above roughly 0.4% C) responds meaningfully to heat treatment.</p>
+
+    <h3>Annealing (Softening for Reworking)</h3>
+    <p>Use annealing when you need to cut, drill, file, or reshape a piece that is already hard. Annealing undoes previous heat treatment and relieves internal stresses.</p>
+    <ol class="steps">
+      <li>Heat the piece evenly to a uniform cherry red (approximately 1,350–1,450°F / 730–790°C). No bright spots or dark spots.</li>
+      <li>Immediately bury the piece completely in dry wood ash, lime, or vermiculite. The goal is to slow the cooling to a crawl.</li>
+      <li>Leave it buried overnight — 8–12 hours minimum. Do not disturb.</li>
+      <li>The result is fully softened steel. It can now be cut with a hacksaw, drilled, filed, and cold-worked with normal tools.</li>
+    </ol>
+
+    <h3>Normalizing (Stress Relief and Grain Refinement)</h3>
+    <p>Normalizing is done before hardening, and is recommended 2–3 times on a newly forged piece. It refines the grain structure damaged by forging and relieves internal stresses that can cause warping during quench.</p>
+    <ol class="steps">
+      <li>Heat to bright orange (approximately 1,650–1,700°F / 900–925°C) — uniform color throughout.</li>
+      <li>Remove from forge and air cool on a clean surface away from drafts.</li>
+      <li>Repeat 2–3 times before final hardening. Each cycle refines the grain slightly further.</li>
+    </ol>
+
+    <h3>Hardening</h3>
+    <p>Hardening rapidly freezes the steel's structure in a hard, wear-resistant form. The key variable is temperature: too cool and it doesn't harden fully; too hot and you damage the steel.</p>
+
+    <div class="callout callout-amber">
+      <span class="callout-icon">&#9888;</span>
+      <div class="callout-content">
+        <strong>The Magnet Test for Hardening Temperature</strong>
+        <p>High-carbon steel loses its magnetism at approximately 1,414°F / 768°C (the Curie point) — which is very close to the correct hardening temperature for most tool steels. Touch a magnet to the piece while heating. The moment it stops attracting the magnet, you are at or just above the hardening temperature. Quench immediately.</p>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li>Normalize the piece 2–3 times first (see above). Grind or clean the surface so you can watch colors during tempering later.</li>
+      <li>Heat slowly and evenly to non-magnetic — the Curie point, approximately 1,414°F / 768°C. Hold briefly to equalize temperature through the cross-section.</li>
+      <li>Have your quench container ready and positioned. Quench in one smooth, controlled movement — no hesitation.</li>
+      <li>For blades: quench edge-down or point-first, moving the piece in a figure-eight motion in the quench to prevent a steam pocket forming on one side. Never quench flat and motionless.</li>
+      <li>After quenching, check hardness: a file should skate off the surface without biting. If it bites, the steel either didn't get hot enough or isn't hardenable.</li>
+      <li>Temper immediately — do not leave hardened steel sitting; it is extremely brittle in this state.</li>
+    </ol>
+
+    <h3>Quench Media Comparison</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Quench Medium</th><th>Cooling Rate</th><th>Best For</th><th>Risks</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Brine (10% salt water)</td><td>Very fast — faster than water</td><td>Very shallow-hardening steel; maximizing hardness</td><td>Highest risk of cracking; aggressive; use only on simple shapes</td></tr>
+          <tr><td>Water (cold)</td><td>Fast</td><td>Low-alloy simple carbon steel; some old files</td><td>High crack risk; avoid on complex shapes or thick sections</td></tr>
+          <tr><td>Canola or vegetable oil (warm, ~120°F)</td><td>Moderate</td><td>Most high-carbon tools; best general choice</td><td>Fire risk — keep away from open flame; use a deep covered container</td></tr>
+          <tr><td>Motor oil (used)</td><td>Moderate</td><td>Works similarly to canola; widely available post-collapse</td><td>More smoke and fumes than canola; slight fire risk</td></tr>
+          <tr><td>Air (still)</td><td>Slow</td><td>Air-hardening alloy steels (A2, D2 tool steels)</td><td>Does not harden simple carbon steels; you need to identify the steel type first</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Tempering (Draw Colors)</h3>
+    <p>Hardened steel is glass-hard and brittle — it will snap under impact. Tempering reduces brittleness at the cost of a small reduction in hardness. The temper colors are visible oxide colors that form on polished steel as it heats from 400–650°F. They are precise thermometers. Match the temper color to the tool's requirements.</p>
+
+    <!-- TEMPER COLOR SVG -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 560 195" style="width:100%;max-width:560px;display:block;margin:0 auto;" aria-label="Tempering color chart">
+        <rect width="560" height="195" fill="#070a09"/>
+        <text x="280" y="20" fill="#e8c96e" font-size="12" font-family="monospace" text-anchor="middle" font-weight="bold">TEMPER COLOR CHART — OXIDE COLORS ON POLISHED STEEL</text>
+
+        <!-- Pale yellow ~430°F -->
+        <rect x="20" y="32" width="72" height="50" fill="#c8b840" rx="3" opacity="0.7"/>
+        <text x="56" y="48" fill="#070a09" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">Pale</text>
+        <text x="56" y="59" fill="#070a09" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">Yellow</text>
+        <text x="56" y="70" fill="#070a09" font-size="8" font-family="monospace" text-anchor="middle">430°F</text>
+        <text x="56" y="79" fill="#070a09" font-size="8" font-family="monospace" text-anchor="middle">220°C</text>
+
+        <!-- Straw yellow ~460°F -->
+        <rect x="96" y="32" width="72" height="50" fill="#b8a028" rx="3" opacity="0.8"/>
+        <text x="132" y="48" fill="#070a09" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">Straw</text>
+        <text x="132" y="59" fill="#070a09" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">Yellow</text>
+        <text x="132" y="70" fill="#070a09" font-size="8" font-family="monospace" text-anchor="middle">460°F</text>
+        <text x="132" y="79" fill="#070a09" font-size="8" font-family="monospace" text-anchor="middle">238°C</text>
+
+        <!-- Dark yellow ~480°F -->
+        <rect x="172" y="32" width="72" height="50" fill="#988818" rx="3" opacity="0.85"/>
+        <text x="208" y="48" fill="#eceee0" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">Dark</text>
+        <text x="208" y="59" fill="#eceee0" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">Yellow</text>
+        <text x="208" y="70" fill="#eceee0" font-size="8" font-family="monospace" text-anchor="middle">480°F</text>
+        <text x="208" y="79" fill="#eceee0" font-size="8" font-family="monospace" text-anchor="middle">249°C</text>
+
+        <!-- Brown ~500°F -->
+        <rect x="248" y="32" width="72" height="50" fill="#7a5018" rx="3" opacity="0.9"/>
+        <text x="284" y="48" fill="#eceee0" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">Brown</text>
+        <text x="284" y="70" fill="#eceee0" font-size="8" font-family="monospace" text-anchor="middle">500°F</text>
+        <text x="284" y="79" fill="#eceee0" font-size="8" font-family="monospace" text-anchor="middle">260°C</text>
+
+        <!-- Purple ~520°F -->
+        <rect x="324" y="32" width="72" height="50" fill="#6a3a7a" rx="3" opacity="0.9"/>
+        <text x="360" y="48" fill="#eceee0" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">Purple</text>
+        <text x="360" y="70" fill="#eceee0" font-size="8" font-family="monospace" text-anchor="middle">520°F</text>
+        <text x="360" y="79" fill="#eceee0" font-size="8" font-family="monospace" text-anchor="middle">271°C</text>
+
+        <!-- Dark purple ~540°F -->
+        <rect x="400" y="32" width="72" height="50" fill="#4a1a5a" rx="3" opacity="0.9"/>
+        <text x="436" y="48" fill="#eceee0" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">Dark</text>
+        <text x="436" y="59" fill="#eceee0" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">Purple</text>
+        <text x="436" y="70" fill="#eceee0" font-size="8" font-family="monospace" text-anchor="middle">540°F</text>
+        <text x="436" y="79" fill="#eceee0" font-size="8" font-family="monospace" text-anchor="middle">282°C</text>
+
+        <!-- Blue ~560°F -->
+        <rect x="476" y="32" width="64" height="50" fill="#1a3a7a" rx="3" opacity="0.9"/>
+        <text x="508" y="48" fill="#eceee0" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">Blue</text>
+        <text x="508" y="70" fill="#eceee0" font-size="8" font-family="monospace" text-anchor="middle">560°F</text>
+        <text x="508" y="79" fill="#eceee0" font-size="8" font-family="monospace" text-anchor="middle">293°C</text>
+
+        <!-- Tool labels below -->
+        <text x="56" y="104" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Scrapers</text>
+        <text x="56" y="114" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Scribers</text>
+        <text x="132" y="104" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Razors</text>
+        <text x="132" y="114" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Knives</text>
+        <text x="132" y="124" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Surgical</text>
+        <text x="208" y="104" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Lathe</text>
+        <text x="208" y="114" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">tools</text>
+        <text x="284" y="104" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Drills</text>
+        <text x="284" y="114" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Taps/Dies</text>
+        <text x="360" y="104" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Axes</text>
+        <text x="360" y="114" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Chisels</text>
+        <text x="436" y="104" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Cold</text>
+        <text x="436" y="114" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">chisels</text>
+        <text x="508" y="104" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Springs</text>
+        <text x="508" y="114" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Saws</text>
+        <text x="508" y="124" fill="#c9a94e" font-size="8" font-family="monospace" text-anchor="middle">Swords</text>
+
+        <!-- Arrow: hardness decreasing right -->
+        <line x1="20" y1="170" x2="540" y2="170" stroke="#243028" stroke-width="1.5"/>
+        <text x="20" y="165" fill="#4d6048" font-size="8" font-family="monospace">HARDEST</text>
+        <text x="455" y="165" fill="#4d6048" font-size="8" font-family="monospace">TOUGHEST</text>
+        <text x="220" y="185" fill="#4d6048" font-size="9" font-family="monospace" text-anchor="middle">Hardness decreases &#8594; Toughness increases as temperature rises</text>
+      </svg>
+      <div class="svg-caption">Temper color chart. Colors appear on polished steel as it heats. Watch the colors travel from the body toward the edge; quench when the edge reaches the target color.</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Temper Color</th><th>Temp (°F)</th><th>Temp (°C)</th><th>Best Used For</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="heat-swatch" style="background:#c8b840;"></span>Pale yellow</td><td>430°F</td><td>220°C</td><td>Scrapers, scribers, burnishing tools — maximum hardness</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#b8a028;"></span>Straw yellow</td><td>460°F</td><td>238°C</td><td>Razors, surgical instruments, fine woodworking knives</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#987808;"></span>Dark yellow</td><td>480°F</td><td>249°C</td><td>Lathe tools, plane irons, large knives</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#7a5018;"></span>Brown</td><td>500°F</td><td>260°C</td><td>Drills, taps, dies, punches</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#6a3a7a;"></span>Purple</td><td>520°F</td><td>271°C</td><td>Axes, woodworking chisels, hunting knives</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#4a1a5a;"></span>Dark purple</td><td>540°F</td><td>282°C</td><td>Cold chisels, hammers</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#1a3a7a;"></span>Blue</td><td>560°F</td><td>293°C</td><td>Springs, swords, saw blades — maximum toughness</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#4a6a4a;"></span>Gray-blue</td><td>600°F+</td><td>316°C+</td><td>Too soft for cutting tools; structural parts only</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Tempering Procedure</h4>
+    <ol>
+      <li>Polish the hardened piece with 120-grit sandpaper on the flat and the bevels so you can see color changes clearly.</li>
+      <li>Heat the body (spine/back) of the tool gently — not the edge. Indirect heat: lay the tool on a hot steel plate, hold near coals, or use an oven set to the target temperature.</li>
+      <li>Watch the colors travel from the hot body toward the cool edge. They move slowly — a couple of centimeters per minute.</li>
+      <li>Quench in oil or water when the edge reaches the target color. Do not wait for it to pass the target.</li>
+      <li>For thick tools (axes, chisels), you can use an oven at 450–550°F for 1 hour for uniform tempering.</li>
+    </ol>
+  </section>
+
+  <!-- =================== SECTION 5: PRIORITY TOOL ORDER =================== -->
+  <section id="priority-tools">
+    <h2>5. Priority Tool Making Order</h2>
+    <p>Build your tooling infrastructure before building products. A blacksmith without tongs and punches cannot work efficiently. This order reflects what enables further production.</p>
+
+    <ol class="priority-list">
+      <li>
+        <div>
+          <span class="pl-title">Punches and Drifts</span>
+          <span class="pl-reason">Enable making holes in hot metal — critical for eye holes in axes and hammers, nail headers, tongs, and most other tools. Make from high-carbon steel. Temper to brown (500°F).</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Chisels (Hot and Cold)</span>
+          <span class="pl-reason">Hot chisels cut metal at forging heat. Cold chisels cut cold metal. Both are simple to make and unlock a wide range of subsequent work. Hot chisel: mild steel, no heat treat needed. Cold chisel: high-carbon, tempered to dark purple.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Tongs</span>
+          <span class="pl-reason">Without tongs you cannot hold hot metal safely. Make flat-jaw tongs first (hold flat bar stock), then V-bit tongs (round stock). Simple tongs can be made from rebar or flat bar in 2–3 hours.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Hammer Heads</span>
+          <span class="pl-reason">Cross-peen hammer heads from medium-high carbon steel. Making your own hammer heads means you can replace worn ones indefinitely. Punch the eye; drift to final shape; harden the face and peen.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Axe Heads</span>
+          <span class="pl-reason">The most impactful community tool for wood processing, construction, and fuel gathering. Make the poll soft and the bit hard. A good axe from a leaf spring takes 4–6 hours for an intermediate smith.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Draw Knives</span>
+          <span class="pl-reason">Essential for woodworking — peeling logs, shaping handles, spoke shaving. A draw knife is a long bevel blade with two right-angle handles. Make from leaf spring or old saw blade. Harden and temper to straw.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Garden Tools (Hoe Blades, Cultivators)</span>
+          <span class="pl-reason">Mild steel is adequate — these tools need to resist bending, not hold a fine edge. Very fast to produce once basic technique is established. High community value for food production.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Knives and Blades</span>
+          <span class="pl-reason">High trade value and daily utility. General-purpose fixed blades from leaf spring or files. Temper to straw yellow for utility knives; dark yellow for large hunting/camp knives. A beginning smith's most satisfying early project.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Nails (Nail Header Tool First)</span>
+          <span class="pl-reason">Nails are consumed in enormous quantities in any construction project. Make the nail header tool (see section 7) first, then produce nails in bulk from mild steel rod. An experienced smith makes 60–100 nails per hour.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Hinges and Hooks</span>
+          <span class="pl-reason">S-hooks, pot hooks, door hinges, gate hardware. Simple bent-iron work that requires minimal heat treating. Very high demand in any community building shelters and storing food.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Arrowheads and Spear Points</span>
+          <span class="pl-reason">Security and hunting. Simple bodkin points (square cross-section) from mild steel are adequate for hunting. Higher-carbon broadheads hold better edges. A skilled smith can produce 20–30 simple arrowheads per hour.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Plowshares</span>
+          <span class="pl-reason">Agriculture-scale community work. A plowshare requires more material and skill than small tools, but multiplies food production capacity dramatically. Use medium-carbon steel; harden the cutting edge.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="pl-title">Wheel Rims and Structural Hardware</span>
+          <span class="pl-reason">Long-term infrastructure: wagon wheels, cart hardware, barrel hoops. Requires larger stock and more fuel. A lower-urgency but important production capability for community mobility.</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- =================== SECTION 6: KNIFE MAKING =================== -->
+  <section id="knife-making">
+    <h2>6. Step-by-Step: Making a Knife</h2>
+
+    <h3>Stock Selection</h3>
+    <p>The steel is the most important decision. All of the following are excellent starting materials for a fixed-blade utility knife:</p>
+    <ul>
+      <li><strong>Old hand saw blade:</strong> Usually W1 or W2 tool steel, 0.9–1.1% carbon. Already flat; profile can be cut with a hacksaw or angle grinder. Anneal before working if already hard.</li>
+      <li><strong>Vehicle leaf spring:</strong> 5160 spring steel, 0.55–0.65% carbon. Excellent toughness with good edge retention. Flexible under stress — good for camp and survival knives.</li>
+      <li><strong>Old file:</strong> Very high carbon (0.9–1.1%). Anneal thoroughly before forging. Once worked, produces an excellent edge.</li>
+      <li><strong>Coil spring:</strong> Same steel as leaf spring; uncoil by heating to orange and working it flat over the anvil.</li>
+    </ul>
+
+    <!-- KNIFE FORGING SVG -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 560 280" style="width:100%;max-width:560px;display:block;margin:0 auto;" aria-label="Knife forging sequence showing 5 stages">
+        <rect width="560" height="280" fill="#070a09"/>
+        <text x="280" y="22" fill="#e8c96e" font-size="12" font-family="monospace" text-anchor="middle" font-weight="bold">KNIFE FORGING SEQUENCE — 5 STAGES</text>
+
+        <!-- Stage 1: Flat bar stock -->
+        <rect x="20" y="40" width="100" height="22" rx="3" fill="#5a5a5a" stroke="#888" stroke-width="1.5"/>
+        <text x="70" y="35" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">1. STOCK</text>
+        <text x="70" y="77" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">flat bar</text>
+        <text x="70" y="88" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">anneal first</text>
+
+        <!-- Arrow -->
+        <text x="128" y="54" fill="#c9a94e" font-size="16" font-family="monospace">&#8594;</text>
+
+        <!-- Stage 2: Rough profile (drawn-out tip, rough tang) -->
+        <polygon points="150,40 230,40 240,51 230,62 190,62 150,62" fill="#5a5a5a" stroke="#888" stroke-width="1.5"/>
+        <text x="195" y="35" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">2. ROUGH PROFILE</text>
+        <text x="195" y="77" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">draw tip, mark</text>
+        <text x="195" y="88" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">tang length</text>
+
+        <!-- Arrow -->
+        <text x="248" y="54" fill="#c9a94e" font-size="16" font-family="monospace">&#8594;</text>
+
+        <!-- Stage 3: Bevels started (wedge shape at blade) -->
+        <polygon points="270,43 340,40 352,51 340,62 305,62 270,57" fill="#5a5a5a" stroke="#888" stroke-width="1.5"/>
+        <!-- Bevel indicator lines -->
+        <line x1="290" y1="43" x2="340" y2="40" stroke="#c9a94e" stroke-width="0.7" stroke-dasharray="2,1"/>
+        <line x1="290" y1="57" x2="340" y2="62" stroke="#c9a94e" stroke-width="0.7" stroke-dasharray="2,1"/>
+        <text x="311" y="35" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">3. BEVELS</text>
+        <text x="311" y="77" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">forge bevel +</text>
+        <text x="311" y="88" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">draw tang</text>
+
+        <!-- Arrow -->
+        <text x="360" y="54" fill="#c9a94e" font-size="16" font-family="monospace">&#8594;</text>
+
+        <!-- Stage 4: Fully forged (complete shape, thinner) -->
+        <polygon points="380,44 445,40 460,51 445,62 415,62 380,56" fill="#4a4a4a" stroke="#aaa" stroke-width="1.5"/>
+        <text x="420" y="35" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">4. FORGED</text>
+        <text x="420" y="77" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">normalize 3x</text>
+        <text x="420" y="88" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">grind bevels</text>
+
+        <!-- Arrow -->
+        <text x="465" y="54" fill="#c9a94e" font-size="16" font-family="monospace">&#8594;</text>
+
+        <!-- Stage 5: Final (finished knife silhouette) -->
+        <polygon points="487,44 536,41 542,51 536,61 510,61 487,56" fill="#888888" stroke="#c9a94e" stroke-width="1.5"/>
+        <!-- edge line -->
+        <line x1="487" y1="56" x2="542" y2="51" stroke="#e8c96e" stroke-width="1"/>
+        <text x="514" y="35" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">5. FINISHED</text>
+        <text x="514" y="77" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">heat treat +</text>
+        <text x="514" y="88" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">sharpen</text>
+
+        <!-- Bottom: detailed cross-section of bevel angle -->
+        <text x="280" y="118" fill="#e8c96e" font-size="11" font-family="monospace" text-anchor="middle">BEVEL ANGLE CROSS-SECTION</text>
+
+        <!-- Cross section of blade -->
+        <polygon points="200,165 360,145 360,185 200,165" fill="#5a5a5a" stroke="#888" stroke-width="1"/>
+        <!-- edge highlight -->
+        <line x1="360" y1="145" x2="360" y2="185" stroke="#e8c96e" stroke-width="2"/>
+
+        <!-- Angle indicators -->
+        <line x1="360" y1="165" x2="310" y2="145" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="360" y1="165" x2="310" y2="185" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
+
+        <text x="295" y="142" fill="#c9a94e" font-size="10" font-family="monospace">20–25°</text>
+        <text x="295" y="192" fill="#c9a94e" font-size="10" font-family="monospace">20–25°</text>
+        <text x="370" y="168" fill="#e8c96e" font-size="10" font-family="monospace">EDGE</text>
+        <text x="220" y="162" fill="#8a9e86" font-size="10" font-family="monospace">SPINE</text>
+
+        <text x="280" y="218" fill="#4d6048" font-size="9" font-family="monospace" text-anchor="middle">20–25° per side = utility/camp knife. 15° per side = slicing/fillet. 30° per side = heavy chopper.</text>
+        <text x="280" y="235" fill="#4d6048" font-size="9" font-family="monospace" text-anchor="middle">Maintain consistent angle throughout sharpening. A wood guide block cut to angle helps.</text>
+      </svg>
+      <div class="svg-caption">Knife forging sequence and bevel geometry. Each stage is a full forging heat — do not rush between stages. Normalize after rough forging before grinding.</div>
+    </div>
+
+    <h3>Full Knife-Making Process</h3>
+    <ol class="steps">
+      <li><strong>Anneal the stock.</strong> Heat evenly to cherry red; bury in dry ash overnight. This softens the steel so it can be cut and filed in the next step.</li>
+      <li><strong>Mark the profile.</strong> Use a scribe or soapstone to mark the blade outline, tang length, and plunge line (where the bevel starts) on the annealed stock.</li>
+      <li><strong>Cut rough shape.</strong> Hacksaw, angle grinder, or hot chisel at the forge. Rough out the profile 3–4 mm outside the final line — you'll refine in forging.</li>
+      <li><strong>Forge the bevel and tip.</strong> Heat to bright orange. Draw out the tip to a point. Work the bevels by angling the hammer blows and rotating the blade. Both bevels should be even. Draw the tang to about 60% of the blade's thickness and narrow it.</li>
+      <li><strong>Normalize three times.</strong> Heat to orange; air cool. Repeat twice more. This refines the grain structure and prepares the steel for hardening.</li>
+      <li><strong>Grind the bevels.</strong> Use a belt grinder, file, or flat stone. Establish a consistent 20–25° bevel per side for a utility knife. Leave the edge 0.5 mm thick — not sharp — before heat treating. A too-thin edge warps during quench.</li>
+      <li><strong>Harden.</strong> Heat to non-magnetic. Quench in warm canola oil, edge-first, moving in a figure-eight. File should skate off. If not, re-heat and quench again.</li>
+      <li><strong>Temper to straw yellow (460°F / 238°C).</strong> Polish the blade; heat the spine gently; watch the straw color travel to the edge; quench when it arrives. For camp/utility use: straw-dark yellow. For heavy choppers: brown-purple.</li>
+      <li><strong>Attach handle.</strong> Options: two scales of wood or bone pinned through the tang with metal pins; a through-tang handle of antler or wood fastened with a pommel cap and epoxy; or a paracord wrap over a shaped tang for emergency use.</li>
+      <li><strong>Sharpen.</strong> Coarse stone to establish the bevel; medium stone to refine; fine stone to polish; leather strop loaded with abrasive compound to finish. Test on arm hair — a sharp knife shaves cleanly.</li>
+    </ol>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">&#9888;</span>
+      <div class="callout-content">
+        <strong>Quench Safety</strong>
+        <p>Quenching puts hot steel into flammable oil. Use a container at least 30 cm deep with a tight-fitting lid — if the oil ignites, slide the lid over the container (do not pour water). Keep a fire extinguisher rated for grease fires within reach. Never use a shallow pan. Always quench away from your body, leaning away from the container.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== SECTION 7: NAIL MAKING =================== -->
+  <section id="nail-making">
+    <h2>7. Step-by-Step: Making Nails</h2>
+
+    <p>Nails are the most immediately useful smithing product for a community rebuilding shelter and infrastructure. Common cut nails of the pre-industrial era were forged by hand — a skilled nailer could produce 60–100 per hour once the system was established. The key is the nail header tool, which lets you form the head without repositioning the nail repeatedly.</p>
+
+    <h3>The Nail Header Tool</h3>
+    <pre class="diagram">
+NAIL HEADER — TOP VIEW AND CROSS SECTION
+
+TOP VIEW:
+  ┌─────────────────────────────┐
+  │  ███████████████████████   │  ← steel bar (2×4 cm × 15 cm)
+  │  ███ HOLE ██████████████   │  ← tapered hole, 3–5mm dia.
+  │  ███████████████████████   │
+  └─────────────────────────────┘
+
+CROSS SECTION (side):
+
+     ┌───────────────────────┐
+     │         HARDY         │  ← shank fits in hardy hole
+     │      ┌───┐            │
+     │      │   │ ← tapered hole (smallest at top)
+     │      └───┘            │
+     └───────────────────────┘
+
+HOW IT WORKS:
+  1. Forge nail shank to point; mark cut line
+  2. Hot-cut shank — leave 6mm sticking above header hole
+  3. Hold header over pritchel hole of anvil
+  4. Three hammer blows spread the sticking end into a head
+  5. Nail drops through pritchel hole when cooled
+    </pre>
+
+    <figure class="svg-diagram" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
+      <svg viewBox="0 0 580 200" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="nail-seq-title">
+        <title id="nail-seq-title">Nail Making Sequence — 5 Steps</title>
+        <desc>Five-step diagram showing the nail making process: starting rod, forging the point, marking cut length, hot cutting with stub above header, and striking the head.</desc>
+        <defs><marker id="na-arr" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#8a9e86"/></marker></defs>
+        <text x="290" y="16" text-anchor="middle" font-size="12" fill="#c9a94e" font-family="sans-serif" font-weight="700">NAIL MAKING SEQUENCE</text>
+        <!-- Step labels -->
+        <text x="52" y="36" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif" font-weight="700">① START</text>
+        <text x="160" y="36" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif" font-weight="700">② POINT</text>
+        <text x="268" y="36" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif" font-weight="700">③ MARK</text>
+        <text x="376" y="36" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif" font-weight="700">④ CUT</text>
+        <text x="484" y="36" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif" font-weight="700">⑤ HEAD</text>
+        <!-- Arrows between steps -->
+        <line x1="86" y1="110" x2="114" y2="110" stroke="#3a4838" stroke-width="1.5" marker-end="url(#na-arr)"/>
+        <line x1="194" y1="110" x2="222" y2="110" stroke="#3a4838" stroke-width="1.5" marker-end="url(#na-arr)"/>
+        <line x1="302" y1="110" x2="330" y2="110" stroke="#3a4838" stroke-width="1.5" marker-end="url(#na-arr)"/>
+        <line x1="410" y1="110" x2="438" y2="110" stroke="#3a4838" stroke-width="1.5" marker-end="url(#na-arr)"/>
+        <!-- STEP 1: Round rod -->
+        <rect x="10" y="90" width="76" height="16" rx="3" fill="#8a9e86" stroke="#4d6048" stroke-width="1.5"/>
+        <text x="48" y="124" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">Round rod</text>
+        <text x="48" y="136" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">4–6 mm dia.</text>
+        <!-- STEP 2: Rod with point tapered on end -->
+        <polygon points="118,90 186,90 186,106 118,106 118,98" fill="#8a9e86" stroke="#4d6048" stroke-width="1.5"/>
+        <polygon points="186,90 198,98 186,106" fill="#c9a94e" stroke="#7a6430" stroke-width="1"/>
+        <text x="158" y="124" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">4-sided taper</text>
+        <text x="158" y="136" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">orange heat</text>
+        <!-- STEP 3: Rod with mark line -->
+        <polygon points="226,90 294,90 294,106 226,106 226,98" fill="#8a9e86" stroke="#4d6048" stroke-width="1.5"/>
+        <polygon points="294,90 306,98 294,106" fill="#c9a94e" stroke="#7a6430" stroke-width="1"/>
+        <line x1="258" y1="84" x2="258" y2="112" stroke="#c84848" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="258" y="80" text-anchor="middle" font-size="9" fill="#c84848" font-family="sans-serif">← cut mark</text>
+        <text x="266" y="124" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">Soapstone mark</text>
+        <text x="266" y="136" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">= shank length</text>
+        <!-- STEP 4: In header, stub above -->
+        <!-- Header tool -->
+        <rect x="334" y="104" width="68" height="20" rx="2" fill="#243028" stroke="#c9a94e" stroke-width="1.5"/>
+        <text x="368" y="118" text-anchor="middle" font-size="8" fill="#c9a94e" font-family="sans-serif">HEADER TOOL</text>
+        <!-- Shank below header -->
+        <rect x="356" y="124" width="24" height="50" rx="2" fill="#8a9e86" stroke="#4d6048" stroke-width="1"/>
+        <polygon points="356,174 380,174 368,186" fill="#c9a94e" stroke="#7a6430" stroke-width="1"/>
+        <!-- Stub above header -->
+        <rect x="360" y="88" width="16" height="16" rx="1" fill="#c87a40" stroke="#6e4020" stroke-width="1.5"/>
+        <text x="368" y="80" text-anchor="middle" font-size="9" fill="#c87a40" font-family="sans-serif">6 mm stub</text>
+        <text x="376" y="138" font-size="9" fill="#8a9e86" font-family="sans-serif">← point</text>
+        <text x="376" y="150" font-size="9" fill="#4d6048" font-family="sans-serif">shank below</text>
+        <text x="376" y="162" font-size="9" fill="#4d6048" font-family="sans-serif">header</text>
+        <!-- STEP 5: Completed nail with head -->
+        <!-- Nail with flat head -->
+        <ellipse cx="484" cy="84" rx="26" ry="8" fill="#c9a94e" stroke="#7a6430" stroke-width="2"/>
+        <rect x="476" y="84" width="16" height="70" rx="2" fill="#8a9e86" stroke="#4d6048" stroke-width="1.5"/>
+        <polygon points="476,154 492,154 484,168" fill="#c9a94e" stroke="#7a6430" stroke-width="1"/>
+        <text x="522" y="90" font-size="10" fill="#c9a94e" font-family="sans-serif" font-weight="700">Flat head</text>
+        <text x="522" y="108" font-size="9" fill="#8a9e86" font-family="sans-serif">3 blows</text>
+        <text x="522" y="120" font-size="9" fill="#4d6048" font-family="sans-serif">spreads stub</text>
+        <text x="484" y="185" text-anchor="middle" font-size="9" fill="#4b9e6a" font-family="sans-serif">FINISHED NAIL</text>
+        <!-- Bottom caption -->
+        <text x="290" y="198" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">Expert rate: 60–100 nails/hr · Make nail header tool first · 3–4 inch framing nails are highest priority</text>
+      </svg>
+      <figcaption>Nail making sequence — the nail header tool (Step 4) is the key to production speed; without it, forming a consistent head requires repositioning and multiple heats. Make the header tool before producing nails in bulk.</figcaption>
+    </figure>
+
+    <h3>Nail-Making Process</h3>
+    <ol class="steps">
+      <li><strong>Prepare stock.</strong> Mild steel round rod, 4–6 mm diameter. Anneal if necessary. Cut into working lengths of 25–30 cm for comfortable handling.</li>
+      <li><strong>Forge the point.</strong> Heat 3–4 cm of the tip to bright orange. Hold at 45° to the anvil corner and strike downward, rotating the rod 90° between blows to form a four-sided taper to a sharp point. 3–4 blows per rotation, 2–3 heats.</li>
+      <li><strong>Mark the shank length.</strong> Hold the finished point into the nail header hole from below. Mark the shank length with a soapstone mark above the header — this is where you will cut.</li>
+      <li><strong>Hot cut to length.</strong> Heat to orange. Cut with a hot chisel or hardy — but not all the way through. Leave it barely attached. The stub will become the head.</li>
+      <li><strong>Insert into header.</strong> With the nail point up, slip the header down over the shank from the pointed end, stopping at the nick. The stub sticks above the header.</li>
+      <li><strong>Strike the head.</strong> Three to four hammer blows flatten and spread the stub into a head. A flat head for common nails; a rounded head for roofing nails; a decorative head using a swage.</li>
+      <li><strong>Release.</strong> Hold the header over the pritchel hole; tap the side — the nail drops through. If the header has cooled, reheat the nail and header together before the head-striking step.</li>
+    </ol>
+
+    <p><strong>Production rate:</strong> Beginners produce 15–25 nails per hour. With practice, 60–100 nails per hour is achievable. Two people working together — one at the forge, one at the header — can sustain higher rates.</p>
+
+    <div class="callout callout-amber">
+      <span class="callout-icon">&#9888;</span>
+      <div class="callout-content">
+        <strong>Nail Stock Sizes to Make</strong>
+        <p>Prioritize 3–4 inch nails (common framing nails) first — highest demand for construction. 1.5 inch nails for trim and furniture. 6 inch spikes for timber framing and bridge construction. Make the header tool with interchangeable dies for multiple sizes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== SECTION 8: CASTING =================== -->
+  <section id="casting">
+    <h2>8. Metal Casting</h2>
+
+    <p>Casting allows production of complex three-dimensional shapes that are impossible to forge — handles with complex curves, pulleys, buckles, bushings, pipe fittings, and gears. The two most accessible metals for post-collapse casting are aluminum and bronze, both achievable with a charcoal-fed crucible forge.</p>
+
+    <h3>Aluminum Casting</h3>
+    <p>Aluminum's melting point of 1,220°F (660°C) is the critical advantage: a simple forced-air charcoal fire can achieve this without difficulty. Aluminum is also abundant in the post-collapse scrap stream.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Topic</th><th>Details</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Melting point</td><td>1,220°F / 660°C — achievable with charcoal and forced air</td></tr>
+          <tr><td>Best scrap sources</td><td>Cast engine parts, pistons, wheels, cylinder heads, marine castings. Avoid aluminum cans — too much oxide content per volume; produces spongy castings.</td></tr>
+          <tr><td>Crucible options</td><td>Heavy steel pipe cap (10 cm dia.); thick-walled steel pipe section with a welded bottom; cast iron skillet (handle removed). Steel crucibles erode slowly — expect 20–50 pours per crucible.</td></tr>
+          <tr><td>Flux</td><td>A small amount of table salt (NaCl) or borax floated on the melt helps dross separate. Skim the gray dross (oxide layer) before pouring.</td></tr>
+          <tr><td>What to cast</td><td>Tool handles, buckles and clasps, pulley wheels, counterweights, pipe fittings, gear blanks, brackets, plumb bobs, fishing weights, cooking pot handles</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Green Sand Casting Formula</h3>
+    <p>Green sand is the standard mold material for aluminum and bronze casting. It holds its shape when packed, yet releases the casting cleanly and can be reused hundreds of times.</p>
+    <ul>
+      <li><strong>Sand:</strong> Fine clean silica sand — 100 mesh preferred; beach sand works. Remove pebbles and debris.</li>
+      <li><strong>Bentonite clay:</strong> 8–12% by weight (approximately 1 cup per 10 cups of sand). Acts as binder. Bag bentonite from hardware or pool supply stores; or find natural bentonite deposits (swells noticeably when wet).</li>
+      <li><strong>Water:</strong> Mix until the sand barely holds its shape when squeezed in a fist — like slightly damp beach sand. Too wet and the mold collapses; too dry and it crumbles.</li>
+      <li><strong>Alternative:</strong> Oil-bonded sand (petrobond): fine sand mixed with 3–5% motor oil. More durable than green sand; produces a better surface finish; reusable.</li>
+    </ul>
+
+    <h3>Sand Casting Setup and Process</h3>
+    <pre class="diagram">
+SAND CASTING — CROSS SECTION
+
+         SPRUE           RISER
+           │               │
+    ┌──────▼───────────────▼──────┐  ← COPE (top half of flask)
+    │   sand ░░░░░░░░░░░░░ sand   │
+    │  ░░░░░░ ┌─CAVITY──┐ ░░░░░░ │  ← cavity = shape of part
+    │   sand ░└─────────┘░ sand   │
+    ├─────────────────────────────┤  ← PARTING LINE
+    │   sand ░░░░░░░░░░░░░ sand   │  ← DRAG (bottom half)
+    │  ░░░░░░ │  RUNNER  │ ░░░░░░ │  ← runner feeds cavity
+    │   sand ░░░░░░░░░░░░░ sand   │
+    └─────────────────────────────┘
+       ↑ FLASK: wood box or channel iron frame
+
+PROCESS:
+  1. Place pattern in drag half; pack sand around it tightly
+  2. Flip; place cope on top; pack sand around upper half of pattern
+  3. Remove pattern carefully — cavity remains
+  4. Cut sprue (pour hole) and runner (channel to cavity)
+  5. Reassemble cope and drag; secure with pins or C-clamps
+  6. Pour molten metal into sprue; let cool fully (30–60 min for Al)
+  7. Open flask; remove casting; cut off sprue and runner; file
+    </pre>
+
+    <h3>Lost Foam Casting</h3>
+    <p>For one-off complex shapes, lost foam casting eliminates the need to make a two-part mold. Carve the desired shape in polystyrene foam. Bury the foam pattern completely in loose dry sand (no binder needed). Pour molten aluminum directly into the sprue hole cut into the foam — the metal vaporizes the foam as it enters, filling the exact shape. The foam gas escapes through the sand. Allow to cool; dig out the casting. The mold is destroyed but the casting is exact.</p>
+    <p>This technique works well for handles, brackets, and custom hardware where you need an exact shape from a carved foam prototype.</p>
+
+    <h3>Bronze Casting</h3>
+    <p>Bronze (copper + 8–12% tin) has been the preferred casting metal for bearings, bushings, bells, and fine hardware for 5,000 years. It machines and finishes better than aluminum and is far superior for bearing surfaces.</p>
+    <ul>
+      <li><strong>Composition:</strong> 90% copper + 10% tin = standard bearing bronze. 95% copper + 5% tin = bell metal (higher resonance).</li>
+      <li><strong>Melting point:</strong> 1,675°F / 913°C — achievable with a forced-air charcoal setup but requires more fuel and time than aluminum.</li>
+      <li><strong>Scrap copper sources:</strong> Electrical wire (remove insulation), plumbing pipe and fittings, motor windings, radiator cores.</li>
+      <li><strong>Tin sources:</strong> Old tin cans (actually steel), pewter items (high tin content), solder (tin-lead alloy; lead degrades bearing quality).</li>
+      <li><strong>Best uses for bronze:</strong> Bushings and bearings (bronze wears instead of the shaft), pump housings, valve seats, ship hardware, bells, art casting, gears for light loads.</li>
+    </ul>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">&#9888;</span>
+      <div class="callout-content">
+        <strong>Casting Safety — Moisture Causes Explosions</strong>
+        <p>Molten metal contacting any moisture — wet sand, damp crucible, wet scrap, condensation in molds — causes a violent steam explosion that throws molten metal in all directions. All sand must be dry; all tools must be preheated over the furnace before contact with the melt; all scrap must be dry. Wear a full face shield (not just safety glasses), leather gloves, leather or wool apron, and leather boots. Keep a bucket of dry sand for spills — never use water on a molten metal fire.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== SECTION 9: TOOL MAINTENANCE =================== -->
+  <section id="tool-maintenance">
+    <h2>9. Tool Maintenance</h2>
+
+    <p>Maintaining tools is as important as making them. A dull axe requires twice the energy and produces less-controlled cuts. A rusty saw cuts nothing. A cracked handle breaks under load. Tool maintenance is daily work in a productive blacksmith shop and community.</p>
+
+    <h3>Sharpening Progression</h3>
+    <p>Every sharpening job follows the same sequence: start coarse enough to establish the bevel, work finer to refine the edge, then strop to align the final wire edge. Never start with a fine stone on a dull or damaged tool — you will spend ten times the effort and still not get a sharp edge.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Stage</th><th>Grit / Tool</th><th>Purpose</th><th>When Done</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1. Coarse</td><td>80–120 grit stone or belt</td><td>Establish bevel angle; remove chips and damage; set the grind</td><td>Consistent bevel visible across full width with no flat spot at edge</td></tr>
+          <tr><td>2. Medium</td><td>220–400 grit stone</td><td>Refine scratches from coarse; reduce wire edge</td><td>Scratches from coarse stage gone; uniform grey finish</td></tr>
+          <tr><td>3. Fine</td><td>600–1000 grit stone</td><td>Polish the bevel; align the edge</td><td>Reflective bevel; edge just catches light uniformly</td></tr>
+          <tr><td>4. Strop</td><td>Leather strop + stropping compound (or bare leather)</td><td>Remove wire edge; align and polish final edge</td><td>Edge shaves arm hair cleanly; paper cuts without tearing</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Angle guides:</strong> Cut a wood block to the desired angle (20–25° for knives; 25–30° for plane irons; 30–35° for axes; 35–40° for hatchets used for splitting). The block rests on the stone and sets the spine height, maintaining a consistent angle without commercial guides.</p>
+
+    <h3>Saw Sharpening</h3>
+    <p>A dull saw is dangerous — it deflects unpredictably and requires excessive force. Most hand saws can be recut with a triangular file.</p>
+    <ol>
+      <li><strong>Jointing:</strong> File across all teeth with a flat mill file until a small flat appears on every tooth. This levels the teeth to uniform height.</li>
+      <li><strong>Setting:</strong> Bend alternating teeth left and right using a saw set tool (or pliers for field repair). The set creates a kerf wider than the blade body so the saw doesn't bind. Set is typically 0.1–0.2 mm per side.</li>
+      <li><strong>Filing:</strong> Use a triangular file sized to fit the gullet (space between teeth). For crosscut saws, file at 60–75° to the blade. For rip saws, file at 90° (straight across). File every other tooth from one side, then flip the saw and do the remaining teeth.</li>
+      <li><strong>File selection:</strong> 6-inch slim taper for saws with 10–14 teeth per inch; 7-inch slim for 8–10 TPI; 4.5-inch extra slim for fine dovetail saws.</li>
+    </ol>
+
+    <h3>Handle Replacement and Selection</h3>
+    <p>Handle wood species matter. The wrong species fails under impact or vibration.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Species</th><th>Properties</th><th>Best For</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Hickory</td><td>High impact resistance; excellent shock absorption; tough, hard, strong</td><td>Hammers, axes, sledges — anything that takes impact blows</td></tr>
+          <tr><td>Ash</td><td>Flex and strength combined; slightly less impact resistance than hickory but excellent spring</td><td>Hoes, rakes, shovels, cultivators — garden tools that flex in soil</td></tr>
+          <tr><td>Oak (white)</td><td>Hard and rigid; low flex; very durable</td><td>Drawknives, chisels, mallets, plane totes — tools requiring rigidity over flex</td></tr>
+          <tr><td>Osage orange</td><td>Extremely hard and tough; comparable to hickory</td><td>Excellent hammer and axe handles; also excellent bow wood</td></tr>
+          <tr><td>Black locust</td><td>Very hard, rot-resistant; tough</td><td>Outdoor tool handles, mallet heads; not as shock-resistant as hickory</td></tr>
+          <tr><td>Avoid: pine, poplar, birch</td><td>Soft, low impact resistance, checks under stress</td><td>Not appropriate for striking tools; fine for light-duty handles only</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Fitting a handle:</strong> Shape the handle eye-end to be slightly larger than the tool eye; insert firmly; drive a wooden wedge into the end grain of the handle through the eye from the top; then drive one or two steel wedges (or cut nails) at 90° to the wooden wedge. The wedges expand the handle within the eye. Soak a loose handle overnight in linseed oil — the swelling often tightens the fit enough to avoid a full replacement.</p>
+
+    <h3>Rust Prevention and Storage</h3>
+    <ul>
+      <li><strong>Beeswax and oil coating:</strong> Melt beeswax into warm linseed or mineral oil (roughly 1 part wax to 4 parts oil). Wipe onto clean metal surfaces and buff. Provides lasting protection without attracting grit the way pure oil does.</li>
+      <li><strong>Storage:</strong> Never store tools on a concrete floor — concrete is hygroscopic and promotes rust from below. Hang on wood pegs or store on wood shelves. Even a layer of cardboard between tool and concrete is significant.</li>
+      <li><strong>Active rust:</strong> Remove with vinegar soak (2–4 hours for light rust), then neutralize with baking soda water, dry completely, and oil immediately. For heavy rust: electrolytic rust removal (steel sacrificial anode in baking soda water with a battery charger) strips rust without metal removal.</li>
+      <li><strong>Blade edges:</strong> Keep a light coat of oil on sharpened edges. A piece of cardboard as a blade sheath prevents contact with other metal and with hands.</li>
+    </ul>
+  </section>
+
+  <hr>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-md);margin-top:var(--sp-xl)">
+    <a href="agriculture.html" class="btn btn-outline">&larr; Agriculture</a>
+    <a href="chemistry.html" class="btn btn-primary">Chemistry &rarr;</a>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:var(--sp-xl)">
+    <span class="callout-icon">&#128279;</span>
+    <div class="callout-content">
+      <strong>Related Sections</strong>
+      <p>
+        <a href="energy.html">Energy &rarr; Charcoal production for forge fuel</a> &middot;
+        <a href="chemistry.html">Chemistry &rarr; Metal surface treatment and acid etching</a> &middot;
+        <a href="vehicles.html">Vehicles &rarr; Engine part repair and fabrication</a> &middot;
+        <a href="tools.html">Tools &rarr; Tool inventory and maintenance planning</a>
+      </p>
+    </div>
+  </div>
+
+<nav class="section-pagination no-print" aria-label="Section navigation">
+  <a href="climate.html" class="pagination-btn pagination-prev">← Climate &amp; Regional</a>
+  <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+  <a href="governance.html" class="pagination-btn pagination-next">Governance →</a>
+</nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title">
+      <div class="aria-avatar">&#129302;</div>
+      <div class="aria-title-text">
+        <strong>Bunker Bot</strong>
+        <small>Offline Survival AI</small>
+      </div>
+    </div>
+    <button id="aria-close" class="btn-icon">&#10005;</button>
+  </div>
+  <div class="aria-status">
+    <span class="status-dot checking"></span>
+    <span class="aria-status-label">Checking&hellip;</span>
+    &nbsp;&middot;&nbsp;
+    <span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">&mdash;</span>
+  </div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome">
+      <div class="aria-message-content">
+        <p>You're reading Metallurgy &amp; Blacksmithing. Ask me about building a forge, identifying scrap steel, heat treating knives, making nails, casting aluminum, or which tools to make first.</p>
+        <p class="aria-note">&#9888; Requires Ollama running locally. <a href="../ai-setup.html">Setup &rarr;</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask ARIA&hellip;" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+
+<button id="back-to-top" class="back-to-top" title="Back to top">&#8593;</button>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/aria.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

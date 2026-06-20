@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Medical & First Aid — wound care, fractures, burns, emergency childbirth, herbal medicine, triage, and mental health in survival situations.">
+  <title>Medical &amp; First Aid — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Medical &amp; First Aid</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline" data-print>🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>🏥 Medical &amp; First Aid</h1>
+    <p class="section-desc">When professional medical care is unavailable, this section may save a life. Study it before you need it. Hands-on practice is essential — knowledge alone is not enough.</p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2025-06"></span></span>
+      <span class="meta-item">⏱️ <span id="reading-time"></span></span>
+      <span class="meta-item">📖 Section 2 of 8</span>
+    </div>
+  </div>
+
+  <div class="callout callout-danger">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-content">
+      <strong>This is not a substitute for professional medical training</strong>
+      <p>These procedures are for use when no professional medical care is available. Seek qualified medical help whenever possible. Incorrect application of these techniques can cause serious harm. Take a wilderness first aid or EMT course before a crisis — practice on mannequins, not real people under pressure.</p>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#wound-care">Wound Care &amp; Infection Control</a></li>
+      <li><a href="#fractures">Fractures &amp; Splinting</a></li>
+      <li><a href="#burns">Burns</a></li>
+      <li><a href="#temperature">Hypothermia &amp; Heat Emergencies</a></li>
+      <li><a href="#childbirth">Emergency Childbirth</a></li>
+      <li><a href="#abdominal">Appendicitis &amp; Abdominal Emergencies</a></li>
+      <li><a href="#dental">Dental Emergencies</a></li>
+      <li><a href="#herbal">Herbal Medicine</a></li>
+      <li><a href="#medications">Medications &amp; Stockpiling</a></li>
+      <li><a href="#triage">Triage &amp; Mass Casualty</a></li>
+      <li><a href="#mental-health">Mental Health in Survival</a></li>
+      <li><a href="#chest-wounds">Chest Wounds &amp; Pneumothorax</a></li>
+      <li><a href="#snakebite">Snakebite &amp; Envenomation</a></li>
+      <li><a href="#stroke">Stroke Recognition (FAST)</a></li>
+      <li><a href="#seizures">Seizures</a></li>
+      <li><a href="#diabetic">Diabetic Emergencies</a></li>
+      <li><a href="#drowning">Drowning &amp; Submersion</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">⏱️</span>
+    <div class="callout-content">
+      <strong>First 24 Hours — Medical Priorities</strong>
+      <ol style="margin:.5rem 0 0;padding-left:1.2rem">
+        <li>Stop any active bleeding — direct pressure or tourniquet. This takes absolute priority.</li>
+        <li>Confirm breathing and airway in all injured. Roll unconscious breathing patients to recovery position.</li>
+        <li>Treat shock: lay flat, elevate legs (not if head/chest/spine injury suspected), keep warm.</li>
+        <li>Clean and dress all wounds before closure — infection prevention starts immediately.</li>
+        <li>Inventory first aid supplies: antibiotics, tourniquets, gauze, pain relievers.</li>
+        <li>Identify any group member with medical training and designate them as medical lead.</li>
+        <li>Establish a clean sick bay — a dedicated area for treating the injured, away from general living space.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- =================== WOUND CARE =================== -->
+  <section id="wound-care">
+    <h2>1. Wound Care &amp; Infection Control</h2>
+
+    <h3>Hemorrhage Control — Stop Bleeding First</h3>
+    <p>Uncontrolled bleeding kills within minutes. Address it before anything else.</p>
+
+    <ol class="steps">
+      <li><strong>Direct pressure:</strong> Apply a clean cloth or bandage directly over the wound. Press firmly and continuously for 10 minutes without lifting to check. Most bleeding stops with sustained pressure.</li>
+      <li><strong>Tourniquet (limbs only):</strong> For arterial bleeding that doesn't stop with 5–10 minutes of direct pressure, apply a tourniquet 5–7cm (2–3 inches) above the wound. Tighten until bleeding stops. Note the time. Do not remove — tourniquets can be left for up to 2 hours before tissue damage risk escalates. Mark "TK" and time on the patient's forehead or tourniquet.</li>
+      <li><strong>Improvised tourniquet:</strong> A wide strip of cloth (not rope or wire — they cut tissue), wrapped twice around the limb and tied with a stick (windlass) through the knot. Twist the stick until bleeding stops. Secure the stick so it cannot unwind.</li>
+      <li><strong>Wound packing:</strong> For deep wounds (gunshot, stab, groin/neck where tourniquet is impossible) — pack clean gauze or cloth firmly into the wound cavity. Apply pressure with both thumbs for 5+ minutes. This is painful but necessary.</li>
+    </ol>
+
+    <h3>Wound Cleaning</h3>
+    <p>Infection kills more slowly than blood loss but just as certainly. Proper cleaning is the single most important step after stopping bleeding.</p>
+
+    <ol class="steps">
+      <li>Once bleeding is controlled, irrigate the wound with large volumes of clean water under pressure. The ideal: a 20–60mL syringe with an 18-gauge needle (or splash guard) produces the needed pressure. Alternatively, a plastic bag with a pinhole works.</li>
+      <li>Volume matters: Use at least 100–200mL of water per cm of wound depth. A moderately dirty wound may require 1 liter of irrigation.</li>
+      <li>Use saline (1 tsp salt per liter of boiled/clean water) or plain clean water. Avoid hydrogen peroxide (damages tissue), betadine at full strength (use diluted 10:1 with water), or rubbing alcohol directly in wounds (severely damages tissue).</li>
+      <li>Scrub visible dirt from the wound with a clean cloth or soft brush after irrigation.</li>
+      <li>Inspect for foreign bodies (debris, gravel, clothing fragments). Remove what you can see with tweezers. Retained foreign bodies cause chronic infection.</li>
+    </ol>
+
+    <h3>Wound Closure</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Method</th><th>Best For</th><th>When to Use</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Butterfly strips / Steri-strips</td><td>Small clean cuts, well-aligned edges</td><td>First choice for clean lacerations</td><td>Clean and dry wound edges first; use tincture of benzoin to improve adhesion</td></tr>
+          <tr><td>Staples (skin stapler)</td><td>Long scalp and trunk lacerations</td><td>When stapler available</td><td>Fast; stock a 35-staple disposable stapler in medical kit</td></tr>
+          <tr><td>Sutures</td><td>Deep or gaping wounds where closure is needed</td><td>If closure is truly necessary and you have training</td><td>See technique below</td></tr>
+          <tr><td>Leave open</td><td>Infected or bite wounds; wounds &gt;12 hours old</td><td>When contamination risk is high</td><td>Pack loosely with gauze; allow to heal by secondary intention; change dressing daily</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>When NOT to Close a Wound</strong>
+        <p>Do not suture: animal bites, puncture wounds, heavily contaminated wounds, wounds older than 8–12 hours, or any wound showing signs of infection. Closing an infected wound traps bacteria and creates an abscess. Pack and dress these wounds open and allow healing from the inside out.</p>
+      </div>
+    </div>
+
+    <h4>Simple Interrupted Suture Technique</h4>
+    <ul>
+      <li><strong>Equipment:</strong> Non-absorbable nylon or prolene suture (3-0 or 4-0 for skin). Curved needle. Needle driver or locking pliers. Forceps or tweezers. Scissors. Sterile gloves.</li>
+      <li>Space sutures 3–5mm apart. Start in the center of the wound and work outward.</li>
+      <li>Pass needle through skin at 90° angle, 3–5mm from wound edge. Exit opposite side at same distance. Tie with surgeon's knot (double throw first loop, single throws after, minimum 3 throws total).</li>
+      <li>Sutures should approximate edges — not pull tight. Over-tight sutures cut through skin as swelling occurs.</li>
+      <li>Check sutures daily. Remove at: face 5 days, scalp/trunk 10 days, hands/feet/over joints 14 days.</li>
+    </ul>
+
+    <h3>Signs of Infection</h3>
+    <p>Monitor all wounds daily. Progressive infection without antibiotics can lead to sepsis and death within days.</p>
+
+    <ul>
+      <li><strong>Local signs (wound):</strong> Increasing redness, warmth, swelling, pain (beyond first 24–48 hours), pus (purulent discharge), wound edges separating or not healing</li>
+      <li><strong>Systemic signs (serious):</strong> Fever above 38.5°C (101.3°F), red streaking spreading from wound (lymphangitis — medical emergency), swollen lymph nodes, chills, confusion, rapid heart rate</li>
+    </ul>
+
+    <p><strong>Treatment:</strong> If antibiotics available — amoxicillin-clavulanate or cephalexin for general wounds; doxycycline or co-trimoxazole as alternative. Continue for full 7–10 day course even if improving. Open any abscesses, drain pus, irrigate and pack cavity.</p>
+  </section>
+
+  <!-- =================== FRACTURES =================== -->
+  <section id="fractures">
+    <h2>2. Fractures &amp; Splinting</h2>
+
+    <h3>Assessment</h3>
+    <ul>
+      <li><strong>Signs of fracture:</strong> Pain at site (especially with pressure or movement), deformity, swelling, bruising, crepitus (grinding sensation), loss of function, numbness below fracture (nerve involvement — urgent)</li>
+      <li><strong>Closed fracture:</strong> Bone broken, skin intact. Lower infection risk.</li>
+      <li><strong>Open (compound) fracture:</strong> Bone protrudes through skin or wound communicates with fracture. High infection risk. <span class="badge badge-danger">Critical</span> — irrigate wound, cover bone with moist clean cloth, splint, begin antibiotics immediately.</li>
+    </ul>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Check Circulation, Sensation, Movement (CSM) Before and After Splinting</strong>
+        <p>Before applying any splint: check pulse distal to injury (wrist for forearm fracture, foot for leg fracture), sensation (can patient feel you touch their fingers/toes?), and movement (can they wiggle them?). Check CSM again after splinting. Loss of pulse or sensation after splinting = splint too tight, loosen immediately.</p>
+      </div>
+    </div>
+
+    <h3>General Splinting Principles</h3>
+    <ol class="steps">
+      <li>Splint the limb in the position found — do not straighten angulated fractures unless circulation is compromised and evacuation is impossible.</li>
+      <li>Splint should immobilize the joint above and below the fracture.</li>
+      <li>Pad bony prominences to prevent pressure sores.</li>
+      <li>Secure with bandages, torn clothing strips, or improvised materials — firm but not tight enough to cut circulation.</li>
+      <li>Elevate the injured limb above heart level to reduce swelling.</li>
+    </ol>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Fracture Location</th><th>Improvised Splint Materials</th><th>Position</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Forearm/wrist</td><td>Sticks, trekking poles, rolled magazine</td><td>Wrist neutral, palm down</td><td>Sling to support arm</td></tr>
+          <tr><td>Upper arm (humerus)</td><td>Board, SAM splint, padding</td><td>Arm at side</td><td>Sling + swathe (wrap around body)</td></tr>
+          <tr><td>Finger</td><td>Popsicle stick, neighboring finger (buddy tape)</td><td>Slight bend at joints</td><td>Tape to adjacent finger with padding between</td></tr>
+          <tr><td>Lower leg/ankle</td><td>Two straight sticks, sleeping pad, backpack stays</td><td>Foot at 90° to leg</td><td>Pad ankle prominences, check foot pulse hourly</td></tr>
+          <tr><td>Thigh (femur)</td><td>Requires traction splint — two poles with cord</td><td>Leg straight</td><td>Femur fractures bleed heavily internally (1–2L); shock risk</td></tr>
+          <tr><td>Ribs</td><td>Do NOT bind tightly — impedes breathing</td><td>Semi-upright position</td><td>Deep breathing exercises every hour to prevent pneumonia</td></tr>
+          <tr><td>Spine (suspected)</td><td>Keep patient flat and still</td><td>Neutral spine</td><td>Log-roll to move; improvise cervical collar from rolled clothing</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =================== BURNS =================== -->
+  <section id="burns">
+    <h2>3. Burns</h2>
+
+    <h3>Classification</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Degree</th><th>Appearance</th><th>Depth</th><th>Treatment</th></tr></thead>
+        <tbody>
+          <tr><td>1st Degree (superficial)</td><td>Red, dry, painful — like sunburn</td><td>Epidermis only</td><td>Cool water 10–20 min, aloe vera, pain relief. Heals 3–5 days.</td></tr>
+          <tr><td>2nd Degree (partial thickness)</td><td>Blistered, wet, intensely painful</td><td>Into dermis</td><td>Cool water, do NOT pop blisters, cover with clean non-stick dressing. Heals 2–3 weeks.</td></tr>
+          <tr><td>3rd Degree (full thickness)</td><td>White, brown, or black, leathery, painless (nerves destroyed)</td><td>All skin layers</td><td>Cover with clean moist cloth, do not apply any cream, treat for shock. Cannot heal without skin graft.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Immediate Treatment</h3>
+    <ol class="steps">
+      <li><strong>Cool the burn:</strong> Run cool (not cold, not ice) water over the burn for 10–20 minutes. This is the single most important intervention. Do it within 30 minutes of injury for maximum benefit.</li>
+      <li><strong>Remove jewelry and tight clothing</strong> near the burn before swelling occurs. Do not remove clothing stuck to burned skin.</li>
+      <li><strong>Cover:</strong> Non-stick sterile dressing or clean plastic wrap (cling film) applied gently. Do not use cotton wool, fluffy bandages, or materials that stick.</li>
+      <li><strong>Do NOT apply:</strong> Butter, toothpaste, ice, egg white, oil, or any home remedy. These trap heat and dramatically increase infection risk.</li>
+      <li><strong>Hydrate:</strong> Serious burns cause massive fluid loss. Begin oral rehydration immediately if patient is conscious and not vomiting.</li>
+    </ol>
+
+    <h4>Rule of Nines (Burn Area Estimation)</h4>
+    <div class="diagram">
+      Head = 9%
+      Each arm = 9%
+      Chest (front) = 9%
+      Abdomen (front) = 9%
+      Upper back = 9%
+      Lower back = 9%
+      Each thigh = 9%
+      Each lower leg = 9%
+      Genitals = 1%
+
+      Burns >20% of body surface = major burn, high shock risk
+      Burns >40% = critical without hospital care
+      Burns of hands, face, feet, genitals, airway = always serious regardless of size
+    </div>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Inhalation Injury</strong>
+        <p>Smoke inhalation can be fatal even with no external burns. Signs: singed nasal hairs, sooty sputum, hoarse voice, stridor (noisy breathing), burns inside mouth. Keep patient upright. Airway swelling can close the throat within hours — if intubation is impossible and airway closes, emergency tracheotomy may be the only option.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== TEMPERATURE =================== -->
+  <section id="temperature">
+    <h2>4. Hypothermia &amp; Heat Emergencies</h2>
+
+    <h3>Hypothermia</h3>
+    <p>Hypothermia occurs when core body temperature drops below 35°C (95°F). It's insidious — the patient may not realize how impaired they are.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Stage</th><th>Core Temp</th><th>Signs</th><th>Treatment</th></tr></thead>
+        <tbody>
+          <tr><td>Mild</td><td>32–35°C (90–95°F)</td><td>Shivering, confusion, slurred speech, poor coordination</td><td>Remove wet clothing, insulate, warm beverages (conscious only), shared body heat</td></tr>
+          <tr><td>Moderate</td><td>28–32°C (82–90°F)</td><td>Shivering stops (bad sign), muscle rigidity, drowsiness, paradoxical undressing</td><td>Handle gently — no rough movement (triggers cardiac arrest), horizontal position, warm only armpits/groin/neck, NO alcohol</td></tr>
+          <tr><td>Severe</td><td>&lt;28°C (&lt;82°F)</td><td>Unconscious, very slow pulse/breathing, pupils dilated, appears dead</td><td>"Not dead until warm and dead" — begin CPR if no pulse, continue rewarming, hospital only true definitive care</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Rewarming Precautions</strong>
+        <p>Active external rewarming (hot water bottles) only at armpits, groin, and neck — not extremities. Warming hands and feet first drives cold blood to the core, causing "afterdrop" — a further drop in core temperature that can trigger cardiac arrest. Do not rub extremities. Keep horizontal — sitting up causes blood to pool in cold legs and can cause "rescue collapse."</p>
+      </div>
+    </div>
+
+    <h3>Heat Stroke</h3>
+    <p>A true medical emergency — brain damage and death occur rapidly. Distinguish from heat exhaustion (less serious).</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Condition</th><th>Skin</th><th>Consciousness</th><th>Temperature</th><th>Treatment</th></tr></thead>
+        <tbody>
+          <tr><td>Heat Cramps</td><td>Moist</td><td>Normal</td><td>Normal</td><td>Rest, fluids with electrolytes, stretch muscles</td></tr>
+          <tr><td>Heat Exhaustion</td><td>Pale, clammy, moist</td><td>Intact but weak</td><td>Normal to 40°C</td><td>Cool shade, oral rehydration, lie down with feet elevated</td></tr>
+          <tr><td>Heat Stroke (Classic)</td><td>Hot, DRY, flushed</td><td>Confused to unconscious</td><td>&gt;40°C (104°F)</td><td><strong>Emergency cooling NOW</strong></td></tr>
+          <tr><td>Heat Stroke (Exertional)</td><td>Hot, may be moist</td><td>Altered to unconscious</td><td>&gt;40°C</td><td><strong>Emergency cooling NOW</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ol class="steps">
+      <li>Move to coolest available location (shade, air conditioning, water).</li>
+      <li><strong>Cool aggressively:</strong> Immerse in cool water (ice bath is best). If unavailable, wet all clothing, fan vigorously. Apply ice packs to neck, armpits, and groin. Every minute of delay increases brain damage.</li>
+      <li>Target: reduce temperature below 39°C (102°F) within 30 minutes.</li>
+      <li>Once conscious and recovered, provide cool fluids with electrolytes.</li>
+      <li>Do NOT give aspirin or ibuprofen (damage liver/kidneys in heat stroke).</li>
+    </ol>
+  </section>
+
+  <!-- =================== CHILDBIRTH =================== -->
+  <section id="childbirth">
+    <h2>5. Emergency Childbirth</h2>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Most births are uncomplicated</strong>
+        <p>Normal deliveries require primarily patience, cleanliness, warmth, and support. The mother's body knows what to do. Your primary job is to keep things clean, keep the baby warm, and watch for complications. Do not rush the process.</p>
+      </div>
+    </div>
+
+    <h3>Preparation</h3>
+    <ul class="checklist">
+      <li>Clean environment — lay down clean sheets or plastic</li>
+      <li>Sterile or very clean gloves</li>
+      <li>Clean towels or cloth for baby</li>
+      <li>Two clean cord ties (shoelace, strip of cloth) and clean scissors/blade</li>
+      <li>Warm water and basin</li>
+      <li>Good lighting</li>
+    </ul>
+
+    <h3>Stages of Labor</h3>
+    <ol class="steps">
+      <li><strong>Stage 1 — Labor:</strong> Contractions begin and become regular. Cervix dilates from 0–10cm. May last 8–20+ hours for first birth. Support, hydration, position changes (walking, hands-and-knees). Do NOT push until fully dilated (10cm).</li>
+      <li><strong>Stage 2 — Delivery:</strong> Pushing. Mother pushes with contractions. Baby's head will appear at vaginal opening (crowning). Support (do not pull) the baby's head with gentle counterpressure. Once head is delivered, check for cord around neck — if present, gently slip it over baby's head. One shoulder delivers at a time. Catch the baby — they are slippery.</li>
+      <li><strong>Stage 3 — Placenta:</strong> Usually delivers 5–30 minutes after baby. Do not pull the cord. Gentle pushing with next contractions delivers the placenta. Inspect placenta to ensure it's complete (retained pieces cause hemorrhage).</li>
+    </ol>
+
+    <h3>Newborn Care</h3>
+    <ol class="steps">
+      <li>Dry and stimulate the baby by rubbing vigorously with a cloth — this stimulates breathing.</li>
+      <li>Clear the airway: place baby with head slightly lower than body and wipe mouth and nose with cloth.</li>
+      <li>If not breathing within 30 seconds of drying: give 5 rescue breaths (small puffs — infant lungs are tiny), then 30 compressions with two fingers on the breastbone at a rate of 100/min, alternating with 2 breaths.</li>
+      <li>Warmth is critical — newborns lose heat rapidly. Place skin-to-skin with mother and cover both with blankets.</li>
+      <li>Tie cord in two places (10cm and 15cm from baby's belly), cut between them with sterile scissors. No rush — wait for cord to stop pulsing (2–5 minutes).</li>
+      <li>Encourage breastfeeding within the first hour.</li>
+    </ol>
+
+    <h3>Postpartum Hemorrhage</h3>
+    <p>The most common cause of maternal death. Normal blood loss is up to 500mL (1 pint). More than this is hemorrhage.</p>
+    <ul>
+      <li>Massage the uterus (firm fundal massage through the abdomen) — it should feel like a hard ball. This stimulates contraction and reduces bleeding.</li>
+      <li>Encourage breastfeeding — releases oxytocin, which contracts the uterus.</li>
+      <li>If misoprostol is available (400–600mcg sublingual): dramatically reduces postpartum hemorrhage.</li>
+      <li>If bleeding doesn't slow, aortic compression (press firmly on the abdomen above the navel) temporarily reduces blood flow while seeking help.</li>
+    </ul>
+  </section>
+
+  <!-- =================== ABDOMINAL =================== -->
+  <section id="abdominal">
+    <h2>6. Appendicitis &amp; Abdominal Emergencies</h2>
+
+    <h3>Recognizing Appendicitis</h3>
+    <p>Untreated appendicitis ruptures (usually 48–72 hours after onset), causing peritonitis — which is frequently fatal without surgery.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>Classic Appendicitis</th></tr></thead>
+        <tbody>
+          <tr><td>Pain location</td><td>Starts around navel, migrates to right lower quadrant (McBurney's point: 1/3 of the way from right hip bone to navel)</td></tr>
+          <tr><td>Pain character</td><td>Constant, worsens with movement, deep breath, bumps in road</td></tr>
+          <tr><td>Associated symptoms</td><td>Nausea, vomiting, low-grade fever (37.5–38.5°C), loss of appetite</td></tr>
+          <tr><td>Rebound tenderness</td><td>Pain worse when you quickly release pressure than when pressing</td></tr>
+          <tr><td>Rovsing's sign</td><td>Pressing left lower abdomen causes pain in the right lower abdomen</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Antibiotics for Appendicitis — Last Resort</strong>
+        <p>Several studies show antibiotics alone (metronidazole 500mg + amoxicillin-clavulanate or ceftriaxone) can treat uncomplicated appendicitis in the short term and delay rupture. This is a bridge strategy only — evacuate to surgical care as quickly as possible. Ruptured appendicitis cannot be treated with antibiotics alone.</p>
+      </div>
+    </div>
+
+    <h3>Other Abdominal Emergencies</h3>
+    <ul>
+      <li><strong>Bowel obstruction:</strong> Severe cramping, vomiting (eventually fecal), distended abdomen, no gas/stool. Lay patient flat, IV fluids if possible, nasogastric decompression if trained. Surgical emergency.</li>
+      <li><strong>Peptic ulcer perforation:</strong> Sudden severe "board-like" rigid abdomen, history of stomach pain or NSAID use. Lay flat, antibiotics (metronidazole + amoxicillin), nothing by mouth. Surgical emergency.</li>
+      <li><strong>Kidney stones:</strong> Severe flank/back pain radiating to groin, may see blood in urine. Usually passes with hydration and ibuprofen. Strain urine to catch stone. Not life-threatening unless obstructed kidney becomes infected.</li>
+    </ul>
+  </section>
+
+  <!-- =================== DENTAL =================== -->
+  <section id="dental">
+    <h2>7. Dental Emergencies</h2>
+
+    <h3>Toothache &amp; Abscess</h3>
+    <ul>
+      <li><strong>Pain relief:</strong> Ibuprofen 400mg + acetaminophen 500mg together (synergistic). Clove oil (eugenol) applied to the tooth/cavity with a cotton ball is a powerful local analgesic.</li>
+      <li><strong>Temporary filling:</strong> Mix zinc oxide powder with clove oil to a thick paste (dental cement). Pack into the cavity. Dental repair kits (dentemp) include similar material.</li>
+      <li><strong>Abscess:</strong> Swelling below the tooth or along the jaw — indicates bacterial abscess. If fluctuant (soft), it needs drainage. Rinse with warm salt water frequently. Start amoxicillin 500mg 3× daily or metronidazole 400mg 3× daily. Do not ignore — dental abscess can spread to the airway (Ludwig's angina) or brain and become fatal.</li>
+    </ul>
+
+    <h3>Tooth Extraction (Last Resort)</h3>
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Extract only as a last resort</strong>
+        <p>Improper extraction can cause dry socket, broken roots, jaw fracture, or spread infection into the airway. Exhaust all other options (pain management, antibiotics, temporary repair) before attempting extraction.</p>
+      </div>
+    </div>
+    <ol class="steps">
+      <li>Achieve local anesthesia if available: dental lidocaine or 2% lidocaine with epinephrine injected into the gum tissue surrounding the tooth. Wait 5–10 minutes.</li>
+      <li>Loosen the periodontal ligament: use a flat-bladed instrument (dental elevator, thin flathead screwdriver sterilized) to push between tooth and gum, rocking to break the ligament fibers around the root. This is the most important step.</li>
+      <li>Grip the tooth firmly at the gum line with extraction forceps (or strong pliers padded with cloth). Rock in the direction of the roots (front teeth: buccal-lingual, molars: figure-8 pattern). Do not rotate unless the root is clearly round. Apply steady pressure.</li>
+      <li>After extraction: bite on a clean cloth for 30–45 minutes to control bleeding. Do not rinse aggressively for 24 hours (dislodges the clot).</li>
+      <li>Begin antibiotics if any signs of infection. Salt water rinses after 24 hours. Clove oil for dry socket pain.</li>
+    </ol>
+  </section>
+
+  <!-- =================== HERBAL =================== -->
+  <section id="herbal">
+    <h2>8. Herbal Medicine</h2>
+
+    <p>Many pharmaceutical drugs were derived from plants. Herbal medicine offers real benefits but also real risks. Never substitute herbal remedies for essential medications in critical conditions. Know dosing, preparation, and contraindications.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Plant</th><th>Part Used</th><th>Preparation</th><th>Use</th><th>Cautions</th></tr></thead>
+        <tbody>
+          <tr><td>Yarrow (<em>Achillea millefolium</em>)</td><td>Aerial parts</td><td>Poultice (fresh crushed), tea, tincture</td><td>Wound bleeding (styptic), fever, anti-inflammatory</td><td>Avoid in pregnancy; some people have allergic reaction (ragweed family)</td></tr>
+          <tr><td>Plantain (<em>Plantago major</em>)</td><td>Leaves</td><td>Chewed/crushed poultice, tea</td><td>Insect bites, splinters, minor wounds, inflammation, cough</td><td>Very safe; minimal contraindications</td></tr>
+          <tr><td>Willow Bark (<em>Salix</em> spp.)</td><td>Inner bark</td><td>Decoction (simmer 20 min), tincture</td><td>Pain, fever, inflammation (contains salicin — aspirin precursor)</td><td>Avoid in aspirin allergy, children (Reye's syndrome risk), bleeding disorders</td></tr>
+          <tr><td>Elderberry (<em>Sambucus nigra</em>)</td><td>Berries (ripe, cooked)</td><td>Syrup, tincture, decoction</td><td>Immune support, antiviral, flu/cold severity reduction</td><td>Raw elderberries cause vomiting; cook or tincture only</td></tr>
+          <tr><td>Garlic (<em>Allium sativum</em>)</td><td>Cloves</td><td>Raw, juice, poultice</td><td>Antibacterial, antifungal, antiviral, cardiovascular</td><td>May thin blood; GI upset raw; do not replace antibiotics for serious infection</td></tr>
+          <tr><td>Echinacea (<em>Echinacea</em> spp.)</td><td>Root, aerial parts</td><td>Tincture, tea</td><td>Immune stimulation, wound healing, upper respiratory infection</td><td>Avoid with autoimmune disease; limited to 10-day courses</td></tr>
+          <tr><td>Valerian (<em>Valeriana officinalis</em>)</td><td>Root</td><td>Tincture, tea, capsule</td><td>Sedation, anxiety, sleep</td><td>Do not combine with alcohol or sedatives; mild drowsiness</td></tr>
+          <tr><td>Lavender (<em>Lavandula</em> spp.)</td><td>Flowers, essential oil</td><td>Diluted oil, compress, tea</td><td>Burns (diluted), anxiety, insect repellent, headache</td><td>Do not ingest essential oil; dilute before skin application</td></tr>
+          <tr><td>Turmeric (<em>Curcuma longa</em>)</td><td>Root</td><td>Powder, paste, decoction</td><td>Anti-inflammatory, antioxidant, wound healing</td><td>High doses may affect blood clotting; avoid in gallstones</td></tr>
+          <tr><td>Calendula (<em>Calendula officinalis</em>)</td><td>Flowers</td><td>Infused oil, poultice, tea rinse</td><td>Wound healing, skin infection, antifungal</td><td>Ragweed allergy cross-reaction possible</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Basic Preparations</h3>
+    <h4>Tincture (Alcohol Extract)</h4>
+    <p>Fill a jar with fresh or dried plant material. Cover with 80–100 proof alcohol (vodka works). Seal, shake daily, wait 4–6 weeks. Strain. Dose typically 1–3mL, 2–3× daily.</p>
+
+    <h4>Poultice</h4>
+    <p>Fresh leaves: chew or crush and apply directly to wound. Dried herbs: mix powder with water to form paste, apply to cloth, place on skin. Cover with bandage. Change 2× daily.</p>
+
+    <h4>Tea / Infusion</h4>
+    <p>Pour boiling water over dried herbs (1 Tbsp per cup). Cover and steep 10–15 minutes. Strain. Roots and bark require a decoction (simmer 20–30 minutes).</p>
+  </section>
+
+  <!-- =================== MEDICATIONS =================== -->
+  <section id="medications">
+    <h2>9. Medications &amp; Stockpiling</h2>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Build Your Supply Gradually</strong>
+        <p>Most medications require a prescription. Build your supply by asking your doctor for a 90-day supply and rotating it. Some medications (antibiotics, specific drugs) may be obtainable through international pharmacy, veterinary suppliers (fish antibiotics — same compounds as human versions, though quality varies), or by storing a small emergency supply with a doctor's guidance.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Medication</th><th>Dose</th><th>Use</th><th>Priority</th></tr></thead>
+        <tbody>
+          <tr><td>Ibuprofen</td><td>400–800mg every 6–8h with food</td><td>Pain, fever, inflammation</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Acetaminophen (Tylenol)</td><td>500–1000mg every 6h (max 3g/day)</td><td>Pain, fever, safe in pregnancy</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Diphenhydramine (Benadryl)</td><td>25–50mg every 6–8h</td><td>Allergic reaction, mild sedation, sleep</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Loperamide (Imodium)</td><td>4mg then 2mg after each loose stool (max 16mg/day)</td><td>Diarrhea</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Epinephrine auto-injector</td><td>0.3mg IM thigh</td><td>Anaphylaxis (severe allergic reaction)</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Amoxicillin-clavulanate</td><td>875/125mg twice daily × 7–10 days</td><td>Wound infection, respiratory infection, dental</td><td><span class="badge badge-warning">High</span></td></tr>
+          <tr><td>Doxycycline</td><td>100mg twice daily</td><td>Respiratory infection, tick-borne illness, STI</td><td><span class="badge badge-warning">High</span></td></tr>
+          <tr><td>Metronidazole</td><td>400–500mg 3× daily</td><td>Anaerobic infections, dental abscess, Giardia, C. diff</td><td><span class="badge badge-warning">High</span></td></tr>
+          <tr><td>Ciprofloxacin</td><td>500mg twice daily</td><td>UTI, GI infections, anthrax prophylaxis</td><td><span class="badge badge-warning">High</span></td></tr>
+          <tr><td>Hydrocortisone cream 1%</td><td>Apply sparingly 2× daily</td><td>Skin rash, inflammation, insect bites</td><td><span class="badge badge-info">Useful</span></td></tr>
+          <tr><td>Antacid (omeprazole)</td><td>20mg daily before eating</td><td>Peptic ulcer, GERD, NSAID protection</td><td><span class="badge badge-info">Useful</span></td></tr>
+          <tr><td>Oral rehydration salts (ORS)</td><td>As directed per dehydration level</td><td>Diarrhea/vomiting dehydration</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Misoprostol</td><td>600mcg sublingual after delivery</td><td>Postpartum hemorrhage prevention</td><td><span class="badge badge-warning">High</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Storage</h3>
+    <ul>
+      <li>Store in original sealed containers in a cool, dark, dry location (not bathroom medicine cabinet — humidity and temperature fluctuate).</li>
+      <li>Expiration dates are conservative — most solid medications (tablets, capsules) retain 80–90% potency for years beyond expiration if stored properly. Liquid medications, biologics (insulin, vaccines), and tetracycline-class antibiotics degrade faster.</li>
+      <li>Insulin: requires refrigeration (2–8°C); open vials last 28 days at room temperature. Store backup supply in coolest available location. Refrigerate if any power available.</li>
+      <li>Label all medications clearly — name, dose, indication, and expiration date.</li>
+    </ul>
+  </section>
+
+  <!-- =================== TRIAGE =================== -->
+  <section id="triage">
+    <h2>10. Triage &amp; Mass Casualty</h2>
+
+    <p>When multiple casualties exceed available resources, triage ensures the greatest number of people survive. It requires making difficult decisions rapidly.</p>
+
+    <h3>START Triage System</h3>
+    <p>Simple Triage and Rapid Treatment. Assess each victim in under 60 seconds.</p>
+
+    <div class="diagram">
+START TRIAGE ALGORITHM
+══════════════════════════════════════════════════════
+
+[Can they walk?]
+       │
+      YES ──────────────────────────────→ GREEN (Minor) — Walking wounded
+       │                                  Treat last
+      NO
+       │
+       ▼
+[Check Respirations]
+  Not breathing → Reposition airway
+       │
+  Still not breathing ───────────────→ BLACK (Deceased/Expectant)
+       │                                  No treatment resources
+  Breathing — Rate?
+       │
+  >30/min or <6/min ──────────────→ RED (Immediate) — Treat first
+       │
+  6–30/min
+       │
+       ▼
+[Check Perfusion — Radial Pulse or Capillary Refill]
+  No radial pulse OR cap refill >2 sec ──→ RED (Immediate)
+       │
+  Pulse present, cap refill ≤2 sec
+       │
+       ▼
+[Check Mental Status — "Squeeze my hand"]
+  Unable to follow simple commands ──→ RED (Immediate)
+       │
+  Follows commands ───────────────────→ YELLOW (Delayed) — Treat after Red
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tag Color</th><th>Category</th><th>Meaning</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge badge-danger">RED</span></td><td>Immediate</td><td>Life-threatening but survivable with immediate treatment</td><td>Airway compromise, severe bleeding, tension pneumothorax</td></tr>
+          <tr><td><span class="badge badge-warning">YELLOW</span></td><td>Delayed</td><td>Serious but stable — can wait 1–4 hours</td><td>Fractures, burns &lt;40%, significant wounds</td></tr>
+          <tr><td><span class="badge badge-success">GREEN</span></td><td>Minor</td><td>Walking wounded — treat after red and yellow</td><td>Minor cuts, sprains, emotional shock</td></tr>
+          <tr><td>BLACK</td><td>Expectant/Deceased</td><td>Dead, or injuries incompatible with survival given available resources</td><td>No pulse after airway repositioning; unsurvivable injuries</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-amber">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Reassess Frequently</strong>
+        <p>A yellow patient can deteriorate to red. A red patient successfully treated may move to yellow. Retriage every 15–30 minutes or after completing a treatment cycle. Document who has been seen and when.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== MENTAL HEALTH =================== -->
+  <section id="mental-health">
+    <h2>11. Mental Health in Survival Situations</h2>
+
+    <p>Psychological casualties can exceed physical ones after major disasters. Untreated, trauma, grief, and severe stress degrade decision-making, cooperation, and physical health. Mental health is a survival skill.</p>
+
+    <h3>Normal Reactions to Abnormal Situations</h3>
+    <p>Expect to see (and experience): disbelief and denial, anger, grief, anxiety, sleep disturbances, intrusive memories, irritability, and difficulty concentrating. These are normal stress reactions — not signs of weakness or mental illness. Most people recover without clinical intervention given time, safety, and social support.</p>
+
+    <h3>Psychological First Aid</h3>
+    <ol class="steps">
+      <li><strong>Safety:</strong> Meet immediate physical needs first (shelter, warmth, water, food). A person cannot process trauma while still in immediate danger.</li>
+      <li><strong>Calm:</strong> Help people regulate their physical state — slow breathing, grounding techniques ("name 5 things you can see"), reduce sensory overload.</li>
+      <li><strong>Connection:</strong> Reunite people with social supports. Isolation worsens outcomes dramatically. Assign survivors to groups, even if those groups are newly formed.</li>
+      <li><strong>Self-efficacy:</strong> Give people tasks and agency. Helplessness is psychologically devastating. Even small, meaningful tasks restore a sense of control.</li>
+      <li><strong>Hope:</strong> Provide accurate, clear information about what is known. Reduce uncertainty where possible. Acknowledge difficulty while reinforcing survivability.</li>
+    </ol>
+
+    <h3>Managing Specific Conditions</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Condition</th><th>Signs</th><th>Intervention</th></tr></thead>
+        <tbody>
+          <tr><td>Acute panic attack</td><td>Racing heart, shortness of breath, terror, feeling of doom</td><td>Slow breathing (4 in, hold 4, out 4), grounding, reassurance; usually passes in 10–20 minutes</td></tr>
+          <tr><td>Acute grief</td><td>Overwhelming sadness, crying, withdrawal</td><td>Allow expression; don't force "being strong"; ensure basic needs met; presence without forced conversation</td></tr>
+          <tr><td>Dissociation</td><td>Staring, unresponsive, disconnected from reality</td><td>Gentle physical touch (if culturally appropriate), calm voice, simple commands, name-calling</td></tr>
+          <tr><td>Suicidal ideation</td><td>Statements of hopelessness, giving away possessions, withdrawal</td><td>Ask directly ("Are you thinking of killing yourself?"). Remove means. Constant supervision. Mobilize community support.</td></tr>
+          <tr><td>Prolonged grief/PTSD</td><td>Weeks of nightmares, flashbacks, avoidance, hypervigilance</td><td>Structure and routine; social engagement; narrative processing (talking through what happened); may benefit from medication if available</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>For Community Leaders</h3>
+    <ul>
+      <li>Establish routines and structure — predictability reduces anxiety.</li>
+      <li>Normalize emotional responses — hold community gatherings, allow grief rituals.</li>
+      <li>Identify individuals who were helpers before the crisis — they often transition naturally to support roles.</li>
+      <li>Watch for compassion fatigue in caregivers — rotate roles, ensure helpers have support.</li>
+      <li>Children need: honest but age-appropriate information, maintained routines, the ability to play, and reassurance that adults are in charge.</li>
+      <li>Alcohol and substance abuse often spike post-disaster. Manage access to intoxicants within community agreements.</li>
+    </ul>
+  </section>
+
+  <!-- =================== CHEST WOUNDS =================== -->
+  <section id="chest-wounds">
+    <h2>12. Chest Wounds &amp; Pneumothorax</h2>
+
+    <p>Chest injuries are highly lethal if not recognized and treated immediately. Two life threats dominate: tension pneumothorax and sucking chest wounds. Both can kill within minutes.</p>
+
+    <h3>Open (Sucking) Chest Wound</h3>
+    <p>A hole in the chest wall allows air to enter the pleural space with each breath, collapsing the lung. You'll hear a sucking or gurgling sound at the wound on inhalation.</p>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">🚨</span>
+      <div class="callout-content">
+        <strong>Seal Three Sides Only — Not Four</strong>
+        <p>A fully sealed occlusive dressing can trap air and cause a tension pneumothorax (see below). Seal only three sides to create a flutter valve — air escapes on exhalation but cannot enter on inhalation.</p>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li>Position the patient: sitting up or leaning toward the injured side helps the uninjured lung function.</li>
+      <li>Apply an occlusive dressing (plastic wrap, foil, or a commercial chest seal) over the wound during exhalation, when the chest is compressed.</li>
+      <li><strong>Tape only three sides.</strong> Leave the bottom edge open to act as a flutter valve.</li>
+      <li>Monitor constantly. If breathing worsens after sealing → suspect tension pneumothorax (see below). Burp the seal by briefly lifting the bottom edge to release trapped air.</li>
+    </ol>
+
+    <h3>Tension Pneumothorax</h3>
+    <p>Air trapped in the pleural space compresses the heart and great vessels, causing cardiovascular collapse. This is immediately life-threatening and progresses rapidly.</p>
+
+    <h4>Signs (DOPE mnemonic):</h4>
+    <ul>
+      <li><strong>D</strong>eviated trachea — shifts away from affected side (late sign)</li>
+      <li><strong>O</strong>ver-inflated chest on affected side — does not rise/fall with breathing</li>
+      <li><strong>P</strong>rogressing respiratory distress — rapidly worsening breathing</li>
+      <li><strong>E</strong>levated jugular veins + falling blood pressure + cyanosis (blue lips/fingertips)</li>
+    </ul>
+
+    <h4>Needle Decompression (if trained):</h4>
+    <ol class="steps">
+      <li>Use a large-bore needle (14g or 16g, at least 3.25 inches/8cm long) or improvised equivalent.</li>
+      <li>Locate the 2nd intercostal space, mid-clavicular line (just below the collarbone, halfway between shoulder and sternum) on the affected side.</li>
+      <li>Insert the needle perpendicular to the chest wall, just above the 3rd rib (inserting below a rib avoids the neurovascular bundle running under each rib).</li>
+      <li>A rush of air confirms correct placement. Leave the needle in place; convert to a chest seal.</li>
+      <li>Improvised: a large syringe needle taped in place. Commercial: commercial needle decompression kit.</li>
+    </ol>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Training Required</strong>
+        <p>Needle decompression without training carries serious risks including lung puncture, hemothorax, and infection. If untrained, focus on positioning, oxygen (if available), and evacuation. A three-sided chest seal alone will help most sucking chest wounds significantly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== SNAKEBITE =================== -->
+  <section id="snakebite">
+    <h2>13. Snakebite &amp; Envenomation</h2>
+
+    <p>Most snakebites worldwide are from pit vipers (rattlesnakes, copperheads, cottonmouths in North America; lancehead vipers in South America) and cobras/mambas in Africa and Asia. Treatment is almost entirely supportive — many traditional interventions cause more harm than the bite itself.</p>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">🚫</span>
+      <div class="callout-content">
+        <strong>Do NOT Do These</strong>
+        <p>Cut and suck the wound — does not work, introduces bacteria.<br>
+        Apply a tourniquet — causes tissue necrosis in viper envenomations.<br>
+        Apply ice — worsens local tissue damage.<br>
+        Give alcohol — vasodilation speeds venom absorption.<br>
+        Use an electric shock device — no evidence of efficacy, causes burns.</p>
+      </div>
+    </div>
+
+    <h3>Immediate Response</h3>
+    <ol class="steps">
+      <li>Move away from the snake — a bitten snake can still bite. Do not attempt to capture or kill it.</li>
+      <li>Keep the bitten limb below heart level and immobilized. Movement spreads venom through lymphatic circulation.</li>
+      <li>Remove rings, watches, and tight clothing from the bitten limb — swelling will be significant.</li>
+      <li>Mark the leading edge of swelling and redness with a pen and note the time — track spread to assess severity and urgency.</li>
+      <li>Evacuate to hospital with antivenom as rapidly as possible. Antivenom is the only definitive treatment.</li>
+    </ol>
+
+    <h3>Pressure Immobilization (Neurotoxic Bites Only)</h3>
+    <p>Used ONLY for bites from neurotoxic snakes (elapids — cobras, mambas, coral snakes, Australian elapids). <strong>Do NOT use for viper bites</strong> — pressure causes necrosis with cytotoxic venom.</p>
+    <p>Wrap the entire bitten limb firmly (not tightly) with a bandage starting at the fingers/toes and working up. The wrap should be firm enough to leave a finger impression but not cut off circulation. Splint the limb. Carry — do not walk — the patient.</p>
+
+    <h3>Signs of Systemic Envenomation (Seek Emergency Care)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Venom Type</th><th>Signs</th><th>Treatment Priority</th></tr></thead>
+        <tbody>
+          <tr><td>Cytotoxic (most vipers)</td><td>Severe local swelling, tissue death, blistering, necrosis at bite site</td><td>Antivenom, wound care, prevent infection</td></tr>
+          <tr><td>Hemotoxic (rattlesnakes)</td><td>Uncontrolled bleeding from gums, wounds; blood in urine; clotting failure</td><td>Antivenom, blood products if available</td></tr>
+          <tr><td>Neurotoxic (cobras, mambas, coral)</td><td>Drooping eyelids, slurred speech, muscle weakness, respiratory paralysis</td><td>Pressure immobilization, antivenom, airway support</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Without antivenom, treatment is supportive: airway management, IV fluids for shock, wound care. Approximately 70% of snakebites inject insufficient venom to cause serious envenomation ("dry bites" or minimal envenomation). This does not mean you can delay assessment — envenomation can progress over hours.</p>
+  </section>
+
+  <!-- =================== STROKE =================== -->
+  <section id="stroke">
+    <h2>14. Stroke Recognition — FAST</h2>
+
+    <p>Stroke occurs when blood supply to part of the brain is cut off (ischemic stroke, 87%) or a blood vessel ruptures (hemorrhagic stroke, 13%). Time is brain — every minute without treatment, approximately 1.9 million neurons die. Without CT scan capability, you cannot distinguish ischemic from hemorrhagic stroke, so treatment without imaging is limited to supportive care and evacuation.</p>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">🧠</span>
+      <div class="callout-content">
+        <strong>FAST — Stroke Recognition</strong>
+        <p><strong>F — Face drooping:</strong> Ask the person to smile. Is one side of the face drooping or numb?<br>
+        <strong>A — Arm weakness:</strong> Ask them to raise both arms. Does one arm drift downward?<br>
+        <strong>S — Speech difficulty:</strong> Ask them to repeat a simple phrase. Is speech slurred or strange?<br>
+        <strong>T — Time to act:</strong> If ANY of these signs are present, this is a stroke. Act immediately.</p>
+      </div>
+    </div>
+
+    <h3>Additional Signs</h3>
+    <ul>
+      <li>Sudden severe headache with no known cause ("worst headache of my life" — suggests hemorrhagic stroke)</li>
+      <li>Sudden vision loss in one or both eyes</li>
+      <li>Sudden confusion, difficulty understanding speech</li>
+      <li>Sudden numbness or weakness of face, arm, or leg — especially on one side</li>
+      <li>Sudden loss of balance, coordination, or difficulty walking</li>
+    </ul>
+
+    <h3>Without Medical Care</h3>
+    <ol class="steps">
+      <li>Keep the patient calm, lying down with head and shoulders slightly elevated (30°).</li>
+      <li>Nothing by mouth — swallowing is often impaired after stroke; aspiration pneumonia is a serious risk.</li>
+      <li>Do not give aspirin unless you are confident this is ischemic (non-hemorrhagic). Aspirin worsens hemorrhagic stroke. Without imaging, you cannot know.</li>
+      <li>Monitor airway — unconscious or semi-conscious patients may need to be positioned in recovery position.</li>
+      <li>Monitor blood glucose if diabetic (hypoglycemia mimics stroke — see Diabetic Emergencies section).</li>
+      <li>Keep patient warm and still. Prevent pressure sores if bedridden — turn every 2 hours.</li>
+      <li>Many stroke patients partially recover over days to weeks. Rehabilitation begins as soon as the patient is stable: speech exercises, range-of-motion movements for affected limbs.</li>
+    </ol>
+  </section>
+
+  <!-- =================== SEIZURES =================== -->
+  <section id="seizures">
+    <h2>15. Seizures</h2>
+
+    <p>A seizure is abnormal electrical activity in the brain. Most seizures stop on their own within 1–3 minutes. The danger is not the seizure itself but the risk of injury during convulsions and airway obstruction afterward.</p>
+
+    <h3>During a Seizure</h3>
+    <ol class="steps">
+      <li><strong>Time the seizure.</strong> Most self-terminate within 3 minutes. A seizure lasting over 5 minutes (status epilepticus) is a medical emergency.</li>
+      <li>Clear the area around the patient of hard or sharp objects. Do not restrain movement — you cannot stop a seizure by holding someone down.</li>
+      <li>Turn the patient onto their side (recovery position) to prevent choking on saliva or vomit.</li>
+      <li><strong>Do not put anything in the mouth.</strong> The "swallowing your tongue" myth is false. Objects placed in the mouth during seizures cause broken teeth and bitten fingers.</li>
+      <li>Loosen any tight clothing around the neck.</li>
+    </ol>
+
+    <h3>After a Seizure (Post-Ictal Phase)</h3>
+    <ul>
+      <li>The patient will be confused, drowsy, and disoriented — this is normal and lasts 5–30 minutes.</li>
+      <li>Maintain recovery position until fully conscious.</li>
+      <li>Check for injuries from falling or convulsions.</li>
+      <li>Do not give food or drink until fully alert.</li>
+      <li>Ask if they have a known seizure condition and whether they have missed medication.</li>
+    </ul>
+
+    <h3>When to Be Concerned</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Situation</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>First seizure ever</td><td>Seek medical evaluation — underlying cause (trauma, infection, toxin) must be identified</td></tr>
+          <tr><td>Seizure lasting &gt;5 minutes</td><td>Status epilepticus — life-threatening. Diazepam (Valium) 5–10mg rectal or IV if available. Maintain airway.</td></tr>
+          <tr><td>Multiple seizures without recovery in between</td><td>Status epilepticus — treat as above</td></tr>
+          <tr><td>Seizure in a pregnant woman</td><td>Eclampsia until proven otherwise — lay on left side, protect airway, magnesium sulfate if available</td></tr>
+          <tr><td>Seizure after head injury</td><td>Traumatic brain injury — immobilize spine, monitor for deteriorating consciousness</td></tr>
+          <tr><td>Diabetic patient</td><td>Check blood glucose — hypoglycemia causes seizures; give sugar if conscious and able to swallow</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =================== DIABETIC =================== -->
+  <section id="diabetic">
+    <h2>16. Diabetic Emergencies</h2>
+
+    <p>Two opposite conditions both present as altered consciousness in a diabetic patient. Distinguishing them matters because their treatments are opposite. When in doubt — give sugar. The risk of giving sugar to a hyperglycemic patient is low; the risk of withholding sugar from a hypoglycemic patient is death.</p>
+
+    <h3>Hypoglycemia (Low Blood Sugar) — The Immediate Killer</h3>
+    <div class="callout callout-danger">
+      <span class="callout-icon">🍬</span>
+      <div class="callout-content">
+        <strong>Blood glucose below 70 mg/dL (3.9 mmol/L)</strong>
+        <p>Onset is rapid — minutes. Brain cells begin dying. This is the more immediately dangerous of the two conditions.</p>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Signs:</strong> Shaking, sweating, pale skin, rapid heart rate, confusion, irritability, headache, seizure, unconsciousness</li>
+      <li><strong>Cause:</strong> Too much insulin, too little food, excessive exercise, alcohol</li>
+    </ul>
+    <ol class="steps">
+      <li>If conscious and able to swallow: 15g of fast-acting carbohydrate — 4 glucose tablets, 4 oz fruit juice, 1 tablespoon honey or sugar dissolved in water, or 3–4 hard candies.</li>
+      <li>Wait 15 minutes. If still symptomatic, repeat.</li>
+      <li>Once recovered, give a complex carbohydrate + protein snack to prevent rebound (crackers with peanut butter, bread with cheese).</li>
+      <li>If unconscious: do not give anything by mouth. Rub honey or glucose gel on the inside of the cheek or gums. Recovery position. Glucagon injection if available and trained.</li>
+    </ol>
+
+    <h3>Hyperglycemia (High Blood Sugar) — The Slow Threat</h3>
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Blood glucose above 250 mg/dL (13.9 mmol/L)</strong>
+        <p>Onset is gradual — hours to days. Can progress to diabetic ketoacidosis (DKA), which is life-threatening.</p>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Signs:</strong> Extreme thirst, frequent urination, fatigue, blurred vision, fruity-smelling breath (DKA), nausea, abdominal pain, deep labored breathing (Kussmaul breathing in DKA)</li>
+      <li><strong>Cause:</strong> Missed insulin doses, infection (infection raises blood sugar dramatically), illness, excessive carbohydrate intake</li>
+    </ul>
+    <ol class="steps">
+      <li>Give insulin if available and prescribed. Continue food and water.</li>
+      <li>Hydration is critical — dehydration worsens hyperglycemia. Encourage water (not juice).</li>
+      <li>Treat any underlying infection aggressively — infection is the #1 trigger for DKA.</li>
+      <li>DKA: IV fluids and insulin are the definitive treatment. Without these, DKA carries high mortality.</li>
+      <li>Insulin storage: regular insulin is most shelf-stable. Unrefrigerated insulin degrades in weeks at room temperature; store in coolest available location.</li>
+    </ol>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Hypoglycemia (Low)</th><th>Hyperglycemia (High)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Onset</strong></td><td>Minutes to hours</td><td>Hours to days</td></tr>
+          <tr><td><strong>Skin</strong></td><td>Pale, sweaty, cold</td><td>Flushed, dry, warm</td></tr>
+          <tr><td><strong>Breathing</strong></td><td>Normal</td><td>Deep, labored (DKA)</td></tr>
+          <tr><td><strong>Breath odor</strong></td><td>Normal</td><td>Fruity/acetone (DKA)</td></tr>
+          <tr><td><strong>Consciousness</strong></td><td>Agitated → unresponsive fast</td><td>Gradual decline</td></tr>
+          <tr><td><strong>Treatment</strong></td><td>Give sugar immediately</td><td>Insulin + fluids</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =================== DROWNING =================== -->
+  <section id="drowning">
+    <h2>17. Drowning &amp; Submersion</h2>
+
+    <p>Drowning causes death by hypoxia (oxygen deprivation), not by water in the lungs. Most drowning victims have very little water in their airways — the larynx spasms and closes (laryngospasm). Rescue and resuscitation are effective even after several minutes of submersion, particularly in cold water, which reduces oxygen demand.</p>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Cold Water Drowning — Extended Window</strong>
+        <p>In cold water (&lt;10°C / 50°F), the diving reflex and hypothermia dramatically slow metabolism. Successful resuscitations have occurred after 20–40 minutes of submersion in cold water. <strong>"Not dead until warm and dead"</strong> — continue CPR until core temperature is restored and there is still no pulse.</p>
+      </div>
+    </div>
+
+    <h3>Rescue — Water Safety</h3>
+    <ol class="steps">
+      <li><strong>Reach before you enter.</strong> A drowning person will instinctively grab anything — including a rescuer — and push them under. Use a pole, rope, towel, or clothing to reach them from shore or a boat.</li>
+      <li><strong>Throw before you go.</strong> A rope with a float (plastic bottle works) can be thrown to the victim.</li>
+      <li><strong>Row before you swim.</strong> Use a boat if available — far safer than swimming.</li>
+      <li>Only enter the water as a last resort. If you must swim to a victim, approach from behind to avoid being grabbed. If grabbed, push away and approach again from behind.</li>
+    </ol>
+
+    <h3>After Rescue — Resuscitation</h3>
+    <ol class="steps">
+      <li>As soon as the victim is on a stable surface: assess responsiveness and breathing.</li>
+      <li><strong>Do not perform "clearing the water" drains or compressions before rescue breaths</strong> — this is ineffective and delays oxygenation.</li>
+      <li>If not breathing: begin CPR immediately with rescue breaths. Drowning is a hypoxic arrest — ventilation is more critical than in cardiac arrest. Use a 30:2 ratio (30 compressions, 2 breaths).</li>
+      <li>If breathing: place in recovery position on their side. Monitor airway constantly — vomiting is common.</li>
+      <li>Treat for hypothermia: remove wet clothing, insulate, apply warm water bottles to armpits and groin if available.</li>
+      <li>All drowning victims who required resuscitation should be observed for at least 6–8 hours for secondary drowning (delayed pulmonary edema). Signs: coughing, shortness of breath, altered consciousness hours after rescue.</li>
+    </ol>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Secondary Drowning (Delayed Pulmonary Edema)</strong>
+        <p>A victim who appears fine after rescue can develop serious breathing problems 1–24 hours later as aspirated water triggers inflammation in the lungs. Any drowning victim who was unconscious or required resuscitation must be monitored for: persistent cough, difficulty breathing, unusual fatigue, or chest pain. These are emergency signs.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✅</span>
+      <div class="callout-content">
+        <strong>→ Related Sections</strong>
+        <p>Hypothermia treatment: <a href="#temperature">§4 Hypothermia &amp; Heat Emergencies</a><br>
+        CPR and resuscitation basics: <a href="#triage">§10 Triage &amp; Mass Casualty</a><br>
+        Mental health support for survivors: <a href="#mental-health">§11 Mental Health</a></p>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-md);margin-top:var(--sp-xl)">
+    <a href="food.html" class="btn btn-outline">← Food &amp; Water</a>
+    <a href="energy.html" class="btn btn-primary">Next: Energy →</a>
+  </div>
+  <div class="callout callout-tip" style="margin-top:var(--sp-xl)">
+    <span class="callout-icon">🔗</span>
+    <div class="callout-content">
+      <strong>Related Sections</strong>
+      <p>
+        <a href="food.html#sanitation">Food &amp; Water → ORS recipe for dehydration</a> ·
+        <a href="food.html#foraging">Food &amp; Water → Herbal medicine plants</a> ·
+        <a href="communications.html">Communications → Calling for help</a> ·
+        <a href="security.html#bug-out">Security → Go-bag medical supplies</a>
+      </p>
+    </div>
+  </div>
+
+<nav class="section-pagination no-print" aria-label="Section navigation">
+  <a href="food.html" class="pagination-btn pagination-prev">← Food &amp; Water</a>
+  <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+  <a href="energy.html" class="pagination-btn pagination-next">Energy →</a>
+</nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title">
+      <div class="aria-avatar">🤖</div>
+      <div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div>
+    </div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome">
+      <div class="aria-message-content"><p>You're reading the Medical section. Ask me about wound care, medications, triage, or any first aid procedure.<p class="aria-note">⚠️ Requires Ollama. <a href="../ai-setup.html">Setup →</a></p></div>
+    </div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/aria.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-06-19",
+  "sections": [
+    {
+      "version": "1.0.0",
+      "date": "2026-06-19",
+      "title": "Initial Release",
+      "changes": [
+        "19 complete content sections covering all core survival domains",
+        "9 interactive tools: calorie calculator, water budget, solar sizing, supply tracker, skill inventory, planting calendar, bug-out decision tree, radio frequencies, medication reference",
+        "ARIA AI assistant via Ollama — fully offline capable",
+        "60-book reference library with free PDF links and acquisition tracker",
+        "Complete gear checklist with localStorage persistence",
+        "Emergency quick-reference card (printable)",
+        "12 printable wallet-sized emergency reference cards",
+        "Service worker for full offline caching",
+        "High contrast and night vision display modes",
+        "Font size accessibility controls (Normal / Large / XL)",
+        "Client-side search across all content",
+        "Inline SVG diagrams throughout — no external images required",
+        "Zero CDN dependencies — works from USB drive on any browser"
+      ]
+    }
+  ]
+}

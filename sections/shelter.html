@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shelter & Construction — site selection, emergency shelters, timber framing, earthbag, cob building, passive solar, insulation, and tools.">
+  <title>Shelter &amp; Construction — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Shelter &amp; Construction</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>🏕️ Shelter &amp; Construction</h1>
+    <p class="section-desc">You have 3 hours in extreme cold without shelter before hypothermia becomes life-threatening. Shelter is the second priority after air. This section covers emergency survival shelters through long-term community construction.</p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2025-06"></span></span>
+      <span class="meta-item">⏱️ <span id="reading-time"></span></span>
+      <span class="meta-item">📖 Section 4 of 8</span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#site-selection">Site Selection</a></li>
+      <li><a href="#emergency-shelters">Emergency Shelters</a></li>
+      <li><a href="#long-term">Long-Term Construction Methods</a></li>
+      <li><a href="#insulation">Insulation &amp; Ventilation</a></li>
+      <li><a href="#passive-solar">Passive Solar Design</a></li>
+      <li><a href="#roofing">Roofing with Found Materials</a></li>
+      <li><a href="#tools">Essential Tools &amp; Improvised Tools</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">⏱️</span>
+    <div class="callout-content">
+      <strong>First 24 Hours — Shelter Priorities</strong>
+      <ol style="margin:.5rem 0 0;padding-left:1.2rem">
+        <li>Assess your current structure: roof leaks, broken windows, structural damage, gas line integrity.</li>
+        <li>Cover any broken windows immediately with plastic sheeting or tarps — wind and rain exposure kills.</li>
+        <li>Identify your sleeping area and insulate it tonight — thermal mass and layering prevent overnight hypothermia.</li>
+        <li>Establish a single defensible entry/exit point and ensure all group members know it.</li>
+        <li>Inventory firewood, fuel, and heating capacity — calculate how many nights your supply covers.</li>
+        <li>Identify any structural hazards: load-bearing wall damage, cracked chimneys, unstable floors. Don't occupy until assessed.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- =================== SITE SELECTION =================== -->
+  <section id="site-selection">
+    <h2>1. Site Selection</h2>
+    <p>Where you build matters as much as how you build. A poorly sited shelter compounds every other problem.</p>
+
+    <h3>Non-Negotiable Criteria</h3>
+    <ul>
+      <li><strong>Above flood plain:</strong> Know the 100-year flood elevation. Any structure at risk of flooding will eventually flood. Look for high watermarks on trees, debris lines, and eroded banks.</li>
+      <li><strong>Stable ground:</strong> Avoid: steep slopes (&gt;30%), sandy or loose soil (slides, poor foundation), expansive clay (swells/cracks foundations), rock with no topsoil (can't build or grow food).</li>
+      <li><strong>Water access:</strong> Within a reasonable distance of a clean water source, but per sanitation rules — never immediately downhill of your latrine.</li>
+      <li><strong>Not in a natural wind funnel:</strong> Gaps between hills, canyon mouths, and valley floors often create severe localized winds.</li>
+    </ul>
+
+    <h3>Desirable Criteria</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Factor</th><th>Ideal</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Sun orientation (Northern Hemisphere)</td><td>Main face toward south</td><td>Passive solar heating; maximum sunlight for garden and panels</td></tr>
+          <tr><td>Wind</td><td>Windbreak to north/northwest; open to south</td><td>Reduces heating load; trees on north side protect from cold prevailing winds</td></tr>
+          <tr><td>Slope</td><td>Slight south-facing slope (2–5°)</td><td>Improves drainage; warms faster in spring</td></tr>
+          <tr><td>Soil</td><td>Deep loam or clay loam</td><td>Good for earthbag, cob, rammed earth construction and agriculture</td></tr>
+          <tr><td>Defensibility</td><td>Clear sight lines; single main approach</td><td>Early warning; perimeter management</td></tr>
+          <tr><td>Distance from roads</td><td>Far enough for security, close enough for access</td><td>Balance privacy vs. connectivity</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Radon, Soil Contamination, and EMF</strong>
+        <p>Before building permanent structures, test soil for contamination (near industrial sites, old farms with chemical use) and radon gas (naturally occurring in granite-rich soils). Both can be addressed but require specific construction techniques. Map any underground utilities or pipelines.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== EMERGENCY SHELTERS =================== -->
+  <section id="emergency-shelters">
+    <h2>2. Emergency Shelters</h2>
+    <p>These can be built in 1–3 hours from nothing. They buy time — days or weeks — while you establish more permanent solutions.</p>
+
+    <h3>Debris Hut</h3>
+    <p>The most effective no-equipment emergency shelter in temperate forests. Built from natural materials, it can keep you warm in near-freezing temperatures with no fire.</p>
+
+    <ol class="steps">
+      <li>Find or cut a ridgepole 2–3m longer than your height. Prop one end on a forked branch or stump 1m high; the other end on the ground.</li>
+      <li>Lean branches and sticks along both sides of the ridgepole to create a ribbed frame. The interior should be just barely large enough for you to fit — smaller = warmer.</li>
+      <li>Pile debris (dead leaves, ferns, pine needles, grass) over the frame to a depth of at least 60cm (2 feet). This is the insulation layer. Err on the side of too much.</li>
+      <li>Fill the interior floor with dry leaves to insulate you from the ground — cold ground steals more heat than cold air.</li>
+      <li>Create a "door plug" — a bundle of leaves in a bag, jacket, or netting — to block the entrance when inside.</li>
+      <li>Sleep in layers and bring all clothing inside. Your body heat warms the small interior in 30–60 minutes.</li>
+    </ol>
+
+    <div class="diagram">
+     ╱─────────────────────╲
+    ╱  ╱  ╱  ╱  ╱  ╱  ╱  ╲ ╲  ← 60cm+ debris
+   ╱  ╱  ╱  ╱  ╱  ╱  ╱  ╱  ╲ ╲
+  ──────────────────────────────  ← Ridgepole
+  ╲  ╲  ╲  ╲  ╲  ╲  ╲  ╲  ╱ ╱
+   ╲  ╲  ╲  ╲  ╲  ╲  ╲  ╱ ╱    Door ← [Leaf plug]
+    Small opening at one end only. Entirely filled with dry leaves inside.
+    </div>
+
+    <h3>Lean-To</h3>
+    <p>Faster to build than a debris hut; better for mild weather or when you have a fire. Not suitable for severe cold without fire.</p>
+    <ol class="steps">
+      <li>Lash a horizontal ridgepole between two trees (or forked stakes) at chest height on the windward side.</li>
+      <li>Lean branches and sticks against the ridgepole at a 45° angle to form the roof.</li>
+      <li>Layer bark, leaves, or a tarp over the framework. Overlap like shingles from bottom to top so water runs off.</li>
+      <li>Build a fire in front of the open face, with a reflector (rocks, logs, or tarp-wrapped frame) on the opposite side to direct heat back into the shelter.</li>
+    </ol>
+
+    <h3>Tarp Configurations</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Setup</th><th>Best For</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>A-frame</td><td>Rain, moderate wind, two people</td><td>Ridge line between trees, tarp draped over. Stake sides to ground. Fast setup.</td></tr>
+          <tr><td>Lean-to</td><td>Mild rain, use with fire</td><td>One edge high, other pegged to ground. Open front for fire warmth.</td></tr>
+          <tr><td>Diamond/Plow point</td><td>Single person, rain, wind</td><td>Tarp on diagonal; one corner up (ridgeline), opposite corner down as door flap.</td></tr>
+          <tr><td>Burrito / cocoon</td><td>No rain, emergency insulation</td><td>Wrap yourself in tarp with leaves for insulation. Last resort only.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Snow Shelters</h3>
+    <ul>
+      <li><strong>Quinzhee:</strong> Pile snow into a dome 2m high, 3m diameter. Insert sticks as depth guides (25cm). Wait 2 hours for snow to sinter (harden). Hollow out from inside using sticks as guides — walls should be 25cm thick. Create a sleeping platform higher than the entrance (warm air rises). Make a ventilation hole in the roof.</li>
+      <li><strong>Snow trench:</strong> Quickest cold-weather shelter. Dig a trench just wide enough to lie in, 1m deep. Cover with a tarp, branches, or blocks of snow. Insulate bottom with pine boughs. Can be dug in 20 minutes with a tool.</li>
+    </ul>
+  </section>
+
+  <!-- =================== LONG TERM =================== -->
+  <section id="long-term">
+    <h2>3. Long-Term Construction Methods</h2>
+
+    <h3>Timber Framing</h3>
+    <p>Traditional post-and-beam construction using large timbers joined with mortise-and-tenon joinery and wooden pegs (treenails). No metal fasteners required. A properly built timber frame will stand for centuries.</p>
+
+    <h4>Key Joinery — Mortise and Tenon</h4>
+    <div class="diagram">
+    TENON (the tongue)         MORTISE (the slot)
+    ┌──────────────┐           ┌────────────────────────┐
+    │              ├──[TENON]──┤  MORTISE               │
+    │  Beam A      │           │  (cut to fit tenon)    │
+    └──────────────┘           └────────────────────────┘
+                                         Beam B
+    Secure with a wooden peg (treenail) driven through a hole
+    bored through the assembled joint — offsets drill for "draw-boring"
+    to pull joint tight as peg is driven.
+    </div>
+
+    <h4>Raising Sequence</h4>
+    <ol class="steps">
+      <li>Cut and prepare all timbers on the ground. Mark all joints clearly.</li>
+      <li>Pre-assemble bents (the two-dimensional frames: two posts + connecting beams) flat on the ground.</li>
+      <li>Raise bents one by one with pike poles, ropes, and helpers. Brace each bent plumb before moving to the next.</li>
+      <li>Connect bents with horizontal plates and girts.</li>
+      <li>Add roof rafters and apply sheathing/roofing.</li>
+    </ol>
+
+    <h4>Timber Selection</h4>
+    <ul>
+      <li>Hardwoods (oak, elm, hickory) for posts, beams, and joinery — strong, rot-resistant.</li>
+      <li>Softwoods (pine, fir, spruce) for rafters, sheathing, flooring — straight-grained, easy to work.</li>
+      <li>Logs should be debarked and allowed to dry (season) before use — green wood shrinks and can loosen joints.</li>
+    </ul>
+
+    <h3>Earthbag Construction</h3>
+    <p>Fill polypropylene bags (grain sacks, sandbags) with moist soil, tamp firmly, and stack in courses like masonry. Incredibly strong, uses on-site materials, and resists fire, earthquakes, and bullets.</p>
+
+    <ol class="steps">
+      <li>Lay a rubble-filled French drain foundation (gravel in a trench) to prevent moisture wicking into earthbags.</li>
+      <li>Fill bags with slightly moist subsoil (10–15% moisture) — not topsoil, which has organic matter that decomposes. Stabilized soil (add 5–10% Portland cement) dramatically increases strength.</li>
+      <li>Fill bags 80% full, fold, and tamp flat before placing. Each bag should be roughly 15cm (6") high after tamping.</li>
+      <li>Stagger joints like masonry — each bag centered over the joint below.</li>
+      <li>Place two strands of barbed wire between each course — this acts as mortar, locking courses together and preventing slipping.</li>
+      <li>Plaster interior and exterior with earthen, lime, or cement plaster to protect bags from UV (which degrades polypropylene) and weathering.</li>
+    </ol>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✅</span>
+      <div class="callout-content">
+        <strong>Earthbag Arch and Dome Construction</strong>
+        <p>Earthbag is particularly suited to domes. Use a center pivot cord as a radius guide to curve each course inward. Bags on the curve must be trimmed/folded. A simple dome (4m diameter) can be built by 2–3 untrained people in 2–3 weeks and is structurally superior to a rectangular building for handling horizontal forces.</p>
+      </div>
+    </div>
+
+    <h3>Cob Building</h3>
+    <p>Cob is a mixture of subsoil (clay-rich), sand, and straw formed into "cobs" (rough lumps) and pressed together by hand and foot into monolithic walls. No formwork or bags needed.</p>
+
+    <div class="ratio-box">Mix: 1 part clay soil + 2 parts coarse sand + straw (test batches to find your soil's ideal ratio)</div>
+
+    <ul>
+      <li>Mix cob on a tarp by folding and stomping repeatedly — the straw must be thoroughly incorporated. Test: form a ball, drop from 1m — it should hold together but not splatter.</li>
+      <li>Apply cob in 15–25cm lifts. Allow each lift to firm up (usually 1–3 days) before adding the next to prevent slumping.</li>
+      <li>Cob walls should be minimum 45cm thick for structural walls; thicker for thermal mass benefit.</li>
+      <li>Final plaster: clay plaster (interior), lime plaster (exterior — lime is weather-resistant and breathable).</li>
+    </ul>
+  </section>
+
+  <!-- =================== INSULATION =================== -->
+  <section id="insulation">
+    <h2>4. Insulation &amp; Ventilation</h2>
+
+    <h3>Insulation Principles</h3>
+    <p>Insulation works by trapping still air (which is an excellent insulator). Wet insulation loses all value — vapor management is critical.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Material</th><th>R-value per inch</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Sheep's wool</td><td>R-3.5 to R-3.8</td><td>Naturally moisture-managing, fire-resistant, no face protection needed</td></tr>
+          <tr><td>Straw bales</td><td>R-1.4 per inch (R-30 typical bale)</td><td>Excellent, widely available; must be kept dry; face coat with lime plaster</td></tr>
+          <tr><td>Cellulose (shredded paper)</td><td>R-3.5</td><td>DIY: shred newspapers, add 20% borax (fire retardant). Pack into cavities.</td></tr>
+          <tr><td>Wood shavings / sawdust</td><td>R-2.5</td><td>Available near mills; tends to settle; add borax; moderate fire risk</td></tr>
+          <tr><td>Dried moss / lichen</td><td>R-3 (approx)</td><td>Traditional Scandinavian building material; must be very dry</td></tr>
+          <tr><td>Earthen walls (cob/adobe)</td><td>R-0.4 per inch</td><td>Low insulation but high thermal mass — absorbs and stores heat</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Ventilation</h3>
+    <p>All inhabited structures must have ventilation. Without it: CO2 accumulates, moisture condenses (causing rot and mold), and radon may accumulate. With it: fresh air, reduced humidity, healthy indoor environment.</p>
+
+    <ul>
+      <li><strong>Cross ventilation:</strong> Place openings on opposite walls aligned with prevailing wind. Open area = 5–10% of floor area for comfortable summer ventilation.</li>
+      <li><strong>Stack effect:</strong> Warm air rises. High vents on south/east face and lower vents on north allow natural convection without fans.</li>
+      <li><strong>Cooking ventilation:</strong> Any open fire or wood stove indoors requires a proper flue to exterior. A smoke shelf in the firebox prevents backdraft. Chimney should extend 0.9m above the roof ridge or any obstruction within 3m horizontally.</li>
+      <li><strong>Winter balance:</strong> Excessive ventilation in winter wastes heat. Use operable vents, not fixed openings. Air-to-air heat exchangers (ERV/HRV) allow fresh air with minimal heat loss — can be built from two cardboard tubes in a box with corrugated inserts.</li>
+    </ul>
+  </section>
+
+  <!-- =================== PASSIVE SOLAR =================== -->
+  <section id="passive-solar">
+    <h2>5. Passive Solar Design</h2>
+
+    <p>Passive solar uses the building's orientation, glazing, thermal mass, and shading to heat and cool the building naturally — no mechanical systems required.</p>
+
+    <h3>Core Principles (Northern Hemisphere)</h3>
+    <div class="diagram">
+           WINTER SUN (low angle)                   SUMMER SUN (high angle)
+                  ☀️                                       ☀️
+                  │                                        │
+                  │ (low)                                  │ (high)
+                  ▼                                        │
+     ┌────────────────────────┐                           ╱
+     │    OVERHANG            │ ← sized to block summer  ╱
+     │    (correct depth)     │   sun, allow winter sun ╱
+     ├────────────────────────┤                          /
+     │    SOUTH-FACING        │ ← Large glazing (glass or
+     │    WINDOWS             │   clear plastic) faces south
+     ├────────────────────────┤
+     │    THERMAL MASS        │ ← Stone, brick, tile, or water
+     │    (floor, walls)      │   absorbs heat during day,
+     │    inside south face   │   releases at night
+     └────────────────────────┘
+     INSULATION ON ALL OTHER WALLS (north, east, west)
+    </div>
+
+    <h4>Overhang Sizing</h4>
+    <p>To allow winter sun and block summer sun:</p>
+    <div class="ratio-box">Overhang depth = Window height × tan(90° − latitude − 23.5°)</div>
+    <p>Simpler rule: For latitudes 30–45°N, overhang depth = 50–65% of south window height. Example: 4-foot windows → 2 to 2.6-foot overhang.</p>
+
+    <h3>Thermal Mass Requirements</h3>
+    <ul>
+      <li>Use minimum 6 square feet of thermal mass per square foot of south-facing glazing.</li>
+      <li>Thermal mass should be in direct sunlight (dark-colored, unobstructed).</li>
+      <li>Concrete, brick, stone, tile, or water containers all work. Water has 3× the heat storage of masonry per unit volume.</li>
+      <li>Insulate the building envelope well — thermal mass only works if heat doesn't immediately escape through the walls.</li>
+    </ul>
+  </section>
+
+  <!-- =================== ROOFING =================== -->
+  <section id="roofing">
+    <h2>6. Roofing with Found Materials</h2>
+
+    <h3>Thatch</h3>
+    <p>Traditional thatching uses long-stemmed grasses, reeds (<em>Phragmites australis</em> is ideal), straw, or palm fronds. A properly thatched roof lasts 30–50 years and is excellent insulation.</p>
+    <ol class="steps">
+      <li>Harvest reeds or long straw at maturity. Bundle into 20–25cm diameter bundles bound with natural cordage.</li>
+      <li>Begin at the eave (bottom edge). Lay bundles with heads pointing outward, lapped by 50% on each successive course.</li>
+      <li>Secure bundles with hazel withies (thin flexible branches) and steel or bamboo rods tied to rafters.</li>
+      <li>Pitch must be steep (45°+) for good water shedding. A 45° pitch sheds water well; 60°+ is ideal for the wettest climates.</li>
+      <li>Ridge: fold bundles over the ridge and secure with pegs. The ridge is the most critical area — birds and rot attack from the top first.</li>
+    </ol>
+
+    <h3>Wooden Shingles / Shakes</h3>
+    <p>Split from straight-grained rot-resistant wood (western red cedar is ideal; oak, chestnut, or any straight-grained wood works). A froe and mallet are the traditional tools.</p>
+    <ul>
+      <li>Shingle thickness: 1cm at the butt (thick end), tapering to a point.</li>
+      <li>Exposure (visible area per shingle): 1/3 of shingle length. Three layers of shingles cover every point of the roof.</li>
+      <li>Leave a 3–5mm gap between adjacent shingles — wood expands when wet.</li>
+      <li>Secure with two wooden pegs or nails, set in from the edge.</li>
+    </ul>
+
+    <h3>Sod / Green Roof</h3>
+    <p>A sod roof over a structure with steep walls provides excellent insulation. Requires: a very strong roof structure (sod is heavy, 40–80 kg/m²), a waterproof layer underneath (birch bark is traditional, HDPE pond liner is modern), drainage layer, and growing medium.</p>
+
+    <h3>Improvised Roofing from Salvage</h3>
+    <ul>
+      <li><strong>Metal sheets / tin:</strong> Overlap minimum 15cm at seams and 30cm at ridges. Secure with screws or bent nails. Noisy in rain but highly durable.</li>
+      <li><strong>Bark shingles:</strong> Harvest large sheets of elm, birch, or poplar bark in spring (when bark peels easily). Lay and weight flat to dry without curling. Use as large overlapping shingles.</li>
+      <li><strong>Tar paper / felt:</strong> Any salvaged roofing felt can be layered. Short-term solution — degrades in UV within 1–2 years.</li>
+    </ul>
+  </section>
+
+  <!-- =================== TOOLS =================== -->
+  <section id="tools">
+    <h2>7. Essential Tools &amp; Improvised Tools</h2>
+
+    <h3>Priority Hand Tools List</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tool</th><th>Uses</th><th>Priority</th></tr></thead>
+        <tbody>
+          <tr><td>Crosscut saw (2-person)</td><td>Felling trees, bucking logs</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Felling axe</td><td>Felling, splitting, limbing</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Hatchet / hand axe</td><td>Splitting kindling, shaping small timber</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Hand drill (brace and bit)</td><td>Boring holes for joinery and fasteners</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Hammer / maul</td><td>Driving fasteners, splitting</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Chisels (set of 4)</td><td>Mortise cutting, joinery, carving</td><td><span class="badge badge-danger">Essential</span></td></tr>
+          <tr><td>Hand planes (jack + smoothing)</td><td>Smoothing and sizing timber</td><td><span class="badge badge-warning">High</span></td></tr>
+          <tr><td>Drawknife</td><td>Debarking logs, shaping wood</td><td><span class="badge badge-warning">High</span></td></tr>
+          <tr><td>Froe + mallet</td><td>Splitting shingles, staves, fence rails</td><td><span class="badge badge-warning">High</span></td></tr>
+          <tr><td>Level (spirit or water)</td><td>Plumb and level reference</td><td><span class="badge badge-warning">High</span></td></tr>
+          <tr><td>Combination square</td><td>Marking 90° and 45° cuts</td><td><span class="badge badge-warning">High</span></td></tr>
+          <tr><td>Adze</td><td>Hollowing, shaping curved surfaces</td><td><span class="badge badge-info">Useful</span></td></tr>
+          <tr><td>Drawbore pins / treenails</td><td>Traditional wooden fasteners</td><td><span class="badge badge-info">Useful</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Improvised Tools</h3>
+    <ul>
+      <li><strong>Plumb bob:</strong> Any weight (nut, rock) suspended on a string. Gives true vertical.</li>
+      <li><strong>Water level:</strong> A clear hose filled with water — both ends will settle to the same elevation anywhere in the loop regardless of the path between them. Accurate to millimeters over long distances.</li>
+      <li><strong>Square:</strong> The 3-4-5 triangle (or any multiple: 6-8-10, 9-12-15). Mark 3 units on one side from a corner, 4 units on the other, 5 units diagonally = perfect 90°.</li>
+      <li><strong>Wedges:</strong> Split from hardwood; used to fell trees, split logs, and tighten joints. Make several sizes — small (splitting kindling), medium (driving joinery), large (log splitting).</li>
+      <li><strong>Rope pump:</strong> A rope with rubber discs (cut from tires) looped through a pipe into a water source. Pull the rope and discs lift water. Can be powered by hand, wind, or bicycle.</li>
+      <li><strong>Maul from a rock:</strong> Lash a smooth, hard, oval rock (granite works well) into a hardwood handle split and wedged around the stone — simple and effective hammer/maul.</li>
+    </ul>
+
+    <h3>Tool Maintenance Without Electricity</h3>
+    <ul class="checklist">
+      <li>Sharpen chisels and plane irons on a combination whetstone (coarse then fine), finished on a leather strop</li>
+      <li>Axes: sharpen with a mill bastard file, then a whetstone. Keep edge at 25–30° included angle</li>
+      <li>Saws: file-sharpen hand saws every 10–20 hours of use. Rip teeth at 0°, crosscut at 15–20° fleam angle</li>
+      <li>Oil all metal tools lightly (linseed or machine oil) to prevent rust, especially in humid storage</li>
+      <li>Oil wooden handles with linseed oil; replace handles before they break</li>
+      <li>Store in dry conditions — moisture is the primary tool killer</li>
+    </ul>
+  </section>
+
+  <hr>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-md);margin-top:var(--sp-xl)">
+    <a href="energy.html" class="btn btn-outline">← Energy</a>
+    <a href="communications.html" class="btn btn-primary">Next: Communications →</a>
+  </div>
+  <div class="callout callout-tip" style="margin-top:var(--sp-xl)">
+    <span class="callout-icon">🔗</span>
+    <div class="callout-content">
+      <strong>Related Sections</strong>
+      <p>
+        <a href="energy.html#rocket-stove">Energy → Rocket stoves for heating &amp; cooking</a> ·
+        <a href="energy.html#solar-cooker">Energy → Solar cooker builds</a> ·
+        <a href="energy.html#batteries">Energy → Battery storage for off-grid power</a> ·
+        <a href="food.html#growing">Food &amp; Water → Root cellar &amp; food storage</a>
+      </p>
+    </div>
+  </div>
+
+<nav class="section-pagination no-print" aria-label="Section navigation">
+  <a href="energy.html" class="pagination-btn pagination-prev">← Energy</a>
+  <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+  <a href="communications.html" class="pagination-btn pagination-next">Communications →</a>
+</nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">🤖</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're reading Shelter &amp; Construction. Ask me about site selection, building techniques, insulation, or tools.<p class="aria-note">⚠️ Requires Ollama. <a href="../ai-setup.html">Setup →</a></p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/aria.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

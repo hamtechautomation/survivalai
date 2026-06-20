@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Food, Water & Sanitation — purification, preservation, foraging, hunting, and sanitation without running water.">
+  <title>Food, Water &amp; Sanitation — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Food, Water &amp; Sanitation</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline" data-print>🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <!-- Section Header -->
+  <div class="section-header">
+    <h1>💧 Food, Water &amp; Sanitation</h1>
+    <p class="section-desc">
+      Water is your most critical resource. Without it, you have 3 days. This section covers finding, purifying, and storing water;
+      growing and preserving food; foraging and hunting; and maintaining sanitation to prevent disease.
+    </p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2025-06"></span></span>
+      <span class="meta-item">⏱️ <span id="reading-time"></span></span>
+      <span class="meta-item">📖 Section 1 of 8</span>
+    </div>
+  </div>
+
+  <!-- Table of Contents -->
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#water-sourcing">Water Sourcing</a></li>
+      <li><a href="#water-purification">Water Purification Methods</a></li>
+      <li><a href="#water-storage">Water Storage</a></li>
+      <li><a href="#rainwater">Rainwater Collection</a></li>
+      <li><a href="#food-preservation">Food Preservation</a></li>
+      <li><a href="#foraging">Foraging — Wild Edibles</a></li>
+      <li><a href="#hunting">Hunting &amp; Trapping</a></li>
+      <li><a href="#sanitation">Sanitation Without Running Water</a></li>
+      <li><a href="#growing">Growing Your Own Food</a></li>
+      <li><a href="#nutrition">Nutritional Deficiencies</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">⏱️</span>
+    <div class="callout-content">
+      <strong>First 24 Hours — Food &amp; Water Priorities</strong>
+      <ol style="margin:.5rem 0 0;padding-left:1.2rem">
+        <li><strong>Count your water:</strong> liters on hand ÷ 3 L/person/day = days of supply. Know this number.</li>
+        <li><strong>Count your food:</strong> calories on hand ÷ 2,000 cal/person/day = days of supply.</li>
+        <li>Locate your nearest water source and test your purification method — practice now, not under pressure.</li>
+        <li>Inventory all salt, sugar, bleach, and vinegar — critical inputs for preservation and purification.</li>
+        <li>If on grid power: move all refrigerated food to priority consumption (cook and eat it).</li>
+        <li>Begin rationing to 3 L/person/day water if supply is under 2 weeks. Food rationing: 1,200 cal minimum to maintain function.</li>
+        <li>Designate a food/water coordinator — one person tracks inventory and authorizes draws.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- =================== WATER SOURCING =================== -->
+  <section id="water-sourcing">
+    <h2>1. Water Sourcing</h2>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>All wild water must be treated</strong>
+        <p>Assume any water source — including springs, streams, and rain — may contain pathogens. Treat before drinking. Only emergency situations justify skipping purification.</p>
+      </div>
+    </div>
+
+    <h3>Finding Water in the Wild</h3>
+    <p>Water flows downhill. Head to valley floors, follow animal trails (they lead to water), and look for dense green vegetation. Insects and bird activity at dawn/dusk indicate water nearby.</p>
+
+    <ul>
+      <li><strong>Moving water:</strong> Streams and rivers are preferable to standing ponds — less pathogen concentration, though not safe raw.</li>
+      <li><strong>Springs:</strong> Water emerging from rock or hillside is usually cleaner than surface water but still requires treatment.</li>
+      <li><strong>Dew collection:</strong> Tie clean absorbent cloth around ankles and walk through grass at dawn. Wring cloth into a container. Can yield 1–2 liters/hour in good conditions.</li>
+      <li><strong>Plant transpiration:</strong> Tie a clear plastic bag over a leafy green branch in full sun. 0.5–1L of water will collect in several hours.</li>
+      <li><strong>Snow and ice:</strong> Melt before consuming — eating snow lowers core body temperature. Do not eat ice directly in a survival situation.</li>
+      <li><strong>Cactus:</strong> Some cactus species (barrel cactus pulp squeezed) yield moisture. <span class="badge badge-warning">Caution</span> — many cactus species cause nausea; saguaro and fishhook barrel are among the safer ones.</li>
+    </ul>
+
+    <h3>Well Digging Basics</h3>
+    <p>A hand-dug well can reach groundwater at depths of 3–15m in many areas. Signs of shallow groundwater: surface moisture, lush vegetation, nearby streams that run year-round.</p>
+
+    <ol class="steps">
+      <li>Choose a site at least 30m (100 ft) downhill/downwind from any latrine, septic, or animal pen.</li>
+      <li>Dig with a post-hole digger or shovel. Circle outward from center to maintain structural integrity.</li>
+      <li>Shore the walls with stone, brick, or wooden casing as you go to prevent cave-in.</li>
+      <li>Stop when water seeps in. Allow the well to fill. Bail out the first few fills to flush turbid water.</li>
+      <li>Build a cover and raise the casing 30cm above grade to prevent surface contamination.</li>
+      <li>Treat all water from new well for at least the first month — shock chlorinate with bleach and test quality.</li>
+    </ol>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Water Divining (Dowsing)</strong>
+        <p>No scientific evidence supports dowsing. In areas with high water tables, wells work almost anywhere. Use geological maps, local knowledge, and vegetation indicators instead.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== WATER PURIFICATION =================== -->
+  <section id="water-purification">
+    <h2>2. Water Purification Methods</h2>
+    <p>Each method has tradeoffs. Use multiple methods when possible — filter first, then disinfect.</p>
+
+    <h3>Method 1: Boiling</h3>
+    <p>The most reliable method requiring only fire. Kills all biological pathogens including bacteria, viruses, and protozoa.</p>
+
+    <div class="ratio-box">🔥 1 minute rolling boil at sea level &nbsp;·&nbsp; 3 minutes above 2,000m (6,500 ft)</div>
+
+    <ul>
+      <li>Pre-filter visibly turbid water through cloth to remove sediment before boiling.</li>
+      <li>Allow to cool naturally — do not add ice (may recontaminate).</li>
+      <li>Store in clean sealed containers.</li>
+      <li>Flat taste after boiling? Pour between containers several times to re-oxygenate.</li>
+    </ul>
+
+    <h3>Method 2: Chemical Disinfection — Bleach</h3>
+    <p>Household unscented bleach (sodium hypochlorite) is highly effective against bacteria and viruses. Less effective against <em>Cryptosporidium</em> (use boiling or filters for crypto-risk water).</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Bleach Concentration</th><th>Clear Water</th><th>Cloudy Water</th><th>Wait Time</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>6–8.25% (standard US bleach)</td><td>8 drops/gallon (2 drops/liter)</td><td>16 drops/gallon (4 drops/liter)</td><td>30 min</td></tr>
+          <tr><td>1% (diluted/pool)</td><td>40 drops/gallon</td><td>80 drops/gallon</td><td>30 min</td></tr>
+          <tr><td>10%+ (high concentrate)</td><td>Calculate proportionally</td><td>—</td><td>30 min</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Bleach Degrades</strong>
+        <p>Bleach loses potency over time. Bleach older than 6 months may require double the dose. Treat cloudy water twice. After adding, water should smell faintly of chlorine — if not, re-dose and wait 15 more minutes. If no chlorine smell after second dose, discard and find new source.</p>
+      </div>
+    </div>
+
+    <h3>Method 3: Iodine Tablets</h3>
+    <p>Potable Aqua or similar iodine tablets. Effective against bacteria and viruses. <strong>Not effective against Cryptosporidium.</strong></p>
+    <ul>
+      <li>1 tablet per liter of clear water, 2 tablets for cloudy. Wait 30 minutes (cold water: 60 minutes).</li>
+      <li>Vitamin C tablets neutralize iodine taste (add after wait time, not before).</li>
+      <li><span class="badge badge-warning">Caution</span> — Not suitable for pregnant women, those with thyroid conditions, or extended use beyond several weeks.</li>
+    </ul>
+
+    <h3>Method 4: Solar Disinfection (SODIS)</h3>
+    <p>Fill clear PET plastic bottles (1.5–2L max) with water. Shake to oxygenate. Lay on reflective surface in direct sunlight.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Conditions</th><th>Minimum Exposure</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Sunny / clear</td><td>6 hours</td></tr>
+          <tr><td>Partly cloudy (less than 50% cloud cover)</td><td>6 hours</td></tr>
+          <tr><td>Overcast / more than 50% clouds</td><td>2 consecutive days</td></tr>
+          <tr><td>Turbid water (Secchi depth &lt; 30cm)</td><td>Filter first — SODIS ineffective</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul>
+      <li>Works best when UV Index is 3 or higher.</li>
+      <li>Boil or add bleach after SODIS if the water will be stored more than 24 hours.</li>
+      <li>Use only PET (#1) bottles, not polycarbonate or colored plastic.</li>
+    </ul>
+
+    <h3>Method 5: Improvised Filter</h3>
+    <p>A layered filter removes sediment, some chemicals, and improves taste. <strong>Does not reliably remove viruses or bacteria — must be followed by chemical treatment or boiling.</strong></p>
+
+    <div class="diagram">
+╔══════════════════════════╗
+║   IMPROVISED WATER FILTER ║
+╠══════════════════════════╣
+║  [ CLOTH / BANDANA ]     ║  ← Removes large debris
+║  [ CHARCOAL / ASH ]      ║  ← Removes taste/odor/some chemicals
+║  [ FINE SAND ]           ║  ← Removes fine particles
+║  [ COARSE SAND / GRAVEL ]║  ← Removes large particles
+║  [ CLOTH ]               ║  ← Bottom filter layer
+║  [ HOLES IN CONTAINER ]  ║  ← Drainage
+╚══════════════════════════╝
+Use a 2-liter bottle cut in half, inverted.
+Layers should each be 5–10 cm thick.
+Run water through multiple times.
+ALWAYS follow with boiling or chemical disinfection.
+    </div>
+
+    <h3>Method 6: Distillation</h3>
+    <p>The only method that removes <em>all</em> contaminants including heavy metals, salt, and chemical pollutants. Essential for seawater or chemically contaminated water.</p>
+    <ol class="steps">
+      <li>Boil contaminated water in a covered pot with a tube leading from a hole in the lid to a collection container.</li>
+      <li>The tube should pass through cool water or a cold, damp cloth to condense steam into liquid.</li>
+      <li>Collect the condensate — this is purified water.</li>
+      <li>Note: Distillation removes minerals. Long-term, add a pinch of salt per liter to prevent electrolyte depletion.</li>
+    </ol>
+
+    <div class="diagram">
+  ┌──────────────┐
+  │  Boiling Pot │━━━ Tube ━━━━━━━━━━━━━━━━━━━━━━┐
+  │  (dirty water)│   (through cold water/cloth)  │
+  └──────────────┘                                ▼
+                                          ┌──────────────┐
+                                          │  Collection  │
+                                          │  Container   │
+                                          │ (clean water)│
+                                          └──────────────┘
+    </div>
+  </section>
+
+  <!-- =================== WATER STORAGE =================== -->
+  <section id="water-storage">
+    <h2>3. Water Storage</h2>
+
+    <div class="quick-facts">
+      <div class="quick-fact">
+        <span class="qf-value">1 gal</span>
+        <span class="qf-label">Per person per day (minimum)</span>
+      </div>
+      <div class="quick-fact">
+        <span class="qf-value">2 gal</span>
+        <span class="qf-label">Per person per day (comfortable)</span>
+      </div>
+      <div class="quick-fact">
+        <span class="qf-value">55 gal</span>
+        <span class="qf-label">Standard food-grade barrel</span>
+      </div>
+      <div class="quick-fact">
+        <span class="qf-value">1 year</span>
+        <span class="qf-label">Max rotation for stored water</span>
+      </div>
+    </div>
+
+    <h3>Container Selection</h3>
+    <ul>
+      <li><strong>Food-grade HDPE (#2 plastic):</strong> Blue 55-gallon drums are the standard. Approved for water contact.</li>
+      <li><strong>Glass:</strong> Does not leach chemicals but breaks. Good for small quantities.</li>
+      <li><strong>Stainless steel:</strong> Excellent but expensive. Avoid galvanized (zinc leaches).</li>
+      <li><strong>WaterBOB / bathtub bladder:</strong> 100-gallon emergency reservoir — fills from bathtub faucet before crisis.</li>
+      <li><strong>Avoid:</strong> Milk jugs (HDPE #2 but thin walls, residual milk proteins), old soda bottles (fine short-term), colored or opaque bottles of unknown type.</li>
+    </ul>
+
+    <h3>Long-Term Storage Protocol</h3>
+    <ol class="steps">
+      <li>Use only food-grade containers that have never held non-food liquids.</li>
+      <li>Clean thoroughly with dish soap, rinse 3×, then sanitize with 1 tsp bleach per liter of water. Let sit 30 minutes, rinse once.</li>
+      <li>Fill with treated tap water (municipal water is already safe). For well water, add 8 drops of bleach per gallon before storing.</li>
+      <li>Store in a cool, dark location away from direct sunlight and chemicals (gasoline, paint, etc.). Temperature fluctuations accelerate container degradation.</li>
+      <li>Label each container with fill date. Rotate every 6–12 months.</li>
+      <li>Keep containers off concrete floors (use pallets) to avoid off-gassing from concrete into plastic.</li>
+    </ol>
+  </section>
+
+  <!-- =================== RAINWATER =================== -->
+  <section id="rainwater">
+    <h2>4. Rainwater Collection</h2>
+
+    <h3>Basic Catchment System</h3>
+    <div class="diagram">
+┌─────────────────────────────────────┐
+│         ROOF SURFACE                │
+│     (galvanized metal is best;      │
+│      asphalt shingles add toxins)   │
+└──────────────┬──────────────────────┘
+               │ Gutters
+               ▼
+    ┌──────────────────┐
+    │  FIRST-FLUSH     │  ← Diverts first 10 gallons (contaminants)
+    │  DIVERTER        │    to ground, away from storage
+    └──────────┬───────┘
+               │
+               ▼
+    ┌──────────────────┐
+    │   STORAGE        │  ← Screened, lidded barrel/cistern
+    │   BARREL / TANK  │    (opaque to prevent algae growth)
+    └──────────┬───────┘
+               │
+               ▼
+           Spigot / tap
+    </div>
+
+    <figure class="svg-diagram" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1.5rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
+      <svg viewBox="0 0 600 360" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rainwater-title">
+        <title id="rainwater-title">Rainwater Catchment System Diagram</title>
+        <desc>Cross-section of a complete rainwater harvesting system showing roof surface, gutters, first-flush diverter, storage barrel, overflow pipe, and spigot.</desc>
+        <!-- Sky / rain -->
+        <text x="80" y="22" font-size="11" fill="#4a80b5" font-family="sans-serif">☁ ☁ ☁  RAIN  ☁ ☁</text>
+        <line x1="100" y1="28" x2="95" y2="48" stroke="#4a80b5" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <line x1="130" y1="28" x2="125" y2="48" stroke="#4a80b5" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <line x1="160" y1="28" x2="155" y2="48" stroke="#4a80b5" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <line x1="190" y1="28" x2="185" y2="48" stroke="#4a80b5" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <line x1="220" y1="28" x2="215" y2="48" stroke="#4a80b5" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <!-- Roof -->
+        <polygon points="20,80 300,80 300,55 160,40 20,55" fill="#243028" stroke="#3a4838" stroke-width="2"/>
+        <text x="130" y="72" text-anchor="middle" font-size="11" fill="#c9a94e" font-family="sans-serif" font-weight="700">ROOF</text>
+        <text x="130" y="86" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(metal/tile preferred — avoid asphalt)</text>
+        <!-- Gutter -->
+        <rect x="280" y="80" width="24" height="12" rx="2" fill="#4a80b5" stroke="#3a4838" stroke-width="1.5"/>
+        <text x="330" y="90" font-size="10" fill="#8a9e86" font-family="sans-serif">← Gutter (screened)</text>
+        <!-- Downspout -->
+        <rect x="286" y="92" width="12" height="80" fill="#4a80b5" stroke="#3a4838" stroke-width="1"/>
+        <text x="310" y="132" font-size="10" fill="#8a9e86" font-family="sans-serif">← Downspout</text>
+        <!-- First-flush diverter box -->
+        <rect x="272" y="172" width="40" height="60" rx="4" fill="#182016" stroke="#c9a94e" stroke-width="2"/>
+        <text x="292" y="192" text-anchor="middle" font-size="9" fill="#c9a94e" font-family="sans-serif" font-weight="700">FIRST</text>
+        <text x="292" y="204" text-anchor="middle" font-size="9" fill="#c9a94e" font-family="sans-serif" font-weight="700">FLUSH</text>
+        <text x="292" y="218" text-anchor="middle" font-size="9" fill="#c9a94e" font-family="sans-serif" font-weight="700">DIVERTER</text>
+        <!-- Arrow: dirty water diverts right -->
+        <line x1="312" y1="202" x2="370" y2="202" stroke="#c84848" stroke-width="2" stroke-dasharray="4,3"/>
+        <polygon points="368,198 378,202 368,206" fill="#c84848"/>
+        <text x="380" y="197" font-size="9" fill="#c84848" font-family="sans-serif">First ~10 gal</text>
+        <text x="380" y="209" font-size="9" fill="#c84848" font-family="sans-serif">diverted to ground</text>
+        <text x="380" y="221" font-size="9" fill="#8a9e86" font-family="sans-serif">(dirt, bird droppings)</text>
+        <!-- Pipe from diverter to barrel -->
+        <rect x="286" y="232" width="12" height="40" fill="#4b9e6a" stroke="#3a4838" stroke-width="1"/>
+        <text x="200" y="255" font-size="10" fill="#8a9e86" font-family="sans-serif">Clean water →</text>
+        <!-- Storage barrel -->
+        <rect x="252" y="272" width="80" height="76" rx="6" fill="#182016" stroke="#4b9e6a" stroke-width="2.5"/>
+        <text x="292" y="300" text-anchor="middle" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">STORAGE</text>
+        <text x="292" y="314" text-anchor="middle" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">BARREL</text>
+        <text x="292" y="328" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">55–300 gal</text>
+        <text x="292" y="340" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">opaque lid</text>
+        <!-- Overflow pipe -->
+        <line x1="332" y1="290" x2="390" y2="290" stroke="#4a80b5" stroke-width="2"/>
+        <polygon points="388,286 398,290 388,294" fill="#4a80b5"/>
+        <text x="402" y="287" font-size="9" fill="#8a9e86" font-family="sans-serif">Overflow pipe</text>
+        <text x="402" y="299" font-size="9" fill="#8a9e86" font-family="sans-serif">(to garden/ground)</text>
+        <!-- Spigot -->
+        <rect x="264" y="344" width="16" height="8" rx="2" fill="#c9a94e" stroke="#7a6430" stroke-width="1"/>
+        <text x="170" y="350" font-size="10" fill="#c9a94e" font-family="sans-serif">Spigot/tap →</text>
+        <!-- Ground line -->
+        <line x1="0" y1="355" x2="600" y2="355" stroke="#3a4838" stroke-width="2"/>
+        <text x="500" y="352" font-size="9" fill="#4d6048" font-family="sans-serif">Ground level</text>
+        <!-- Mosquito screen note -->
+        <text x="20" y="295" font-size="9" fill="#8a9e86" font-family="sans-serif">★ Screen all openings</text>
+        <text x="20" y="308" font-size="9" fill="#8a9e86" font-family="sans-serif">  (mosquito larvae)</text>
+        <text x="20" y="322" font-size="9" fill="#8a9e86" font-family="sans-serif">★ Treat before drinking</text>
+      </svg>
+      <figcaption>Rainwater catchment system — the first-flush diverter is critical: it discards the first ~10 gallons that wash dust, bird droppings, and debris off the roof before directing clean water to storage. Always treat collected rainwater before drinking.</figcaption>
+    </figure>
+
+    <h3>Yield Calculation</h3>
+    <p>Collection area (sq ft) × Rainfall (inches) × 0.623 = Gallons collected</p>
+    <p><em>Example: 500 sq ft roof × 1 inch rain × 0.623 = 311 gallons per inch of rain</em></p>
+    <p>A 2,000 sq ft roof in an area receiving 40 inches of annual rain can collect ~49,840 gallons/year — far more than most households need.</p>
+
+    <h3>Maintenance</h3>
+    <ul class="checklist">
+      <li>Clean gutters and screens monthly</li>
+      <li>Inspect first-flush diverter after each rain event</li>
+      <li>Check storage tanks for algae, sediment, mosquito larvae quarterly</li>
+      <li>Disinfect tanks annually with bleach solution (1 tsp per gallon, wait 12 hours, drain, refill)</li>
+      <li>Treat all collected rainwater before drinking (sediment filter + boiling or bleach)</li>
+    </ul>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Roof Material Matters</strong>
+        <p>Asphalt shingles, lead flashing, and painted roofs introduce chemicals into collected water. Galvanized metal, unpainted tin, and clay tile are the safest catchment surfaces. Always filter and treat rain collected from asphalt roofs especially carefully.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== FOOD PRESERVATION =================== -->
+  <section id="food-preservation">
+    <h2>5. Food Preservation</h2>
+
+    <p>The goal: extend shelf life by removing or controlling moisture, oxygen, heat, and microbial growth. Each method suits different foods.</p>
+
+    <h3>Pressure Canning</h3>
+    <p>The only safe method for low-acid foods (meat, vegetables, beans, soups). Botulism spores survive boiling — they require 240°F (115°C), achievable only under pressure.</p>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">☠️</span>
+      <div class="callout-content">
+        <strong>Botulism Warning — Critical</strong>
+        <p>Improperly canned low-acid foods can grow <em>Clostridium botulinum</em>, producing a toxin that causes fatal paralysis. Never use water-bath canning for meat, vegetables, or beans. A bad seal, bulging lid, or off-smell means discard — <strong>do not taste to test</strong>. One gram of botulinum toxin can kill one million people.</p>
+      </div>
+    </div>
+
+    <h4>Water-Bath Canning (High-Acid Only)</h4>
+    <p>Safe for: fruits, jams, jellies, pickles, tomatoes with added acid (pH &lt; 4.6). Submerge jars in boiling water for specified time per recipe.</p>
+
+    <h4>Pressure Canning (Low-Acid)</h4>
+    <ul>
+      <li>Use a USDA-approved pressure canner (not just a pressure cooker).</li>
+      <li>Process at 10 PSI (adjust for altitude: +1 PSI per 2,000 ft above sea level).</li>
+      <li>Follow tested recipes — do not improvise processing times.</li>
+      <li>Inspect seals after cooling: lid should be concave, ring firm. Any flex = failed seal.</li>
+    </ul>
+
+    <h3>Salt Curing &amp; Brining</h3>
+    <p>Salt draws out moisture (osmosis) and creates an inhospitable environment for bacteria. Used for meat, fish, and some vegetables.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Salt Ratio</th><th>Time</th><th>Best For</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Dry curing</td><td>1 lb salt per 5 lb meat (+ 1 oz curing salt/nitrate)</td><td>7–14 days, refrigerated</td><td>Bacon, ham, fish</td></tr>
+          <tr><td>Brine (wet cure)</td><td>1 cup salt per gallon water (≈5%)</td><td>1–4 weeks</td><td>Whole poultry, pork, fish</td></tr>
+          <tr><td>Strong brine pickling</td><td>3–4 cups salt per gallon water (≈20%)</td><td>Indefinite</td><td>Vegetables, olives</td></tr>
+          <tr><td>Quick pickle</td><td>Vinegar + salt + sugar</td><td>1–2 weeks</td><td>Cucumbers, peppers, onions</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Smoking</h3>
+    <p>Heat + smoke kills surface bacteria and reduces moisture. Cold smoking (below 90°F/32°C) primarily adds flavor and preservative compounds but does not cook — must be combined with curing. Hot smoking (165–185°F/74–85°C internal temp) cooks the food.</p>
+
+    <ul>
+      <li><strong>Woods to use:</strong> Apple, cherry, hickory, oak, alder. Avoid pine, cedar, resinous softwoods (toxic compounds).</li>
+      <li>Smoke fish 2–4 hours at 145°F (63°C) internal. Jerky: 160°F (71°C) for poultry, 165°F (74°C) for wild game.</li>
+      <li>Properly smoked and dried meat lasts 1–3 months without refrigeration.</li>
+    </ul>
+
+    <h3>Fermentation</h3>
+    <p>Beneficial bacteria convert sugars to lactic acid, creating an acidic, self-preserving environment. No cooking or special equipment needed — just salt, vegetables, and time.</p>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✅</span>
+      <div class="callout-content">
+        <strong>Basic Fermented Vegetables (Lacto-fermentation)</strong>
+        <p>Pack sliced/shredded vegetables (cabbage, carrots, beets, peppers) tightly into a clean jar. Add 1–2% salt by weight (≈1 tsp per lb of vegetables). Pack so vegetables are submerged under their own liquid. Cover with cloth. Ferment at room temperature (65–75°F) for 3–21 days. Taste daily. Move to cold storage when desired sourness is reached.</p>
+      </div>
+    </div>
+
+    <h3>Dehydration</h3>
+    <p>Remove moisture to below 10% and microbial growth halts. Dried food is lightweight, compact, and lasts years if stored properly.</p>
+
+    <ul>
+      <li><strong>Sun drying:</strong> Slice food thinly (4–6mm). Lay on clean racks in direct sun with airflow. Cover with fine mesh to keep insects out. Turn daily. Takes 1–5 days depending on food and weather. Requires 95°F+ and low humidity.</li>
+      <li><strong>Fire/smoke drying:</strong> Hang strips above (not in) a fire or use indirect heat from coals. Keep temperature around 140–160°F (60–71°C).</li>
+      <li><strong>Improvised solar dryer:</strong> A black-painted box with a glass/plastic top concentrates heat. Reaches 140–160°F in full sun.</li>
+      <li><strong>Test for dryness:</strong> Meat should crack, not bend. Vegetables should crumble or be leathery with no soft spots.</li>
+      <li><strong>Storage:</strong> Seal in airtight containers with oxygen absorbers. Keep dark and cool. Properly dried vegetables: 1–2 years. Jerky: 1–2 months at room temp, 1 year frozen.</li>
+    </ul>
+  </section>
+
+  <!-- =================== FORAGING =================== -->
+  <section id="foraging">
+    <h2>6. Foraging — Wild Edible Plants</h2>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">☠️</span>
+      <div class="callout-content">
+        <strong>Universal Edibility Test</strong>
+        <p>When uncertain: Test one plant part at a time. Fast 8 hours. Rub on inner wrist — wait 15 min for reaction. Touch to lips — wait 3 min. Place on tongue — wait 15 min. Chew without swallowing — wait 15 min. Swallow a small amount — wait 8 hours. If no adverse reaction (nausea, burning, swelling), eat small amount and wait 24 hours. <strong>Never skip steps.</strong></p>
+      </div>
+    </div>
+
+    <h3>Universally Safe Edibles (Low Misidentification Risk)</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Plant</th><th>Edible Parts</th><th>Season</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Dandelion (<em>Taraxacum officinale</em>)</td><td>Leaves, flowers, roots</td><td>Spring–Fall</td><td>Leaves bitter when older; roots roastable as coffee substitute</td></tr>
+          <tr><td>Cattail (<em>Typha</em> spp.)</td><td>Shoots, pollen, roots</td><td>Year-round</td><td>Young shoots raw or cooked; pollen as flour; roots starchy</td></tr>
+          <tr><td>Clover (<em>Trifolium</em> spp.)</td><td>Leaves, flowers, seeds</td><td>Spring–Fall</td><td>High protein; best cooked; widespread globally</td></tr>
+          <tr><td>Plantain (<em>Plantago major</em>)</td><td>Leaves, seeds</td><td>Spring–Fall</td><td>Young leaves edible; seeds like psyllium; also medicinal</td></tr>
+          <tr><td>Chicory (<em>Cichorium intybus</em>)</td><td>Leaves, roots</td><td>Spring–Fall</td><td>Roots roastable as coffee substitute; bitter but nutritious</td></tr>
+          <tr><td>Wood sorrel (<em>Oxalis</em> spp.)</td><td>Leaves, flowers, seed pods</td><td>Spring–Fall</td><td>Lemon flavor, high vitamin C; <em>avoid in large quantities</em> (oxalic acid)</td></tr>
+          <tr><td>Lambsquarters (<em>Chenopodium album</em>)</td><td>Leaves, seeds</td><td>Spring–Summer</td><td>Excellent cooked green; seeds ground into flour</td></tr>
+          <tr><td>Pine (<em>Pinus</em> spp.)</td><td>Inner bark, needles, seeds</td><td>Year-round</td><td>Pine needle tea: high vitamin C; inner bark (cambium) edible cooked; nuts edible</td></tr>
+          <tr><td>Acorn (<em>Quercus</em> spp.)</td><td>Nuts</td><td>Fall</td><td>Leach tannins: crack, shell, soak in running/changed water 12–48 hours until not bitter; then grind into flour</td></tr>
+          <tr><td>Blackberry/Raspberry (<em>Rubus</em> spp.)</td><td>Berries, young shoots, leaves</td><td>Summer</td><td>One of the safest wild berries to forage; easy identification by canes and thorns</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Mushroom Safety</h3>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">☠️</span>
+      <div class="callout-content">
+        <strong>Mushroom Rule: 100% Certain or Don't Eat</strong>
+        <p>The Death Cap (<em>Amanita phalloides</em>) and Destroying Angel (<em>A. bisporigera</em>) cause fatal liver failure with no antidote. Symptoms appear 6–24 hours after eating — long after the toxic dose has been absorbed. No folk test (peeling, silver tarnish, smell) reliably distinguishes safe from deadly mushrooms.</p>
+      </div>
+    </div>
+
+    <h4>Beginner-Safe Mushrooms with Few Deadly Lookalikes</h4>
+    <ul>
+      <li><strong>Giant puffball (<em>Calvatia gigantea</em>):</strong> White, football-sized to car-sized. Slice in half — flesh must be pure white throughout (no internal structure, gills, or color). Any other color = not this species, don't eat.</li>
+      <li><strong>Chicken of the Woods (<em>Laetiporus sulphureus</em>):</strong> Bright orange/yellow shelf fungus on trees. No dangerous lookalikes (though can cause reactions in some people, especially when growing on certain trees like locust).</li>
+      <li><strong>Chanterelle (<em>Cantharellus</em> spp.):</strong> Golden, funnel-shaped, false gills (forked ridges). Main lookalike is Jack-O-Lantern (<em>Omphalotus olearius</em>) — brighter orange, true gills, grows in clusters at tree bases, glows faintly in dark. Chanterelles don't glow.</li>
+      <li><strong>Hen of the Woods (<em>Grifola frondosa</em>):</strong> Overlapping gray-brown fronds at base of oaks. Excellent, distinctive.</li>
+      <li><strong>Morel (<em>Morchella</em> spp.):</strong> Honeycomb cap, hollow stem. Learn the false morel distinction (wrinkled/saddle-shaped, not honeycomb). Morels must be cooked — raw morels are mildly toxic.</li>
+    </ul>
+
+    <h3>What to Avoid</h3>
+    <ul>
+      <li><strong>White or yellow umbrella-shaped mushrooms</strong> — high risk of Amanita genus</li>
+      <li><strong>Berries:</strong> White, yellow, and red berries are high risk. Blue/black berries are generally lower risk but still require ID.</li>
+      <li><strong>Anything in the carrot/parsley family</strong> unless you are expert-level — Water Hemlock and Poison Hemlock look similar to edible Angelica, Wild Carrot, and Wild Parsnip.</li>
+      <li><strong>Anything with milky sap</strong> (unless you're certain it's a known safe species like dandelion)</li>
+    </ul>
+  </section>
+
+  <!-- =================== HUNTING =================== -->
+  <section id="hunting">
+    <h2>7. Hunting &amp; Trapping</h2>
+
+    <h3>Primitive Traps</h3>
+    <p>Trapping is far more efficient than active hunting — multiple traps work simultaneously while you do other tasks. Set 10+ traps to reliably catch 1–2 animals per day.</p>
+
+    <h4>Simple Snare</h4>
+    <div class="diagram">
+    Fixed point (tree/stake)
+         |
+         | Wire/cordage
+         |
+    ┌────┴────┐
+    │  Loop   │  ← Fist-diameter for rabbits
+    │  (noose)│    Thumb-diameter for squirrels
+    └─────────┘
+    Position loop 4" (10cm) above ground on game trail.
+    Loop diameter: rabbit = 3-4 inches. squirrel = 2 inches.
+    Use smooth wire (picture-hanging wire, guitar string, snare wire).
+    Check snares every 12 hours — dead animals attract predators/scavengers.
+    </div>
+
+    <ul>
+      <li>Set snares on active trails (look for tracks, droppings, fur on branches).</li>
+      <li>Support the loop with a small twig to keep it at the right height.</li>
+      <li>Don't leave human scent — handle with gloves or rub with dirt/natural materials.</li>
+    </ul>
+
+    <h4>Deadfall Trap (Figure-Four)</h4>
+    <div class="diagram">
+    [Heavy rock or log]
+         │
+    ┌────┴────────┐
+    │  Figure-4   │ ← Three sticks notched together support weight
+    │  Support    │   until prey disturbs bait stick
+    └─────────────┘
+    Bait the horizontal ground stick with food.
+    Rock/log should be 3-5× the weight of the target animal.
+    Works for: mice, rats, squirrels, rabbits.
+    </div>
+
+    <h4>Box Trap (Humane / Catch-Alive)</h4>
+    <p>Build a wooden box with a hinged door held open by a bait-stick trigger. When animal takes bait, stick falls, door closes. Advantages: reusable, no snare skill needed, can transport live animal. Use for rabbits, squirrels, large rodents.</p>
+
+    <h3>Field Dressing Game</h3>
+    <p>Process immediately after kill — heat accelerates spoilage. Work cleanly to avoid contaminating the meat with gut contents.</p>
+
+    <ol class="steps">
+      <li><strong>Hang the animal</strong> upside down by hind legs from a branch if possible — aids drainage.</li>
+      <li><strong>Remove the skin:</strong> Make a shallow cut around each ankle, slit up the inside of the legs to the center. Grip the skin and pull downward — it usually peels off in one piece on rabbit/squirrel.</li>
+      <li><strong>Open the body cavity:</strong> Pinch the belly skin away from organs (so you don't pierce them), make a shallow cut from sternum to pelvis. Avoid cutting intestines.</li>
+      <li><strong>Remove organs:</strong> Reach in and pull out all organs. Set aside heart and liver if they look healthy — these are nutritious and safe to eat (cook thoroughly). Discard the rest.</li>
+      <li><strong>Clean the cavity:</strong> Wipe with a clean cloth or rinse with clean water. Remove any debris or contamination.</li>
+      <li><strong>Inspect:</strong> Look for abscesses, unusual growths, discolored organs, or parasites. Isolated cysts in small animals may be parasites — discard the affected organ; the meat is usually still safe when cooked.</li>
+      <li><strong>Cool immediately:</strong> Hang in shade with good airflow, or submerge in cold stream. Process or preserve within 24 hours in warm weather, 48 hours in cool weather.</li>
+    </ol>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Always Cook Wild Game Thoroughly</strong>
+        <p>Wild animals carry Trichinella (pork tapeworm), Toxoplasma, E. coli, and other parasites. Cook all wild game to a minimum internal temperature of 165°F (74°C). Do not eat raw meat in a survival situation unless absolutely no other option — the risk of incapacitating illness outweighs the short-term caloric gain.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== SANITATION =================== -->
+  <section id="sanitation">
+    <h2>8. Sanitation Without Running Water</h2>
+
+    <p>Disease — not violence — is the primary killer in disaster scenarios. Cholera, typhoid, dysentery, and hepatitis A spread through fecal contamination of water and food. Maintaining sanitation saves lives.</p>
+
+    <h3>Latrine Construction</h3>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">📍</span>
+      <div class="callout-content">
+        <strong>Location Rules (Non-Negotiable)</strong>
+        <p>
+          At least <strong>60m (200 ft)</strong> from any water source (well, stream, pond).<br>
+          Downhill and downwind from dwellings and water sources.<br>
+          At least <strong>1.5m (5 ft)</strong> above the water table — don't dig into groundwater.<br>
+          Away from flood zones.
+        </p>
+      </div>
+    </div>
+
+    <h4>Simple Cat-Hole (Short-Term, 1–3 People)</h4>
+    <p>Dig a hole 20–30cm (8–12 inches) deep. After use, cover with soil. Do not dig in the same area until previous cat-holes have composted (minimum 6 months in warm climates).</p>
+
+    <h4>Slit Trench Latrine (Emergency, Group)</h4>
+    <p>Dig a trench 30cm wide × 1m deep × 1m per 6 people. Provide a cover (board, soil pile alongside) to fill in after each use. When full within 30–45cm of surface, fill completely and mark the area. Dig a new trench.</p>
+
+    <h4>Pit Latrine (Long-Term)</h4>
+    <div class="diagram">
+  ┌──────────────────┐
+  │   Superstructure  │ ← Privacy shelter (posts + tarp/wood)
+  │   (privacy)       │
+  ├──────────────────┤
+  │   Slab / Cover   │ ← Concrete, wood, or plastic slab with hole
+  ├──────────────────┤
+  │   Lining (upper) │ ← Brick/stone for top 60cm to prevent collapse
+  │                  │
+  │   Unlined (lower)│ ← Allows leaching (stay above water table!)
+  │                  │
+  │   [Pit: 1×1×2m] │ ← Serves 5 people for 1–3 years
+  └──────────────────┘
+    </div>
+
+    <figure class="svg-diagram" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1.5rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
+      <svg viewBox="0 0 600 380" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="latrine-title">
+        <title id="latrine-title">Pit Latrine Construction Cross-Section</title>
+        <desc>Cross-section diagram of a pit latrine showing superstructure, slab cover with hole, partial lining, unlined pit, ventilation pipe, and fly screen. Includes key dimensions and placement rules.</desc>
+        <!-- Sky / above ground -->
+        <text x="300" y="18" text-anchor="middle" font-size="11" fill="#8a9e86" font-family="sans-serif">— ABOVE GROUND —</text>
+        <!-- Superstructure walls -->
+        <rect x="180" y="22" width="160" height="120" rx="4" fill="#1e2820" stroke="#3a4838" stroke-width="2" stroke-dasharray="6,3"/>
+        <text x="260" y="62" text-anchor="middle" font-size="11" fill="#eceee0" font-family="sans-serif" font-weight="700">SUPERSTRUCTURE</text>
+        <text x="260" y="78" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">Posts + tarp or boards</text>
+        <text x="260" y="94" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">for privacy and rain</text>
+        <!-- Roof -->
+        <polygon points="170,22 350,22 370,8 150,8" fill="#243028" stroke="#3a4838" stroke-width="1.5"/>
+        <!-- Ventilation pipe -->
+        <rect x="338" y="8" width="14" height="130" fill="#4a80b5" stroke="#28486a" stroke-width="1.5"/>
+        <text x="365" y="34" font-size="10" fill="#4a80b5" font-family="sans-serif">Vent pipe</text>
+        <text x="365" y="47" font-size="9" fill="#8a9e86" font-family="sans-serif">(extends 0.5m</text>
+        <text x="365" y="58" font-size="9" fill="#8a9e86" font-family="sans-serif">above roof)</text>
+        <!-- Fly screen -->
+        <rect x="336" y="3" width="18" height="8" rx="1" fill="#c9a94e" stroke="#7a6430" stroke-width="1"/>
+        <text x="365" y="12" font-size="9" fill="#c9a94e" font-family="sans-serif">Fly screen</text>
+        <!-- Slab cover -->
+        <rect x="175" y="140" width="170" height="18" rx="2" fill="#243028" stroke="#8a9e86" stroke-width="2"/>
+        <ellipse cx="260" cy="149" rx="14" ry="7" fill="#070a09" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="300" y="146" font-size="9" fill="#c9a94e" font-family="sans-serif">← Squat hole</text>
+        <text x="50" y="152" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">Concrete/wood slab</text>
+        <!-- Ground line -->
+        <line x1="0" y1="162" x2="600" y2="162" stroke="#4d6048" stroke-width="2.5"/>
+        <text x="300" y="176" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif" font-weight="700">— GROUND LEVEL —</text>
+        <!-- Below ground labels -->
+        <text x="300" y="194" text-anchor="middle" font-size="11" fill="#8a9e86" font-family="sans-serif">— BELOW GROUND —</text>
+        <!-- Lined upper section -->
+        <rect x="200" y="162" width="120" height="60" fill="#182016" stroke="#8a9e86" stroke-width="1.5"/>
+        <text x="260" y="185" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">Brick/stone lining</text>
+        <text x="260" y="199" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">top 60 cm</text>
+        <text x="260" y="212" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">(prevents collapse)</text>
+        <!-- Unlined lower section -->
+        <rect x="200" y="222" width="120" height="100" fill="#0c110f" stroke="#4d6048" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="260" y="252" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif">Unlined pit</text>
+        <text x="260" y="266" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">leaching to soil</text>
+        <text x="260" y="282" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">1 m × 1 m × 2 m deep</text>
+        <text x="260" y="298" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">Serves 5 people 1–3 yrs</text>
+        <!-- Dimension lines -->
+        <line x1="170" y1="162" x2="170" y2="322" stroke="#3a4838" stroke-width="1"/>
+        <line x1="165" y1="162" x2="175" y2="162" stroke="#3a4838" stroke-width="1"/>
+        <line x1="165" y1="322" x2="175" y2="322" stroke="#3a4838" stroke-width="1"/>
+        <text x="158" y="246" text-anchor="middle" font-size="9" fill="#c9a94e" font-family="sans-serif" transform="rotate(-90,158,246)">2 m deep</text>
+        <!-- Water table warning -->
+        <rect x="0" y="340" width="600" height="40" fill="#3d0000" opacity="0.3"/>
+        <line x1="0" y1="340" x2="600" y2="340" stroke="#c84848" stroke-width="2" stroke-dasharray="8,4"/>
+        <text x="300" y="357" text-anchor="middle" font-size="10" fill="#c84848" font-family="sans-serif" font-weight="700">⚠ WATER TABLE — Pit bottom must stay 1.5m ABOVE this line</text>
+        <text x="300" y="371" text-anchor="middle" font-size="9" fill="#c84848" font-family="sans-serif">If water seeps into pit during digging, stop and move location</text>
+        <!-- Distance note -->
+        <text x="490" y="162" font-size="9" fill="#8a9e86" font-family="sans-serif">Min. 60m from</text>
+        <text x="490" y="174" font-size="9" fill="#8a9e86" font-family="sans-serif">any water source</text>
+        <text x="490" y="186" font-size="9" fill="#c84848" font-family="sans-serif">Downhill of dwelling</text>
+      </svg>
+      <figcaption>Pit latrine cross-section — the ventilation pipe creates airflow through the pit and out through the fly screen, which traps flies inside the pipe rather than letting them carry pathogens to food. Lining the upper 60 cm prevents collapse but allows leaching in the unlined lower section.</figcaption>
+    </figure>
+
+    <ul>
+      <li>Add a small amount of ash, sawdust, or dry soil after each use to control odors and aid composting.</li>
+      <li>Add a tight-fitting lid to reduce fly access (flies spread disease from feces to food).</li>
+      <li>When pit is 50cm from full, cover completely and dig a new one 3m away. Mark old pit.</li>
+      <li>Humanure (properly composted) can be used in gardens after 1 year — on fruit trees and non-root vegetables only.</li>
+    </ul>
+
+    <h3>Greywater Management</h3>
+    <p>Greywater (from washing, cooking) is less dangerous than blackwater but still carries bacteria. Route away from water sources.</p>
+
+    <ul>
+      <li><strong>Simple soak pit:</strong> Dig a 1m × 1m × 1m pit filled with gravel and rocks. Route sink/wash water into pit via pipe or channel. Soil filters and microbes treat the water as it percolates.</li>
+      <li>Keep grease and food scraps out of greywater — they clog systems and attract vermin.</li>
+      <li>Use biodegradable soap when possible. Avoid antibacterial soaps (they disrupt beneficial soil microbes).</li>
+    </ul>
+
+    <h3>Hand Hygiene Without Running Water</h3>
+
+    <div class="ratio-box">🤲 Clean hands = primary disease prevention</div>
+
+    <ul>
+      <li><strong>Tippy-tap:</strong> A foot-operated water dispensing system. A jug of water suspended from a branch, tipped by pressing a foot pedal (stick attached to jug by cord). Delivers a small stream of water for handwashing without touching the water source.</li>
+      <li>Use soap (even improvised soap: rendered fat + lye from wood ash) and scrub for 20 seconds.</li>
+      <li><strong>Alcohol hand sanitizer:</strong> Effective if 60%+ alcohol. Requires no water. Stock generously. Can be made from high-proof spirits (70%+ isopropyl or 95% grain alcohol diluted to 70%).</li>
+      <li>Wash hands: After toilet, before eating/cooking, after handling animals or raw meat, after caring for sick individuals.</li>
+    </ul>
+
+    <h3>Makeshift Soap</h3>
+    <ol class="steps">
+      <li>Leach lye from hardwood ash: pour water through ash, collect the leachate (lye solution). The water should be strong enough to float an egg or feel slippery (caustic — handle carefully, avoid skin contact).</li>
+      <li>Render animal fat: heat fat scraps with water, skim off the fat layer, repeat until fat is clear and odorless.</li>
+      <li>Combine lye water and rendered fat in roughly equal volumes. Cook in a pot over low heat, stirring constantly, until mixture reaches "trace" (leaves a ribbon on the surface when drizzled).</li>
+      <li>Pour into molds. Allow to cure for 4–6 weeks in a dry location before use.</li>
+    </ol>
+
+    <h3>Disease Prevention Summary</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Disease</th><th>Transmission</th><th>Prevention</th><th>Symptoms</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cholera</td><td>Contaminated water/food</td><td>Water purification, handwashing</td><td>Profuse watery diarrhea, dehydration (can be fatal in hours)</td></tr>
+          <tr><td>Typhoid</td><td>Fecal-oral, contaminated water</td><td>Purified water, sanitation</td><td>High fever, headache, rose spots, constipation then diarrhea</td></tr>
+          <tr><td>Hepatitis A</td><td>Fecal-oral</td><td>Handwashing, cook shellfish thoroughly</td><td>Jaundice, fatigue, nausea, liver pain</td></tr>
+          <tr><td>Dysentery</td><td>Contaminated food/water/hands</td><td>Handwashing, water purification</td><td>Bloody diarrhea, fever, cramps</td></tr>
+          <tr><td>Giardia</td><td>Contaminated water (animal feces)</td><td>Filter + disinfect all water</td><td>Foul-smelling diarrhea, bloating, weeks duration</td></tr>
+          <tr><td>Leptospirosis</td><td>Rodent urine in water</td><td>Avoid swimming in flood water, cover cuts</td><td>Flu-like symptoms, jaundice, kidney failure</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✅</span>
+      <div class="callout-content">
+        <strong>Oral Rehydration Solution (ORS)</strong>
+        <p>Diarrheal disease dehydrates rapidly. ORS prevents death when IV fluids aren't available.</p>
+        <p><strong>Recipe:</strong> 1 liter clean water + 6 level teaspoons sugar + ½ teaspoon salt. Stir until dissolved. Give small sips continuously — 200–400mL per hour for adults. Add mashed banana or orange juice if available (potassium). Children: 50–100mL after each loose stool.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- =================== GROWING FOOD =================== -->
+  <section id="growing">
+    <h2>9. Growing Your Own Food</h2>
+
+    <p>Stored food has a finite end date. Foraging and hunting are unreliable at scale. The only sustainable long-term food solution is cultivation. A 1,000 sq ft (93 m²) intensively managed garden can supply 50–75% of the vegetables for one adult year-round in a temperate climate.</p>
+
+    <h3>Soil Preparation</h3>
+    <p>Everything depends on soil. Poor soil produces poor food. Invest in soil quality before seeds.</p>
+
+    <h4>Soil Assessment</h4>
+    <ul>
+      <li><strong>Texture test:</strong> Grab a handful of moist soil and squeeze. Sandy soil crumbles immediately; clay holds its shape and feels plastic; loam (ideal) holds shape but breaks apart with light pressure.</li>
+      <li><strong>Drainage test:</strong> Dig a 30cm (12") hole, fill with water, time how long it takes to drain. 1–3 inches/hour is ideal. Slower = drainage problem; faster = won't hold moisture.</li>
+      <li><strong>pH estimation:</strong> Mix soil with vinegar — fizzing indicates alkaline (pH &gt;7). Mix soil with baking soda + water — fizzing indicates acidic (pH &lt;6). Most vegetables prefer pH 6.0–7.0.</li>
+    </ul>
+
+    <h4>Soil Amendment</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Problem</th><th>Amendment</th><th>Rate</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Too acidic (pH &lt;6)</td><td>Wood ash or agricultural lime</td><td>5 lbs/100 sq ft</td><td>Wood ash also adds potassium</td></tr>
+          <tr><td>Too alkaline (pH &gt;7)</td><td>Sulfur or pine needles</td><td>1 lb/100 sq ft sulfur</td><td>Takes months to act</td></tr>
+          <tr><td>Poor drainage (clay)</td><td>Coarse sand + compost</td><td>4 inches each, tilled in</td><td>Do not add sand to clay alone — makes concrete</td></tr>
+          <tr><td>Drains too fast (sand)</td><td>Compost + clay</td><td>4–6 inches compost</td><td>Mulch heavily to retain moisture</td></tr>
+          <tr><td>Low fertility</td><td>Compost or aged manure</td><td>3–4 inches tilled to 12"</td><td>Never use fresh manure — burns roots</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Building a Compost System</h4>
+    <ol class="steps">
+      <li><strong>Ratio:</strong> 3 parts brown (dead leaves, straw, cardboard, wood chips) to 1 part green (kitchen scraps, fresh grass, manure). Too much green = slimy, smelly. Too much brown = slow, dry.</li>
+      <li>Maintain moisture like a wrung-out sponge — not dripping, not dry.</li>
+      <li>Turn the pile every 1–2 weeks to introduce oxygen. Without turning, composting takes 6–12 months. With weekly turning, 4–8 weeks.</li>
+      <li>Finished compost is dark, crumbly, and smells like earth — not rot.</li>
+      <li>What NOT to compost: meat, dairy, diseased plants, pet waste (dog/cat — can carry pathogens).</li>
+    </ol>
+
+    <h3>Seed Selection &amp; Saving</h3>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">🌱</span>
+      <div class="callout-content">
+        <strong>Heirloom vs. Hybrid Seeds</strong>
+        <p><strong>Heirloom (open-pollinated) seeds</strong> breed true — seeds saved from the fruit will grow the same plant next year. <strong>Hybrid seeds</strong> (labeled "F1") are bred for yield but their seeds produce inconsistent offspring. <strong>For long-term survival, you must have heirloom seeds.</strong> You cannot keep replanting hybrids without a seed supplier.</p>
+      </div>
+    </div>
+
+    <h4>Highest-Priority Crops by Category</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Category</th><th>Crops</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Calorie staples</td><td>Potatoes, sweet potatoes, corn, winter squash, beans</td><td>High calorie density per square foot</td></tr>
+          <tr><td>Protein</td><td>Dry beans (black, kidney, navy), lentils, soybeans</td><td>Store well dried; complete protein when combined with grains</td></tr>
+          <tr><td>Long storage</td><td>Winter squash, dried beans, garlic, onions, beets</td><td>Months of storage without preservation</td></tr>
+          <tr><td>Year-round greens</td><td>Kale, chard, spinach, arugula</td><td>Cold-tolerant; continuous harvest; high in vitamins A, C, K</td></tr>
+          <tr><td>Medicine</td><td>Echinacea, garlic, calendula, chamomile, valerian</td><td>Dual-purpose: food + medicine</td></tr>
+          <tr><td>Soil improvement</td><td>Clover, vetch, cowpeas</td><td>Fix nitrogen from air into soil — natural fertilizer</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>How to Save Seeds</h4>
+    <ol class="steps">
+      <li>Select the healthiest, most productive plants for seed saving — never save from diseased or weak plants.</li>
+      <li>Allow fruit to fully ripen on the plant (much riper than eating stage) before harvesting seeds.</li>
+      <li>Dry seeds thoroughly — at least 2 weeks in a single layer in a cool, airy location. Seeds must be completely dry or they will mold in storage.</li>
+      <li>Store in airtight containers (glass jars with lids, Mylar bags) with oxygen absorbers in a cool, dark, dry location. Freezing (below -20°C/-4°F) extends viability to decades for most species.</li>
+      <li>Label: species, variety, date saved, source. Unlabeled seeds are nearly worthless.</li>
+    </ol>
+
+    <h3>Crop Rotation</h3>
+    <p>Growing the same plant family in the same location every year depletes specific nutrients and builds up soil pathogens. A 4-bed rotation prevents this:</p>
+
+    <div class="diagram">
+  Year 1   Year 2   Year 3   Year 4   Year 5
+  ─────    ─────    ─────    ─────    ─────
+  Bed A    Bed B    Bed C    Bed D    Back to A
+  Leaves   Fruits   Roots    Legumes  (cycle repeats)
+  (brassica) (tomato) (carrot) (beans)
+    </div>
+
+    <ul>
+      <li><strong>Leaves</strong> (brassicas: cabbage, kale, broccoli): heavy nitrogen users</li>
+      <li><strong>Fruits</strong> (tomatoes, peppers, squash): heavy feeders, follow legumes</li>
+      <li><strong>Roots</strong> (carrots, beets, turnips): need loose soil, light feeders</li>
+      <li><strong>Legumes</strong> (beans, peas): fix nitrogen — leave them last so the next crop benefits</li>
+    </ul>
+
+    <h3>Companion Planting</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Plant</th><th>Good Companions</th><th>Avoid Planting With</th><th>Benefit</th></tr></thead>
+        <tbody>
+          <tr><td>Corn</td><td>Beans, squash ("Three Sisters")</td><td>Tomatoes, fennel</td><td>Beans fix nitrogen; squash shades weeds; corn provides trellis</td></tr>
+          <tr><td>Tomatoes</td><td>Basil, carrots, marigolds</td><td>Brassicas, fennel</td><td>Marigolds repel nematodes; basil improves flavor and repels aphids</td></tr>
+          <tr><td>Carrots</td><td>Onions, leeks, rosemary</td><td>Dill (when flowering)</td><td>Onion family repels carrot fly</td></tr>
+          <tr><td>Beans</td><td>Corn, squash, potatoes</td><td>Onion family, fennel</td><td>Fix nitrogen for neighboring plants</td></tr>
+          <tr><td>Brassicas</td><td>Dill, celery, onions</td><td>Tomatoes, strawberries</td><td>Dill attracts beneficial wasps that parasitize caterpillars</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Water-Efficient Irrigation Without Infrastructure</h3>
+    <ol class="steps">
+      <li><strong>Ollas (clay pot irrigation):</strong> Bury an unglazed clay pot to its neck in the soil and fill with water. Water seeps slowly through the clay directly to root zones — 70% more efficient than surface watering. Cover the top to prevent evaporation.</li>
+      <li><strong>Wicking beds:</strong> A raised bed with a sealed reservoir of water in the bottom layer (gravel + plastic liner). Soil wicks moisture up by capillary action. Can go 5–7 days without refilling.</li>
+      <li><strong>Mulching:</strong> 4–6 inches of straw, wood chips, or dried leaves around plants reduces soil evaporation by 70%. Apply after rain when soil is moist.</li>
+      <li><strong>Swales:</strong> Level trenches dug along the contour of a slope. Capture and infiltrate rainwater into the ground, reducing runoff. Plant fruit trees on the downhill bank of each swale to access deep moisture.</li>
+      <li><strong>Water in the morning:</strong> Evaporation rates are lowest. Avoid watering in the heat of the day or at night (fungal disease).</li>
+    </ol>
+  </section>
+
+  <!-- =================== NUTRITIONAL DEFICIENCIES =================== -->
+  <section id="nutrition">
+    <h2>10. Nutritional Deficiencies</h2>
+
+    <p>In a prolonged emergency, macro-calorie supply usually dominates concern — but micronutrient deficiencies can develop within weeks and cause serious illness long before starvation. Knowing what to look for and which locally available foods address each deficiency is a critical survival skill.</p>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Deficiencies Emerge Faster Than You Expect</strong>
+        <p>Scurvy (Vitamin C deficiency) develops in 4–12 weeks on a diet without fresh produce. Pellagra (Niacin/B3) appears within weeks on a corn-only diet without lime processing. Night blindness (Vitamin A) can appear in weeks in children. These are not theoretical long-term risks — they are acute survival hazards in weeks 4–12 of an emergency.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Deficiency</th><th>Timeline</th><th>Signs &amp; Symptoms</th><th>Survival Food Sources</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Vitamin C</strong> (Scurvy)</td>
+            <td>4–12 weeks</td>
+            <td>Bleeding gums, bruising easily, wound healing failure, joint pain, fatigue, tooth loosening</td>
+            <td>Pine needle tea (high Vit C), rose hips, sprouts from any seeds, dandelion greens, wild onion, canned tomatoes</td>
+            <td>Pine needle tea: steep 1 Tbsp fresh needles in hot (not boiling) water 10 min. Do not use yew needles (toxic).</td>
+          </tr>
+          <tr>
+            <td><strong>Vitamin A</strong></td>
+            <td>Weeks in children; months in adults</td>
+            <td>Night blindness (first sign), dry eyes, increased infection susceptibility, skin rashes</td>
+            <td>Liver (highest source), orange/yellow vegetables (squash, sweet potato, carrots), dark leafy greens, eggs</td>
+            <td>Critical for children and pregnant women first.</td>
+          </tr>
+          <tr>
+            <td><strong>Niacin / B3</strong> (Pellagra)</td>
+            <td>Weeks on corn-only diet</td>
+            <td>4 Ds: Dermatitis (sun-sensitive rash on exposed skin), Diarrhea, Dementia, Death</td>
+            <td>Nixtamalized corn (treated with lime — hominy), liver, meat, eggs, peanuts, sunflower seeds</td>
+            <td>Nixtamalization: boil corn in water + 1 Tbsp pickling lime per cup corn. Rinse. This unlocks bound niacin.</td>
+          </tr>
+          <tr>
+            <td><strong>Thiamine / B1</strong> (Beriberi)</td>
+            <td>Weeks to months on polished rice</td>
+            <td>Wet beriberi: heart failure, leg edema. Dry beriberi: nerve damage, numbness, muscle weakness</td>
+            <td>Brown rice (not white), legumes, sunflower seeds, liver, whole grains</td>
+            <td>Do not polish or refine grains if possible — thiamine is in the bran layer.</td>
+          </tr>
+          <tr>
+            <td><strong>Vitamin D</strong></td>
+            <td>Months in low-sun environments</td>
+            <td>Bone pain, muscle weakness, rickets in children, immune dysfunction</td>
+            <td>Sunlight (20 min/day on arms and face), fatty fish, eggs, liver, mushrooms dried in sunlight</td>
+            <td>Mushrooms dried gills-up in sunlight for 1–2 hours generate significant Vitamin D.</td>
+          </tr>
+          <tr>
+            <td><strong>Iodine</strong></td>
+            <td>Months</td>
+            <td>Goiter (enlarged thyroid in neck), hypothyroidism, fatigue, cognitive impairment; severe fetal/infant brain damage</td>
+            <td>Seaweed (kelp), seafood, iodized salt. If inland without sea access: use iodized salt generously.</td>
+            <td>Seaweed: even a small amount weekly prevents deficiency. Dried kelp stores well.</td>
+          </tr>
+          <tr>
+            <td><strong>Iron</strong></td>
+            <td>Months</td>
+            <td>Fatigue, pale skin, rapid heartbeat, shortness of breath with exertion, reduced cognitive function</td>
+            <td>Red meat and liver (highest), dark leafy greens, beans, lentils, cast iron cookware adds iron to food</td>
+            <td>Pair with Vitamin C foods to increase absorption by 3-6×. Avoid tea/coffee with meals (reduces absorption).</td>
+          </tr>
+          <tr>
+            <td><strong>Calories</strong> (Starvation)</td>
+            <td>3 weeks without food</td>
+            <td>Weight loss, muscle wasting, immune collapse, organ failure</td>
+            <td>Prioritize calorie density: fats (9 cal/g), then carbohydrates (4 cal/g). Minimum 1,200 cal/day to function.</td>
+            <td>Refeeding syndrome: after prolonged starvation, reintroduce food slowly — rapid refeeding causes fatal electrolyte shifts.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✅</span>
+      <div class="callout-content">
+        <strong>The Diversity Rule</strong>
+        <p>Eating 10–15 different plant and animal foods per week provides adequate micronutrient coverage without needing to track individual nutrients. Dietary diversity is your most effective defense against deficiency. A monotonous diet — even a calorie-adequate one — is the fastest path to micronutrient disease.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Footer -->
+  <hr>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-md);margin-top:var(--sp-xl)">
+    <a href="../index.html" class="btn btn-outline">← Home</a>
+    <a href="medical.html" class="btn btn-primary">Next: Medical &amp; First Aid →</a>
+  </div>
+  <div class="callout callout-tip" style="margin-top:var(--sp-xl)">
+    <span class="callout-icon">🔗</span>
+    <div class="callout-content">
+      <strong>Related Sections</strong>
+      <p>
+        <a href="medical.html#herbal">Medical → Herbal medicine plants</a> ·
+        <a href="medical.html#medications">Medical → ORS recipe for diarrheal disease</a> ·
+        <a href="energy.html#rocket-stove">Energy → Rocket stoves for fuel-efficient cooking</a> ·
+        <a href="shelter.html">Shelter → Root cellar and food storage construction</a>
+      </p>
+    </div>
+  </div>
+
+
+<nav class="section-pagination no-print" aria-label="Section navigation">
+  <a href="../index.html" class="pagination-btn pagination-prev">← Home</a>
+  <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+  <a href="medical.html" class="pagination-btn pagination-next">Medical →</a>
+</nav>
+</div><!-- /content-wrapper -->
+</main>
+
+<!-- Bunker Bot Panel -->
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title">
+      <div class="aria-avatar">🤖</div>
+      <div class="aria-title-text">
+        <strong>Bunker Bot</strong>
+        <small>Offline Survival AI</small>
+      </div>
+    </div>
+    <button id="aria-close" class="btn-icon" aria-label="Close Bunker Bot">✕</button>
+  </div>
+  <div class="aria-status">
+    <span class="status-dot checking"></span>
+    <span class="aria-status-label">Checking connection…</span>
+    &nbsp;·&nbsp;
+    <span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span>
+  </div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome">
+      <div class="aria-message-content">
+        <p>I'm <strong>Bunker Bot</strong>. You're reading the Food &amp; Water section. Ask me about purification ratios, preservation techniques, foraging safety, or anything else here.</p>
+        <p class="aria-note">⚠️ Requires Ollama running locally. <a href="../ai-setup.html">Setup guide →</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2" aria-label="Message Bunker Bot"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+
+<button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/aria.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

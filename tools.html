@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculators &amp; Tools — The Last Light Survival Guide</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Tool page styles */
+    .tool-nav { position: sticky; top: 62px; background: var(--bg-0); border-bottom: 1px solid var(--border); padding: .5rem 1rem; display: flex; gap: .5rem; flex-wrap: wrap; z-index: 100; }
+    .tool-nav a { color: var(--text-2); text-decoration: none; font-size: .8rem; padding: .25rem .6rem; border-radius: 4px; border: 1px solid var(--border); white-space: nowrap; }
+    .tool-nav a:hover { color: var(--amber); border-color: var(--amber-dim); }
+    .tool-section { padding: 2rem 0; border-bottom: 2px solid var(--border); }
+    .tool-section h2 { color: var(--amber); font-size: 1.4rem; margin-bottom: .5rem; }
+    .tool-section .tool-subtitle { color: var(--text-2); font-size: .9rem; margin-bottom: 1.5rem; }
+    .tool-form { display: grid; gap: 1rem; }
+    .tool-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
+    .field { display: flex; flex-direction: column; gap: .35rem; }
+    .field label { font-size: .8rem; color: var(--text-2); text-transform: uppercase; letter-spacing: .05em; }
+    .field input, .field select { background: var(--bg-3); border: 1px solid var(--border-hi); color: var(--text-0); padding: .4rem .6rem; border-radius: 4px; font-size: .9rem; min-width: 80px; }
+    .field input:focus, .field select:focus { border-color: var(--amber); outline: none; }
+    .results-box { background: var(--bg-2); border: 1px solid var(--border-hi); border-radius: 8px; padding: 1rem 1.25rem; margin-top: 1rem; }
+    .results-box .result-row { display: flex; justify-content: space-between; align-items: center; padding: .3rem 0; border-bottom: 1px solid var(--border); }
+    .results-box .result-row:last-child { border: none; }
+    .result-label { color: var(--text-2); font-size: .85rem; }
+    .result-value { color: var(--amber); font-weight: 700; font-size: 1.05rem; }
+    .btn-add { background: var(--bg-3); border: 1px dashed var(--border-hi); color: var(--text-2); padding: .4rem .8rem; border-radius: 4px; cursor: pointer; font-size: .85rem; }
+    .btn-add:hover { border-color: var(--amber); color: var(--amber); }
+    .person-list, .item-list { display: flex; flex-direction: column; gap: .5rem; margin: .75rem 0; }
+    .person-card, .item-card { background: var(--bg-3); border: 1px solid var(--border); border-radius: 6px; padding: .6rem .8rem; display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+    .person-card input, .person-card select, .item-card input, .item-card select { background: var(--bg-4, #1e2820); border: 1px solid var(--border); color: var(--text-0); padding: .3rem .5rem; border-radius: 4px; font-size: .82rem; }
+    .btn-remove { background: none; border: none; color: var(--red); cursor: pointer; font-size: 1.1rem; padding: 0 .25rem; flex-shrink: 0; }
+    .duration-row { display: flex; gap: .5rem; }
+    .duration-row label { display: flex; align-items: center; gap: .4rem; font-size: .85rem; cursor: pointer; }
+    .ref-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: 1rem; }
+    .ref-table th { background: var(--bg-3); color: var(--amber); text-align: left; padding: .4rem .6rem; font-size: .75rem; text-transform: uppercase; }
+    .ref-table td { padding: .35rem .6rem; border-bottom: 1px solid var(--border); }
+    .ref-table tr:hover td { background: var(--bg-3); }
+    .green { color: var(--green); } .red { color: var(--red); } .orange { color: var(--orange); } .amber { color: var(--amber); }
+    .tag-green { background: var(--green-dim, #2a5a3c); color: var(--green); padding: .15rem .4rem; border-radius: 3px; font-size: .75rem; }
+    .tag-amber { background: var(--amber-dim); color: var(--amber); padding: .15rem .4rem; border-radius: 3px; font-size: .75rem; }
+    .tag-orange { background: var(--orange-dim, #6e4020); color: var(--orange); padding: .15rem .4rem; border-radius: 3px; font-size: .75rem; }
+    .tag-red { background: var(--red-dim); color: var(--red); padding: .15rem .4rem; border-radius: 3px; font-size: .75rem; }
+    .appliance-list { display: grid; gap: .4rem; }
+    .appliance-row { display: grid; grid-template-columns: auto 1fr 70px 70px auto; gap: .5rem; align-items: center; background: var(--bg-3); padding: .4rem .6rem; border-radius: 4px; font-size: .83rem; }
+    .appliance-row input[type=checkbox] { width: 16px; height: 16px; cursor: pointer; }
+    .appliance-row input[type=number] { background: var(--bg-4, #1e2820); border: 1px solid var(--border); color: var(--text-0); padding: .25rem .4rem; border-radius: 3px; width: 100%; }
+    .indicator { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .indicator.ok { background: var(--green); }
+    .indicator.warn { background: var(--red); }
+    .supply-item { background: var(--bg-3); border-left: 3px solid var(--border-hi); border-radius: 4px; padding: .6rem .8rem; display: grid; grid-template-columns: 1fr auto auto; gap: .5rem; align-items: center; }
+    .supply-item.green { border-left-color: var(--green); }
+    .supply-item.yellow { border-left-color: var(--amber); }
+    .supply-item.orange { border-left-color: var(--orange); }
+    .supply-item.red { border-left-color: var(--red); }
+    @media (max-width: 600px) { .tool-row { flex-direction: column; } .appliance-row { grid-template-columns: auto 1fr auto; } }
+    @media print { .tool-nav, .field, .btn-add, .btn-remove, button { display: none !important; } .tool-section { page-break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar" aria-label="Main navigation"></nav>
+  <div id="overlay" class="overlay"></div>
+  <div class="main-content">
+    <header class="top-bar">
+      <button id="menu-toggle" class="btn-icon" aria-label="Open navigation">☰</button>
+      <div class="breadcrumb"><a href="index.html">Home</a> › Calculators &amp; Tools</div>
+      <button id="aria-toggle" class="btn btn-sm btn-ghost">🤖 Bunker Bot</button>
+    </header>
+
+    <nav class="tool-nav no-print">
+      <a href="#tool-1">🍽️ Calories</a>
+      <a href="#tool-2">💧 Water</a>
+      <a href="#tool-3">⚡ Solar</a>
+      <a href="#tool-4">📦 Supplies</a>
+      <a href="#tool-5">🧠 Skills</a>
+      <a href="#tool-6">🌱 Planting</a>
+      <a href="#tool-7">🚗 Stay/Go</a>
+      <a href="#tool-8">📻 Radio</a>
+      <a href="#tool-9">💊 Meds</a>
+    </nav>
+
+    <div class="content-wrapper">
+      <div class="section-hero">
+        <h1>Calculators &amp; Tools</h1>
+        <p>All data stays on your device — no server, no tracking, no internet required.</p>
+      </div>
+
+      <!-- ===== TOOL 1: CALORIE CALCULATOR ===== -->
+      <section id="tool-1" class="tool-section">
+        <h2>🍽️ How Much Food Does Your Group Need?</h2>
+        <p class="tool-subtitle">Add each person in your group to calculate total daily food requirements.</p>
+
+        <div id="person-list" class="person-list"></div>
+        <button class="btn-add" onclick="addPerson()">+ Add Person</button>
+
+        <div class="tool-row" style="margin-top:1rem">
+          <div class="field">
+            <label>Duration</label>
+            <div class="duration-row">
+              <label><input type="radio" name="duration" value="7" checked> 7 days</label>
+              <label><input type="radio" name="duration" value="30"> 30 days</label>
+              <label><input type="radio" name="duration" value="90"> 90 days</label>
+              <label><input type="radio" name="duration" value="365"> 1 year</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-box" id="calorie-results">
+          <div class="result-row"><span class="result-label">Daily Calories (group)</span><span class="result-value" id="res-cal">—</span></div>
+          <div class="result-row"><span class="result-label">Daily Protein</span><span class="result-value" id="res-prot">—</span></div>
+          <div class="result-row"><span class="result-label">Daily Fat</span><span class="result-value" id="res-fat">—</span></div>
+          <div class="result-row"><span class="result-label">Food Weight/Day</span><span class="result-value" id="res-wt">—</span></div>
+          <div class="result-row"><span class="result-label">Total for Duration</span><span class="result-value" id="res-total">—</span></div>
+        </div>
+
+        <h3 style="margin-top:1.5rem;color:var(--amber);font-size:1rem">Calorie Density Reference</h3>
+        <table class="ref-table">
+          <thead><tr><th>Food</th><th>Cal/lb</th><th>1 day feeds</th></tr></thead>
+          <tbody id="cal-ref-table"></tbody>
+        </table>
+
+        <h3 style="margin-top:1.5rem;color:var(--amber);font-size:1rem">Reverse: How Long Does My Supply Last?</h3>
+        <div class="tool-row">
+          <div class="field"><label>Food Item</label><select id="rev-food" onchange="calcReverse()"></select></div>
+          <div class="field"><label>Pounds on Hand</label><input type="number" id="rev-lbs" min="0" value="50" oninput="calcReverse()"></div>
+          <div class="results-box" style="flex:1"><div class="result-row"><span class="result-label">Days This Feeds Group</span><span class="result-value" id="res-reverse">—</span></div></div>
+        </div>
+      </section>
+
+      <!-- ===== TOOL 2: WATER BUDGET ===== -->
+      <section id="tool-2" class="tool-section">
+        <h2>💧 Daily Water Budget</h2>
+        <p class="tool-subtitle">Calculate total daily water requirements for your group, animals, and garden.</p>
+
+        <div class="tool-row">
+          <div class="field"><label>People</label><input type="number" id="w-people" min="0" value="4" oninput="calcWater()"></div>
+          <div class="field"><label>Climate</label>
+            <select id="w-climate" onchange="calcWater()">
+              <option value="1.4">Arid/Desert</option>
+              <option value="1.0" selected>Temperate</option>
+              <option value="0.9">Humid</option>
+            </select>
+          </div>
+          <div class="field"><label>Season</label>
+            <select id="w-season" onchange="calcWater()">
+              <option value="1.3">Summer</option>
+              <option value="1.0" selected>Spring/Fall</option>
+              <option value="0.8">Winter</option>
+            </select>
+          </div>
+        </div>
+
+        <h3 style="margin-top:1rem;font-size:.9rem;color:var(--text-2)">Livestock</h3>
+        <div class="tool-row">
+          <div class="field"><label>Horses</label><input type="number" id="w-horses" min="0" value="0" oninput="calcWater()"></div>
+          <div class="field"><label>Cows</label><input type="number" id="w-cows" min="0" value="0" oninput="calcWater()"></div>
+          <div class="field"><label>Goats</label><input type="number" id="w-goats" min="0" value="0" oninput="calcWater()"></div>
+          <div class="field"><label>Pigs</label><input type="number" id="w-pigs" min="0" value="0" oninput="calcWater()"></div>
+          <div class="field"><label>Chickens</label><input type="number" id="w-chickens" min="0" value="0" oninput="calcWater()"></div>
+        </div>
+        <div class="tool-row">
+          <div class="field"><label>Garden (sq ft)</label><input type="number" id="w-garden" min="0" value="0" oninput="calcWater()"></div>
+        </div>
+
+        <div class="results-box" id="water-results">
+          <div class="result-row"><span class="result-label">Total Daily (gallons)</span><span class="result-value" id="w-total">—</span></div>
+          <div class="result-row"><span class="result-label">Drinking</span><span class="result-value" id="w-drink">—</span></div>
+          <div class="result-row"><span class="result-label">Cooking &amp; Hygiene</span><span class="result-value" id="w-hygiene">—</span></div>
+          <div class="result-row"><span class="result-label">Livestock</span><span class="result-value" id="w-livestock">—</span></div>
+          <div class="result-row"><span class="result-label">Garden Irrigation</span><span class="result-value" id="w-garden-out">—</span></div>
+        </div>
+
+        <h3 style="margin-top:1.5rem;color:var(--amber);font-size:1rem">Roof Catchment Calculator</h3>
+        <p style="font-size:.82rem;color:var(--text-2)">Formula: roof area (sq ft) × rainfall (inches) × 0.623 = gallons harvested</p>
+        <div class="tool-row">
+          <div class="field"><label>Roof Area (sq ft)</label><input type="number" id="w-roof" min="0" value="1000" oninput="calcCatchment()"></div>
+          <div class="field"><label>Rainfall (inches)</label><input type="number" id="w-rain" min="0" step="0.1" value="1" oninput="calcCatchment()"></div>
+          <div class="results-box" style="flex:1"><div class="result-row"><span class="result-label">Gallons Harvested</span><span class="result-value" id="w-catch">—</span></div></div>
+        </div>
+
+        <h3 style="margin-top:1rem;color:var(--amber);font-size:1rem">Tank Reserve</h3>
+        <div class="tool-row">
+          <div class="field"><label>Tank Size (gallons)</label><input type="number" id="w-tank" min="0" value="500" oninput="calcTank()"></div>
+          <div class="results-box" style="flex:1"><div class="result-row"><span class="result-label">Days of Reserve</span><span class="result-value" id="w-reserve">—</span></div></div>
+        </div>
+      </section>
+
+      <!-- ===== TOOL 3: SOLAR POWER SIZING ===== -->
+      <section id="tool-3" class="tool-section">
+        <h2>⚡ Off-Grid Power Calculator</h2>
+        <p class="tool-subtitle">Add your loads and select your climate to size a solar system.</p>
+
+        <div class="field" style="margin-bottom:1rem">
+          <label>Sun Hours/Day by Climate</label>
+          <select id="sol-climate" onchange="calcSolar()">
+            <option value="6">Arid/Desert (6 hrs)</option>
+            <option value="4" selected>Temperate (4 hrs)</option>
+            <option value="3">Northern/Cloudy (3 hrs)</option>
+            <option value="5.5">Tropical (5.5 hrs)</option>
+          </select>
+        </div>
+
+        <div class="appliance-list" id="appliance-list"></div>
+        <button class="btn-add" onclick="addAppliance()" style="margin-top:.5rem">+ Add Custom Appliance</button>
+
+        <div class="results-box" style="margin-top:1rem">
+          <div class="result-row"><span class="result-label">Daily Watt-Hours Needed</span><span class="result-value" id="sol-wh">—</span></div>
+          <div class="result-row"><span class="result-label">Panel Wattage (×1.25 safety)</span><span class="result-value" id="sol-panel">—</span></div>
+          <div class="result-row"><span class="result-label">Battery Bank (3-day, 12V)</span><span class="result-value" id="sol-battery">—</span></div>
+          <div class="result-row"><span class="result-label">Charge Controller</span><span class="result-value" id="sol-cc">—</span></div>
+          <div class="result-row"><span class="result-label">Inverter Size</span><span class="result-value" id="sol-inv">—</span></div>
+        </div>
+      </section>
+
+      <!-- ===== TOOL 4: SUPPLY TRACKER ===== -->
+      <section id="tool-4" class="tool-section">
+        <h2>📦 Supply Tracker</h2>
+        <p class="tool-subtitle">Track what you have and how long it will last. Data saved to your device.</p>
+
+        <div class="tool-row" style="flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem">
+          <input type="text" id="sup-name" placeholder="Item name" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem;min-width:120px">
+          <select id="sup-cat" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem">
+            <option>Water</option><option>Food</option><option>Medical</option>
+            <option>Fuel</option><option>Comms</option><option>Power</option><option>Security</option>
+          </select>
+          <input type="number" id="sup-qty" placeholder="Qty" min="0" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem;width:80px">
+          <input type="text" id="sup-unit" placeholder="Unit (lbs, gal…)" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem;width:100px">
+          <input type="number" id="sup-rate" placeholder="Use/day" min="0" step="any" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem;width:90px">
+          <input type="date" id="sup-exp" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem">
+          <button onclick="addSupplyItem()" class="btn btn-sm btn-amber">Add</button>
+        </div>
+
+        <div class="results-box" style="margin-bottom:1rem">
+          <div class="result-row"><span class="result-label">Overall Readiness</span><span class="result-value" id="sup-overall">—</span></div>
+          <div id="sup-alerts" style="font-size:.82rem;color:var(--red);margin-top:.25rem"></div>
+        </div>
+
+        <div id="supply-list" class="item-list"></div>
+
+        <div class="tool-row" style="margin-top:1rem">
+          <button class="btn btn-sm btn-outline" onclick="exportSupplies()">⬇ Export JSON</button>
+          <label class="btn btn-sm btn-outline" style="cursor:pointer">⬆ Import JSON<input type="file" accept=".json" style="display:none" onchange="importSupplies(event)"></label>
+          <button class="btn btn-sm btn-outline" onclick="window.print()">🖨️ Print</button>
+        </div>
+      </section>
+
+      <!-- ===== TOOL 5: SKILL INVENTORY ===== -->
+      <section id="tool-5" class="tool-section">
+        <h2>🧠 Group Skill Inventory</h2>
+        <p class="tool-subtitle">Rate each member 0–3 per skill. Identifies gaps and single points of failure.</p>
+
+        <div class="tool-row" style="margin-bottom:.75rem">
+          <input type="text" id="sk-name" placeholder="Member name" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem">
+          <input type="text" id="sk-role" placeholder="Role" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem">
+          <button onclick="addMember()" class="btn btn-sm btn-amber">Add Member</button>
+        </div>
+
+        <div style="overflow-x:auto">
+          <table class="ref-table" id="skill-matrix">
+            <thead><tr id="skill-header"><th>Skill</th></tr></thead>
+            <tbody id="skill-body"></tbody>
+          </table>
+        </div>
+
+        <div class="results-box" style="margin-top:1rem">
+          <div class="result-row"><span class="result-label">Critical Gaps (no coverage)</span><span id="sk-gaps" style="font-size:.85rem;color:var(--red)">—</span></div>
+          <div class="result-row"><span class="result-label">Single Points of Failure</span><span id="sk-spof" style="font-size:.85rem;color:var(--orange)">—</span></div>
+        </div>
+
+        <p style="font-size:.75rem;color:var(--text-2);margin-top:.5rem">Rating: 0=None · 1=Basic · 2=Competent · 3=Expert</p>
+      </section>
+
+      <!-- TOOL 6: PLANTING CALENDAR -->
+<section id="tool-6" class="tool-section">
+  <h2>🌱 What to Plant This Month</h2>
+  <p class="tool-subtitle">Enter your USDA hardiness zone and current month to get planting guidance.</p>
+
+  <div class="tool-row">
+    <div class="field">
+      <label>USDA Zone</label>
+      <select id="pl-zone" onchange="calcPlanting()">
+        <option value="3">Zone 3 (Alaska/N. Canada)</option>
+        <option value="4">Zone 4 (N. Midwest)</option>
+        <option value="5" selected>Zone 5 (Midwest/NE)</option>
+        <option value="6">Zone 6 (Mid-Atlantic)</option>
+        <option value="7">Zone 7 (Southeast/PNW)</option>
+        <option value="8">Zone 8 (Deep South/PNW)</option>
+        <option value="9">Zone 9 (California/TX)</option>
+        <option value="10">Zone 10 (S. Florida/S. CA)</option>
+        <option value="11">Zone 11 (Tropical)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Month</label>
+      <select id="pl-month" onchange="calcPlanting()"></select>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-top:1rem">
+    <div class="results-box">
+      <div style="color:var(--amber);font-weight:700;margin-bottom:.5rem">🌱 Direct Sow Now</div>
+      <div id="pl-direct" style="font-size:.85rem;line-height:1.8">—</div>
+    </div>
+    <div class="results-box">
+      <div style="color:var(--amber);font-weight:700;margin-bottom:.5rem">🪴 Start Indoors Now</div>
+      <div id="pl-indoor" style="font-size:.85rem;line-height:1.8">—</div>
+    </div>
+    <div class="results-box">
+      <div style="color:var(--amber);font-weight:700;margin-bottom:.5rem">🍅 Harvest Now</div>
+      <div id="pl-harvest" style="font-size:.85rem;line-height:1.8">—</div>
+    </div>
+    <div class="results-box">
+      <div style="color:var(--amber);font-weight:700;margin-bottom:.5rem">📅 Coming Up (30 days)</div>
+      <div id="pl-soon" style="font-size:.85rem;line-height:1.8">—</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:1.5rem;color:var(--amber);font-size:1rem">Full Year Calendar</h3>
+  <div style="overflow-x:auto">
+    <table class="ref-table" id="pl-year-table">
+      <thead><tr id="pl-year-head"><th>Crop</th></tr></thead>
+      <tbody id="pl-year-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TOOL 7: BUG OUT DECISION TREE -->
+<section id="tool-7" class="tool-section">
+  <h2>🚗 Should You Stay or Go?</h2>
+  <p class="tool-subtitle">Answer each question to get a recommendation. Based on standard emergency management principles.</p>
+
+  <div id="bugout-questions">
+    <div id="bq-current" class="results-box" style="max-width:600px">
+      <p id="bq-question" style="font-size:1rem;font-weight:600;margin-bottom:1rem">Loading…</p>
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+        <button class="btn btn-sm btn-amber" onclick="bqAnswer('yes')">Yes</button>
+        <button class="btn btn-sm btn-outline" onclick="bqAnswer('no')">No</button>
+        <button class="btn btn-sm" style="background:none;border:none;color:var(--text-2);font-size:.8rem;cursor:pointer" onclick="bqReset()">Start Over</button>
+      </div>
+    </div>
+    <div id="bq-result" style="display:none;max-width:600px"></div>
+  </div>
+
+  <details style="margin-top:1.5rem">
+    <summary style="cursor:pointer;color:var(--text-2);font-size:.85rem">🖨️ Printable Decision Card</summary>
+    <div class="results-box no-screen" style="margin-top:.75rem;font-size:.82rem">
+      <strong>STAY:</strong> No immediate threat + safe for 48+ hrs + supplies adequate<br>
+      <strong>GO NOW:</strong> Immediate danger + escape route open<br>
+      <strong>SHELTER &amp; DEFEND:</strong> Immediate danger + no escape route<br>
+      <strong>PREPARE TO GO:</strong> Growing threat + confirmed destination + group can travel<br>
+      <strong>STAY UNLESS:</strong> Threat possible but no confirmed destination or route
+    </div>
+  </details>
+</section>
+
+<!-- TOOL 8: RADIO FREQUENCIES -->
+<section id="tool-8" class="tool-section">
+  <h2>📻 Emergency Radio Frequencies</h2>
+  <p class="tool-subtitle">Searchable reference. Add your local repeaters and community frequencies.</p>
+
+  <div class="tool-row" style="margin-bottom:.75rem">
+    <input type="text" id="rf-search" placeholder="Search frequencies…" oninput="filterFreqs()" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.9rem;flex:1">
+    <select id="rf-type" onchange="filterFreqs()" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.9rem">
+      <option value="">All Types</option>
+      <option>Weather</option><option>HAM</option><option>CB</option>
+      <option>Marine</option><option>Aviation</option><option>FRS</option>
+      <option>MURS</option><option>GMRS</option><option>Mesh</option><option>Custom</option>
+    </select>
+  </div>
+
+  <table class="ref-table">
+    <thead><tr><th>Name</th><th>Frequency</th><th>Type</th><th>Notes</th><th></th></tr></thead>
+    <tbody id="rf-tbody"></tbody>
+  </table>
+
+  <h3 style="margin-top:1.5rem;color:var(--amber);font-size:1rem">Add Custom Entry</h3>
+  <div class="tool-row" style="flex-wrap:wrap">
+    <input type="text" id="rf-name" placeholder="Name" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem;flex:1;min-width:120px">
+    <input type="text" id="rf-freq" placeholder="Frequency" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem;width:130px">
+    <select id="rf-newtype" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem">
+      <option>Custom</option><option>HAM</option><option>FRS</option><option>GMRS</option><option>CB</option><option>Marine</option>
+    </select>
+    <input type="text" id="rf-notes" placeholder="Notes" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px;font-size:.85rem;flex:2;min-width:120px">
+    <button class="btn btn-sm btn-amber" onclick="addFreq()">Add</button>
+  </div>
+</section>
+
+<!-- TOOL 9: MEDICATION REFERENCE -->
+<section id="tool-9" class="tool-section">
+  <h2>💊 Field Pharmacology Guide</h2>
+  <div class="alert-box danger" style="margin-bottom:1rem">
+    ⚠️ <strong>Emergency use only.</strong> This information is for genuine emergencies when no medical professional is available. Normal healthcare should always be used when accessible. Incorrect medication use can cause serious harm or death.
+  </div>
+
+  <input type="text" id="med-search" placeholder="Search by name, condition, or drug class…" oninput="filterMeds()" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.5rem .75rem;border-radius:4px;font-size:.9rem;width:100%;max-width:500px;margin-bottom:1rem">
+
+  <div style="overflow-x:auto">
+    <table class="ref-table">
+      <thead><tr><th>Drug</th><th>Treats</th><th>Adult Dose</th><th>Duration</th><th>Cautions</th><th>Shelf Life</th></tr></thead>
+      <tbody id="med-tbody"></tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top:1.5rem;color:var(--amber);font-size:1rem">Drug Interaction Checker</h3>
+  <div class="tool-row">
+    <div class="field"><label>Drug 1</label><select id="int-drug1" onchange="checkInteraction()" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px"></select></div>
+    <div class="field"><label>Drug 2</label><select id="int-drug2" onchange="checkInteraction()" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);padding:.4rem .6rem;border-radius:4px"></select></div>
+  </div>
+  <div id="int-result" class="results-box" style="margin-top:.75rem;font-size:.9rem">Select two medications to check for interactions.</div>
+</section>
+
+<script>
+/* ===== TOOL 6: PLANTING CALENDAR ===== */
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const FROST_LAST = {3:5,4:4.83,5:4.5,6:4,7:3.5,8:2.5,9:2,10:1,11:0};
+const FROST_FIRST = {3:9,4:9.5,5:10,6:10.5,7:11,8:11.5,9:12,10:12.5,11:13};
+
+const CROPS = [
+  {name:'Tomatoes',direct:null,indoor:-8,harvest:75,note:'Frost-sensitive; transplant 2wk after last frost'},
+  {name:'Peppers',direct:null,indoor:-10,harvest:80,note:'Frost-sensitive; slow to start'},
+  {name:'Bush Beans',direct:2,indoor:null,harvest:55,note:'Direct sow after last frost'},
+  {name:'Pole Beans',direct:2,indoor:null,harvest:65,note:'Need trellis; frost-sensitive'},
+  {name:'Peas',direct:-6,indoor:null,harvest:65,note:'Frost tolerant; plant early'},
+  {name:'Corn',direct:2,indoor:null,harvest:80,note:'Needs warm soil (60°F+)'},
+  {name:'Potatoes',direct:-3,indoor:null,harvest:90,note:'Plant pieces with eyes'},
+  {name:'Carrots',direct:-4,indoor:null,harvest:75,note:'Direct sow; thin to 2"'},
+  {name:'Lettuce',direct:-5,indoor:-7,harvest:50,note:'Frost tolerant; bolt in heat'},
+  {name:'Spinach',direct:-6,indoor:null,harvest:45,note:'Very frost tolerant'},
+  {name:'Kale',direct:-6,indoor:-8,harvest:55,note:'Frost tolerant; improves after frost'},
+  {name:'Garlic',direct:-16,indoor:null,harvest:240,note:'Plant fall; harvest early summer'},
+  {name:'Onions',direct:null,indoor:-12,harvest:110,note:'Long season; start early'},
+  {name:'Squash/Zucchini',direct:2,indoor:-3,harvest:55,note:'Prolific; frost-sensitive'},
+  {name:'Cucumber',direct:2,indoor:-3,harvest:60,note:'Frost-sensitive; loves heat'},
+  {name:'Melons',direct:3,indoor:-4,harvest:90,note:'Long season; warm climate best'},
+  {name:'Sweet Potatoes',direct:4,indoor:null,harvest:100,note:'Needs long warm season'},
+  {name:'Broccoli',direct:-8,indoor:-10,harvest:70,note:'Cool season; bolt in heat'},
+  {name:'Radishes',direct:-4,indoor:null,harvest:28,note:'Fastest crop; succession plant'},
+  {name:'Basil',direct:3,indoor:-6,harvest:60,note:'Frost-sensitive; loves heat'},
+  {name:'Rosemary',direct:null,indoor:-10,harvest:90,note:'Perennial Z7+; slow from seed'},
+  {name:'Oregano',direct:null,indoor:-10,harvest:80,note:'Perennial; transplant after frost'},
+];
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const ms = document.getElementById('pl-month');
+  if(ms){MONTHS.forEach((m,i)=>{const o=document.createElement('option');o.value=i+1;o.textContent=m;if(i+1===new Date().getMonth()+1)o.selected=true;ms.appendChild(o);});}
+  renderYearTable();
+  calcPlanting();
+});
+
+function getFrostDate(zone,which){return which==='last'?FROST_LAST[zone]||4.5:FROST_FIRST[zone]||10;}
+
+function calcPlanting(){
+  const zone=parseInt(document.getElementById('pl-zone')?.value||5);
+  const month=parseInt(document.getElementById('pl-month')?.value||new Date().getMonth()+1);
+  const lastFrost=getFrostDate(zone,'last');
+  const firstFrost=getFrostDate(zone,'first');
+
+  const direct=[],indoor=[],harvest=[],soon=[];
+
+  CROPS.forEach(c=>{
+    const directMonth=c.direct!=null?lastFrost+c.direct/4:null;
+    const indoorMonth=c.indoor!=null?lastFrost+c.indoor/4:null;
+    const harvestMonth=c.direct!=null?(lastFrost+c.direct/4+c.harvest/30):(lastFrost+2+c.harvest/30);
+
+    if(directMonth!=null&&Math.abs(month-directMonth)<0.75)direct.push(c.name);
+    if(indoorMonth!=null&&Math.abs(month-indoorMonth)<0.75)indoor.push(c.name+(c.indoor?' (transplant in '+(Math.abs(c.indoor))+' wks)':''));
+    if(Math.round(harvestMonth)%12===month%12||Math.abs(harvestMonth-month)<0.75)harvest.push(c.name);
+    const soonDirect=directMonth!=null&&directMonth>month&&directMonth<=month+1;
+    const soonIndoor=indoorMonth!=null&&indoorMonth>month&&indoorMonth<=month+1;
+    if(soonDirect)soon.push(c.name+' (direct sow)');
+    if(soonIndoor)soon.push(c.name+' (start indoors)');
+  });
+
+  document.getElementById('pl-direct').textContent=direct.join(', ')||'Nothing this month for your zone';
+  document.getElementById('pl-indoor').textContent=indoor.join(', ')||'Nothing this month for your zone';
+  document.getElementById('pl-harvest').textContent=harvest.join(', ')||'Check specific varieties';
+  document.getElementById('pl-soon').textContent=soon.join(', ')||'Nothing upcoming in 30 days';
+}
+
+function renderYearTable(){
+  const zone=parseInt(document.getElementById('pl-zone')?.value||5);
+  const head=document.getElementById('pl-year-head');
+  const body=document.getElementById('pl-year-body');
+  if(!head||!body)return;
+  head.innerHTML='<th>Crop</th>'+MONTHS.map(m=>`<th style="font-size:.7rem;padding:.25rem .3rem">${m.slice(0,3)}</th>`).join('');
+  const lastFrost=getFrostDate(zone,'last');
+  body.innerHTML=CROPS.map(c=>{
+    const cells=MONTHS.map((_,mi)=>{
+      const m=mi+1;
+      const directMonth=c.direct!=null?lastFrost+c.direct/4:null;
+      const indoorMonth=c.indoor!=null?lastFrost+c.indoor/4:null;
+      const harvestMonth=(directMonth||lastFrost+2)+c.harvest/30;
+      let bg='';
+      if(directMonth!=null&&Math.abs(m-directMonth)<0.75)bg='background:var(--green-dim,#2a5a3c);color:var(--green)';
+      else if(indoorMonth!=null&&Math.abs(m-indoorMonth)<0.75)bg='background:var(--amber-dim);color:var(--amber)';
+      else if(Math.abs(m-harvestMonth)<0.75||Math.round(harvestMonth)===m)bg='background:var(--orange-dim,#6e4020);color:var(--orange)';
+      return `<td style="text-align:center;font-size:.65rem;${bg}">${bg?'●':''}</td>`;
+    }).join('');
+    return `<tr><td style="font-size:.78rem;white-space:nowrap">${c.name}</td>${cells}</tr>`;
+  }).join('');
+}
+
+/* ===== TOOL 7: BUG OUT DECISION TREE ===== */
+const BQ_TREE = {
+  q1:{text:'Is there an immediate physical danger at your current location right now? (fire, flood, structural collapse, armed threat within minutes)',
+    yes:'q_imm',no:'q2'},
+  q_imm:{text:'Do you have a viable escape route open right now?',
+    yes:{rec:'GO NOW',cls:'red',msg:'Immediate evacuation. Take only what you can carry in 60 seconds. Move immediately. Do not wait.',actions:['Grab go-bag','Alert all group members','Leave by safest route NOW','Do not return until threat is confirmed gone']},
+    no:{rec:'SHELTER & DEFEND',cls:'orange',msg:'Your escape route is cut off. Fortify your position, signal for help, and wait for an opening.',actions:['Barricade entry points','Signal from a window or roof','Conserve resources','Wait for threat to shift or pass']}},
+  q2:{text:'Is your location likely to become more dangerous in the next 48–72 hours?',
+    yes:'q3',
+    no:{rec:'STAY',cls:'green',msg:'Your location is safe now and should remain safe. Conserve resources, reinforce, and monitor.',actions:['Secure perimeter','Inventory supplies','Establish watch rotation','Monitor communications']}},
+  q3:{text:'Do you have a confirmed safer destination?',
+    yes:'q4',
+    no:{rec:'STAY',cls:'green',msg:'No confirmed destination means bugging out could put you in more danger, not less. Improve your current position.',actions:['Fortify current location','Identify and confirm a destination before moving','Expand your supply cache','Make contact with potential destination']}},
+  q4:{text:'Can your group reach that destination? (Have transport and fuel, or is it walkable for your slowest member?)',
+    yes:'q5',
+    no:{rec:'STAY & PREPARE',cls:'amber',msg:'You cannot safely reach your destination yet. Use this time to solve the transport problem.',actions:['Source fuel or transport','Reduce load to what can be carried','Identify intermediate waypoints','Prepare to move when transport is available']}},
+  q5:{text:'Are all group members physically capable of travel? (No immobile injured, elderly, or infants who cannot be moved safely?)',
+    yes:'q6',
+    no:{rec:'SHELTER IN PLACE',cls:'orange',msg:'Evacuating would put vulnerable members at extreme risk. Their safety outweighs the threat of staying.',actions:['Prioritize vulnerable member care','Create a shelter-in-place plan','Signal for evacuation assistance','Prepare a delayed departure plan']}},
+  q6:{text:'Do you have more than 72 hours of supplies at your current location?',
+    yes:'q7',
+    no:{rec:'PREPARE TO GO',cls:'amber',msg:'Limited supplies make staying time-limited anyway. Begin preparation for departure now.',actions:['Pack go-bags immediately','Confirm destination and route','Set departure trigger (supply level or threat level)','Begin moving when ready']}},
+  q7:{text:'Is your route to the destination currently passable and known by your group?',
+    yes:{rec:'PREPARE TO GO',cls:'amber',msg:'All conditions favor movement. Depart when threat level increases or supplies approach 72-hour mark.',actions:['Brief all members on route','Set departure trigger conditions','Assign roles (navigator, security, medic)','Have go-bags staged and ready']},
+    no:{rec:'STAY UNLESS',cls:'amber',msg:'Stay and actively confirm your route. Move when: threat increases significantly, supplies below 72hrs, or route is confirmed.',actions:['Send scouts to confirm route','Monitor radio for route conditions','Set trigger: move when route is known','Do not move blind into an unknown route']}}
+};
+
+let bqCurrent='q1';
+function bqStart(){bqCurrent='q1';renderBQ();}
+function bqReset(){bqStart();}
+function bqAnswer(ans){
+  const node=BQ_TREE[bqCurrent];
+  if(!node)return;
+  const next=node[ans];
+  if(typeof next==='string'){bqCurrent=next;renderBQ();}
+  else if(next&&next.rec){showBQResult(next);}
+}
+function renderBQ(){
+  const node=BQ_TREE[bqCurrent];
+  if(!node)return;
+  document.getElementById('bq-result').style.display='none';
+  const qDiv=document.getElementById('bq-current');
+  qDiv.style.display='block';
+  document.getElementById('bq-question').textContent=node.text;
+}
+function showBQResult(r){
+  document.getElementById('bq-current').style.display='none';
+  const colors={red:'var(--red)',orange:'var(--orange)',amber:'var(--amber)',green:'var(--green)'};
+  const res=document.getElementById('bq-result');
+  res.style.display='block';
+  res.innerHTML=`<div style="border:2px solid ${colors[r.cls]||'var(--amber)'};border-radius:8px;padding:1.25rem">
+    <div style="font-size:1.5rem;font-weight:900;color:${colors[r.cls]};margin-bottom:.5rem">${r.rec}</div>
+    <p style="margin-bottom:1rem">${r.msg}</p>
+    <div style="color:var(--text-2);font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.35rem">Action checklist:</div>
+    <ul style="font-size:.88rem;line-height:2">${r.actions.map(a=>`<li>${a}</li>`).join('')}</ul>
+    <button class="btn btn-sm btn-outline" onclick="bqReset()" style="margin-top:1rem">← Start Over</button>
+  </div>`;
+}
+window.addEventListener('DOMContentLoaded',()=>renderBQ());
+
+/* ===== TOOL 8: RADIO FREQUENCIES ===== */
+const RF_KEY='radio-freqs';
+const DEFAULT_FREQS=[
+  {name:'NOAA Weather Radio',freq:'162.400–162.550 MHz',type:'Weather',notes:'Continuous; SAME alerts',custom:false},
+  {name:'National Simplex VHF',freq:'146.520 MHz',type:'HAM',notes:'National calling; move off after contact',custom:false},
+  {name:'National Simplex UHF',freq:'446.000 MHz',type:'HAM',notes:'UHF calling frequency',custom:false},
+  {name:'Marine Ch 16 (Distress)',freq:'156.800 MHz',type:'Marine',notes:'Monitor always; distress and calling',custom:false},
+  {name:'CB Ch 9 (Emergency)',freq:'27.065 MHz',type:'CB',notes:'Emergency; REACT teams monitor',custom:false},
+  {name:'CB Ch 19 (Highway)',freq:'27.185 MHz',type:'CB',notes:'Truckers; road conditions',custom:false},
+  {name:'Aircraft Emergency',freq:'121.500 MHz',type:'Aviation',notes:'Guard; all aircraft monitor',custom:false},
+  {name:'Military Air Distress',freq:'243.000 MHz',type:'Military',notes:'Military UHF guard',custom:false},
+  {name:'Meshtastic Default US',freq:'906.875 MHz',type:'Mesh',notes:'LoRa mesh default channel',custom:false},
+  {name:'FRS Ch 1',freq:'462.5625 MHz',type:'FRS',notes:'No license at FRS power levels',custom:false},
+  {name:'MURS Ch 1',freq:'151.820 MHz',type:'MURS',notes:'License-free business band',custom:false},
+  {name:'GMRS Emergency',freq:'462.675 MHz',type:'GMRS',notes:'GMRS calling/emergency; license required',custom:false},
+];
+let rfData=[];
+
+function loadFreqs(){
+  try{const saved=JSON.parse(localStorage.getItem(RF_KEY)||'null');rfData=saved?[...DEFAULT_FREQS,...saved.filter(f=>f.custom)]:[...DEFAULT_FREQS];}
+  catch(e){rfData=[...DEFAULT_FREQS];}
+  renderFreqs();
+}
+function saveFreqs(){localStorage.setItem(RF_KEY,JSON.stringify(rfData.filter(f=>f.custom)));}
+function addFreq(){
+  const name=document.getElementById('rf-name').value.trim();
+  const freq=document.getElementById('rf-freq').value.trim();
+  if(!name||!freq)return;
+  rfData.push({name,freq,type:document.getElementById('rf-newtype').value,notes:document.getElementById('rf-notes').value,custom:true});
+  saveFreqs();renderFreqs();
+  document.getElementById('rf-name').value='';document.getElementById('rf-freq').value='';document.getElementById('rf-notes').value='';
+}
+function removeFreq(idx){rfData.splice(idx,1);saveFreqs();renderFreqs();}
+function filterFreqs(){renderFreqs();}
+function renderFreqs(){
+  const search=(document.getElementById('rf-search')?.value||'').toLowerCase();
+  const type=document.getElementById('rf-type')?.value||'';
+  const tbody=document.getElementById('rf-tbody');
+  const filtered=rfData.filter(f=>(!type||f.type===type)&&(!search||f.name.toLowerCase().includes(search)||f.freq.toLowerCase().includes(search)||f.notes.toLowerCase().includes(search)));
+  tbody.innerHTML=filtered.map((f,i)=>`<tr>
+    <td><strong>${f.name}</strong></td>
+    <td style="font-family:monospace;font-size:.82rem">${f.freq}</td>
+    <td><span class="tag-amber" style="font-size:.7rem">${f.type}</span></td>
+    <td style="font-size:.8rem;color:var(--text-2)">${f.notes}</td>
+    <td>${f.custom?`<button class="btn-remove" onclick="removeFreq(${rfData.indexOf(f)})">✕</button>`:''}</td>
+  </tr>`).join('')||'<tr><td colspan="5" style="color:var(--text-2);text-align:center">No matches</td></tr>';
+}
+window.addEventListener('DOMContentLoaded',loadFreqs);
+
+/* ===== TOOL 9: MEDICATION REFERENCE ===== */
+const MEDS=[
+  {name:'Amoxicillin',brand:'Amoxil',cls:'Antibiotic (penicillin)',treats:'Resp infections, ear, dental, UTI, skin',dose:'500mg q8h or 875mg q12h',ped:'25-45mg/kg/day',dur:'7-10 days',ci:'Penicillin allergy',inter:'Warfarin (↑effect)',store:'Room temp',shelf:'1-2 yr',notes:'Most common antibiotic; broad coverage'},
+  {name:'Doxycycline',brand:'Vibramycin',cls:'Antibiotic (tetracycline)',treats:'Lyme, RMSF, pneumonia, malaria prevention',dose:'100mg q12h',ped:'Avoid <8yr (stains teeth)',dur:'7-14 days',ci:'Pregnancy, children <8, sun sensitivity',inter:'Antacids/dairy reduce absorption (take 2hr apart)',store:'Room temp, dry',shelf:'2-3 yr ⚠ TOXIC if degraded',notes:'Key for tick-borne illness; never use beyond expiry'},
+  {name:'Ciprofloxacin',brand:'Cipro',cls:'Antibiotic (fluoroquinolone)',treats:'UTI, GI infections, anthrax exposure',dose:'500mg q12h',ped:'10-20mg/kg/day (avoid if possible)',dur:'3-14 days',ci:'Pregnancy, children (tendon risk)',inter:'Dairy/antacids reduce absorption; QT risk',store:'Room temp',shelf:'3-5 yr',notes:'Reserve for serious infections'},
+  {name:'Metronidazole',brand:'Flagyl',cls:'Antibiotic/Antiparasitic',treats:'Giardia, C. diff, dental abscess, anaerobic infections',dose:'500mg q8h',ped:'15-35mg/kg/day',dur:'5-10 days',ci:'1st trimester pregnancy',inter:'⚠ NO ALCOHOL — severe disulfiram-like reaction',store:'Room temp',shelf:'2-3 yr',notes:'Essential for waterborne parasites'},
+  {name:'Azithromycin',brand:'Z-Pack',cls:'Antibiotic (macrolide)',treats:'Resp infections, ear, STIs, whooping cough',dose:'500mg day 1, then 250mg days 2-5',ped:'10mg/kg day 1, 5mg/kg days 2-5',dur:'5 days',ci:'QT prolongation risk; liver disease',inter:'QT-prolonging drugs',store:'Room temp',shelf:'2-3 yr',notes:'Good for penicillin-allergic patients'},
+  {name:'Ibuprofen',brand:'Advil/Motrin',cls:'NSAID',treats:'Pain, fever, inflammation',dose:'400-800mg q6-8h WITH food',ped:'5-10mg/kg q6-8h',dur:'As needed',ci:'Kidney disease, stomach ulcers, last trimester pregnancy',inter:'Blood thinners, other NSAIDs',store:'Room temp',shelf:'4-5 yr',notes:'Anti-inflammatory advantage over acetaminophen'},
+  {name:'Acetaminophen',brand:'Tylenol',cls:'Analgesic/Antipyretic',treats:'Pain, fever',dose:'500-1000mg q4-6h; MAX 4g/day',ped:'15mg/kg q4-6h',dur:'As needed',ci:'Liver disease; heavy alcohol use',inter:'Alcohol → liver toxicity',store:'Room temp',shelf:'5+ yr',notes:'⚠ Overdose causes liver failure; safe in pregnancy'},
+  {name:'Diphenhydramine',brand:'Benadryl',cls:'Antihistamine',treats:'Allergic reactions, anaphylaxis support, sleep, nausea',dose:'25-50mg q4-6h',ped:'1mg/kg q6h (avoid <2yr)',dur:'As needed',ci:'Glaucoma, enlarged prostate, elderly (fall risk)',inter:'Alcohol/sedatives → excessive sedation',store:'Room temp',shelf:'3-5 yr',notes:'Also: motion sickness, insomnia'},
+  {name:'Loperamide',brand:'Imodium',cls:'Antidiarrheal',treats:'Acute diarrhea (non-infectious)',dose:'4mg initial, then 2mg after each loose stool; max 16mg/day',ped:'0.05-0.1mg/kg',dur:'2-3 days max',ci:'⚠ NOT for bloody diarrhea or fever (suggests infection)',inter:'Few significant',store:'Room temp',shelf:'3-5 yr',notes:'Prevents life-threatening dehydration from diarrhea'},
+  {name:'Omeprazole',brand:'Prilosec',cls:'Proton Pump Inhibitor',treats:'Acid reflux, ulcers, stress gastritis',dose:'20-40mg once daily before meals',ped:'1mg/kg/day',dur:'4-8 weeks',ci:'Long-term → Mg/B12 deficiency',inter:'Reduces absorption of drugs needing stomach acid',store:'Room temp, dry',shelf:'2-3 yr',notes:'Stress and poor diet cause GERD spikes'},
+  {name:'Ondansetron',brand:'Zofran',cls:'Antiemetic',treats:'Nausea and vomiting',dose:'4-8mg q6-8h (ODT)',ped:'0.1-0.15mg/kg',dur:'As needed',ci:'QT prolongation',inter:'⚠ Azithromycin + Ondansetron = cardiac QT risk',store:'Room temp, protect from moisture',shelf:'3 yr',notes:'Prevents dangerous dehydration from vomiting'},
+  {name:'Epinephrine',brand:'EpiPen',cls:'Emergency Sympathomimetic',treats:'Anaphylaxis, severe asthma',dose:'0.3mg IM outer thigh; repeat in 5-15min if needed',ped:'0.15mg (<30kg); 0.3mg (>30kg)',dur:'Single dose; seek further care',ci:'No absolute CI in life-threatening anaphylaxis',inter:'MAOIs → hypertensive crisis',store:'Room temp, protect from light; ⚠ do NOT refrigerate EpiPen',shelf:'12-18 mo; may work beyond expiry in emergency',notes:'LIFE-SAVING in anaphylaxis'},
+  {name:'Naloxone',brand:'Narcan',cls:'Opioid Antagonist',treats:'Opioid overdose reversal',dose:'0.4mg IM or 4mg intranasal; repeat q2-3min',ped:'0.01mg/kg IM or 2mg intranasal',dur:'Single use; repeat as needed',ci:'None (safe to give if opioid OD uncertain)',inter:'Opioids (reverses them — that is the point)',store:'Room temp, protect from light',shelf:'2-3 yr',notes:'100% safe to give; no effect if not opioid OD'},
+  {name:'Potassium Iodide',brand:'IOSAT/ThyroShield',cls:'Thyroid Protectant',treats:'Radioactive iodine (I-131) thyroid protection',dose:'130mg once',ped:'See NBC section (16-130mg by age)',dur:'Single dose per exposure',ci:'Thyroid disease/iodine allergy (weigh vs radiation risk)',inter:'ACE inhibitors, K-sparing diuretics',store:'Room temp',shelf:'7+ yr',notes:'Take within 24hr of exposure; protects ONLY thyroid'}
+];
+
+const INTERACTIONS=[
+  {drugs:['Metronidazole','Alcohol'],severity:'DANGER',msg:'Severe disulfiram-like reaction: flushing, vomiting, rapid heartbeat, hypotension. No alcohol during treatment or 48hr after.'},
+  {drugs:['Doxycycline','Antacids'],severity:'WARNING',msg:'Antacids, dairy, and calcium significantly reduce doxycycline absorption. Take 2 hours apart.'},
+  {drugs:['Ciprofloxacin','Antacids'],severity:'WARNING',msg:'Dairy, antacids, and calcium reduce ciprofloxacin absorption. Take 2 hours apart.'},
+  {drugs:['Acetaminophen','Alcohol'],severity:'WARNING',msg:'Increased risk of liver toxicity. Avoid alcohol with regular acetaminophen use.'},
+  {drugs:['Epinephrine','MAOIs'],severity:'DANGER',msg:'Risk of severe hypertensive crisis. Use with extreme caution if MAOIs (e.g. phenelzine) have been taken in last 14 days.'},
+  {drugs:['Diphenhydramine','Alcohol'],severity:'WARNING',msg:'Excessive sedation and CNS depression. Avoid combining.'},
+  {drugs:['Azithromycin','Ondansetron'],severity:'DANGER',msg:'Both prolong the QT interval. Combination significantly increases risk of potentially fatal cardiac arrhythmia.'},
+  {drugs:['Azithromycin','Ciprofloxacin'],severity:'WARNING',msg:'Additive QT prolongation risk. Monitor for arrhythmia if combination is necessary.'},
+];
+
+function filterMeds(){
+  const q=(document.getElementById('med-search')?.value||'').toLowerCase();
+  const tbody=document.getElementById('med-tbody');
+  const filtered=MEDS.filter(m=>!q||(m.name+m.treats+m.cls+m.notes).toLowerCase().includes(q));
+  tbody.innerHTML=filtered.map(m=>`<tr>
+    <td><strong>${m.name}</strong><br><span style="font-size:.72rem;color:var(--text-2)">${m.brand} · ${m.cls}</span></td>
+    <td style="font-size:.8rem">${m.treats}</td>
+    <td style="font-size:.8rem">${m.dose}</td>
+    <td style="font-size:.8rem">${m.dur}</td>
+    <td style="font-size:.78rem;color:var(--red)">${m.ci}</td>
+    <td style="font-size:.78rem">${m.shelf}</td>
+  </tr>`).join('');
+}
+
+function checkInteraction(){
+  const d1=document.getElementById('int-drug1')?.value;
+  const d2=document.getElementById('int-drug2')?.value;
+  const el=document.getElementById('int-result');
+  if(!d1||!d2||d1===d2){el.textContent='Select two different medications.';return;}
+  const inter=INTERACTIONS.find(i=>i.drugs.some(d=>d===d1||d.toLowerCase()===d1.toLowerCase())&&i.drugs.some(d=>d===d2||d.toLowerCase()===d2.toLowerCase()));
+  if(inter){
+    const col=inter.severity==='DANGER'?'var(--red)':'var(--orange)';
+    el.innerHTML=`<span style="color:${col};font-weight:700">⚠ ${inter.severity}:</span> ${inter.msg}`;
+  } else {
+    el.innerHTML='<span style="color:var(--green)">✓</span> No known interaction in this reference. Always verify with a complete medication list.';
+  }
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  filterMeds();
+  const makeOpts=()=>MEDS.map(m=>`<option value="${m.name}">${m.name}</option>`).join('');
+  const d1=document.getElementById('int-drug1');
+  const d2=document.getElementById('int-drug2');
+  if(d1)d1.innerHTML=`<option value="">Select…</option>`+makeOpts();
+  if(d2)d2.innerHTML=`<option value="">Select…</option>`+makeOpts();
+});
+</script>
+
+    </div><!-- end content-wrapper -->
+  </div><!-- end main-content -->
+
+  <aside id="aria-panel" class="aria-panel">
+    <div class="aria-header">
+      <div class="aria-status"><span class="status-dot"></span><span class="aria-status-label">Bunker Bot</span><span id="aria-model-badge" class="model-badge"></span></div>
+      <button id="aria-close" class="btn-icon">✕</button>
+    </div>
+    <div id="aria-messages" class="aria-messages"></div>
+    <div class="aria-input-row">
+      <input type="text" id="aria-input" placeholder="Ask Bunker Bot…" autocomplete="off">
+      <button id="aria-send" class="btn btn-sm btn-amber">Send</button>
+    </div>
+  </aside>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
+
+  <script>
+  // ===== TOOL 1: CALORIE CALCULATOR =====
+  const CALORIES = {
+    child:   { sed:1400, light:1600, mod:1800, heavy:2000 },
+    teen:    { sed:1800, light:2200, mod:2600, heavy:3000 },
+    adult:   { sed:2000, light:2400, mod:2800, heavy:3500 },
+    elderly: { sed:1600, light:1900, mod:2200, heavy:2600 }
+  };
+  const FOODS = [
+    {name:'White Rice',    cpl:1633},
+    {name:'Pinto Beans',   cpl:671},
+    {name:'Flour',         cpl:1651},
+    {name:'Rolled Oats',   cpl:1718},
+    {name:'Sugar',         cpl:1748},
+    {name:'Vegetable Oil', cpl:3527},
+    {name:'Pasta',         cpl:1664},
+    {name:'Cornmeal',      cpl:1598},
+    {name:'Honey',         cpl:1360},
+    {name:'Lard/Tallow',   cpl:4082}
+  ];
+  let persons = [];
+  let personId = 0;
+
+  function addPerson() {
+    const id = personId++;
+    persons.push({ id, name: '', age: 'adult', activity: 'mod' });
+    renderPersons();
+  }
+
+  function renderPersons() {
+    const list = document.getElementById('person-list');
+    list.innerHTML = persons.map(p => `
+      <div class="person-card" data-id="${p.id}">
+        <div class="field" style="flex:1"><label>Name</label><input value="${p.name || ''}" onchange="updatePerson(${p.id},'name',this.value)" placeholder="e.g. Adult #1"></div>
+        <div class="field"><label>Age Group</label><select onchange="updatePerson(${p.id},'age',this.value)">
+          <option value="child"   ${p.age === 'child'   ? 'selected' : ''}>Child 2-12</option>
+          <option value="teen"    ${p.age === 'teen'    ? 'selected' : ''}>Teen 13-17</option>
+          <option value="adult"   ${p.age === 'adult'   ? 'selected' : ''}>Adult 18-65</option>
+          <option value="elderly" ${p.age === 'elderly' ? 'selected' : ''}>Elderly 65+</option>
+        </select></div>
+        <div class="field"><label>Activity</label><select onchange="updatePerson(${p.id},'activity',this.value)">
+          <option value="sed"   ${p.activity === 'sed'   ? 'selected' : ''}>Sedentary</option>
+          <option value="light" ${p.activity === 'light' ? 'selected' : ''}>Light</option>
+          <option value="mod"   ${p.activity === 'mod'   ? 'selected' : ''}>Moderate</option>
+          <option value="heavy" ${p.activity === 'heavy' ? 'selected' : ''}>Heavy Work</option>
+        </select></div>
+        <button class="btn-remove" onclick="removePerson(${p.id})">✕</button>
+      </div>`).join('');
+    calcCalories();
+  }
+
+  function updatePerson(id, key, val) {
+    const p = persons.find(x => x.id === id);
+    if (p) { p[key] = val; calcCalories(); }
+  }
+
+  function removePerson(id) {
+    persons = persons.filter(x => x.id !== id);
+    renderPersons();
+  }
+
+  function calcCalories() {
+    const totalCal = persons.reduce((s, p) => {
+      const row = CALORIES[p.age] || CALORIES.adult;
+      return s + (row[p.activity] || row.mod);
+    }, 0);
+    const dur = parseInt(document.querySelector('input[name=duration]:checked')?.value || 7);
+
+    document.getElementById('res-cal').textContent   = totalCal ? totalCal.toLocaleString() + ' cal' : '—';
+    document.getElementById('res-prot').textContent  = totalCal ? Math.round(totalCal * 0.15 / 4) + ' g' : '—';
+    document.getElementById('res-fat').textContent   = totalCal ? Math.round(totalCal * 0.30 / 9) + ' g' : '—';
+    document.getElementById('res-wt').textContent    = totalCal ? (totalCal / 1650).toFixed(1) + ' lbs' : '—';
+    document.getElementById('res-total').textContent = totalCal ? Math.round(totalCal * dur / 1650).toLocaleString() + ' lbs total' : '—';
+
+    // Update ref table with current group calorie total
+    const perCal = totalCal || 2400;
+    const tbody = document.getElementById('cal-ref-table');
+    if (tbody) {
+      tbody.innerHTML = FOODS.map(f =>
+        `<tr><td>${f.name}</td><td>${f.cpl.toLocaleString()}</td><td>${(f.cpl / perCal).toFixed(1)} lbs</td></tr>`
+      ).join('');
+    }
+
+    calcReverse();
+  }
+
+  document.querySelectorAll('input[name=duration]').forEach(r => r.addEventListener('change', calcCalories));
+
+  function calcReverse() {
+    const food     = FOODS.find(f => f.name === document.getElementById('rev-food')?.value);
+    const lbs      = parseFloat(document.getElementById('rev-lbs')?.value) || 0;
+    const totalCal = persons.reduce((s, p) => {
+      const row = CALORIES[p.age] || CALORIES.adult;
+      return s + (row[p.activity] || row.mod);
+    }, 0);
+    const el = document.getElementById('res-reverse');
+    if (!food || !lbs || !totalCal) { if (el) el.textContent = '—'; return; }
+    el.textContent = (food.cpl * lbs / totalCal).toFixed(1) + ' days';
+  }
+
+  // ===== TOOL 2: WATER BUDGET =====
+  function calcWater() {
+    const people   = parseInt(document.getElementById('w-people').value) || 0;
+    const climate  = parseFloat(document.getElementById('w-climate').value) || 1;
+    const season   = parseFloat(document.getElementById('w-season').value) || 1;
+    const mult     = climate * season;
+    const drinking = people * 1 * mult;
+    const hygiene  = people * 1.5 * mult;
+    const horses   = (parseInt(document.getElementById('w-horses').value)   || 0) * 12;
+    const cows     = (parseInt(document.getElementById('w-cows').value)     || 0) * 20;
+    const goats    = (parseInt(document.getElementById('w-goats').value)    || 0) * 2;
+    const pigs     = (parseInt(document.getElementById('w-pigs').value)     || 0) * 4;
+    const chickens = (parseInt(document.getElementById('w-chickens').value) || 0) / 10;
+    const livestock = horses + cows + goats + pigs + chickens;
+    const garden   = ((parseInt(document.getElementById('w-garden').value) || 0) * 0.623 / 7) * mult;
+    const total    = drinking + hygiene + livestock + garden;
+
+    document.getElementById('w-total').textContent      = total.toFixed(1) + ' gal';
+    document.getElementById('w-drink').textContent      = drinking.toFixed(1) + ' gal';
+    document.getElementById('w-hygiene').textContent    = hygiene.toFixed(1) + ' gal';
+    document.getElementById('w-livestock').textContent  = livestock.toFixed(1) + ' gal';
+    document.getElementById('w-garden-out').textContent = garden.toFixed(1) + ' gal';
+
+    window._waterTotal = total;
+    calcTank();
+  }
+
+  function calcCatchment() {
+    const roof = parseFloat(document.getElementById('w-roof').value) || 0;
+    const rain = parseFloat(document.getElementById('w-rain').value) || 0;
+    document.getElementById('w-catch').textContent = (roof * rain * 0.623).toFixed(0) + ' gal';
+  }
+
+  function calcTank() {
+    const tank  = parseFloat(document.getElementById('w-tank').value) || 0;
+    const total = window._waterTotal || 1;
+    document.getElementById('w-reserve').textContent = total > 0 ? (tank / total).toFixed(0) + ' days' : '—';
+  }
+
+  // ===== TOOL 3: SOLAR POWER SIZING =====
+  const DEFAULT_APPLIANCES = [
+    { name: 'LED Bulb',        w: 10,  h: 5,   on: true  },
+    { name: 'Ceiling Fan',     w: 50,  h: 8,   on: false },
+    { name: 'AM/FM Radio',     w: 5,   h: 4,   on: true  },
+    { name: 'HAM Radio (RX)',  w: 10,  h: 8,   on: true  },
+    { name: 'HAM Radio (TX)',  w: 50,  h: 0.5, on: true  },
+    { name: 'Phone Charger',   w: 10,  h: 2,   on: true  },
+    { name: 'Laptop',          w: 45,  h: 4,   on: false },
+    { name: 'Mini Fridge',     w: 60,  h: 24,  on: false },
+    { name: 'Well Pump',       w: 750, h: 0.5, on: false },
+    { name: 'Water Pump',      w: 200, h: 1,   on: false }
+  ];
+  let appliances = DEFAULT_APPLIANCES.map((a, i) => ({ ...a, id: i }));
+  let appId = appliances.length;
+
+  function renderAppliances() {
+    const list = document.getElementById('appliance-list');
+    list.innerHTML = appliances.map(a => `
+      <div class="appliance-row">
+        <input type="checkbox" ${a.on ? 'checked' : ''} onchange="toggleAppliance(${a.id}, this.checked)">
+        <span style="color:${a.on ? 'var(--text-0)' : 'var(--text-2)'}">${a.name}</span>
+        <div><input type="number" value="${a.w}" min="0" style="width:60px" onchange="updateAppliance(${a.id},'w',this.value)" title="Watts"> W</div>
+        <div><input type="number" value="${a.h}" min="0" step="0.1" style="width:50px" onchange="updateAppliance(${a.id},'h',this.value)" title="Hours/day"> h/d</div>
+        ${a.custom ? `<button class="btn-remove" onclick="removeAppliance(${a.id})">✕</button>` : '<span></span>'}
+      </div>`).join('');
+    calcSolar();
+  }
+
+  function toggleAppliance(id, on) {
+    const a = appliances.find(x => x.id === id);
+    if (a) { a.on = on; renderAppliances(); }
+  }
+
+  function updateAppliance(id, k, v) {
+    const a = appliances.find(x => x.id === id);
+    if (a) { a[k] = parseFloat(v) || 0; calcSolar(); }
+  }
+
+  function removeAppliance(id) {
+    appliances = appliances.filter(x => x.id !== id);
+    renderAppliances();
+  }
+
+  function addAppliance() {
+    appliances.push({ id: appId++, name: 'Custom Device', w: 50, h: 4, on: true, custom: true });
+    renderAppliances();
+  }
+
+  function calcSolar() {
+    const sun     = parseFloat(document.getElementById('sol-climate').value) || 4;
+    const active  = appliances.filter(a => a.on);
+    const dailyWh = active.reduce((s, a) => s + a.w * a.h, 0);
+    const peakW   = active.reduce((s, a) => s + a.w, 0);
+
+    document.getElementById('sol-wh').textContent      = dailyWh.toFixed(0) + ' Wh';
+    document.getElementById('sol-panel').textContent   = Math.ceil(dailyWh / sun * 1.25) + ' W';
+    document.getElementById('sol-battery').textContent = Math.ceil(dailyWh * 3 / (12 * 0.5)) + ' Ah @ 12V';
+    document.getElementById('sol-cc').textContent      = Math.ceil(Math.ceil(dailyWh / sun * 1.25) / 12 * 1.25) + ' A';
+    document.getElementById('sol-inv').textContent     = Math.ceil(peakW * 1.25) + ' W';
+  }
+
+  // ===== TOOL 4: SUPPLY TRACKER =====
+  const SUP_KEY = 'supply-tracker-items';
+  let supplyItems = [];
+  let supplyId = 0;
+
+  function loadSupplies() {
+    try {
+      supplyItems = JSON.parse(localStorage.getItem(SUP_KEY) || '[]');
+      supplyId = supplyItems.reduce((m, i) => Math.max(m, i.id || 0), 0) + 1;
+    } catch(e) { supplyItems = []; }
+    renderSupplies();
+  }
+
+  function saveSupplies() {
+    localStorage.setItem(SUP_KEY, JSON.stringify(supplyItems));
+  }
+
+  function addSupplyItem() {
+    const name = document.getElementById('sup-name').value.trim();
+    if (!name) return;
+    supplyItems.push({
+      id:   supplyId++,
+      name,
+      cat:  document.getElementById('sup-cat').value,
+      qty:  parseFloat(document.getElementById('sup-qty').value) || 0,
+      unit: document.getElementById('sup-unit').value || 'units',
+      rate: parseFloat(document.getElementById('sup-rate').value) || 0,
+      exp:  document.getElementById('sup-exp').value
+    });
+    document.getElementById('sup-name').value = '';
+    document.getElementById('sup-qty').value  = '';
+    document.getElementById('sup-unit').value = '';
+    document.getElementById('sup-rate').value = '';
+    document.getElementById('sup-exp').value  = '';
+    saveSupplies();
+    renderSupplies();
+  }
+
+  function removeSupplyItem(id) {
+    supplyItems = supplyItems.filter(x => x.id !== id);
+    saveSupplies();
+    renderSupplies();
+  }
+
+  function getDaysColor(days) {
+    if (days === null) return '';
+    if (days > 90) return 'green';
+    if (days > 30) return 'yellow';
+    if (days > 7)  return 'orange';
+    return 'red';
+  }
+
+  function renderSupplies() {
+    const list = document.getElementById('supply-list');
+    list.innerHTML = supplyItems.map(item => {
+      const days    = item.rate > 0 ? item.qty / item.rate : null;
+      const cls     = getDaysColor(days);
+      const daysStr = days !== null ? days.toFixed(0) + ' days' : '—';
+      const expWarn = item.exp && new Date(item.exp) < new Date(Date.now() + 30 * 86400000) ? ' ⚠️exp' : '';
+      return `<div class="supply-item ${cls}">
+        <span><strong>${item.name}</strong> <span style="color:var(--text-2);font-size:.8rem">${item.cat}</span><br>
+        <span style="font-size:.82rem">${item.qty} ${item.unit}${expWarn}</span></span>
+        <span class="tag-${cls || 'amber'}">${daysStr}</span>
+        <button class="btn-remove" onclick="removeSupplyItem(${item.id})">✕</button>
+      </div>`;
+    }).join('') || '<p style="color:var(--text-2);font-size:.85rem">No items tracked yet. Add your first item above.</p>';
+
+    const withRates = supplyItems.filter(i => i.rate > 0);
+    const minDays   = withRates.length > 0 ? Math.min(...withRates.map(i => i.qty / i.rate)) : null;
+    document.getElementById('sup-overall').textContent = minDays !== null
+      ? Math.round(minDays) + ' days minimum'
+      : supplyItems.length + ' items tracked';
+
+    const alerts = supplyItems.filter(i => i.rate > 0 && i.qty / i.rate < 7).map(i => i.name);
+    document.getElementById('sup-alerts').textContent = alerts.length
+      ? '⚠ Critical (<7 days): ' + alerts.join(', ')
+      : '';
+  }
+
+  function exportSupplies() {
+    const blob = new Blob([JSON.stringify(supplyItems, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'supplies.json';
+    a.click();
+  }
+
+  function importSupplies(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        supplyItems = JSON.parse(ev.target.result);
+        saveSupplies();
+        renderSupplies();
+      } catch(err) { alert('Invalid JSON file'); }
+    };
+    reader.readAsText(file);
+  }
+
+  // ===== TOOL 5: SKILL INVENTORY =====
+  const SK_KEY = 'skill-inventory';
+  const SKILL_CATS = [
+    ['Medical',        'First Aid',        'Surgery/Suturing', 'Herbalism',      'Dentistry'],
+    ['Agriculture',    'Planting/Seeds',   'Animal Husbandry', 'Irrigation',     'Preservation'],
+    ['Construction',   'Carpentry',        'Masonry',          'Plumbing',       'Structural'],
+    ['Energy',         'Solar/Electrical', 'Generators',       'Diesel/Auto',    'Welding'],
+    ['Food Processing','Canning',          'Fermentation',     'Butchering',     'Milling'],
+    ['Communications', 'HAM Radio',        'Electronics',      'Computers',      'Signaling'],
+    ['Navigation',     'Maps/Compass',     'Celestial Nav',    'Local Knowledge','Driving'],
+    ['Security',       'Firearms',         'Tactics',          'Perimeter',      'Emergency Response'],
+    ['Textiles',       'Spinning/Weaving', 'Sewing',           'Leatherwork',    'Shoemaking'],
+    ['Metalwork',      'Blacksmithing',    'Welding',          'Casting',        'Tool Making']
+  ];
+  const ALL_SKILLS = SKILL_CATS.flatMap(([cat, ...subs]) => subs.map(s => cat + ': ' + s));
+  let skData = { members: [], ratings: {} };
+
+  function loadSkills() {
+    try { const d = localStorage.getItem(SK_KEY); if (d) skData = JSON.parse(d); } catch(e) {}
+    renderSkillMatrix();
+  }
+
+  function saveSkills() { localStorage.setItem(SK_KEY, JSON.stringify(skData)); }
+
+  function addMember() {
+    const name = document.getElementById('sk-name').value.trim();
+    const role = document.getElementById('sk-role').value.trim();
+    if (!name) return;
+    skData.members.push({ name, role });
+    document.getElementById('sk-name').value = '';
+    document.getElementById('sk-role').value = '';
+    saveSkills();
+    renderSkillMatrix();
+  }
+
+  function setRating(mIdx, skill, val) {
+    if (!skData.ratings[skill]) skData.ratings[skill] = {};
+    skData.ratings[skill][mIdx] = parseInt(val) || 0;
+    saveSkills();
+    updateAnalysis();
+  }
+
+  const ratingColors = ['#243028', '#7a6430', '#c9a94e', '#e8c96e'];
+
+  function renderSkillMatrix() {
+    const header  = document.getElementById('skill-header');
+    const body    = document.getElementById('skill-body');
+    const members = skData.members;
+
+    header.innerHTML = '<th>Skill</th>' + members.map((m, i) =>
+      `<th style="font-size:.75rem">${m.name}<br><span style="color:var(--text-2);font-weight:400">${m.role}</span><br>
+       <button class="btn-remove" onclick="removeMember(${i})">✕</button></th>`
+    ).join('');
+
+    body.innerHTML = SKILL_CATS.map(([cat, ...subs]) =>
+      `<tr><td colspan="${members.length + 1}" style="background:var(--bg-3);color:var(--amber);font-size:.75rem;padding:.25rem .6rem;text-transform:uppercase;font-weight:700">${cat}</td></tr>` +
+      subs.map(sub => {
+        const skill = cat + ': ' + sub;
+        return `<tr><td style="font-size:.82rem;padding:.3rem .6rem">${sub}</td>` +
+          members.map((_, i) => {
+            const r = (skData.ratings[skill] || {})[i] || 0;
+            return `<td style="text-align:center;padding:.2rem">
+              <select onchange="setRating(${i},'${skill.replace(/'/g,"\\'")}',this.value)"
+                style="background:${ratingColors[r]};border:none;color:var(--text-0);border-radius:3px;width:40px;text-align:center;cursor:pointer">
+                <option value="0" ${r === 0 ? 'selected' : ''}>0</option>
+                <option value="1" ${r === 1 ? 'selected' : ''}>1</option>
+                <option value="2" ${r === 2 ? 'selected' : ''}>2</option>
+                <option value="3" ${r === 3 ? 'selected' : ''}>3</option>
+              </select></td>`;
+          }).join('') + '</tr>';
+      }).join('')
+    ).join('');
+
+    updateAnalysis();
+  }
+
+  function removeMember(idx) {
+    skData.members.splice(idx, 1);
+    const newRatings = {};
+    Object.keys(skData.ratings).forEach(s => {
+      const r = skData.ratings[s];
+      const nr = {};
+      Object.keys(r).forEach(i => {
+        const ni = parseInt(i);
+        if (ni < idx) nr[ni] = r[ni];
+        else if (ni > idx) nr[ni - 1] = r[ni];
+      });
+      newRatings[s] = nr;
+    });
+    skData.ratings = newRatings;
+    saveSkills();
+    renderSkillMatrix();
+  }
+
+  function updateAnalysis() {
+    const gaps = [], spof = [];
+    ALL_SKILLS.forEach(skill => {
+      const r        = skData.ratings[skill] || {};
+      const maxR     = Object.values(r).reduce((m, v) => Math.max(m, v), 0);
+      const covCount = Object.values(r).filter(v => v >= 2).length;
+      if (maxR === 0) gaps.push(skill.split(': ')[1]);
+      else if (covCount === 1) spof.push(skill.split(': ')[1]);
+    });
+    document.getElementById('sk-gaps').textContent = gaps.length
+      ? gaps.slice(0, 5).join(', ') + (gaps.length > 5 ? ` +${gaps.length - 5} more` : '')
+      : 'None — great coverage!';
+    document.getElementById('sk-spof').textContent = spof.length
+      ? spof.slice(0, 5).join(', ') + (spof.length > 5 ? ` +${spof.length - 5} more` : '')
+      : 'None — good redundancy!';
+  }
+
+  // ===== INIT =====
+  window.addEventListener('DOMContentLoaded', () => {
+    // Tool 1 init
+    const tbody = document.getElementById('cal-ref-table');
+    if (tbody) {
+      tbody.innerHTML = FOODS.map(f =>
+        `<tr><td>${f.name}</td><td>${f.cpl.toLocaleString()}</td><td>${(f.cpl / 2400).toFixed(1)} lbs</td></tr>`
+      ).join('');
+    }
+    const revSel = document.getElementById('rev-food');
+    if (revSel) revSel.innerHTML = FOODS.map(f => `<option>${f.name}</option>`).join('');
+    addPerson(); addPerson(); // start with 2 adults
+
+    // Tool 2 init
+    calcWater();
+    calcCatchment();
+
+    // Tool 3 init
+    renderAppliances();
+
+    // Tool 4 init
+    loadSupplies();
+
+    // Tool 5 init
+    loadSkills();
+  });
+  </script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/search.js"></script>
+  <script src="assets/js/aria.js"></script>
+</body>
+</html>

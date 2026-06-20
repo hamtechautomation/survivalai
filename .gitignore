@@ -1,0 +1,15 @@
+# PDFs — too large for git; copy pdfs/ folder separately or use git-lfs
+pdfs/*.pdf
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Editor
+.vscode/
+.idea/

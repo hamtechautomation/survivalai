@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Animal Husbandry — raising chickens, goats, and rabbits for eggs, milk, and meat; basic veterinary care; slaughter and butchering.">
+  <title>Animal Husbandry — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Animal Husbandry</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline" data-print>🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>🐓 Animal Husbandry</h1>
+    <p class="section-desc">Stored food runs out. Foraging and hunting are unreliable at scale. Animals — kept, bred, and managed — provide a renewable supply of protein, fat, and calories year after year. This section covers the three most practical livestock choices for a survival scenario: chickens, goats, and rabbits.</p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2025-06"></span></span>
+      <span class="meta-item">⏱️ <span id="reading-time"></span></span>
+      <span class="meta-item">📖 Supplemental Section</span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#why-animals">Why These Three Animals</a></li>
+      <li><a href="#chickens">Chickens — Eggs &amp; Meat</a></li>
+      <li><a href="#goats">Goats — Milk &amp; Meat</a></li>
+      <li><a href="#rabbits">Rabbits — Fast Protein</a></li>
+      <li><a href="#veterinary">Basic Veterinary Care</a></li>
+      <li><a href="#slaughter">Slaughter &amp; Butchering</a></li>
+      <li><a href="#feed">Feed Without Commercial Supply</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">⏱️</span>
+    <div class="callout-content">
+      <strong>First 24 Hours — Animal Husbandry Priorities</strong>
+      <ol style="margin:.5rem 0 0;padding-left:1.2rem">
+        <li>Secure your existing animals — predators exploit disrupted routines immediately.</li>
+        <li>Calculate your feed supply on hand — how many days until you need alternate feed sources?</li>
+        <li>Ensure fresh water access for all animals. Dehydration kills livestock within 24–48 hours.</li>
+        <li>Identify the highest-yield animals in your group (best layers, heaviest breeders) — prioritize their survival.</li>
+        <li>Assess your fencing and housing for predator vulnerabilities — reinforce tonight.</li>
+        <li>If acquiring animals in a crisis: prioritize females (production), then one breeding male.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- =================== WHY THESE THREE =================== -->
+  <section id="why-animals">
+    <h2>1. Why These Three Animals</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Animal</th><th>Primary Output</th><th>Space Needed</th><th>Feed Efficiency</th><th>Time to First Production</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Chickens</strong></td><td>Eggs (daily), meat</td><td>Low (4 sq ft/bird indoor)</td><td>Good — 2 lbs feed per dozen eggs</td><td>18–24 weeks (pullets to laying)</td></tr>
+          <tr><td><strong>Goats</strong></td><td>Milk (daily), meat, hide</td><td>Medium (200 sq ft/goat outdoor)</td><td>Excellent — browse weeds, waste, scrub</td><td>Immediately if already lactating</td></tr>
+          <tr><td><strong>Rabbits</strong></td><td>Meat (fast cycle), fur</td><td>Very low (1 sq ft/rabbit in hutch)</td><td>Best — 4:1 feed-to-meat ratio vs. 7:1 for chickens</td><td>8–12 weeks (kit to slaughter weight)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Rabbit Starvation (Protein Poisoning)</strong>
+        <p>Rabbit meat is extremely lean. Eating rabbit as your only food source for weeks causes "rabbit starvation" — protein toxicity from excess protein metabolism when fat intake is insufficient. Always pair rabbit meat with high-fat foods (lard, nuts, fatty birds, bone marrow). This is also why rabbits should supplement, not replace, a diverse food supply.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== CHICKENS =================== -->
+  <section id="chickens">
+    <h2>2. Chickens — Eggs &amp; Meat</h2>
+
+    <p>A flock of 6–8 hens provides 4–6 eggs per day for a family — roughly 1,000–1,500 calories of high-quality protein and fat. Chickens require minimal space, eat kitchen and garden scraps, and produce manure that is among the best garden fertilizers available.</p>
+
+    <h3>Best Breeds for Survival</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Breed</th><th>Eggs/Year</th><th>Meat Quality</th><th>Temperament</th><th>Cold Hardy?</th><th>Best For</th></tr></thead>
+        <tbody>
+          <tr><td>Rhode Island Red</td><td>250–300</td><td>Good</td><td>Active, hardy</td><td>✅ Yes</td><td>Best all-purpose survival bird</td></tr>
+          <tr><td>Barred Plymouth Rock</td><td>200–280</td><td>Excellent</td><td>Calm, docile</td><td>✅ Yes</td><td>Dual-purpose; excellent meat</td></tr>
+          <tr><td>Buff Orpington</td><td>175–200</td><td>Excellent</td><td>Very calm</td><td>✅ Yes</td><td>Best for beginners; good brooder</td></tr>
+          <tr><td>Leghorn</td><td>280–320</td><td>Poor (lean)</td><td>Skittish, active</td><td>⚠️ Moderate</td><td>Maximum egg production only</td></tr>
+          <tr><td>Sussex</td><td>200–250</td><td>Excellent</td><td>Calm, curious</td><td>✅ Yes</td><td>Good foragers; dual-purpose</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Housing Requirements</h3>
+    <ul>
+      <li><strong>Space:</strong> Minimum 4 sq ft (0.37 m²) per bird inside the coop; 8–10 sq ft per bird in the outdoor run. Overcrowding causes pecking, stress, and disease.</li>
+      <li><strong>Ventilation:</strong> Critical. Ammonia from droppings builds up quickly and causes respiratory disease. Vents near the top of the coop (above roost height) allow air exchange without cold drafts on the birds.</li>
+      <li><strong>Roosts:</strong> 8–12 inches of horizontal perch per bird, at least 18 inches off the ground. Chickens sleep on perches — failure to provide them causes stress and health issues.</li>
+      <li><strong>Nest boxes:</strong> 1 box per 3–4 hens. Approximately 12"×12"×12". Fill with straw or wood shavings. Place in the darkest corner of the coop.</li>
+      <li><strong>Predator proofing:</strong> Hardware cloth (not chicken wire — predators tear through it) on all openings, 1/2-inch mesh. Bury wire apron 12" out from coop walls, bent horizontally underground, to prevent digging. Lock doors at dusk.</li>
+    </ul>
+
+    <h3>Egg Production Basics</h3>
+    <ul>
+      <li>Hens begin laying at 18–24 weeks (breed dependent). Peak production is year 1–2. Production drops ~20% each year after.</li>
+      <li><strong>Light requirement:</strong> Hens need 14–16 hours of light per day to maintain laying. In winter, supplemental light (even a single LED bulb on a timer) maintains production. Without supplemental light, most hens stop laying October–February.</li>
+      <li>Fertile eggs can be stored unwashed at room temperature for 2–3 weeks. Washed eggs must be refrigerated (washing removes the bloom/cuticle that seals the pores).</li>
+      <li>A hen will lay without a rooster. A rooster is needed only if you want fertilized eggs (for hatching).</li>
+    </ul>
+
+    <h3>Hatching Your Own Chicks</h3>
+    <ol class="steps">
+      <li>Maintain 1 rooster per 8–12 hens for reliable fertility.</li>
+      <li>Collect fertilized eggs within 7 days for incubation. Mark with pencil (not pen — ink is absorbed).</li>
+      <li><strong>Broody hen method</strong> (easiest): Allow a hen that "goes broody" (sits on a clutch, puffs up, pecks when disturbed) to sit on 8–12 fertile eggs. Incubation is 21 days. She will do all the work.</li>
+      <li><strong>Improvised incubator:</strong> Maintain 99–102°F (37.2–38.9°C) and 50–60% humidity. Turn eggs 3× daily until day 18, then stop. Candle eggs at day 7 and 14 (hold to a bright light — clear = infertile; dark mass with veins = developing).</li>
+      <li>Chicks need a brooder (warm, draft-free space) at 95°F for week 1, reduced by 5°F each week until fully feathered (~6 weeks).</li>
+    </ol>
+  </section>
+
+  <!-- =================== GOATS =================== -->
+  <section id="goats">
+    <h2>3. Goats — Milk &amp; Meat</h2>
+
+    <p>A single dairy goat in good condition produces 1–3 quarts (1–3 liters) of milk per day for 10 months after kidding. That milk provides calories, fat, protein, and calcium — and can be made into cheese and yogurt that preserve much longer than fresh milk. Goats are browsers (prefer shrubs, weeds, and brush) rather than grazers, making them valuable for land that can't support cattle.</p>
+
+    <h3>Best Breeds for Survival</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Breed</th><th>Milk/Day</th><th>Size</th><th>Hardiness</th><th>Best For</th></tr></thead>
+        <tbody>
+          <tr><td>Nigerian Dwarf</td><td>0.5–1.5 qt</td><td>Small (40–75 lbs)</td><td>Excellent</td><td>Small space; high butterfat (great for cheese)</td></tr>
+          <tr><td>Nubian</td><td>1.5–2.5 qt</td><td>Large (135–175 lbs)</td><td>Good (heat-tolerant)</td><td>High butterfat milk; good meat goat</td></tr>
+          <tr><td>LaMancha</td><td>1.5–3 qt</td><td>Medium (130–155 lbs)</td><td>Excellent</td><td>Persistent lactation; calm temperament</td></tr>
+          <tr><td>Boer</td><td>Minimal</td><td>Large (200–300 lbs)</td><td>Excellent</td><td>Meat production; fastest growth rate</td></tr>
+          <tr><td>Kiko</td><td>Minimal</td><td>Medium (100–160 lbs)</td><td>Excellent</td><td>Parasite resistance; minimal management</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Minimum Requirements</h3>
+    <ul>
+      <li><strong>Social:</strong> Goats are herd animals — a single goat will be stressed and unproductive. Minimum 2 goats.</li>
+      <li><strong>Space:</strong> 200 sq ft (18 m²) minimum per goat for outdoor area; 15–20 sq ft shelter per goat.</li>
+      <li><strong>Fencing:</strong> Goats are legendary escape artists. Requires woven wire fence minimum 4 feet high with electric wire on top. Field fence (2"×4" mesh) with a hot wire at nose height is most effective.</li>
+      <li><strong>Shelter:</strong> Three-sided shelter adequate in most climates — protection from wind, rain, and sun. Deep-bedded straw. Draft-free for freshened does with kids.</li>
+    </ul>
+
+    <h3>Milking Procedure</h3>
+    <ol class="steps">
+      <li>Milk at the same time(s) each day. Consistency is critical — irregular milking reduces production and can cause mastitis.</li>
+      <li>Clean the udder with a warm damp cloth. Discard the first 1–2 streams from each teat (highest bacteria count from the teat canal).</li>
+      <li>Milk until the udder is soft and empty. Leaving milk causes mastitis and signals the doe to reduce production.</li>
+      <li>Dip teats in a 1% iodine solution (or commercial teat dip) after milking to seal the teat orifice against bacteria.</li>
+      <li>Strain milk through a clean cloth into a clean container. Cool immediately.</li>
+      <li>Does must be re-bred annually to maintain milk production. Dry off 2 months before kidding.</li>
+    </ol>
+
+    <h3>Simple Cheese Making</h3>
+    <p><strong>Basic Fresh Cheese (Chèvre):</strong> Heat 1 gallon milk to 86°F. Add mesophilic starter culture or 1/4 cup cultured buttermilk. Add 1/4 rennet tablet dissolved in cool water. Stir gently. Let sit 12–18 hours undisturbed at 70–75°F. Ladle curds into a cloth-lined colander and drain 6–24 hours. Add salt to taste. Keeps refrigerated 1–2 weeks; unrefrigerated 2–3 days.</p>
+    <p><strong>Hard cheese</strong> requires pressing equipment and more controlled aging but keeps for months to years without refrigeration — a critical preservation method for milk calories.</p>
+
+    <h3>Breeding &amp; Kidding</h3>
+    <ul>
+      <li>Does cycle September–January (short-day breeders in the Northern Hemisphere). Gestation is 150 days (5 months).</li>
+      <li>Signs of imminent birth: udder filling (2–3 weeks before), ligaments beside the tail softening (24 hours before), restlessness, pawing bedding.</li>
+      <li>Most goats kid without assistance. Stay nearby but don't interfere unless labor is prolonged (&gt;30 min active pushing without delivery).</li>
+      <li>Clear kids' airways immediately after birth. Dry them with a towel. Ensure each kid nurses colostrum within 1 hour of birth — colostrum provides passive immunity that cannot be supplemented.</li>
+    </ul>
+  </section>
+
+  <!-- =================== RABBITS =================== -->
+  <section id="rabbits">
+    <h2>4. Rabbits — Fast Protein</h2>
+
+    <p>Rabbits have the best feed-to-meat conversion ratio of any common livestock (4:1 vs. 7:1 for chickens, 8:1 for pigs, 15:1 for cattle). A breeding pair can produce 200–300 lbs of meat per year in a 3×3 ft hutch. They are silent, odorless when properly managed, and can be kept in locations where larger animals would be impractical.</p>
+
+    <h3>Best Breeds for Survival</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Breed</th><th>Slaughter Weight</th><th>Weeks to Slaughter</th><th>Litter Size</th><th>Best For</th></tr></thead>
+        <tbody>
+          <tr><td>New Zealand White</td><td>4.5–5 lbs</td><td>8–10 weeks</td><td>8–12 kits</td><td>Maximum meat production; industry standard</td></tr>
+          <tr><td>Californian</td><td>4–5 lbs</td><td>8–10 weeks</td><td>6–10 kits</td><td>Excellent meat yield; calm temperament</td></tr>
+          <tr><td>Rex</td><td>4–5 lbs</td><td>8–10 weeks</td><td>7–10 kits</td><td>Dual-purpose: meat + valuable fur</td></tr>
+          <tr><td>Flemish Giant</td><td>9–13 lbs</td><td>12–16 weeks</td><td>7–10 kits</td><td>Large carcass; slower growth</td></tr>
+          <tr><td>American Chinchilla</td><td>4–5 lbs</td><td>9–11 weeks</td><td>6–9 kits</td><td>Hardy; heat-tolerant</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Housing</h3>
+    <ul>
+      <li><strong>Wire hutches:</strong> 30"×36" minimum per rabbit. 14-gauge galvanized wire, 1"×2" mesh for sides and top, 1/2"×1" mesh for floor (prevents foot injuries while allowing waste through).</li>
+      <li><strong>Separate bucks and does</strong> except for supervised breeding. Rabbits breed constantly and indiscriminately — mixed housing = uncontrolled breeding and fighting.</li>
+      <li>Nest boxes: 12"×12"×14" wooden box with 6" opening. Provide 2–3 days before kindling (birth). Fill with straw; doe will pull her own fur to line it.</li>
+      <li><strong>Temperature:</strong> Rabbits tolerate cold (-20°C / -4°F with shelter) far better than heat. Above 85°F (29°C), bucks become temporarily infertile; above 95°F (35°C) animals die of heat stroke. Shade and airflow are critical in summer.</li>
+    </ul>
+
+    <h3>Breeding Cycle</h3>
+    <div class="callout callout-info">
+      <span class="callout-icon">📅</span>
+      <div class="callout-content">
+        <strong>The Compound Breeding Cycle</strong>
+        <p>Gestation: 31 days. Kits are weaned at 6–8 weeks. Does can be re-bred immediately after kindling (for maximum output) or at weaning (for doe health and sustainability). A single doe can produce 4–6 litters per year. 1 buck services 8–10 does.</p>
+      </div>
+    </div>
+    <ol class="steps">
+      <li>Always bring the doe to the buck's cage — does are territorial and will fight in their own hutch.</li>
+      <li>A successful mating involves a visible mount, thrust, and the buck falling to the side (the fall-off). Confirm before returning the doe. One breeding session with 2–3 observed matings is sufficient.</li>
+      <li>Palpate (gently feel the abdomen) 10–14 days after mating to confirm pregnancy. Grape-sized embryos can be felt if the doe is bred.</li>
+      <li>Provide nest box at day 28. Doe will kindle (give birth) at day 31, usually at night.</li>
+      <li>Check nest on day 1: remove any dead kits (does will not, and dead kits cause disease). Do not disturb frequently — does can abandon a nest if repeatedly stressed.</li>
+    </ol>
+  </section>
+
+  <!-- =================== VETERINARY CARE =================== -->
+  <section id="veterinary">
+    <h2>5. Basic Veterinary Care</h2>
+
+    <p>Livestock health depends far more on management than on medication. 80% of animal disease in small-scale livestock systems is caused by four preventable factors: overcrowding, poor sanitation, inadequate nutrition, and parasite burden. Address these before reaching for treatments.</p>
+
+    <h3>Universal Signs of Illness (Any Species)</h3>
+    <ul>
+      <li>Separation from the group / isolation behavior</li>
+      <li>Off feed or water (not eating or drinking) — serious after 24 hours in any animal</li>
+      <li>Discharge from eyes, nose, or other openings</li>
+      <li>Changes in feces: diarrhea, blood, very dry/absent</li>
+      <li>Changes in posture: hunched, head down, ears drooping</li>
+      <li>Labored breathing: visible effort, open-mouth breathing in any species</li>
+      <li>Pale mucous membranes (gums, inner eyelid) — indicates anemia, shock, or heavy parasite burden</li>
+    </ul>
+
+    <h3>Common Conditions by Species</h3>
+
+    <h4>Chickens</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Condition</th><th>Signs</th><th>Treatment / Prevention</th></tr></thead>
+        <tbody>
+          <tr><td>Coccidiosis</td><td>Bloody diarrhea in chicks 3–6 weeks old; hunching; ruffled feathers</td><td>Amprolium (Corid) in water; keep brooders dry; avoid wet litter</td></tr>
+          <tr><td>Respiratory disease (MG, IB)</td><td>Coughing, sneezing, rattling breathing, swollen sinuses</td><td>Tylosin or doxycycline; isolate sick birds; improve ventilation</td></tr>
+          <tr><td>Egg binding</td><td>Hen straining, tail pumping, no egg; hunched posture</td><td>Warm bath 20 min; calcium supplement; gentle internal pressure; vet if not passed in 24h</td></tr>
+          <tr><td>Mites/lice</td><td>Excessive preening, feather loss (especially around vent), pale comb</td><td>Dust bath with wood ash + diatomaceous earth; inspect and treat roost at night</td></tr>
+          <tr><td>Bumblefoot</td><td>Hard dark scab on foot pad; limping</td><td>Clean, soak in warm salt water, remove core, pack with honey + bandage; prevent with smooth roosts</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Goats</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Condition</th><th>Signs</th><th>Treatment / Prevention</th></tr></thead>
+        <tbody>
+          <tr><td>Barber pole worm (Haemonchus)</td><td>Pale lower eyelid (FAMACHA score ≥3), bottle jaw (swelling under chin), poor condition</td><td>Deworm only affected animals based on FAMACHA; rotate pastures; avoid overstocking</td></tr>
+          <tr><td>Enterotoxemia (Overeating disease)</td><td>Sudden death in well-conditioned animals; bloat; neurological signs</td><td>CD&amp;T vaccine annually; avoid sudden feed changes; reduce grain</td></tr>
+          <tr><td>Bloat</td><td>Left-side distension (rumen); distress; off feed</td><td>Walk the animal; massage left flank; simethicone (Gas-X, 2 tablets); in severe cases, trocar the rumen</td></tr>
+          <tr><td>Mastitis</td><td>Hot, hard, or lumpy udder; abnormal milk (clots, blood, watery)</td><td>Strip milk frequently; intramammary antibiotic (if available); cold/warm pack; dry off if severe</td></tr>
+          <tr><td>Hoof rot</td><td>Limping; foul-smelling soft tissue between toes; dark discoloration</td><td>Trim hoof, clean, pack with zinc sulfate paste or copper sulfate; inject oxytetracycline if severe</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Rabbits</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Condition</th><th>Signs</th><th>Treatment / Prevention</th></tr></thead>
+        <tbody>
+          <tr><td>GI stasis (Gut slowdown)</td><td>Off feed; no fecal pellets; hunched; teeth grinding; hard abdomen</td><td>Gentle abdominal massage; force water; simethicone; hay only diet to stimulate motility; often fatal if untreated</td></tr>
+          <tr><td>Snuffles (Pasteurella)</td><td>Runny nose; crusty paws (from wiping nose); rattling breathing</td><td>Enrofloxacin or trimethoprim-sulfa; isolate; no cure — carriers must often be culled</td></tr>
+          <tr><td>Ear mites</td><td>Head shaking; thick crusty discharge in ear canals; scratching</td><td>Mineral oil in ear canal to smother mites; ivermectin injection if available</td></tr>
+          <tr><td>Sore hocks</td><td>Raw or ulcerated skin on rear feet; reluctant to move</td><td>Rest board in hutch; neosporin on sores; switch to solid-bottom cage temporarily</td></tr>
+          <tr><td>Coccidiosis</td><td>Diarrhea in young rabbits; pot-bellied; wasting</td><td>Sulfa drugs in water; keep cages clean and dry; quarantine new animals</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Essential Medications to Stock</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Medication</th><th>Use</th><th>Species</th></tr></thead>
+        <tbody>
+          <tr><td>Penicillin G (injectable)</td><td>General bacterial infections</td><td>Goats, rabbits (NOT chickens — toxic)</td></tr>
+          <tr><td>Oxytetracycline (LA-200)</td><td>Respiratory disease, hoof rot, pinkeye</td><td>Goats, chickens</td></tr>
+          <tr><td>Enrofloxacin (Baytril)</td><td>Pasteurella, respiratory infections</td><td>Rabbits, chickens</td></tr>
+          <tr><td>Ivermectin</td><td>Internal and external parasites</td><td>Goats, rabbits (NOT laying hens — withdrawal period)</td></tr>
+          <tr><td>Amprolium (Corid)</td><td>Coccidiosis</td><td>Chickens, rabbits</td></tr>
+          <tr><td>Probiotics (live culture)</td><td>After antibiotic treatment; GI support</td><td>All species</td></tr>
+          <tr><td>Electrolytes (oral)</td><td>Dehydration, diarrhea recovery</td><td>All species</td></tr>
+          <tr><td>Wound spray (gentian violet, Vetericyn)</td><td>Minor wounds, fly strike prevention</td><td>All species</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =================== SLAUGHTER =================== -->
+  <section id="slaughter">
+    <h2>6. Slaughter &amp; Butchering</h2>
+
+    <p>Slaughter is a necessary skill when raising animals for meat. Done correctly, it is rapid and humane. A well-practiced slaughterer minimizes the animal's stress and pain. This is a practical skill — approach it matter-of-factly.</p>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Preparation Reduces Stress — for Both of You</strong>
+        <p>Withhold feed from the animal for 12 hours before slaughter (water is fine). This empties the digestive tract, reducing contamination risk when gutting. Work quietly and calmly — animals sense stress. Have all equipment sharp and ready before you begin.</p>
+      </div>
+    </div>
+
+    <h3>Chicken — Cervical Dislocation</h3>
+    <ol class="steps">
+      <li>Hold the bird upside down by its legs for 30–60 seconds — blood rushes to the head, causing drowsiness and reducing struggle.</li>
+      <li>Place the bird on the ground or a cone, breast down. Use a sharp knife or hatchet to sever the head from the body in one clean stroke.</li>
+      <li>Allow to bleed out in a bucket (1–2 minutes). The body will convulse — this is normal nervous system activity.</li>
+      <li><strong>Scalding:</strong> Submerge the bird in 140–150°F (60–65°C) water for 30–60 seconds. Feathers should pull easily. Too hot destroys the skin; too cool makes plucking difficult.</li>
+      <li>Pluck immediately while the bird is warm. Work from wings and tail first, then body.</li>
+      <li><strong>Eviscerating:</strong> Make a careful horizontal cut between the vent and the keel bone. Reach in and remove all organs in one motion. Preserve liver, heart, and gizzard (clean after removing stomach lining) — these are nutritionally dense.</li>
+      <li>Rinse carcass in cold water. Chill immediately to below 40°F (4°C).</li>
+    </ol>
+
+    <h3>Rabbit — Cervical Dislocation</h3>
+    <ol class="steps">
+      <li>Hold the rabbit firmly by its hind legs with one hand. Grip the head with the other hand, thumb under the chin.</li>
+      <li>Stretch the rabbit to full length and rapidly rotate the head upward and back. You'll feel/hear the cervical dislocation. Death is instantaneous.</li>
+      <li>Hang by the hind feet. Make a circular cut around each hind leg at the hock. Cut down the inside of each leg to the crotch. Sever the tail.</li>
+      <li>Pull the skin downward off the body like removing a sweater — it separates easily. Remove head and front feet.</li>
+      <li>Make a careful vertical cut through the belly skin. Remove intestines. Preserve liver (check for white spots — indicates coccidiosis; discard if present), kidneys, and heart.</li>
+      <li>Rinse and chill immediately. Rabbit is best aged 1–2 days in a cool location before cooking — this tenderizes the meat.</li>
+    </ol>
+
+    <h3>Goat — Stunning or Knife Slaughter</h3>
+    <p>Goat slaughter requires either a captive bolt pistol/firearm (shot to the brain for instant unconsciousness) or a skilled knife cut that severs both carotid arteries simultaneously. The latter requires practice. An unsecured, conscious goat thrashing is dangerous and inhumane. Restraint is critical.</p>
+
+    <ol class="steps">
+      <li>Restrain the animal in a kill restraint box or have two people hold the animal on its side.</li>
+      <li>Stun with a captive bolt or .22 caliber shot to the forehead (aimed toward the base of the brain). OR: expose the throat and make a single firm cut severing both carotid arteries and the jugular vein simultaneously — the blade must be razor-sharp and the cut completed in one motion.</li>
+      <li>Allow to bleed out completely while hanging inverted by the hind legs (5–8 minutes). Full bleed-out prevents contamination and improves meat quality.</li>
+      <li>Skin from hind legs downward, working the hide away from the carcass with a fist or skinning knife.</li>
+      <li>Eviscerate by opening the belly cavity carefully, avoiding rupture of intestines or bladder. Remove all organs. Preserve liver, kidneys, heart.</li>
+      <li>Quarter or leave whole for aging. Hang in a cool, fly-free location for 3–7 days before butchering into cuts. Aging tenderizes the meat significantly.</li>
+    </ol>
+  </section>
+
+  <!-- =================== FEED =================== -->
+  <section id="feed">
+    <h2>7. Feed Without Commercial Supply</h2>
+
+    <p>Commercial pelleted feed is convenient but will not be available in a prolonged emergency. Understanding what animals can eat from your land and kitchen is essential for long-term livestock management.</p>
+
+    <h3>Chickens</h3>
+    <ul>
+      <li><strong>Grains:</strong> Whole corn, wheat, barley, oats, millet, buckwheat. Should form 60–70% of diet.</li>
+      <li><strong>Protein:</strong> Dried insects (mealworms, black soldier fly larvae — grow these), fish meal, meat scraps, earthworms, legume seeds (peas, soybeans). 15–20% of diet.</li>
+      <li><strong>Greens:</strong> Any leafy greens, grass, dandelions, clover. Free-range foraging covers most green needs.</li>
+      <li><strong>Calcium:</strong> Ground oyster shell or dried, crushed eggshells fed back to the hens. Essential for shell quality and bone health.</li>
+      <li><strong>Grit:</strong> Small stones or commercial grit. Chickens have no teeth — grit in the gizzard grinds whole grain.</li>
+      <li><strong>AVOID:</strong> Avocado (toxic), onion family in large amounts, raw potato skins (solanine), chocolate, caffeine, anything moldy.</li>
+    </ul>
+
+    <h3>Goats</h3>
+    <ul>
+      <li><strong>Browse:</strong> Woody shrubs, tree leaves, blackberries, kudzu, multiflora rose. Goats prefer browse to grass — use them to clear overgrown land.</li>
+      <li><strong>Hay:</strong> Grass or mixed hay for the majority of the diet. Alfalfa is high in calcium — good for lactating does but can cause urinary calculi in bucks and wethers.</li>
+      <li><strong>Grain supplement:</strong> For lactating does only — corn, oats, barley, or sunflower seeds. 1 lb grain per 3 lbs milk produced daily.</li>
+      <li><strong>Minerals:</strong> Goats need copper, selenium, and zinc. Loose goat mineral free-choice (not cattle mineral — excess copper in goats is fatal in sheep, insufficient for goats). Without commercial minerals, feed kelp (iodine, trace minerals) and sunflower seeds (copper).</li>
+      <li><strong>AVOID:</strong> Rhododendron, azalea, yew, nightshade, cherry leaves (all extremely toxic to goats). Lilacs, oak (in large amounts). Never feed moldy hay.</li>
+    </ul>
+
+    <h3>Rabbits</h3>
+    <ul>
+      <li><strong>Hay:</strong> The most important part of a rabbit's diet — 80%+ should be timothy, orchard grass, or meadow hay. Prevents GI stasis. Unlimited access.</li>
+      <li><strong>Fresh greens:</strong> Kale, dandelion, plantain, clover, raspberry leaves, carrot tops, chicory. Introduce gradually to avoid diarrhea.</li>
+      <li><strong>Grains:</strong> Small amounts only — oats, barley, wheat. Excess grain causes fatal GI imbalance.</li>
+      <li><strong>Root vegetables:</strong> Carrots (small amounts — high sugar), beets, turnips, parsnips.</li>
+      <li><strong>AVOID:</strong> Iceberg lettuce (toxic in quantity), rhubarb leaves, potato tops, avocado, onion family, fruit seeds/pits, anything moldy.</li>
+    </ul>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✅</span>
+      <div class="callout-content">
+        <strong>Black Soldier Fly Larvae — The Ultimate Protein Loop</strong>
+        <p>Black soldier fly (Hermetia illucens) larvae convert kitchen scraps, manure, and vegetable waste into high-protein (40% protein, 30% fat) animal feed in 14 days. A 4×4 ft bin produces enough larvae to supplement protein for a flock of 20 chickens. Set up with a sloped board so mature larvae self-harvest into a collection bucket. Zero cost, zero purchased feed. They also pre-compost the waste they process.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-md);margin-top:var(--sp-xl)">
+    <a href="knowledge.html" class="btn btn-outline">← Knowledge &amp; Preservation</a>
+    <a href="../index.html" class="btn btn-primary">Back to Home →</a>
+  </div>
+  <div class="callout callout-tip" style="margin-top:var(--sp-xl)">
+    <span class="callout-icon">🔗</span>
+    <div class="callout-content">
+      <strong>Related Sections</strong>
+      <p>
+        <a href="food.html#growing">Food &amp; Water → Growing crops to feed animals (and yourself)</a> ·
+        <a href="food.html#nutrition">Food &amp; Water → Nutritional deficiencies — animal products help prevent them all</a> ·
+        <a href="food.html#food-preservation">Food &amp; Water → Preserving meat, cheese, and eggs</a> ·
+        <a href="medical.html#herbal">Medical → Herbal treatments that work for both humans and animals</a> ·
+        <a href="energy.html#biogas">Energy → Biogas from animal manure</a>
+      </p>
+    </div>
+  </div>
+
+
+<nav class="section-pagination no-print" aria-label="Section navigation">
+  <a href="agriculture.html" class="pagination-btn pagination-prev">← Agriculture</a>
+  <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+  <a href="nbc.html" class="pagination-btn pagination-next">NBC Threats →</a>
+</nav>
+</div><!-- /content-wrapper -->
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title">
+      <div class="aria-avatar">🤖</div>
+      <div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div>
+    </div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome">
+      <div class="aria-message-content">
+        <p>You're reading the Animal Husbandry section. Ask me about raising chickens, goats, or rabbits; treating sick animals; or setting up a sustainable protein supply.</p>
+        <p class="aria-note">⚠️ Requires Ollama. <a href="../ai-setup.html">Setup →</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/aria.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

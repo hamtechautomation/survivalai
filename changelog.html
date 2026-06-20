@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Changelog — version history and update notes for The Last Light Survival Guide.">
+  <title>Changelog — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .cl-version {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: .25rem;
+    }
+
+    .cl-version-number {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--amber);
+      font-family: var(--mono);
+    }
+
+    .cl-version-date {
+      font-size: .8rem;
+      color: var(--text-muted);
+    }
+
+    .cl-version-badge {
+      font-size: .65rem;
+      font-weight: 700;
+      padding: .15rem .5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .badge-current {
+      background: rgba(201,169,78,.15);
+      color: var(--amber);
+      border: 1px solid rgba(201,169,78,.3);
+    }
+
+    .badge-planned {
+      background: rgba(41,128,185,.1);
+      color: #5dade2;
+      border: 1px solid rgba(41,128,185,.25);
+    }
+
+    .cl-section {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      background: var(--bg-1);
+    }
+
+    .cl-section.current {
+      border-color: rgba(201,169,78,.3);
+      background: linear-gradient(135deg, rgba(201,169,78,.04) 0%, var(--bg-1) 100%);
+    }
+
+    .cl-section.planned {
+      border-color: rgba(41,128,185,.2);
+      background: linear-gradient(135deg, rgba(41,128,185,.03) 0%, var(--bg-1) 100%);
+      opacity: .85;
+    }
+
+    .cl-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.25rem 0;
+    }
+
+    .cl-group-title {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text-muted);
+      margin: 1rem 0 .5rem;
+    }
+
+    .cl-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .cl-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: .65rem;
+      padding: .3rem 0;
+      font-size: .88rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cl-list li:last-child { border-bottom: none; }
+
+    .cl-tag {
+      flex-shrink: 0;
+      font-size: .62rem;
+      font-weight: 700;
+      padding: .15rem .4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-top: 2px;
+    }
+
+    .tag-new { background: rgba(39,174,96,.15); color: #58d68d; border: 1px solid rgba(39,174,96,.25); }
+    .tag-fix { background: rgba(231,76,60,.12); color: #e74c3c; border: 1px solid rgba(231,76,60,.25); }
+    .tag-improve { background: rgba(41,128,185,.12); color: #5dade2; border: 1px solid rgba(41,128,185,.25); }
+    .tag-content { background: rgba(155,89,182,.12); color: #af7ac5; border: 1px solid rgba(155,89,182,.25); }
+
+    .file-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .75rem;
+    }
+
+    .file-chip {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .2rem .55rem;
+      font-size: .72rem;
+      font-family: var(--mono);
+      color: var(--amber-dim);
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: .75rem;
+      margin: 1rem 0;
+    }
+
+    .stat-chip {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .6rem .75rem;
+      text-align: center;
+    }
+
+    .stat-chip strong {
+      display: block;
+      font-size: 1.4rem;
+      color: var(--amber);
+    }
+
+    .stat-chip span {
+      font-size: .7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+  </style>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Changelog</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>📋 Changelog</h1>
+    <p class="section-desc">Version history and update notes for The Last Light Survival Guide. This guide is a living document — content will be expanded and refined as better techniques are identified.</p>
+  </div>
+
+  <!-- v1.1 — planned -->
+  <div class="cl-section planned">
+    <div class="cl-version">
+      <span class="cl-version-number">v1.1</span>
+      <span class="cl-version-date">Planned</span>
+      <span class="cl-version-badge badge-planned">Planned</span>
+    </div>
+    <p style="font-size:.85rem;color:var(--text-muted);margin:.5rem 0 1rem">Potential improvements under consideration — not yet implemented.</p>
+    <hr class="cl-divider">
+
+    <div class="cl-group-title">Under Consideration</div>
+    <ul class="cl-list">
+      <li><span class="cl-tag tag-new">New</span>Section 9: Agriculture — soil prep, seed saving, crop rotation, companion planting, irrigation without infrastructure</li>
+      <li><span class="cl-tag tag-new">New</span>Section 10: Community Governance — law, dispute resolution, trade systems, community contracts post-collapse</li>
+      <li><span class="cl-tag tag-new">New</span>Printable section posters — key diagrams sized for A3/tabloid printing and lamination</li>
+      <li><span class="cl-tag tag-improve">Improve</span>Add Spanish and French translations of the Emergency Card</li>
+      <li><span class="cl-tag tag-improve">Improve</span>Service Worker / PWA manifest so the guide installs as an offline app on mobile</li>
+      <li><span class="cl-tag tag-improve">Improve</span>Interactive plant identification photo gallery (SVG illustrations, no external images)</li>
+      <li><span class="cl-tag tag-improve">Improve</span>Gear list export to plain text for printing outside this guide</li>
+      <li><span class="cl-tag tag-improve">Improve</span>Bunker Bot: multi-model switching UI within the panel (drop-down of available Ollama models)</li>
+    </ul>
+  </div>
+
+  <!-- v1.0 — current -->
+  <div class="cl-section current" id="v1.0">
+    <div class="cl-version">
+      <span class="cl-version-number">v1.0</span>
+      <span class="cl-version-date">June 2025 — Initial Release</span>
+      <span class="cl-version-badge badge-current">Current</span>
+    </div>
+    <p style="font-size:.85rem;color:var(--text-secondary);margin:.5rem 0 1rem">Complete initial build — all 8 content sections, AI integration, offline search, and full tooling.</p>
+
+    <div class="stat-row">
+      <div class="stat-chip"><strong>20</strong><span>HTML Files</span></div>
+      <div class="stat-chip"><strong>8</strong><span>Content Sections</span></div>
+      <div class="stat-chip"><strong>122</strong><span>Gear Items</span></div>
+      <div class="stat-chip"><strong>~496KB</strong><span>Total Size</span></div>
+      <div class="stat-chip"><strong>0</strong><span>CDN Calls</span></div>
+      <div class="stat-chip"><strong>100%</strong><span>Offline</span></div>
+    </div>
+
+    <hr class="cl-divider">
+
+    <div class="cl-group-title">New — Content Sections</div>
+    <ul class="cl-list">
+      <li><span class="cl-tag tag-new">New</span><strong>Section 1: Food, Water &amp; Sanitation</strong> — Water purification (boiling, bleach, SODIS, filter, distillation), rainwater catchment, food preservation (canning, fermentation, smoking, dehydration), foraging guide, hunting &amp; trapping, latrine construction, ORS recipe</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Section 2: Medical &amp; First Aid</strong> — Tourniquet, hemostatic gauze, wound closure, suturing, fractures, burns (Rule of Nines), hypothermia, heat stroke, emergency childbirth, appendicitis, dental emergencies, herbal medicine, medications table, START triage flowchart, mental health</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Section 3: Energy Creation &amp; Management</strong> — Solar system sizing formulas, battery bank calculation, micro-hydro (Pelton wheel), wood gasification (Imbert downdraft), battery maintenance, Faraday cage construction, fuel storage safety</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Section 4: Shelter &amp; Construction</strong> — Site selection, debris hut, lean-to, tarp configurations, timber framing &amp; joinery, earthbag, cob, passive solar design formula, insulation R-values, hand tools priority table</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Section 5: Communications &amp; Signals</strong> — Ham radio licensing, Baofeng UV-5R setup, CHIRP programming, emergency frequencies, complete Morse code reference, mirror signaling, ground-to-air signals, Meshtastic/LoRa mesh, NOAA weather radio, dead drop techniques</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Section 6: Navigation &amp; Maps</strong> — Topographic map reading, UTM grid system, compass &amp; declination, triangulation, Polaris finding, Southern Cross, shadow stick, watch method, natural navigation; inline SVG compass rose and Northern Hemisphere star chart</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Section 7: Security &amp; Defense</strong> — Community governance &amp; watch schedules, layered perimeter defense, trip-wire construction, conflict de-escalation protocol, firearms &amp; caliber guide, non-lethal options, OPSEC principles, building fortification, bug-out vs. bug-in decision framework, 72-hour go-bag table</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Section 8: Knowledge &amp; Preservation</strong> — Book preservation, essential reading list (5 categories), community library system, apprenticeship teaching model, iron gall ink recipe, double-entry ledger, digital storage comparison, Kiwix/offline libraries, Raspberry Pi archive server, skills by age table</li>
+    </ul>
+
+    <hr class="cl-divider">
+
+    <div class="cl-group-title">New — Tools &amp; Utility Pages</div>
+    <ul class="cl-list">
+      <li><span class="cl-tag tag-new">New</span><strong>Emergency Quick Reference Card</strong> (<code>quick-reference.html</code>) — Single-page printable card with Rule of Threes, bleeding control, water purification, ORS recipe, Morse code, START triage, radio frequencies, distress signals, and navigation</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Bunker Bot Setup Guide</strong> (<code>ai-setup.html</code>) — OS-tabbed setup instructions for macOS, Windows, and Linux; model recommendations by RAM tier; portable USB install instructions; CORS workaround</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Master Gear List</strong> (<code>gear.html</code>) — 122 items across 12 categories with Critical / Important / Nice-to-Have priority tiers; checkbox persistence via localStorage; live progress bar for Critical items; Print All and Print Shopping List modes</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Bunker Bot System Prompt</strong> (<code>aria-prompt.html</code>) — Full Bunker Bot system prompt with copy-to-clipboard; step-by-step instructions for ChatGPT, Claude.ai, Ollama, and Gemini; complete Ollama Modelfile; prompt customization guide</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Changelog</strong> (<code>changelog.html</code>) — This page</li>
+    </ul>
+
+    <hr class="cl-divider">
+
+    <div class="cl-group-title">New — Infrastructure &amp; Features</div>
+    <ul class="cl-list">
+      <li><span class="cl-tag tag-new">New</span><strong>Bunker Bot offline AI assistant</strong> — Streams responses from Ollama at localhost:11434; auto-detects installed models; preference order llama3 → gemma3 → phi3 → mistral; AbortController stop-streaming; conversation history (last 6 exchanges); localStorage model preference</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Client-side full-text search</strong> — Pre-built index with TF-IDF-style scoring; title exact (+15), title prefix (+10), tag match (+8), content (+2/match), all-token bonus (+20); keyboard navigation (↑/↓/Enter); 180ms debounce; base-path aware for section pages</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Dark high-contrast theme</strong> — Amber #c9a94e on near-black #070a09; readable by flashlight; system font stack only (zero CDN); CSS custom properties throughout; amber/green/red semantic colours</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Responsive sidebar navigation</strong> — Dynamically built by app.js; auto base-path resolution for root vs. section pages; hamburger toggle at 900px; keyboard: <kbd>/</kbd> = search, <kbd>Esc</kbd> = close</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Print stylesheets</strong> — Every page hides nav/sidebar/Bunker Bot and switches to black-on-white; gear.html shopping list mode hides checked items; quick-reference card fits one letter-size page</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Inline SVG graphics</strong> — Compass rose (300×300) and Northern Hemisphere star chart (340×340) in navigation.html; no external images anywhere in the guide</li>
+      <li><span class="cl-tag tag-new">New</span><strong>ASCII diagrams</strong> — Improvised water filter, distillation setup, snare, latrine, debris hut, lean-to, mortise-tenon joint, timber raising sequence, layered defense perimeter, START triage flowchart — all in monospace pre blocks</li>
+    </ul>
+
+    <hr class="cl-divider">
+
+    <div class="cl-group-title">Files Included in v1.0</div>
+    <div class="file-list">
+      <span class="file-chip">index.html</span>
+      <span class="file-chip">quick-reference.html</span>
+      <span class="file-chip">ai-setup.html</span>
+      <span class="file-chip">gear.html</span>
+      <span class="file-chip">aria-prompt.html</span>
+      <span class="file-chip">changelog.html</span>
+      <span class="file-chip">sections/food.html</span>
+      <span class="file-chip">sections/medical.html</span>
+      <span class="file-chip">sections/energy.html</span>
+      <span class="file-chip">sections/shelter.html</span>
+      <span class="file-chip">sections/communications.html</span>
+      <span class="file-chip">sections/navigation.html</span>
+      <span class="file-chip">sections/security.html</span>
+      <span class="file-chip">sections/knowledge.html</span>
+      <span class="file-chip">assets/css/style.css</span>
+      <span class="file-chip">assets/js/app.js</span>
+      <span class="file-chip">assets/js/search.js</span>
+      <span class="file-chip">assets/js/aria.js</span>
+      <span class="file-chip">README.md</span>
+    </div>
+  </div>
+
+  <div class="callout callout-info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-content">
+      <strong>How to Update Your Copy</strong>
+      <p>This guide is a static collection of files with no auto-update mechanism — that's a feature, not a bug. To update, download a new copy and replace the files. Your gear checklist checkboxes are saved in your browser's localStorage and will survive a file replacement as long as you use the same browser on the same device.</p>
+    </div>
+  </div>
+
+</div><!-- /content-wrapper -->
+</main>
+
+<!-- Bunker Bot Panel -->
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title">
+      <div class="aria-avatar">🤖</div>
+      <div class="aria-title-text">
+        <strong>Bunker Bot</strong>
+        <small>Offline Survival AI</small>
+      </div>
+    </div>
+    <button id="aria-close" class="btn-icon" aria-label="Close Bunker Bot">✕</button>
+  </div>
+  <div class="aria-status">
+    <span class="status-dot checking"></span>
+    <span class="aria-status-label">Checking connection…</span>
+    &nbsp;·&nbsp;
+    <span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span>
+  </div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome">
+      <div class="aria-message-content">
+        <p>Hello, I'm <strong>Bunker Bot</strong> — your offline survival AI. Ask me anything about preparedness, first aid, food, shelter, navigation, or emergency response.</p>
+        <p class="aria-note">⚠️ Requires Ollama running locally. <a href="ai-setup.html">Setup guide →</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask ARIA a survival question…" rows="2" aria-label="Message Bunker Bot"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+
+<button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">↑</button>
+
+<script src="assets/js/search.js"></script>
+<script src="assets/js/aria.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

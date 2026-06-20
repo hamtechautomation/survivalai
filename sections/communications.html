@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Communications & Signals — ham radio, Baofeng setup, Morse code, signal fires, Meshtastic/LoRa mesh networks, NOAA weather radio, and dead drops.">
+  <title>Communications &amp; Signals — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Communications &amp; Signals</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>📻 Communications &amp; Signals</h1>
+    <p class="section-desc">Information is power. Knowing what's happening, being able to reach help, and coordinating with your community are force multipliers. This section covers every layer of the communications stack from radio to hand signals.</p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2025-06"></span></span>
+      <span class="meta-item">⏱️ <span id="reading-time"></span></span>
+      <span class="meta-item">📖 Section 5 of 8</span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#ham-radio">Ham Radio Basics</a></li>
+      <li><a href="#baofeng">Baofeng Radio Setup Guide</a></li>
+      <li><a href="#morse">Morse Code Reference</a></li>
+      <li><a href="#visual-signals">Visual Signals</a></li>
+      <li><a href="#mesh">Mesh Networks (Meshtastic/LoRa)</a></li>
+      <li><a href="#noaa">NOAA Weather Radio</a></li>
+      <li><a href="#faraday-comms">Faraday Storage for Radios</a></li>
+      <li><a href="#dead-drops">Dead Drop Communication</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">⏱️</span>
+    <div class="callout-content">
+      <strong>First 24 Hours — Communications Priorities</strong>
+      <ol style="margin:.5rem 0 0;padding-left:1.2rem">
+        <li>Power on NOAA weather radio and tune to your regional frequency — official emergency broadcasts come here first.</li>
+        <li>Turn on your Baofeng and monitor <strong>146.520 MHz</strong> (national VHF simplex calling frequency).</li>
+        <li>Make contact with immediate neighbors — share information, assess who has working radios.</li>
+        <li>Establish a check-in schedule: agree on frequency, time of day, and interval (every 4 hours, every sunrise, etc.).</li>
+        <li>Charge all radios and power banks right now — while power may still be available.</li>
+        <li>Write your critical frequencies on paper and tape it to each radio. Don't rely on memory under stress.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- =================== HAM RADIO =================== -->
+  <section id="ham-radio">
+    <h2>1. Ham Radio Basics</h2>
+
+    <p>Amateur (ham) radio is the most robust communications infrastructure available in a collapse scenario. It operates across multiple frequency bands, can span from local neighborhood to intercontinental distances, requires no commercial infrastructure, and has an active global community of operators.</p>
+
+    <h3>License Levels (USA)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>License</th><th>Exam</th><th>Privileges</th><th>Best For</th></tr></thead>
+        <tbody>
+          <tr><td>Technician</td><td>35 questions, no code</td><td>VHF/UHF (local, 1–50 miles with repeater)</td><td>Local emergency comms, most practical starting point</td></tr>
+          <tr><td>General</td><td>35 additional questions</td><td>Most HF frequencies (regional/national)</td><td>Reaching help 100–1,000+ miles away</td></tr>
+          <tr><td>Amateur Extra</td><td>50 additional questions</td><td>All amateur bands</td><td>Maximum flexibility, DX (global) contacts</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Emergency Use Without a License</strong>
+        <p>FCC rules allow unlicensed operation of any amateur radio in an immediate threat to life or property (47 CFR 97.405). In a genuine emergency, transmit for help on any frequency available. In non-emergency situations, unlicensed transmission is illegal and can interfere with emergency services. Get your license now — the Technician exam is easy and open book.</p>
+      </div>
+    </div>
+
+    <h3>Key Emergency Frequencies</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Frequency</th><th>Band</th><th>Use</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>146.520 MHz</td><td>2m VHF</td><td>National simplex calling frequency</td><td>Monitor this frequency. First place to call in an emergency on VHF.</td></tr>
+          <tr><td>446.000 MHz</td><td>70cm UHF</td><td>National UHF simplex calling</td><td>Secondary to 146.520</td></tr>
+          <tr><td>7.200–7.300 MHz</td><td>40m HF</td><td>Regional emergency nets (night)</td><td>40m travels 500–3,000 miles at night; reliable daytime skip 50–300 miles</td></tr>
+          <tr><td>14.300 MHz</td><td>20m HF</td><td>Maritime mobile net; global calling</td><td>Daytime 1,000–10,000 miles</td></tr>
+          <tr><td>3.985 MHz</td><td>75m HF</td><td>ARES/RACES emergency nets</td><td>Regional nighttime; 100–500 miles</td></tr>
+          <tr><td>156.800 MHz</td><td>Marine VHF</td><td>Channel 16 — marine distress</td><td>Monitored by Coast Guard; technically requires marine license</td></tr>
+          <tr><td>121.500 MHz</td><td>Aviation</td><td>International aeronautical distress</td><td>Pilots monitor this frequency</td></tr>
+          <tr><td>NOAA 162.400–162.550 MHz</td><td>Weather</td><td>NOAA weather broadcasts</td><td>7 frequencies; receive only</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>HF Propagation Basics</h3>
+    <ul>
+      <li><strong>Ground wave:</strong> 160m–40m bands travel along the earth's surface. Range: 50–200 miles. Reliable and predictable.</li>
+      <li><strong>Skip/skywave:</strong> HF signals bounce off the ionosphere. Daytime: ionosphere is dense, 20m–10m bands skip further (10m can be global). Nighttime: lower frequencies (80m–40m) skip, high frequencies (20m–10m) may go dead.</li>
+      <li><strong>Practical rule:</strong> Use 40m or 80m at night for regional (100–1,000 miles). Use 20m or 15m during the day for long-distance (1,000–10,000 miles).</li>
+    </ul>
+  </section>
+
+  <!-- =================== BAOFENG =================== -->
+  <section id="baofeng">
+    <h2>2. Baofeng Radio Setup Guide</h2>
+
+    <p>The Baofeng UV-5R and UV-82 are inexpensive ($20–30), dual-band (VHF/UHF) handheld transceivers widely used in preparedness circles. They're not the best radios, but they're affordable, easy to acquire in quantity, and work well enough for local emergency communications.</p>
+
+    <h3>Initial Setup</h3>
+    <ol class="steps">
+      <li>Charge the battery fully before first use (8–10 hours initial charge). The radio can be used while charging.</li>
+      <li>Install the antenna by threading clockwise until snug. Do NOT transmit without an antenna — it damages the final output transistor.</li>
+      <li>Set VOX off (Menu → 4 → 0). VOX (voice-activated transmission) causes accidental transmissions in noisy environments.</li>
+      <li>Set power to high (Menu → 2 → H) for maximum range in open terrain. Use low power in buildings to save battery.</li>
+      <li>Set squelch (Menu → 0 → 5). This mutes noise when no signal is present. Higher numbers = stronger signal needed to open squelch.</li>
+    </ol>
+
+    <h3>Programming with CHIRP (Recommended)</h3>
+    <p>CHIRP is free open-source radio programming software. Much easier than programming channels manually via the keypad.</p>
+    <ol class="steps">
+      <li>Download CHIRP from <code>chirp.danplabell.us</code> (or store on USB). Requires Python or standalone installer.</li>
+      <li>Connect radio to computer with the programming cable (USB to 2.5mm/3.5mm cable — must be Baofeng-compatible; cheap cables sometimes fail).</li>
+      <li>In CHIRP: Radio → Download from Radio. Select your model. Download current configuration.</li>
+      <li>Add channels: Name, frequency, mode (FM), tone (CTCSS if using a repeater), power level.</li>
+      <li>Radio → Upload to Radio. Disconnect cable and test.</li>
+    </ol>
+
+    <h3>Essential Frequencies to Program</h3>
+    <ul>
+      <li>146.520 MHz FM — National VHF simplex calling</li>
+      <li>446.000 MHz FM — UHF simplex calling</li>
+      <li>FRS channels (462.5625–467.7125 MHz — receive only, no TX license needed for FRS)</li>
+      <li>NOAA weather: 162.400, 162.425, 162.450, 162.475, 162.500, 162.525, 162.550 MHz (RX only)</li>
+      <li>Your local repeater frequencies (find at repeaterbook.com or local ham club)</li>
+      <li>MURS: 151.820, 151.880, 151.940, 154.570, 154.600 MHz (legal without license for business/personal)</li>
+    </ul>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Legal Frequency Use</strong>
+        <p>Baofeng radios can transmit on frequencies they shouldn't. Transmitting on FRS, GMRS (without license), or public safety frequencies (police, fire, EMS) is illegal and can interfere with emergency services. Program your radio carefully. Amateur frequencies require a ham license. In a genuine emergency, the law allows transmitting on any frequency to preserve life.</p>
+      </div>
+    </div>
+
+    <h3>Battery Life &amp; Charging</h3>
+    <ul>
+      <li>Standard battery: ~8–12 hours receive, 4–6 hours mixed RX/TX on high power.</li>
+      <li>Charge from included USB charger or the drop-in charger. Both work with a 12V DC–USB adapter for solar/car charging.</li>
+      <li>AA battery pack (sold separately) allows the radio to run on standard AA batteries — critical when lithium packs are dead and no charger is available. Slightly reduced TX power.</li>
+    </ul>
+  </section>
+
+  <!-- =================== MORSE CODE =================== -->
+  <section id="morse">
+    <h2>3. Morse Code Reference</h2>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✅</span>
+      <div class="callout-content">
+        <strong>SOS — The Universal Distress Signal</strong>
+        <p>· · · — — — · · · (three dots, three dashes, three dots). Transmitted continuously with a 1-second pause between groups. Can be flashed with a light, banged on metal, or transmitted on any radio. No license or skill required to send SOS — it is internationally recognized.</p>
+      </div>
+    </div>
+
+    <h3>International Morse Code Alphabet</h3>
+    <pre style="font-size:.8rem;line-height:1.8;color:var(--green)">
+A  · —      N  — ·
+B  — · · ·  O  — — —
+C  — · — ·  P  · — — ·
+D  — · ·    Q  — — · —
+E  ·         R  · — ·
+F  · · — ·  S  · · ·
+G  — — ·    T  —
+H  · · · ·  U  · · —
+I  · ·      V  · · · —
+J  · — — —  W  · — —
+K  — · —    X  — · · —
+L  · — · ·  Y  — · — —
+M  — —      Z  — — · ·
+
+Numbers:
+1  · — — — —    6  — · · · ·
+2  · · — — —    7  — — · · ·
+3  · · · — —    8  — — — · ·
+4  · · · · —    9  — — — — ·
+5  · · · · ·    0  — — — — —
+
+Punctuation:
+. (period)     · — · — · —
+, (comma)      — — · · — —
+? (question)   · · — — · ·
+/ (slash)      — · · — ·
+= (break)      — · · · —
+
+Prosigns:
+AR (end of transmission)   · — · —
+BK (break)                 — · · · — · —
+CQ (calling all stations)  — · — · — — · —
+DE (from / this is)        — · · ·
+K  (invitation to transmit) — · —
+SK (end of contact)        · · · — · —
+    </pre>
+
+    <h3>Sending Techniques</h3>
+    <ul>
+      <li><strong>Timing:</strong> Dot = 1 unit. Dash = 3 units. Space between elements = 1 unit. Space between letters = 3 units. Space between words = 7 units.</li>
+      <li><strong>Light signals:</strong> Flashlight, mirror, or signal lamp. Short flash = dot; long flash = dash.</li>
+      <li><strong>Sound:</strong> Knock on metal/wood. Short knock = dot; long knock = dash.</li>
+      <li><strong>Practice tip:</strong> Learn the 5 most common letters first (E, T, A, I, N) — they cover a high percentage of English text. Then add: O, S, R, H, L.</li>
+    </ul>
+  </section>
+
+  <!-- =================== VISUAL SIGNALS =================== -->
+  <section id="visual-signals">
+    <h2>4. Visual Signals</h2>
+
+    <h3>Signal Fire</h3>
+    <ul>
+      <li>Location: High point, open clearing, lakeshore, ridgeline — maximum visibility from air.</li>
+      <li><strong>Smoke production:</strong> Three fires in a triangle (10–30m apart) is the international distress signal. Produce white smoke (against dark background) with green leaves, grass, moss. Produce black smoke (against snow or pale sky) with plastic, rubber, oily rags. Maintain 3 fires simultaneously if possible.</li>
+      <li>Prepare the fire in advance — have dry tinder and fuel ready to light instantly. A signal fire that takes 20 minutes to light after spotting an aircraft is useless.</li>
+      <li>Signal fires work best in daylight with good visibility. At night, flames are visible; use sparingly to conserve fuel.</li>
+    </ul>
+
+    <h3>Mirror/Heliograph Signaling</h3>
+    <p>A mirror flash can be seen 50+ miles away in clear conditions from an aircraft. It's one of the most effective signaling tools for search-and-rescue scenarios.</p>
+    <ol class="steps">
+      <li>Hold mirror at arm's length. Tilt until sunlight reflected off the mirror creates a bright spot on your other hand or the ground.</li>
+      <li>Look through the mirror's sight hole (if present) and align the reflected sun spot with the target.</li>
+      <li>If no sight hole: extend two fingers in a V-shape toward the target. Tilt the mirror until the bright spot falls on your V. The mirror is now aimed at the target.</li>
+      <li>Flash in SOS pattern: 3 short, 3 long, 3 short. Even random flashes attract attention — just keep flashing when a target (aircraft, distant hilltop) is visible.</li>
+    </ol>
+
+    <h3>Ground-to-Air Signals</h3>
+    <p>Create these signals in large, open areas visible from the air. Minimum size: 3 meters each character, 10+ meters preferred. Use rocks, logs, footprints in snow, or trenches to maximize contrast.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>X</strong></td><td>Need medical assistance / unable to proceed</td></tr>
+          <tr><td><strong>V</strong></td><td>Require assistance</td></tr>
+          <tr><td><strong>→</strong> (arrow)</td><td>Traveling in this direction</td></tr>
+          <tr><td><strong>F</strong></td><td>Need food and water</td></tr>
+          <tr><td><strong>LL</strong></td><td>All is well</td></tr>
+          <tr><td><strong>N</strong></td><td>No / negative</td></tr>
+          <tr><td><strong>Y</strong></td><td>Yes / affirmative</td></tr>
+          <tr><td><strong>SOS</strong> or <strong>△△△</strong></td><td>Distress — need immediate help</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Other Visual Methods</h3>
+    <ul>
+      <li><strong>Bright fabric/tarp:</strong> Spread a bright-colored tarp (orange or yellow is most visible from air) in an open area. Rescue orange is internationally recognized as a distress color.</li>
+      <li><strong>Flagging tape:</strong> Mark your position and travel direction by tying bright flagging tape to trees at intervals. Searchers on foot or by air can track your movement.</li>
+      <li><strong>Chalk or spray paint on hard surfaces:</strong> Leave directional arrows and messages on rocks, roads, or walls in urban environments.</li>
+    </ul>
+  </section>
+
+  <!-- =================== MESH NETWORKS =================== -->
+  <section id="mesh">
+    <h2>5. Mesh Networks — Meshtastic &amp; LoRa</h2>
+
+    <p>Meshtastic is an open-source project enabling encrypted text messaging over LoRa (Long Range) radio using inexpensive devices (~$30–60). It operates without internet, cell service, or any central infrastructure. Devices automatically relay messages through each other — the mesh extends as more nodes are added.</p>
+
+    <h3>Key Characteristics</h3>
+    <div class="quick-facts">
+      <div class="quick-fact"><span class="qf-value">5–15 km</span><span class="qf-label">Node range (line of sight)</span></div>
+      <div class="quick-fact"><span class="qf-value">8+</span><span class="qf-label">Hop relay limit</span></div>
+      <div class="quick-fact"><span class="qf-value">AES256</span><span class="qf-label">Encryption</span></div>
+      <div class="quick-fact"><span class="qf-value">$30–60</span><span class="qf-label">Per node cost</span></div>
+    </div>
+
+    <h3>Recommended Hardware</h3>
+    <ul>
+      <li><strong>LILYGO T-Beam:</strong> Built-in GPS, Wi-Fi, Bluetooth. Best for mobile nodes. Flash with Meshtastic firmware.</li>
+      <li><strong>Heltec LoRa32 V2/V3:</strong> Compact, OLED display. Good for fixed nodes.</li>
+      <li><strong>RAK WisBlock:</strong> Modular, low power. Best for solar-powered permanent nodes.</li>
+    </ul>
+
+    <h3>Setup &amp; Deployment</h3>
+    <ol class="steps">
+      <li>Flash Meshtastic firmware onto device (one-time, done before crisis on a computer).</li>
+      <li>Configure channel name and encryption key — all devices on your network must share the same channel settings.</li>
+      <li>Place nodes at elevated locations (hilltops, buildings, towers) to maximize range. Solar-powered nodes can run indefinitely.</li>
+      <li>Users connect via Bluetooth from smartphone (Meshtastic app) or serial terminal to their local node, which relays messages across the mesh.</li>
+      <li>Messages include: plain text, GPS position (optional), telemetry (battery level, signal strength).</li>
+    </ol>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✅</span>
+      <div class="callout-content">
+        <strong>Community Mesh Planning</strong>
+        <p>A community of 50 homes with 10 strategically placed fixed nodes (hilltops, water towers, tall buildings) can cover an entire neighborhood or small rural area. Test the network before an emergency. Identify gaps and add relay nodes as needed. Document node locations on your printed maps.</p>
+      </div>
+    </div>
+
+    <h3>LoRa Frequencies by Region</h3>
+    <ul>
+      <li>US: 915 MHz (ISM band — license-free)</li>
+      <li>EU: 868 MHz</li>
+      <li>AU: 915/923 MHz</li>
+      <li>Asia: 433 MHz or 470 MHz (varies by country)</li>
+    </ul>
+  </section>
+
+  <!-- =================== NOAA =================== -->
+  <section id="noaa">
+    <h2>6. NOAA Weather Radio</h2>
+
+    <p>NOAA Weather Radio All Hazards (NWR) broadcasts continuous 24/7 weather information plus emergency alerts — including not just weather but also industrial accidents, nuclear plant issues, law enforcement alerts, and AMBER alerts.</p>
+
+    <h3>NOAA Frequencies</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Channel</th><th>Frequency</th></tr></thead>
+        <tbody>
+          <tr><td>WX-1</td><td>162.400 MHz</td></tr>
+          <tr><td>WX-2</td><td>162.425 MHz</td></tr>
+          <tr><td>WX-3</td><td>162.450 MHz</td></tr>
+          <tr><td>WX-4</td><td>162.475 MHz</td></tr>
+          <tr><td>WX-5</td><td>162.500 MHz</td></tr>
+          <tr><td>WX-6</td><td>162.525 MHz</td></tr>
+          <tr><td>WX-7</td><td>162.550 MHz</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul>
+      <li>All Baofeng and most ham radios can receive NOAA. Program all 7 channels into memory.</li>
+      <li>Dedicated weather radios (S.A.M.E. type) can be programmed to only alert for your specific county/region — reduces nuisance alerts.</li>
+      <li>Battery backup or hand-crank weather radio is essential when grid power is down.</li>
+      <li>The Emergency Alert System (EAS) tone — a distinctive digital tone followed by voice — precedes all emergency broadcasts.</li>
+    </ul>
+  </section>
+
+  <!-- =================== FARADAY FOR COMMS =================== -->
+  <section id="faraday-comms">
+    <h2>7. Faraday Storage for Radios</h2>
+
+    <p>Communications equipment is uniquely valuable in a crisis — and uniquely at risk from EMP. Store at least one backup radio of each type in a Faraday cage and don't open it until needed.</p>
+
+    <h3>What to Store in a Faraday Cage</h3>
+    <ul class="checklist">
+      <li>1–2 spare Baofeng or equivalent handhelds (in anti-static bags inside metal container)</li>
+      <li>Spare batteries and battery packs (lithium batteries are not EMP-sensitive but their protection circuits can be)</li>
+      <li>MPPT charge controller (for recharging radios after EMP)</li>
+      <li>Handheld NOAA weather radio</li>
+      <li>USB charging cables and adapters</li>
+      <li>Programming cable and printed frequency list</li>
+      <li>Meshtastic nodes</li>
+    </ul>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Double-Shield Rule</strong>
+        <p>Wrap each radio individually in aluminum foil. Place the foil-wrapped radios in a zip-lock bag. Place in a metal ammunition can (steel, tight-fitting lid). Place the ammo can inside a galvanized steel trash can with a tight lid. This two-layer approach provides 40–50dB of additional attenuation vs a single can alone.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== DEAD DROPS =================== -->
+  <section id="dead-drops">
+    <h2>8. Dead Drop Communication</h2>
+
+    <p>When electronic communications are compromised, monitored, or unavailable, dead drops (pre-arranged physical information exchange points) allow secure, asynchronous communication.</p>
+
+    <h3>Basic Dead Drop System</h3>
+    <ol class="steps">
+      <li><strong>Select locations:</strong> Pre-designate 3–5 drop locations known only to your group. Good locations are easily accessible, non-suspicious, and have natural concealment (under a specific rock, inside a hollow tree, behind a loose brick).</li>
+      <li><strong>Establish signals:</strong> Use chalk marks, specific rock arrangements, or tied fabric to signal that a message is waiting at a specific drop. A mark at a pre-agreed location ("signal point") tells the recipient to check drop #2, for example.</li>
+      <li><strong>Message format:</strong> Keep messages concise. Use pre-agreed codes where possible. Waterproof (wrap in plastic bag inside a small container).</li>
+      <li><strong>Rotation:</strong> Use each drop only once per message cycle, then move to the next. Never reuse the same drop consecutively if operational security is critical.</li>
+    </ol>
+
+    <h3>Simple Cipher for Messages</h3>
+    <p>A Caesar cipher (shift each letter by a pre-agreed number) or a one-time pad (random key agreed in advance, used once) allows basic message encryption without computers.</p>
+
+    <div class="diagram">
+Caesar Cipher (shift 3 example):
+Plain:  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+Cipher: D E F G H I J K L M N O P Q R S T U V W X Y Z A B C
+
+"MEET AT DAWN" → "PHHW DW GDZQ"
+Decryption: shift back by 3
+
+One-Time Pad (more secure):
+1. Both parties have identical random number sheets (destroy after use)
+2. Add each letter number (A=1...Z=26) to the key number, mod 26
+3. Key is burned after use — message unbreakable without the pad
+    </div>
+
+    <h3>Physical Dead Drop Containers</h3>
+    <ul>
+      <li><strong>Film canister or pill bottle:</strong> Waterproof, small, easily hidden under rocks or in soil.</li>
+      <li><strong>Magnetic key holder:</strong> Attaches under metal surfaces (bridges, vehicles, fences).</li>
+      <li><strong>Sealed ziplock inside a rock:</strong> Faux rock containers blend into the environment.</li>
+      <li><strong>Hollow tree / bark crevice:</strong> Natural, blends completely — mark with a subtle signal only your group knows.</li>
+    </ul>
+  </section>
+
+  <hr>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-md);margin-top:var(--sp-xl)">
+    <a href="shelter.html" class="btn btn-outline">← Shelter</a>
+    <a href="navigation.html" class="btn btn-primary">Next: Navigation →</a>
+  </div>
+  <div class="callout callout-tip" style="margin-top:var(--sp-xl)">
+    <span class="callout-icon">🔗</span>
+    <div class="callout-content">
+      <strong>Related Sections</strong>
+      <p>
+        <a href="navigation.html#compass">Navigation → UTM coordinates for radio position reports</a> ·
+        <a href="security.html#opsec">Security → OPSEC — what not to transmit</a> ·
+        <a href="energy.html#faraday">Energy → Faraday cage protection for your radios</a>
+      </p>
+    </div>
+  </div>
+
+<nav class="section-pagination no-print" aria-label="Section navigation">
+  <a href="shelter.html" class="pagination-btn pagination-prev">← Shelter</a>
+  <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+  <a href="navigation.html" class="pagination-btn pagination-next">Navigation →</a>
+</nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">🤖</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're reading Communications. Ask me about ham radio, Baofeng programming, Morse code, or Meshtastic setup.<p class="aria-note">⚠️ Requires Ollama. <a href="../ai-setup.html">Setup →</a></p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/aria.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

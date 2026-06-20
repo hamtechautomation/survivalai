@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Psychology &amp; Morale — The Last Light Survival Guide</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/sidebar.css">
+  <style>
+    /* ── Page-specific styles ── */
+    .psych-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
+    .psych-nav a { background: var(--bg-1); border: 1px solid #5c4a1e; color: var(--amber); padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-size: 0.85em; }
+    .psych-nav a:hover { background: var(--amber); color: var(--bg-0); }
+
+    /* Breathing widget */
+    .breath-widget { background: var(--bg-1); border: 1px solid #5c4a1e; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; text-align: center; }
+    .breath-box-container { display: flex; justify-content: center; margin: 1.25rem 0; }
+    .breath-box { width: 160px; height: 160px; border: 3px solid var(--amber); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; transition: box-shadow 0.3s; }
+    .breath-box.active { box-shadow: 0 0 24px rgba(201,169,78,0.45); }
+    .breath-phase-label { font-size: 1.1em; font-weight: 700; color: var(--amber); }
+    .breath-countdown { font-size: 2.4em; font-weight: 700; color: #fff; line-height: 1; margin-top: 0.2rem; }
+    .breath-instruction { font-size: 0.82em; color: #aaa; margin-top: 0.5rem; }
+    .breath-progress { width: 160px; height: 4px; background: #222; border-radius: 2px; margin: 0.5rem auto 0; overflow: hidden; }
+    .breath-progress-fill { height: 100%; background: var(--amber); width: 0%; transition: width 1s linear; }
+    .breath-controls { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem; }
+    .breath-cycle-count { font-size: 0.82em; color: #888; margin-top: 0.5rem; }
+
+    /* Stress self-assessment */
+    .assessment-widget { background: var(--bg-1); border: 1px solid #3a3a1a; border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0; }
+    .assessment-question { display: flex; align-items: flex-start; gap: 0.75rem; margin: 0.6rem 0; padding: 0.5rem 0.75rem; background: #0c1110; border-radius: 4px; }
+    .assessment-question label { font-size: 0.88em; color: #ccc; flex: 1; cursor: pointer; }
+    .assessment-question input[type="checkbox"] { accent-color: var(--amber); width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; cursor: pointer; }
+    .assessment-result { margin-top: 1rem; padding: 0.85rem 1rem; border-radius: 6px; display: none; font-size: 0.9em; }
+    .assessment-result.show { display: block; }
+    .result-manageable { background: #071a07; border: 1px solid #2a6a2a; color: #7acc7a; }
+    .result-elevated { background: #1a1207; border: 1px solid #7a5a10; color: #d4a840; }
+    .result-crisis { background: #1a0707; border: 1px solid #8b0000; color: #e07070; }
+    .assessment-score-bar { height: 8px; background: #222; border-radius: 4px; margin: 0.6rem 0; overflow: hidden; }
+    .assessment-score-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+
+    /* Decision log */
+    .decision-log-widget { background: var(--bg-1); border: 1px solid #2a3a2a; border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0; }
+    .decision-log-table { width: 100%; border-collapse: collapse; font-size: 0.82em; margin-top: 0.75rem; }
+    .decision-log-table th { background: #0f1a0f; color: var(--amber); padding: 0.4rem 0.5rem; text-align: left; border: 1px solid #2a3a2a; }
+    .decision-log-table td { padding: 0.35rem 0.5rem; border: 1px solid #1a2a1a; color: #ccc; vertical-align: top; }
+    .decision-log-table tr:nth-child(even) { background: #0a130a; }
+    .log-controls { display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
+    .log-input-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 0.4rem; margin-top: 0.6rem; }
+    .log-input-row input { background: #0a130a; border: 1px solid #2a3a2a; color: #ccc; padding: 0.3rem 0.5rem; border-radius: 3px; font-size: 0.82em; width: 100%; }
+    .log-input-row input::placeholder { color: #555; }
+    @media (max-width: 700px) {
+      .log-input-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* SVG flowchart container */
+    .flowchart-wrap { overflow-x: auto; margin: 1.25rem 0; background: var(--bg-1); border: 1px solid #2a3a2a; border-radius: 6px; padding: 1rem; }
+
+    /* Withdrawal table color coding */
+    .wd-fatal { background: #1a0505; }
+    .wd-serious { background: #1a0d05; }
+    .wd-moderate { background: #14140a; }
+    .wd-mild { background: #0a0f0a; }
+    .wd-tag-fatal { color: #e74c3c; font-weight: 700; }
+    .wd-tag-serious { color: #e67e22; font-weight: 700; }
+    .wd-tag-moderate { color: #d4a840; font-weight: 600; }
+    .wd-tag-mild { color: #7acc7a; }
+
+    /* Dark triad callout */
+    .dark-triad-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .dark-triad-card { background: #14080a; border: 1px solid #5a1a2a; border-left: 3px solid #8b2a3a; border-radius: 4px; padding: 0.75rem; }
+    .dark-triad-card h4 { color: #cc6677; margin: 0 0 0.4rem; font-size: 0.9em; }
+    .dark-triad-card ul { margin: 0; padding-left: 1rem; font-size: 0.82em; color: #bbb; }
+
+    /* Grief dev stage cards */
+    .grief-stage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .grief-stage-card { background: var(--bg-1); border: 1px solid #2a3a4a; border-left: 3px solid #4a7aaa; border-radius: 4px; padding: 0.75rem; }
+    .grief-stage-card h4 { color: #6a9acc; margin: 0 0 0.4rem; font-size: 0.9em; }
+    .grief-stage-card ul { margin: 0; padding-left: 1rem; font-size: 0.82em; color: #bbb; }
+
+    /* 5-step safety plan */
+    .safety-plan { counter-reset: safety-step; }
+    .safety-step { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.75rem 1rem 0.75rem 3rem; margin: 0.5rem 0; position: relative; counter-increment: safety-step; }
+    .safety-step::before { content: counter(safety-step); position: absolute; left: 0.85rem; top: 0.75rem; color: var(--amber); font-weight: 700; font-size: 1.1em; }
+
+    /* Burnout stages */
+    .burnout-table td:first-child { font-weight: 600; }
+    .burnout-early { color: #d4a840; }
+    .burnout-middle { color: #e67e22; }
+    .burnout-late { color: #e74c3c; }
+
+    /* Phase timeline bar */
+    .timeline-bar { display: flex; gap: 2px; margin: 0.75rem 0; border-radius: 4px; overflow: hidden; }
+    .timeline-segment { padding: 0.5rem 0.75rem; font-size: 0.78em; font-weight: 600; flex: 1; text-align: center; }
+    .ts-alarm { background: #5a0a0a; color: #ff9090; }
+    .ts-mobilize { background: #5a3a0a; color: #ffca80; }
+    .ts-adapt { background: #0a3a0a; color: #80ff90; }
+    .ts-collapse { background: #2a0a2a; color: #ff90ff; }
+
+    /* Conflict escalation */
+    .conflict-stages { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin: 1rem 0; }
+    @media (max-width: 650px) { .conflict-stages { grid-template-columns: 1fr; } }
+    .conflict-stage { padding: 0.6rem 0.5rem; border-radius: 4px; text-align: center; font-size: 0.8em; }
+    .cs-1 { background: #0a1a1a; border: 1px solid #1a4a4a; color: #80cccc; }
+    .cs-2 { background: #0a140a; border: 1px solid #2a5a1a; color: #80cc80; }
+    .cs-3 { background: #1a1a0a; border: 1px solid #5a5a1a; color: #cccc80; }
+    .cs-4 { background: #1a0d0a; border: 1px solid #5a2a1a; color: #cc9060; }
+    .cs-5 { background: #1a0a0a; border: 1px solid #8b0000; color: #e07070; }
+    .conflict-stage strong { display: block; margin-bottom: 0.25rem; }
+
+    /* PTSD cluster grid */
+    .ptsd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .ptsd-cluster { background: var(--bg-1); border: 1px solid #3a2a1a; border-top: 3px solid var(--amber); border-radius: 4px; padding: 0.75rem; }
+    .ptsd-cluster h4 { color: var(--amber); margin: 0 0 0.4rem; font-size: 0.88em; text-transform: uppercase; letter-spacing: 0.05em; }
+    .ptsd-cluster ul { margin: 0; padding-left: 1rem; font-size: 0.82em; color: #bbb; }
+
+    /* Print styles */
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block; }
+      .breath-widget, .assessment-widget { display: none; }
+      #aria-panel, #sidebar, .top-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app-shell">
+    <nav id="sidebar" aria-label="Main navigation"></nav>
+    <div id="overlay" class="overlay"></div>
+    <div class="main-content">
+      <header class="top-bar">
+        <button id="menu-toggle" class="btn-icon" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb"><a href="../index.html">Home</a> › Psychology &amp; Morale</div>
+        <button id="aria-toggle" class="btn btn-sm btn-ghost">🤖 Bunker Bot</button>
+      </header>
+
+      <div class="content-wrapper">
+
+        <!-- ═══ PAGE HEADER ═══ -->
+        <header class="section-header">
+          <div class="section-badges">
+            <span class="badge badge-danger">CRITICAL</span>
+            <span class="badge">All Scenarios</span>
+            <span class="badge">Day 1 – Year 5+</span>
+          </div>
+          <h1>Psychology &amp; Morale</h1>
+          <p class="section-subtitle">The science of human breakdown and resilience under prolonged crisis — stress physiology, grief, PTSD, decision-making, group dynamics, morale systems, and addiction withdrawal.</p>
+        </header>
+
+        <div class="alert-box danger">
+          <strong>"Every survival failure study shows the same pattern. The gear was there. The knowledge was there. The people broke first."</strong>
+          <br>Psychological failure is not weakness — it is predictable physiology. Understanding the mechanisms gives you a chance to interrupt them.
+        </div>
+
+        <!-- Quick-nav -->
+        <nav class="psych-nav" aria-label="Section navigation">
+          <a href="#stress-response">Stress Response</a>
+          <a href="#breathing">Tactical Breathing</a>
+          <a href="#grief">Grief &amp; Loss</a>
+          <a href="#ptsd">PTSD &amp; Peer Support</a>
+          <a href="#suicide">Suicide Risk</a>
+          <a href="#decisions">Decision Making</a>
+          <a href="#leadership">Leadership &amp; Burnout</a>
+          <a href="#group-dynamics">Group Dynamics</a>
+          <a href="#morale">Morale Systems</a>
+          <a href="#children">Children in Survival</a>
+          <a href="#withdrawal">Addiction &amp; Withdrawal</a>
+          <a href="#tools">Interactive Tools</a>
+        </nav>
+
+        <!-- ═══ SECTION 1: STRESS RESPONSE ═══ -->
+        <h2 id="stress-response">1. The Stress Response System</h2>
+
+        <p>The human stress response evolved for short-duration physical threats. Under prolonged survival conditions it becomes a liability — consuming resources, degrading cognition, and eventually destroying the body from the inside. Understanding the mechanism is the first step to managing it.</p>
+
+        <h3>Autonomic Nervous System: Two Branches</h3>
+        <div class="two-col">
+          <div class="card">
+            <h4 style="color:#e07070;">Sympathetic — "Fight / Flight / Freeze"</h4>
+            <ul>
+              <li>Adrenaline (epinephrine) and noradrenaline release within seconds</li>
+              <li>Heart rate spikes, blood pressure rises, pupils dilate</li>
+              <li>Blood redirected from digestion to large muscles</li>
+              <li>Cortisol released from adrenal cortex (peaks at 15–30 min)</li>
+              <li>Fine motor skills degrade; gross motor strength increases</li>
+              <li>Rational prefrontal cortex partially offline — amygdala dominant</li>
+              <li>Time perception distorts (events seem faster or slower)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4 style="color:#7acc7a;">Parasympathetic — "Rest / Digest / Recover"</h4>
+            <ul>
+              <li>Vagus nerve activates; heart rate and blood pressure decrease</li>
+              <li>Digestion resumes; immune function restored</li>
+              <li>Cortisol cleared; inflammatory response normalized</li>
+              <li>Prefrontal cortex comes back online — rational thought returns</li>
+              <li>Memory consolidation occurs during rest states</li>
+              <li>Activated by slow breathing, social connection, physical safety</li>
+              <li>Required for learning, planning, and complex decision-making</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Phases of Acute Stress Response</h3>
+        <div class="timeline-bar">
+          <div class="timeline-segment ts-alarm">0–24 hr<br>Alarm / Shock</div>
+          <div class="timeline-segment ts-mobilize">24–72 hr<br>Mobilization</div>
+          <div class="timeline-segment ts-adapt">72 hr – weeks<br>Adaptation</div>
+          <div class="timeline-segment ts-collapse">Weeks+<br>Adaptation Failure</div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Phase</th><th>Timeline</th><th>What Happens</th><th>Intervention</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Alarm / Shock</strong></td>
+              <td>0–24 hr</td>
+              <td>High adrenaline, emotional numbness or panic, impaired judgment, tunnel vision on immediate threat</td>
+              <td>Focus on immediate safety only. Do not make complex plans. Prioritize shelter, water, and securing the group.</td>
+            </tr>
+            <tr>
+              <td><strong>Mobilization</strong></td>
+              <td>24–72 hr</td>
+              <td>Cortisol elevated, energy mobilized, hypervigilance, emotional volatility, sleep disruption</td>
+              <td>Assign clear roles. Short-term task focus. Begin sleep schedules even if imperfect. Food matters enormously here.</td>
+            </tr>
+            <tr>
+              <td><strong>Adaptation</strong></td>
+              <td>72 hr – weeks</td>
+              <td>If resources are adequate: cortisol normalizes, routines establish, social bonds strengthen. Cognitive function recovers.</td>
+              <td>Establish routine. Create predictability. Allow emotional processing. This window determines long-term resilience.</td>
+            </tr>
+            <tr>
+              <td><strong>Adaptation Failure</strong></td>
+              <td>Weeks+ (if unresolved)</td>
+              <td>Chronic cortisol: immune suppression, decision degradation, depression, interpersonal conflict, physical illness</td>
+              <td>Mandatory rest. Leadership rotation. Address unresolved grief. Seek remaining social structure.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Chronic Stress Cascade</h3>
+        <pre class="diagram">Sustained threat perception
+         │
+         ▼
+Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
+         │
+         ▼
+   Chronic cortisol elevation
+    ├── Immune suppression (increased infection risk)
+    ├── Hippocampus shrinkage (memory and learning impaired)
+    ├── Prefrontal cortex thinning (judgment, impulse control degrade)
+    ├── Amygdala hypersensitivity (threat perception amplified)
+    ├── Sleep architecture disruption (deep sleep reduced)
+    └── Metabolic disruption (blood sugar, appetite dysregulation)</pre>
+
+        <h3>Physical Stress Symptoms — Reference Table</h3>
+        <table class="data-table">
+          <thead>
+            <tr><th>Symptom</th><th>Mechanism</th><th>Functional Impact</th><th>Recovery Signal</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Heart rate &gt;100 bpm at rest</td><td>Sympathetic dominance</td><td>Fatigue, poor sleep, anxiety amplification</td><td>Resting HR returns to &lt;80</td></tr>
+            <tr><td>Tunnel vision</td><td>Peripheral vascular constriction</td><td>Miss peripheral threats; poor spatial awareness</td><td>Peripheral awareness returns</td></tr>
+            <tr><td>Fine motor loss</td><td>Blood redirected to large muscles</td><td>Cannot thread sutures, operate locks, use tools precisely</td><td>Fine tremor resolves</td></tr>
+            <tr><td>Time distortion</td><td>Norepinephrine alters time perception</td><td>Poor sequencing, misjudge task duration</td><td>Accurate time estimation resumes</td></tr>
+            <tr><td>Auditory exclusion</td><td>Attention narrowing</td><td>Miss verbal instructions; poor communication</td><td>Normal hearing awareness</td></tr>
+            <tr><td>Gastrointestinal upset</td><td>Digestion shut down, gut motility altered</td><td>Nausea, diarrhea, inability to eat</td><td>Appetite and normal digestion return</td></tr>
+            <tr><td>Memory gaps</td><td>Hippocampal encoding impaired under high cortisol</td><td>Cannot recall events from acute phase; no tactical recall</td><td>Memory continuity re-establishes</td></tr>
+          </tbody>
+        </table>
+
+        <div class="alert-box info">
+          <strong>Recovery Window:</strong> The 48–72 hour period after acute trauma onset is the most critical window for intervention. Sleep (even fragmented), food intake, and social connection during this period dramatically affect long-term outcomes. Forcing action while denying recovery compounds psychological damage.
+        </div>
+
+        <!-- ═══ SECTION 2: TACTICAL BREATHING ═══ -->
+        <h2 id="breathing">2. Tactical Breathing</h2>
+
+        <p>Controlled breathing is the fastest accessible tool for activating the parasympathetic nervous system. It works by stimulating the vagus nerve through slow exhalation, directly counteracting the sympathetic stress response.</p>
+
+        <div class="alert-box info">
+          <strong>4-7-8 vs Box Breathing:</strong> Box breathing (4-4-4-4) is safer under physical exertion and preferred for active scenarios. 4-7-8 breathing (inhale 4, hold 7, exhale 8) is more powerful for deep relaxation and pre-sleep use, but the extended breath-hold is contraindicated during heavy physical activity.
+        </div>
+
+        <h3>Box Breathing (4-4-4-4) — Interactive Widget</h3>
+
+        <!-- BOX BREATHING SVG DIAGRAM (static, for print) -->
+        <figure class="svg-diagram no-js-only" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
+          <svg viewBox="0 0 420 420" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="breath-svg-title">
+            <title id="breath-svg-title">Box Breathing Pattern — 4-4-4-4</title>
+            <desc>Animated diagram showing the four phases of box breathing: inhale for 4 counts, hold for 4 counts, exhale for 4 counts, hold for 4 counts. A square path traces the breathing cycle.</desc>
+            <defs>
+              <style>
+                @keyframes breath-trace {
+                  0%   { stroke-dashoffset: 480; }
+                  100% { stroke-dashoffset: 0; }
+                }
+                @keyframes breath-dot {
+                  0%   { transform: translate(90px, 90px); }
+                  25%  { transform: translate(330px, 90px); }
+                  50%  { transform: translate(330px, 330px); }
+                  75%  { transform: translate(90px, 330px); }
+                  100% { transform: translate(90px, 90px); }
+                }
+                @keyframes phase-inhale { 0%,24%{opacity:1}25%,100%{opacity:0.3}}
+                @keyframes phase-hold1  { 0%,24%{opacity:0.3}25%,49%{opacity:1}50%,100%{opacity:0.3}}
+                @keyframes phase-exhale { 0%,49%{opacity:0.3}50%,74%{opacity:1}75%,100%{opacity:0.3}}
+                @keyframes phase-hold2  { 0%,74%{opacity:0.3}75%,99%{opacity:1}100%{opacity:0.3}}
+              </style>
+            </defs>
+            <!-- Background -->
+            <rect width="420" height="420" fill="#0c110f"/>
+            <!-- Square path -->
+            <rect x="90" y="90" width="240" height="240" fill="none" stroke="#243028" stroke-width="3" rx="4"/>
+            <!-- Animated trace -->
+            <rect x="90" y="90" width="240" height="240" fill="none" stroke="#c9a94e" stroke-width="4" rx="4"
+                  stroke-dasharray="480" stroke-dashoffset="480"
+                  style="animation: breath-trace 16s linear infinite"/>
+            <!-- Dot moving around the box -->
+            <circle cx="0" cy="0" r="12" fill="#c9a94e" opacity="0.9"
+                    style="animation: breath-dot 16s linear infinite; transform-origin: 0 0; transform-box: fill-box"/>
+            <!-- Phase labels on each side -->
+            <!-- INHALE — top (left→right) -->
+            <text x="210" y="76" text-anchor="middle" font-size="14" fill="#eceee0" font-family="sans-serif" font-weight="700"
+                  style="animation: phase-inhale 16s linear infinite">INHALE</text>
+            <text x="210" y="88" text-anchor="middle" font-size="11" fill="#4b9e6a" font-family="sans-serif"
+                  style="animation: phase-inhale 16s linear infinite">4 counts →</text>
+            <!-- HOLD (full) — right side (top→bottom) -->
+            <text x="356" y="214" text-anchor="middle" font-size="14" fill="#eceee0" font-family="sans-serif" font-weight="700"
+                  transform="rotate(90,356,214)"
+                  style="animation: phase-hold1 16s linear infinite">HOLD</text>
+            <text x="376" y="214" text-anchor="middle" font-size="11" fill="#c9a94e" font-family="sans-serif"
+                  transform="rotate(90,376,214)"
+                  style="animation: phase-hold1 16s linear infinite">4 counts ↓</text>
+            <!-- EXHALE — bottom (right→left) -->
+            <text x="210" y="356" text-anchor="middle" font-size="14" fill="#eceee0" font-family="sans-serif" font-weight="700"
+                  style="animation: phase-exhale 16s linear infinite">EXHALE</text>
+            <text x="210" y="368" text-anchor="middle" font-size="11" fill="#4a80b5" font-family="sans-serif"
+                  style="animation: phase-exhale 16s linear infinite">← 4 counts</text>
+            <!-- HOLD (empty) — left side (bottom→top) -->
+            <text x="64" y="214" text-anchor="middle" font-size="14" fill="#eceee0" font-family="sans-serif" font-weight="700"
+                  transform="rotate(-90,64,214)"
+                  style="animation: phase-hold2 16s linear infinite">HOLD</text>
+            <text x="44" y="214" text-anchor="middle" font-size="11" fill="#c9a94e" font-family="sans-serif"
+                  transform="rotate(-90,44,214)"
+                  style="animation: phase-hold2 16s linear infinite">4 counts ↑</text>
+            <!-- Center instruction -->
+            <text x="210" y="206" text-anchor="middle" font-size="12" fill="#8a9e86" font-family="sans-serif">Box Breathing</text>
+            <text x="210" y="222" text-anchor="middle" font-size="20" fill="#c9a94e" font-family="sans-serif" font-weight="800">4 — 4 — 4 — 4</text>
+            <text x="210" y="240" text-anchor="middle" font-size="11" fill="#8a9e86" font-family="sans-serif">16 seconds per cycle</text>
+            <!-- Corner dots -->
+            <circle cx="90" cy="90" r="5" fill="#4d6048"/>
+            <circle cx="330" cy="90" r="5" fill="#4d6048"/>
+            <circle cx="330" cy="330" r="5" fill="#4d6048"/>
+            <circle cx="90" cy="330" r="5" fill="#4d6048"/>
+            <!-- Counts at corners -->
+            <text x="90" y="80" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif">1</text>
+            <text x="330" y="80" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif">2</text>
+            <text x="330" y="348" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif">3</text>
+            <text x="90" y="348" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif">4</text>
+            <text x="210" y="406" text-anchor="middle" font-size="10" fill="#4d6048" font-family="sans-serif">Used by special forces, surgeons, and pilots to rapidly reduce acute stress</text>
+          </svg>
+          <figcaption>Box breathing pattern — trace the square with your breath. Each side = 4 seconds. Total cycle: 16 seconds. Repeat 4–6 times. The animated dot shows the current phase (may animate in modern browsers).</figcaption>
+        </figure>
+
+        <!-- BOX BREATHING WIDGET -->
+        <div class="breath-widget no-print" id="breath-widget">
+          <p style="font-size:0.88em;color:#aaa;margin:0 0 1rem;">Used by military, first responders, and surgeons to rapidly reduce acute stress response. Equalizing all four phases creates controlled CO₂ tolerance and vagal stimulation.</p>
+          <div class="breath-box-container">
+            <div class="breath-box" id="breath-box">
+              <div class="breath-phase-label" id="breath-phase-label">Ready</div>
+              <div class="breath-countdown" id="breath-countdown">—</div>
+              <div class="breath-instruction" id="breath-instruction">Press Start</div>
+            </div>
+          </div>
+          <div class="breath-progress">
+            <div class="breath-progress-fill" id="breath-progress-fill"></div>
+          </div>
+          <div class="breath-controls">
+            <button class="btn btn-sm btn-amber" id="breath-start">Start</button>
+            <button class="btn btn-sm btn-ghost" id="breath-stop" style="display:none;">Stop</button>
+          </div>
+          <div class="breath-cycle-count" id="breath-cycle-count">Cycles completed: 0</div>
+        </div>
+
+        <h3>Physiological Mechanism</h3>
+        <table class="data-table">
+          <thead><tr><th>Phase</th><th>Duration</th><th>What's Happening</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Inhale</strong></td><td>4 seconds</td><td>Diaphragm descends, thoracic pressure drops, lungs expand. Heart rate briefly increases (normal). Oxygen drawn in.</td></tr>
+            <tr><td><strong>Hold (full)</strong></td><td>4 seconds</td><td>O₂ diffuses across alveolar membrane. CO₂ accumulates slightly — this is the training signal for CO₂ tolerance.</td></tr>
+            <tr><td><strong>Exhale</strong></td><td>4 seconds</td><td>Vagus nerve stimulated. Parasympathetic activation. Heart rate decreases. Adrenaline clearance begins.</td></tr>
+            <tr><td><strong>Hold (empty)</strong></td><td>4 seconds</td><td>Extended vagal tone. Amygdala calming effect. Cortisol synthesis temporarily suppressed.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>4-7-8 Breathing — Relaxation &amp; Pre-Sleep</h3>
+        <div class="card">
+          <h4>Protocol</h4>
+          <ol>
+            <li>Exhale completely through mouth</li>
+            <li>Close mouth, inhale through nose for <strong>4 counts</strong></li>
+            <li>Hold breath for <strong>7 counts</strong></li>
+            <li>Exhale completely through mouth for <strong>8 counts</strong></li>
+            <li>Repeat 3–4 cycles maximum</li>
+          </ol>
+          <p style="font-size:0.85em;color:#aaa;margin:0.5rem 0 0;"><strong>Effect:</strong> The 8-count exhale extends vagal stimulation significantly longer than box breathing. Effective for pre-sleep anxiety and severe acute panic. Do not use if physically exerting — the breath-hold during high CO₂ demand can cause lightheadedness or fainting.</p>
+        </div>
+
+        <h3>When to Use Each Technique</h3>
+        <table class="data-table">
+          <thead><tr><th>Situation</th><th>Technique</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Active threat / patrol / exertion</td><td>Box breathing (4-4-4-4)</td><td>Safe at elevated heart rate; no extended holds</td></tr>
+            <tr><td>Before high-stakes decision</td><td>Box breathing, 2–4 cycles</td><td>Brings prefrontal cortex back online</td></tr>
+            <tr><td>Cannot sleep / pre-sleep anxiety</td><td>4-7-8, 3–4 cycles</td><td>Potent vagal stimulation; use lying down</td></tr>
+            <tr><td>Acute panic attack</td><td>Box breathing first, then 4-7-8</td><td>Box breathing is easier to maintain during peak panic</td></tr>
+            <tr><td>Teaching a child</td><td>"Belly breathing" — one hand on chest, one on belly</td><td>Visual feedback helps children; count on fingers</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ═══ SECTION 3: GRIEF & LOSS ═══ -->
+        <h2 id="grief">3. Grief &amp; Loss</h2>
+
+        <p>In a sustained crisis, loss is not an event — it is a condition. People may lose family members, community, identity, livelihood, and worldview simultaneously. Understanding grief as a process (not a problem to solve) determines whether a group develops resilience or fractures.</p>
+
+        <h3>Non-Linear Waves Model</h3>
+        <div class="alert-box info">
+          Grief does not follow the "5 stages" in order. The Kübler-Ross model was developed for <em>terminal patients</em>, not bereaved survivors. Modern grief research (Stroebe, Bonanno) supports a <strong>wave model</strong>: grief comes in unpredictable waves of intensity, interspersed with periods of normal functioning. Expecting linearity creates shame when the "wrong" stage recurs.
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <h4>Normal Grief — Expected Features</h4>
+            <ul>
+              <li>Waves of intense sadness that come without warning</li>
+              <li>Temporary difficulty concentrating or making decisions</li>
+              <li>Searching behavior (looking for the person in crowds)</li>
+              <li>Vivid dreams of the deceased</li>
+              <li>Anger, guilt, relief — sometimes simultaneously</li>
+              <li>Periods of normal function between waves</li>
+              <li>Gradually increasing wave spacing over months</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Complicated Grief — When to Intervene</h4>
+            <ul>
+              <li>No reduction in intensity after 6+ months</li>
+              <li>Complete inability to function in daily tasks</li>
+              <li>Total social withdrawal lasting &gt;2 weeks</li>
+              <li>Persistent denial that the death occurred</li>
+              <li>Active suicidal ideation</li>
+              <li>Substance use escalating as primary coping</li>
+              <li>Inability to stop searching behavior or visit death site compulsively</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Continuing Bonds Theory</h3>
+        <p>Research by Klass, Silverman, and Nickman (1996) overturned the assumption that "healthy grief" requires "letting go." <strong>Maintaining a continuing bond with the deceased</strong> — through rituals, objects, conversations, stories — is normal and psychologically healthy for most people. In a survival context, this is especially important: ancestors, traditions, and memories are resources, not pathologies.</p>
+
+        <div class="card">
+          <h4>Continuing Bond Practices That Help</h4>
+          <ul>
+            <li>Keeping a meaningful object of the deceased</li>
+            <li>Telling stories about the person — not just at memorials, but regularly</li>
+            <li>Naming new things (gardens, animals, children) after the lost</li>
+            <li>Annual commemorations tied to the community's calendar</li>
+            <li>Speaking directly to the deceased in private or ritual settings</li>
+          </ul>
+        </div>
+
+        <h3>Children's Grief by Developmental Stage</h3>
+        <div class="grief-stage-grid">
+          <div class="grief-stage-card">
+            <h4>Under 5 — Magical Thinking</h4>
+            <ul>
+              <li>May not understand permanence of death</li>
+              <li>Regression: bedwetting, thumb-sucking, clinginess</li>
+              <li>May ask the same questions repeatedly (testing permanence)</li>
+              <li>Concrete language only: "Daddy died — he can't come back"</li>
+              <li>Never say "went to sleep" or "passed away" — creates sleep phobia</li>
+              <li>Needs physical closeness and unbroken routine</li>
+            </ul>
+          </div>
+          <div class="grief-stage-card">
+            <h4>Ages 5–12 — Concrete Operational</h4>
+            <ul>
+              <li>Understands permanence; wants facts and mechanisms</li>
+              <li>May mask feelings to protect adults</li>
+              <li>School performance and concentration often drop</li>
+              <li>May take on caretaker role for younger siblings</li>
+              <li>Magical guilt: "Did I cause this?"</li>
+              <li>Benefit from tasks and roles — being "helpful" is healthy</li>
+            </ul>
+          </div>
+          <div class="grief-stage-card">
+            <h4>Ages 12–16 — Adolescent</h4>
+            <ul>
+              <li>Swings between peer withdrawal and family clinging</li>
+              <li>Anger as primary expression — may externalize onto any authority</li>
+              <li>May take on inappropriate adult roles ("man of the house")</li>
+              <li>Risk-taking behavior can escalate</li>
+              <li>Peer connection more important than adult connection at this stage</li>
+              <li>Need explicit permission to not be an adult</li>
+            </ul>
+          </div>
+          <div class="grief-stage-card">
+            <h4>Ages 16+ — Near-Adult</h4>
+            <ul>
+              <li>May function as adults outwardly while internally collapsing</li>
+              <li>Need explicit permission to grieve and not perform</li>
+              <li>Can process abstract concepts of meaning and legacy</li>
+              <li>Risk of delayed grief ("I'll deal with it later" — but later never comes)</li>
+              <li>Benefit from near-adult information with explicit acknowledgment of uncertainty</li>
+              <li>Strong sense of injustice — direct address is required</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Communal Grief Practices</h3>
+        <table class="data-table">
+          <thead><tr><th>Practice</th><th>Evidence</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Public mourning rituals</td><td>Strong — normalizes grief, creates collective witness</td><td>Even improvised rituals are effective. Formality matters less than community participation.</td></tr>
+            <tr><td>Story sharing about the deceased</td><td>Strong — activates continuing bonds, provides meaning</td><td>Create explicit story-sharing events. Don't wait for it to happen organically.</td></tr>
+            <tr><td>Silent companionship</td><td>Moderate — "presence without pressure" reduces isolation</td><td>Sitting with a grieving person without speaking is underrated.</td></tr>
+            <tr><td>Forced positive thinking ("They'd want you to be happy")</td><td>Harmful — invalidates grief, creates shame</td><td>Avoid. Let grief be what it is.</td></tr>
+            <tr><td>Grief timelines ("You should be over it by now")</td><td>Harmful — increases complicated grief risk</td><td>There is no schedule. Different loss types and attachment styles produce wildly different timelines.</td></tr>
+            <tr><td>Rushing burial/memorial due to "practicality"</td><td>Moderate harm — removes transitional ritual</td><td>When possible, invest at least minimal ritual even in crisis. A 10-minute ceremony matters.</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ═══ SECTION 4: PTSD ═══ -->
+        <h2 id="ptsd">4. PTSD Recognition &amp; Peer Support</h2>
+
+        <h3>Acute Stress Reaction vs PTSD</h3>
+        <div class="two-col">
+          <div class="card" style="border-left-color:#d4a840;">
+            <h4 style="color:#d4a840;">Acute Stress Reaction (ASR) — Normal</h4>
+            <p style="font-size:0.85em;color:#bbb;">Within first 4 weeks of traumatic event. Symptoms include flashbacks, nightmares, hypervigilance, emotional numbing, and avoidance. These are <strong>normal physiological responses</strong> to abnormal events. Most people recover naturally within 4 weeks with social support and safety.</p>
+          </div>
+          <div class="card" style="border-left-color:#e74c3c;">
+            <h4 style="color:#e74c3c;">PTSD — When Intervention Is Needed</h4>
+            <p style="font-size:0.85em;color:#bbb;">Symptoms persist beyond 4 weeks AND cause significant functional impairment. Not everyone exposed to trauma develops PTSD — approximately 20–30% after severe trauma. Risk factors: pre-existing mental health conditions, lack of social support, prior trauma, severity of event.</p>
+          </div>
+        </div>
+
+        <h3>4 PTSD Symptom Clusters (DSM-5)</h3>
+        <div class="ptsd-grid">
+          <div class="ptsd-cluster">
+            <h4>Intrusion</h4>
+            <ul>
+              <li>Flashbacks (reliving the event)</li>
+              <li>Nightmares about the trauma</li>
+              <li>Intrusive images or thoughts</li>
+              <li>Physiological reactivity to reminders</li>
+            </ul>
+          </div>
+          <div class="ptsd-cluster">
+            <h4>Avoidance</h4>
+            <ul>
+              <li>Avoiding thoughts/feelings about trauma</li>
+              <li>Avoiding external reminders (places, people)</li>
+              <li>Emotional numbing</li>
+              <li>Restricted range of affect</li>
+            </ul>
+          </div>
+          <div class="ptsd-cluster">
+            <h4>Negative Cognitions</h4>
+            <ul>
+              <li>"I am permanently damaged"</li>
+              <li>Persistent blame of self or others</li>
+              <li>Persistent negative emotional states</li>
+              <li>Feeling detached from others</li>
+            </ul>
+          </div>
+          <div class="ptsd-cluster">
+            <h4>Hyperarousal</h4>
+            <ul>
+              <li>Irritability / angry outbursts</li>
+              <li>Reckless or self-destructive behavior</li>
+              <li>Hypervigilance</li>
+              <li>Exaggerated startle response</li>
+              <li>Sleep disturbance</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>5-4-3-2-1 Grounding Technique</h3>
+        <div class="alert-box info">
+          <strong>Purpose:</strong> Interrupt flashback or dissociative state by anchoring attention to present sensory reality. Works by engaging the prefrontal cortex through deliberate sensory enumeration, reducing amygdala dominance.
+        </div>
+        <div class="card">
+          <ol>
+            <li><strong>5 things you can SEE</strong> — name each one aloud or silently. Be specific ("a crack in the wall running diagonally left," not just "wall").</li>
+            <li><strong>4 things you can TOUCH</strong> — physically make contact with each one. Notice texture, temperature, weight.</li>
+            <li><strong>3 things you can HEAR</strong> — stop and listen for sounds you were previously ignoring.</li>
+            <li><strong>2 things you can SMELL</strong> — lean in if necessary; even subtle smells count.</li>
+            <li><strong>1 thing you can TASTE</strong> — run tongue along teeth; notice any residual taste.</li>
+          </ol>
+          <p style="font-size:0.85em;color:#aaa;margin:0.5rem 0 0;">Repeat the cycle if needed. For children, adapt to "point to 5 blue things." For severe dissociation, physical intervention first: hold something cold (ice, cold metal), stomp feet, or clap hands hard.</p>
+        </div>
+
+        <h3>Peer Support: What to Say / What NOT to Say</h3>
+        <table class="data-table">
+          <thead><tr><th>Helpful</th><th>Harmful</th></tr></thead>
+          <tbody>
+            <tr><td>"I'm here. You don't have to talk."</td><td>"You need to talk about it."</td></tr>
+            <tr><td>"What happened to you was real and awful."</td><td>"Others have it worse."</td></tr>
+            <tr><td>"What would help you right now?"</td><td>"You should feel grateful to be alive."</td></tr>
+            <tr><td>"This is a normal reaction to an abnormal situation."</td><td>"You just need to be stronger."</td></tr>
+            <tr><td>"Take your time. There's no schedule."</td><td>"You need to move on."</td></tr>
+            <tr><td>"I won't share what you tell me without your permission."</td><td>"I told everyone because I was worried."</td></tr>
+            <tr><td>"I believe you."</td><td>"Are you sure that's what happened?"</td></tr>
+            <tr><td>[Sitting silently in proximity]</td><td>"Cheer up / look on the bright side."</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Trauma-Informed Leadership Framework</h3>
+        <p>The SAMHSA 6-principle model adapted for crisis leadership:</p>
+        <div class="info-grid">
+          <div class="card">
+            <h4>Predictability</h4>
+            <p style="font-size:0.85em;color:#bbb;">Trauma dysregulates the nervous system's ability to anticipate. Consistent schedules, announced changes, and reliable leaders directly counteract this.</p>
+          </div>
+          <div class="card">
+            <h4>Choice</h4>
+            <p style="font-size:0.85em;color:#bbb;">Trauma removes agency. Offering meaningful choices — even small ones — restores the sense of control that is central to recovery.</p>
+          </div>
+          <div class="card">
+            <h4>Collaboration</h4>
+            <p style="font-size:0.85em;color:#bbb;">Decisions made with people rather than for people build trust and reduce the re-traumatization of powerlessness.</p>
+          </div>
+          <div class="card">
+            <h4>Trustworthiness</h4>
+            <p style="font-size:0.85em;color:#bbb;">Follow through on every commitment. Say what you mean. Acknowledge what you don't know. Never lie about the situation — trauma survivors detect deception acutely.</p>
+          </div>
+          <div class="card">
+            <h4>Empowerment</h4>
+            <p style="font-size:0.85em;color:#bbb;">Identify and amplify individual strengths. Assign meaningful roles. Celebrate demonstrated competence.</p>
+          </div>
+          <div class="card">
+            <h4>Cultural Humility</h4>
+            <p style="font-size:0.85em;color:#bbb;">Grief and trauma expression are culturally specific. What looks like pathology may be normal cultural mourning. Ask before interpreting.</p>
+          </div>
+        </div>
+
+        <div class="alert-box warning">
+          <strong>Debriefing Warning:</strong> "Critical Incident Stress Debriefing" (CISD) — forcing trauma survivors to recount events in group settings shortly after the event — has been shown in multiple randomized controlled trials to increase PTSD risk rather than decrease it. Psychological First Aid (PFA) is the evidence-based alternative: provide safety, comfort, social connection, and practical assistance. Do not force narrative disclosure.
+        </div>
+
+        <!-- ═══ SECTION 5: SUICIDE RISK ═══ -->
+        <h2 id="suicide">5. Suicide Risk &amp; Intervention</h2>
+
+        <div class="alert-box danger">
+          <strong>Critical Research Finding:</strong> Asking someone directly about suicide does NOT increase the risk. Multiple studies show that direct, compassionate inquiry <em>reduces</em> suicide risk by reducing isolation and communicating that someone cares. Fear of asking is the primary reason people die who could have been helped.
+        </div>
+
+        <h3>Warning Signs Table</h3>
+        <table class="data-table">
+          <thead><tr><th>Category</th><th>Warning Signs</th><th>Urgency Level</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Direct Statements</strong></td>
+              <td>"I wish I were dead," "everyone would be better off without me," "I can't keep going," "I just want it to stop"</td>
+              <td style="color:#e74c3c;"><strong>Immediate</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Behavioral</strong></td>
+              <td>Giving away prized possessions, saying final goodbyes, sudden calm after prolonged depression, researching methods, putting affairs in order</td>
+              <td style="color:#e74c3c;"><strong>Immediate</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Change Pattern</strong></td>
+              <td>Sudden withdrawal from group, sleeping excessively or not at all, giving up on tasks and planning, loss of interest in survival activities</td>
+              <td style="color:#e67e22;"><strong>High</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Contextual Risk Factors</strong></td>
+              <td>Recent major loss, prior attempt history, social isolation, access to lethal means, perceived burdensomeness ("I'm a burden to everyone")</td>
+              <td style="color:#d4a840;"><strong>Elevated</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>How to Ask Directly</h3>
+        <div class="card">
+          <h4>Safe Messaging Script</h4>
+          <p style="font-size:0.88em;color:#ccc;">Find a private moment. Sit at the same level. Use calm eye contact. Say:</p>
+          <blockquote style="border-left:3px solid var(--amber);margin:0.75rem 0;padding:0.5rem 1rem;background:#0a0f0a;color:#ddd;font-size:0.9em;">
+            "I've noticed you seem really low lately, and I care about you. I want to ask you directly — are you thinking about ending your life?"
+          </blockquote>
+          <p style="font-size:0.85em;color:#aaa;">If yes: "Thank you for trusting me with that. I'm not going anywhere. Let's talk about what's happening."</p>
+          <p style="font-size:0.85em;color:#aaa;">If no: "Okay. I'm still here if things change or you want to talk. I meant what I said."</p>
+          <p style="font-size:0.85em;color:#888;margin-top:0.5rem;"><strong>What NOT to do:</strong> Do not promise secrecy. Do not argue about whether they should feel this way. Do not minimize ("you have so much to live for"). Do not leave someone in acute crisis alone.</p>
+        </div>
+
+        <h3>Safety Planning — 5 Steps Without a Professional</h3>
+        <div class="safety-plan">
+          <div class="safety-step">
+            <strong>Identify warning signs:</strong> Work together to name the specific thoughts, images, moods, and behaviors that signal a crisis is building. Write them down.
+          </div>
+          <div class="safety-step">
+            <strong>Internal coping strategies:</strong> Things the person can do alone to distract or self-soothe: physical exercise, breathing techniques, specific locations that feel safe, repetitive tasks.
+          </div>
+          <div class="safety-step">
+            <strong>Social contacts for distraction:</strong> Name 2–3 people the person can contact to take their mind off the crisis (not to talk about the crisis — to be distracted).
+          </div>
+          <div class="safety-step">
+            <strong>People to ask for help:</strong> Name 1–2 trusted people in the group who know about the crisis and have agreed to be available. Include how to reach them.
+          </div>
+          <div class="safety-step">
+            <strong>Means restriction:</strong> Remove or restrict access to lethal means — firearms, medications, weapons. This single intervention reduces suicide completion rates significantly. Do this practically and without shame.
+          </div>
+        </div>
+
+        <h3>Follow-Up Protocol</h3>
+        <ul>
+          <li><strong>Never leave alone</strong> in acute crisis — assign a companion rotation if needed</li>
+          <li>Check in at regular intervals (daily minimum after a disclosure)</li>
+          <li>Re-assess every 24–48 hours: "How are you today? Has anything changed?"</li>
+          <li>Adjust means restriction as risk level changes</li>
+          <li>Document disclosures and check-ins in a private record</li>
+          <li>Brief other trusted group members as appropriate — shared knowledge saves lives</li>
+        </ul>
+
+        <div class="alert-box info">
+          <strong>Secondary Traumatic Stress for Interveners:</strong> Responding to someone in suicidal crisis is traumatic for the responder. After the acute phase: debrief with another trusted adult, name what you felt, take rest. Compassion fatigue from repeated crisis response is real and requires the same attention as primary trauma.
+        </div>
+
+        <!-- ═══ SECTION 6: DECISION MAKING ═══ -->
+        <h2 id="decisions">6. Decision Making Under Stress</h2>
+
+        <h3>STOP Method</h3>
+        <div class="info-grid">
+          <div class="card">
+            <h4 style="font-size:1.4em;color:var(--amber);">S</h4>
+            <h4>Stop</h4>
+            <p style="font-size:0.85em;color:#bbb;">Physically stop all action. Movement creates urgency creates panic. Stopping interrupts the momentum toward bad decisions.</p>
+          </div>
+          <div class="card">
+            <h4 style="font-size:1.4em;color:var(--amber);">T</h4>
+            <h4>Think</h4>
+            <p style="font-size:0.85em;color:#bbb;">What do I actually know? What am I assuming? What are my options? This 30-second pause activates prefrontal cortex function.</p>
+          </div>
+          <div class="card">
+            <h4 style="font-size:1.4em;color:var(--amber);">O</h4>
+            <h4>Observe</h4>
+            <p style="font-size:0.85em;color:#bbb;">Gather information before acting. Look around. Check all four directions. Assess group status. Check resources.</p>
+          </div>
+          <div class="card">
+            <h4 style="font-size:1.4em;color:var(--amber);">P</h4>
+            <h4>Plan</h4>
+            <p style="font-size:0.85em;color:#bbb;">Select a course of action. Communicate it. Set a time to re-assess. The plan can be simple — the value is in the process, not the perfection.</p>
+          </div>
+        </div>
+
+        <h3>Decision Fatigue</h3>
+        <div class="alert-box warning">
+          Cognitive resources for self-regulation and decision-making are finite and deplete with use. Research suggests significant degradation occurs after approximately 200 discrete decisions per day (lower under stress, sleep deprivation, or inadequate nutrition). The effect is real regardless of whether you feel tired.
+        </div>
+        <ul>
+          <li><strong>SOPs (Standard Operating Procedures)</strong> reduce decision load by converting recurring choices into automatic responses — this is why military and emergency services use them. Develop SOPs for daily operations (water collection, food prep, guard rotation) to preserve cognitive resources for novel problems.</li>
+          <li><strong>Consolidate decisions</strong> into scheduled windows (morning planning meeting) rather than distributing them throughout the day</li>
+          <li><strong>Delegate irreversible decisions</strong> to rested individuals; reserve critical choices for best cognitive windows (mid-morning, post-meal)</li>
+          <li><strong>Nutrition matters</strong>: glucose availability directly affects prefrontal cortex function — hunger impairs judgment measurably</li>
+        </ul>
+
+        <h3>Cognitive Biases in Survival Situations</h3>
+        <table class="data-table">
+          <thead><tr><th>Bias</th><th>How It Manifests</th><th>Countermeasure</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Confirmation Bias</strong></td>
+              <td>Ignoring evidence that the camp is compromised, that the plan is failing, or that someone is dangerous — seeking only confirming information</td>
+              <td>Actively assign someone to argue the opposite case. Require "what would change my mind?" before finalizing decisions.</td>
+            </tr>
+            <tr>
+              <td><strong>Sunk Cost Fallacy</strong></td>
+              <td>Staying in a dangerous location because you spent 3 weeks building it. Continuing a failed foraging route because of past investment.</td>
+              <td>Focus on future value only: "Given what we know NOW, what is the best option from THIS point forward?"</td>
+            </tr>
+            <tr>
+              <td><strong>Normalcy Bias</strong></td>
+              <td>"It can't be as bad as it looks" — underestimating threat magnitude; delaying response to obvious danger</td>
+              <td>Worst-case planning. "If this IS as bad as it could be, what do we do?" Run the scenario explicitly.</td>
+            </tr>
+            <tr>
+              <td><strong>Optimism Bias</strong></td>
+              <td>"It'll work out" — underestimating probability of negative outcomes; failing to prepare for predictable problems</td>
+              <td>Pre-mortem analysis: "Imagine we failed. What went wrong?" Systematically identify failure points before committing.</td>
+            </tr>
+            <tr>
+              <td><strong>Hindsight Bias</strong></td>
+              <td>Post-crisis blame: "We should have known" — treating past decisions as obviously wrong using knowledge unavailable at the time</td>
+              <td>Decision logs with timestamps show what was known when. Evaluate decisions by process quality, not outcome.</td>
+            </tr>
+            <tr>
+              <td><strong>Authority Bias</strong></td>
+              <td>Following a confident leader regardless of competence because they sound certain</td>
+              <td>Separate role authority from domain expertise. "Who has the most relevant experience with THIS specific problem?"</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Group Decision Making</h3>
+        <div class="card">
+          <h4>When Consensus Fails</h4>
+          <p style="font-size:0.88em;color:#bbb;">Groups under stress cannot achieve consensus on every decision — attempting to do so consumes resources and creates resentment. Establish in advance:</p>
+          <ul style="font-size:0.88em;color:#bbb;">
+            <li><strong>Decision type classification:</strong> Routine (SOP handles it), tactical (designated lead decides), strategic (group input required), emergency (fastest competent person decides alone)</li>
+            <li><strong>Final authority:</strong> Who has final say when consensus cannot be reached? Establish this before the crisis. Legitimacy requires prior agreement, not just assertion.</li>
+            <li><strong>Veto rights:</strong> Are there decisions any individual can block? (Health and safety decisions are candidates.) Clarify scope.</li>
+            <li><strong>Decision record:</strong> Log who decided what and why. Reduces post-hoc blame and allows learning.</li>
+          </ul>
+        </div>
+
+        <!-- DECISION LOG WIDGET -->
+        <h3 id="decision-log">Decision Log Template</h3>
+        <div class="decision-log-widget no-print" id="decision-log-widget">
+          <p style="font-size:0.85em;color:#aaa;margin:0 0 0.75rem;">Track decisions to counter hindsight bias, distribute accountability, and enable post-crisis learning. Data is saved in your browser.</p>
+          <div class="log-input-row">
+            <input type="text" id="log-who" placeholder="Who decided">
+            <input type="text" id="log-what" placeholder="Decision made">
+            <input type="text" id="log-why" placeholder="Reasoning at the time">
+            <input type="text" id="log-outcome" placeholder="Outcome (fill later)">
+            <button class="btn btn-sm btn-amber" id="log-add">Add</button>
+          </div>
+          <table class="decision-log-table" id="log-table">
+            <thead>
+              <tr>
+                <th>Date/Time</th>
+                <th>Who</th>
+                <th>Decision</th>
+                <th>Reasoning</th>
+                <th>Outcome</th>
+                <th class="no-print">Del</th>
+              </tr>
+            </thead>
+            <tbody id="log-tbody"></tbody>
+          </table>
+          <div class="log-controls">
+            <button class="btn btn-sm btn-ghost" id="log-clear">Clear All</button>
+            <button class="btn btn-sm btn-ghost" id="log-print">Print Log</button>
+          </div>
+        </div>
+
+        <!-- ═══ SECTION 7: LEADERSHIP & BURNOUT ═══ -->
+        <h2 id="leadership">7. Leadership &amp; Burnout</h2>
+
+        <h3>Compassion Fatigue vs Burnout — Different Conditions</h3>
+        <div class="two-col">
+          <div class="card" style="border-left-color:#cc6677;">
+            <h4 style="color:#cc6677;">Compassion Fatigue</h4>
+            <p style="font-size:0.85em;color:#bbb;">Secondary traumatic stress from absorbing others' trauma. Develops rapidly (weeks). Key symptom: emotional numbing, inability to feel empathy, intrusive images of others' trauma. Specific to caregiving roles. Recovery: distance from caregiving, processing own emotional response, peer supervision.</p>
+          </div>
+          <div class="card" style="border-left-color:#e67e22;">
+            <h4 style="color:#e67e22;">Burnout</h4>
+            <p style="font-size:0.85em;color:#bbb;">Chronic exhaustion from sustained overwork without adequate recovery. Develops over months. Key symptom: cynicism, depersonalization, reduced efficacy, physical illness. Not specific to emotional content — a logistics manager burns out too. Recovery: sustained workload reduction, rest, restored sense of competence.</p>
+          </div>
+        </div>
+
+        <h3>Burnout Stages</h3>
+        <table class="data-table burnout-table">
+          <thead><tr><th>Stage</th><th>Behavioral Signs</th><th>Physical Signs</th><th>Response Required</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="burnout-early"><strong>Early</strong></td>
+              <td class="burnout-early">Enthusiasm decline, increased inefficiency, taking shortcuts, difficulty delegating, minor irritability</td>
+              <td class="burnout-early">Disrupted sleep, minor headaches, tension in neck/shoulders</td>
+              <td>Mandatory scheduled rest, reduce decision load, explicit acknowledgment</td>
+            </tr>
+            <tr>
+              <td class="burnout-middle"><strong>Middle</strong></td>
+              <td class="burnout-middle">Chronic exhaustion, cynicism, emotional detachment, errors in judgment, resentment of others</td>
+              <td class="burnout-middle">Recurrent illness (immune suppression), significant sleep disruption, appetite changes</td>
+              <td>Temporary role rotation, supported leave from leadership, therapeutic conversation</td>
+            </tr>
+            <tr>
+              <td class="burnout-late"><strong>Late</strong></td>
+              <td class="burnout-late">Despair, inability to function, complete withdrawal or collapse, suicidal ideation possible</td>
+              <td class="burnout-late">Physical breakdown, inability to perform basic self-care, significant weight change</td>
+              <td>Remove from role entirely, 24/7 support, treat as medical emergency, full rest period (weeks minimum)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Dark Triad Recognition</h3>
+        <div class="alert-box warning">
+          Crisis environments selectively attract and elevate individuals with dark triad personality traits. Vulnerability in others, chaotic systems without oversight, and the availability of resources create ideal conditions for exploitation. Recognizing these patterns early — before authority becomes entrenched — is critical for group safety.
+        </div>
+        <div class="dark-triad-grid">
+          <div class="dark-triad-card">
+            <h4>Narcissism</h4>
+            <ul>
+              <li>Grandiose self-assessment</li>
+              <li>Requires constant admiration</li>
+              <li>Cannot tolerate criticism</li>
+              <li>Exploits others' vulnerabilities</li>
+              <li>Takes credit for others' work</li>
+              <li>Blames others for failures</li>
+            </ul>
+          </div>
+          <div class="dark-triad-card">
+            <h4>Machiavellianism</h4>
+            <ul>
+              <li>Calculative and strategic manipulation</li>
+              <li>Long-term planning for personal gain</li>
+              <li>Deceptive — lies are tools</li>
+              <li>Builds alliances instrumentally</li>
+              <li>Identifies and exploits others' weaknesses</li>
+              <li>Amoral — ends justify means</li>
+            </ul>
+          </div>
+          <div class="dark-triad-card">
+            <h4>Psychopathy</h4>
+            <ul>
+              <li>Lack of empathy or remorse</li>
+              <li>Impulsive risk-taking</li>
+              <li>Superficial charm</li>
+              <li>Callousness in crisis</li>
+              <li>Parasitic lifestyle if unchecked</li>
+              <li>Violence without emotional context</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>Countermeasures for Dark Triad Leaders</h4>
+          <ul>
+            <li><strong>Structural checks:</strong> No single person controls resources, communication, and security simultaneously</li>
+            <li><strong>Accountability logs:</strong> All major decisions are recorded and visible</li>
+            <li><strong>Protected dissent channels:</strong> Anonymous question/concern mechanisms</li>
+            <li><strong>Distributed trust:</strong> Multiple people have relationships with all group members — no single gatekeeper</li>
+            <li><strong>Regular group welfare check-ins</strong> that happen outside the leader's presence</li>
+            <li><strong>Pre-established removal process:</strong> How is a leader removed if necessary? Agree before the crisis.</li>
+          </ul>
+        </div>
+
+        <h3>Mandatory Rest for Leaders</h3>
+        <p>Leaders resist rest for predictable reasons: identity is fused with the role, they fear information will be lost, and they perceive rest as abandonment of responsibility. These are rationalizations of cortisol-impaired judgment. Strategies to enforce mandatory rest:</p>
+        <ul>
+          <li>Rest is scheduled in the group SOP — not optional, not granted by the leader to themselves</li>
+          <li>Designate a temporary deputy who receives full briefing before leader rest</li>
+          <li>Frame rest as a <em>performance obligation</em> — "the group needs you functional tomorrow"</li>
+          <li>Leadership rotation prevents single points of failure and prevents the leader's identity from becoming inseparable from the role</li>
+        </ul>
+
+        <!-- ═══ SECTION 8: GROUP DYNAMICS ═══ -->
+        <h2 id="group-dynamics">8. Group Dynamics</h2>
+
+        <h3>Cabin Fever</h3>
+        <div class="alert-box warning">
+          <strong>Timeline:</strong> The most dangerous period for cabin fever and interpersonal conflict is typically <strong>weeks 2–4</strong> of enforced confinement or close-quarters living. Week 1 benefits from novelty and adrenaline. By week 2, reality sets in. By week 4, small irritants have compounded into genuine conflicts.
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <h4>Cabin Fever Symptoms</h4>
+            <ul>
+              <li>Disproportionate irritability to minor triggers</li>
+              <li>Intense restlessness and pacing</li>
+              <li>Difficulty concentrating</li>
+              <li>Distorted time perception (days blur)</li>
+              <li>Suspicious interpretation of others' behavior</li>
+              <li>Depression and hopelessness</li>
+              <li>Sleep disruption</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Prevention Strategies</h4>
+            <ul>
+              <li>Rotate sleeping arrangements and work assignments periodically</li>
+              <li>Designate "alone time" as a scheduled, respected resource</li>
+              <li>Physical exercise — non-negotiable daily minimum</li>
+              <li>Novel tasks — learning something new preserves engagement</li>
+              <li>Regular outdoor exposure regardless of conditions</li>
+              <li>Social anchor points — structured group interactions at set times</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Scapegoating Mechanism</h3>
+        <p>Under chronic stress, groups unconsciously externalize their anxiety onto an identifiable individual or subgroup. The scapegoat becomes the symbolic container of the group's collective fear, failure, and frustration. The mechanism is unconscious — the group genuinely believes their grievances are the cause of their discomfort.</p>
+        <div class="card">
+          <h4>Early Warning Signs of Scapegoating</h4>
+          <ul>
+            <li>Disproportionate blame attributed to one person for multiple unrelated problems</li>
+            <li>Rapid consensus forming against an individual (suspicious when everyone agrees too quickly)</li>
+            <li>Exclusion from group activities or information sharing</li>
+            <li>Mockery that continues after the target has disengaged</li>
+            <li>Group mood visibly improves when discussing the scapegoat's faults</li>
+          </ul>
+          <h4 style="margin-top:0.75rem;">Intervention</h4>
+          <ul>
+            <li>Name it explicitly: "I notice we keep returning to X as the source of all our problems."</li>
+            <li>Direct the stress conversation to its actual sources: resource scarcity, uncertainty, loss</li>
+            <li>Privately support the targeted individual — reduce their isolation</li>
+            <li>Assign the targeted individual to a specific valued role</li>
+          </ul>
+        </div>
+
+        <h3>In-Group / Out-Group Formation</h3>
+        <p>Sustained stress accelerates tribal boundary formation. Subgroups based on prior relationship, skill type, or background form natural coalitions that can calcify into factions. Early intervention prevents zero-sum competition from replacing collaborative survival.</p>
+        <ul>
+          <li><strong>Recognition signs:</strong> Separate eating arrangements forming organically, information not flowing between subgroups, jokes about "us" vs "them," resource distribution disputes along group lines</li>
+          <li><strong>Intervention:</strong> Deliberately mix groups for task assignments, create cross-group dependencies (you cannot complete the task alone — you need someone from the other group), celebrate cross-group collaboration explicitly</li>
+        </ul>
+
+        <h3>Rumor Control Protocol</h3>
+        <div class="card">
+          <h4>Information Vacuum Law</h4>
+          <p style="font-size:0.85em;color:#bbb;">Information vacuums fill with rumors — always. People under stress will generate explanations for uncertainty; those explanations trend toward worst-case scenarios. The only defense is filling the vacuum with verified information faster than rumors can form.</p>
+          <ol style="font-size:0.85em;color:#bbb;">
+            <li><strong>Designated information officer</strong> — single source of official updates, identified by name to the group</li>
+            <li><strong>Regular briefings</strong> — scheduled, not crisis-triggered. Daily or twice-daily. Even "no new information" is information.</li>
+            <li><strong>Anonymous question mechanism</strong> — physical box or private note system allows questions without social risk</li>
+            <li><strong>Rumor acknowledgment</strong> — address specific rumors by name: "I've heard people saying X. Here is what I actually know."</li>
+            <li><strong>Uncertainty honesty</strong> — "I don't know yet, but I will tell you by [specific time]" is far more trust-building than false certainty</li>
+          </ol>
+        </div>
+
+        <h3>Fair Process Theory</h3>
+        <div class="alert-box info">
+          Research by Kim and Mauborgne shows that people accept outcomes they don't like — including bad news — if they believe the <em>process</em> that produced the outcome was fair. Procedural justice requires: (1) input was considered, (2) the decision rationale was explained, and (3) the same rules applied to everyone. Groups that practice fair process survive bad outcomes significantly better than those that don't.
+        </div>
+
+        <h3>Conflict Escalation Model</h3>
+        <div class="conflict-stages">
+          <div class="conflict-stage cs-1">
+            <strong>Stage 1</strong>
+            Disagreement
+            <div style="font-size:0.85em;color:#aaa;margin-top:0.3rem;">Issue-focused, rational, solvable</div>
+          </div>
+          <div class="conflict-stage cs-2">
+            <strong>Stage 2</strong>
+            Tension
+            <div style="font-size:0.85em;color:#aaa;margin-top:0.3rem;">Personal, parties harden, other grievances recruited</div>
+          </div>
+          <div class="conflict-stage cs-3">
+            <strong>Stage 3</strong>
+            Crisis
+            <div style="font-size:0.85em;color:#aaa;margin-top:0.3rem;">Emotional flooding, coalitions form, public confrontations</div>
+          </div>
+          <div class="conflict-stage cs-4">
+            <strong>Stage 4</strong>
+            Freeze / Fight
+            <div style="font-size:0.85em;color:#aaa;margin-top:0.3rem;">Communication breakdown, threat of violence, all-or-nothing framing</div>
+          </div>
+          <div class="conflict-stage cs-5">
+            <strong>Stage 5</strong>
+            Resolution or Collapse
+            <div style="font-size:0.85em;color:#aaa;margin-top:0.3rem;">Mediated solution — or group fracture / expulsion</div>
+          </div>
+        </div>
+
+        <h3>Conflict De-Escalation Flowchart</h3>
+        <div class="flowchart-wrap">
+          <svg viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto;" aria-label="Conflict de-escalation flowchart">
+            <defs>
+              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#c9a94e"/>
+              </marker>
+            </defs>
+            <!-- Start -->
+            <rect x="250" y="10" width="200" height="40" rx="20" fill="#1a2a1a" stroke="#4a9a4a" stroke-width="1.5"/>
+            <text x="350" y="35" text-anchor="middle" fill="#7acc7a" font-size="13" font-family="sans-serif">Conflict Detected</text>
+            <!-- Arrow down -->
+            <line x1="350" y1="50" x2="350" y2="90" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <!-- Assess stage -->
+            <rect x="200" y="90" width="300" height="40" rx="4" fill="#14140a" stroke="#5c4a1e" stroke-width="1.5"/>
+            <text x="350" y="110" text-anchor="middle" fill="#d4a840" font-size="12" font-family="sans-serif">Assess: Is violence imminent?</text>
+            <text x="350" y="124" text-anchor="middle" fill="#888" font-size="10" font-family="sans-serif">Physical posturing, raised voices, weapons visible?</text>
+            <!-- Yes / No branches -->
+            <line x1="350" y1="130" x2="350" y2="155" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <!-- Diamond -->
+            <polygon points="350,155 430,185 350,215 270,185" fill="#1a0a0a" stroke="#8b0000" stroke-width="1.5"/>
+            <text x="350" y="190" text-anchor="middle" fill="#e07070" font-size="12" font-family="sans-serif">Yes</text>
+            <!-- Yes path right -->
+            <line x1="430" y1="185" x2="540" y2="185" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <rect x="540" y="165" width="150" height="40" rx="4" fill="#1a0505" stroke="#8b0000" stroke-width="1.5"/>
+            <text x="615" y="181" text-anchor="middle" fill="#e07070" font-size="11" font-family="sans-serif">Physical separation</text>
+            <text x="615" y="197" text-anchor="middle" fill="#e07070" font-size="11" font-family="sans-serif">Remove audience</text>
+            <!-- No path down -->
+            <text x="295" y="205" text-anchor="middle" fill="#7acc7a" font-size="11" font-family="sans-serif">No</text>
+            <line x1="350" y1="215" x2="350" y2="245" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <!-- Step 1 -->
+            <rect x="180" y="245" width="340" height="40" rx="4" fill="#0a1a1a" stroke="#2a5a5a" stroke-width="1.5"/>
+            <text x="350" y="262" text-anchor="middle" fill="#7acccc" font-size="12" font-family="sans-serif">Separate parties — neutral locations</text>
+            <text x="350" y="277" text-anchor="middle" fill="#888" font-size="10" font-family="sans-serif">No audience. Cool-down period (minimum 20 minutes).</text>
+            <line x1="350" y1="285" x2="350" y2="315" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <!-- Step 2 -->
+            <rect x="180" y="315" width="340" height="40" rx="4" fill="#0a1a1a" stroke="#2a5a5a" stroke-width="1.5"/>
+            <text x="350" y="332" text-anchor="middle" fill="#7acccc" font-size="12" font-family="sans-serif">Individual listening — mediator hears each side</text>
+            <text x="350" y="347" text-anchor="middle" fill="#888" font-size="10" font-family="sans-serif">"What happened?" — no interruptions, no judgment</text>
+            <line x1="350" y1="355" x2="350" y2="385" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <!-- Step 3 -->
+            <rect x="180" y="385" width="340" height="40" rx="4" fill="#0a1a1a" stroke="#2a5a5a" stroke-width="1.5"/>
+            <text x="350" y="402" text-anchor="middle" fill="#7acccc" font-size="12" font-family="sans-serif">Joint session — name the core needs, not positions</text>
+            <text x="350" y="417" text-anchor="middle" fill="#888" font-size="10" font-family="sans-serif">"You both need X. Let's find a solution that meets both."</text>
+            <line x1="350" y1="425" x2="350" y2="455" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <!-- End -->
+            <rect x="240" y="455" width="220" height="30" rx="15" fill="#0f1a0f" stroke="#4a9a4a" stroke-width="1.5"/>
+            <text x="350" y="474" text-anchor="middle" fill="#7acc7a" font-size="12" font-family="sans-serif">Agreement + Written Record</text>
+          </svg>
+        </div>
+
+        <!-- ═══ SECTION 9: MORALE ═══ -->
+        <h2 id="morale">9. Morale Systems</h2>
+
+        <p>Morale is not a feeling — it is a system. It can be built deliberately, maintained through process, and repaired when it breaks. Allowing morale to be entirely determined by external circumstances is a leadership failure.</p>
+
+        <h3>Shared Rituals as Psychological Anchors</h3>
+        <div class="info-grid">
+          <div class="card">
+            <h4>Daily Rituals</h4>
+            <ul>
+              <li>Morning announcement — same time, same format</li>
+              <li>Group meal (even if small) — shared eating is irreplaceable</li>
+              <li>Evening check-in or debrief</li>
+              <li>Designated "quiet hours" — respected boundaries</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Weekly Rituals</h4>
+            <ul>
+              <li>Sabbath equivalent — one protected rest day</li>
+              <li>Group meeting with open agenda</li>
+              <li>Recognition of work done (explicit, public)</li>
+              <li>Special food if possible — small celebrations matter</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Milestone Rituals</h4>
+            <ul>
+              <li>Birthdays — always acknowledged</li>
+              <li>Month markers ("We have been here one month")</li>
+              <li>Achievement celebrations — first harvest, completed build</li>
+              <li>Memorials for losses — don't skip these</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Music — Neurological Effects</h3>
+        <p>Music has some of the strongest documented neurological effects of any non-pharmacological intervention:</p>
+        <table class="data-table">
+          <thead><tr><th>Effect</th><th>Mechanism</th><th>Application</th></tr></thead>
+          <tbody>
+            <tr><td>Dopamine release</td><td>Anticipatory reward response to musical expectation and resolution</td><td>Music during work increases sustained output; familiar music most effective</td></tr>
+            <tr><td>Social synchrony</td><td>Group musical activity (even clapping) synchronizes neural oscillations, increasing prosocial behavior</td><td>Group singing, drumming, or clapping sessions for cohesion</td></tr>
+            <tr><td>Pain reduction</td><td>Endogenous opioid release triggered by music listening</td><td>Play music during medical procedures; reduces perceived pain intensity</td></tr>
+            <tr><td>Cortisol reduction</td><td>HPA axis modulation via limbic structures</td><td>Calm instrumental music during meals and pre-sleep</td></tr>
+          </tbody>
+        </table>
+        <div class="alert-box info">
+          <strong>Grid-Down Music:</strong> Prioritize acoustic instruments — guitar, violin, harmonica, hand drums, recorder/flute, voice. These require no electricity and survive physically. Include instrument maintenance materials in supply planning. Skill transfer (music teaching) is also a high-value morale activity.
+        </div>
+
+        <h3>Story, Narrative, and Shared Identity</h3>
+        <p>Groups that survive sustained hardship share a coherent narrative: who they are, where they came from, what they value, and why their survival matters. This narrative must be actively maintained — it does not arise automatically.</p>
+        <ul>
+          <li><strong>Founding story:</strong> How did this group come together? Tell it regularly. Details matter — specific names, specific choices, specific moments of grace.</li>
+          <li><strong>Values naming:</strong> What does this group stand for? Explicit values (stated, not assumed) create behavioral expectations and conflict resolution frameworks.</li>
+          <li><strong>Future story:</strong> What are we building toward? Groups with a vision of what comes next endure present hardship better than those living only in the present crisis.</li>
+          <li><strong>Memory keeping:</strong> Written or audio records of what happened. People who know their story is being recorded experience more meaning in daily events.</li>
+        </ul>
+
+        <h3>Dark Humor</h3>
+        <p>Gallows humor is a legitimate, evidence-supported coping mechanism. It creates distance from overwhelming events, builds group cohesion through shared perspective, and demonstrates mastery over trauma. It is psychologically healthy within limits.</p>
+        <div class="two-col">
+          <div class="card" style="border-left-color:#7acc7a;">
+            <h4 style="color:#7acc7a;">Healthy Dark Humor</h4>
+            <ul>
+              <li>Shared among those who have experienced the same event</li>
+              <li>The butt of the joke is the situation, not a person</li>
+              <li>Creates solidarity and signals "we can survive this"</li>
+              <li>Everyone feels included in the joke</li>
+              <li>Can be stopped when someone signals discomfort</li>
+            </ul>
+          </div>
+          <div class="card" style="border-left-color:#e74c3c;">
+            <h4 style="color:#e74c3c;">When It Becomes Dehumanization</h4>
+            <ul>
+              <li>Targets a person's identity, not the situation</li>
+              <li>Serves to exclude or humiliate a group member</li>
+              <li>Continues past discomfort signals</li>
+              <li>Normalizes callousness toward real suffering</li>
+              <li>Used to avoid processing — only ever humor, never acknowledgment</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Purpose and Meaning — Logotherapy Applied</h3>
+        <div class="alert-box info">
+          Viktor Frankl, who developed logotherapy while imprisoned in Nazi concentration camps, observed that survival correlated strongly with the <strong>ability to find meaning in suffering</strong> — not the absence of suffering. "Those who have a 'why' to live can bear almost any 'how.'" (Nietzsche, quoted by Frankl.)
+        </div>
+        <div class="card">
+          <h4>Three Sources of Meaning (Frankl)</h4>
+          <ol>
+            <li><strong>What we give to the world:</strong> Work, creativity, contribution — even in survival, every person can contribute something</li>
+            <li><strong>What we receive from the world:</strong> Love, beauty, truth — actively noticing what remains good</li>
+            <li><strong>The stance we take toward suffering:</strong> We cannot always choose our circumstances; we can always choose our response to them</li>
+          </ol>
+          <p style="font-size:0.85em;color:#aaa;margin:0.5rem 0 0;">In practice: assign meaningful roles, celebrate contribution explicitly, create space for beauty (art, music, natural observation), acknowledge suffering directly rather than minimizing it, and connect individual effort to group survival.</p>
+        </div>
+
+        <!-- ═══ SECTION 10: CHILDREN ═══ -->
+        <h2 id="children">10. Children in Survival</h2>
+
+        <h3>Age-Appropriate Honesty</h3>
+        <table class="data-table">
+          <thead><tr><th>Age</th><th>Cognitive Level</th><th>What to Say</th><th>What to Avoid</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Under 5</strong></td>
+              <td>Pre-operational; magical thinking; egocentric</td>
+              <td>"Some bad things happened but the grown-ups are keeping you safe. You are loved. You will be okay." Repeat daily.</td>
+              <td>Details about violence or death; complex explanations; "went to sleep" language; visible adult panic</td>
+            </tr>
+            <tr>
+              <td><strong>Age 5–12</strong></td>
+              <td>Concrete operational; seeks facts and fairness; may mask feelings</td>
+              <td>Basic facts + reassurance + a specific role ("Your job is to watch the little ones while we do X"). Honest uncertainty: "I don't know when/if X. Here's what I do know."</td>
+              <td>Dismissing questions, lying about facts they'll discover anyway, assigning adult decision-making burden</td>
+            </tr>
+            <tr>
+              <td><strong>Age 12–16</strong></td>
+              <td>Formal operational; abstract reasoning; peer-primary</td>
+              <td>More facts + real responsibility + regular check-ins about their emotional state. Peer connection must be protected. Permission to not always be mature: "You don't have to be strong all the time."</td>
+              <td>Full adult information burden; treating them as fully adult; dismissing peer relationships as trivial</td>
+            </tr>
+            <tr>
+              <td><strong>Age 16+</strong></td>
+              <td>Near-adult; can process abstraction and mortality</td>
+              <td>Near-full information + genuine shared responsibility + explicit permission to grieve. They need to know they matter, not just that they're useful.</td>
+              <td>Treating as fully adult in terms of emotional responsibility; assuming they're fine because they look functional</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Routine as Psychological Anchor</h3>
+        <p>Children's nervous systems regulate through predictability. Even improvised structure dramatically outperforms no structure. Components of effective crisis routine for children:</p>
+        <ul>
+          <li><strong>Learning time:</strong> 1–2 hours daily of any organized knowledge activity — mathematics, reading, skill instruction</li>
+          <li><strong>Physical activity:</strong> Structured play or exercise period — gross motor activity metabolizes cortisol</li>
+          <li><strong>Creative time:</strong> Drawing, storytelling, music, building — unstructured creativity time</li>
+          <li><strong>Social time:</strong> Peer interaction, especially for adolescents</li>
+          <li><strong>Bedtime ritual:</strong> Same sequence every night — bath/wash, story or reflection, same sleep location</li>
+        </ul>
+
+        <h3>Trauma Play — Normal and Healthy</h3>
+        <div class="alert-box info">
+          Children who act out scary scenarios through play — "zombies attacking," "the bad people coming," "burying" toys — are processing trauma through their primary developmental tool: play. This is a healthy sign. Suppressing trauma play drives the processing underground. Observe without excessive intervention. Offer gentle narrative support only if the play seems stuck in a loop without resolution.
+        </div>
+
+        <h3>Regression — Normal Response</h3>
+        <div class="two-col">
+          <div class="card">
+            <h4>Common Regression Signs</h4>
+            <ul>
+              <li>Bedwetting (previously dry children)</li>
+              <li>Thumb-sucking returned in older child</li>
+              <li>Extreme clinginess</li>
+              <li>Baby-talk in older child</li>
+              <li>Refusal to sleep alone</li>
+              <li>Loss of previously mastered skills</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Response</h4>
+            <ul>
+              <li>Do not punish or shame regression — it is neurologically adaptive</li>
+              <li>Meet the regressed need (let them cling; let them sleep with you)</li>
+              <li>Increase physical affection and proximity</li>
+              <li>Regression typically resolves as safety increases</li>
+              <li>Prolonged regression (&gt;3 months) without improvement warrants additional attention</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Resilience Factors</h3>
+        <div class="alert-box info">
+          The single strongest predictor of child psychological resilience after trauma is the presence of <strong>at least one stable, consistently available attached adult</strong>. Not parents specifically — any adult who shows up reliably, is emotionally present, and communicates genuine care. Multiple risk factors become survivable with this one protective factor in place.
+        </div>
+        <ul>
+          <li><strong>Sense of control:</strong> Assign choices and age-appropriate responsibilities. Children with agency cope better.</li>
+          <li><strong>Peer connection:</strong> Even one reliable same-age friend reduces trauma impact significantly. Protect peer relationships.</li>
+          <li><strong>Competence experience:</strong> Teach skills and celebrate mastery. Children who can do things feel safer.</li>
+          <li><strong>Narrative coherence:</strong> Children need to be able to tell the story of what happened. Help them find words.</li>
+          <li><strong>Cultural and spiritual continuity:</strong> Familiar practices, foods, stories, and traditions — even simplified versions — provide identity stability.</li>
+        </ul>
+
+        <!-- ═══ SECTION 11: WITHDRAWAL ═══ -->
+        <h2 id="withdrawal">11. Addiction &amp; Withdrawal</h2>
+
+        <div class="alert-box danger">
+          <strong>Do NOT abruptly stop alcohol or benzodiazepines in someone with heavy daily use. This can kill.</strong> Alcohol and benzodiazepine withdrawal are among the only substance withdrawals with significant mortality risk. Taper whenever possible. If tapering is impossible due to supply loss, treat withdrawal signs (tremor, confusion, fever, hallucinations) as a medical emergency.
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Substance</th>
+              <th>Timeline</th>
+              <th>Severity / Fatal Risk</th>
+              <th>Dangerous Symptoms</th>
+              <th>Management Without Professionals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="wd-fatal">
+              <td><strong>Alcohol</strong></td>
+              <td>Onset 6–24 hr; peak 2–4 days; resolves 5–7 days (or longer)</td>
+              <td class="wd-tag-fatal">POTENTIALLY FATAL</td>
+              <td>Tremor, sweating, anxiety (early) → seizures, hallucinations, delirium tremens (DTs), hyperthermia (late)</td>
+              <td>Taper if any alcohol remains. Monitor every 4–6 hr. Thiamine (B1) if available. Benzodiazepines (diazepam, lorazepam) are ideal if available. Phenobarbital if not. Keep cool, hydrated. Seizure precautions.</td>
+            </tr>
+            <tr class="wd-fatal">
+              <td><strong>Benzodiazepines</strong><br><span style="font-size:0.8em;color:#888;">Valium, Xanax, Klonopin, Ativan</span></td>
+              <td>Onset 1–4 days (long-acting) or 12–24 hr (short-acting); symptoms can persist 1–2 weeks</td>
+              <td class="wd-tag-fatal">POTENTIALLY FATAL</td>
+              <td>Identical to alcohol withdrawal — seizures, psychosis, hyperthermia, cardiovascular instability</td>
+              <td>Switch to longest-acting equivalent (diazepam) and taper 5–10% per 1–2 weeks. Never abrupt discontinuation after &gt;3 months daily use. Phenobarbital alternative if no benzos available.</td>
+            </tr>
+            <tr class="wd-serious">
+              <td><strong>Opioids</strong><br><span style="font-size:0.8em;color:#888;">Heroin, oxycodone, morphine, fentanyl</span></td>
+              <td>Short-acting: onset 8–24 hr, peak 36–72 hr, resolves 5–7 days. Long-acting: delayed 36–48 hr, protracted weeks</td>
+              <td class="wd-tag-serious">Rarely fatal — severely unpleasant</td>
+              <td>Severe pain, vomiting, diarrhea, muscle cramps, insomnia, anxiety, gooseflesh, tachycardia. Dehydration is the main danger, especially in compromised patients.</td>
+              <td>Clonidine (BP medication) reduces autonomic symptoms significantly. Loperamide (Imodium) for diarrhea. IV or oral rehydration critical. NSAIDs for muscle pain. Keep warm. Methadone/buprenorphine if available.</td>
+            </tr>
+            <tr class="wd-moderate">
+              <td><strong>SSRIs / SNRIs</strong><br><span style="font-size:0.8em;color:#888;">Prozac, Zoloft, Effexor, Paxil</span></td>
+              <td>Onset 1–4 days after stopping; can last 1–4 weeks. Paroxetine (Paxil) worst. Fluoxetine (Prozac) milder due to long half-life.</td>
+              <td class="wd-tag-moderate">Not dangerous — disabling</td>
+              <td>"Brain zaps" (electrical shock sensations), dizziness, nausea, vivid dreams, irritability, flu-like symptoms</td>
+              <td>Taper over months if possible (ideal: 10% reduction per month). If supply lost: symptoms are self-limiting but severe. Omega-3s may reduce severity. Reassure patient — not dangerous, will pass.</td>
+            </tr>
+            <tr class="wd-moderate">
+              <td><strong>Nicotine</strong></td>
+              <td>Acute craving within 1–2 hr; peak days 2–3; acute phase resolves by day 5; psychological craving weeks–months</td>
+              <td class="wd-tag-mild">Not dangerous</td>
+              <td>Irritability, anxiety, difficulty concentrating, increased appetite, insomnia, intense craving</td>
+              <td>Exercise (most effective). Hard candy / oral substitution. Tobacco alternatives (willow bark, etc.) for ritual. Cold water. Structured distraction during peak cravings (20 minutes). Cravings pass.</td>
+            </tr>
+            <tr class="wd-mild">
+              <td><strong>Caffeine</strong></td>
+              <td>Onset 12–24 hr after last dose; peak 20–51 hr; resolves in 2–9 days</td>
+              <td class="wd-tag-mild">Not dangerous</td>
+              <td>Headache (primary), fatigue, difficulty concentrating, depressed mood, flu-like aches</td>
+              <td>Taper over 1–2 weeks by reducing dose 25% every 2–3 days. Stay hydrated. NSAIDs for headache. Symptoms are dramatically reduced by taper.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <details style="margin:1rem 0;">
+          <summary style="cursor:pointer;color:var(--amber);font-weight:600;">Alcohol Withdrawal Severity Scale (CIWA) — Field Reference</summary>
+          <div style="padding:0.75rem;background:var(--bg-1);border:1px solid #2a2a2a;border-radius:0 0 4px 4px;">
+            <p style="font-size:0.85em;color:#bbb;">Monitor every 4–6 hours during acute withdrawal. Total score guides intervention urgency.</p>
+            <table class="data-table" style="font-size:0.82em;">
+              <thead><tr><th>CIWA Score</th><th>Severity</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td>0–9</td><td style="color:#7acc7a;">Mild</td><td>Oral hydration, thiamine B1, monitor. Medications not required unless worsening.</td></tr>
+                <tr><td>10–19</td><td style="color:#d4a840;">Moderate</td><td>Benzodiazepine or phenobarbital per protocol. Close monitoring q4h. IV access ideal.</td></tr>
+                <tr><td>20+</td><td style="color:#e74c3c;">Severe / DTs</td><td>Medical emergency. Aggressive benzodiazepine dosing, IV fluids, cooling measures, seizure management. Death risk is real.</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:0.82em;color:#888;margin:0.5rem 0 0;">CIWA domains: nausea/vomiting, tremor, paroxysmal sweats, anxiety, agitation, perceptual disturbances, headache, orientation. Each scored 0–7 (some 0–4). Total = sum of all scores.</p>
+          </div>
+        </details>
+
+        <!-- ═══ SECTION 12: INTERACTIVE TOOLS ═══ -->
+        <h2 id="tools">Interactive Tools</h2>
+
+        <!-- STRESS SELF-ASSESSMENT -->
+        <h3>Stress Self-Assessment (10-Question Checklist)</h3>
+        <div class="assessment-widget no-print" id="stress-assessment">
+          <p style="font-size:0.85em;color:#aaa;margin:0 0 0.75rem;">Answer honestly about the past 48 hours. Results are not diagnostic but provide a functional snapshot. Not saved or transmitted.</p>
+
+          <div class="assessment-question">
+            <input type="checkbox" id="q1" class="assess-q">
+            <label for="q1">1. I have had difficulty making decisions that would normally be simple for me.</label>
+          </div>
+          <div class="assessment-question">
+            <input type="checkbox" id="q2" class="assess-q">
+            <label for="q2">2. I have had trouble sleeping or staying asleep, even when I have the opportunity.</label>
+          </div>
+          <div class="assessment-question">
+            <input type="checkbox" id="q3" class="assess-q">
+            <label for="q3">3. I have felt more irritable or angry than the situation warrants.</label>
+          </div>
+          <div class="assessment-question">
+            <input type="checkbox" id="q4" class="assess-q">
+            <label for="q4">4. I have had intrusive thoughts or images about a recent frightening event that I cannot stop.</label>
+          </div>
+          <div class="assessment-question">
+            <input type="checkbox" id="q5" class="assess-q">
+            <label for="q5">5. I have felt emotionally numb or disconnected from people around me.</label>
+          </div>
+          <div class="assessment-question">
+            <input type="checkbox" id="q6" class="assess-q">
+            <label for="q6">6. I have noticed physical symptoms: heart racing, shortness of breath, tension headache, or persistent fatigue without physical cause.</label>
+          </div>
+          <div class="assessment-question">
+            <input type="checkbox" id="q7" class="assess-q">
+            <label for="q7">7. I have been avoiding thinking about or talking about something important that I need to address.</label>
+          </div>
+          <div class="assessment-question">
+            <input type="checkbox" id="q8" class="assess-q">
+            <label for="q8">8. I have felt hopeless about the future or unable to see a way through the current situation.</label>
+          </div>
+          <div class="assessment-question">
+            <input type="checkbox" id="q9" class="assess-q">
+            <label for="q9">9. I have had thoughts of harming myself or that others would be better off without me.</label>
+          </div>
+          <div class="assessment-question">
+            <input type="checkbox" id="q10" class="assess-q">
+            <label for="q10">10. I have been unable to complete basic daily tasks (eating, hygiene, assigned duties) due to psychological distress.</label>
+          </div>
+
+          <div style="margin-top:1rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <button class="btn btn-sm btn-amber" id="assess-submit">Calculate</button>
+            <button class="btn btn-sm btn-ghost" id="assess-reset">Reset</button>
+          </div>
+
+          <div class="assessment-score-bar">
+            <div class="assessment-score-fill" id="assess-bar"></div>
+          </div>
+
+          <div class="assessment-result" id="assess-result"></div>
+        </div>
+
+        <!-- CROSS-REFERENCE -->
+        <div class="alert-box info" style="margin-top:2rem;">
+          <strong>Cross-References:</strong>
+          <a href="medicine.html">Medical Care</a> —
+          <a href="communications.html">Communications</a> —
+          <a href="shelter.html">Shelter</a> —
+          <a href="water.html">Water</a> —
+          <a href="../index.html">Home</a>
+        </div>
+
+        <div class="nav-buttons">
+          <a href="../index.html" class="btn-nav">← Home</a>
+          <a href="medicine.html" class="btn-nav">Medical Care →</a>
+        </div>
+      <nav class="section-pagination no-print" aria-label="Section navigation">
+        <a href="governance.html" class="pagination-btn pagination-prev">← Governance</a>
+        <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+        <a href="chemistry.html" class="pagination-btn pagination-next">Chemistry →</a>
+      </nav>
+      </div><!-- end .content-wrapper -->
+    </div><!-- end .main-content -->
+
+    <!-- ═══ BUNKER BOT PANEL ═══ -->
+    <aside id="aria-panel" class="aria-panel">
+      <div class="aria-header">
+        <div class="aria-status">
+          <span class="status-dot"></span>
+          <span class="aria-status-label">Bunker Bot</span>
+          <span id="aria-model-badge" class="model-badge"></span>
+        </div>
+        <button id="aria-close" class="btn-icon">✕</button>
+      </div>
+      <div id="aria-messages" class="aria-messages"></div>
+      <div class="aria-input-row">
+        <input type="text" id="aria-input" placeholder="Ask Bunker Bot…" autocomplete="off">
+        <button id="aria-send" class="btn btn-sm btn-amber">Send</button>
+      </div>
+    </aside>
+  </div><!-- end #app-shell -->
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
+
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/search.js"></script>
+  <script src="../assets/js/aria.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* ══════════════════════════════
+       BOX BREATHING WIDGET
+    ══════════════════════════════ */
+    var breathState = {
+      running: false,
+      phase: 0,
+      secondsLeft: 4,
+      cycles: 0,
+      timer: null,
+      progressTimer: null,
+      totalSeconds: 0
+    };
+
+    var phases = [
+      { label: 'Inhale',    instruction: 'Breathe in slowly through your nose', seconds: 4, color: '#7acc7a' },
+      { label: 'Hold',      instruction: 'Hold — lungs full',                   seconds: 4, color: '#d4a840' },
+      { label: 'Exhale',    instruction: 'Breathe out slowly through your mouth', seconds: 4, color: '#6aaccc' },
+      { label: 'Hold',      instruction: 'Hold — lungs empty',                   seconds: 4, color: '#aa6acc' }
+    ];
+
+    var bBox       = document.getElementById('breath-box');
+    var bLabel     = document.getElementById('breath-phase-label');
+    var bCount     = document.getElementById('breath-countdown');
+    var bInstr     = document.getElementById('breath-instruction');
+    var bFill      = document.getElementById('breath-progress-fill');
+    var bCycles    = document.getElementById('breath-cycle-count');
+    var btnStart   = document.getElementById('breath-start');
+    var btnStop    = document.getElementById('breath-stop');
+
+    function breathRender() {
+      var p = phases[breathState.phase];
+      bLabel.textContent = p.label;
+      bLabel.style.color = p.color;
+      bCount.textContent = breathState.secondsLeft;
+      bInstr.textContent = p.instruction;
+      bBox.style.borderColor = p.color;
+      bCycles.textContent = 'Cycles completed: ' + breathState.cycles;
+      // progress bar: fraction of current phase elapsed
+      var elapsed = p.seconds - breathState.secondsLeft;
+      var pct = (elapsed / p.seconds) * 100;
+      bFill.style.width = pct + '%';
+      bFill.style.background = p.color;
+    }
+
+    function breathTick() {
+      breathState.secondsLeft--;
+      if (breathState.secondsLeft <= 0) {
+        breathState.phase = (breathState.phase + 1) % phases.length;
+        if (breathState.phase === 0) {
+          breathState.cycles++;
+        }
+        breathState.secondsLeft = phases[breathState.phase].seconds;
+      }
+      breathRender();
+    }
+
+    function breathStart() {
+      if (breathState.running) return;
+      breathState.running = true;
+      breathState.phase = 0;
+      breathState.secondsLeft = phases[0].seconds;
+      bBox.classList.add('active');
+      btnStart.style.display = 'none';
+      btnStop.style.display = '';
+      breathRender();
+      breathState.timer = setInterval(breathTick, 1000);
+    }
+
+    function breathStop() {
+      breathState.running = false;
+      clearInterval(breathState.timer);
+      bBox.classList.remove('active');
+      btnStart.style.display = '';
+      btnStop.style.display = 'none';
+      bLabel.textContent = 'Ready';
+      bLabel.style.color = 'var(--amber)';
+      bCount.textContent = '—';
+      bInstr.textContent = 'Press Start';
+      bBox.style.borderColor = 'var(--amber)';
+      bFill.style.width = '0%';
+    }
+
+    if (btnStart) btnStart.addEventListener('click', breathStart);
+    if (btnStop)  btnStop.addEventListener('click', breathStop);
+
+
+    /* ══════════════════════════════
+       STRESS SELF-ASSESSMENT
+    ══════════════════════════════ */
+    var assessSubmit = document.getElementById('assess-submit');
+    var assessReset  = document.getElementById('assess-reset');
+    var assessResult = document.getElementById('assess-result');
+    var assessBar    = document.getElementById('assess-bar');
+
+    var resultData = [
+      {
+        min: 0, max: 3,
+        cls: 'result-manageable',
+        title: 'Score: {score}/10 — Manageable Stress',
+        text: 'Stress is present but within functional range. Continue monitoring. Prioritize sleep and food. Use box breathing proactively. Check in with others.'
+      },
+      {
+        min: 4, max: 6,
+        cls: 'result-elevated',
+        title: 'Score: {score}/10 — Elevated Stress',
+        text: 'Significant stress load. Cognitive performance is affected. Mandate a rest period. Reduce decision load. Seek conversation with a trusted group member. Do not make irreversible decisions alone today.'
+      },
+      {
+        min: 7, max: 10,
+        cls: 'result-crisis',
+        title: 'Score: {score}/10 — Crisis Level',
+        text: 'Severe psychological distress. Functional capacity is significantly compromised. This person needs immediate support: someone to be with, rest, food, and water. If Question 9 was checked, follow the suicide risk protocol in Section 5 immediately. Do not leave them alone.'
+      }
+    ];
+
+    function runAssessment() {
+      var qs = document.querySelectorAll('.assess-q');
+      var score = 0;
+      qs.forEach(function (q) { if (q.checked) score++; });
+
+      var pct = (score / 10) * 100;
+      assessBar.style.width = pct + '%';
+      var barColor = score <= 3 ? '#4a9a4a' : score <= 6 ? '#9a7a1a' : '#8b0000';
+      assessBar.style.background = barColor;
+
+      var rd = resultData.find(function (r) { return score >= r.min && score <= r.max; });
+      assessResult.className = 'assessment-result show ' + rd.cls;
+      assessResult.innerHTML = '<strong>' + rd.title.replace('{score}', score) + '</strong><br>' + rd.text;
+
+      // Q9 specific flag
+      var q9 = document.getElementById('q9');
+      if (q9 && q9.checked) {
+        assessResult.innerHTML += '<br><br><strong style="color:#e74c3c;">Question 9 was checked. Follow the suicide risk protocol in Section 5 immediately. Do not leave this person alone.</strong>';
+      }
+    }
+
+    if (assessSubmit) assessSubmit.addEventListener('click', runAssessment);
+    if (assessReset) assessReset.addEventListener('click', function () {
+      document.querySelectorAll('.assess-q').forEach(function (q) { q.checked = false; });
+      assessResult.className = 'assessment-result';
+      assessResult.innerHTML = '';
+      assessBar.style.width = '0%';
+    });
+
+
+    /* ══════════════════════════════
+       DECISION LOG
+    ══════════════════════════════ */
+    var LS_KEY = 'psych_decision_log';
+
+    function loadLog() {
+      try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; }
+      catch (e) { return []; }
+    }
+
+    function saveLog(entries) {
+      try { localStorage.setItem(LS_KEY, JSON.stringify(entries)); } catch (e) {}
+    }
+
+    function renderLog() {
+      var tbody = document.getElementById('log-tbody');
+      if (!tbody) return;
+      var entries = loadLog();
+      tbody.innerHTML = '';
+      if (entries.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#555;font-style:italic;">No entries yet</td></tr>';
+        return;
+      }
+      entries.forEach(function (e, i) {
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td style="white-space:nowrap;font-size:0.8em;">' + escHtml(e.ts) + '</td>' +
+          '<td>' + escHtml(e.who) + '</td>' +
+          '<td>' + escHtml(e.what) + '</td>' +
+          '<td>' + escHtml(e.why) + '</td>' +
+          '<td>' + escHtml(e.outcome) + '</td>' +
+          '<td class="no-print"><button class="btn btn-sm btn-ghost" data-idx="' + i + '" style="padding:0.1rem 0.4rem;font-size:0.75em;">✕</button></td>';
+        tbody.appendChild(tr);
+      });
+      tbody.querySelectorAll('[data-idx]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var entries = loadLog();
+          entries.splice(parseInt(this.getAttribute('data-idx')), 1);
+          saveLog(entries);
+          renderLog();
+        });
+      });
+    }
+
+    function escHtml(s) {
+      return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    var logAdd = document.getElementById('log-add');
+    if (logAdd) {
+      logAdd.addEventListener('click', function () {
+        var who     = document.getElementById('log-who').value.trim();
+        var what    = document.getElementById('log-what').value.trim();
+        var why     = document.getElementById('log-why').value.trim();
+        var outcome = document.getElementById('log-outcome').value.trim();
+        if (!who && !what) return;
+        var now = new Date();
+        var ts = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+        var entries = loadLog();
+        entries.push({ ts: ts, who: who, what: what, why: why, outcome: outcome });
+        saveLog(entries);
+        document.getElementById('log-who').value = '';
+        document.getElementById('log-what').value = '';
+        document.getElementById('log-why').value = '';
+        document.getElementById('log-outcome').value = '';
+        renderLog();
+      });
+    }
+
+    var logClear = document.getElementById('log-clear');
+    if (logClear) {
+      logClear.addEventListener('click', function () {
+        if (confirm('Clear all log entries? This cannot be undone.')) {
+          saveLog([]);
+          renderLog();
+        }
+      });
+    }
+
+    var logPrint = document.getElementById('log-print');
+    if (logPrint) {
+      logPrint.addEventListener('click', function () { window.print(); });
+    }
+
+    // Initial render
+    renderLog();
+
+  })();
+  </script>
+</body>
+</html>

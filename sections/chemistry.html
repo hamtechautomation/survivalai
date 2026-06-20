@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chemistry & Materials — The Last Light Survival Guide</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .chem-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
+    .chem-nav a { background: var(--bg-1); border: 1px solid #5c4a1e; color: var(--amber); padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-size: 0.85em; }
+    .chem-nav a:hover { background: var(--amber); color: var(--bg-0); }
+    .callout-danger { background: #1a0505; border: 1px solid #8b0000; border-left: 4px solid #c0392b; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.75rem 0; }
+    .callout-danger strong { color: #e74c3c; }
+    .callout-danger::before { content: "⚠ SAFETY: "; color: #e74c3c; font-weight: 700; }
+    .sap-table td:last-child { color: var(--amber); font-weight: 600; }
+    .cuts-row-foreshots { background: #1a0505; }
+    .cuts-row-heads { background: #1a1205; }
+    .cuts-row-hearts { background: #051a08; }
+    .cuts-row-tails { background: #0a0a14; }
+    .compat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; margin: 1rem 0; }
+    .compat-card { background: #1a0505; border: 1px solid #5a1a1a; border-radius: 4px; padding: 0.6rem 0.75rem; font-size: 0.82em; }
+    .compat-card .mix-a { color: #e74c3c; font-weight: 600; }
+    .compat-card .mix-b { color: #e67e22; font-weight: 600; }
+    .compat-card .result { color: #888; font-style: italic; font-size: 0.9em; margin-top: 0.25rem; }
+    .process-step { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.75rem 1rem; margin: 0.5rem 0; counter-increment: step; position: relative; padding-left: 3rem; }
+    .process-step::before { content: counter(step); position: absolute; left: 0.85rem; top: 0.75rem; color: var(--amber); font-weight: 700; font-size: 1.1em; }
+    .process-steps { counter-reset: step; }
+    .material-card { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 6px; padding: 0.85rem; margin: 0.5rem 0; }
+    .material-card h4 { color: var(--amber); margin: 0 0 0.4rem; font-size: 0.95em; }
+    .tag-use { background: #0a1a2a; color: #4494cc; border: 1px solid #1a3a50; font-size: 0.75em; padding: 0.1rem 0.4rem; border-radius: 3px; margin: 0.15rem; display: inline-block; }
+    .recipe-box { background: #050a05; border: 1px solid #2a4a2a; border-radius: 6px; padding: 1rem; margin: 0.75rem 0; }
+    .recipe-box h4 { color: #4a9a4a; margin: 0 0 0.5rem; }
+    .caloric-bar { display: flex; align-items: center; gap: 0.75rem; margin: 0.4rem 0; }
+    .cal-fill { height: 14px; background: linear-gradient(90deg, #e67e22, #5c3010); border-radius: 2px; }
+    .cal-label { font-size: 0.82em; color: #bbb; }
+    .cal-val { font-size: 0.82em; color: var(--amber); font-weight: 600; min-width: 70px; }
+    .gun-box { background: #0a0a14; border: 1px solid #4444aa; border-left: 4px solid #6666cc; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.75rem 0; }
+    .gun-box::before { content: "⚑ HISTORICAL/SAFETY CONTEXT ONLY: "; color: #8888cc; font-weight: 700; font-size: 0.85em; display: block; margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+  <nav id="sidebar"><div id="nav-logo"><span>&#9762;</span> Last Light</div><div id="nav-links"></div></nav>
+  <main id="main-content">
+    <div id="breadcrumb"><a href="../index.html">Home</a> › Chemistry &amp; Materials</div>
+
+    <header class="section-header">
+      <div class="section-badges">
+        <span class="badge badge-danger">CRITICAL</span>
+        <span class="badge">All Zones</span>
+        <span class="badge">Month 1 – Year 5</span>
+      </div>
+      <h1>Chemistry &amp; Improvised Materials Science</h1>
+      <p class="section-subtitle">Everything you can make from raw materials: soap, alcohol, charcoal, candles, leather, lime, adhesives, and more. Every process with safety callouts.</p>
+    </header>
+
+    <div class="callout callout-red">
+      <strong>Before You Start — Universal Safety Rules:</strong>
+      <ul style="margin:0.5rem 0 0; padding-left:1.2rem;">
+        <li><strong>Never use aluminum containers</strong> with lye — violent reaction produces hydrogen gas and destroys the container</li>
+        <li><strong>Always add lye to water</strong>, never water to lye — reverse causes violent heat spike and spattering</li>
+        <li><strong>Methanol in distillate foreshots</strong> is odorless and causes blindness/death — always discard first 50ml per 20L wash</li>
+        <li><strong>Quicklime + water</strong> is exothermic and can cause burns and fires on contact with combustibles</li>
+        <li><strong>Work outdoors or with ventilation</strong> for all processes involving heat, acid, or volatile compounds</li>
+      </ul>
+    </div>
+
+    <nav class="chem-nav">
+      <a href="#soap">Soap Making</a>
+      <a href="#alcohol">Alcohol</a>
+      <a href="#charcoal">Charcoal</a>
+      <a href="#candles">Candles &amp; Lamps</a>
+      <a href="#tanning">Tanning Hides</a>
+      <a href="#lime">Lime &amp; Mortar</a>
+      <a href="#adhesives">Adhesives</a>
+      <a href="#gunpowder">Gunpowder</a>
+      <a href="#cleaning">Cleaning &amp; Sanitation</a>
+      <a href="#compat">Chemical Compatibility</a>
+    </nav>
+
+    <!-- ═══ SOAP MAKING ═══ -->
+    <h2 id="soap">1. Soap Making</h2>
+
+    <h3>Lye from Wood Ash</h3>
+    <p>Lye (potassium hydroxide, KOH) is extracted by leaching water through hardwood ash. Softwood ash produces weaker lye; hardwood ash from oak, hickory, beech, or maple is best.</p>
+
+    <div class="callout-danger">
+      Lye is caustic — it will cause chemical burns on contact with skin and eyes. Wear gloves and eye protection at all times when handling lye solution. If contact occurs, flush immediately with large volumes of water for 15+ minutes. Do not use aluminum, tin, or zinc containers — use only wood, plastic, stainless steel, or glass.
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step">Burn hardwood completely. Collect dry ash (not charcoal). Do not use ash from pressure-treated wood, painted wood, or trash — toxins will contaminate your soap.</div>
+      <div class="process-step">Build a leaching vessel: drill small holes in the bottom of a wooden barrel or plastic bucket. Layer straw, then gravel, then ash. This filters out ash particles.</div>
+      <div class="process-step">Slowly pour rainwater (soft water preferred — well water works but is slower) over the ash. Collect the brown-orange liquid that drips from the bottom. This is crude lye solution.</div>
+      <div class="process-step">Re-run the collected lye back through the ash 3–4 times to concentrate it. Fresh water must go through the ash first; concentrated lye goes through last.</div>
+      <div class="process-step">Test lye strength using the <strong>egg/potato float test</strong> — a fresh egg or small potato piece should float with a dime-sized area above the surface. If it sinks, the lye is too weak (concentrate more). If it floats very high, it may be too strong for soap (dilute slightly).</div>
+    </div>
+
+    <div class="recipe-box">
+      <h4>Float Test Reference</h4>
+      <table style="font-size:0.85em;">
+        <thead><tr><th>Result</th><th>Lye Concentration</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Object sinks</td><td>Too weak (&lt;10%)</td><td>Boil to concentrate, or run through more ash</td></tr>
+          <tr><td>Float with dime-sized area above surface</td><td>Correct (~25–30% KOH)</td><td>Ready for soap making</td></tr>
+          <tr><td>Object floats very high (&gt;50% above)</td><td>Too strong</td><td>Dilute with water, re-test</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Cold Process Soap — Exact Saponification Values</h3>
+    <p>Saponification is the chemical reaction between fat and lye that produces soap and glycerin. Each fat requires a specific amount of lye to saponify completely. Use these values to calculate recipes:</p>
+
+    <table class="sap-table">
+      <thead><tr><th>Fat / Oil</th><th>KOH (lye) per gram of fat</th><th>NaOH per gram of fat</th><th>Result Properties</th></tr></thead>
+      <tbody>
+        <tr><td>Lard (pork fat)</td><td>0.190g</td><td>0.138g</td><td>Hard, white, mild — excellent all-purpose</td></tr>
+        <tr><td>Tallow (beef/mutton)</td><td>0.193g</td><td>0.140g</td><td>Very hard, white, long shelf life</td></tr>
+        <tr><td>Coconut oil</td><td>0.257g</td><td>0.190g</td><td>High lather, cleansing, can be drying</td></tr>
+        <tr><td>Olive oil</td><td>0.189g</td><td>0.134g</td><td>Soft, conditioning, slow to harden</td></tr>
+        <tr><td>Palm oil</td><td>0.199g</td><td>0.141g</td><td>Hard bar, stable lather, long shelf life</td></tr>
+        <tr><td>Sunflower oil</td><td>0.194g</td><td>0.134g</td><td>Skin-conditioning, soft bar</td></tr>
+        <tr><td>Castor oil</td><td>0.180g</td><td>0.128g</td><td>Boosts lather; use max 5–10% of recipe</td></tr>
+        <tr><td>Bear/duck fat</td><td>~0.191g</td><td>~0.139g</td><td>Similar to lard; use lard values</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-amber">
+      <strong>Lye Discount:</strong> Always use 5–8% less lye than the theoretical saponification value requires (called "superfatting" or a "lye discount"). This ensures all lye is consumed in the reaction — no free lye in the finished soap. Example: recipe requires 100g lye → use 92–95g.
+    </div>
+
+    <h3>Cold Process Recipe — Basic (1 kg batch)</h3>
+    <div class="recipe-box">
+      <h4>Simple Tallow/Lard Soap</h4>
+      <ul style="font-size:0.9em;color:#bbb;">
+        <li>700g lard or tallow (or mixed)</li>
+        <li>300g coconut oil (if available; otherwise use all lard)</li>
+        <li>140g sodium hydroxide (NaOH) for hard bar soap — or equivalent KOH for soft soap</li>
+        <li>330ml water (distilled or rainwater ideal)</li>
+      </ul>
+      <ol style="font-size:0.88em;color:#bbb;padding-left:1.2rem;">
+        <li>Dissolve lye in water (not reverse) — solution heats to 80°C+. Set aside to cool to ~40°C.</li>
+        <li>Melt fats to ~40°C. Both lye solution and fats should be similar temperature.</li>
+        <li>Slowly pour lye solution into fats while stirring. Never stop stirring.</li>
+        <li>Stir (or stick-blend) until mixture reaches "trace" — thick consistency like pudding. Drizzled soap on surface holds a trace line.</li>
+        <li>Pour into molds (wood boxes lined with fabric, or silicone molds).</li>
+        <li>Cover with towel; insulate for 24–48 hours (the "gel phase" — heat helps saponification complete).</li>
+        <li>Unmold after 48–72 hours. Soap is still caustic at this stage — handle with gloves.</li>
+        <li>Cut into bars. Cure on an open rack for <strong>4–6 weeks minimum</strong>. Water evaporates; pH drops; soap hardens.</li>
+      </ol>
+    </div>
+
+    <div class="callout-danger">
+      Test finished soap with a pH strip or the "zap test" — touch tongue briefly to soap. If it "zaps" (sharp electrical-like sensation), free lye is present. Re-cure another 2 weeks or discard if zap persists.
+    </div>
+
+    <h3>Hot Process Soap — Faster, More Forgiving</h3>
+    <p>Hot process soap is cooked after trace, which completes saponification before curing. Ready to use in days rather than weeks.</p>
+    <ol>
+      <li>Follow cold process to trace.</li>
+      <li>Transfer to oven-safe container (crockpot ideal). Cook at 70–80°C.</li>
+      <li>Stir every 15–20 minutes. Soap will go through phases: applesauce → taffy → Vaseline texture.</li>
+      <li>At Vaseline stage (~60–90 min), test with pH strip (should be 8–10) or zap test (no zing).</li>
+      <li>Add any fragrance or botanicals now (heat would destroy them earlier).</li>
+      <li>Pack into molds quickly — hot process soap is thick and doesn't pour.</li>
+      <li>Usable after 1–2 days. Benefits from a 2–4 week cure for hardness.</li>
+    </ol>
+
+    <h3>Liquid Soap (Soft Soap)</h3>
+    <p>Use <strong>potassium hydroxide (KOH)</strong> from wood ash rather than sodium hydroxide (NaOH). KOH produces a soft/liquid soap; NaOH produces a hard bar. Follow the same cold process recipe using KOH values from the saponification table. Dilute the finished paste with distilled water to desired consistency.</p>
+
+    <h3>Medicinal Soap Additives</h3>
+    <table>
+      <thead><tr><th>Additive</th><th>Amount</th><th>Properties</th><th>When to Add</th></tr></thead>
+      <tbody>
+        <tr><td>Pine tar</td><td>5–10% of oil weight</td><td>Antimicrobial, antifungal, antiparasitic; treats skin conditions including mange and ringworm</td><td>At trace</td></tr>
+        <tr><td>Activated charcoal</td><td>1 tsp per batch</td><td>Draws toxins and bacteria; good for acne and infected skin</td><td>At trace</td></tr>
+        <tr><td>Calendula infusion</td><td>Replace water with infused water</td><td>Anti-inflammatory; gentle on wounds and rashes</td><td>As lye water component</td></tr>
+        <tr><td>Lavender/tea tree oil</td><td>1–3% of oil weight</td><td>Antimicrobial, insect-repelling; fragrance for morale</td><td>At trace (cooled)</td></tr>
+        <tr><td>Honey</td><td>1 tbsp per kg</td><td>Humectant, antimicrobial; adds lather</td><td>At trace</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ═══ ALCOHOL ═══ -->
+    <h2 id="alcohol">2. Alcohol Production</h2>
+
+    <h3>Fermentation Basics</h3>
+    <p>Yeast converts fermentable sugars into ethanol and CO₂. Any source of fermentable sugar can produce alcohol. Temperature, nutrient availability, and yeast strain determine efficiency and flavor.</p>
+
+    <div class="callout callout-amber">
+      <strong>Legal Note:</strong> Home distillation is illegal in most US jurisdictions and many countries. During a collapse scenario, this becomes a moot regulatory concern, but understanding the chemistry is valuable regardless. This section is educational.
+    </div>
+
+    <h3>Wash Recipes</h3>
+    <div class="recipe-box">
+      <h4>Sugar Wash (Fastest, Simplest)</h4>
+      <p style="font-size:0.88em;color:#bbb;">20L water + 5kg white sugar + 1 packet bread yeast + 1 tsp yeast nutrient (or crushed vitamin B tablet). Ferments in 5–7 days at 20–25°C. Produces a clean, neutral alcohol wash. Starting specific gravity (SG) ~1.090; finished ~1.000.</p>
+    </div>
+
+    <div class="recipe-box">
+      <h4>Corn Mash (Bourbon-Style)</h4>
+      <p style="font-size:0.88em;color:#bbb;">5kg cracked corn + 20L water. Heat to 70°C, add 1 cup malted barley (or amylase enzyme), hold 60°C for 60 min (converts starch to sugar). Cool to 30°C. Add yeast. Ferments 7–14 days. More complex flavor; lower ABV wash than sugar.</p>
+    </div>
+
+    <div class="recipe-box">
+      <h4>Fruit Wine</h4>
+      <p style="font-size:0.88em;color:#bbb;">Crush ripe fruit (apples, grapes, pears, berries). Add water to desired consistency. Test brix (sugar level) — ideally 20–25 brix for 10–12% ABV. Add yeast (wild from fruit skins or cultured). Ferment 7–21 days until bubbling stops. Rack off sediment; age if possible.</p>
+    </div>
+
+    <div class="recipe-box">
+      <h4>Grain Beer (Simple)</h4>
+      <p style="font-size:0.88em;color:#bbb;">Malt any grain (allow to germinate 3–4 days, then dry and crack). Steep in hot water at 65°C for 60 min (mash). Drain sweet wort. Boil 60 min; add hops if available (or yarrow, juniper). Cool to 20°C. Add yeast. Ferments in 1–2 weeks. Lower ABV (~4–6%) but nutritious and safer to drink than untreated water when properly fermented.</p>
+    </div>
+
+    <h3>Pot Still Construction</h3>
+    <pre class="diagram">
+POT STILL — COPPER PIPE / PRESSURE COOKER METHOD
+──────────────────────────────────────────────────────────────
+                         [Thermometer port]
+                              │
+         ┌────────────────────┴────────────────────┐
+    Lid →│             PRESSURE COOKER             │← 15–20L capacity
+         │           (your pot/boiler)             │
+         └─────────────────┬───────────────────────┘
+                           │ (copper tube sealed
+                           │  through lid port)
+                           │
+                     ┌─────┴──────┐
+                     │  LYNE ARM  │← 1–1.5" copper pipe
+                     │ (angled    │   angled ~30° downward
+                     │  downward) │
+                     └─────┬──────┘
+                           │
+              ┌────────────┴──────────────┐
+              │      CONDENSER COIL       │← 3/8" or 1/2"
+              │  (10–15 feet 3/8" copper  │   copper tubing
+              │   coiled in cold water    │   coiled ~15 loops
+              │   bucket or cold stream)  │
+              └────────────┬──────────────┘
+                           │
+                      Collection
+                      vessel (glass)
+                           │
+                    [Parrot / hydrometer cup
+                     to measure proof live]
+
+MATERIALS:
+  • Pressure cooker or large stockpot with lid
+  • Copper tubing 3/8" OD (10–15 feet for condenser)
+  • Food-grade silicone or copper ferrule for lid connection
+  • Large container for condenser cooling water
+  • Glass collection vessels
+  • Thermometer (reads 75–100°C range)
+
+SEALING: Rye flour + water paste seals joints temporarily.
+         Food-grade silicone sealant is better.
+         Never use lead solder — lead poisoning.
+──────────────────────────────────────────────────────────────</pre>
+
+    <h3>The Cuts — What to Keep and What to Discard</h3>
+
+    <div class="callout-danger">
+      Methanol is produced early in every distillation run. It causes optic nerve destruction leading to permanent blindness, and at higher doses, death. It cannot be detected by smell alone. Always discard the foreshots. This is non-negotiable.
+    </div>
+
+    <table>
+      <thead><tr><th>Fraction</th><th>Amount (per 20L wash)</th><th>Temp Range</th><th>What It Contains</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr class="cuts-row-foreshots">
+          <td><strong>Foreshots</strong></td>
+          <td style="color:#e74c3c">First 50–100ml</td>
+          <td>~65–72°C</td>
+          <td>Methanol, acetone, acetaldehyde — toxic compounds that concentrate first</td>
+          <td style="color:#e74c3c;font-weight:600">DISCARD. No exceptions. Store separately to avoid accidental use.</td>
+        </tr>
+        <tr class="cuts-row-heads">
+          <td><strong>Heads</strong></td>
+          <td>Next 100–200ml</td>
+          <td>~72–78°C</td>
+          <td>Acetaldehyde, esters — harsh, solvent-like flavor. Some methanol still present.</td>
+          <td>DISCARD or set aside for cleaning solvent only (not for drinking)</td>
+        </tr>
+        <tr class="cuts-row-hearts">
+          <td><strong>Hearts</strong></td>
+          <td>Middle portion (majority)</td>
+          <td>~78–82°C</td>
+          <td>Primarily ethanol and water. Clean, smooth flavor.</td>
+          <td style="color:#4a9a4a;font-weight:600">KEEP. This is your product.</td>
+        </tr>
+        <tr class="cuts-row-tails">
+          <td><strong>Tails</strong></td>
+          <td>Final portion</td>
+          <td>&gt;82°C</td>
+          <td>Fusel oils (higher alcohols), water, congeners. Harsh flavor, some useful compounds.</td>
+          <td>Set aside; can be added to next run for efficiency or discard</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Proofing — Measuring Alcohol Content</h3>
+    <ul>
+      <li><strong>Hydrometer (alcohol meter):</strong> Drop into collected distillate; reads ABV (alcohol by volume) directly. Most accurate. Alcohol hydrometers read 0–100% ABV; different from brewing hydrometers which read sugar content.</li>
+      <li><strong>Flame test:</strong> Dip wick or paper in distillate; light it. Burns with clear blue flame = 50%+ ABV. Burns with yellow flame = 40–50% ABV. Doesn't burn = &lt;40% ABV. Imprecise but useful when no hydrometer is available.</li>
+      <li><strong>Target for antiseptic use:</strong> 70–90% ABV. Above 90% is actually less effective as a disinfectant (needs some water to denature proteins properly).</li>
+    </ul>
+
+    <h3>Uses by Proof Level</h3>
+    <table>
+      <thead><tr><th>Proof / ABV</th><th>Use</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>5–14% (beer/wine)</td><td>Drinking, food preservation, vinegar mother</td><td>Safe to drink if properly fermented and cuts applied to distillate</td></tr>
+        <tr><td>40–50% (spirits)</td><td>Drinking (morale), trade good, flavor extracts</td><td>Standard "whiskey/vodka" proof; long shelf life</td></tr>
+        <tr><td>70–90% (high proof)</td><td>Antiseptic (wound care, surface disinfection), tinctures</td><td>Must be above 70% to kill pathogens reliably</td></tr>
+        <tr><td>85%+ (near-pure ethanol)</td><td>Fuel (E85 compatible engines), stove alcohol, fire starting</td><td>Can run modified engines; excellent camp stove fuel; burns clean</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ═══ CHARCOAL ═══ -->
+    <h2 id="charcoal">3. Charcoal &amp; Activated Charcoal</h2>
+
+    <h3>Charcoal Production</h3>
+
+    <div class="material-card">
+      <h4>Retort Method (Best Quality)</h4>
+      <p>Seal wood in a metal container (barrel with tight lid, capped pipe sections, metal tin). Apply external heat. Volatile gases escape through a small vent but oxygen cannot enter — wood carbonizes without combusting. The vent gases can be ignited and burned to supply heat (closed-loop). Opens when coals are grey and no more smoke emerges. Do NOT open while hot — oxygen will ignite the charcoal.</p>
+      <p><strong>Best woods:</strong> Hardwoods (oak, hickory, maple, fruitwood) produce dense, hot-burning charcoal. Softwoods produce lighter, faster-burning charcoal. Coconut shells and bamboo produce excellent charcoal.</p>
+    </div>
+
+    <div class="material-card">
+      <h4>Pit/Mound Method (Traditional, Lower Quality)</h4>
+      <p>Stack wood tightly in a pit or mound. Cover with earth, sod, or damp leaves leaving small air holes. Light from the bottom; allow to smolder 24–48 hours. Carefully seal all holes once burning begins. Too much air = combustion (ash, not charcoal). Too little = incomplete carbonization. Takes practice to read the smoke color — white/blue smoke = still cooking; clear/no smoke = done.</p>
+    </div>
+
+    <pre class="diagram">
+RETORT CHARCOAL KILN (Steel Barrel)
+──────────────────────────────────────────────
+         ┌─────────┐
+    Lid  │▓▓▓▓▓▓▓▓▓│← Tight-fitting lid (clamp or bolt)
+         │         │   Small vent pipe through lid
+         │  WOOD   │← Pack tightly; no gaps
+         │ CHARGE  │   (billets 6–12" long)
+         │         │
+         └────┬────┘
+              │ ← External fire surrounds barrel
+         ═════╪═════   (or barrel sits in fire pit)
+              │
+              ▼
+    Vent gases escape and can be burned
+    to provide heat (efficient method)
+
+SIGNS OF COMPLETION:
+  ✓ No more smoke from vent
+  ✓ Vent gases no longer ignitable
+  ✓ Wait for barrel to cool completely before opening
+  ✓ Do NOT open while hot — instant ignition
+──────────────────────────────────────────────</pre>
+
+    <figure class="svg-diagram" aria-label="Retort charcoal kiln cross-section diagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 300" width="100%" role="img" aria-label="Retort charcoal kiln cross-section">
+        <defs>
+          <marker id="ck-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#d4a843"/>
+          </marker>
+          <!-- hatching for wood -->
+          <pattern id="wood-hatch" patternUnits="userSpaceOnUse" width="8" height="8">
+            <path d="M-1,1 L3,-3 M0,8 L8,0 M5,11 L11,5" stroke="#8b6914" stroke-width="1.2" opacity=".6"/>
+          </pattern>
+          <!-- fire pattern -->
+          <pattern id="fire-dots" patternUnits="userSpaceOnUse" width="10" height="10">
+            <circle cx="5" cy="5" r="1.5" fill="#c0450a" opacity=".5"/>
+          </pattern>
+        </defs>
+
+        <!-- barrel wall -->
+        <rect x="160" y="40" width="220" height="200" rx="6" ry="6" fill="#3a3a3a" stroke="#666" stroke-width="2"/>
+        <!-- lid -->
+        <rect x="155" y="32" width="230" height="16" rx="4" ry="4" fill="#555" stroke="#888" stroke-width="1.5"/>
+        <!-- wood charge interior -->
+        <rect x="172" y="55" width="196" height="178" fill="url(#wood-hatch)" stroke="none"/>
+        <!-- vent pipe through lid -->
+        <rect x="256" y="10" width="28" height="28" rx="3" fill="#444" stroke="#888" stroke-width="1.5"/>
+        <rect x="265" y="4" width="10" height="12" fill="#333" stroke="#777" stroke-width="1"/>
+
+        <!-- fire/heat surrounding barrel -->
+        <rect x="80" y="100" width="80" height="140" rx="8" fill="url(#fire-dots)" stroke="#c0450a" stroke-width="1.5" opacity=".8"/>
+        <rect x="380" y="100" width="80" height="140" rx="8" fill="url(#fire-dots)" stroke="#c0450a" stroke-width="1.5" opacity=".8"/>
+        <!-- fire label text inside fire blocks -->
+        <text x="120" y="168" text-anchor="middle" font-size="11" fill="#e07030" font-family="monospace">FIRE</text>
+        <text x="420" y="168" text-anchor="middle" font-size="11" fill="#e07030" font-family="monospace">FIRE</text>
+
+        <!-- vent gas arrow upward -->
+        <line x1="270" y1="4" x2="270" y2="-12" stroke="#d4a843" stroke-width="2" marker-end="url(#ck-arrow)"/>
+
+        <!-- labels -->
+        <!-- lid -->
+        <line x1="390" y1="40" x2="430" y2="28" stroke="#888" stroke-width="1"/>
+        <text x="433" y="27" font-size="11" fill="#aaa" font-family="monospace">Lid (clamped)</text>
+        <!-- vent pipe -->
+        <line x1="290" y1="14" x2="360" y2="5" stroke="#888" stroke-width="1"/>
+        <text x="362" y="9" font-size="11" fill="#aaa" font-family="monospace">Vent pipe</text>
+        <!-- wood charge -->
+        <text x="270" y="148" text-anchor="middle" font-size="13" fill="#c8a040" font-family="monospace" font-weight="bold">WOOD</text>
+        <text x="270" y="165" text-anchor="middle" font-size="13" fill="#c8a040" font-family="monospace" font-weight="bold">CHARGE</text>
+        <!-- vent gas label -->
+        <text x="310" y="-8" font-size="10" fill="#d4a843" font-family="monospace">Vent gas → ignite for heat</text>
+
+        <!-- caption bar -->
+        <rect x="0" y="270" width="540" height="30" fill="#1a1a1a"/>
+        <text x="270" y="290" text-anchor="middle" font-size="11" fill="#888" font-family="monospace">Retort Kiln: no oxygen enters barrel — wood carbonizes rather than burning</text>
+      </svg>
+    </figure>
+
+    <h3>Activated Charcoal</h3>
+    <p>Regular charcoal has limited adsorption capacity. Activated charcoal has been processed to create an enormous surface area (1 gram can have 500–3,000 m² of surface area) that adsorbs toxins, gases, heavy metals, and pathogens.</p>
+
+    <h4>Steam Activation</h4>
+    <ol>
+      <li>Produce regular charcoal (retort method preferred).</li>
+      <li>Heat charcoal to 900–1,100°C in a metal retort or kiln.</li>
+      <li>Inject steam (from a boiling water pot connected via pipe) at this temperature for 30–60 minutes.</li>
+      <li>Steam erodes the char structure, creating the porous surface. Cool under sealed conditions.</li>
+      <li>Result is noticeably lighter, more friable, and deeply black compared to regular charcoal.</li>
+    </ol>
+
+    <div class="callout callout-amber">
+      <strong>Field Improvisation:</strong> True steam activation requires 900°C which is difficult to achieve reliably without a proper kiln. A reasonable field substitute: charcoal produced from clean hardwood in a retort provides significantly better adsorption than pit-fired charcoal even without activation. Use fine-ground charcoal for filtration, layered with sand and gravel.
+    </div>
+
+    <h4>Chemical Activation (Zinc Chloride Method)</h4>
+    <ol>
+      <li>Mix wood shavings or sawdust with a concentrated zinc chloride solution (dissolve ZnCl₂ in water to make 60–80% solution).</li>
+      <li>Soak wood material 24 hours. Drain excess.</li>
+      <li>Heat to 600°C in retort — zinc chloride inhibits tar formation and creates pores.</li>
+      <li>Wash finished product thoroughly with hot water to remove zinc chloride — residual zinc is toxic.</li>
+    </ol>
+    <div class="callout-danger">Zinc chloride is corrosive and toxic. Wear gloves and eye protection. Wash activated charcoal thoroughly — residual ZnCl₂ renders it unsafe for medical use. Steam-activated charcoal is safer for internal use.</div>
+
+    <h3>Uses of Charcoal &amp; Activated Charcoal</h3>
+    <div class="compat-grid">
+      <div class="material-card">
+        <h4>Water Filtration</h4>
+        <span class="tag-use">Adsorbs organics</span><span class="tag-use">Removes taste/odor</span>
+        <p style="font-size:0.82em;color:#bbb;margin:0.4rem 0 0">Crush to 1–3mm granules. Layer in filter column (sand → gravel → charcoal → gravel → sand). Does NOT remove bacteria/viruses alone — must follow with boiling or UV.</p>
+      </div>
+      <div class="material-card">
+        <h4>Poisoning Treatment</h4>
+        <span class="tag-use">Adsorbs toxins</span><span class="tag-use">Emergency use</span>
+        <p style="font-size:0.82em;color:#bbb;margin:0.4rem 0 0">50–100g activated charcoal in 8oz water, taken within 1 hour of ingestion. Adsorbs many poisons before absorption. Does NOT work for: cyanide, heavy metals, alcohols, caustics. Call poison control if available.</p>
+      </div>
+      <div class="material-card">
+        <h4>Wound Deodorizing</h4>
+        <span class="tag-use">Infected wounds</span>
+        <p style="font-size:0.82em;color:#bbb;margin:0.4rem 0 0">Activated charcoal poultice on infected wounds reduces odor and may adsorb some toxins. Not a substitute for debridement and antibiotics but useful adjunct in austere conditions.</p>
+      </div>
+      <div class="material-card">
+        <h4>Blacksmithing Fuel</h4>
+        <span class="tag-use">Forge fuel</span>
+        <span class="tag-use">Charcoal preferred</span>
+        <p style="font-size:0.82em;color:#bbb;margin:0.4rem 0 0">Charcoal was the original blacksmithing fuel before coal. Burns hot and clean. Requires 2–3x more charcoal by weight than coal for equivalent heat, but can be produced anywhere wood is available.</p>
+      </div>
+      <div class="material-card">
+        <h4>Biochar (Soil Amendment)</h4>
+        <span class="tag-use">Agriculture</span>
+        <span class="tag-use">Long-term fertility</span>
+        <p style="font-size:0.82em;color:#bbb;margin:0.4rem 0 0">Crushed charcoal added to soil creates habitat for beneficial microorganisms, improves drainage and water retention, and locks carbon for centuries. Charge with compost before adding (raw biochar can temporarily decrease fertility by adsorbing nutrients).</p>
+      </div>
+    </div>
+
+    <!-- ═══ CANDLES & LAMPS ═══ -->
+    <h2 id="candles">4. Candles &amp; Oil Lamps</h2>
+
+    <div class="callout callout-amber">
+      <strong>Caloric Cost of Light:</strong> Every candle burns food calories. Tallow is rendered fat — the same calories your livestock provide. Quantify your "light budget" against your food supply in a long-term scenario.
+    </div>
+
+    <h3>Caloric Cost Comparison</h3>
+    <p style="font-size:0.85em;color:#888;">Approximate calories burned per hour of light (equivalent light output)</p>
+    <div style="max-width:420px;margin:0.75rem 0">
+      <div class="caloric-bar">
+        <div class="cal-val">Oil lamp</div>
+        <div class="cal-fill" style="width:35%"></div>
+        <div class="cal-label">~35 kcal/hr (olive/lard oil)</div>
+      </div>
+      <div class="caloric-bar">
+        <div class="cal-val">Tallow candle</div>
+        <div class="cal-fill" style="width:55%"></div>
+        <div class="cal-label">~60 kcal/hr (less efficient)</div>
+      </div>
+      <div class="caloric-bar">
+        <div class="cal-val">Beeswax candle</div>
+        <div class="cal-fill" style="width:45%"></div>
+        <div class="cal-label">~45 kcal/hr (burns longer/brighter)</div>
+      </div>
+      <div class="caloric-bar">
+        <div class="cal-val">Pitch/pine knot</div>
+        <div class="cal-fill" style="width:80%"></div>
+        <div class="cal-label">~80+ kcal/hr (very inefficient but free)</div>
+      </div>
+    </div>
+    <p style="font-size:0.82em;color:#888;">Oil lamps are the most calorie-efficient light source. Use them over candles when possible for long-term scenarios. Prioritize natural light — schedule tasks in daylight.</p>
+
+    <h3>Tallow Candles</h3>
+    <ol>
+      <li><strong>Render fat:</strong> Chop kidney fat or other hard fat into small pieces. Melt slowly in water bath at low heat. Strain through cloth. Rendered tallow is white, odorless when cool. Discard crackling and solids.</li>
+      <li><strong>Wick materials:</strong> Cotton twine (braid 3 threads); rush pith (stripped inner stem of bulrush — traditional rush light); linen cord. Avoid synthetic materials — toxic fumes. Pre-treat wick by soaking in molten tallow or a solution of borax and salt (prolongs burn and reduces mushrooming).</li>
+      <li><strong>Molds:</strong> Rolled paper tubes; hollowed-out tin cans; clay molds; wooden channels. Hang wick through center; pour melted tallow; cool at room temperature. Takes 1–4 hours to fully solidify.</li>
+      <li><strong>Rush lights:</strong> Soak dried rush stems in molten tallow; drain; hang to cool. Burn faster than formed candles but require no mold.</li>
+    </ol>
+
+    <h3>Beeswax Candles</h3>
+    <p>Beeswax requires no rendering — melt at 62°C and pour. Burns longer, brighter, and cleaner than tallow with a pleasant honey scent. Requires no wick treatment. The premium candle material. Reserve beeswax for situations where burn quality matters (medical procedures, fine work). Cotton wick at 1:1 height-to-diameter ratio.</p>
+
+    <h3>Oil Lamps</h3>
+    <pre class="diagram">
+OIL LAMP — SIMPLE RESERVOIR TYPE
+──────────────────────────────────────────────
+         [Flame]
+           │
+    ┌──────┴──────┐
+    │   Wick      │← Cotton or plant fiber
+    │   (rises    │   twisted tight
+    │   by        │   1/4" diameter for
+    │   capillary)│   bright light
+    └──────┬──────┘
+           │
+    ┌──────┴──────────────────────┐
+    │      Oil reservoir          │← Any non-porous
+    │  (clay bowl, tin can,       │   container
+    │   glass jar, stone dish)    │
+    │  Fill with oil              │
+    └─────────────────────────────┘
+
+OILS THAT WORK:
+  Best:    Olive oil (cleanest, least smoke)
+  Good:    Lard oil (rendered to liquid consistency)
+  Good:    Fish oil (smells, but burns well)
+  Fair:    Vegetable oil (sunflower, canola, corn)
+  Poor:    Mineral oil (petroleum — not renewable)
+  Avoid:   Motor oil (toxic fumes)
+
+WICK CHANNEL: Punch small hole in lid or use
+  notched clay to hold wick at 45° angle in oil.
+  Wick should have 1/4" above oil surface.
+──────────────────────────────────────────────</pre>
+
+    <!-- ═══ TANNING HIDES ═══ -->
+    <h2 id="tanning">5. Tanning Hides</h2>
+
+    <h3>Rawhide vs. Tanned Leather</h3>
+    <table>
+      <thead><tr><th>Type</th><th>Process</th><th>Properties</th><th>Best Uses</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Rawhide</strong></td><td>Dehaired, dried under tension (no tanning)</td><td>Rock-hard when dry; flexible when wet; shrinks dramatically as it dries</td><td>Lashing, tool handles, drum heads, containers, knife sheaths, snowshoe webbing</td></tr>
+        <tr><td><strong>Brain-tanned</strong></td><td>Brains emulsified and worked into hide</td><td>Soft as cloth, extremely comfortable; not waterproof unless smoked</td><td>Clothing (buckskin shirts, gloves, moccasins), bags, sleeping skins</td></tr>
+        <tr><td><strong>Bark-tanned</strong></td><td>Tannin from bark slowly penetrates hide</td><td>Stiff, durable, moderately water-resistant; quality improves with time</td><td>Boots, harness, straps, saddles, armor, book covers</td></tr>
+        <tr><td><strong>Alum-tawed</strong></td><td>Aluminum sulfate + salt</td><td>White, soft, fine-grained; not waterproof</td><td>Gloves, book binding, fine garments</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Brain Tanning — Step by Step</h3>
+    <div class="callout callout-amber">
+      <strong>Traditional rule:</strong> Every animal has approximately enough brains to tan its own hide. A deer has roughly 2–3 oz of brain, which will tan a deer hide. Mix with water to make an emulsion.
+    </div>
+    <div class="process-steps">
+      <div class="process-step"><strong>Fresh hide:</strong> Get to hide within hours of slaughter. Remove all meat and fat ("fleshing") with a dull-edged bone or draw knife over a log. A flesh knife angled correctly shaves; it doesn't scrape.</div>
+      <div class="process-step"><strong>Dehairing:</strong> Soak hide in wood ash solution (lye water) or plain water for 3–7 days (water rots hair roots; lye loosens them faster). Remove when hair slides off with hand pressure. Scrape hair off over a beam.</div>
+      <div class="process-step"><strong>Membrane removal:</strong> Flesh side still has a membrane ("grain") that must be removed for brain tan to penetrate. Scrape with a sharp stone or metal scraper until the hide is uniform, semi-translucent.</div>
+      <div class="process-step"><strong>Brain emulsion:</strong> Boil or mash the brains with a small amount of warm water until smooth and creamy. Apply generously to both sides. Work into the hide with hands, stones, or a wooden paddle. Wring and re-apply 2–3 times over several hours.</div>
+      <div class="process-step"><strong>Softening (most critical step):</strong> Work the hide continuously as it dries — stretch, pull, massage, rub over a rope or cable. The hide must be worked throughout the entire drying process. If it dries stiff, you failed — re-wet and try again.</div>
+      <div class="process-step"><strong>Smoking (for water resistance):</strong> Sew the hide into a smoke bag (a cylinder sewn to a hole in the ground where you smolder rotten wood — not flames). Smoke 20–30 minutes per side until tan color penetrates. Smoking cross-links the oils; smoked brain tan can be washed and re-dried without stiffening. Unsmoked brain tan stiffens when wet.</div>
+    </div>
+
+    <h3>Vegetable (Bark) Tanning</h3>
+    <p>Bark tanning uses plant tannins (tannic acid) to chemically bind with collagen proteins in the hide, creating a stable, durable leather.</p>
+    <p><strong>Best tannin sources:</strong> Oak bark (highest tannin content), hemlock bark, chestnut bark, sumac leaves and twigs, black walnut hulls, mimosa bark.</p>
+    <ol>
+      <li><strong>Prepare bark:</strong> Peel fresh bark; dry and grind or crush. Steep in water 24–48 hours to make tannin solution (tea). Bark tea should be dark brown and astringent to taste.</li>
+      <li><strong>Prepare hide:</strong> Flesh and dehair as above. Soak in weak tannin solution first ("puering") for 1–2 weeks, then transfer to progressively stronger solutions.</li>
+      <li><strong>Pit tanning:</strong> Dig pit or use barrel. Layer alternating hide and fresh bark. Fill with water. Hides must be fully submerged. Weight them down. Visit weekly; add fresh bark as tannin depletes. Process takes 3–12 months for thick hides (shoe-sole leather).</li>
+      <li><strong>Finishing:</strong> Remove when hide is uniformly tan-colored throughout thickness. Wash. Apply grease (neatsfoot oil, tallow, cod liver oil) while damp. Allow to dry under slight tension. Work leather while drying to soften.</li>
+    </ol>
+
+    <h3>What Leather Can You Make?</h3>
+    <table>
+      <thead><tr><th>Hide Source</th><th>Thickness</th><th>Best Tanning Method</th><th>Products</th></tr></thead>
+      <tbody>
+        <tr><td>Deer, elk</td><td>Medium</td><td>Brain tan</td><td>Gloves, shirts, moccasins, bags — the softest leather</td></tr>
+        <tr><td>Cowhide (thin)</td><td>Thin-medium</td><td>Bark or alum</td><td>Harness, straps, belts, light boots</td></tr>
+        <tr><td>Cowhide (thick)</td><td>Thick</td><td>Bark (slow)</td><td>Sole leather, armor, saddles, heavy straps</td></tr>
+        <tr><td>Pig skin</td><td>Medium</td><td>Bark or brain</td><td>Gloves, clothing, bags</td></tr>
+        <tr><td>Sheep/goat skin</td><td>Thin</td><td>Alum or brain</td><td>Book binding, fine gloves, clothing, bags</td></tr>
+        <tr><td>Rabbit, squirrel</td><td>Very thin</td><td>Brain tan only</td><td>Fur-on: insulation, decorative; fur-off: very delicate items</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ═══ LIME & MORTAR ═══ -->
+    <h2 id="lime">6. Lime &amp; Mortar</h2>
+
+    <h3>Making Quicklime</h3>
+    <p>Limestone (calcium carbonate, CaCO₃) heated above 900°C decomposes into quicklime (calcium oxide, CaO) and carbon dioxide. Quicklime is the foundation of mortar, limewash, and agricultural lime.</p>
+
+    <div class="callout-danger">Quicklime reacts violently with water, releasing intense heat (900°C can be reached locally). Adding water to quicklime can cause spattering and fires. Always add quicklime TO water slowly — never water onto a pile of quicklime. Wear gloves, eye protection, and keep water supply nearby.</div>
+
+    <div class="process-steps">
+      <div class="process-step"><strong>Identify limestone:</strong> White/grey stone that fizzes vigorously when a drop of vinegar or dilute acid is applied. Chalk, seashells, and coral are also calcium carbonate and can be burned.</div>
+      <div class="process-step"><strong>Build a kiln:</strong> A simple lime kiln can be a stone-lined pit or barrel-shaped structure with air inlets at the base. Stack limestone chunks and alternating layers of fuel (wood, coal). Air must circulate through the fuel and stone.</div>
+      <div class="process-step"><strong>Fire continuously at 900°C+ for 24–48 hours.</strong> The stone must glow red-hot throughout. Insufficient temperature produces partially burned limestone that won't fully slake and weakens mortar.</div>
+      <div class="process-step"><strong>Test completion:</strong> Cooled quicklime is lighter, more friable, and slightly different color than the original stone. Drop a small piece in water — it should hiss, heat rapidly, and crumble to a powder within minutes.</div>
+    </div>
+
+    <h3>Slaking Quicklime</h3>
+    <p>Slaking converts quicklime (CaO) to hydrated lime / slaked lime (Ca(OH)₂) by adding water. Slaked lime is the working material for mortar and limewash.</p>
+
+    <div class="process-steps">
+      <div class="process-step">Fill a pit or non-metal container with water first. Slowly add quicklime pieces to the water — not the reverse. The reaction produces intense heat and steam.</div>
+      <div class="process-step">Stir continuously with a long wooden paddle. Add more water to maintain a thick liquid consistency. The mixture heats dramatically (potentially to boiling).</div>
+      <div class="process-step">Allow to cool and continue slaking for 24–72 hours. Stir periodically. Fully slaked lime becomes a smooth white putty.</div>
+      <div class="process-step">Aged lime putty (slaked and left to mature in a covered pit for months to years) produces stronger, more workable mortar. Traditional medieval builders aged lime for years. Fresh-slaked lime works but is less plastic.</div>
+    </div>
+
+    <h3>Mortar and Limewash Recipes</h3>
+    <table>
+      <thead><tr><th>Product</th><th>Ratio</th><th>Use</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Lime mortar</strong></td><td>1 part lime putty : 2.5–3 parts sharp sand</td><td>Laying stone and brick</td><td>Flexible, breathable — suitable for historic structures; hardens slowly (weeks to months); never use with Portland cement</td></tr>
+        <tr><td><strong>Limewash</strong></td><td>1 part lime putty : 5–8 parts water</td><td>Interior/exterior coating, antimicrobial treatment of walls, whitewash</td><td>Apply in multiple thin coats. Antimicrobial — kills pathogens on surfaces. Excellent for dairy buildings and latrines.</td></tr>
+        <tr><td><strong>Hydraulic lime mortar</strong></td><td>1 part hydraulic lime : 2.5 parts sand</td><td>Below-ground and wet applications (foundations, cisterns)</td><td>Sets by chemical reaction (not just drying); works underwater; requires hydraulic lime (NHL) which has clay impurities naturally</td></tr>
+        <tr><td><strong>Cob mortar</strong></td><td>Lime + clay subsoil + sand + straw fibers</td><td>Cob construction, earthen plaster</td><td>Highly plastic; self-leveling; traditional rural construction worldwide</td></tr>
+        <tr><td><strong>Soil stabilization</strong></td><td>5–10% quicklime mixed into soil</td><td>Road beds, floor bases</td><td>Reacts with clay to produce pozzolanic binding — dramatically increases load-bearing capacity</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Hydraulic Lime vs. Air Lime</h3>
+    <p><strong>Air lime (non-hydraulic):</strong> Sets by carbonation — absorbing CO₂ from air. Only works in air; will not set underwater. Takes weeks to months. Remains somewhat flexible.</p>
+    <p><strong>Hydraulic lime (NHL):</strong> Contains silica/alumina compounds (from clay impurities in the limestone). Sets by both carbonation AND hydraulic reaction (with water). Sets faster, stronger, and works in wet conditions and underwater. Identified by the presence of dark "clinker" spots in the burned limestone — these are silica-rich zones.</p>
+    <p><strong>Roman concrete (Opus Caementicium):</strong> The Romans used volcanic ash (pozzolan — from Pozzuoli, Italy) mixed with lime to create a hydraulic concrete of extraordinary durability. The volcanic ash provides reactive silica. Volcanic ash substitutes: pulverized brick, fired clay, blast furnace slag, rice hull ash, or silica-rich wood ash can provide pozzolanic activity. Mix 1 part lime : 1 part pozzolan material : 2 parts aggregate.</p>
+
+    <!-- ═══ ADHESIVES ═══ -->
+    <h2 id="adhesives">7. Adhesives &amp; Sealants</h2>
+
+    <div class="material-card">
+      <h4>Pine Pitch Glue</h4>
+      <p><strong>Composition:</strong> 3 parts pine pitch (resin) : 1 part charcoal powder : 1 part beeswax (or fat).</p>
+      <p><strong>Process:</strong> Melt pitch carefully over low heat (flammable — no open flames if possible; use water bath). Add charcoal and beeswax. Mix thoroughly. Apply hot with stick to surfaces to join. Cures as it cools. Reheat to reposition.</p>
+      <p><strong>Properties:</strong> Waterproof, flexible, bonds stone/wood/bone/ceramic. Used for millennia for arrowheads, tool hafting, canoe sealing, waterproofing containers. Not suitable for high-heat applications.</p>
+      <span class="tag-use">Waterproof</span><span class="tag-use">Stone/wood/bone</span><span class="tag-use">Arrowhead hafting</span><span class="tag-use">Canoe sealing</span>
+    </div>
+
+    <div class="material-card">
+      <h4>Hide Glue</h4>
+      <p><strong>Source:</strong> Collagen from animal hides, hooves, bones, and cartilage.</p>
+      <p><strong>Process:</strong> Simmer hide scraps, hooves, or bones in water for several hours. Strain out solids; reduce liquid by boiling until thick and sticky. Pour into molds to set into gel. Dry into sheets or granules for storage. Reactivate by dissolving in hot water.</p>
+      <p><strong>Properties:</strong> Strongest wood-to-wood adhesive — woodworkers still use it for furniture. Reversible with heat and moisture (a feature: joints can be disassembled by steaming). Not waterproof. Sets by cooling, not by chemical cure.</p>
+      <span class="tag-use">Wood joinery</span><span class="tag-use">Furniture</span><span class="tag-use">Reversible joints</span><span class="tag-use">Bookbinding</span>
+    </div>
+
+    <div class="material-card">
+      <h4>Birch Tar</h4>
+      <p><strong>Process:</strong> Distill birch bark in a sealed clay vessel (pack bark tightly, small hole at bottom for drip collection, heat externally). Brown-black oil drips out. This is birch tar. Concentration can be adjusted by further heating. True dry distillation — no water involved.</p>
+      <p><strong>Properties:</strong> Ancient Neanderthal and Stone Age adhesive; antimicrobial; waterproof; black. Used for tool hafting, waterproofing baskets and leather, skin treatment for eczema and psoriasis. Very sticky; difficult to remove from skin (use oil or animal fat to dissolve).</p>
+      <span class="tag-use">Waterproof</span><span class="tag-use">Antimicrobial</span><span class="tag-use">Ancient adhesive</span><span class="tag-use">Leather treatment</span>
+    </div>
+
+    <div class="material-card">
+      <h4>Natural Rubber (Climate Dependent)</h4>
+      <p><strong>Sources:</strong> Rubber tree (Hevea brasiliensis) latex — tropical only. Dandelion root latex (Taraxacum spp.) — temperate, lower yield. Guayule (Parthenium argentatum) — semi-arid Southwest USA.</p>
+      <p><strong>Collection:</strong> Score bark of rubber tree at 30° angle, 1.5mm deep; collect dripping latex. Dandelion root: grind roots, collect white latex, allow to coagulate.</p>
+      <p><strong>Vulcanization (without sulfur):</strong> Smoke-vulcanization was used by Amazonian peoples — hold latex over smoky fire to cross-link polymer chains. Produces a more durable, less sticky rubber than raw latex.</p>
+      <span class="tag-use">Seals/gaskets</span><span class="tag-use">Waterproofing</span><span class="tag-use">Tropical zones only</span>
+    </div>
+
+    <!-- ═══ GUNPOWDER ═══ -->
+    <h2 id="gunpowder">8. Gunpowder</h2>
+
+    <div class="gun-box">
+      <table>
+        <thead><tr><th>Component</th><th>Historical Percentage</th><th>Function</th></tr></thead>
+        <tbody>
+          <tr><td>Potassium nitrate (saltpeter, KNO₃)</td><td>75%</td><td>Oxidizer — provides oxygen for combustion</td></tr>
+          <tr><td>Charcoal (carbon)</td><td>15%</td><td>Fuel — fine-ground hardwood charcoal is best</td></tr>
+          <tr><td>Sulfur</td><td>10%</td><td>Lowers ignition temperature; improves ignition reliability</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Saltpeter Sourcing — Nitre Beds</h4>
+      <p>Potassium nitrate occurs naturally where organic matter decomposes under specific conditions. Traditional nitre beds were constructed by:</p>
+      <ol style="font-size:0.88em;color:#bbb;">
+        <li>Building a covered shed over a mixture of: stable manure (high nitrogen), old mortar/limestone rubble (calcium), straw, and soil.</li>
+        <li>Keeping moist but not waterlogged. Urine accelerates the process (adds nitrogen).</li>
+        <li>Turning the pile regularly to aerate — the nitrification bacteria are aerobic.</li>
+        <li>After 12–18 months, white crystals appear on the surface (potassium/calcium nitrate efflorescence).</li>
+        <li>Dissolve the bed material in hot water; filter; add wood ash (provides potassium to convert calcium nitrate to potassium nitrate); boil down to crystallize.</li>
+        <li>Crystals are filtered, dried, and re-dissolved 2–3 times for purity.</li>
+      </ol>
+
+      <h4>Safety and Handling</h4>
+      <ul style="font-size:0.88em;color:#bbb;">
+        <li>Sensitive to heat, friction, and static electricity. A spark or static discharge from clothing can ignite unconfined powder.</li>
+        <li>Mix only small amounts (less than 50g at a time for testing). Never use metal tools — use wood, bone, or plastic.</li>
+        <li>Store dry in non-metallic, sealed container. Small quantities only. Never store large quantities.</li>
+        <li>Unconfined, it burns rapidly (deflagration) rather than detonating. Confinement is required for projectile propulsion.</li>
+        <li><strong>Uses in context:</strong> Signal flares and fire starters; primitive firearm propellant; blasting for mining; pyrotechnics for signaling search-and-rescue.</li>
+      </ul>
+    </div>
+
+    <!-- ═══ CLEANING & SANITATION ═══ -->
+    <h2 id="cleaning">9. Improvised Cleaning &amp; Sanitation Products</h2>
+
+    <h3>Vinegar</h3>
+    <p>Vinegar is dilute acetic acid produced by acetic acid bacteria (Acetobacter) oxidizing ethanol. Any alcoholic liquid can become vinegar.</p>
+    <div class="process-steps">
+      <div class="process-step">Produce any fermented alcohol — fruit wine, grain beer, or a weak sugar wash (5–8% ABV ideal; too strong kills the bacteria).</div>
+      <div class="process-step">Obtain a "mother of vinegar" — a cellulose mat produced by Acetobacter. Vinegar from a store often contains a living mother. Or allow raw apple cider to sit uncovered for wild inoculation (slower).</div>
+      <div class="process-step">Add mother to your alcoholic liquid in a wide-mouthed container (maximum oxygen exposure). Cover with cloth (not lid) to allow air access. Temperature: 25–30°C optimal.</div>
+      <div class="process-step">Ready in 4–8 weeks. Strong, sharp smell. Test with pH strip — finished vinegar is pH 3–4. Strain and bottle. Pasteurize (heat to 60°C for 10 min) to halt fermentation if you want to stop it there.</div>
+    </div>
+    <p><strong>Uses:</strong> Food preservation (pickling), surface cleaning, pH adjustment in soap making, hair rinse (restores pH after alkaline soap), weed killer (undiluted), meat tenderizing, and as a weak disinfectant.</p>
+
+    <h3>Washing Soda (Sodium Carbonate)</h3>
+    <p>Baking soda (sodium bicarbonate, NaHCO₃) converts to washing soda (sodium carbonate, Na₂CO₃) by heating:</p>
+    <ol>
+      <li>Spread baking soda on a baking sheet in a thin layer.</li>
+      <li>Bake at 200°C (400°F) for 1 hour, stirring occasionally.</li>
+      <li>It loses CO₂ and water, converting to washing soda. The texture changes — it looks more crystalline and coarser.</li>
+    </ol>
+    <p>Washing soda is more alkaline (pH ~11) than baking soda (pH ~8.3). Uses: heavy-duty laundry cleaner, dishwasher detergent substitute, degreaser, drain cleaner. Do not use on aluminum — reacts and corrodes.</p>
+
+    <h3>Bleach — Storage and Limitations</h3>
+    <div class="callout callout-amber">
+      <strong>Bleach Cannot Be Easily Made from Scratch.</strong> Chlorine bleach (sodium hypochlorite) requires electrolysis of brine — technically possible but practically difficult without stable electricity. Stockpile and store properly; do not assume you can produce it post-collapse.
+    </div>
+    <table>
+      <thead><tr><th>Storage Factor</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Shelf life (sealed, dark, cool)</td><td>12–18 months for 5–6% household bleach before significant degradation</td></tr>
+        <tr><td>Shelf life (opened)</td><td>3–6 months before activity drops below effective levels</td></tr>
+        <tr><td>Storage conditions</td><td>Sealed, dark container, cool temperature (&lt;25°C). Heat, light, and air accelerate decomposition.</td></tr>
+        <tr><td>Concentration loss</td><td>Loses ~20% of activity per year at room temperature even when sealed</td></tr>
+        <tr><td>Test if still active</td><td>Pour small amount on concrete — if it bleaches the surface quickly and smells strongly of chlorine, it's still viable</td></tr>
+        <tr><td>Substitute disinfectants</td><td>10% lye solution (caustic — use gloves); 70%+ alcohol; pine tar; boiling; UV exposure (sunlight)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Lye Solution as Disinfectant and Cleaner</h3>
+    <p>A 10% potassium hydroxide or sodium hydroxide solution in water is an effective surface disinfectant, drain cleaner, and oven cleaner. It is corrosive — use gloves and avoid contact with eyes and skin. Food-grade uses include:</p>
+    <ul>
+      <li><strong>Pretzels:</strong> Brief dip in 3–4% lye solution before baking creates the dark crust and characteristic flavor</li>
+      <li><strong>Lutefisk:</strong> Fish preserved in lye solution, then rehydrated</li>
+      <li><strong>Nixtamalization (corn):</strong> Soaking dried corn in 5% lye or slaked lime solution overnight releases niacin (prevents pellagra) and makes amino acids bioavailable. <strong>This is critical for corn-dependent communities</strong> — communities that adopted corn without nixtamalization (the American South, parts of Europe) suffered widespread pellagra.</li>
+      <li><strong>Olive curing:</strong> Soaking green olives in dilute lye removes bitter compounds (oleuropein) before brining</li>
+    </ul>
+
+    <!-- ═══ CHEMICAL COMPATIBILITY ═══ -->
+    <h2 id="compat">10. Chemical Compatibility — What NOT to Mix</h2>
+
+    <div class="callout callout-red">
+      <strong>Some common chemical combinations produce toxic gases, fire, or violent reactions. Most of these involve materials you will have on hand. Memorize or post this list.</strong>
+    </div>
+
+    <div class="compat-grid">
+      <div class="compat-card">
+        <div class="mix-a">Bleach</div>
+        <div>+</div>
+        <div class="mix-b">Ammonia</div>
+        <div class="result">Chloramine gas — toxic, respiratory damage</div>
+      </div>
+      <div class="compat-card">
+        <div class="mix-a">Bleach</div>
+        <div>+</div>
+        <div class="mix-b">Vinegar or any acid</div>
+        <div class="result">Chlorine gas — extremely toxic, can be lethal</div>
+      </div>
+      <div class="compat-card">
+        <div class="mix-a">Bleach</div>
+        <div>+</div>
+        <div class="mix-b">Rubbing alcohol</div>
+        <div class="result">Chloroform and chloroacetone — toxic, mutagenic</div>
+      </div>
+      <div class="compat-card">
+        <div class="mix-a">Lye (NaOH/KOH)</div>
+        <div>+</div>
+        <div class="mix-b">Aluminum</div>
+        <div class="result">Hydrogen gas — flammable and explosive; never use aluminum containers with lye</div>
+      </div>
+      <div class="compat-card">
+        <div class="mix-a">Bleach</div>
+        <div>+</div>
+        <div class="mix-b">Hydrogen peroxide</div>
+        <div class="result">Oxygen released rapidly — fire accelerant; can cause violent boiling</div>
+      </div>
+      <div class="compat-card">
+        <div class="mix-a">Quicklime</div>
+        <div>+</div>
+        <div class="mix-b">Water (rapid)</div>
+        <div class="result">Intense heat (to boiling), steam explosion risk; always add lime to water slowly</div>
+      </div>
+      <div class="compat-card">
+        <div class="mix-a">Potassium nitrate (saltpeter)</div>
+        <div>+</div>
+        <div class="mix-b">Any fuel (charcoal, sugar, sulfur)</div>
+        <div class="result">Gunpowder / explosive mixture — friction or spark initiates</div>
+      </div>
+      <div class="compat-card">
+        <div class="mix-a">Ammonia</div>
+        <div>+</div>
+        <div class="mix-b">Any acid (vinegar, battery acid)</div>
+        <div class="result">Neutralization reaction with ammonium salt formation; steam release in concentrated form</div>
+      </div>
+      <div class="compat-card">
+        <div class="mix-a">Wood ash (lye)</div>
+        <div>+</div>
+        <div class="mix-b">Vinegar</div>
+        <div class="result">Violent foaming neutralization — not explosive but messy and counterproductive</div>
+      </div>
+      <div class="compat-card">
+        <div class="mix-a">Pine pitch / tar</div>
+        <div>+</div>
+        <div class="mix-b">Open flame while melting</div>
+        <div class="result">Flash fire — always use water bath or indirect heat; highly flammable</div>
+      </div>
+      <div class="compat-card">
+        <div class="mix-a">Charcoal retort</div>
+        <div>+</div>
+        <div class="mix-b">Opening while hot</div>
+        <div class="result">Immediate ignition — charcoal auto-ignites on oxygen contact when hot; always cool fully</div>
+      </div>
+      <div class="compat-card">
+        <div class="mix-a">Methanol (foreshots)</div>
+        <div>+</div>
+        <div class="mix-b">Any consumption</div>
+        <div class="result">Permanent blindness / death — not a mixture, but a severe hazard. Always discard first 50ml per 20L wash.</div>
+      </div>
+    </div>
+
+    <table style="margin-top:1rem">
+      <thead><tr><th>Also Remember</th><th>Hazard</th></tr></thead>
+      <tbody>
+        <tr><td>Never burn plastic for heat near food</td><td>Releases dioxins and HCl (from PVC) — carcinogenic, contaminates cooking area</td></tr>
+        <tr><td>Never burn pressure-treated wood indoors</td><td>Contains arsenic and chromium — toxic fumes</td></tr>
+        <tr><td>Never use galvanized metal for cooking</td><td>Zinc oxide fumes from heated galvanizing cause "metal fume fever"</td></tr>
+        <tr><td>Never store distillate in tin containers</td><td>Tin reacts with acid in spirit — produces organotin compounds; use glass only</td></tr>
+        <tr><td>Carbon monoxide from generators/stoves</td><td>Odorless, colorless — kills without warning. Never run combustion engines/stoves indoors without ventilation.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="nav-buttons">
+      <a href="../index.html" class="btn-nav">← Home</a>
+      <a href="textiles.html" class="btn-nav">Textiles →</a>
+    </div>
+
+    <div class="callout callout-amber" style="margin-top:2rem;">
+      <strong>Cross-References:</strong>
+      <a href="agriculture.html">Agriculture</a> —
+      <a href="metallurgy.html">Metallurgy</a> —
+      <a href="textiles.html">Textiles</a> —
+      <a href="medicine.html">Medical Care</a> —
+      <a href="../literature.html">Reference Library</a>
+    </div>
+
+    <nav class="section-pagination no-print" aria-label="Section navigation">
+      <a href="psychology.html" class="pagination-btn pagination-prev">← Psychology</a>
+      <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+      <a href="textiles.html" class="pagination-btn pagination-next">Textiles →</a>
+    </nav>
+  </main>
+
+  <aside id="aria-panel">
+    <div class="aria-header">
+      <span class="status-dot"></span>
+      <span class="aria-status-label">Bunker Bot</span>
+      <span id="aria-model-badge">offline</span>
+      <button id="aria-close">✕</button>
+    </div>
+    <div id="aria-messages"></div>
+    <div class="aria-input-row">
+      <input type="text" id="aria-input" placeholder="Ask ARIA...">
+      <button id="aria-send">Send</button>
+    </div>
+  </aside>
+
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/aria.js"></script>
+</body>
+</html>

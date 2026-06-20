@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Library — The Last Light Survival Guide</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .pdf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.85rem;
+      margin-top: 1.5rem;
+    }
+    .pdf-card {
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--amber);
+      border-radius: 6px;
+      padding: 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      transition: border-color 0.15s;
+    }
+    .pdf-card:hover { border-color: #555; border-top-color: var(--amber); }
+    .pdf-title  { font-weight: 700; color: var(--amber); font-size: 0.95em; line-height: 1.3; }
+    .pdf-author { color: var(--text-2); font-size: 0.78em; }
+    .pdf-desc   { color: var(--text-1); font-size: 0.83em; line-height: 1.55; flex: 1; margin-top: 0.2rem; }
+    .pdf-meta   { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.3rem; }
+    .badge-size   { font-size: 0.72em; padding: 0.1rem 0.45rem; border-radius: 3px; background: #1a1a2a; color: #8a8aff; border: 1px solid #2a2a4a; }
+    .badge-license{ font-size: 0.72em; padding: 0.1rem 0.45rem; border-radius: 3px; background: #0d2030; color: #3498db; border: 1px solid #1a3a50; }
+    .badge-uk     { font-size: 0.72em; padding: 0.1rem 0.45rem; border-radius: 3px; background: #0d2a14; color: #27ae60; border: 1px solid #1a4a22; }
+    .pdf-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+    .btn-open {
+      flex: 1; text-align: center; text-decoration: none;
+      background: #1a1a0a; border: 1px solid var(--amber); color: var(--amber);
+      padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.82em; cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-open:hover { background: var(--amber); color: var(--bg-0); }
+    .btn-dl {
+      flex: 0; padding: 0.3rem 0.55rem;
+      text-decoration: none; background: var(--bg-3); border: 1px solid var(--border);
+      color: var(--text-2); border-radius: 4px; font-size: 0.82em;
+      transition: background 0.15s;
+    }
+    .btn-dl:hover { background: var(--bg-4); color: var(--text-0); }
+    .back-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.75rem;
+      padding: 0.75rem 0 1.25rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--amber); text-decoration: none; font-size: 0.9em; font-weight: 600;
+    }
+    .back-link:hover { text-decoration: underline; }
+    .dl-all-btn {
+      background: var(--amber-dim); border: 1px solid var(--amber); color: var(--amber);
+      padding: 0.35rem 0.9rem; border-radius: 4px; font-size: 0.82em; cursor: pointer;
+      font-weight: 600; transition: background 0.15s;
+    }
+    .dl-all-btn:hover { background: var(--amber); color: var(--bg-0); }
+    .index-note {
+      font-size: 0.8em; color: var(--text-3); margin-top: 2rem;
+      padding-top: 1rem; border-top: 1px solid var(--border);
+    }
+    @media (max-width: 600px) {
+      .pdf-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+  <div id="overlay" class="overlay"></div>
+
+  <header class="site-header">
+    <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+    <div class="header-breadcrumb">
+      <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+      <span class="page-title">PDF Library</span>
+    </div>
+    <div class="header-actions">
+      <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+    </div>
+  </header>
+
+  <main class="main-content" id="main-content">
+  <div class="content-wrapper">
+
+    <div class="back-bar">
+      <a href="../literature.html" class="back-link">← Reference Library</a>
+      <button class="dl-all-btn" onclick="downloadAll()">⬇ Download All (14 PDFs)</button>
+    </div>
+
+    <div class="section-header">
+      <div class="section-badges">
+        <span class="badge">14 PDFs</span>
+        <span class="badge">~219 MB total</span>
+        <span class="badge">100% Offline</span>
+      </div>
+      <h1>📚 PDF Library</h1>
+      <p class="section-subtitle">All files are bundled locally — open or download any PDF without an internet connection. Bunker Bot can search the contents of all text-readable PDFs.</p>
+    </div>
+
+    <div class="pdf-grid">
+
+      <div class="pdf-card">
+        <div class="pdf-title">US Army Survival Manual FM 3-05.70</div>
+        <div class="pdf-author">US Dept. of the Army · 2002</div>
+        <div class="pdf-desc">The definitive military survival reference — shelter, water, fire, food, navigation, and SERE across every climate. 676 pages.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">20 MB</span>
+          <span class="badge-license">Public Domain</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="fm-3-05-70-survival.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="fm-3-05-70-survival.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">US Army Survival Manual FM 21-76 (1957)</div>
+        <div class="pdf-author">US Dept. of the Army · 1957</div>
+        <div class="pdf-desc">The original survival field manual — evasion, escape, and primitive techniques not always in the modern edition. 314 pages.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">18 MB</span>
+          <span class="badge-license">Public Domain</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="fm-21-76-survival-1957.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="fm-21-76-survival-1957.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">First Aid — FM 4-25.11</div>
+        <div class="pdf-author">US Army / Navy / USAF / USMC · 2004</div>
+        <div class="pdf-desc">Military first aid — trauma, wounds, fractures, burns, airway management, hypothermia, mass-casualty triage. 227 pages.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">2.5 MB</span>
+          <span class="badge-license">Public Domain</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="fm-4-25-11-first-aid.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="fm-4-25-11-first-aid.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">Field Hygiene &amp; Sanitation FM 21-10</div>
+        <div class="pdf-author">US Army / USMC · 2000</div>
+        <div class="pdf-desc">Water purification, latrines, waste disposal, pest control, disease prevention. The illnesses that kill most survivors are preventable.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">2.8 MB</span>
+          <span class="badge-license">Public Domain</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="fm-21-10-field-hygiene.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="fm-21-10-field-hygiene.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">US Army Ranger Handbook SH 21-76</div>
+        <div class="pdf-author">US Army · 2006</div>
+        <div class="pdf-desc">Small-unit tactics, demolitions, reconnaissance, battle drills, and leadership under pressure. Concise and action-oriented.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">3.7 MB</span>
+          <span class="badge-license">Public Domain</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="ranger-handbook.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="ranger-handbook.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">US Army Signal Operations FM 6-02</div>
+        <div class="pdf-author">US Dept. of the Army · 2019</div>
+        <div class="pdf-desc">Military communications: radio networks, encryption, frequencies, antenna theory, and maintaining comms under degraded conditions.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">5.3 MB</span>
+          <span class="badge-license">Public Domain</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="fm-6-02-signal-ops.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="fm-6-02-signal-ops.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">Emergency War Surgery (5th Ed.)</div>
+        <div class="pdf-author">US Army Borden Institute · 2018</div>
+        <div class="pdf-desc">Advanced trauma surgery without hospital infrastructure — haemorrhage control, blast injuries, burns, amputations, field anaesthesia.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">29 MB</span>
+          <span class="badge-license">Public Domain</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="emergency-war-surgery.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="emergency-war-surgery.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">Nuclear War Survival Skills</div>
+        <div class="pdf-author">Cresson H. Kearny · Oak Ridge National Lab · 1987</div>
+        <div class="pdf-desc">Peer-reviewed nuclear survival guide — expedient shelters, KFM dosimeter construction, fallout decontamination, medical effects of radiation.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">70 MB</span>
+          <span class="badge-license">Public Domain</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="nuclear-war-survival.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="nuclear-war-survival.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">Where There Is No Doctor</div>
+        <div class="pdf-author">David Werner et al. · Hesperian · 2012</div>
+        <div class="pdf-desc">The world's most-used community health guide — diagnosis, treatment, and prevention for remote areas without medical professionals. 503 pages.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">8.3 MB</span>
+          <span class="badge-license">Hesperian Free License</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="where-there-is-no-doctor.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="where-there-is-no-doctor.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">Where There Is No Dentist</div>
+        <div class="pdf-author">Murray Dickson · Hesperian · 2012</div>
+        <div class="pdf-desc">Practical dental care without a dentist — extractions, fillings, infections, pain relief, and prevention. Illustrated procedures.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">7.2 MB</span>
+          <span class="badge-license">Hesperian Free License</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="where-there-is-no-dentist.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="where-there-is-no-dentist.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">The Humanure Handbook (3rd Ed.)</div>
+        <div class="pdf-author">Joseph Jenkins · 2005</div>
+        <div class="pdf-desc">Safe composting of human waste into fertile soil. Critical sanitation when sewage fails — thermophilic composting, pathogen safety, system construction.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">22 MB</span>
+          <span class="badge-license">Author Free Release</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="humanure-handbook.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="humanure-handbook.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">Aerie Wilderness Medicine (15th Ed.)</div>
+        <div class="pdf-author">Aerie Backcountry Medicine · 2025</div>
+        <div class="pdf-desc">Current wilderness medicine curriculum — patient assessment, trauma, environmental injuries, altitude sickness, evacuation decisions. WEMT standard.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">13 MB</span>
+          <span class="badge-license">Educator Free License</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="aerie-backcountry-medicine.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="aerie-backcountry-medicine.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">UK Emergency Preparedness Guide</div>
+        <div class="pdf-author">UK Cabinet Office · 2016</div>
+        <div class="pdf-desc">Official UK government guidance for individuals, families, and communities — flooding, power cuts, evacuation, and community resilience.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">285 KB</span>
+          <span class="badge-uk">Crown Copyright</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="uk-emergency-preparedness.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="uk-emergency-preparedness.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+      <div class="pdf-card">
+        <div class="pdf-title">The Art of War</div>
+        <div class="pdf-author">Sun Tzu · trans. Lionel Giles · c.500 BCE</div>
+        <div class="pdf-desc">Strategic thinking, deception, intelligence, and leadership under pressure. Foundational text on conflict and resource management — applies to security and community defence.</div>
+        <div class="pdf-meta">
+          <span class="badge-size">0.9 MB</span>
+          <span class="badge-license">Public Domain</span>
+        </div>
+        <div class="pdf-actions">
+          <a href="art-of-war-sun-tzu.pdf" target="_blank" class="btn-open">Open</a>
+          <a href="art-of-war-sun-tzu.pdf" download class="btn-dl" title="Download">⬇</a>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="index-note">
+      Bunker Bot can search the text of all PDFs above (except Nuclear War Survival Skills, which is a scanned image).
+      To re-index after adding new PDFs: <code>cd pdfs &amp;&amp; python3 extract.py</code>.
+      Go to <a href="../literature.html">Reference Library</a> to manage your personal library and Bunker Bot knowledge base.
+    </p>
+
+  </div><!-- /content-wrapper -->
+  </main>
+
+  <!-- Download confirmation modal -->
+  <div id="dl-confirm" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9200;align-items:center;justify-content:center;" onclick="if(event.target===this)cancelDownload()">
+    <div style="background:var(--bg-2);border:1px solid var(--border-hi);border-top:2px solid var(--amber);border-radius:8px;padding:1.4rem 1.6rem;width:min(400px,92vw);">
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);margin-bottom:0.5rem;">Download PDF</div>
+      <div id="confirm-title" style="font-weight:700;color:var(--amber-light);font-size:0.97rem;line-height:1.4;margin-bottom:0.35rem;"></div>
+      <div style="font-size:0.78rem;color:var(--text-3);margin-bottom:1.1rem;"><span id="confirm-size"></span><span id="confirm-file" style="font-family:monospace;"></span></div>
+      <div style="display:flex;gap:0.6rem;justify-content:flex-end;">
+        <button onclick="cancelDownload()" style="background:var(--bg-4);border:1px solid var(--border-hi);color:var(--text-1);padding:0.4rem 1rem;border-radius:4px;font-size:0.85em;cursor:pointer;font-weight:600;">Cancel</button>
+        <button onclick="confirmDownload()" style="background:var(--amber-dim);border:1px solid var(--amber);color:var(--amber-light);padding:0.4rem 1rem;border-radius:4px;font-size:0.85em;cursor:pointer;font-weight:700;">⬇ Download</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download guide modal -->
+  <div id="dl-guide" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9100;align-items:center;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+    <div style="background:var(--bg-2);border:1px solid var(--border-hi);border-top:2px solid var(--amber);border-radius:8px;padding:1.5rem 1.75rem;width:min(460px,92vw);">
+      <h3 style="margin:0 0 0.75rem;color:var(--amber);font-size:1rem;">⬇ Downloading All PDFs</h3>
+      <p style="font-size:0.85em;color:var(--text-1);line-height:1.6;margin:0 0 0.85rem;">
+        Browsers block automatic multi-file downloads. The quickest approach:
+      </p>
+      <ol style="font-size:0.84em;color:var(--text-1);line-height:1.9;margin:0 0 1rem;padding-left:1.2rem;">
+        <li>Click the <strong style="color:var(--amber)">⬇</strong> button on each card below — they're real links your browser won't block.</li>
+        <li><strong>Or</strong> — copy the entire <code>survivalai/pdfs/</code> folder to a USB drive. All 14 files are already there.</li>
+        <li>Already downloaded? Your browser just adds <code>(1)</code> to the filename — the originals are safe.</li>
+      </ol>
+      <div style="text-align:right;">
+        <button onclick="document.getElementById('dl-guide').style.display='none'" style="background:var(--bg-4);border:1px solid var(--border-hi);color:var(--text-1);padding:0.35rem 0.85rem;border-radius:4px;font-size:0.83em;cursor:pointer;">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot"></aside>
+
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/librarian.js"></script>
+  <script src="../assets/js/aria.js"></script>
+  <script>
+    const PDF_FILES = [
+      'fm-3-05-70-survival.pdf',
+      'fm-21-76-survival-1957.pdf',
+      'fm-4-25-11-first-aid.pdf',
+      'fm-21-10-field-hygiene.pdf',
+      'ranger-handbook.pdf',
+      'fm-6-02-signal-ops.pdf',
+      'emergency-war-surgery.pdf',
+      'nuclear-war-survival.pdf',
+      'where-there-is-no-doctor.pdf',
+      'where-there-is-no-dentist.pdf',
+      'humanure-handbook.pdf',
+      'aerie-backcountry-medicine.pdf',
+      'uk-emergency-preparedness.pdf',
+      'art-of-war-sun-tzu.pdf',
+    ];
+
+    function downloadAll() {
+      document.getElementById('dl-guide').style.display = 'flex';
+    }
+
+    // ── Download confirmation ──────────────────────────────
+    const PDF_META = {
+      'fm-3-05-70-survival.pdf':      { title: 'US Army Survival Manual FM 3-05.70',     size: '20 MB' },
+      'fm-21-76-survival-1957.pdf':   { title: 'US Army Survival Manual FM 21-76 (1957)',size: '18 MB' },
+      'fm-4-25-11-first-aid.pdf':     { title: 'First Aid FM 4-25.11',                   size: '2.5 MB' },
+      'fm-21-10-field-hygiene.pdf':   { title: 'Field Hygiene & Sanitation FM 21-10',    size: '2.8 MB' },
+      'ranger-handbook.pdf':          { title: 'US Army Ranger Handbook SH 21-76',       size: '3.7 MB' },
+      'fm-6-02-signal-ops.pdf':       { title: 'US Army Signal Operations FM 6-02',      size: '5.3 MB' },
+      'emergency-war-surgery.pdf':    { title: 'Emergency War Surgery (5th Ed.)',         size: '29 MB' },
+      'nuclear-war-survival.pdf':     { title: 'Nuclear War Survival Skills',             size: '70 MB' },
+      'where-there-is-no-doctor.pdf': { title: 'Where There Is No Doctor',               size: '8.3 MB' },
+      'where-there-is-no-dentist.pdf':{ title: 'Where There Is No Dentist',              size: '7.2 MB' },
+      'humanure-handbook.pdf':        { title: 'The Humanure Handbook',                  size: '22 MB' },
+      'aerie-backcountry-medicine.pdf':{ title: 'Aerie Wilderness Medicine (15th Ed.)',  size: '13 MB' },
+      'uk-emergency-preparedness.pdf':{ title: 'UK Emergency Preparedness Guide',        size: '285 KB' },
+      'art-of-war-sun-tzu.pdf':       { title: 'The Art of War',                         size: '0.9 MB' },
+    };
+
+    let _pendingHref = null;
+
+    document.addEventListener('click', e => {
+      const link = e.target.closest('a[download]');
+      if (!link) return;
+      e.preventDefault();
+      const file = link.getAttribute('href').split('/').pop();
+      const meta = PDF_META[file] || { title: file, size: '' };
+      _pendingHref = link.href;
+      document.getElementById('confirm-title').textContent = meta.title;
+      document.getElementById('confirm-size').textContent  = meta.size ? meta.size + ' · ' : '';
+      document.getElementById('confirm-file').textContent  = file;
+      document.getElementById('dl-confirm').style.display  = 'flex';
+    });
+
+    function confirmDownload() {
+      if (_pendingHref) {
+        const a = document.createElement('a');
+        a.href = _pendingHref;
+        a.download = '';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        _pendingHref = null;
+      }
+      document.getElementById('dl-confirm').style.display = 'none';
+    }
+
+    function cancelDownload() {
+      _pendingHref = null;
+      document.getElementById('dl-confirm').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

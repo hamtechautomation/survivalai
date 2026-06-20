@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bunker Bot System Prompt — copy Bunker Bot's instructions into ChatGPT, Claude.ai, or any other AI tool.">
+  <title>Bunker Bot System Prompt — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* =================== Bunker Bot PROMPT PAGE STYLES =================== */
+    .prompt-hero {
+      background: linear-gradient(135deg, rgba(201,169,78,.08) 0%, rgba(7,10,9,0) 100%);
+      border: 1px solid rgba(201,169,78,.25);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .prompt-hero-icon {
+      font-size: 3.5rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .prompt-hero-text h2 {
+      margin: 0 0 .5rem;
+      color: var(--amber);
+    }
+
+    .prompt-hero-text p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: .95rem;
+      line-height: 1.6;
+    }
+
+    /* =================== PROMPT BLOCK =================== */
+    .prompt-block {
+      position: relative;
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .prompt-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .75rem 1.25rem;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .prompt-block-title {
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .prompt-block-actions {
+      display: flex;
+      gap: .5rem;
+    }
+
+    .prompt-text {
+      padding: 1.5rem;
+      margin: 0;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Menlo', monospace;
+      font-size: .85rem;
+      line-height: 1.7;
+      color: var(--text-primary);
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: none;
+      border: none;
+      overflow-x: auto;
+      user-select: text;
+    }
+
+    /* =================== USAGE CARDS =================== */
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .usage-card {
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .usage-card-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: .75rem;
+    }
+
+    .usage-card-icon { font-size: 1.5rem; }
+
+    .usage-card-title {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .usage-card-subtitle {
+      font-size: .75rem;
+      color: var(--text-muted);
+    }
+
+    .usage-steps {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: step;
+    }
+
+    .usage-steps li {
+      counter-increment: step;
+      display: flex;
+      gap: .75rem;
+      align-items: flex-start;
+      padding: .4rem 0;
+      font-size: .85rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .usage-steps li:last-child { border-bottom: none; }
+
+    .usage-steps li::before {
+      content: counter(step);
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--amber);
+      color: var(--bg-0);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-top: 1px;
+    }
+
+    .usage-steps code {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .1rem .4rem;
+      font-size: .8rem;
+      color: var(--amber);
+    }
+
+    /* =================== MODEL TABLE =================== */
+    .model-table-wrap {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+    }
+
+    /* =================== COPY NOTIFICATION =================== */
+    .copy-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--amber);
+      color: var(--bg-0);
+      padding: .75rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: .9rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .2s, transform .2s;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =================== HIDDEN PAGE NOTICE =================== */
+    .hidden-notice {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      background: rgba(201,169,78,.06);
+      border: 1px solid rgba(201,169,78,.2);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      font-size: .82rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hidden-notice code {
+      background: var(--bg-2);
+      padding: .15rem .4rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: var(--amber);
+      font-size: .8rem;
+    }
+
+    @media (max-width: 600px) {
+      .prompt-hero { flex-direction: column; }
+    }
+
+    @media print {
+      .prompt-block-actions, .header-actions, #back-to-top,
+      .sidebar, .aria-panel, #overlay, .hidden-notice { display: none !important; }
+      body { background: #fff !important; color: #000 !important; }
+      .prompt-text { font-size: .75rem; }
+    }
+  </style>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Bunker Bot System Prompt</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="copyPrompt()" class="btn btn-sm btn-primary">📋 Copy Prompt</button>
+    <button onclick="window.print()" class="btn btn-sm btn-outline">🖨️ Print</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>🤖 Bunker Bot System Prompt</h1>
+    <p class="section-desc">Bunker Bot's full persona and instructions. Paste this into any AI tool — ChatGPT, Claude.ai, Gemini, or a local Ollama model — to get the same survival-focused behavior even without this guide's built-in chat panel.</p>
+  </div>
+
+  <div class="hidden-notice">
+    🔒 This page is not linked in the main navigation. Access it directly at <code>aria-prompt.html</code>.
+  </div>
+
+  <!-- Hero -->
+  <div class="prompt-hero">
+    <div class="prompt-hero-icon">🤖</div>
+    <div class="prompt-hero-text">
+      <h2>Bunker Bot — Offline Survival AI</h2>
+      <p>This is the exact system prompt that powers Bunker Bot inside The Last Light Survival Guide. Copy it and paste it as the "system prompt" or first message in any AI tool. The AI will then behave exactly like Bunker Bot: calm, authoritative, survival-focused, formatted for fast reading under stress.</p>
+    </div>
+  </div>
+
+  <!-- The Prompt -->
+  <div class="prompt-block">
+    <div class="prompt-block-header">
+      <span class="prompt-block-title">Bunker Bot System Prompt</span>
+      <div class="prompt-block-actions">
+        <button onclick="copyPrompt()" class="btn btn-sm btn-primary">📋 Copy</button>
+        <button onclick="selectAll()" class="btn btn-sm btn-ghost">Select All</button>
+      </div>
+    </div>
+    <pre class="prompt-text" id="prompt-text">You are Bunker Bot — Offline Survival AI — embedded in "The Last Light Survival Guide," a comprehensive offline emergency preparedness reference.
+
+Your purpose:
+- Answer ONLY questions related to survival, emergency preparedness, first aid, food/water, energy, shelter, navigation, security, and community resilience.
+- For off-topic questions, politely redirect: "I'm specialized in survival and preparedness topics. Can I help you with something in that area?"
+
+Response format:
+1. Lead with a short, actionable answer (1-3 sentences). Clarity over completeness.
+2. Follow with numbered steps or bullet points if the task has multiple parts.
+3. End with a "⚠️ Warning:" line if there is a genuine safety risk.
+4. If the answer is in the guide, note: "→ See: [Section Name]" at the end.
+
+Tone: Calm, direct, authoritative. Never alarmist. Think experienced wilderness medic meets practical engineer.
+
+Safety: Always prioritize human safety. Never recommend actions that could cause serious harm. When in doubt, advise seeking professional help post-crisis.</pre>
+  </div>
+
+  <!-- How to Use -->
+  <h2>How to Use This Prompt</h2>
+  <div class="usage-grid">
+
+    <div class="usage-card">
+      <div class="usage-card-header">
+        <span class="usage-card-icon">💬</span>
+        <div>
+          <div class="usage-card-title">ChatGPT</div>
+          <div class="usage-card-subtitle">chat.openai.com</div>
+        </div>
+      </div>
+      <ol class="usage-steps">
+        <li>Open ChatGPT and start a new chat</li>
+        <li>Click your profile → <strong>Customize ChatGPT</strong></li>
+        <li>Under "Custom instructions," paste the prompt in the first box</li>
+        <li>Save. All future chats will use Bunker Bot's persona.</li>
+        <li>Alternatively, paste the prompt as your <em>first message</em> in any chat</li>
+      </ol>
+    </div>
+
+    <div class="usage-card">
+      <div class="usage-card-header">
+        <span class="usage-card-icon">🔮</span>
+        <div>
+          <div class="usage-card-title">Claude.ai</div>
+          <div class="usage-card-subtitle">claude.ai</div>
+        </div>
+      </div>
+      <ol class="usage-steps">
+        <li>Open Claude.ai and start a new conversation</li>
+        <li>Paste the full prompt as your first message, then add a line break</li>
+        <li>Below the prompt, add: <code>Acknowledge that you are Bunker Bot and are ready.</code></li>
+        <li>Claude will adopt the Bunker Bot persona for that conversation</li>
+        <li>For persistent use, create a <strong>Project</strong> with the prompt as instructions</li>
+      </ol>
+    </div>
+
+    <div class="usage-card">
+      <div class="usage-card-header">
+        <span class="usage-card-icon">🦙</span>
+        <div>
+          <div class="usage-card-title">Ollama (local)</div>
+          <div class="usage-card-subtitle">ollama.com — fully offline</div>
+        </div>
+      </div>
+      <ol class="usage-steps">
+        <li>Install Ollama and pull a model (see <a href="ai-setup.html">Bunker Bot Setup</a>)</li>
+        <li>Create a custom Modelfile: <code>ollama create aria -f Modelfile</code></li>
+        <li>In the Modelfile, add: <code>SYSTEM """[paste prompt here]"""</code></li>
+        <li>Run: <code>ollama run aria</code></li>
+        <li>Or use the built-in Bunker Bot panel in this guide (no setup needed)</li>
+      </ol>
+    </div>
+
+    <div class="usage-card">
+      <div class="usage-card-header">
+        <span class="usage-card-icon">💎</span>
+        <div>
+          <div class="usage-card-title">Gemini / Other Tools</div>
+          <div class="usage-card-subtitle">Any AI chat interface</div>
+        </div>
+      </div>
+      <ol class="usage-steps">
+        <li>Open the AI tool and start a new conversation</li>
+        <li>Copy the full Bunker Bot system prompt above</li>
+        <li>Paste it as your very first message to the AI</li>
+        <li>Send it and wait for the AI to confirm the persona</li>
+        <li>Continue your conversation — the AI will maintain Bunker Bot's behavior</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <!-- Ollama Modelfile -->
+  <h2>Ollama Modelfile (Full Bunker Bot Setup)</h2>
+  <p>For a fully persistent, offline Bunker Bot that loads instantly without pasting the prompt each time, create a custom Ollama model using this Modelfile:</p>
+
+  <div class="prompt-block">
+    <div class="prompt-block-header">
+      <span class="prompt-block-title">Modelfile</span>
+      <div class="prompt-block-actions">
+        <button onclick="copyModelfile()" class="btn btn-sm btn-ghost">📋 Copy</button>
+      </div>
+    </div>
+    <pre class="prompt-text" id="modelfile-text">FROM llama3
+
+SYSTEM """You are Bunker Bot — Offline Survival AI — embedded in "The Last Light Survival Guide," a comprehensive offline emergency preparedness reference.
+
+Your purpose:
+- Answer ONLY questions related to survival, emergency preparedness, first aid, food/water, energy, shelter, navigation, security, and community resilience.
+- For off-topic questions, politely redirect: "I'm specialized in survival and preparedness topics. Can I help you with something in that area?"
+
+Response format:
+1. Lead with a short, actionable answer (1-3 sentences). Clarity over completeness.
+2. Follow with numbered steps or bullet points if the task has multiple parts.
+3. End with a "⚠️ Warning:" line if there is a genuine safety risk.
+4. If the answer is in the guide, note: "→ See: [Section Name]" at the end.
+
+Tone: Calm, direct, authoritative. Never alarmist. Think experienced wilderness medic meets practical engineer.
+
+Safety: Always prioritize human safety. Never recommend actions that could cause serious harm. When in doubt, advise seeking professional help post-crisis."""
+
+PARAMETER temperature 0.7
+PARAMETER top_p 0.9
+PARAMETER num_ctx 4096</pre>
+  </div>
+
+  <div class="callout callout-tip">
+    <span class="callout-icon">💡</span>
+    <div class="callout-content">
+      <strong>Creating the Ollama Model</strong>
+      <p>Save the Modelfile as <code>Modelfile</code> (no extension) in any directory, then run:</p>
+      <pre><code>ollama create aria -f Modelfile
+ollama run aria</code></pre>
+      <p>Change <code>FROM llama3</code> to any model you have installed (<code>ollama list</code> shows available models). Smaller models like <code>phi3:mini</code> work well on 4–8GB RAM.</p>
+    </div>
+  </div>
+
+  <!-- Model Guide -->
+  <h2>Choosing a Model for Bunker Bot</h2>
+  <p>Bunker Bot's system prompt works with any capable language model. Match the model to your hardware:</p>
+
+  <div class="model-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>RAM Available</th>
+          <th>Recommended Model</th>
+          <th>Download Size</th>
+          <th>Quality</th>
+          <th>Offline?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>4–8 GB</td>
+          <td><code>phi3:mini</code></td>
+          <td>2.3 GB</td>
+          <td>Good for basic Q&amp;A</td>
+          <td>✅ Yes</td>
+        </tr>
+        <tr>
+          <td>8–16 GB</td>
+          <td><code>llama3:8b</code></td>
+          <td>4.7 GB</td>
+          <td>Excellent</td>
+          <td>✅ Yes</td>
+        </tr>
+        <tr>
+          <td>16–32 GB</td>
+          <td><code>llama3</code></td>
+          <td>4.7 GB</td>
+          <td>Excellent</td>
+          <td>✅ Yes</td>
+        </tr>
+        <tr>
+          <td>32 GB+</td>
+          <td><code>llama3:70b</code></td>
+          <td>40 GB</td>
+          <td>Near GPT-4 quality</td>
+          <td>✅ Yes</td>
+        </tr>
+        <tr>
+          <td>Any (internet)</td>
+          <td>ChatGPT GPT-4o</td>
+          <td>—</td>
+          <td>Best available</td>
+          <td>❌ No</td>
+        </tr>
+        <tr>
+          <td>Any (internet)</td>
+          <td>Claude Sonnet/Opus</td>
+          <td>—</td>
+          <td>Best available</td>
+          <td>❌ No</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout-warning">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-content">
+      <strong>Internet-based AI in a Real Emergency</strong>
+      <p>ChatGPT, Claude.ai, and Gemini require an active internet connection and functioning cloud infrastructure. In a serious emergency, these services may be unavailable. Bunker Bot running on Ollama works with zero internet, zero power grid (battery + solar), and zero external servers. Build your offline capability <em>before</em> you need it.</p>
+    </div>
+  </div>
+
+  <!-- Customizing the Prompt -->
+  <h2>Customizing Bunker Bot's Prompt</h2>
+  <p>The base prompt above is intentionally minimal. You can extend it for your specific situation. Here are expansions to consider:</p>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <h3 style="margin-top:0">Add Your Location Context</h3>
+    <p>Add to the end of the SYSTEM block:</p>
+    <pre><code>Context: The user is located in [your region]. Local considerations include [climate, terrain, likely disaster types].</code></pre>
+  </div>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <h3 style="margin-top:0">Add Group-Specific Needs</h3>
+    <p>Add to the end of the SYSTEM block:</p>
+    <pre><code>Group context: [number] adults, [number] children (ages: [ages]), medical conditions: [list]. Tailor advice to this group's needs and limitations.</code></pre>
+  </div>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <h3 style="margin-top:0">Make Responses More Concise</h3>
+    <p>Replace the response format section with:</p>
+    <pre><code>Response format: Answer in 3 sentences maximum. Use a numbered list only if the task has 3+ distinct steps. No preamble.</code></pre>
+  </div>
+
+  <div class="card" style="margin-bottom:2rem">
+    <h3 style="margin-top:0">Add Your Gear Inventory</h3>
+    <p>Add to the end of the SYSTEM block:</p>
+    <pre><code>Available gear: [paste your checked items from the Master Gear List]. When advising, work with what the user has rather than ideal equipment.</code></pre>
+  </div>
+
+  <div class="callout callout-info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-content">
+      <strong>Why a System Prompt?</strong>
+      <p>A "system prompt" is a special instruction given to an AI before the conversation starts. It shapes the AI's entire behavior — its focus, tone, format, and what it will and won't answer. Without Bunker Bot's system prompt, a general-purpose AI will give verbose, hedged, liability-driven answers. With the prompt, it gives you short, direct, actionable survival information — the kind you can actually use under stress.</p>
+    </div>
+  </div>
+
+</div><!-- /content-wrapper -->
+</main>
+
+<!-- Bunker Bot Panel (meta — Bunker Bot explaining itself) -->
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot AI assistant">
+  <div class="aria-header">
+    <div class="aria-title-block">
+      <span class="aria-logo">🤖</span>
+      <div>
+        <span class="aria-title">Bunker Bot</span>
+        <span class="aria-subtitle">Offline Survival AI</span>
+      </div>
+    </div>
+    <div class="aria-header-actions">
+      <span class="status-dot checking"></span>
+      <span class="aria-status-label">Checking…</span>
+      <button onclick="window.ariaClear && ariaClear()" class="btn-icon" title="Clear chat">↺</button>
+      <button id="aria-close" class="btn-icon" aria-label="Close Bunker Bot">✕</button>
+    </div>
+  </div>
+  <div class="aria-model-bar">
+    Model: <span id="aria-model-badge">llama3</span>
+  </div>
+  <div id="aria-messages" class="aria-messages">
+    <div class="aria-message aria-welcome">
+      <p>Questions about configuring AI tools, model selection, or getting the best survival advice from any AI? Ask me here.</p>
+    </div>
+  </div>
+  <div class="aria-input-bar">
+    <textarea id="aria-input" class="aria-input" placeholder="Ask Bunker Bot anything survival-related…" rows="1"></textarea>
+    <button id="aria-send" class="btn btn-primary btn-sm">Send</button>
+  </div>
+</aside>
+
+<!-- Copy toast notification -->
+<div class="copy-toast" id="copy-toast">✓ Copied to clipboard</div>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/search.js"></script>
+<script src="assets/js/aria.js"></script>
+<script>
+  function showToast(msg) {
+    const toast = document.getElementById('copy-toast');
+    if (!toast) return;
+    toast.textContent = '✓ ' + msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  function copyPrompt() {
+    const text = document.getElementById('prompt-text');
+    if (!text) return;
+    navigator.clipboard.writeText(text.innerText.trim()).then(() => {
+      showToast('System prompt copied to clipboard');
+    }).catch(() => {
+      selectAll();
+      showToast('Select All triggered — press Ctrl+C / Cmd+C to copy');
+    });
+  }
+
+  function copyModelfile() {
+    const text = document.getElementById('modelfile-text');
+    if (!text) return;
+    navigator.clipboard.writeText(text.innerText.trim()).then(() => {
+      showToast('Modelfile copied to clipboard');
+    }).catch(() => {
+      text.focus();
+      document.execCommand('selectAll');
+    });
+  }
+
+  function selectAll() {
+    const text = document.getElementById('prompt-text');
+    if (!text) return;
+    const range = document.createRange();
+    range.selectNodeContents(text);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+</script>
+</body>
+</html>

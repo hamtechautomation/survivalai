@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agriculture & Food Production — soil science, seed saving, irrigation, livestock, beekeeping, aquaponics, and community-scale farming with SVG diagrams.">
+  <title>Agriculture — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .svg-diagram { background:var(--bg-1); border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--sp-md); margin:var(--sp-lg) 0; display:flex; flex-direction:column; align-items:center; gap:var(--sp-sm); }
+    .svg-diagram figcaption { font-size:.8rem; color:var(--text-dim); text-align:center; }
+    .svg-diagram svg { max-width:100%; height:auto; }
+    .zone-picker { display:flex; flex-wrap:wrap; gap:var(--sp-sm); margin:var(--sp-md) 0; }
+    .zone-btn { padding:.4rem .9rem; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg-1); color:var(--text-dim); cursor:pointer; font-size:.85rem; transition:all .15s; }
+    .zone-btn.active { background:var(--amber); color:#000; border-color:var(--amber); font-weight:600; }
+    .cal-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:var(--sp-sm); margin-top:var(--sp-md); }
+    .cal-month { background:var(--bg-1); border:1px solid var(--border); border-radius:var(--radius-sm); padding:var(--sp-sm); }
+    .cal-month h4 { color:var(--amber); margin:0 0 .4rem; font-size:.85rem; }
+    .cal-month ul { margin:0; padding-left:1rem; font-size:.78rem; color:var(--text-dim); }
+    .cal-month ul li { margin:.15rem 0; }
+    .cal-month.empty ul:after { content:"No outdoor activity"; color:var(--text-muted); font-style:italic; }
+    .companion-help { color:#4ade80; } .companion-harm { color:#f87171; } .companion-neutral { color:var(--text-dim); }
+    table.matrix td, table.matrix th { font-size:.75rem; padding:.3rem .5rem; }
+  </style>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Agriculture</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>🌱 Agriculture &amp; Food Production</h1>
+    <p class="section-desc">A single acre of well-managed intensive garden can produce enough calories to sustain 4–6 people year-round. This section covers the complete arc from emergency first-season planting to long-term community food systems — soil science, seed sovereignty, water management, livestock, bees, and aquaponics.</p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2025-06"></span></span>
+      <span class="meta-item">⏱️ <span id="reading-time"></span></span>
+      <span class="meta-item">
+        <span class="badge badge-success">Beginner → Advanced</span>
+        <span class="badge badge-info" style="margin-left:.3rem">All Zones</span>
+      </span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#soil-food-web">The Living Soil</a></li>
+      <li><a href="#soil-testing">Soil Testing &amp; Diagnosis</a></li>
+      <li><a href="#soil-building">Building Soil Fast</a></li>
+      <li><a href="#cover-crops">Cover Crops</a></li>
+      <li><a href="#crop-planning">Crop Planning &amp; Rotation</a></li>
+      <li><a href="#companion-planting">Companion Planting</a></li>
+      <li><a href="#planting-calendar">Planting Calendar by Zone</a></li>
+      <li><a href="#seed-saving">Seed Saving</a></li>
+      <li><a href="#water-management">Water Management</a></li>
+      <li><a href="#livestock">Livestock</a></li>
+      <li><a href="#beekeeping">Beekeeping</a></li>
+      <li><a href="#aquaponics">Aquaponics &amp; Ponds</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">⏱️</span>
+    <div class="callout-content">
+      <strong>First 24 Hours — Agriculture Priorities</strong>
+      <ol style="margin:.5rem 0 0;padding-left:1.2rem">
+        <li>Protect seeds above all else — store cool, dry, dark. They are irreplaceable once commercial supply ends.</li>
+        <li>Plant the fastest crops immediately: radish (25 days), spinach (40 days), lettuce (45 days).</li>
+        <li>Assess available land for sun exposure, soil type, and water access.</li>
+        <li>Identify any existing fruit trees, berry bushes, or perennial edibles already on your land.</li>
+        <li>Establish a water source for irrigation before planting anything that requires it.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- =================== LIVING SOIL =================== -->
+  <section id="soil-food-web">
+    <h2>1. The Living Soil</h2>
+    <p>Soil is not a growing medium — it's an ecosystem. One tablespoon of healthy topsoil contains more living organisms than there are humans on Earth. NPK fertilizer feeds plants directly but bypasses and ultimately degrades this web. Understanding the web lets you build fertility that compounds over time without external inputs.</p>
+
+    <h3>The Soil Food Web Hierarchy</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Organism</th><th>Role</th><th>What Kills Them</th><th>How to Encourage</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Bacteria</strong></td><td>Primary decomposers; fix nitrogen (some); release phosphorus from mineral forms</td><td>Tilling, synthetic fertilizers, pesticides, drought</td><td>Compost additions; avoid tillage; keep soil covered</td></tr>
+          <tr><td><strong>Fungi (mycorrhizae)</strong></td><td>Extend root reach 100–1,000×; mine minerals from rock; share nutrients between plants; build stable carbon (glomalin)</td><td>Tillage destroys hyphae; phosphorus fertilizer reduces colonization; fungicides</td><td>No-till; wood chip mulch; plant fungal hosts (almost all crops)</td></tr>
+          <tr><td><strong>Protozoa</strong></td><td>Eat bacteria; release nitrogen as waste (mineralization); regulate bacterial population</td><td>Drying; waterlogging; pesticides</td><td>Moisture management; organic matter</td></tr>
+          <tr><td><strong>Nematodes</strong></td><td>Predatory nematodes eat bacteria and fungi; release nutrients; some control root pests</td><td>Drying; solarization; pesticides</td><td>Organic matter; moisture; avoid solarization</td></tr>
+          <tr><td><strong>Earthworms</strong></td><td>Mechanical tillage; create macropores (drainage + root channels); castings are high-fertility compost</td><td>Tilling; acidic soil (pH &lt;5); chemical fertilizers; compaction</td><td>Organic matter; no-till; maintain pH 6–7; mulch</td></tr>
+          <tr><td><strong>Arthropods</strong></td><td>Shred organic matter; predator insects control pests; beetle larvae aerate soil</td><td>Pesticides; tillage; bare soil</td><td>Diverse plantings; mulch; leave leaf litter</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Glomalin — the hidden carbon bank.</strong> Mycorrhizal fungi produce a glycoprotein called glomalin that coats soil particles, sticking them into stable aggregates. This is what gives healthy soil its crumbly, open structure. It also sequesters carbon for decades to centuries. Tillage destroys glomalin and releases that carbon as CO₂. Every tillage event sets back your soil structure by 1–5 years.
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== SOIL TESTING =================== -->
+  <section id="soil-testing">
+    <h2>2. Soil Testing &amp; Diagnosis</h2>
+
+    <h3>Soil pH — Improvised Tests</h3>
+    <p>pH (6.0–7.0 is ideal for most vegetables) controls which nutrients are plant-available. Outside this range, plants show deficiency symptoms even in nutrient-rich soil.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Test</th><th>What You Need</th><th>Method</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Red cabbage indicator</strong></td>
+            <td>Red cabbage, water</td>
+            <td>Boil red cabbage in water 15 min; strain purple liquid; add 1 tsp soil to 2 tsp liquid; wait 5 min</td>
+            <td>Pink/red = acidic (pH &lt;6); purple = neutral (6–7); blue/green = alkaline (&gt;7)</td>
+          </tr>
+          <tr>
+            <td><strong>Vinegar &amp; baking soda</strong></td>
+            <td>White vinegar, baking soda</td>
+            <td>Put 2 tsp soil in each of 2 cups. Add vinegar to one; baking soda + water to other</td>
+            <td>Fizzes with vinegar = alkaline soil. Fizzes with baking soda = acidic. Neither = near neutral.</td>
+          </tr>
+          <tr>
+            <td><strong>Commercial pH strips</strong></td>
+            <td>pH strips (cheap, long shelf life)</td>
+            <td>Mix 1 part soil + 5 parts distilled water; let settle; dip strip</td>
+            <td>Color match chart gives 0.5 pH accuracy</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Reading Soil by Indicator Plants</h3>
+    <p>What grows wild on your land tells you what your soil is doing. Plants don't lie.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Indicator Plant</th><th>What It Means</th></tr></thead>
+        <tbody>
+          <tr><td>Plantain (Plantago major)</td><td>Compacted, wet, low-fertility soil; high foot traffic</td></tr>
+          <tr><td>Dandelion</td><td>Compacted soil, low calcium; but roots break compaction and mine minerals</td></tr>
+          <tr><td>Dock (Rumex)</td><td>Poor drainage; high iron; low pH</td></tr>
+          <tr><td>Stinging nettle</td><td>High nitrogen; near old manure, compost, or habitation — excellent garden site</td></tr>
+          <tr><td>Clover (self-seeded)</td><td>Low nitrogen (clover colonizes where it's deficient); fixable</td></tr>
+          <tr><td>Bracken fern</td><td>Acidic, low-nutrient, often sandy — poor garden candidate</td></tr>
+          <tr><td>Cattails / Sedges</td><td>Wetland; standing water; high organic matter — drain or use as duck forage</td></tr>
+          <tr><td>Mustard, chickweed, fat hen</td><td>Disturbed fertile soil — great garden potential</td></tr>
+          <tr><td>Mosses</td><td>Acidic, poorly drained, low fertility, often shaded</td></tr>
+          <tr><td>Yarrow, wild chamomile</td><td>Well-drained, moderate fertility — good sign</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Soil Texture (Jar Test &amp; Ribbon Test)</h3>
+    <p><strong>Jar test:</strong> Fill 1/3 of a jar with soil, water to top, shake 1 min, let settle 24 hrs. Sand settles first (bottom), silt in middle, clay on top, organic matter floats. Measure layer depths as fractions of total.</p>
+    <p><strong>Ribbon test:</strong> Wet a golf-ball-sized soil sample to a paste. Try to squeeze it into a ribbon between thumb and forefinger. No ribbon = sandy. Short ribbon (&lt;1 in) = sandy loam. Medium ribbon (1–2 in) = loam. Long ribbon (&gt;2 in) = clay loam or clay.</p>
+
+    <div class="svg-diagram">
+      <figure>
+        <svg viewBox="0 0 500 300" width="500" height="300" xmlns="http://www.w3.org/2000/svg" aria-label="Soil texture triangle">
+          <!-- Triangle -->
+          <polygon points="250,20 30,270 470,270" fill="none" stroke="#c9a94e" stroke-width="2"/>
+          <!-- Internal grid lines - clay axis (left side parallel) -->
+          <line x1="80" y1="120" x2="390" y2="270" stroke="#444" stroke-width="0.5"/>
+          <line x1="130" y1="70" x2="360" y2="270" stroke="#444" stroke-width="0.5"/>
+          <!-- Silt axis -->
+          <line x1="200" y1="20" x2="200" y2="270" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+          <!-- Zones -->
+          <text x="250" y="60" fill="#c9a94e" text-anchor="middle" font-size="10">CLAY</text>
+          <text x="130" y="200" fill="#7ea" text-anchor="middle" font-size="10">SANDY</text>
+          <text x="120" y="215" fill="#7ea" text-anchor="middle" font-size="10">LOAM</text>
+          <text x="250" y="200" fill="#adf" text-anchor="middle" font-size="10">LOAM</text>
+          <text x="250" y="215" fill="#adf" text-anchor="middle" font-size="8">(ideal)</text>
+          <text x="370" y="200" fill="#fa8" text-anchor="middle" font-size="10">SILT</text>
+          <text x="370" y="215" fill="#fa8" text-anchor="middle" font-size="10">LOAM</text>
+          <text x="80" y="260" fill="#888" text-anchor="middle" font-size="9">SAND</text>
+          <text x="420" y="260" fill="#888" text-anchor="middle" font-size="9">SILT</text>
+          <!-- Ideal zone highlight -->
+          <polygon points="200,130 290,130 250,200 190,200" fill="#adf" fill-opacity="0.15" stroke="#adf" stroke-width="1"/>
+          <!-- Axis labels -->
+          <text x="120" y="155" fill="#c9a94e" text-anchor="middle" font-size="9" transform="rotate(-60,120,155)">% Clay →</text>
+          <text x="250" y="285" fill="#888" text-anchor="middle" font-size="9">% Sand ←                          % Silt →</text>
+          <text x="12" y="275" fill="#888" font-size="9">100%</text>
+          <text x="452" y="275" fill="#888" font-size="9">100%</text>
+          <text x="235" y="18" fill="#c9a94e" font-size="9">100%</text>
+        </svg>
+        <figcaption>Soil texture triangle — ideal loam sits in the center band. Too much clay = waterlogged; too much sand = drains too fast; too much silt = compacts easily.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- =================== BUILDING SOIL =================== -->
+  <section id="soil-building">
+    <h2>3. Building Soil Fast</h2>
+
+    <h3>Sheet Mulching (Lasagna Gardening)</h3>
+    <p>Turns lawn or weedy ground into productive garden in one season with no digging. Layers decompose in place.</p>
+    <ol>
+      <li><strong>Mow or knock down</strong> existing vegetation as low as possible</li>
+      <li><strong>Layer wet cardboard</strong> (remove tape; no glossy coating) — overlapping edges 6 inches; kills existing weeds by blocking light</li>
+      <li><strong>Layer 2–4 inches compost</strong> on top of cardboard</li>
+      <li><strong>Layer 4–6 inches wood chips</strong> or straw on top</li>
+      <li><strong>Plant directly</strong> into the compost layer (push aside wood chips to plant); roots will penetrate cardboard as it decomposes</li>
+      <li><strong>Time to usable garden:</strong> Immediately for transplants; 3–6 months for seeds; fully decomposed in one season</li>
+    </ol>
+    <p><strong>Why it works:</strong> Cardboard smothers weeds, earthworms colonize the moist cardboard layer within weeks, compost provides immediate nutrition, wood chips prevent moisture loss and continue adding organic matter as they break down.</p>
+
+    <h3>Biochar Production &amp; Application</h3>
+    <p>Biochar is charcoal made specifically for soil amendment — not the same as barbecue charcoal (which has additives). It creates a porous carbon structure that persists in soil for hundreds to thousands of years, providing habitat for soil bacteria and retaining water and nutrients.</p>
+
+    <h4>Making Biochar (TLUD Method — Top-Lit Updraft)</h4>
+    <ol>
+      <li>Fill a 55-gallon drum or large metal container with wood chunks (hardwood preferred; bone-dry)</li>
+      <li>Light the top layer; allow fire to establish</li>
+      <li>As top layer burns down, the heat pyrolyzes (converts without burning) the wood below</li>
+      <li>Watch the smoke: initially white/grey (water and volatiles burning off), then thins to nearly invisible (pyrolysis without combustion) — this is the target stage</li>
+      <li>When smoke nearly disappears, immediately quench with water to halt combustion (if fire continues, you get ash, not char)</li>
+      <li>Biochar is ready when cooled completely — black, lightweight, porous pieces</li>
+    </ol>
+
+    <h4>Activating and Applying Biochar</h4>
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Raw biochar is sterile and EXTRACTS nutrients from soil</strong> for the first months after application. Always "charge" it first by soaking in compost tea, urine (diluted 10:1), or compost for 1–2 weeks before applying.
+      </div>
+    </div>
+    <ul>
+      <li><strong>Application rate:</strong> 5–10% by volume (about 1 inch per 10 inches of soil depth) mixed into top 12 inches of soil</li>
+      <li><strong>One-time application</strong> — biochar does not degrade; benefits persist for centuries</li>
+      <li><strong>Best use:</strong> Sandy or nutrient-poor soils; tropical soils (Terra Preta — ancient Amazonian biochar soil is the model)</li>
+    </ul>
+
+    <h3>Vermicomposting (Worm Farming)</h3>
+    <p>Red wiggler worms (Eisenia fetida) — not earthworms — process kitchen waste into the highest-quality compost available. Worm castings have 5–11× more nitrogen, phosphorus, and potassium than ordinary soil, and contain beneficial microbes that suppress plant disease.</p>
+
+    <h4>Simple Bin Setup</h4>
+    <ol>
+      <li>Drill 1/4" holes in bottom and lid of a plastic bin (30–60L); place inside a second bin to catch liquid (worm tea = liquid fertilizer)</li>
+      <li>Bedding: shredded newspaper or cardboard moistened to "wrung sponge"; fill bin halfway</li>
+      <li>Add worms (start with 0.5 kg for a household); bury in bedding</li>
+      <li>Feed: kitchen scraps (vegetable peels, fruit, coffee grounds, eggshells); avoid meat, dairy, citrus in large amounts</li>
+      <li>Maintain darkness and temperature 10–29°C (50–85°F); moisture like a wrung sponge</li>
+      <li><strong>Harvest:</strong> Push finished compost to one side; add fresh bedding and food to other side; worms migrate toward new food; harvest the finished side in 2–4 weeks</li>
+      <li><strong>Yield:</strong> 0.5 kg worms process 0.5 kg of waste per week; 1 kg of castings per week from a mature bin</li>
+    </ol>
+
+    <h3>Compost: Carbon-to-Nitrogen Ratios</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Material</th><th>C:N Ratio</th><th>Category</th></tr></thead>
+        <tbody>
+          <tr><td>Sawdust</td><td>500:1</td><td>Brown (carbon)</td></tr>
+          <tr><td>Wood chips</td><td>400:1</td><td>Brown</td></tr>
+          <tr><td>Straw</td><td>80:1</td><td>Brown</td></tr>
+          <tr><td>Autumn leaves</td><td>60:1</td><td>Brown</td></tr>
+          <tr><td>Cardboard</td><td>350:1</td><td>Brown</td></tr>
+          <tr><td>Kitchen scraps (mixed)</td><td>15:1</td><td>Green (nitrogen)</td></tr>
+          <tr><td>Grass clippings</td><td>20:1</td><td>Green</td></tr>
+          <tr><td>Fresh manure (cow)</td><td>20:1</td><td>Green</td></tr>
+          <tr><td>Chicken manure</td><td>7:1</td><td>Green (very hot)</td></tr>
+          <tr><td>Coffee grounds</td><td>20:1</td><td>Green</td></tr>
+          <tr><td>Legume hay/clover</td><td>15:1</td><td>Green</td></tr>
+          <tr><td><strong>Target mix</strong></td><td><strong>25–30:1</strong></td><td>Roughly 3 parts brown : 1 part green</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Hot vs. cold composting:</strong> Hot piles (55–65°C / 131–149°F) kill weed seeds and pathogens; require turning every 3–5 days; finished in 4–8 weeks. Cold piles need no management; finished in 6–18 months; weed seeds survive. For food security, use hot composting for speed and pathogen kill.</p>
+  </section>
+
+  <!-- =================== COVER CROPS =================== -->
+  <section id="cover-crops">
+    <h2>4. Cover Crops</h2>
+    <p>Cover crops are planted not to eat but to improve soil between seasons. They are the backbone of a no-external-input fertility system.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Crop</th><th>Purpose</th><th>Sow When</th><th>Terminate</th><th>N Fixed</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Crimson clover</strong></td><td>Nitrogen fixation; pollinator; shallow roots</td><td>Early spring or fall</td><td>Before flowering (maximum N release)</td><td>100–200 lb/acre</td></tr>
+          <tr><td><strong>Hairy vetch</strong></td><td>Highest N fixation of any cover crop; tolerates poor soil</td><td>Late summer/fall</td><td>At 50% bloom (chop and drop)</td><td>100–200 lb/acre</td></tr>
+          <tr><td><strong>Field peas</strong></td><td>N fixation; edible as green peas; frost tolerant</td><td>Early spring or fall</td><td>Eat some; terminate rest before pod maturation</td><td>50–100 lb/acre</td></tr>
+          <tr><td><strong>Winter rye</strong></td><td>Biomass; winter cover; prevents erosion; allelopathic (suppresses weeds)</td><td>Fall</td><td>Spring, before jointing; mow or roll-crimp</td><td>0 (grass)</td></tr>
+          <tr><td><strong>Buckwheat</strong></td><td>Fast biomass (6 weeks); mobilizes phosphorus; smothers weeds; excellent pollinator</td><td>After last frost; warm season only</td><td>At 25% bloom (before it seeds — reseeds aggressively)</td><td>0</td></tr>
+          <tr><td><strong>Sunflower</strong></td><td>Deep taproot breaks hardpan; biomass; seeds = food and oil</td><td>Spring after last frost</td><td>Harvest seeds; chop stalks</td><td>0</td></tr>
+          <tr><td><strong>Daikon radish</strong></td><td>Drill 12–24" into compacted subsoil; pockets left by decomposing roots = drainage channels</td><td>Late summer (6–8 weeks before frost)</td><td>Frost kills it; leave to decompose in place</td><td>0</td></tr>
+          <tr><td><strong>Phacelia</strong></td><td>Fastest-establishing cover crop; exceptional pollinator; winter killed</td><td>Spring or summer</td><td>At bloom; winter kills it naturally in cold climates</td><td>0</td></tr>
+          <tr><td><strong>Austrian winter peas</strong></td><td>N fixation + winter hardiness; pairs with winter rye</td><td>Fall</td><td>Spring with rye</td><td>50–100 lb/acre</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Termination Methods (Without Herbicides)</h3>
+    <ul>
+      <li><strong>Chop and drop:</strong> Mow or cut at soil level; leave residue as mulch</li>
+      <li><strong>Roll-crimp:</strong> A heavy roller with crimping fins flattens and crimps stems at regular intervals, killing the plant without cutting; creates a thick mulch mat; direct-seed or transplant through it</li>
+      <li><strong>Tarping:</strong> Cover with black plastic or silage tarps for 1–3 weeks; heat and darkness kill the cover crop</li>
+      <li><strong>Frost termination:</strong> Choose species killed by frost for zero-effort fall termination</li>
+    </ul>
+  </section>
+
+  <!-- =================== CROP PLANNING =================== -->
+  <section id="crop-planning">
+    <h2>5. Crop Planning &amp; Rotation</h2>
+
+    <h3>Calorie Farming: Output per Square Foot</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Crop</th><th>Yield/100 sq ft</th><th>Cal/lb</th><th>Cal/100 sq ft</th><th>Climate Best</th></tr></thead>
+        <tbody>
+          <tr><td>Potato</td><td>50–100 lb</td><td>350</td><td>17,500–35,000</td><td>Cool, temperate</td></tr>
+          <tr><td>Sweet potato</td><td>40–80 lb</td><td>390</td><td>15,600–31,200</td><td>Warm, subtropical</td></tr>
+          <tr><td>Dry beans</td><td>10–20 lb</td><td>1,545</td><td>15,450–30,900</td><td>Universal</td></tr>
+          <tr><td>Corn (grain)</td><td>15–25 lb</td><td>1,540</td><td>23,100–38,500</td><td>Temperate, tropical</td></tr>
+          <tr><td>Squash (winter)</td><td>40–80 lb</td><td>95</td><td>3,800–7,600</td><td>Temperate</td></tr>
+          <tr><td>Cassava</td><td>50–100 lb</td><td>330</td><td>16,500–33,000</td><td>Tropical only</td></tr>
+          <tr><td>Wheat</td><td>10–15 lb</td><td>1,540</td><td>15,400–23,100</td><td>Temperate</td></tr>
+          <tr><td>Amaranth (grain)</td><td>10–20 lb</td><td>1,560</td><td>15,600–31,200</td><td>Wide range</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Three Sisters — The Original Polyculture</h3>
+    <p>Corn, beans, and squash planted together fed the Americas for thousands of years. They are self-supporting, self-fertilizing, and self-mulching when planted correctly.</p>
+    <ul>
+      <li><strong>Corn</strong> provides the vertical trellis structure</li>
+      <li><strong>Beans</strong> climb the corn; fix 50–150 lb nitrogen per acre into soil</li>
+      <li><strong>Squash</strong> shades the soil (suppressing weeds), reduces evaporation, and makes the entire patch inhospitable to some pests</li>
+    </ul>
+    <p><strong>Planting sequence:</strong> Plant corn hills 3–4 ft apart in blocks (not rows — need cross-pollination). When corn is 6 inches tall, plant 4–6 bean seeds around each stalk. When beans sprout, plant 2–3 squash seeds between hills. Space squash so vines can run without competing with corn root zone.</p>
+
+    <h3>4-Year Crop Rotation</h3>
+
+    <div class="svg-diagram">
+      <figure>
+        <svg viewBox="0 0 540 420" width="540" height="420" xmlns="http://www.w3.org/2000/svg" aria-label="4-year crop rotation diagram">
+          <!-- Year labels -->
+          <text x="270" y="20" fill="#c9a94e" text-anchor="middle" font-size="14" font-weight="bold">4-Year Crop Rotation</text>
+          <!-- Beds -->
+          <!-- Bed A -->
+          <rect x="20" y="35" width="240" height="165" rx="8" fill="#1a2a1a" stroke="#4a7c4a" stroke-width="2"/>
+          <text x="140" y="55" fill="#7ea" text-anchor="middle" font-size="11" font-weight="bold">BED A</text>
+          <text x="140" y="73" fill="#888" text-anchor="middle" font-size="9">Year 1: Leaves (brassicas, lettuce)</text>
+          <text x="140" y="88" fill="#888" text-anchor="middle" font-size="9">Year 2: Legumes (beans, peas) ←N↑</text>
+          <text x="140" y="103" fill="#888" text-anchor="middle" font-size="9">Year 3: Roots (carrots, beets, onion)</text>
+          <text x="140" y="118" fill="#888" text-anchor="middle" font-size="9">Year 4: Fruits (tomatoes, peppers)</text>
+          <!-- Bed B -->
+          <rect x="280" y="35" width="240" height="165" rx="8" fill="#1a1a2a" stroke="#4a4a7c" stroke-width="2"/>
+          <text x="400" y="55" fill="#adf" text-anchor="middle" font-size="11" font-weight="bold">BED B</text>
+          <text x="400" y="73" fill="#888" text-anchor="middle" font-size="9">Year 1: Fruits (tomatoes, peppers)</text>
+          <text x="400" y="88" fill="#888" text-anchor="middle" font-size="9">Year 2: Leaves (brassicas, lettuce)</text>
+          <text x="400" y="103" fill="#888" text-anchor="middle" font-size="9">Year 3: Legumes (beans, peas) ←N↑</text>
+          <text x="400" y="118" fill="#888" text-anchor="middle" font-size="9">Year 4: Roots (carrots, beets, onion)</text>
+          <!-- Bed C -->
+          <rect x="20" y="220" width="240" height="165" rx="8" fill="#2a1a1a" stroke="#7c4a4a" stroke-width="2"/>
+          <text x="140" y="240" fill="#fa8" text-anchor="middle" font-size="11" font-weight="bold">BED C</text>
+          <text x="140" y="258" fill="#888" text-anchor="middle" font-size="9">Year 1: Roots (carrots, beets, onion)</text>
+          <text x="140" y="273" fill="#888" text-anchor="middle" font-size="9">Year 2: Fruits (tomatoes, peppers)</text>
+          <text x="140" y="288" fill="#888" text-anchor="middle" font-size="9">Year 3: Leaves (brassicas, lettuce)</text>
+          <text x="140" y="303" fill="#888" text-anchor="middle" font-size="9">Year 4: Legumes (beans, peas) ←N↑</text>
+          <!-- Bed D -->
+          <rect x="280" y="220" width="240" height="165" rx="8" fill="#2a2a1a" stroke="#7c7c4a" stroke-width="2"/>
+          <text x="400" y="240" fill="#ee8" text-anchor="middle" font-size="11" font-weight="bold">BED D</text>
+          <text x="400" y="258" fill="#888" text-anchor="middle" font-size="9">Year 1: Legumes (beans, peas) ←N↑</text>
+          <text x="400" y="273" fill="#888" text-anchor="middle" font-size="9">Year 2: Roots (carrots, beets, onion)</text>
+          <text x="400" y="288" fill="#888" text-anchor="middle" font-size="9">Year 3: Fruits (tomatoes, peppers)</text>
+          <text x="400" y="303" fill="#888" text-anchor="middle" font-size="9">Year 4: Leaves (brassicas, lettuce)</text>
+          <!-- Rotation arrows -->
+          <path d="M260 117 L280 117" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr)"/>
+          <path d="M140 200 L140 220" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr)"/>
+          <path d="M400 200 L400 220" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr)"/>
+          <path d="M280 302 L260 302" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr2)"/>
+          <defs>
+            <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#c9a94e"/>
+            </marker>
+            <marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+              <path d="M6,0 L0,3 L6,6 Z" fill="#c9a94e"/>
+            </marker>
+          </defs>
+          <!-- Rule -->
+          <text x="270" y="405" fill="#666" text-anchor="middle" font-size="9">Rule: No plant family in the same bed two years in a row. Legumes always precede heavy feeders.</text>
+        </svg>
+        <figcaption>Each bed cycles through the same 4 families in staggered years. Legumes enrich soil; fruits deplete it; roots use moderate fertility; leaves prefer nitrogen-rich soil left by legumes.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- =================== COMPANION PLANTING =================== -->
+  <section id="companion-planting">
+    <h2>6. Companion Planting</h2>
+
+    <div class="svg-diagram">
+      <figure>
+        <svg viewBox="0 0 480 480" width="480" height="480" xmlns="http://www.w3.org/2000/svg" aria-label="Companion planting wheel">
+          <text x="240" y="22" fill="#c9a94e" text-anchor="middle" font-size="13" font-weight="bold">Companion Planting Wheel</text>
+          <!-- Center -->
+          <circle cx="240" cy="250" r="42" fill="#1a2010" stroke="#4a7c20" stroke-width="2"/>
+          <text x="240" y="246" fill="#7ea" text-anchor="middle" font-size="10" font-weight="bold">Plant</text>
+          <text x="240" y="260" fill="#7ea" text-anchor="middle" font-size="10" font-weight="bold">Together</text>
+          <!-- Outer ring segments - 8 plant groups -->
+          <!-- Tomato segment -->
+          <path d="M240,250 L240,80 A170,170 0 0,1 360,170 Z" fill="#3a1a1a" stroke="#555" stroke-width="1"/>
+          <text x="305" y="135" fill="#fa8" text-anchor="middle" font-size="9" font-weight="bold">TOMATO</text>
+          <text x="305" y="149" fill="#4ade80" text-anchor="middle" font-size="8">+ Basil, Carrot</text>
+          <text x="305" y="162" fill="#4ade80" text-anchor="middle" font-size="8">+ Marigold</text>
+          <text x="305" y="175" fill="#f87171" text-anchor="middle" font-size="8">- Fennel, Brassica</text>
+          <!-- Corn segment -->
+          <path d="M240,250 L360,170 A170,170 0 0,1 400,310 Z" fill="#2a2a10" stroke="#555" stroke-width="1"/>
+          <text x="365" y="240" fill="#ee8" text-anchor="middle" font-size="9" font-weight="bold">CORN</text>
+          <text x="365" y="254" fill="#4ade80" text-anchor="middle" font-size="8">+ Beans</text>
+          <text x="365" y="268" fill="#4ade80" text-anchor="middle" font-size="8">+ Squash</text>
+          <text x="365" y="282" fill="#f87171" text-anchor="middle" font-size="8">- Tomato</text>
+          <!-- Beans segment -->
+          <path d="M240,250 L400,310 A170,170 0 0,1 300,410 Z" fill="#102a10" stroke="#555" stroke-width="1"/>
+          <text x="335" y="370" fill="#7ea" text-anchor="middle" font-size="9" font-weight="bold">BEANS</text>
+          <text x="335" y="384" fill="#4ade80" text-anchor="middle" font-size="8">+ Carrot, Corn</text>
+          <text x="335" y="398" fill="#f87171" text-anchor="middle" font-size="8">- Onion, Garlic</text>
+          <!-- Squash segment -->
+          <path d="M240,250 L300,410 A170,170 0 0,1 140,410 Z" fill="#1a2a10" stroke="#555" stroke-width="1"/>
+          <text x="220" y="410" fill="#adf" text-anchor="middle" font-size="9" font-weight="bold">SQUASH</text>
+          <text x="220" y="424" fill="#4ade80" text-anchor="middle" font-size="8">+ Nasturtium, Corn</text>
+          <text x="220" y="438" fill="#f87171" text-anchor="middle" font-size="8">- Potato</text>
+          <!-- Onion segment -->
+          <path d="M240,250 L140,410 A170,170 0 0,1 80,310 Z" fill="#2a1a10" stroke="#555" stroke-width="1"/>
+          <text x="115" y="355" fill="#fa8" text-anchor="middle" font-size="9" font-weight="bold">ONION</text>
+          <text x="115" y="369" fill="#4ade80" text-anchor="middle" font-size="8">+ Carrot, Beet</text>
+          <text x="115" y="383" fill="#4ade80" text-anchor="middle" font-size="8">+ Chamomile</text>
+          <text x="115" y="397" fill="#f87171" text-anchor="middle" font-size="8">- Beans, Peas</text>
+          <!-- Carrot segment -->
+          <path d="M240,250 L80,310 A170,170 0 0,1 120,170 Z" fill="#1a1a2a" stroke="#555" stroke-width="1"/>
+          <text x="115" y="240" fill="#c9a94e" text-anchor="middle" font-size="9" font-weight="bold">CARROT</text>
+          <text x="115" y="254" fill="#4ade80" text-anchor="middle" font-size="8">+ Leek, Sage</text>
+          <text x="115" y="268" fill="#4ade80" text-anchor="middle" font-size="8">+ Onion</text>
+          <text x="115" y="282" fill="#f87171" text-anchor="middle" font-size="8">- Dill (bolts it)</text>
+          <!-- Brassica segment -->
+          <path d="M240,250 L120,170 A170,170 0 0,1 200,90 Z" fill="#1a2a2a" stroke="#555" stroke-width="1"/>
+          <text x="163" y="135" fill="#adf" text-anchor="middle" font-size="9" font-weight="bold">BRASSICA</text>
+          <text x="163" y="149" fill="#4ade80" text-anchor="middle" font-size="8">+ Dill, Celery</text>
+          <text x="163" y="162" fill="#4ade80" text-anchor="middle" font-size="8">+ Marigold</text>
+          <text x="163" y="175" fill="#f87171" text-anchor="middle" font-size="8">- Tomato, Fennel</text>
+          <!-- Potato segment -->
+          <path d="M240,250 L200,90 A170,170 0 0,1 240,80 Z" fill="#2a1a2a" stroke="#555" stroke-width="1"/>
+          <!-- Legend -->
+          <circle cx="30" cy="460" r="5" fill="#4ade80"/>
+          <text x="40" y="464" fill="#4ade80" font-size="9">= beneficial companion</text>
+          <circle cx="210" cy="460" r="5" fill="#f87171"/>
+          <text x="220" y="464" fill="#f87171" font-size="9">= avoid planting together</text>
+        </svg>
+        <figcaption>Companion planting wheel — green = beneficial, red = avoid. Plant companions within 2–3 feet for pest-confusion and pollination benefits.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Companion Planting Matrix</h3>
+    <div class="table-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Plant</th>
+            <th>Good Companions</th>
+            <th>Bad Companions</th>
+            <th>Why It Works</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Tomato</strong></td><td class="companion-help">Basil, carrot, marigold, parsley, borage</td><td class="companion-harm">Fennel, brassicas, corn (shares pests)</td><td>Basil repels thrips; marigold deters nematodes; borage repels hornworm</td></tr>
+          <tr><td><strong>Corn</strong></td><td class="companion-help">Beans, squash, cucumber, melon</td><td class="companion-harm">Tomato (earworm), brassica</td><td>Three Sisters system; beans fix N; squash shades out weeds</td></tr>
+          <tr><td><strong>Beans</strong></td><td class="companion-help">Carrot, corn, squash, strawberry, cucumber</td><td class="companion-harm">Onion, garlic, fennel, beet</td><td>Legume N fixation benefits neighbors; alliums stunt bean growth</td></tr>
+          <tr><td><strong>Squash</strong></td><td class="companion-help">Nasturtium, corn, beans, marigold, borage</td><td class="companion-harm">Potato (blight shared), fennel</td><td>Nasturtium repels squash bug and aphids; borage deters tomato hornworm</td></tr>
+          <tr><td><strong>Carrot</strong></td><td class="companion-help">Leek, sage, onion, rosemary, peas</td><td class="companion-harm">Dill (causes bolting), parsnip (competes)</td><td>Leek/onion scent masks carrot from carrot fly; sage same</td></tr>
+          <tr><td><strong>Cabbage</strong></td><td class="companion-help">Dill, celery, marigold, onion, potato</td><td class="companion-harm">Tomato, strawberry, fennel, all brassicas (disease)</td><td>Dill attracts parasitic wasps; celery repels white cabbage butterfly</td></tr>
+          <tr><td><strong>Onion/Garlic</strong></td><td class="companion-help">Carrot, beet, chamomile, summer savory, lettuce</td><td class="companion-harm">Beans, peas, asparagus, sage</td><td>Sulfur compounds repel many root pests; alliums with carrots = mutual pest confusion</td></tr>
+          <tr><td><strong>Potato</strong></td><td class="companion-help">Horseradish, beans, cabbage, marigold, nasturtium</td><td class="companion-harm">Tomato (shared blight), squash, fennel, rosemary</td><td>Horseradish repels potato beetle; marigold nematode suppression</td></tr>
+          <tr><td><strong>Lettuce</strong></td><td class="companion-help">Carrot, radish, strawberry, chives, garlic</td><td class="companion-harm">Fennel, celery (bolts it)</td><td>Radish attracts flea beetles away from lettuce; chives deter aphids</td></tr>
+          <tr><td><strong>Marigold</strong></td><td class="companion-help">Almost everything</td><td class="companion-harm">—</td><td>French marigold roots exude thiopene, a potent nematode suppressant; also repels aphids, whitefly</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =================== PLANTING CALENDAR =================== -->
+  <section id="planting-calendar">
+    <h2>7. Planting Calendar by Climate Zone</h2>
+    <p>Select your approximate climate zone to see monthly planting guidance. These are general guides — local last/first frost dates override these recommendations.</p>
+
+    <div class="zone-picker" id="zone-picker">
+      <button class="zone-btn" data-zone="arctic" onclick="showZone('arctic',this)">Zone 3–4: Subarctic/Very Cold</button>
+      <button class="zone-btn" data-zone="cold" onclick="showZone('cold',this)">Zone 5–6: Cold Temperate</button>
+      <button class="zone-btn active" data-zone="temperate" onclick="showZone('temperate',this)">Zone 7–8: Temperate</button>
+      <button class="zone-btn" data-zone="warm" onclick="showZone('warm',this)">Zone 9–10: Warm / Subtropical</button>
+      <button class="zone-btn" data-zone="tropical" onclick="showZone('tropical',this)">Zone 11+: Tropical</button>
+    </div>
+
+    <div id="cal-output" class="cal-grid"></div>
+
+    <script>
+    const CALENDAR = {
+      arctic: {
+        Jan:[], Feb:['Start indoors: onions, leeks, celery'],
+        Mar:['Start indoors: tomatoes (12 wks), peppers (12 wks), broccoli (8 wks)'],
+        Apr:['Direct sow (under cover): spinach, peas, kale, arugula — frost tolerant','Continue starting brassicas indoors'],
+        May:['Harden off transplants outdoors during warm days','Direct sow after May 15: carrots, beets, radish','Transplant broccoli, cabbage outside after last frost (late May)'],
+        Jun:['Transplant tomatoes, peppers, squash, beans after last frost','Direct sow: beans, squash, corn, cucumbers','Succession plant lettuce/spinach every 2 weeks'],
+        Jul:['Plant turnips, kale for fall harvest','Succession sow beans for late harvest','Monitor for July heatwaves — shade sensitive crops'],
+        Aug:['Plant garlic (late Aug) for next year','Sow radish, spinach, arugula for September harvest','Begin harvesting and preserving main crops'],
+        Sep:['Harvest before first frost (early-mid Sept typically)','Dig potatoes after vines die back','Plant cover crops: winter rye, hairy vetch'],
+        Oct:['Dig root crops before hard freeze','Mulch perennials heavily','Store root vegetables in cool cellar'],
+        Nov:[],Dec:[]
+      },
+      cold: {
+        Jan:['Start indoors: onions, leeks, celery (8–10 wks before last frost ~late April)'],
+        Feb:['Start indoors: peppers, eggplant (10–12 wks)','Order seeds now — best selection before March'],
+        Mar:['Start indoors: tomatoes (6–8 wks), broccoli, cabbage, cauliflower','Cold-frame or outdoor (under cover): spinach, kale, arugula, mâche'],
+        Apr:['Direct sow outdoors: peas, radish, spinach, lettuce, kale (frost-hardy)','Transplant hardened brassica starts outdoors','Start squash, cucumbers, melons indoors (late April)'],
+        May:['Transplant tomatoes, peppers after last frost (mid-late May)','Direct sow after last frost: beans, corn, squash, cucumbers, basil','Succession plant lettuce every 3 weeks'],
+        Jun:['Hill potatoes','Direct sow second planting of beans','Begin harvesting: radish, lettuce, peas'],
+        Jul:['Plant fall brassicas for harvest: broccoli, cabbage, kale (8–10 wks before first frost)','Succession sow beets, carrots for fall','Harvest garlic when tops fall over'],
+        Aug:['Plant garlic (late Aug–Sept)','Direct sow: turnips, spinach, arugula, radish for fall','Plant cover crops in empty beds'],
+        Sep:['First frost possible late Sept — row cover tender crops','Harvest winter squash (skin hard enough not to dent)','Plant garlic if not done'],
+        Oct:['Final harvests before hard freeze','Mulch garlic heavily','Plant cover crops in all empty beds'],
+        Nov:['Harvest cold-hardy kale and Brussels sprouts (improved by frost)'],
+        Dec:[]
+      },
+      temperate: {
+        Jan:['Start indoors: onions, leeks (12–14 wks before last frost ~March 15)','Plan crop rotations on paper'],
+        Feb:['Start indoors: peppers, eggplant, celery','Cold-frame: kale, spinach, arugula, claytonia for fresh harvest'],
+        Mar:['Start indoors: tomatoes (6–8 wks), broccoli, cabbage','Direct sow outdoors: peas, spinach, kale, lettuce, chard, carrots, beets (light frost ok)','Plant potatoes (early varieties) late March'],
+        Apr:['Transplant brassicas outdoors after hardening','Direct sow: beets, carrots, radish, turnip','Last chance to plant spring peas'],
+        May:['Transplant tomatoes, peppers after last frost (~April 15–May 1)','Direct sow: beans, squash, cucumbers, corn, basil, melons','Plant sweet potatoes (slips) after soil warms to 65°F'],
+        Jun:['First harvests: lettuce, radish, peas, kale','Direct sow second planting of beans, carrots, beets','Plant fall broccoli starts (for Sept harvest)'],
+        Jul:['Harvest garlic; cure 4–6 weeks','Plant succession crops for fall: beans, carrots, beets','Sow fall broccoli, cabbage, kale directly or transplant'],
+        Aug:['Plant garlic (late Aug)','Direct sow: spinach, arugula, lettuce, radish for fall harvest','Plant cover crops in harvested beds'],
+        Sep:['Harvest winter squash; cure in sun 10 days','Plant garlic if not done (before Oct 1)','Row cover tender crops for frost extension'],
+        Oct:['Harvest sweet potatoes before first hard frost','Plant cold-hardy crops under cover: spinach, kale survive to December','Plant cover crops in all bare beds'],
+        Nov:['Harvest cold-hardy crops under row cover','Garlic should be sprouting — mulch lightly with straw'],
+        Dec:['Review notes from this season; order seed catalogs','Check stored root vegetables for rot']
+      },
+      warm: {
+        Jan:['Warm zone: begin spring plantings indoors','Direct sow: peas, lettuce, spinach, brassicas — winter is mild enough','Plant garlic (late planting still fine)'],
+        Feb:['Direct sow: most cool-season crops outdoors','Start tomatoes, peppers indoors (8 wks before transplant)','Last chance for cool-season crops before heat'],
+        Mar:['Transplant tomatoes, peppers, eggplant','Direct sow: beans, corn, squash, cucumbers','Heat comes fast — plant summer crops now'],
+        Apr:['Plant sweet potatoes (slips)','Direct sow: okra, melons, southern peas (cowpeas)','Plant tropical herbs: basil, ginger, turmeric'],
+        May:['Begin harvesting: tomatoes, cucumbers, summer squash','Protect from heat stress: mulch heavily, water deeply','Plant heat-tolerant crops: sweet potato, okra, cowpeas, amaranth'],
+        Jun:['Intense heat — most cool-season crops bolt','Focus: okra, amaranth, cowpeas, sweet potato — heat-lovers','Water management critical; drip or mulch'],
+        Jul:['Start fall garden transplants indoors (tomatoes, peppers — 8 wks before Sept planting)','Okra, sweet potato, hot peppers peak production'],
+        Aug:['Begin planting fall garden: brassicas direct sow','Transplant tomatoes, peppers for fall crop','Start cool-season crops: spinach, lettuce (for Sept)'],
+        Sep:['Fall garden peaks: brassicas, beans, cucumbers, tomatoes','Excellent growing month — cool nights, warm days','Plant cover crops in finished beds'],
+        Oct:['Plant garlic','Direct sow: carrots, beets, turnips, kale, spinach — all will overwinter','Harvest sweet potatoes after first cool nights'],
+        Nov:['Plant peas for December harvest','Direct sow: lettuce, spinach, radish','This is a prime planting month in warm zones'],
+        Dec:['Active winter garden: kale, chard, brassicas, spinach','Start onions, leeks for spring','Mild Zone 9–10: harvest all winter with row cover']
+      },
+      tropical: {
+        Jan:['Dry season planting: irrigate all crops','Root crops: sweet potato, cassava, yam — peak season','Harvest dry beans, corn if planted in Nov'],
+        Feb:['Plant: corn, squash, beans with irrigation','Fruit trees in active growth — fertilize with compost','Last month for easy dry season planting'],
+        Mar:['Start heat-tolerant crops: okra, cowpeas, amaranth, peppers','Begin preparing beds for wet season planting','Harvest cassava (18-month crop)'],
+        Apr:['Wet season approaching (may vary by region)','Plant rain-fed crops before first rains: corn, beans, squash','Prepare water management: swales, drainage'],
+        May:['First rains — plant corn, beans, squash, cassava directly','Fast-maturing greens: amaranth, sweet potato vines','Monitor for fungal disease (humidity increases)'],
+        Jun:['Peak wet season growing: cassava, yams, sweet potato','Succession plant beans and corn every 3 weeks','Manage drainage — flooding risk'],
+        Jul:['Heavy rain crops: taro, cassava, plantain, ginger, turmeric','Continue planting cowpeas, okra, calabash','Harvest fast crops before end of rains'],
+        Aug:['Continue wet season harvest','Plant long-season crops for dry season: cassava, plantain','Save seeds from best plants'],
+        Sep:['Wet season winding down (varies)','Plant dry season crops: tomatoes, peppers, cucumbers with drip','Harvest beans and corn'],
+        Oct:['Dry season begins — set up irrigation','Plant: tomatoes, peppers, eggplant, beans, greens','Excellent growth conditions with cooling temperatures'],
+        Nov:['Peak tropical growing season: plant everything','Pineapple ratoon crop management','Harvest and preserve wet season crops'],
+        Dec:['Prime planting month — cool, dry','Plant corn for February harvest','All vegetable crops thrive; focus on irrigation']
+      }
+    };
+    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    function showZone(zone, btn) {
+      document.querySelectorAll('.zone-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      const data = CALENDAR[zone];
+      const out = document.getElementById('cal-output');
+      out.innerHTML = MONTHS.map(m => {
+        const items = data[m] || [];
+        return `<div class="cal-month${items.length===0?' empty':''}">
+          <h4>${m}</h4>
+          ${items.length ? '<ul>' + items.map(i=>`<li>${i}</li>`).join('') + '</ul>' : '<ul></ul>'}
+        </div>`;
+      }).join('');
+    }
+    document.addEventListener('DOMContentLoaded', () => showZone('temperate', null));
+    </script>
+  </section>
+
+  <!-- =================== SEED SAVING =================== -->
+  <section id="seed-saving">
+    <h2>8. Seed Saving</h2>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">🌾</span>
+      <div class="callout-content">
+        <strong>Heirloom only.</strong> F1 hybrid seeds do not breed true. Only open-pollinated / heirloom varieties can sustain an agricultural system. Check seed packets: if it says F1, the seeds you save will be unpredictable.
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Crop</th><th>Pollination</th><th>Isolation Needed</th><th>Harvest Stage</th><th>Processing</th><th>Storage Life</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tomatoes</strong></td><td>Self</td><td>25 ft</td><td>Fully ripe (past eating ripe)</td><td>Ferment 3 days in water; rinse; float test; dry 2 weeks</td><td>4–5 yrs</td></tr>
+          <tr><td><strong>Peppers</strong></td><td>Self (mostly)</td><td>300 ft between varieties</td><td>Fully ripe (red/colored)</td><td>Scrape seeds; wash; dry on paper</td><td>2–4 yrs</td></tr>
+          <tr><td><strong>Beans/Peas</strong></td><td>Self</td><td>10 ft</td><td>Pods dry and brown on plant</td><td>Shell; dry 2 more weeks; store</td><td>3–5 yrs</td></tr>
+          <tr><td><strong>Squash/Pumpkin</strong></td><td>Insect</td><td>1/4 mile (crosses with all cucurbits)</td><td>Past eating stage; fully mature</td><td>Scoop seeds; wash; dry flat on screen 3 weeks</td><td>4–6 yrs</td></tr>
+          <tr><td><strong>Corn</strong></td><td>Wind</td><td>1/4–1/2 mile; or 1,000+ plants</td><td>Ears dried on stalk (husks dry/papery)</td><td>Shell off cob; dry further 2 weeks</td><td>2–3 yrs</td></tr>
+          <tr><td><strong>Brassicas</strong></td><td>Insect</td><td>1/2 mile between varieties (ALL cross)</td><td>Seed pods yellowing/drying</td><td>Cut stalks; paper bag; thresh; winnow</td><td>3–5 yrs</td></tr>
+          <tr><td><strong>Lettuce</strong></td><td>Self</td><td>25 ft</td><td>Fluffy seed heads (like dandelion)</td><td>Shake/rub seeds loose; dry; winnow chaff</td><td>2–3 yrs</td></tr>
+          <tr><td><strong>Carrots</strong></td><td>Insect</td><td>1/4 mile; <em>biennial</em> (2 years)</td><td>Flower heads dry and brown</td><td>Cut umbels; paper bag; thresh</td><td>3–4 yrs</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Seed Storage Protocol</h3>
+    <ul>
+      <li><strong>Dry thoroughly:</strong> Seeds must be below 8% moisture. Test: bite — should crack, not bend</li>
+      <li><strong>Container:</strong> Glass jars with tight lids; add 1 silica gel packet per jar</li>
+      <li><strong>Location:</strong> Cool (below 50°F / 10°C), dark, stable temperature — refrigerator or root cellar</li>
+      <li><strong>Label:</strong> Variety name, year saved, source, germination rate from last test</li>
+      <li><strong>Germination test before planting season:</strong> 10 seeds on wet paper towel at room temperature, 7–10 days — less than 70% germination = plant extra thickly or replace</li>
+      <li><strong>Community seed library:</strong> Distribute different varieties to different people; loss of one cache doesn't lose the variety</li>
+    </ul>
+  </section>
+
+  <!-- =================== WATER =================== -->
+  <section id="water-management">
+    <h2>9. Water Management</h2>
+
+    <h3>Swales on Contour</h3>
+    <p>A swale is a level trench dug along a contour line — a line where the land is at exactly the same elevation. Water flowing down the slope hits the swale, pools, and slowly infiltrates rather than running off. The berm (mound of excavated soil on the downhill side) captures even more. Trees planted on berms access the stored water for years.</p>
+
+    <div class="svg-diagram">
+      <figure>
+        <svg viewBox="0 0 500 280" width="500" height="280" xmlns="http://www.w3.org/2000/svg" aria-label="Swale on contour cross-section">
+          <text x="250" y="18" fill="#c9a94e" text-anchor="middle" font-size="12" font-weight="bold">Swale on Contour — Cross Section</text>
+          <!-- Hillside -->
+          <path d="M0,240 Q150,200 250,160 Q350,120 500,80" fill="none" stroke="#555" stroke-width="1" stroke-dasharray="4,4"/>
+          <!-- Ground -->
+          <path d="M0,260 L500,260" stroke="#444" stroke-width="1"/>
+          <!-- Main slope fill -->
+          <path d="M0,240 Q100,215 180,195 L180,260 L0,260 Z" fill="#2a1e0f" stroke="none"/>
+          <!-- Swale trench -->
+          <path d="M180,195 L200,215 L240,215 L260,195" fill="#1a3a5a" stroke="#4a8ab5" stroke-width="2"/>
+          <!-- Water in swale -->
+          <path d="M200,215 Q220,225 240,215" fill="#1a5a8a" opacity="0.7"/>
+          <text x="220" y="228" fill="#7bc" text-anchor="middle" font-size="8">water</text>
+          <!-- Berm -->
+          <path d="M260,195 Q290,180 320,190 L320,260 L260,260 Z" fill="#3a2a0f" stroke="#7a5a2f" stroke-width="1.5"/>
+          <text x="290" y="230" fill="#c9a94e" text-anchor="middle" font-size="9">BERM</text>
+          <!-- Slope above swale -->
+          <path d="M260,195 Q350,160 500,120 L500,260 L260,260 Z" fill="#2a1e0f" stroke="none"/>
+          <!-- Tree on berm -->
+          <circle cx="295" cy="168" r="20" fill="#2a4a1a" stroke="#4a7a2a" stroke-width="1"/>
+          <line x1="295" y1="188" x2="295" y2="195" stroke="#7a5a2f" stroke-width="2"/>
+          <text x="295" y="208" fill="#7ea" text-anchor="middle" font-size="8">tree</text>
+          <!-- Water flow arrows coming down slope -->
+          <path d="M440,130 L380,160" stroke="#4a8ab5" stroke-width="1.5" marker-end="url(#warr)"/>
+          <path d="M400,115 L350,145" stroke="#4a8ab5" stroke-width="1.5" marker-end="url(#warr)"/>
+          <text x="430" y="118" fill="#7bc" font-size="8">runoff</text>
+          <!-- Infiltration arrows down from swale -->
+          <path d="M210,228 L210,250" stroke="#4a8ab5" stroke-width="1" stroke-dasharray="3,2"/>
+          <path d="M230,230 L230,250" stroke="#4a8ab5" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="220" y="258" fill="#7bc" text-anchor="middle" font-size="7">infiltration</text>
+          <!-- Labels -->
+          <text x="90" y="225" fill="#888" text-anchor="middle" font-size="9">slope</text>
+          <text x="180" y="185" fill="#7bc" text-anchor="middle" font-size="9">SWALE</text>
+          <text x="180" y="196" fill="#7bc" text-anchor="middle" font-size="8">(level trench)</text>
+          <!-- Contour line label -->
+          <text x="135" y="192" fill="#555" font-size="7" font-style="italic">contour line</text>
+          <defs>
+            <marker id="warr" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto">
+              <path d="M0,0 L5,2.5 L0,5 Z" fill="#4a8ab5"/>
+            </marker>
+          </defs>
+        </svg>
+        <figcaption>Swale cross-section: water runs down slope, pools in level trench, infiltrates soil, and feeds tree roots on the berm. A series of swales can convert a dry hillside into a water-retaining food forest.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Finding the Contour Line (A-Frame Level)</h3>
+    <ol>
+      <li>Build an A-frame from three sticks — two legs of equal length joined at the top; a crossbar connecting the legs at their midpoints</li>
+      <li>Hang a plumb line from the apex down to the crossbar; mark the center of the crossbar with a notch</li>
+      <li>Calibrate: set both feet on level ground; mark where plumb line falls. This is true level.</li>
+      <li>On your slope, move one foot up or down until the plumb line returns to the mark — both feet are now at exactly the same elevation</li>
+      <li>Mark that line with stakes; this is your contour; dig your swale on this line</li>
+    </ol>
+
+    <h3>Rainwater Harvesting Calculator</h3>
+    <p><strong>Formula:</strong> Collection (liters) = Roof area (m²) × Rainfall (mm) × 0.8 (efficiency factor)</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Roof Area</th><th>10mm rain</th><th>25mm rain</th><th>100mm rain</th></tr></thead>
+        <tbody>
+          <tr><td>20 m² (small shed)</td><td>160 L</td><td>400 L</td><td>1,600 L</td></tr>
+          <tr><td>50 m²</td><td>400 L</td><td>1,000 L</td><td>4,000 L</td></tr>
+          <tr><td>100 m² (small house)</td><td>800 L</td><td>2,000 L</td><td>8,000 L</td></tr>
+          <tr><td>200 m² (large house)</td><td>1,600 L</td><td>4,000 L</td><td>16,000 L</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Garden water need: 25 liters per square meter per week in summer. A 100 m² garden needs ~2,500 L/week. A 100 m² roof collecting 25mm of rain provides 2,000 L — enough for nearly a full week with modest efficiency.</p>
+
+    <h3>Gravity-Fed Drip Irrigation</h3>
+    <ol>
+      <li>Elevate a water tank (IBC tote, barrel, cistern) — every 10 cm of head pressure = ~0.01 bar; at 1 meter elevation you have 0.1 bar — sufficient for drip emitters (require 0.07–0.14 bar minimum)</li>
+      <li>Connect ½" main line from tank base; run along bed length</li>
+      <li>Insert ¼" side tubing with drip emitters (0.5–2 L/hr) at each plant base</li>
+      <li>Open valve for 1–2 hours daily (or automate with a gravity-powered timer)</li>
+      <li>Filter input: 200-mesh screen filter at tank outlet prevents emitter clogging</li>
+    </ol>
+
+    <h3>Mulching to Reduce Water Needs</h3>
+    <ul>
+      <li>4 inches of straw, wood chips, or hay reduces soil moisture evaporation by 50–70%</li>
+      <li>Keeps soil temperature stable (cooler in summer, warmer in spring/fall)</li>
+      <li>Suppresses weeds (saves labor = water savings indirectly)</li>
+      <li>As it decomposes, feeds soil organisms</li>
+      <li>Keep mulch 2–3 inches away from plant stems (rot and slug habitat otherwise)</li>
+    </ul>
+  </section>
+
+  <!-- =================== LIVESTOCK =================== -->
+  <section id="livestock">
+    <h2>10. Livestock</h2>
+
+    <h3>Chickens</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Breed</th><th>Purpose</th><th>Eggs/Year</th><th>Meat Quality</th><th>Foraging</th></tr></thead>
+        <tbody>
+          <tr><td>Rhode Island Red</td><td>Dual (eggs + meat)</td><td>250–300</td><td>Good</td><td>Excellent</td></tr>
+          <tr><td>Barred Plymouth Rock</td><td>Dual</td><td>200–280</td><td>Excellent</td><td>Very good</td></tr>
+          <tr><td>Leghorn</td><td>Eggs</td><td>280–320</td><td>Poor (lean)</td><td>Moderate</td></tr>
+          <tr><td>Buff Orpington</td><td>Dual; broody (hatches eggs)</td><td>175–200</td><td>Excellent</td><td>Good</td></tr>
+          <tr><td>Australorp</td><td>Eggs (world record holder)</td><td>250–300</td><td>Good</td><td>Good</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Coop Design</h4>
+    <ul>
+      <li><strong>Space:</strong> 4 sq ft per bird inside; 10 sq ft per bird in run; overcrowding = disease and aggression</li>
+      <li><strong>Hardware cloth:</strong> Use ½" welded wire, not chicken wire — chicken wire keeps chickens in but doesn't keep predators out. Predators (racoons, weasels) reach through chicken wire and grab birds.</li>
+      <li><strong>Ventilation:</strong> 1 sq ft of ventilation per 10 sq ft of floor space; chickens die from ammonia buildup faster than from cold</li>
+      <li><strong>Roosts:</strong> 8–10 inches per bird; round 2" diameter dowel preferred; higher than nest boxes so birds sleep on roost not in boxes</li>
+      <li><strong>Nest boxes:</strong> 1 per 4 hens; 12"×12"×12"; fill with straw or shavings; keep darker than rest of coop</li>
+      <li><strong>Predator-proof floor:</strong> Hardware cloth apron buried 12" horizontally around perimeter, or buried 12" vertically — deters digging predators</li>
+    </ul>
+
+    <h4>Egg Production Management</h4>
+    <ul>
+      <li>Hens require 14–16 hours of light to maintain egg production; winter production drops without supplemental light</li>
+      <li>Peak production at 18–30 weeks; declines at 2–3 years; molt (feather loss) at ~18 months — no eggs for 6–8 weeks</li>
+      <li>Force molt to synchronize flock production: reduce feed 5–7 days; flock resumes production together after new feathers grow</li>
+      <li>Nutritional requirement: layer hens need 3.5–4g calcium daily — supplement with oyster shell free-choice or crushed eggshells</li>
+    </ul>
+
+    <h4>Key Diseases</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Disease</th><th>Signs</th><th>Prevention</th><th>Treatment</th></tr></thead>
+        <tbody>
+          <tr><td>Marek's Disease</td><td>Paralysis of one leg/wing; weight loss; grey iris</td><td>Vaccination at hatch (day-old chicks); available from hatcheries</td><td>No treatment; cull affected birds to prevent spread</td></tr>
+          <tr><td>Coccidiosis</td><td>Bloody diarrhea; hunched; not eating (mainly chicks 3–8 weeks)</td><td>Medicated chick starter; clean dry brooder</td><td>Amprolium (Corid) in water 5–7 days</td></tr>
+          <tr><td>Respiratory (MG, ILT)</td><td>Gurgling; runny nose; eye swelling; reduced eggs</td><td>Biosecurity; quarantine new birds 30 days</td><td>Tetracycline or tylosin in water; isolate affected</td></tr>
+          <tr><td>Egg binding</td><td>Hen straining; abdomen swollen; lethargy</td><td>Calcium in diet; avoid obese hens</td><td>Warm bath 20 min; mineral oil on vent; gentle manipulation; vet if not resolved in 48 hrs</td></tr>
+          <tr><td>Bumblefoot</td><td>Black scab on foot pad; swollen; limping</td><td>Smooth roosts; no wire floors; clean dry conditions</td><td>Soak; remove scab; flush; pack with raw honey; bandage</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Goats</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Breed</th><th>Purpose</th><th>Milk/Day</th><th>Size</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Nubian</td><td>Dairy (high fat)</td><td>3–4 L</td><td>Large</td><td>High butterfat; good for cheese; loud</td></tr>
+          <tr><td>Alpine</td><td>Dairy (high volume)</td><td>4–6 L</td><td>Large</td><td>Highest milk volume of dairy breeds</td></tr>
+          <tr><td>Nigerian Dwarf</td><td>Dairy (small farm)</td><td>0.5–1 L</td><td>Small</td><td>Less feed; easier handling; high butterfat</td></tr>
+          <tr><td>Boer</td><td>Meat</td><td>Minimal</td><td>Large</td><td>Best meat conformation; fast-growing; 60 days to harvest</td></tr>
+          <tr><td>Kiko</td><td>Meat (hardy)</td><td>Minimal</td><td>Medium</td><td>Disease-resistant; low-input; good mothers</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Key Requirements</h4>
+    <ul>
+      <li><strong>Social:</strong> Goats die of loneliness — minimum 2 goats at all times</li>
+      <li><strong>Fencing:</strong> 4-foot minimum; woven wire (field fence) + 2 strands electric; goats test every fence constantly</li>
+      <li><strong>Milking:</strong> Once daily (remove kid after morning feed) or twice daily for maximum production; always strip last milk (prevents mastitis); dip teat in 1% iodine solution AFTER milking (not before — iodine residue in milk)</li>
+      <li><strong>Breeding:</strong> 150-day gestation; give colostrum within 1 hour of birth; CAE-prevention = pasteurize colostrum at 56°C/133°F for 60 minutes (not higher — destroys antibodies)</li>
+    </ul>
+
+    <h4>Disease Management</h4>
+    <ul>
+      <li><strong>Barber pole worm (Haemonchus contortus):</strong> Most common killer of goats in warm climates. FAMACHA scoring (eyelid color) identifies anemia. Rotate pastures; avoid overgrazing; treat with effective dewormers (not all are still effective — fecal egg counts tell you which work). Copper boluses improve resistance.</li>
+      <li><strong>Enterotoxemia (CD&amp;T):</strong> Vaccinate annually with CD&T (Clostridium perfringens C&amp;D + Tetanus). Overeating grain without vaccination = death within hours.</li>
+      <li><strong>Bloat:</strong> Gas-X (simethicone) orally; walk the animal; tube with hose if severe; prevention = limit lush legume pasture access when wet</li>
+    </ul>
+
+    <h4>Basic Chèvre (Fresh Goat Cheese)</h4>
+    <ol>
+      <li>Heat 1 gallon fresh milk to 32°C (90°F)</li>
+      <li>Add 1 packet mesophilic culture; stir gently; cover; wait 1 hour at room temperature</li>
+      <li>Add 1/4 rennet tablet dissolved in 1/4 cup cold non-chlorinated water; stir 1 min; let set 12 hours</li>
+      <li>Pour curds into cheesecloth-lined colander; tie corners and hang to drain 6–12 hours</li>
+      <li>Season with salt; refrigerate; eat within 1 week</li>
+    </ol>
+
+    <h3>Rabbits</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Breed</th><th>Purpose</th><th>Market Weight</th><th>Litter Size</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>New Zealand White</td><td>Meat (commercial standard)</td><td>5 lb at 8 weeks</td><td>8–12</td><td>Most efficient feed-to-meat ratio</td></tr>
+          <tr><td>Californian</td><td>Meat</td><td>4.5 lb at 8 weeks</td><td>7–10</td><td>Good mothering; calm temperament</td></tr>
+          <tr><td>Rex</td><td>Meat + fur</td><td>4 lb at 10 weeks</td><td>6–8</td><td>Finest fur; quieter; less meat yield</td></tr>
+          <tr><td>Flemish Giant</td><td>Meat (large frame)</td><td>8–10 lb at 12 weeks</td><td>8–12</td><td>More feed required; impressive size</td></tr>
+          <tr><td>Angora</td><td>Fiber (wool)</td><td>—</td><td>4–6</td><td>Shear every 90 days; high maintenance</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Housing &amp; Management</h4>
+    <ul>
+      <li><strong>Hutch:</strong> 30"×36" per rabbit; wire floor (½"×1" mesh) with a solid resting board section</li>
+      <li><strong>NO mixed-sex housing:</strong> Males and females housed separately except for intentional breeding — rabbits breed constantly</li>
+      <li><strong>Heat kills:</strong> Above 95°F (35°C) rabbits die rapidly; provide shade, frozen water bottles, misting in summer</li>
+      <li><strong>Breeding:</strong> Always bring doe TO buck's cage (does defend territory and fight); 31-day gestation; provide nesting box 27 days after breeding; 6–8 kits typical; wean at 8 weeks</li>
+      <li><strong>Processing age:</strong> 8–12 weeks for fryers (most efficient); 5–6 lb live weight = ~2.5 lb dressed weight</li>
+    </ul>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Rabbit Starvation (Protein Poisoning)</strong> — Rabbit meat is extremely lean. Surviving on rabbit meat alone without fat sources leads to death from protein poisoning within weeks. Always pair rabbit with fat sources: bone marrow, lard, nuts, seeds, oil.
+      </div>
+    </div>
+
+    <h3>Pigs</h3>
+    <ul>
+      <li><strong>Best breeds for foraging:</strong> Kunekune (smallest; fastest to finish on pasture), Berkshire (excellent meat quality), Large Black (robust foragers), American Guinea Hog (lard type; extremely hardy)</li>
+      <li><strong>Rotational foraging:</strong> Electric fence (2 strands at 8" and 18" height); move pigs every 2–4 weeks; pigs till, fertilize, and weed the area they graze — plant cover crop after removal</li>
+      <li><strong>Feed requirement:</strong> Commercial: 3–4 lb feed per lb of gain. On pasture: reduced 30–50% but slower gain. Supplement with: kitchen/garden scraps, whey, spent grain, acorns, root crops</li>
+      <li><strong>Harvest timing:</strong> 200–250 lb live weight (typically 6–9 months on forage-based system); dress weight ~70% of live weight; one pig = 140–175 lb of pork</li>
+      <li><strong>Processing:</strong> Scald at 145–150°F (63–65°C) for 5 minutes to loosen hair; scrape hair off; eviscerate; cool carcass to below 40°F within 12 hours; age 3–7 days for flavor</li>
+    </ul>
+
+    <h3>Ducks</h3>
+    <p>Ducks are more disease-resistant than chickens, better foragers, and require no roost or nest boxes (lay on ground). They do require water access for washing bills and mating.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Breed</th><th>Purpose</th><th>Eggs/Year</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Khaki Campbell</td><td>Eggs (champion layer)</td><td>300–340</td><td>Outperforms most chicken breeds; small body, less feed</td></tr>
+          <tr><td>Indian Runner</td><td>Eggs + pest control</td><td>250–300</td><td>Upright posture; excellent foragers; pest control in orchards</td></tr>
+          <tr><td>Pekin</td><td>Meat (commercial standard)</td><td>150–200</td><td>Fastest growing; harvest at 7 weeks; commercial breed</td></tr>
+          <tr><td>Muscovy</td><td>Meat + eggs; quiet</td><td>60–120</td><td>Only "duck" that is actually a different species; silent; excellent brooder; leanest meat</td></tr>
+          <tr><td>Rouen</td><td>Dual (slower growing)</td><td>150–200</td><td>Beautiful; calm; similar to wild Mallard</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li>Ducks eat slugs, snails, and insects avidly — rotate through garden beds after harvest for pest cleanup</li>
+      <li>Duck eggs have more fat and protein than chicken eggs; excellent for baking</li>
+      <li>Water: needs water deep enough to submerge head and wash face; kiddie pool minimum; clean every 1–2 days (ducks foul water fast)</li>
+    </ul>
+  </section>
+
+  <!-- =================== BEEKEEPING =================== -->
+  <section id="beekeeping">
+    <h2>11. Beekeeping</h2>
+
+    <h3>Top Bar Hive Construction</h3>
+    <p>The top bar hive requires no purchased equipment, no foundation, and no extractor. It is the appropriate technology for off-grid beekeeping.</p>
+
+    <div class="svg-diagram">
+      <figure>
+        <svg viewBox="0 0 520 380" width="520" height="380" xmlns="http://www.w3.org/2000/svg" aria-label="Top bar hive construction plans">
+          <text x="260" y="18" fill="#c9a94e" text-anchor="middle" font-size="12" font-weight="bold">Top Bar Hive — Construction Plans</text>
+
+          <!-- Side view (trapezoidal cross-section) -->
+          <text x="130" y="38" fill="#888" text-anchor="middle" font-size="10">SIDE VIEW (cross-section)</text>
+          <!-- Hive body trapezoid -->
+          <polygon points="50,60 210,60 190,200 70,200" fill="#2a1e0f" stroke="#c9a94e" stroke-width="2"/>
+          <!-- Top bars -->
+          <rect x="45" y="55" width="170" height="8" fill="#3a2a1a" stroke="#c9a94e" stroke-width="1.5"/>
+          <!-- Comb hanging -->
+          <path d="M100,63 Q100,130 95,155" fill="none" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <path d="M130,63 Q130,135 125,158" fill="none" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <path d="M160,63 Q160,133 156,156" fill="none" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <!-- Entrance hole -->
+          <rect x="125" y="193" width="20" height="7" fill="#000" stroke="#888" stroke-width="1"/>
+          <text x="135" y="208" fill="#888" text-anchor="middle" font-size="8">entrance</text>
+
+          <!-- Dimensions -->
+          <line x1="35" y1="60" x2="35" y2="200" stroke="#555" stroke-width="1"/>
+          <line x1="30" y1="60" x2="40" y2="60" stroke="#555" stroke-width="1"/>
+          <line x1="30" y1="200" x2="40" y2="200" stroke="#555" stroke-width="1"/>
+          <text x="22" y="135" fill="#888" font-size="8" text-anchor="middle" transform="rotate(-90,22,135)">25–30 cm deep</text>
+          <line x1="50" y1="215" x2="210" y2="215" stroke="#555" stroke-width="1"/>
+          <line x1="50" y1="210" x2="50" y2="220" stroke="#555" stroke-width="1"/>
+          <line x1="210" y1="210" x2="210" y2="220" stroke="#555" stroke-width="1"/>
+          <text x="130" y="228" fill="#888" text-anchor="middle" font-size="8">38–40 cm wide (top)</text>
+          <line x1="70" y1="235" x2="190" y2="235" stroke="#555" stroke-width="1"/>
+          <text x="130" y="247" fill="#888" text-anchor="middle" font-size="8">24–28 cm wide (bottom)</text>
+          <!-- Wall angle label -->
+          <text x="62" y="160" fill="#888" font-size="8">120°</text>
+
+          <!-- Top view -->
+          <text x="390" y="38" fill="#888" text-anchor="middle" font-size="10">TOP VIEW (bars removed)</text>
+          <rect x="290" y="50" width="200" height="400" rx="4" fill="none" stroke="#c9a94e" stroke-width="2" height="155"/>
+          <rect x="290" y="50" width="200" height="155" rx="4" fill="#2a1e0f" stroke="#c9a94e" stroke-width="2"/>
+          <!-- Top bars (8 shown) -->
+          <rect x="290" y="50" width="200" height="12" fill="#3a2a1a" stroke="#c9a94e" stroke-width="1"/>
+          <rect x="290" y="68" width="200" height="12" fill="#3a2a1a" stroke="#c9a94e" stroke-width="1"/>
+          <rect x="290" y="86" width="200" height="12" fill="#3a2a1a" stroke="#c9a94e" stroke-width="1"/>
+          <rect x="290" y="104" width="200" height="12" fill="#3a2a1a" stroke="#c9a94e" stroke-width="1"/>
+          <rect x="290" y="122" width="200" height="12" fill="#3a2a1a" stroke="#c9a94e" stroke-width="1"/>
+          <rect x="290" y="140" width="200" height="12" fill="#3a2a1a" stroke="#c9a94e" stroke-width="1"/>
+          <rect x="290" y="158" width="200" height="12" fill="#3a2a1a" stroke="#c9a94e" stroke-width="1"/>
+          <rect x="290" y="176" width="200" height="12" fill="#3a2a1a" stroke="#c9a94e" stroke-width="1"/>
+          <!-- Length dimension -->
+          <line x1="290" y1="218" x2="490" y2="218" stroke="#555" stroke-width="1"/>
+          <line x1="290" y1="213" x2="290" y2="223" stroke="#555" stroke-width="1"/>
+          <line x1="490" y1="213" x2="490" y2="223" stroke="#555" stroke-width="1"/>
+          <text x="390" y="232" fill="#888" text-anchor="middle" font-size="8">120 cm total length</text>
+          <text x="390" y="244" fill="#888" text-anchor="middle" font-size="7">hold 25–30 bars; each bar 38mm wide</text>
+
+          <!-- Materials list -->
+          <text x="260" y="280" fill="#c9a94e" font-size="10" font-weight="bold">Materials:</text>
+          <text x="260" y="296" fill="#888" font-size="9">• 25 mm (1") rough-sawn lumber; any species</text>
+          <text x="260" y="310" fill="#888" font-size="9">• Hive body: 4 boards cut to trapezoid shape</text>
+          <text x="260" y="324" fill="#888" font-size="9">• Bars: 25–30 strips, 38mm wide × hive width</text>
+          <text x="260" y="338" fill="#888" font-size="9">• Roof: boards or plywood; overhang 5 cm each side</text>
+          <text x="260" y="352" fill="#888" font-size="9">• Entrance: 2 cm hole drilled near bottom front</text>
+          <text x="260" y="366" fill="#888" font-size="9">• Legs: 4 posts, hive at waist height; grease legs vs. ants</text>
+        </svg>
+        <figcaption>Top bar hive plans. Bees build natural comb downward from each bar. No foundation required. Inspect by lifting individual bars.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Catching a Wild Swarm</h3>
+    <p>Swarms are nature's way of colonies reproducing. A swarm is docile (they have no hive to defend) and represents a free, locally-adapted colony.</p>
+    <ol>
+      <li><strong>Timing:</strong> Swarms typically emerge April–June in temperate climates, on warm days (above 18°C / 65°F)</li>
+      <li><strong>Equipment:</strong> Empty hive box or cardboard box, sheet, ladder, gloves, veil</li>
+      <li><strong>Method:</strong> Spread sheet under swarm cluster; hold box directly below cluster and give branch one sharp shake — bees fall into box; if queen went in, all bees follow within minutes</li>
+      <li><strong>Installation:</strong> Install box contents into your hive at dusk; prop box opening into hive entrance; bees walk in overnight</li>
+      <li><strong>Lure swarms proactively:</strong> Coat an empty hive interior with beeswax; add a few drops of lemongrass essential oil near entrance (mimics Nasonov pheromone); place in tree at 3–5 meters height; scout bees investigate and recruit swarms</li>
+    </ol>
+
+    <h3>Reading a Hive — Health Signs</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>What You See</th><th>Healthy</th><th>Problem</th></tr></thead>
+        <tbody>
+          <tr><td>Brood pattern</td><td>Solid, "shotgun shell" pattern; tan-brown capped brood</td><td>Scattered (spotty) pattern = disease; sunken/perforated caps = AFB or EFB</td></tr>
+          <tr><td>Bee behavior at entrance</td><td>Purposeful; pollen-carrying workers; fanning bees</td><td>Fighting, robbing bees from another hive; bees crawling (pesticide exposure)</td></tr>
+          <tr><td>Queen cells</td><td>Rare (1–2 supercedure cells at mid-comb normal)</td><td>Many queen cells at frame bottom = swarm preparation; act within days</td></tr>
+          <tr><td>Smell</td><td>Warm honey, wax, slight wood smell</td><td>Sour = fermented honey; putrid = American foulbrood (must report + destroy); fruity = European foulbrood</td></tr>
+          <tr><td>Varroa mite</td><td>Few on sticky board (&lt;1/day in spring)</td><td>&gt;9/day = treatment threshold; visible as red-brown dot on bee thorax</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Varroa Mite Control</h3>
+    <ul>
+      <li><strong>Oxalic acid drizzle (most accessible):</strong> 35g oxalic acid (wood bleach, sold at hardware stores) dissolved in 1L 1:1 sugar-water syrup; drizzle 5ml per seam of bees; use ONLY when broodless (winter); wears heavy gloves and glasses — caustic</li>
+      <li><strong>Drone comb trapping:</strong> Insert empty drawn drone comb (wider cells); remove and freeze when fully capped (mites prefer drone brood); rotate frames</li>
+      <li><strong>Screened bottom board:</strong> Mites fall through and cannot climb back; passive 10–15% reduction</li>
+    </ul>
+
+    <h3>Honey Extraction Without Equipment</h3>
+    <p><strong>Crush and strain method:</strong></p>
+    <ol>
+      <li>Remove honey-filled comb from bars (leave brood comb undisturbed)</li>
+      <li>Crush comb thoroughly in a bucket with your hands or a potato masher</li>
+      <li>Pour crushed comb into a cheesecloth or fine mesh strainer over a collection bucket</li>
+      <li>Let gravity drain for 24–48 hours at room temperature (warm speeds process)</li>
+      <li>Honey in bottom bucket; wax remains in strainer</li>
+      <li>Capping and residue: melt in double boiler; strain through cheesecloth; pour into molds — pure beeswax</li>
+    </ol>
+
+    <h3>Beeswax Uses</h3>
+    <ul>
+      <li><strong>Candles:</strong> Melt; add cotton wick; pour into molds; burns 5× longer than paraffin with a cleaner flame</li>
+      <li><strong>Wood finish:</strong> Melt 1 part beeswax + 4 parts linseed oil; cool; apply to wood — excellent water protection</li>
+      <li><strong>Leather waterproofing:</strong> Warm leather with sunlight or mild heat; rub wax in; buff — maintains leather supple and water-resistant</li>
+      <li><strong>Canvas waterproofing:</strong> Melt wax; brush onto canvas; heat with hair dryer or sun to penetrate fibers</li>
+      <li><strong>Thread waxing:</strong> Draw sewing thread across wax block — prevents tangling and strengthens the thread</li>
+      <li><strong>Grafting wax:</strong> Melt 3 parts beeswax + 1 part linseed oil + 1 part pine resin; seal grafts and cuttings against drying and disease</li>
+    </ul>
+
+    <h3>Mead (Honey Wine)</h3>
+    <p>Mead is fermented honey-water — the oldest alcoholic beverage in human history. It is a significant caloric and trade commodity in a collapse scenario.</p>
+    <ol>
+      <li>Mix 1 part honey to 3–4 parts non-chlorinated water (1 kg honey → 3–4 liters finished mead, roughly 10–12% ABV)</li>
+      <li>Pitch yeast: wine yeast (EC-1118 is most reliable), bread yeast (works but less clean), or wild-capture (let honey-water sit open 24–48 hrs)</li>
+      <li>Add nutrient: a handful of raisins or a crushed Campden tablet provides yeast nutrients</li>
+      <li>Seal with airlock (or stretch cloth over mouth to allow CO₂ to escape)</li>
+      <li>Fermentation active in 24–48 hours; complete in 4–6 weeks at room temperature</li>
+      <li>Rack (siphon off lees) into clean vessel; let clear for 2–4 weeks</li>
+      <li>Drink young (dry mead) or age 3–12 months for smoother character</li>
+    </ol>
+  </section>
+
+  <!-- =================== AQUAPONICS =================== -->
+  <section id="aquaponics">
+    <h2>12. Aquaponics &amp; Ponds</h2>
+
+    <div class="svg-diagram">
+      <figure>
+        <svg viewBox="0 0 520 300" width="520" height="300" xmlns="http://www.w3.org/2000/svg" aria-label="Basic aquaponics system layout">
+          <text x="260" y="18" fill="#c9a94e" text-anchor="middle" font-size="12" font-weight="bold">Media-Bed Aquaponics System</text>
+
+          <!-- Grow bed (upper) -->
+          <rect x="30" y="35" width="220" height="90" rx="6" fill="#1a2a10" stroke="#4a7c20" stroke-width="2"/>
+          <text x="140" y="55" fill="#7ea" text-anchor="middle" font-size="10" font-weight="bold">GROW BED</text>
+          <text x="140" y="70" fill="#888" text-anchor="middle" font-size="8">gravel / expanded clay media</text>
+          <!-- Plants in grow bed -->
+          <line x1="80" y1="80" x2="80" y2="45" stroke="#4a7c20" stroke-width="1.5"/>
+          <ellipse cx="80" cy="40" rx="12" ry="8" fill="#2a4a10"/>
+          <line x1="120" y1="80" x2="120" y2="42" stroke="#4a7c20" stroke-width="1.5"/>
+          <ellipse cx="120" cy="37" rx="10" ry="7" fill="#2a4a10"/>
+          <line x1="160" y1="80" x2="160" y2="44" stroke="#4a7c20" stroke-width="1.5"/>
+          <ellipse cx="160" cy="39" rx="11" ry="8" fill="#2a4a10"/>
+          <line x1="200" y1="80" x2="200" y2="41" stroke="#4a7c20" stroke-width="1.5"/>
+          <ellipse cx="200" cy="36" rx="9" ry="7" fill="#2a4a10"/>
+          <!-- Bell siphon -->
+          <rect x="230" y="90" width="16" height="35" rx="3" fill="#4a4a2a" stroke="#888" stroke-width="1"/>
+          <text x="238" y="140" fill="#888" text-anchor="middle" font-size="7">bell</text>
+          <text x="238" y="149" fill="#888" text-anchor="middle" font-size="7">siphon</text>
+
+          <!-- Fish tank (lower) -->
+          <rect x="30" y="165" width="220" height="110" rx="6" fill="#102030" stroke="#2060a0" stroke-width="2"/>
+          <text x="140" y="188" fill="#7bc" text-anchor="middle" font-size="10" font-weight="bold">FISH TANK</text>
+          <text x="140" y="203" fill="#888" text-anchor="middle" font-size="8">1,000+ liters; 1 fish per 40L</text>
+          <!-- Fish -->
+          <ellipse cx="80" cy="230" rx="18" ry="9" fill="#1a5a3a" stroke="#3a8a5a" stroke-width="1"/>
+          <ellipse cx="130" cy="245" rx="16" ry="8" fill="#1a5a3a" stroke="#3a8a5a" stroke-width="1"/>
+          <ellipse cx="175" cy="225" rx="17" ry="8" fill="#1a5a3a" stroke="#3a8a5a" stroke-width="1"/>
+          <!-- Water level -->
+          <line x1="35" y1="210" x2="245" y2="210" stroke="#2060a0" stroke-width="0.5" stroke-dasharray="4,3" opacity="0.5"/>
+
+          <!-- Water pump (right side) -->
+          <rect x="275" y="195" width="50" height="50" rx="5" fill="#2a2a2a" stroke="#888" stroke-width="1.5"/>
+          <text x="300" y="217" fill="#888" text-anchor="middle" font-size="8">PUMP</text>
+          <text x="300" y="230" fill="#555" text-anchor="middle" font-size="7">(or gravity</text>
+          <text x="300" y="240" fill="#555" text-anchor="middle" font-size="7">if elevated)</text>
+
+          <!-- Pipe: fish tank → pump → grow bed -->
+          <line x1="255" y1="220" x2="275" y2="220" stroke="#2060a0" stroke-width="2"/>
+          <line x1="300" y1="195" x2="300" y2="80" stroke="#2060a0" stroke-width="2"/>
+          <line x1="300" y1="80" x2="255" y2="80" stroke="#2060a0" stroke-width="2"/>
+          <!-- Drain: grow bed → fish tank -->
+          <line x1="238" y1="120" x2="238" y2="160" stroke="#4a8ab5" stroke-width="2"/>
+          <line x1="238" y1="160" x2="255" y2="165" stroke="#4a8ab5" stroke-width="2"/>
+
+          <!-- Flow labels -->
+          <text x="312" y="140" fill="#2060a0" font-size="8" transform="rotate(90,312,140)">water up (pump)</text>
+          <text x="260" y="150" fill="#4a8ab5" font-size="8">drain</text>
+
+          <!-- Nitrogen cycle annotations -->
+          <rect x="340" y="35" width="165" height="240" rx="6" fill="#0a1a0a" stroke="#333" stroke-width="1"/>
+          <text x="422" y="55" fill="#c9a94e" text-anchor="middle" font-size="10" font-weight="bold">Nitrogen Cycle</text>
+          <text x="422" y="75" fill="#7bc" text-anchor="middle" font-size="9">Fish excrete ammonia (NH₃)</text>
+          <path d="M422,82 L422,96" stroke="#555" stroke-width="1" marker-end="url(#na)"/>
+          <text x="422" y="107" fill="#7ea" text-anchor="middle" font-size="9">Nitrosomonas bacteria</text>
+          <text x="422" y="119" fill="#7ea" text-anchor="middle" font-size="9">convert → Nitrite (NO₂)</text>
+          <path d="M422,126 L422,140" stroke="#555" stroke-width="1" marker-end="url(#na)"/>
+          <text x="422" y="151" fill="#adf" text-anchor="middle" font-size="9">Nitrobacter bacteria</text>
+          <text x="422" y="163" fill="#adf" text-anchor="middle" font-size="9">convert → Nitrate (NO₃)</text>
+          <path d="M422,170 L422,184" stroke="#555" stroke-width="1" marker-end="url(#na)"/>
+          <text x="422" y="195" fill="#4ade80" text-anchor="middle" font-size="9">Plants absorb nitrate</text>
+          <text x="422" y="207" fill="#4ade80" text-anchor="middle" font-size="9">as fertilizer</text>
+          <path d="M422,214 L422,228" stroke="#555" stroke-width="1" marker-end="url(#na)"/>
+          <text x="422" y="239" fill="#7bc" text-anchor="middle" font-size="9">Clean water returns</text>
+          <text x="422" y="251" fill="#7bc" text-anchor="middle" font-size="9">to fish tank</text>
+          <defs>
+            <marker id="na" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto">
+              <path d="M0,0 L5,2.5 L0,5 Z" fill="#555"/>
+            </marker>
+          </defs>
+        </svg>
+        <figcaption>Media-bed aquaponics: fish waste feeds plants; plants clean water for fish. The bell siphon creates automatic flood-drain cycles with no moving parts.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Fish Species Selection</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Species</th><th>Temp</th><th>Feed Conversion</th><th>Days to Harvest</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Tilapia</td><td>25–30°C</td><td>1.5–2:1</td><td>240–300</td><td>Most forgiving; tolerates poor water quality; stops eating below 20°C</td></tr>
+          <tr><td>Catfish</td><td>18–28°C</td><td>1.5–2:1</td><td>180–240</td><td>Hardy; bottom feeder; tolerates low oxygen better than others</td></tr>
+          <tr><td>Trout</td><td>10–18°C</td><td>1:1</td><td>365–450</td><td>Best feed conversion; requires high water quality and oxygen; premium fish</td></tr>
+          <tr><td>Bluegill/Sunfish</td><td>15–28°C</td><td>2–3:1</td><td>300–400</td><td>Native to North America; legal to collect from wild; omnivore; excellent flavor</td></tr>
+          <tr><td>Perch (Yellow)</td><td>14–24°C</td><td>2–3:1</td><td>365–550</td><td>Slower growth; outstanding flavor; popular in cold-climate systems</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Natural Fish Feed Alternatives</h3>
+    <ul>
+      <li><strong>Duckweed (Lemna spp.):</strong> 35–45% protein by dry weight; grows explosively on nutrient-rich water (including fish tank waste water); harvest excess daily; fed fresh to tilapia and catfish</li>
+      <li><strong>Black soldier fly larvae (BSFL):</strong> 40% protein, 30% fat; grow on food scraps in 14 days; self-harvest into collection bucket (larvae crawl up ramp to pupate); excellent for all fish; can replace 50–100% of commercial feed</li>
+      <li><strong>Worms:</strong> Red wigglers from compost bins; 60–70% protein; feed fresh or dried; fish go crazy for them; bridge feed for trout especially</li>
+      <li><strong>Aquatic insects:</strong> Midge larvae, water fleas (Daphnia), mosquito larvae — culture in small tanks; harvest with fine mesh net</li>
+      <li><strong>Stocking density:</strong> Reduce 30–40% when relying on natural feeds to allow sustainable harvest rates</li>
+    </ul>
+
+    <h3>Pond Construction for Aquaculture</h3>
+    <ul>
+      <li><strong>Minimum size:</strong> 1,000 m² (0.25 acre) for meaningful production; smaller ponds are less stable ecologically</li>
+      <li><strong>Depth:</strong> 1.5–2 m average; at least one area 2.5 m for fish to winter below ice in cold climates</li>
+      <li><strong>Shape:</strong> Oval or rectangular with elongated east-west axis for maximum sun exposure; avoid corners where anaerobic mud accumulates</li>
+      <li><strong>Inlet/outlet:</strong> Separate inlet and outlet to create flow-through; outlet should be at opposite end from inlet; screened to prevent escape and entry of wild fish</li>
+      <li><strong>Aeration without electricity:</strong> Wind-powered paddle wheel; flowing water inlet creates natural aeration; aquatic plants (water hyacinth, cattail margins) oxygenate and filter</li>
+      <li><strong>Stocking rate:</strong> 300–500 lb per acre of fish sustainable without aeration; 1,000–2,000 lb per acre with mechanical aeration</li>
+      <li><strong>Natural productivity:</strong> Fertilize pond with compost tea or diluted manure to grow phytoplankton; fish eat phytoplankton → zooplankton → insects → fish; a fertilized pond can sustain 100–200 lb per acre with zero feed</li>
+    </ul>
+  </section>
+
+  <hr>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-md);margin-top:var(--sp-xl)">
+    <a href="disasters.html" class="btn btn-outline">← Disaster Playbooks</a>
+    <a href="metallurgy.html" class="btn btn-primary">Next: Metallurgy →</a>
+  </div>
+  <div class="callout callout-tip" style="margin-top:var(--sp-xl)">
+    <span class="callout-icon">🔗</span>
+    <div class="callout-content">
+      <strong>Related Sections</strong>
+      <p>
+        <a href="food.html#growing">Food → Seed saving &amp; nutritional deficiencies</a> ·
+        <a href="animal.html">Animal Husbandry → Veterinary care for livestock</a> ·
+        <a href="energy.html#biogas">Energy → Biogas from manure and crop waste</a> ·
+        <a href="chemistry.html">Chemistry → Natural pesticides &amp; fermentation</a>
+      </p>
+    </div>
+  </div>
+
+<nav class="section-pagination no-print" aria-label="Section navigation">
+  <a href="knowledge.html" class="pagination-btn pagination-prev">← Knowledge</a>
+  <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+  <a href="animal.html" class="pagination-btn pagination-next">Animal Husbandry →</a>
+</nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">🤖</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're reading Agriculture. Ask me about soil testing, companion planting, seed saving, beekeeping, aquaponics, livestock care, or which crops to plant first in a survival scenario.<p class="aria-note">⚠️ Requires Ollama. <a href="../ai-setup.html">Setup →</a></p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/aria.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

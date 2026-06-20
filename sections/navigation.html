@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Navigation & Maps — topographic maps, compass use, celestial navigation, natural navigation, map-making, and urban navigation.">
+  <title>Navigation &amp; Maps — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Navigation &amp; Maps</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>🧭 Navigation &amp; Maps</h1>
+    <p class="section-desc">GPS fails without power, satellites, or signal. True navigation independence comes from understanding maps, compasses, stars, and the land itself. These skills cannot be improvised under pressure — practice them now.</p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2025-06"></span></span>
+      <span class="meta-item">⏱️ <span id="reading-time"></span></span>
+      <span class="meta-item">📖 Section 6 of 8</span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#topo-maps">Topographic Maps</a></li>
+      <li><a href="#compass">Compass Use &amp; Triangulation</a></li>
+      <li><a href="#celestial">Celestial Navigation</a></li>
+      <li><a href="#natural">Natural Navigation</a></li>
+      <li><a href="#map-making">Creating Your Own Maps</a></li>
+      <li><a href="#urban">Urban Navigation</a></li>
+      <li><a href="#charts">Compass Rose &amp; Star Charts</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">⏱️</span>
+    <div class="callout-content">
+      <strong>First 24 Hours — Navigation Priorities</strong>
+      <ol style="margin:.5rem 0 0;padding-left:1.2rem">
+        <li>Confirm your location on a paper topographic map — GPS may be unavailable or unreliable.</li>
+        <li>Identify the 3 nearest water sources, 2 evacuation routes, and 1 rally point from your position.</li>
+        <li>Note the magnetic declination for your region — every bearing calculation depends on it.</li>
+        <li>Mark on your map: current position, bug-out destination, key waypoints, and any known hazards.</li>
+        <li>Verify your compass against a known direction (sun rises east, sets west; Polaris is north at night).</li>
+        <li>Identify 2–3 unmistakable landmarks visible from your position — these become navigation anchors.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- =================== TOPO MAPS =================== -->
+  <section id="topo-maps">
+    <h2>1. Topographic Maps</h2>
+
+    <h3>Reading Contour Lines</h3>
+    <p>Contour lines connect points of equal elevation. Understanding them lets you "see" the three-dimensional landscape from a flat map.</p>
+
+    <div class="diagram">
+  Contour Line Rules:
+  ═══════════════════
+  • Lines NEVER cross (except in caves — ignore this case)
+  • Lines close together = steep slope
+  • Lines far apart = gentle slope or flat land
+  • V-shapes pointing uphill = valleys / drainages (water flows into V)
+  • V-shapes pointing downhill = ridges / spurs
+  • Circles = hilltops (innermost circle is the summit) or depressions (marked with hachures — short tick marks pointing inward)
+  • Index contours (bolder, labeled) = every 5th contour line
+  • Contour interval (CI) = elevation difference between adjacent lines
+
+  Example — reading a 40-foot CI map:
+  If you count 3 contour lines uphill from a labeled 400-ft line,
+  you are at 400 + (3 × 40) = 520 feet elevation.
+    </div>
+
+    <h3>Map Symbols</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td>Blue lines</td><td>Water (streams, rivers, lakes)</td></tr>
+          <tr><td>Blue dashed lines</td><td>Intermittent streams (dry seasonally)</td></tr>
+          <tr><td>Green areas</td><td>Vegetation (forest, brush)</td></tr>
+          <tr><td>White areas</td><td>Open/cleared land</td></tr>
+          <tr><td>Black lines (solid)</td><td>Improved roads, trails, boundaries</td></tr>
+          <tr><td>Black dashed lines</td><td>Trails, unimproved roads</td></tr>
+          <tr><td>Red lines</td><td>Major roads, highways, survey lines</td></tr>
+          <tr><td>Brown contour lines</td><td>Elevation (on USGS 7.5' maps)</td></tr>
+          <tr><td>X or benchmark</td><td>Surveyed elevation point (BM)</td></tr>
+          <tr><td>Triangle + elevation</td><td>Triangulation station</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Map Scale</h3>
+    <ul>
+      <li><strong>1:24,000 (USGS 7.5-minute)</strong> — Most detailed standard topographic. 1 inch = 2,000 feet. Best for backcountry navigation. Print these for your area before a crisis.</li>
+      <li><strong>1:50,000</strong> — NATO military standard. Good balance of detail and coverage.</li>
+      <li><strong>1:100,000</strong> — Regional planning. Less detail, larger area. Good for route planning over longer distances.</li>
+      <li><strong>1:250,000</strong> — Broad area overview. Few topographic details visible.</li>
+    </ul>
+
+    <h3>UTM Grid System</h3>
+    <p>UTM (Universal Transverse Mercator) divides the Earth into 60 zones. Each zone is a 6°-wide strip. Coordinates are given in meters east (Easting) and north (Northing) within the zone. This is the standard used by military, search-and-rescue, and GPS devices.</p>
+
+    <div class="ratio-box">UTM: 14T 0630000E 4852000N = Zone 14T, 630km east, 4852km north of equator</div>
+
+    <p>Reading a grid: Right then Up ("Read Right, Up"). Easting increases left-to-right; Northing increases bottom-to-top.</p>
+  </section>
+
+  <!-- =================== COMPASS =================== -->
+  <section id="compass">
+    <h2>2. Compass Use &amp; Triangulation</h2>
+
+    <h3>Parts of a Baseplate Compass</h3>
+    <div class="diagram">
+  ┌─────────────────────────────┐
+  │  [Direction of travel arrow]│ ← Always points toward your destination
+  │         BASEPLATE           │
+  │  ┌──────────────────┐       │
+  │  │   HOUSING/DIAL   │       │ ← Rotating bezel with degree markings (0–360°)
+  │  │     (rotates)    │       │
+  │  │   ┌──────┐       │       │
+  │  │   │  N   │       │       │ ← Orienting lines (parallel to N-S on housing)
+  │  │   │  ↑   │       │       │
+  │  │   │ [RED]│       │       │ ← Magnetic needle (red end = North)
+  │  │   └──────┘       │       │
+  │  └──────────────────┘       │
+  │  [Magnifying lens]          │ ← For reading fine map detail
+  └─────────────────────────────┘
+    </div>
+
+    <h3>Magnetic Declination</h3>
+    <p>Magnetic north (where your compass points) and true north (geographic north pole) are different. The difference is called declination and varies by location and changes over time.</p>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Ignoring Declination Causes Major Errors</strong>
+        <p>In the eastern US, declination is about 10–15° West. Traveling 10 miles on a bearing with an uncorrected 15° error puts you 2.7 miles off target. Check the declination diagram in the legend of your topo map, or look up current declination for your area at ngdc.noaa.gov (search and print before a crisis).</p>
+      </div>
+    </div>
+
+    <p><strong>East declination:</strong> Add to magnetic bearing to get true bearing. <strong>West declination:</strong> Subtract from magnetic bearing to get true bearing. Memory: "East is least (subtract), West is best (add)" — from true to magnetic bearing.</p>
+
+    <h3>Taking a Field Bearing</h3>
+    <ol class="steps">
+      <li>Hold compass level (needle must swing freely) at waist height, in front of you.</li>
+      <li>Point the direction-of-travel arrow at your target (a landmark or destination).</li>
+      <li>Rotate the housing until the orienting lines are parallel to the magnetic needle, with the orienting arrow under the north (red) end of the needle. "Put red in the shed."</li>
+      <li>Read the bearing where the direction-of-travel arrow meets the degree scale on the housing.</li>
+      <li>Adjust for declination as needed.</li>
+    </ol>
+
+    <h3>Following a Bearing</h3>
+    <ol class="steps">
+      <li>Set your desired bearing on the compass housing.</li>
+      <li>Hold level and rotate your body until red is in the shed (north needle aligned with orienting arrow).</li>
+      <li>Look up along the direction-of-travel arrow. Identify a landmark (tree, rock, hill) in that direction.</li>
+      <li>Walk to that landmark without looking at the compass. When you arrive, take another bearing and identify the next landmark.</li>
+      <li>Check every 100–200 meters, not every step. Frequent corrections while walking cause drift.</li>
+    </ol>
+
+    <h3>Triangulation (Finding Your Position)</h3>
+    <ol class="steps">
+      <li>Identify two or three landmarks visible on your map AND visible from where you stand.</li>
+      <li>Take a magnetic bearing to each landmark from your position. Correct for declination.</li>
+      <li>On your map, from each landmark, draw a line in the direction of 180° + your bearing (the back-bearing — pointing back at you). Each line represents "I am somewhere along this line."</li>
+      <li>Where the lines intersect is your position. With two landmarks, you get a line of intersection. With three, a small triangle — you are somewhere inside it.</li>
+    </ol>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✅</span>
+      <div class="callout-content">
+        <strong>Resection vs Intersection</strong>
+        <p>Resection = finding YOUR position using bearings to known landmarks (described above). Intersection = finding the position of an UNKNOWN point by taking bearings to it from two known positions. Both are essential navigation skills for search-and-rescue operations.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== CELESTIAL =================== -->
+  <section id="celestial">
+    <h2>3. Celestial Navigation</h2>
+
+    <h3>Finding North via Polaris (Northern Hemisphere)</h3>
+    <p>Polaris (the North Star) sits almost exactly at the celestial north pole — it doesn't appear to move as the Earth rotates. Finding it gives you true north within 1°.</p>
+
+    <div class="diagram">
+  BIG DIPPER → POLARIS
+
+         *  *
+        *    *  ← Big Dipper "bowl" top two stars (pointer stars)
+       *      *    |
+       *      *    |  (5× the pointer star distance)
+        *    *     |
+         * *       |
+          *        ▼
+     (Big Dipper)  *  POLARIS ← True North (barely moves all night)
+                             *   * ← Little Dipper (Polaris is at the handle tip)
+    </div>
+
+    <ol class="steps">
+      <li>Find the Big Dipper (Ursa Major) — the distinctive "ladle" or "saucepan" of 7 stars.</li>
+      <li>Identify the two stars forming the outer edge of the "bowl" (away from the handle). These are the pointer stars (Dubhe and Merak).</li>
+      <li>Draw an imaginary line from Merak through Dubhe and extend it approximately 5× the distance between those two stars.</li>
+      <li>The moderately bright star at that point is Polaris. It's at the end of the Little Dipper's handle.</li>
+      <li>Polaris indicates true north. Stand facing it — south is behind you, east to your left, west to your right.</li>
+    </ol>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Southern Hemisphere Navigation</strong>
+        <p>Polaris is not visible south of the equator. Use the Southern Cross (Crux): extend the long axis of the cross 4.5× its length southward — that point is approximately south celestial pole. Alternatively, bisect the line between the two bright stars Hadar (Beta Centauri) and Rigil Kentaurus (Alpha Centauri) and draw a perpendicular line to it; where it meets the extended long axis of the Southern Cross is approximately south.</p>
+      </div>
+    </div>
+
+    <h3>Sun Navigation</h3>
+    <p>The sun rises in the east and sets in the west — roughly. At equinox, this is exact. At other times, the sun rises and sets offset toward north or south depending on the season. Regardless, at solar noon (when the sun reaches its highest point in the sky), it is due south in the Northern Hemisphere (due north in Southern Hemisphere).</p>
+
+    <h4>Shadow Stick Method</h4>
+    <ol class="steps">
+      <li>Push a straight stick (1m tall) vertically into flat ground in an open sunny area.</li>
+      <li>Mark the tip of the shadow with a stone or stake. Wait 15–20 minutes.</li>
+      <li>Mark the tip of the shadow again.</li>
+      <li>Draw a line between the two marks. This line runs roughly east-west (first mark = west, second mark = east in Northern Hemisphere).</li>
+      <li>Draw a perpendicular line — this is north-south. Confirm: point your left toe at first mark, right toe at second mark — you are now facing north.</li>
+    </ol>
+
+    <h4>Watch Method</h4>
+    <ul>
+      <li>Analog watch: Point the hour hand at the sun. Bisect the angle between the hour hand and 12 o'clock. That line points south (Northern Hemisphere). In Southern Hemisphere: point 12 at the sun; bisect between 12 and hour hand to get north.</li>
+      <li>Accuracy: best around equinoxes, poorest near solstices and at higher latitudes. Good to within 15° in most conditions.</li>
+    </ul>
+
+    <h3>Estimating Time to Sunset</h3>
+    <p>Hold your hand at arm's length, fingers horizontal between the sun and the horizon. Each finger width = approximately 15 minutes. Four fingers = one hour until sunset.</p>
+
+    <h3>Star Charts</h3>
+
+    <figure class="svg-diagram" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1.5rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
+      <svg viewBox="0 0 500 500" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="north-star-title">
+        <title id="north-star-title">Northern Hemisphere Star Chart — Looking North</title>
+        <desc>Circular star chart showing the northern sky. Polaris sits at the center. The Big Dipper, Little Dipper, Cassiopeia, and other key constellations are marked relative to Polaris.</desc>
+        <!-- Sky circle -->
+        <circle cx="250" cy="250" r="235" fill="#070a09" stroke="#3a4838" stroke-width="2"/>
+        <!-- Title inside -->
+        <text x="250" y="30" text-anchor="middle" font-size="13" fill="#c9a94e" font-family="sans-serif" font-weight="700">NORTHERN HEMISPHERE — LOOKING NORTH</text>
+        <!-- Horizon ring labels -->
+        <text x="250" y="498" text-anchor="middle" font-size="11" fill="#4d6048" font-family="sans-serif">S (South — behind you)</text>
+        <text x="20" y="255" text-anchor="middle" font-size="11" fill="#4d6048" font-family="sans-serif" transform="rotate(-90,20,255)">E</text>
+        <text x="480" y="255" text-anchor="middle" font-size="11" fill="#4d6048" font-family="sans-serif" transform="rotate(90,480,255)">W</text>
+        <text x="250" y="16" text-anchor="middle" font-size="11" fill="#c9a94e" font-family="sans-serif" font-weight="700">N ↑</text>
+        <!-- Concentric rings (elevation) -->
+        <circle cx="250" cy="250" r="60" fill="none" stroke="#243028" stroke-width="1" stroke-dasharray="4,4"/>
+        <circle cx="250" cy="250" r="120" fill="none" stroke="#243028" stroke-width="1" stroke-dasharray="4,4"/>
+        <circle cx="250" cy="250" r="180" fill="none" stroke="#243028" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="316" y="194" font-size="8" fill="#3a4838" font-family="sans-serif">60°</text>
+        <text x="376" y="136" font-size="8" fill="#3a4838" font-family="sans-serif">30°</text>
+        <!-- POLARIS — center -->
+        <circle cx="250" cy="250" r="9" fill="#c9a94e"/>
+        <text x="268" y="247" font-size="11" fill="#c9a94e" font-family="sans-serif" font-weight="800">POLARIS</text>
+        <text x="268" y="259" font-size="9" fill="#8a9e86" font-family="sans-serif">True North (&lt;1°)</text>
+        <!-- BIG DIPPER (Ursa Major) — rotating around Polaris ~350° position (upper left) -->
+        <!-- Bowl stars -->
+        <circle cx="158" cy="148" r="5" fill="#eceee0"/><!-- Dubhe -->
+        <circle cx="140" cy="174" r="4" fill="#eceee0"/><!-- Merak -->
+        <circle cx="116" cy="148" r="4" fill="#eceee0"/><!-- Phecda -->
+        <circle cx="120" cy="122" r="3" fill="#eceee0"/><!-- Megrez -->
+        <!-- Handle stars -->
+        <circle cx="148" cy="104" r="4" fill="#eceee0"/><!-- Alioth -->
+        <circle cx="178" cy="90" r="4" fill="#eceee0"/><!-- Mizar -->
+        <circle cx="210" cy="80" r="3" fill="#eceee0"/><!-- Alkaid -->
+        <!-- Connect Big Dipper -->
+        <polyline points="158,148 140,174 116,148 120,122 148,104 178,90 210,80" fill="none" stroke="#4a80b5" stroke-width="1.5" opacity="0.7"/>
+        <line x1="120" y1="122" x2="158" y2="148" stroke="#4a80b5" stroke-width="1.5" opacity="0.7"/>
+        <text x="100" y="195" font-size="10" fill="#4a80b5" font-family="sans-serif" font-weight="700">BIG DIPPER</text>
+        <text x="100" y="208" font-size="9" fill="#8a9e86" font-family="sans-serif">(Ursa Major)</text>
+        <!-- Pointer arrow from bowl to Polaris -->
+        <line x1="158" y1="148" x2="252" y2="248" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+        <text x="200" y="204" font-size="9" fill="#c9a94e" font-family="sans-serif" transform="rotate(-45,200,204)">× 5 dist</text>
+        <!-- LITTLE DIPPER (Ursa Minor) — Polaris at handle tip -->
+        <circle cx="250" cy="250" r="9" fill="#c9a94e"/><!-- Polaris again -->
+        <circle cx="230" cy="220" r="3" fill="#eceee0"/>
+        <circle cx="218" cy="198" r="3" fill="#eceee0"/>
+        <circle cx="224" cy="176" r="3" fill="#eceee0"/><!-- bowl bottom -->
+        <circle cx="244" cy="170" r="3.5" fill="#eceee0"/><!-- bowl top -->
+        <circle cx="262" cy="182" r="3" fill="#eceee0"/>
+        <circle cx="260" cy="204" r="3" fill="#eceee0"/>
+        <polyline points="250,250 230,220 218,198 224,176 244,170 262,182 260,204 224,176" fill="none" stroke="#8a9e86" stroke-width="1.2" opacity="0.6"/>
+        <text x="188" y="168" font-size="10" fill="#8a9e86" font-family="sans-serif">LITTLE</text>
+        <text x="188" y="180" font-size="10" fill="#8a9e86" font-family="sans-serif">DIPPER</text>
+        <!-- CASSIOPEIA (W-shape) — opposite Big Dipper, upper right area -->
+        <circle cx="334" cy="136" r="4" fill="#eceee0"/>
+        <circle cx="356" cy="120" r="4" fill="#eceee0"/>
+        <circle cx="374" cy="134" r="4.5" fill="#eceee0"/>
+        <circle cx="392" cy="118" r="4" fill="#eceee0"/>
+        <circle cx="414" cy="132" r="4" fill="#eceee0"/>
+        <polyline points="334,136 356,120 374,134 392,118 414,132" fill="none" stroke="#4b9e6a" stroke-width="1.8" opacity="0.8"/>
+        <text x="350" y="108" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">CASSIOPEIA (W)</text>
+        <text x="350" y="120" font-size="8" fill="#8a9e86" font-family="sans-serif">Opposite Big Dipper</text>
+        <line x1="374" y1="134" x2="252" y2="250" stroke="#4b9e6a" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+        <!-- ORION partial — lower right (seasonal, visible winter) -->
+        <text x="360" y="390" font-size="10" fill="#4d6048" font-family="sans-serif" font-style="italic">Orion (winter)</text>
+        <circle cx="352" cy="408" r="3" fill="#8a9e86" opacity="0.6"/>
+        <circle cx="368" cy="405" r="3" fill="#8a9e86" opacity="0.6"/>
+        <circle cx="382" cy="408" r="3" fill="#8a9e86" opacity="0.6"/>
+        <text x="362" y="420" font-size="8" fill="#4d6048" font-family="sans-serif">Belt stars (E→S→W)</text>
+        <!-- North Star pointer note -->
+        <text x="250" y="478" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">Polaris altitude = your latitude (45° up at 45°N)</text>
+      </svg>
+      <figcaption>Northern hemisphere star chart — looking north. Polaris (the North Star) sits at the center; all stars rotate around it counterclockwise. Use the Big Dipper's two "pointer stars" (outer bowl edge) extended 5× their separation to locate Polaris. Cassiopeia forms a W on the opposite side of Polaris from the Big Dipper.</figcaption>
+    </figure>
+
+    <figure class="svg-diagram" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1.5rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
+      <svg viewBox="0 0 500 500" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="south-star-title">
+        <title id="south-star-title">Southern Hemisphere Star Chart — Looking South</title>
+        <desc>Circular star chart showing the southern sky. The Southern Cross (Crux) and the two Pointer Stars (Alpha and Beta Centauri) are marked. The South Celestial Pole has no bright star, but can be located using the Southern Cross method.</desc>
+        <!-- Sky circle -->
+        <circle cx="250" cy="250" r="235" fill="#070a09" stroke="#3a4838" stroke-width="2"/>
+        <text x="250" y="30" text-anchor="middle" font-size="13" fill="#c9a94e" font-family="sans-serif" font-weight="700">SOUTHERN HEMISPHERE — LOOKING SOUTH</text>
+        <!-- Cardinal labels -->
+        <text x="250" y="498" text-anchor="middle" font-size="11" fill="#4d6048" font-family="sans-serif">N (North — behind you)</text>
+        <text x="22" y="255" text-anchor="middle" font-size="11" fill="#4d6048" font-family="sans-serif" transform="rotate(-90,22,255)">E</text>
+        <text x="478" y="255" text-anchor="middle" font-size="11" fill="#4d6048" font-family="sans-serif" transform="rotate(90,478,255)">W</text>
+        <text x="250" y="16" text-anchor="middle" font-size="11" fill="#c9a94e" font-family="sans-serif" font-weight="700">S ↑</text>
+        <!-- Concentric rings -->
+        <circle cx="250" cy="250" r="60" fill="none" stroke="#243028" stroke-width="1" stroke-dasharray="4,4"/>
+        <circle cx="250" cy="250" r="120" fill="none" stroke="#243028" stroke-width="1" stroke-dasharray="4,4"/>
+        <circle cx="250" cy="250" r="180" fill="none" stroke="#243028" stroke-width="1" stroke-dasharray="4,4"/>
+        <!-- SOUTH CELESTIAL POLE — no bright star here -->
+        <circle cx="250" cy="250" r="6" fill="none" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="270" y="248" font-size="10" fill="#c9a94e" font-family="sans-serif" font-weight="700">South Pole</text>
+        <text x="270" y="260" font-size="9" fill="#8a9e86" font-family="sans-serif">(no bright star)</text>
+        <!-- SOUTHERN CROSS (Crux) — tilted cross shape, upper left of south pole -->
+        <circle cx="168" cy="176" r="6" fill="#eceee0"/><!-- Acrux — bottom of cross -->
+        <circle cx="168" cy="132" r="5.5" fill="#eceee0"/><!-- Gacrux — top of cross -->
+        <circle cx="144" cy="154" r="4.5" fill="#eceee0"/><!-- left arm -->
+        <circle cx="192" cy="154" r="4.5" fill="#eceee0"/><!-- right arm (Mimosa) -->
+        <circle cx="174" cy="146" r="3" fill="#eceee0"/><!-- center -->
+        <!-- Cross lines -->
+        <line x1="168" y1="176" x2="168" y2="132" stroke="#4a80b5" stroke-width="2.5"/>
+        <line x1="144" y1="154" x2="192" y2="154" stroke="#4a80b5" stroke-width="2.5"/>
+        <text x="110" y="115" font-size="11" fill="#4a80b5" font-family="sans-serif" font-weight="700">SOUTHERN</text>
+        <text x="110" y="127" font-size="11" fill="#4a80b5" font-family="sans-serif" font-weight="700">CROSS (Crux)</text>
+        <!-- Long axis extension to South Pole -->
+        <line x1="168" y1="176" x2="245" y2="248" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+        <text x="192" y="228" font-size="9" fill="#c9a94e" font-family="sans-serif" transform="rotate(45,192,228)">× 4.5 lengths</text>
+        <!-- POINTER STARS (Alpha & Beta Centauri) -->
+        <circle cx="230" cy="210" r="7" fill="#eceee0"/><!-- Alpha Centauri (Rigil Kentaurus) — brightest -->
+        <circle cx="200" cy="236" r="5.5" fill="#eceee0"/><!-- Beta Centauri (Hadar) -->
+        <line x1="230" y1="210" x2="200" y2="236" stroke="#4b9e6a" stroke-width="2"/>
+        <text x="150" y="212" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">α Cen</text>
+        <text x="140" y="226" font-size="9" fill="#8a9e86" font-family="sans-serif">(Rigil Kentaurus)</text>
+        <text x="138" y="244" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">β Cen (Hadar)</text>
+        <text x="138" y="257" font-size="9" fill="#8a9e86" font-family="sans-serif">Pointer Stars →</text>
+        <!-- Perpendicular bisector method line -->
+        <line x1="215" y1="223" x2="250" y2="250" stroke="#4b9e6a" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+        <!-- CANOPUS — bright star lower right -->
+        <circle cx="370" cy="322" r="8" fill="#eceee0"/>
+        <text x="382" y="320" font-size="11" fill="#eceee0" font-family="sans-serif" font-weight="700">Canopus</text>
+        <text x="382" y="332" font-size="9" fill="#8a9e86" font-family="sans-serif">2nd brightest star</text>
+        <text x="382" y="344" font-size="9" fill="#8a9e86" font-family="sans-serif">in southern sky</text>
+        <!-- Large Magellanic Cloud -->
+        <ellipse cx="340" cy="195" rx="28" ry="18" fill="#243028" stroke="#3a4838" stroke-width="1" opacity="0.6"/>
+        <text x="375" y="200" font-size="9" fill="#4d6048" font-family="sans-serif">LMC</text>
+        <!-- Small Magellanic Cloud -->
+        <ellipse cx="390" cy="170" rx="18" ry="12" fill="#243028" stroke="#3a4838" stroke-width="1" opacity="0.5"/>
+        <text x="410" y="172" font-size="9" fill="#4d6048" font-family="sans-serif">SMC</text>
+        <text x="350" y="160" font-size="9" fill="#4d6048" font-family="sans-serif">Magellanic Clouds</text>
+        <!-- False Cross label -->
+        <circle cx="296" cy="172" r="3.5" fill="#8a9e86" opacity="0.7"/>
+        <circle cx="312" cy="160" r="3" fill="#8a9e86" opacity="0.7"/>
+        <circle cx="320" cy="176" r="3" fill="#8a9e86" opacity="0.7"/>
+        <circle cx="304" cy="188" r="3" fill="#8a9e86" opacity="0.7"/>
+        <text x="330" y="153" font-size="9" fill="#8a9e86" font-family="sans-serif" font-style="italic">False Cross</text>
+        <text x="330" y="165" font-size="8" fill="#4d6048" font-family="sans-serif">(do not confuse)</text>
+        <!-- Method note -->
+        <text x="250" y="480" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">Method: Extend Crux long axis 4.5× southward = South Pole</text>
+      </svg>
+      <figcaption>Southern hemisphere star chart — looking south. The Southern Cross (Crux) long axis points toward the South Celestial Pole; extend it 4.5× its length to find the pole (no bright star marks it). Alpha and Beta Centauri ("Pointer Stars") to the left of the Cross confirm you have the right constellation — not the similar-looking False Cross.</figcaption>
+    </figure>
+
+  </section>
+
+  <!-- =================== NATURAL NAVIGATION =================== -->
+  <section id="natural">
+    <h2>4. Natural Navigation</h2>
+
+    <p>The land itself contains directional information — encoded in vegetation, wind, water, and terrain. These clues are indicators, not certainties. Always use multiple clues together and verify against other methods when possible.</p>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Natural Navigation is Not GPS</strong>
+        <p>Natural signs are probabilistic indicators, not rules. Moss does not always grow on the north side of trees. Wind patterns vary. Use natural navigation as a supplement to — not a replacement for — compass and map work. Multiple confirming signs are much more reliable than a single indicator.</p>
+      </div>
+    </div>
+
+    <h3>Vegetation Clues</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Clue</th><th>Indication</th><th>Reliability</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Moss on trees</td><td>Tends to grow on the shadier (north) side in Northern Hemisphere</td><td>Low–Medium</td><td>Dense forest, moisture, and other factors override this — only reliable in open woodland</td></tr>
+          <tr><td>Tree ring spacing</td><td>Wider rings on the south side (more sun exposure) in Northern Hemisphere</td><td>Medium</td><td>Read a stump cross-section — rings are wider where more sunlight reaches</td></tr>
+          <tr><td>Flowers &amp; grasses</td><td>South-facing slopes dry faster, have different plant communities than north-facing</td><td>Medium</td><td>Compare two slopes — the greener, more lush slope is typically north-facing in dry climates</td></tr>
+          <tr><td>Snow persistence</td><td>North-facing slopes retain snow longer</td><td>High</td><td>Reliable indicator of slope orientation after snowfall</td></tr>
+          <tr><td>Tree lean</td><td>Trees in open areas lean away from prevailing winds</td><td>High (local)</td><td>Know your region's prevailing wind direction first — usually west to east in North America</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Water Navigation</h3>
+    <ul>
+      <li>Water flows downhill — always. Follow water downhill to reach lower elevations, civilization, or the sea.</li>
+      <li>Streams join rivers. Rivers lead to the sea or to inhabited valleys.</li>
+      <li>Water collects on the outside of bends — the deepest channel is on the outside of meanders.</li>
+      <li>In the wilderness, following water downstream will usually lead to trails, roads, or settlements within 1–3 days of travel in temperate regions.</li>
+    </ul>
+
+    <h3>Wind Patterns</h3>
+    <ul>
+      <li><strong>Sea breeze:</strong> During the day, onshore winds (from sea toward land) — useful for coastal orientation.</li>
+      <li><strong>Valley winds:</strong> In mountains, air flows uphill in the morning (anabatic) and downhill at night (katabatic). This is reliable and can help orient you to valley direction.</li>
+      <li><strong>Prevailing winds (North America):</strong> Generally west to east at mid-latitudes. Check tree lean and grass bend — they typically orient into prevailing wind.</li>
+    </ul>
+  </section>
+
+  <!-- =================== MAP MAKING =================== -->
+  <section id="map-making">
+    <h2>5. Creating Your Own Maps</h2>
+
+    <h3>Dead Reckoning</h3>
+    <p>Track your position by recording: starting point + compass bearing + distance traveled. A simple but effective way to create a rough map of unknown territory.</p>
+
+    <ol class="steps">
+      <li>Establish a reference point (your base camp, a notable landmark).</li>
+      <li>As you travel, record: compass bearing you traveled, and distance (estimated by pace count or time × average speed).</li>
+      <li>Pace calibration: walk 100m on flat ground while counting every time your RIGHT foot hits the ground. This is your "100m count." Most people: 60–70 double paces per 100m.</li>
+      <li>Plot each leg on graph paper: bearing + distance from last point. Build up a map of the area you've explored.</li>
+    </ol>
+
+    <h3>Sketch Mapping</h3>
+    <p>A rough but useful local area map can be created in a few hours by a small team.</p>
+
+    <ul>
+      <li>Start with known landmarks (roads, rivers, buildings) and map their relationships.</li>
+      <li>Use pacing to estimate distances. Check bearings between landmarks with a compass.</li>
+      <li>Use a consistent scale (e.g., 1 inch = 500 feet).</li>
+      <li>Add symbols for: water sources (blue), shelters (square), dangerous areas (X), food sources (leaf symbol), trail connections (dashed line).</li>
+      <li>Make multiple copies — give one to every patrol or team that leaves base.</li>
+    </ul>
+
+    <h3>Mapping from a High Point</h3>
+    <p>A panoramic sketch from a hilltop is one of the most efficient ways to understand local terrain.</p>
+    <ol class="steps">
+      <li>From the high point, draw a series of triangles radiating from your position like a fan.</li>
+      <li>Use compass to record the bearing to each significant landmark (hilltop, stream junction, road, building). Note the approximate distance.</li>
+      <li>Back on graph paper, plot each landmark at its bearing and estimated distance from your observed point.</li>
+      <li>Connect with sketched terrain features — ridge lines, valley floors, river courses.</li>
+    </ol>
+  </section>
+
+  <!-- =================== URBAN NAV =================== -->
+  <section id="urban">
+    <h2>6. Urban Navigation</h2>
+
+    <p>Urban navigation presents unique challenges: tall buildings block stars and distort compass readings (magnetic interference), terrain features are replaced by streets and structures, and the landscape can change rapidly in post-disaster scenarios.</p>
+
+    <h3>Orienting in an Urban Environment</h3>
+    <ul>
+      <li><strong>Street grid orientation:</strong> Most American cities are laid out on north-south/east-west grids. Street numbers increase in a consistent direction. Study your city's grid pattern before a crisis.</li>
+      <li><strong>Landmarks:</strong> Water towers, church steeples, broadcast towers, and distinctive buildings serve as reference points. Note their compass bearings from multiple locations while you can still verify with GPS.</li>
+      <li><strong>Sun:</strong> Even in cities, the sun's position remains reliable. Note which side of buildings is in shade and sun at different times of day.</li>
+      <li><strong>Compass reliability:</strong> Reinforced concrete and large metal structures deflect compass needles. Step away from buildings by 5–10m before taking bearings.</li>
+    </ul>
+
+    <h3>Moving Safely Through Urban Areas</h3>
+    <ul>
+      <li>Avoid open ground when uncertain of threat level. Move along the edges of streets, using cover.</li>
+      <li>Travel in pairs minimum — one navigates, one observes.</li>
+      <li>Pre-plan multiple routes between important locations. Know primary, secondary, and tertiary routes.</li>
+      <li>Mark known safe routes with subtle signals (chalk arrows, flagging tape) for your group.</li>
+      <li>Avoid bridges and tunnels — these are chokepoints and easily controlled or trapped.</li>
+      <li>Know the locations: hospitals, water treatment plants, food distribution points, police/fire stations, community gathering points.</li>
+    </ul>
+  </section>
+
+  <!-- =================== STAR CHARTS =================== -->
+  <section id="charts">
+    <h2>7. Compass Rose &amp; Star Charts</h2>
+
+    <!-- Printable Compass Rose SVG -->
+    <h3>Compass Rose</h3>
+    <div style="display:flex;justify-content:center;margin:var(--sp-xl) 0;">
+      <svg width="300" height="300" viewBox="0 0 300 300" style="max-width:100%" aria-label="Compass Rose">
+        <circle cx="150" cy="150" r="145" fill="none" stroke="var(--border-hi)" stroke-width="2"/>
+        <circle cx="150" cy="150" r="120" fill="none" stroke="var(--border)" stroke-width="1"/>
+        <!-- Cardinal points -->
+        <!-- N -->
+        <polygon points="150,8 143,55 150,50 157,55" fill="var(--amber)" stroke="var(--amber)" stroke-width="1"/>
+        <polygon points="150,8 143,55 150,50 157,55" fill="var(--amber)"/>
+        <!-- S -->
+        <polygon points="150,292 143,245 150,250 157,245" fill="var(--text-3)" stroke="var(--border-hi)" stroke-width="1"/>
+        <!-- E -->
+        <polygon points="292,150 245,143 250,150 245,157" fill="var(--text-3)" stroke="var(--border-hi)" stroke-width="1"/>
+        <!-- W -->
+        <polygon points="8,150 55,143 50,150 55,157" fill="var(--text-3)" stroke="var(--border-hi)" stroke-width="1"/>
+        <!-- Intercardinal - NE, NW, SE, SW (thinner) -->
+        <line x1="150" y1="150" x2="225" y2="75" stroke="var(--amber-dim)" stroke-width="2"/>
+        <line x1="150" y1="150" x2="75" y2="75" stroke="var(--amber-dim)" stroke-width="2"/>
+        <line x1="150" y1="150" x2="225" y2="225" stroke="var(--amber-dim)" stroke-width="2"/>
+        <line x1="150" y1="150" x2="75" y2="225" stroke="var(--amber-dim)" stroke-width="2"/>
+        <!-- Center -->
+        <circle cx="150" cy="150" r="12" fill="var(--bg-0)" stroke="var(--amber)" stroke-width="2"/>
+        <circle cx="150" cy="150" r="4" fill="var(--amber)"/>
+        <!-- Degree marks -->
+        <g stroke="var(--text-3)" stroke-width="1">
+          <!-- Every 10 degrees -->
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(10,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(20,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(30,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="24" transform="rotate(40,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(50,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(60,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(70,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="24" transform="rotate(80,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(100,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(110,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(120,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="24" transform="rotate(130,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(140,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(160,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(170,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="24" transform="rotate(190,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(200,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(210,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(220,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="24" transform="rotate(230,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(240,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(250,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(260,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="24" transform="rotate(280,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(290,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(300,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(310,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="24" transform="rotate(320,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(330,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(340,150,150)"/>
+          <line x1="150" y1="16" x2="150" y2="28" transform="rotate(350,150,150)"/>
+        </g>
+        <!-- Labels -->
+        <text x="150" y="6" text-anchor="middle" fill="var(--amber)" font-size="16" font-weight="bold" font-family="sans-serif">N</text>
+        <text x="150" y="298" text-anchor="middle" fill="var(--text-1)" font-size="14" font-family="sans-serif">S</text>
+        <text x="296" y="155" text-anchor="middle" fill="var(--text-1)" font-size="14" font-family="sans-serif">E</text>
+        <text x="4" y="155" text-anchor="middle" fill="var(--text-1)" font-size="14" font-family="sans-serif">W</text>
+        <text x="228" y="76" text-anchor="middle" fill="var(--text-2)" font-size="11" font-family="sans-serif">NE</text>
+        <text x="72" y="76" text-anchor="middle" fill="var(--text-2)" font-size="11" font-family="sans-serif">NW</text>
+        <text x="228" y="228" text-anchor="middle" fill="var(--text-2)" font-size="11" font-family="sans-serif">SE</text>
+        <text x="72" y="228" text-anchor="middle" fill="var(--text-2)" font-size="11" font-family="sans-serif">SW</text>
+        <!-- Degree numbers -->
+        <text x="150" y="40" text-anchor="middle" fill="var(--text-3)" font-size="8" font-family="sans-serif">0/360</text>
+        <text x="195" y="60" text-anchor="middle" fill="var(--text-3)" font-size="8" font-family="sans-serif">45</text>
+        <text x="270" y="155" text-anchor="middle" fill="var(--text-3)" font-size="8" font-family="sans-serif">90</text>
+        <text x="195" y="248" text-anchor="middle" fill="var(--text-3)" font-size="8" font-family="sans-serif">135</text>
+        <text x="150" y="270" text-anchor="middle" fill="var(--text-3)" font-size="8" font-family="sans-serif">180</text>
+        <text x="104" y="248" text-anchor="middle" fill="var(--text-3)" font-size="8" font-family="sans-serif">225</text>
+        <text x="30" y="155" text-anchor="middle" fill="var(--text-3)" font-size="8" font-family="sans-serif">270</text>
+        <text x="104" y="60" text-anchor="middle" fill="var(--text-3)" font-size="8" font-family="sans-serif">315</text>
+      </svg>
+    </div>
+
+    <!-- Northern Hemisphere Star Chart -->
+    <h3>Northern Hemisphere Star Chart — Key Constellations</h3>
+    <div style="display:flex;justify-content:center;margin:var(--sp-xl) 0;">
+      <svg width="340" height="340" viewBox="0 0 340 340" style="max-width:100%;background:var(--bg-0);border-radius:50%;border:2px solid var(--border-hi)" aria-label="Northern Hemisphere Star Chart">
+        <circle cx="170" cy="170" r="168" fill="var(--bg-0)"/>
+        <!-- Direction labels -->
+        <text x="170" y="14" text-anchor="middle" fill="var(--amber)" font-size="12" font-family="sans-serif">N (0°)</text>
+        <text x="330" y="175" text-anchor="middle" fill="var(--text-2)" font-size="11" font-family="sans-serif">E</text>
+        <text x="170" y="336" text-anchor="middle" fill="var(--text-2)" font-size="11" font-family="sans-serif">S</text>
+        <text x="10" y="175" text-anchor="middle" fill="var(--text-2)" font-size="11" font-family="sans-serif">W</text>
+        <!-- Reference circles -->
+        <circle cx="170" cy="170" r="50" fill="none" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4,4"/>
+        <circle cx="170" cy="170" r="100" fill="none" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4,4"/>
+        <circle cx="170" cy="170" r="150" fill="none" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4,4"/>
+        <!-- Reference lines -->
+        <line x1="170" y1="2" x2="170" y2="338" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4,4"/>
+        <line x1="2" y1="170" x2="338" y2="170" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4,4"/>
+
+        <!-- Polaris (North Star) - very close to center top -->
+        <circle cx="170" cy="34" r="4" fill="var(--amber)" opacity="0.9"/>
+        <text x="182" y="35" fill="var(--amber)" font-size="9" font-family="sans-serif">Polaris</text>
+
+        <!-- Little Dipper (Ursa Minor) -->
+        <g stroke="var(--blue)" stroke-width="1" fill="none" opacity="0.7">
+          <polyline points="170,34 162,50 155,70 160,85 175,92 185,80 180,60"/>
+        </g>
+        <circle cx="162" cy="50" r="2" fill="var(--blue)" opacity="0.7"/>
+        <circle cx="155" cy="70" r="2" fill="var(--blue)" opacity="0.7"/>
+        <circle cx="160" cy="85" r="2" fill="var(--blue)" opacity="0.7"/>
+        <circle cx="175" cy="92" r="2.5" fill="var(--blue)" opacity="0.8"/>
+        <circle cx="185" cy="80" r="2.5" fill="var(--blue)" opacity="0.8"/>
+        <circle cx="180" cy="60" r="2" fill="var(--blue)" opacity="0.7"/>
+        <text x="188" y="96" fill="var(--blue)" font-size="8" font-family="sans-serif" opacity="0.8">Ursa Minor</text>
+
+        <!-- Big Dipper (Ursa Major) -->
+        <g stroke="var(--amber)" stroke-width="1.5" fill="none" opacity="0.8">
+          <polyline points="100,60 120,52 140,48 158,58 165,72 148,78 132,72"/>
+        </g>
+        <circle cx="100" cy="60" r="3" fill="var(--amber)" opacity="0.9"/>
+        <circle cx="120" cy="52" r="3" fill="var(--amber)" opacity="0.9"/>
+        <circle cx="140" cy="48" r="3.5" fill="var(--amber)"/>
+        <circle cx="158" cy="58" r="3.5" fill="var(--amber)"/>
+        <circle cx="165" cy="72" r="3" fill="var(--amber)" opacity="0.9"/>
+        <circle cx="148" cy="78" r="3" fill="var(--amber)" opacity="0.9"/>
+        <circle cx="132" cy="72" r="3" fill="var(--amber)" opacity="0.9"/>
+        <text x="80" y="55" fill="var(--amber)" font-size="8" font-family="sans-serif">Big Dipper</text>
+        <!-- Pointer line to Polaris -->
+        <line x1="140" y1="48" x2="170" y2="34" stroke="var(--amber)" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+        <line x1="158" y1="58" x2="170" y2="34" stroke="var(--amber)" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+
+        <!-- Cassiopeia (W shape, northeast) -->
+        <g stroke="var(--green)" stroke-width="1.5" fill="none" opacity="0.8">
+          <polyline points="210,50 225,35 240,48 258,32 272,45"/>
+        </g>
+        <circle cx="210" cy="50" r="2.5" fill="var(--green)" opacity="0.9"/>
+        <circle cx="225" cy="35" r="3" fill="var(--green)"/>
+        <circle cx="240" cy="48" r="2.5" fill="var(--green)" opacity="0.9"/>
+        <circle cx="258" cy="32" r="3" fill="var(--green)"/>
+        <circle cx="272" cy="45" r="2.5" fill="var(--green)" opacity="0.9"/>
+        <text x="218" y="25" fill="var(--green)" font-size="8" font-family="sans-serif">Cassiopeia</text>
+
+        <!-- Orion (winter, south) - approximate -->
+        <g stroke="var(--text-1)" stroke-width="1" fill="none" opacity="0.7">
+          <line x1="145" y1="270" x2="165" y2="255"/>
+          <line x1="165" y1="255" x2="185" y2="270"/>
+          <!-- Belt -->
+          <line x1="152" y1="290" x2="163" y2="290"/>
+          <line x1="163" y1="290" x2="174" y2="290"/>
+          <line x1="145" y1="270" x2="152" y2="290"/>
+          <line x1="185" y1="270" x2="174" y2="290"/>
+          <line x1="152" y1="290" x2="150" y2="310"/>
+          <line x1="174" y1="290" x2="176" y2="310"/>
+        </g>
+        <circle cx="145" cy="270" r="3" fill="var(--red)" opacity="0.8"/>
+        <circle cx="185" cy="270" r="3" fill="#aaaaff" opacity="0.8"/>
+        <circle cx="152" cy="290" r="2.5" fill="var(--text-1)" opacity="0.8"/>
+        <circle cx="163" cy="290" r="2.5" fill="var(--text-1)" opacity="0.8"/>
+        <circle cx="174" cy="290" r="2.5" fill="var(--text-1)" opacity="0.8"/>
+        <circle cx="165" cy="255" r="2.5" fill="var(--text-1)" opacity="0.7"/>
+        <circle cx="150" cy="310" r="2" fill="var(--text-1)" opacity="0.7"/>
+        <circle cx="176" cy="310" r="2.5" fill="#aaaaff" opacity="0.8"/>
+        <text x="190" y="282" fill="var(--text-2)" font-size="8" font-family="sans-serif">Orion</text>
+        <text x="139" y="268" fill="var(--red)" font-size="7" font-family="sans-serif">Betelgeuse</text>
+        <text x="178" y="316" fill="#aaaaff" font-size="7" font-family="sans-serif">Rigel</text>
+        <text x="153" y="305" fill="var(--text-2)" font-size="7" font-family="sans-serif">Belt →</text>
+
+        <!-- Sirius (south, brightest star) -->
+        <circle cx="128" cy="312" r="4" fill="white" opacity="0.95"/>
+        <text x="100" y="325" fill="var(--text-1)" font-size="8" font-family="sans-serif">Sirius (brightest)</text>
+
+        <!-- Vega (near zenith summer) -->
+        <circle cx="215" cy="125" r="3.5" fill="white" opacity="0.85"/>
+        <text x="220" y="122" fill="var(--text-2)" font-size="8" font-family="sans-serif">Vega</text>
+
+        <!-- Arcturus (spring/summer) -->
+        <circle cx="88" cy="185" r="3.5" fill="var(--orange)" opacity="0.85"/>
+        <text x="55" y="195" fill="var(--text-2)" font-size="8" font-family="sans-serif">Arcturus</text>
+
+        <!-- Legend -->
+        <text x="14" y="322" fill="var(--text-3)" font-size="7" font-family="sans-serif">Center = North Pole · Edge = Horizon</text>
+      </svg>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Print These Charts</strong>
+        <p>Print this page and laminate it, or store in a ziplock bag. Practice identifying Polaris and the Big Dipper from your backyard on several clear nights before you need this skill under pressure. The constellations shown represent approximate winter positions for the Northern Hemisphere.</p>
+      </div>
+    </div>
+
+    <h3>Key Stars for Navigation</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Star</th><th>Constellation</th><th>Direction</th><th>How to Find</th></tr></thead>
+        <tbody>
+          <tr><td>Polaris</td><td>Ursa Minor</td><td>True North (within ~1°)</td><td>Follow Big Dipper pointers × 5</td></tr>
+          <tr><td>Sirius</td><td>Canis Major</td><td>Rises ESE, transits south</td><td>Follow Orion's belt left (east)</td></tr>
+          <tr><td>Orion's Belt</td><td>Orion</td><td>Rises due East, sets due West at equinox</td><td>3 stars in a perfect row; visible winter</td></tr>
+          <tr><td>Vega</td><td>Lyra</td><td>Near zenith summer (NH)</td><td>Bright blue-white star; part of Summer Triangle</td></tr>
+          <tr><td>Arcturus</td><td>Boötes</td><td>Rises NE, high in spring sky</td><td>Follow Big Dipper handle arc outward</td></tr>
+          <tr><td>Southern Cross</td><td>Crux</td><td>Points south (SH)</td><td>4 stars in a cross; visible in Southern Hemisphere</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-md);margin-top:var(--sp-xl)">
+    <a href="communications.html" class="btn btn-outline">← Communications</a>
+    <a href="security.html" class="btn btn-primary">Next: Security →</a>
+  </div>
+  <div class="callout callout-tip" style="margin-top:var(--sp-xl)">
+    <span class="callout-icon">🔗</span>
+    <div class="callout-content">
+      <strong>Related Sections</strong>
+      <p>
+        <a href="communications.html#ham-radio">Communications → Reporting your position by radio</a> ·
+        <a href="security.html#bug-out">Security → Bug-out route planning</a> ·
+        <a href="security.html#perimeter">Security → Patrol routes and perimeter awareness</a>
+      </p>
+    </div>
+  </div>
+
+<nav class="section-pagination no-print" aria-label="Section navigation">
+  <a href="communications.html" class="pagination-btn pagination-prev">← Communications</a>
+  <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+  <a href="security.html" class="pagination-btn pagination-next">Security →</a>
+</nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">🤖</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're reading Navigation. Ask me about compass bearings, map reading, celestial navigation, or how to find north without instruments.<p class="aria-note">⚠️ Requires Ollama. <a href="../ai-setup.html">Setup →</a></p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/aria.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

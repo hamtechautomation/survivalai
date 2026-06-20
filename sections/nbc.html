@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBC Threats — The Last Light Survival Guide</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .threat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .threat-card { background: var(--bg-1); border: 1px solid var(--amber); border-radius: 6px; padding: 1rem; }
+    .threat-card h4 { color: var(--amber); margin: 0 0 0.5rem; }
+    .emp-survive { border-left: 3px solid #4a9; padding: 0.5rem 1rem; background: #0a1a10; margin: 0.5rem 0; }
+    .emp-damage { border-left: 3px solid #f44; padding: 0.5rem 1rem; background: #1a0a0a; margin: 0.5rem 0; }
+    .sludge { font-size: 1.1em; letter-spacing: 0.05em; }
+    .sludge span { color: var(--amber); font-weight: bold; }
+    .nbc-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
+    .nbc-nav a { background: var(--bg-1); border: 1px solid #5c4a1e; color: var(--amber); padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-size: 0.85em; }
+    .nbc-nav a:hover { background: var(--amber); color: var(--bg-0); }
+    .stage-row-1 { background: #1a1a0a; }
+    .stage-row-2 { background: #1a100a; }
+    .stage-row-3 { background: #1a0a0a; }
+    .stage-row-4 { background: #100010; }
+    .ki-age { color: var(--amber); font-weight: bold; }
+  </style>
+</head>
+<body>
+  <nav id="sidebar"><div id="nav-logo"><span>&#9762;</span> Last Light</div><div id="nav-links"></div></nav>
+  <main id="main-content">
+    <div id="breadcrumb"><a href="../index.html">Home</a> › NBC Threats</div>
+
+    <header class="section-header">
+      <div class="section-badges">
+        <span class="badge badge-danger">CRITICAL</span>
+        <span class="badge">All Zones</span>
+        <span class="badge">All Timelines</span>
+      </div>
+      <h1>Nuclear, Biological &amp; Chemical Threats</h1>
+      <p class="section-subtitle">Detection, protection, decontamination, and survival protocols for CBRN events. Includes EMP preparedness.</p>
+    </header>
+
+    <div class="callout callout-red">
+      <strong>First 24 Hours — If Something Happens Now:</strong>
+      <ol style="margin:0.5rem 0 0; padding-left:1.2rem;">
+        <li><strong>Nuclear flash/blast:</strong> DROP behind anything solid. After blast, move perpendicular to wind; find shelter with mass (basement &gt; concrete &gt; vehicle). Stay put 24 hours minimum.</li>
+        <li><strong>EMP (lights out, cars die):</strong> Retrieve Faraday-stored items. Assume grid down for months. Shift to hand tools, animal transport, radio.</li>
+        <li><strong>Biological outbreak:</strong> Assume airborne + contact spread. Mask up immediately. Establish sick room. Boil all water.</li>
+        <li><strong>Chemical attack/spill:</strong> Move upwind AND uphill immediately. Strip outer clothing (removes 80% of agent). Flush with large volumes of water. Do not scrub.</li>
+      </ol>
+    </div>
+
+    <nav class="nbc-nav">
+      <a href="#nuclear">Nuclear Types</a>
+      <a href="#blast-zones">Blast Zones</a>
+      <a href="#fallout">Fallout</a>
+      <a href="#kfm">KFM Meter</a>
+      <a href="#ki-dosing">KI Dosing</a>
+      <a href="#rad-sickness">Rad Sickness</a>
+      <a href="#emp">EMP</a>
+      <a href="#faraday">Faraday Cage</a>
+      <a href="#biological">Biological</a>
+      <a href="#diseases">Disease Table</a>
+      <a href="#chemical">Chemical</a>
+      <a href="#agents">Agent Guide</a>
+      <a href="#decon">Decontamination</a>
+    </nav>
+
+    <!-- ═══ NUCLEAR ═══ -->
+    <h2 id="nuclear">1. Nuclear Threats — Types &amp; Immediate Response</h2>
+
+    <div class="threat-grid">
+      <div class="threat-card">
+        <h4>Strategic Detonation</h4>
+        <p>Full-yield warhead (100kt–1Mt+). Thermal pulse, blast wave, initial radiation, EMP, then fallout. Ground zero unsurvivable. Suburbs/rural survivors face fallout as primary threat.</p>
+      </div>
+      <div class="threat-card">
+        <h4>Tactical Nuke</h4>
+        <p>Battlefield weapon (1–50kt). Smaller blast radius but still produces fallout. More likely scenario in regional conflict.</p>
+      </div>
+      <div class="threat-card">
+        <h4>Dirty Bomb (RDD)</h4>
+        <p>Conventional explosive + radioactive material. Blast kills more than radiation. Contamination is real but limited. Fear &gt; actual lethality. Stay calm, evacuate area, decontaminate.</p>
+      </div>
+      <div class="threat-card">
+        <h4>Reactor Accident</h4>
+        <p>Chernobyl/Fukushima model. No blast. Radiation release over hours to days. Iodine-131 plume is primary early threat. KI tablets critical within 24 hours of exposure.</p>
+      </div>
+    </div>
+
+    <h3>Immediate Sequence After Flash/Blast</h3>
+    <ol>
+      <li><strong>Flash:</strong> Drop instantly — do not look. Get behind mass (wall, car, earthen berm, ditch). Thermal pulse lasts ~3 seconds for 10kt, ~10 seconds for 1Mt.</li>
+      <li><strong>Blast wave:</strong> Arrives seconds to minutes after flash (1 mile ≈ 5 sec for 1Mt). Stay down. Glass and debris travel at 100–200 mph. Overpressure damages lungs.</li>
+      <li><strong>Initial radiation:</strong> Only danger within ~1 km of ground zero. If you survived the blast, initial radiation has largely passed.</li>
+      <li><strong>Fire:</strong> Thermal pulse ignites all combustible material within line-of-sight. Check for fire; evacuate burning structure.</li>
+      <li><strong>Get inside IMMEDIATELY:</strong> Fallout begins arriving within 15 minutes downwind. Cover face. Basement or center of large concrete building.</li>
+      <li><strong>Stay 24 hours minimum.</strong> Radiation decays by the 7-10 rule. First 24 hours are most dangerous.</li>
+    </ol>
+
+    <div class="callout callout-amber">
+      <strong>Distance Saves Lives:</strong> 3 miles from a 1kt blast = survival likely. 30 miles from a 1Mt blast = potential survival with shelter. Every additional mile or layer of mass dramatically increases your odds.
+    </div>
+
+    <!-- ═══ BLAST ZONES ═══ -->
+    <h2 id="blast-zones">2. Blast Radius by Yield</h2>
+
+    <svg viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;background:#070a09;border:1px solid #333;border-radius:8px;display:block;margin:1rem auto;">
+      <defs>
+        <radialGradient id="fireballGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff" stop-opacity="1"/>
+          <stop offset="60%" stop-color="#ff8c00" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#ff2200" stop-opacity="0.6"/>
+        </radialGradient>
+      </defs>
+      <text x="350" y="28" text-anchor="middle" fill="#c9a94e" font-size="16" font-weight="bold" font-family="system-ui">Blast Radius Comparison by Yield</text>
+      <text x="350" y="46" text-anchor="middle" fill="#888" font-size="11" font-family="system-ui">Concentric rings — each yield shown relative to 1Mt (outer ring)</text>
+      <!-- 1 Mt zones -->
+      <circle cx="350" cy="270" r="200" fill="none" stroke="#8b0000" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+      <circle cx="350" cy="270" r="185" fill="#1a0500" opacity="0.25"/>
+      <!-- 100kt -->
+      <circle cx="350" cy="270" r="95" fill="#1a0800" opacity="0.35"/>
+      <!-- 10kt -->
+      <circle cx="350" cy="270" r="45" fill="#250a00" opacity="0.5"/>
+      <!-- 1kt -->
+      <circle cx="350" cy="270" r="18" fill="#3a1000" opacity="0.7"/>
+      <!-- Fireball -->
+      <circle cx="350" cy="270" r="8" fill="url(#fireballGrad)" opacity="0.95"/>
+      <!-- Labels -->
+      <line x1="350" y1="270" x2="532" y2="135" stroke="#8b0000" stroke-width="0.8" opacity="0.6"/>
+      <text x="538" y="130" fill="#ff4444" font-size="11" font-family="system-ui" font-weight="bold">1 Mt</text>
+      <text x="538" y="143" fill="#888" font-size="9.5" font-family="system-ui">Fireball: 2.2 mi</text>
+      <text x="538" y="155" fill="#888" font-size="9.5" font-family="system-ui">5 psi: 8.5 mi</text>
+      <text x="538" y="167" fill="#888" font-size="9.5" font-family="system-ui">Thermal: 35 mi</text>
+      <line x1="350" y1="270" x2="435" y2="180" stroke="#c94444" stroke-width="0.8" opacity="0.6"/>
+      <text x="440" y="178" fill="#ff8844" font-size="11" font-family="system-ui" font-weight="bold">100 kt</text>
+      <text x="440" y="191" fill="#888" font-size="9.5" font-family="system-ui">Fireball: 0.6 mi</text>
+      <text x="440" y="203" fill="#888" font-size="9.5" font-family="system-ui">5 psi: 2.7 mi</text>
+      <text x="440" y="215" fill="#888" font-size="9.5" font-family="system-ui">Thermal: 11 mi</text>
+      <line x1="350" y1="270" x2="390" y2="228" stroke="#e08840" stroke-width="0.8" opacity="0.6"/>
+      <text x="395" y="226" fill="#ffa040" font-size="10" font-family="system-ui" font-weight="bold">10 kt</text>
+      <text x="395" y="238" fill="#888" font-size="9" font-family="system-ui">5 psi: 0.9 mi</text>
+      <text x="395" y="249" fill="#888" font-size="9" font-family="system-ui">Thermal: 3.5 mi</text>
+      <line x1="350" y1="265" x2="350" y2="236" stroke="#c9a94e" stroke-width="0.8" opacity="0.6"/>
+      <text x="358" y="232" fill="#c9a94e" font-size="9" font-family="system-ui" font-weight="bold">1 kt</text>
+      <text x="358" y="243" fill="#888" font-size="8.5" font-family="system-ui">~0.25 mi lethal</text>
+      <text x="350" y="272" text-anchor="middle" fill="#fff" font-size="7" font-family="system-ui">GZ</text>
+      <!-- Wind / fallout note -->
+      <text x="62" y="274" fill="#aaa" font-size="10" font-family="system-ui">Wind →</text>
+      <text x="62" y="287" fill="#888" font-size="8.5" font-family="system-ui">Fallout travels</text>
+      <text x="62" y="298" fill="#888" font-size="8.5" font-family="system-ui">downwind 100s mi</text>
+      <!-- Survival zone table -->
+      <rect x="20" y="340" width="660" height="130" rx="4" fill="#0a0f0a" stroke="#333" stroke-width="1"/>
+      <text x="30" y="358" fill="#c9a94e" font-size="11" font-weight="bold" font-family="system-ui">Survival Zones (1 Mt airburst example)</text>
+      <text x="30" y="374" fill="#ff4444" font-size="10" font-family="system-ui">● 0–1.5 mi: No survival. Fireball, total destruction.</text>
+      <text x="30" y="390" fill="#ff8844" font-size="10" font-family="system-ui">● 1.5–3 mi: Near-total destruction. Survivors severely burned. Evacuation zone.</text>
+      <text x="30" y="406" fill="#ffa040" font-size="10" font-family="system-ui">● 3–8 mi: Heavy structural damage. Windows shattered citywide. Survive with shelter.</text>
+      <text x="30" y="422" fill="#ffcc44" font-size="10" font-family="system-ui">● 8–20 mi: Moderate damage. Fallout is primary threat. Shelter-in-place viable.</text>
+      <text x="30" y="438" fill="#aaffaa" font-size="10" font-family="system-ui">● 20+ mi: Light damage. Fallout risk arrives hours later. Monitor; evacuation may not be needed.</text>
+      <text x="30" y="456" fill="#888" font-size="9" font-family="system-ui">Dirty bomb (RDD): blast zone CONVENTIONAL ONLY. Radiation contamination may cover only a few city blocks.</text>
+    </svg>
+
+    <!-- ═══ FALLOUT ═══ -->
+    <h2 id="fallout">3. Fallout — The Survivable Threat</h2>
+
+    <p>Fallout is the most dangerous radiation threat to survivors outside the blast zone and the most amenable to protective action. It consists of radioactive particles (vaporized soil, building material, weapon components) that rise into the fireball and settle downwind over hours to days.</p>
+
+    <h3>The 7-10 Rule</h3>
+    <p>For every 7-fold increase in time after detonation, radiation intensity decreases by a factor of 10:</p>
+    <table>
+      <thead><tr><th>Time After Blast</th><th>Reduction Factor</th><th>If 1 hr = 1,000 R/hr…</th></tr></thead>
+      <tbody>
+        <tr><td>1 hour</td><td>Reference (×1.0)</td><td>1,000 R/hr — lethal in minutes</td></tr>
+        <tr><td>7 hours</td><td>×0.1 (1/10)</td><td>100 R/hr — still very dangerous</td></tr>
+        <tr><td>49 hours (~2 days)</td><td>×0.01 (1/100)</td><td>10 R/hr — dangerous; limit exposure</td></tr>
+        <tr><td>2 weeks</td><td>×0.001 (1/1,000)</td><td>1 R/hr — manageable with care</td></tr>
+        <tr><td>~3 months</td><td>×0.0001 (1/10,000)</td><td>0.1 R/hr — approaching background</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Shelter Protection Factors</h3>
+    <table>
+      <thead><tr><th>Location</th><th>Protection Factor</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Open field</td><td>PF 1</td><td>No protection</td></tr>
+        <tr><td>Wood frame house (middle floor)</td><td>PF 2–4</td><td>Better than outside; not good</td></tr>
+        <tr><td>Brick/masonry building</td><td>PF 10</td><td>Stay away from windows</td></tr>
+        <tr><td>Concrete building (center, middle floor)</td><td>PF 20–50</td><td>Good option in cities</td></tr>
+        <tr><td>Underground basement</td><td>PF 10–100</td><td>Depth of soil overhead matters most</td></tr>
+        <tr><td>Underground with 3+ feet of earth</td><td>PF 1,000+</td><td>Best improvised shelter</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-amber">
+      <strong>Maximize Protection:</strong> Move to lowest floor, innermost rooms. Bank dirt against exterior windows. Seal gaps with damp cloths. Fill bathtubs and containers with water NOW before potential contamination. Switch off all HVAC systems.
+    </div>
+
+    <h3>Fallout Shelter Cross-Section</h3>
+    <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;background:#070a09;border:1px solid #333;border-radius:8px;display:block;margin:1rem auto;">
+      <rect x="0" y="100" width="680" height="12" fill="#3a2a10" opacity="0.8"/>
+      <rect x="0" y="88" width="680" height="12" fill="#1a3a10" opacity="0.6"/>
+      <rect x="60" y="20" width="560" height="90" rx="2" fill="none" stroke="#666" stroke-width="1.5"/>
+      <polygon points="60,20 340,2 620,20" fill="none" stroke="#888" stroke-width="1"/>
+      <text x="340" y="60" text-anchor="middle" fill="#666" font-size="12" font-family="system-ui">Above-grade structure (PF 2–10)</text>
+      <text x="340" y="78" text-anchor="middle" fill="#555" font-size="10" font-family="system-ui">Avoid — windows, exterior walls, roof exposure</text>
+      <rect x="80" y="112" width="520" height="140" rx="2" fill="#0d1a0d" stroke="#4a9a4a" stroke-width="2"/>
+      <rect x="0" y="112" width="80" height="140" fill="#3a2a10" opacity="0.7"/>
+      <rect x="600" y="112" width="80" height="140" fill="#3a2a10" opacity="0.7"/>
+      <text x="40" y="185" text-anchor="middle" fill="#8a6a30" font-size="10" font-family="system-ui" transform="rotate(-90,40,185)">Earth berm</text>
+      <rect x="180" y="160" width="320" height="70" rx="2" fill="#0a1a0a" stroke="#c9a94e" stroke-width="2"/>
+      <text x="340" y="192" text-anchor="middle" fill="#c9a94e" font-size="11" font-family="system-ui" font-weight="bold">Inner shelter (table + mattresses + books/sandbags)</text>
+      <text x="340" y="208" text-anchor="middle" fill="#8a8" font-size="9.5" font-family="system-ui">Extra mass = higher PF</text>
+      <text x="240" y="220" text-anchor="middle" fill="#aaa" font-size="16" font-family="system-ui">👤👤👤</text>
+      <text x="440" y="220" text-anchor="middle" fill="#aaa" font-size="16" font-family="system-ui">👤👤👤</text>
+      <line x1="100" y1="10" x2="100" y2="88" stroke="#ff4444" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <polygon points="96,85 100,95 104,85" fill="#ff4444"/>
+      <line x1="340" y1="10" x2="340" y2="88" stroke="#ff4444" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <polygon points="336,85 340,95 344,85" fill="#ff4444"/>
+      <line x1="580" y1="10" x2="580" y2="88" stroke="#ff4444" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <polygon points="576,85 580,95 584,85" fill="#ff4444"/>
+      <text x="200" y="12" fill="#ff6666" font-size="10" font-family="system-ui">Fallout particles settling from sky</text>
+      <text x="650" y="130" text-anchor="end" fill="#4a9a4a" font-size="10" font-family="system-ui">Basement: PF 40–100</text>
+      <text x="650" y="185" text-anchor="end" fill="#c9a94e" font-size="10" font-family="system-ui">Inner shelter: PF 200–500</text>
+      <rect x="92" y="165" width="60" height="40" rx="3" fill="#0a1a2a" stroke="#4494cc" stroke-width="1.5"/>
+      <text x="122" y="183" text-anchor="middle" fill="#4494cc" font-size="9" font-family="system-ui">Water</text>
+      <text x="122" y="195" text-anchor="middle" fill="#4494cc" font-size="9" font-family="system-ui">pre-filled</text>
+      <rect x="92" y="210" width="60" height="30" rx="3" fill="#1a1a0a" stroke="#8a8a44" stroke-width="1.5"/>
+      <text x="122" y="229" text-anchor="middle" fill="#8a8a44" font-size="9" font-family="system-ui">Food stores</text>
+      <text x="340" y="308" text-anchor="middle" fill="#666" font-size="10" font-family="system-ui">Stay minimum 24 hrs | Ideal: 2 weeks | Exit only when radiation &lt; 2 R/hr</text>
+    </svg>
+
+    <h3>Food &amp; Water Safety After Fallout</h3>
+    <table>
+      <thead><tr><th>Item</th><th>Safe?</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Pre-stored sealed water</td><td style="color:#4a9a4a">Safe</td><td>Any container sealed before the event</td></tr>
+        <tr><td>Running tap water (municipal)</td><td style="color:#ffaa44">Uncertain</td><td>If pipes are sealed underground, likely OK. Avoid if fallout visible.</td></tr>
+        <tr><td>Open well water</td><td style="color:#ff6644">Avoid early</td><td>Let well run 10 min after 2-week mark; test if possible</td></tr>
+        <tr><td>Rainwater (first 2 weeks)</td><td style="color:#ff4444">Dangerous</td><td>Concentrates fallout. Do not collect.</td></tr>
+        <tr><td>Rainwater (after 3 months)</td><td style="color:#8a8a44">Likely OK</td><td>Radiation has decayed; test if possible</td></tr>
+        <tr><td>Underground stored food</td><td style="color:#4a9a4a">Safe</td><td>Radiation does not penetrate sealed containers</td></tr>
+        <tr><td>Garden vegetables</td><td style="color:#ff8844">Wash thoroughly</td><td>Remove outer leaves. Peel root vegetables. Avoid leafy greens for first season.</td></tr>
+        <tr><td>Animals that grazed outside</td><td style="color:#ff8844">Caution</td><td>Avoid thyroid glands and internal organs. Muscle meat — wash surface.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ═══ KFM METER ═══ -->
+    <h2 id="kfm">4. Kearny Fallout Meter (KFM) — Improvised Dosimeter</h2>
+    <p>The KFM is a proven improvised radiation detector developed by Cresson Kearny at Oak Ridge National Laboratory. It can be built in a few hours and provides cumulative dose readings without electricity.</p>
+
+    <h3>Materials</h3>
+    <ul>
+      <li>2 aluminum foil discs (~1 inch diameter) cut from heavy-duty foil</li>
+      <li>2 lengths of very thin sewing thread, 6+ inches each</li>
+      <li>Small metal can (soup can) with plastic or cardboard lid</li>
+      <li>Silica gel desiccant packets — <strong>CRITICAL</strong> — keeps foil discs dry so they hold charge</li>
+      <li>Magnifying glass for reading</li>
+      <li>Nylon comb (for charging)</li>
+    </ul>
+
+<pre class="diagram">
+KFM CONSTRUCTION (Side View Cross-Section)
+─────────────────────────────────────────────────────────
+              Plastic lid with small window
+              (clear tape over a cut-out)
+                         ↓
+┌──────────────────────────────────────┐
+│  ╔══════════════════════════════╗   │ ← Can wall
+│  ║  Thread support bar (metal)  ║   │
+│  ║        |          |          ║   │
+│  ║        ▼          ▼          ║   │
+│  ║       [●]        [●]         ║   │ ← Al foil discs
+│  ║        ↕ ← gap →  ↕         ║   │   suspended on thread
+│  ║                              ║   │
+│  ║    [Desiccant packet]        ║   │ ← Keeps foil dry
+│  ╚══════════════════════════════╝   │
+└──────────────────────────────────────┘
+                    Metal can body
+
+HOW IT WORKS:
+1. Charge by rubbing comb on hair then touching support bar
+   → Discs separate (same charge repels)
+2. Radiation ionizes air inside → charge leaks away
+   → Discs fall toward each other
+3. Measure gap: wide gap = low dose; touching = high dose
+
+See Nuclear War Survival Skills (NWSS) Ch. 13 for
+exact calibration table. Free at: oism.org/nwss
+─────────────────────────────────────────────────────────</pre>
+
+    <!-- ═══ KI DOSING ═══ -->
+    <h2 id="ki-dosing">5. Potassium Iodide (KI) Dosing</h2>
+    <p>KI floods the thyroid with stable iodine, preventing uptake of radioactive iodine-131. It protects <em>only</em> the thyroid, and only against radioactive iodine — not other radiation types or doses.</p>
+
+    <div class="callout callout-amber">
+      <strong>Timing Is Everything:</strong> Most effective 1–2 hours BEFORE exposure. Still effective up to 4 hours after. After 24 hours, benefit is minimal. Never take KI prophylactically without confirmed radioactive iodine release.
+    </div>
+
+    <table class="dose-table">
+      <thead>
+        <tr><th>Age Group</th><th>Dose</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ki-age">Adults (18–40)</td>
+          <td><strong>130 mg</strong></td>
+          <td>Full dose. Adults under 40 have highest thyroid cancer risk from radiation.</td>
+        </tr>
+        <tr>
+          <td class="ki-age">Adults (40+)</td>
+          <td><strong>130 mg</strong></td>
+          <td>Only if projected thyroid dose &gt;500 rad. Thyroid cancer risk decreases significantly with age.</td>
+        </tr>
+        <tr>
+          <td class="ki-age">Adolescents (12–18)</td>
+          <td><strong>65 mg</strong></td>
+          <td>Half dose. Growing thyroid is more susceptible to radiation damage.</td>
+        </tr>
+        <tr>
+          <td class="ki-age">Children (3–12 years)</td>
+          <td><strong>65 mg</strong></td>
+          <td>Half dose. Liquid formulation preferred if available.</td>
+        </tr>
+        <tr>
+          <td class="ki-age">Children (1 month–3 years)</td>
+          <td><strong>32 mg</strong></td>
+          <td>Quarter dose. Mix liquid in food if needed.</td>
+        </tr>
+        <tr>
+          <td class="ki-age">Newborns (birth–1 month)</td>
+          <td><strong>16 mg</strong></td>
+          <td>Smallest dose. Neonatal thyroid extremely sensitive. Seek medical guidance if possible.</td>
+        </tr>
+        <tr>
+          <td class="ki-age">Pregnant / nursing</td>
+          <td><strong>130 mg (single dose)</strong></td>
+          <td>One dose only — fetal/infant thyroid is priority. Do not repeat.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Contraindications:</strong> Known iodine allergy, thyroid disease, Dermatitis Herpetiformis. In a genuine nuclear emergency, risk of NOT taking KI generally outweighs allergy risk except for a history of anaphylaxis.</p>
+    <p><strong>Improvised KI:</strong> Topical povidone-iodine (Betadine) painted on skin provides unreliable, minimal absorption. Do not use as a substitute. Pre-stored pharmaceutical KI tablets are the only reliable method.</p>
+
+    <!-- ═══ RADIATION SICKNESS ═══ -->
+    <h2 id="rad-sickness">6. Radiation Sickness Stages &amp; Supportive Care</h2>
+    <table>
+      <thead>
+        <tr><th>Dose (rad)</th><th>Stage</th><th>Symptoms</th><th>Prognosis</th><th>Supportive Care</th></tr>
+      </thead>
+      <tbody>
+        <tr class="stage-row-1">
+          <td>&lt;50 rad</td>
+          <td>Subclinical</td>
+          <td>None or mild nausea</td>
+          <td>Full recovery expected</td>
+          <td>Monitor; no specific treatment</td>
+        </tr>
+        <tr class="stage-row-1">
+          <td>50–200 rad</td>
+          <td>Mild ARS</td>
+          <td>Nausea/vomiting within 6 hrs; fatigue; temporary hair loss possible</td>
+          <td>Excellent with minimal care</td>
+          <td>Hydration, rest, antiemetics if available; prevent infection</td>
+        </tr>
+        <tr class="stage-row-2">
+          <td>200–400 rad</td>
+          <td>Moderate ARS</td>
+          <td>Nausea/vomiting within 2 hrs; latent period 2–3 weeks (feels OK); then weakness, infection risk, bleeding</td>
+          <td>50–70% survival with good care</td>
+          <td>Aggressive hydration; fever management; strict wound care; isolate from infection; rest</td>
+        </tr>
+        <tr class="stage-row-3">
+          <td>400–600 rad</td>
+          <td>Severe ARS</td>
+          <td>Immediate nausea; latent period ~1 week; severe immune collapse, hemorrhage, opportunistic infection</td>
+          <td>~50% mortality without support</td>
+          <td>IV fluids if available; antibiotics for infection; blood transfusion if possible; strict infection isolation</td>
+        </tr>
+        <tr class="stage-row-4">
+          <td>&gt;600 rad</td>
+          <td>Lethal ARS</td>
+          <td>Immediate severe symptoms; total GI tract failure; CNS symptoms at &gt;1,000 rad</td>
+          <td>Near 100% without advanced care</td>
+          <td>Palliative comfort; pain relief; hydration; dignity in death</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Radiation Decontamination Protocol</h3>
+    <ol>
+      <li><strong>Remove outer clothing</strong> (outside, before entering shelter) — eliminates ~80% of external contamination. Bag and seal.</li>
+      <li><strong>Shower with soap and water</strong> — gentle, not vigorous scrubbing. Scrubbing abrades skin and increases absorption.</li>
+      <li><strong>Shampoo hair</strong> — do NOT use conditioner; it binds particles to hair shafts.</li>
+      <li><strong>Blow nose, wipe face gently</strong> — remove particles from mucous membranes.</li>
+      <li><strong>Clean under fingernails</strong> — common particle trap.</li>
+      <li><strong>Change into clean stored clothing</strong> — not from exposed areas.</li>
+    </ol>
+
+    <!-- ═══ EMP ═══ -->
+    <h2 id="emp">7. Electromagnetic Pulse (EMP)</h2>
+
+    <div class="threat-grid">
+      <div class="threat-card">
+        <h4>Natural EMP — Geomagnetic Storm</h4>
+        <p><strong>Carrington Event (1859):</strong> The largest recorded solar storm. If repeated today, it would destroy most of the power grid. Affects long conductors (power lines, pipelines) most severely. Personal electronics may survive if not connected to the grid. NOAA typically provides 1–3 days advance warning for major solar events.</p>
+      </div>
+      <div class="threat-card">
+        <h4>Nuclear High-Altitude EMP (HEMP)</h4>
+        <p>A nuclear detonation at 25–300 miles altitude produces three components: <strong>E1</strong> (nanoseconds — destroys microelectronics instantly), <strong>E2</strong> (milliseconds — like lightning), <strong>E3</strong> (seconds to minutes — grid distortion similar to Carrington). A single warhead at 300-mile altitude can cover the entire continental US. No advance warning.</p>
+      </div>
+    </div>
+
+    <h3>What Gets Damaged</h3>
+    <div class="emp-damage">
+      <strong>Highly Vulnerable (E1 component):</strong>
+      <ul style="margin:0.3rem 0; padding-left:1.2rem;">
+        <li>Modern vehicles with ECUs (engine control units) — 1980s onward</li>
+        <li>All computers, smartphones, tablets, smart devices</li>
+        <li>Medical devices: pacemakers, insulin pumps, CPAP machines</li>
+        <li>Power grid transformers (1–2 year lead time to replace; custom manufactured)</li>
+        <li>Communications infrastructure: cell towers, internet routers, switches</li>
+        <li>ATMs, POS systems, banking infrastructure</li>
+        <li>Solar charge controllers and inverters (if connected at time of event)</li>
+        <li>Modern digital ham radios</li>
+      </ul>
+    </div>
+
+    <div class="emp-survive">
+      <strong>More Likely to Survive:</strong>
+      <ul style="margin:0.3rem 0; padding-left:1.2rem;">
+        <li>Pre-1980 vehicles with points ignition and no ECU</li>
+        <li>Older tube (vacuum tube) radios; simple crystal radios</li>
+        <li>Simple mechanical devices with no electronics</li>
+        <li>Items properly stored in Faraday cage (see below)</li>
+        <li>Items off and unplugged at time of event (reduces but does not eliminate E1 risk)</li>
+        <li>Simple DC motors without microcontrollers</li>
+        <li>Wind-up clocks, hand tools, hand pumps, mechanical watches</li>
+      </ul>
+    </div>
+
+    <h3>Recovery Timeline</h3>
+    <table>
+      <thead><tr><th>Timeframe</th><th>What May Be Restored</th></tr></thead>
+      <tbody>
+        <tr><td>Hours</td><td>Faraday-stored personal gear (radios, phones — if undamaged); some diesel vehicles</td></tr>
+        <tr><td>Days–weeks</td><td>Localized backup generators; some rural areas with older infrastructure</td></tr>
+        <tr><td>Months</td><td>Partial grid restoration in priority areas (hospitals, military, government)</td></tr>
+        <tr><td>1–4 years</td><td>Major transformer replacement; general grid restoration. This is the catastrophic multi-year scenario.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ═══ FARADAY ═══ -->
+    <h2 id="faraday">8. Faraday Cage Construction</h2>
+
+    <div class="callout callout-amber">
+      <strong>Grounding Myth — IMPORTANT:</strong> A widely repeated myth states that Faraday cages must be grounded. For protecting personal electronics, grounding is NOT required and can be counterproductive: a ground wire becomes an antenna that couples EMP energy INTO the enclosure. For personal protective use, an isolated, well-sealed metal enclosure is correct. No ground wire.
+    </div>
+
+    <h3>Metal Trash Can Method</h3>
+<pre class="diagram">
+FARADAY CAGE — METAL TRASH CAN METHOD
+────────────────────────────────────────────────────────
+Materials:
+  • Steel or galvanized metal trash can with tight lid
+  • Cardboard or foam (insulation layer — critical)
+  • Heavy-duty aluminum foil (extra wrap for critical items)
+  • Conductive tape (copper/aluminum) for lid seam gap
+
+Construction:
+
+         ┌──────────────────────────┐
+    Lid →│▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│← Conductive tape
+         │  seals lid-to-can gap   │   seals rim gap
+         ├──────────────────────────┤
+         │  [Cardboard lining]      │← NON-conductive
+         │                          │  insulation prevents
+         │  ┌──────────────────┐   │  contact with can wall
+         │  │  ELECTRONICS     │   │
+         │  │  wrapped in foil │   │← Double-wrap
+         │  │  inside cardboard│   │  critical items
+         │  └──────────────────┘   │
+         │  [Cardboard lining]      │
+         └──────────────────────────┘
+              Metal can body
+              (continuous conductive shell)
+
+RULES:
+  ✓ No gaps in metal shell — tape ALL openings
+  ✓ Contents must NOT touch metal sides (use insulation)
+  ✓ NO ground wire (creates antenna)
+  ✓ Lid must make full conductive contact with body
+  ✓ Keep sealed until needed after event
+
+NESTED METHOD (critical items):
+  Layer 1: Device wrapped in foil in cardboard box
+  Layer 2: Metal tin (Altoids to ammo can size)
+  Layer 3: Large metal trash can
+  Each layer adds ~20 dB of shielding attenuation
+────────────────────────────────────────────────────────</pre>
+
+    <h3>Priority Items for Faraday Storage</h3>
+    <table>
+      <thead><tr><th>Item</th><th>Why</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr><td>Handheld HAM radio (Baofeng UV-5R or similar)</td><td>Primary long-range comms post-EMP; grid is down</td><td style="color:#ff6644">Critical</td></tr>
+        <tr><td>Solar charge controller</td><td>Solar panels survive EMP; controller does not without protection</td><td style="color:#ff6644">Critical</td></tr>
+        <tr><td>Insulin pump + CGM equipment</td><td>No substitute; diabetic life-dependency</td><td style="color:#ff6644">Critical</td></tr>
+        <tr><td>Hearing aids (spare set + batteries)</td><td>Widely overlooked; no substitute in grid-down environment</td><td style="color:#ff8844">High</td></tr>
+        <tr><td>AM/FM/SW receiver</td><td>Receive emergency broadcasts, government announcements</td><td style="color:#ff8844">High</td></tr>
+        <tr><td>Laptop with offline reference data</td><td>Medical references, maps, manuals, this guide — no internet to look things up</td><td style="color:#ff8844">High</td></tr>
+        <tr><td>Spare voltage regulators / small inverter</td><td>Enables using solar panels to charge batteries and run equipment</td><td style="color:#ff8844">High</td></tr>
+        <tr><td>Night vision monoculars</td><td>Extremely valuable for security when there is no artificial lighting</td><td style="color:#ffcc44">Medium</td></tr>
+        <tr><td>Spare vehicle ignition module / ECU</td><td>If your vehicle has electronic ignition, a spare may restore mobility</td><td style="color:#ffcc44">Medium</td></tr>
+        <tr><td>LED flashlights + spare</td><td>Modern LEDs have some EMP resistance; protect anyway</td><td style="color:#ffcc44">Medium</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ═══ BIOLOGICAL ═══ -->
+    <h2 id="biological">9. Biological Threats</h2>
+
+    <h3>Natural Pandemic vs. Engineered Pathogen — Early Warning Signs</h3>
+    <table>
+      <thead><tr><th>Indicator</th><th>Natural Pandemic</th><th>Engineered / Weaponized</th></tr></thead>
+      <tbody>
+        <tr><td>Geographic spread</td><td>Single origin, follows travel routes</td><td>Multiple simultaneous outbreaks in geographically separated locations</td></tr>
+        <tr><td>Affected population</td><td>Vulnerable populations first (elderly, immunocompromised)</td><td>May preferentially affect healthy young adults</td></tr>
+        <tr><td>Disease profile</td><td>Consistent with known pathogen characteristics</td><td>Unusual severity, treatment resistance, or symptoms outside known parameters</td></tr>
+        <tr><td>Case fatality rate</td><td>Generally within historical ranges for that pathogen type</td><td>Unusually high CFR or rapid progression</td></tr>
+        <tr><td>Information environment</td><td>Normal public health reporting; media coverage</td><td>Possible information suppression; unusual government/military activity</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Quarantine Protocol</h3>
+    <h4>Who Quarantines</h4>
+    <ul>
+      <li><strong>Confirmed sick:</strong> Immediate isolation. No shared spaces, bathroom, or utensils.</li>
+      <li><strong>Known exposed but asymptomatic:</strong> Separate from unexposed group. Monitor for symptoms for the full incubation period + 2 days safety margin.</li>
+      <li><strong>Unknown exposure status:</strong> In active community outbreak, treat everyone as potentially exposed.</li>
+    </ul>
+
+    <h4>Sick Room Setup</h4>
+    <ul>
+      <li>Dedicated room, ideally with own bathroom. Window fan exhausting OUT creates negative pressure — prevents sick-room air from flowing into rest of house.</li>
+      <li>Single designated caregiver for each entry (highest immunity, willing). Full PPE every time.</li>
+      <li>Separate linens, dishes, waste. Bodily waste: double-bag, seal, dispose far from water sources or burn.</li>
+      <li>Door threshold: wet towel soaked in dilute bleach (1 tsp bleach per gallon water).</li>
+      <li>Communication between sick and caregivers via walkie-talkie or phone — minimize in-person contact.</li>
+    </ul>
+
+    <h3>Improvised PPE Construction</h3>
+    <table>
+      <thead><tr><th>Item</th><th>Improvised Method</th><th>Effectiveness</th></tr></thead>
+      <tbody>
+        <tr><td>Respiratory mask</td><td>3–4 layers tightly woven cotton + 1 layer HEPA vacuum filter material + 1 layer nonwoven fabric. Sew fitted mask with nose wire (twist tie). Must seal to face.</td><td>~70–85% filtration if well-fitted</td></tr>
+        <tr><td>Face shield</td><td>Clear 2L soda bottle cut and shaped; or overhead projector transparency sheet + elastic band stapled to hairband.</td><td>Droplet protection</td></tr>
+        <tr><td>Gloves</td><td>Doubled latex/nitrile preferred. Rubber dish gloves (cleanable between uses). Plastic bags taped at wrist as last resort.</td><td>Barrier; change frequently</td></tr>
+        <tr><td>Gown / coverall</td><td>Large trash bag with arm/head holes, seams taped. Or tightly woven fabric gown washed in hot water between uses.</td><td>Contact barrier</td></tr>
+        <tr><td>Boot covers</td><td>Plastic grocery bags taped over shoes; rubber boots (cleanable).</td><td>Floor contamination barrier</td></tr>
+        <tr><td>Eye protection</td><td>Safety glasses with gaps taped. Swim goggles (excellent seal).</td><td>Splash and droplet protection</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Decontamination Station Layout</h3>
+    <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;background:#070a09;border:1px solid #333;border-radius:8px;display:block;margin:1rem auto;">
+      <text x="340" y="20" text-anchor="middle" fill="#c9a94e" font-size="13" font-weight="bold" font-family="system-ui">Decontamination Station — Entry/Exit Flow</text>
+      <!-- Dirty zone -->
+      <rect x="10" y="40" width="100" height="220" rx="4" fill="#1a0a0a" stroke="#ff4444" stroke-width="2"/>
+      <text x="60" y="62" text-anchor="middle" fill="#ff4444" font-size="11" font-weight="bold" font-family="system-ui">DIRTY</text>
+      <text x="60" y="76" text-anchor="middle" fill="#ff4444" font-size="10" font-family="system-ui">ZONE</text>
+      <text x="60" y="100" text-anchor="middle" fill="#888" font-size="9" font-family="system-ui">Outside /</text>
+      <text x="60" y="112" text-anchor="middle" fill="#888" font-size="9" font-family="system-ui">Sick room</text>
+      <text x="60" y="140" text-anchor="middle" fill="#aaa" font-size="22" font-family="system-ui">⚠</text>
+      <!-- Strip zone -->
+      <rect x="120" y="40" width="100" height="220" rx="4" fill="#1a0f00" stroke="#ff8844" stroke-width="2"/>
+      <text x="170" y="58" text-anchor="middle" fill="#ff8844" font-size="10" font-weight="bold" font-family="system-ui">STRIP ZONE</text>
+      <text x="170" y="74" text-anchor="middle" fill="#888" font-size="8.5" font-family="system-ui">Remove PPE</text>
+      <text x="170" y="87" text-anchor="middle" fill="#888" font-size="8.5" font-family="system-ui">outside → in:</text>
+      <text x="170" y="103" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">1. Boot covers</text>
+      <text x="170" y="116" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">2. Gown (roll out)</text>
+      <text x="170" y="129" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">3. Gloves (peel)</text>
+      <text x="170" y="142" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">4. Hand sanitize</text>
+      <text x="170" y="155" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">5. Face shield</text>
+      <text x="170" y="168" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">6. Mask (by straps)</text>
+      <text x="170" y="181" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">7. Hand sanitize</text>
+      <text x="170" y="200" text-anchor="middle" fill="#666" font-size="7.5" font-family="system-ui">Bag ALL PPE here</text>
+      <!-- Wash zone -->
+      <rect x="230" y="40" width="110" height="220" rx="4" fill="#0a0f1a" stroke="#4494cc" stroke-width="2"/>
+      <text x="285" y="58" text-anchor="middle" fill="#4494cc" font-size="10" font-weight="bold" font-family="system-ui">WASH ZONE</text>
+      <text x="285" y="74" text-anchor="middle" fill="#888" font-size="8.5" font-family="system-ui">Shower or wash:</text>
+      <text x="285" y="90" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">• Soap + water</text>
+      <text x="285" y="103" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">• Shampoo hair</text>
+      <text x="285" y="116" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">• No conditioner</text>
+      <text x="285" y="129" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">• Nasal rinse</text>
+      <text x="285" y="142" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">• Fingernails</text>
+      <text x="285" y="163" text-anchor="middle" fill="#4494cc" font-size="8" font-family="system-ui">Bleach foot bath:</text>
+      <text x="285" y="176" text-anchor="middle" fill="#aaa" font-size="7.5" font-family="system-ui">1:10 dilution tray</text>
+      <text x="285" y="189" text-anchor="middle" fill="#aaa" font-size="7.5" font-family="system-ui">step through before</text>
+      <text x="285" y="202" text-anchor="middle" fill="#aaa" font-size="7.5" font-family="system-ui">exiting this zone</text>
+      <!-- Disinfect zone -->
+      <rect x="350" y="40" width="110" height="220" rx="4" fill="#0d1a0d" stroke="#4a9a4a" stroke-width="2"/>
+      <text x="405" y="55" text-anchor="middle" fill="#4a9a4a" font-size="10" font-weight="bold" font-family="system-ui">DISINFECT</text>
+      <text x="405" y="67" text-anchor="middle" fill="#4a9a4a" font-size="9" font-family="system-ui">ZONE</text>
+      <text x="405" y="86" text-anchor="middle" fill="#888" font-size="8.5" font-family="system-ui">Change into</text>
+      <text x="405" y="99" text-anchor="middle" fill="#888" font-size="8.5" font-family="system-ui">clean stored clothes</text>
+      <text x="405" y="118" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">Surfaces:</text>
+      <text x="405" y="131" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">Bleach 1:10</text>
+      <text x="405" y="144" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">(1 part bleach</text>
+      <text x="405" y="157" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">+ 9 parts water)</text>
+      <text x="405" y="175" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">Skin/hands:</text>
+      <text x="405" y="188" text-anchor="middle" fill="#aaa" font-size="8" font-family="system-ui">70%+ alcohol</text>
+      <!-- Clean zone -->
+      <rect x="470" y="40" width="100" height="220" rx="4" fill="#0a1a0a" stroke="#88cc88" stroke-width="2"/>
+      <text x="520" y="62" text-anchor="middle" fill="#88cc88" font-size="11" font-weight="bold" font-family="system-ui">CLEAN</text>
+      <text x="520" y="76" text-anchor="middle" fill="#88cc88" font-size="10" font-family="system-ui">ZONE</text>
+      <text x="520" y="100" text-anchor="middle" fill="#888" font-size="9" font-family="system-ui">Living space</text>
+      <text x="520" y="113" text-anchor="middle" fill="#888" font-size="9" font-family="system-ui">Food prep</text>
+      <text x="520" y="126" text-anchor="middle" fill="#888" font-size="9" font-family="system-ui">Children</text>
+      <text x="520" y="148" text-anchor="middle" fill="#4a9a4a" font-size="22" font-family="system-ui">✓</text>
+      <!-- Waste zone -->
+      <rect x="580" y="40" width="90" height="220" rx="4" fill="#0a0a1a" stroke="#8844cc" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="625" y="58" text-anchor="middle" fill="#8844cc" font-size="10" font-weight="bold" font-family="system-ui">WASTE</text>
+      <text x="625" y="90" text-anchor="middle" fill="#888" font-size="8" font-family="system-ui">Double-bag</text>
+      <text x="625" y="103" text-anchor="middle" fill="#888" font-size="8" font-family="system-ui">used PPE</text>
+      <text x="625" y="120" text-anchor="middle" fill="#888" font-size="8" font-family="system-ui">Seal and label</text>
+      <text x="625" y="138" text-anchor="middle" fill="#888" font-size="8" font-family="system-ui">Bodily waste:</text>
+      <text x="625" y="151" text-anchor="middle" fill="#888" font-size="8" font-family="system-ui">50m from water</text>
+      <text x="625" y="168" text-anchor="middle" fill="#888" font-size="8" font-family="system-ui">Burn if possible</text>
+      <!-- Arrows between zones -->
+      <polygon points="115,155 125,150 125,160" fill="#ff8844"/>
+      <polygon points="225,155 235,150 235,160" fill="#4494cc"/>
+      <polygon points="345,155 355,150 355,160" fill="#4a9a4a"/>
+      <polygon points="465,155 475,150 475,160" fill="#88cc88"/>
+      <text x="340" y="275" text-anchor="middle" fill="#666" font-size="9" font-family="system-ui">Bleach 1:10 = 1 part bleach + 9 parts water | 70%+ alcohol for skin | Soap + water is primary decontamination</text>
+    </svg>
+
+    <h3>Disinfection Ratios</h3>
+    <table>
+      <thead><tr><th>Use</th><th>Solution</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Hard surfaces (floors, counters, equipment)</td><td>Bleach 1:10 (1 part bleach + 9 parts water)</td><td>Effective in 10–30 min contact time. Prepare fresh daily — degrades quickly.</td></tr>
+        <tr><td>Skin decontamination</td><td>70%+ isopropyl or ethyl alcohol</td><td>Do NOT use bleach on skin — tissue damage and chemical absorption risk.</td></tr>
+        <tr><td>Drinking water (emergency)</td><td>8 drops household bleach per 1 gallon clear water</td><td>Wait 30 min before drinking. For cloudy water, double dose.</td></tr>
+        <tr><td>Bodily fluid spills</td><td>Bleach 1:10; cover with paper towels, apply, wait 10 min, remove</td><td>PPE required for cleanup. Double-bag all materials.</td></tr>
+        <tr><td>Laundry (contaminated)</td><td>Hot water (140°F / 60°C) + detergent</td><td>Wash separately. Hang in direct sunlight to dry (UV kills many pathogens).</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Vector Control (Without Chemicals)</h3>
+    <ul>
+      <li><strong>Mosquitoes:</strong> Eliminate all standing water within 300 feet (buckets, gutters, tarps, tires). Larvae hatch in 7 days. Install bat boxes and dragonfly habitat. Citronella, eucalyptus, and tea tree oil as repellent. Long sleeves and pants at dusk and dawn.</li>
+      <li><strong>Rats:</strong> Eliminate all food sources — sealed containers, no scraps. Hardware cloth (&lt;¼ inch mesh) over any gap in structures. Snap traps are more effective than poison in grid-down (no secondary kill chain, reusable). Barn cats are highly effective long-term.</li>
+      <li><strong>Flies:</strong> Secure all waste and feces. Apply lime to latrines. Mesh screens over food preparation areas. Fly strips from sticky tape coated with sugar water.</li>
+    </ul>
+
+    <!-- ═══ DISEASE TABLE ═══ -->
+    <h2 id="diseases">10. Specific Disease Threats</h2>
+    <table>
+      <thead>
+        <tr><th>Disease</th><th>Transmission</th><th>Incubation</th><th>Recognition</th><th>Intervention</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Influenza</strong></td>
+          <td>Airborne droplets; fomite contact</td>
+          <td>1–4 days</td>
+          <td>Sudden high fever, severe body aches, fatigue, dry cough, respiratory symptoms. Not primarily gastrointestinal ("stomach flu" is a misnomer for influenza).</td>
+          <td>Rest, hydration, fever management. Antivirals (Tamiflu/oseltamivir) effective if given within 48 hrs of symptom onset.</td>
+        </tr>
+        <tr>
+          <td><strong>Cholera</strong></td>
+          <td>Contaminated water and food (fecal-oral). NOT direct person-to-person.</td>
+          <td>Hours to 5 days</td>
+          <td>"Rice water" diarrhea — profuse, watery, whitish appearance. Vomiting. Severe rapid dehydration. Can kill within hours if untreated.</td>
+          <td><strong>ORS is the treatment:</strong> 1L water + 6 tsp sugar + ½ tsp salt. IV fluids for severe cases. Antibiotics shorten duration. Sanitation is prevention.</td>
+        </tr>
+        <tr>
+          <td><strong>Typhoid Fever</strong></td>
+          <td>Fecal-oral: contaminated food/water. Chronic carriers can spread without symptoms.</td>
+          <td>1–3 weeks</td>
+          <td>Prolonged stepwise-increasing fever; "rose spots" on trunk; relative bradycardia (pulse slow relative to fever height); constipation or diarrhea; possible confusion.</td>
+          <td>Fluoroquinolone or chloramphenicol antibiotics. Strict handwashing. Boil all water. Latrine hygiene. Identify and quarantine carriers.</td>
+        </tr>
+        <tr>
+          <td><strong>Plague</strong></td>
+          <td>Flea bites from infected rodents (bubonic). Pneumonic form: airborne person-to-person.</td>
+          <td>2–8 days</td>
+          <td><em>Bubonic:</em> sudden fever + exquisitely tender swollen lymph nodes (buboes) in groin, armpit, or neck. <em>Pneumonic:</em> fever + bloody/frothy cough. <em>Septicemic:</em> rapid organ failure, skin discoloration.</td>
+          <td>Doxycycline or streptomycin CRITICAL within 24 hours of symptom onset. Full respiratory isolation for pneumonic form. Flea + rat control is prevention.</td>
+        </tr>
+        <tr>
+          <td><strong>Smallpox</strong> (recognition only)</td>
+          <td>Airborne and direct contact with lesions or contaminated materials. Extremely contagious.</td>
+          <td>7–19 days</td>
+          <td>High fever 2–4 days → rash appears on face, palms, and soles simultaneously (vs. chickenpox: starts on trunk). ALL lesions at same stage. Lesions are deep, firm, umbilicated (dimpled center). <strong>Smallpox outside a lab = bioterrorism. Report immediately.</strong></td>
+          <td>No civilian treatment. Strict negative-pressure isolation. Vaccinia immune globulin if available. Report to all surviving authorities. Ring vaccination of contacts.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Mass Casualty Triage (Biological)</h3>
+    <table>
+      <thead><tr><th>Priority</th><th>Category</th><th>Criteria</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td style="color:#ff4444">P1 — Immediate</td><td>Can be saved with rapid intervention</td><td>Treatable with available resources; good survival prognosis with care</td><td>Treat first</td></tr>
+        <tr><td style="color:#ffaa44">P2 — Delayed</td><td>Serious but currently stable</td><td>Can wait hours without becoming P1</td><td>Treat after P1</td></tr>
+        <tr><td style="color:#aaaaaa">P3 — Minimal</td><td>Walking wounded; mild illness</td><td>Will survive without immediate care</td><td>Self-care instructions; treat when resources allow</td></tr>
+        <tr><td style="color:#555">P4 — Expectant</td><td>Unlikely to survive with available resources</td><td>Requires resources beyond what's available; very poor prognosis</td><td>Comfort care; do not divert P1/P2 resources</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Burial &amp; Body Handling</h3>
+    <div class="callout callout-amber">
+      <strong>Key Principle:</strong> Bodies from epidemic disease are rarely as contagious as the living sick. The main hazards are GI pathogens (cholera, typhoid) that contaminate water via bodily fluids, and pathogens that remain active post-mortem (Ebola, TB). Panic-driven improper disposal creates more hazard than proper handling.
+    </div>
+    <ul>
+      <li><strong>PPE:</strong> Gloves, mask, and eye protection for all handlers. Minimize contact with bodily fluids.</li>
+      <li><strong>Document:</strong> Record name, approximate time of death, cause if known. Photograph if possible for family notification.</li>
+      <li><strong>Burial site:</strong> Minimum 50 meters from any water source. Minimum 6 feet deep (prevents animal disturbance). Downhill and downwind from camp/living areas.</li>
+      <li><strong>Lime:</strong> Agricultural lime in the grave reduces odor and speeds decomposition; does not reliably kill pathogens but reduces surface environmental burden.</li>
+      <li><strong>Cremation:</strong> Preferred for high-pathogen deaths (hemorrhagic fevers, plague). Requires sustained 1,400°F+. Open-air pyres burn incompletely and may spread aerosols — avoid for suspected bioweapon deaths.</li>
+      <li><strong>Records:</strong> Maintain a death register for eventual family notification and epidemiological tracking.</li>
+    </ul>
+
+    <!-- ═══ CHEMICAL ═══ -->
+    <h2 id="chemical">11. Chemical Threats — Detection</h2>
+
+    <h3>Detection Without Instruments</h3>
+    <ul>
+      <li><strong>Pattern of casualties:</strong> Multiple people rapidly incapacitated with similar symptoms in the same location, especially outdoors with no obvious medical cause.</li>
+      <li><strong>Dead animals:</strong> Birds, insects, and small animals down near the scene before humans are affected.</li>
+      <li><strong>Visible indicators:</strong> Oily liquid droplets on surfaces, white or yellow cloud at ground level, unusual puddles with oily sheen, dead vegetation in a pattern.</li>
+      <li><strong>Smell indicators:</strong> Bitter almonds / peach pits (HCN blood agent), bleach/chlorine (choking agents), newly mown hay / freshly cut grass (phosgene), garlic/mustard (blister agents). Note: sarin nerve agent is nearly odorless — never rely on smell alone.</li>
+      <li><strong>Physical sensations:</strong> Unexplained eye irritation, chest tightening, excessive saliva or tearing, miosis (pinpoint pupils), muscle twitching.</li>
+      <li><strong>NEVER deliberately smell to investigate.</strong> A brief involuntary exposure is already significant.</li>
+    </ul>
+
+    <!-- ═══ AGENTS ═══ -->
+    <h2 id="agents">12. Chemical Agent Quick Reference</h2>
+
+    <h3>Nerve Agents — SLUDGE Mnemonic</h3>
+    <p class="sludge"><span>S</span>alivation &nbsp;|&nbsp; <span>L</span>acrimation (tearing) &nbsp;|&nbsp; <span>U</span>rination &nbsp;|&nbsp; <span>D</span>efecation &nbsp;|&nbsp; <span>G</span>I distress &nbsp;|&nbsp; <span>E</span>mesis (vomiting)</p>
+    <p>Also: <strong>miosis</strong> (pinpoint pupils), <strong>bronchospasm</strong> (wheezing, extreme difficulty breathing), <strong>muscle twitching progressing to seizures</strong>. Death from respiratory failure and asphyxia.</p>
+    <p><strong>Treatment:</strong> Atropine + Pralidoxime (2-PAM) auto-injectors. Without antidote: remove from exposure, fresh air, airway management. Pralidoxime must be given within minutes for fast-acting agents like sarin — delays render it ineffective.</p>
+
+    <table>
+      <thead><tr><th>Class</th><th>Examples</th><th>Appearance / Smell</th><th>Key Symptoms</th><th>Primary Response</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Nerve</strong></td>
+          <td>Sarin (GB), VX, Tabun (GA), Novichok</td>
+          <td>Colorless/odorless (sarin) or oily/garlic (VX)</td>
+          <td>SLUDGE + seizures + pinpoint pupils; rapid progression</td>
+          <td>Evacuate; fresh air; atropine + 2-PAM; decontaminate skin</td>
+        </tr>
+        <tr>
+          <td><strong>Blister (Vesicants)</strong></td>
+          <td>Mustard (HD), Lewisite, Phosgene oxime</td>
+          <td>Oily liquid; garlic/mustard smell; 4–8 hr latency before symptoms (mustard)</td>
+          <td>Blistering skin, eyes, airways; delayed — may feel fine initially then deteriorate rapidly</td>
+          <td>Decontaminate immediately (blot, don't rub); flush eyes; no antidote for mustard; BAL (British Anti-Lewisite) for lewisite</td>
+        </tr>
+        <tr>
+          <td><strong>Blood (Cyanides)</strong></td>
+          <td>Hydrogen cyanide (HCN), Cyanogen chloride</td>
+          <td>Colorless gas; bitter almonds (30–40% of people cannot detect this smell)</td>
+          <td>Rapid unconsciousness, seizures; bright red venous blood; gasping; rapid death</td>
+          <td>Fresh air; amyl nitrite (poppers) inhaled briefly; hydroxocobalamin (Cyanokit) or sodium thiosulfate IV if available</td>
+        </tr>
+        <tr>
+          <td><strong>Choking (Pulmonary)</strong></td>
+          <td>Chlorine, Phosgene, Diphosgene</td>
+          <td>Yellow-green cloud (chlorine); newly mown hay (phosgene); heavier than air — settles low</td>
+          <td>Initial eye/throat irritation; hours later: pulmonary edema (drowning in own fluid). Phosgene: 4–24 hr delayed onset.</td>
+          <td>Evacuate upwind AND uphill; fresh air; strict rest (exertion worsens edema); supportive care; no antidote</td>
+        </tr>
+        <tr>
+          <td><strong>Riot Control</strong></td>
+          <td>CS gas, OC (pepper spray), CN gas</td>
+          <td>White/gray cloud; acrid smell; immediate irritation</td>
+          <td>Eye burning, tearing, coughing, temporary blindness; not lethal in open air</td>
+          <td>Fresh air; copious water flush; serious medical concerns only in enclosed spaces or pre-existing lung disease</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Industrial Chemical Hazards</h3>
+    <p>Many industrial chemicals found near factories, agriculture operations, and utilities pose hazards equivalent to weaponized agents. Know what's within 5 miles of your location.</p>
+    <ul>
+      <li><strong>Chlorine:</strong> Water treatment, pool supplies, manufacturing. Yellow-green cloud. Heavier than air — fills basements and low areas. Move upwind and uphill.</li>
+      <li><strong>Ammonia:</strong> Cold storage, fertilizer, manufacturing. Lighter than air. Severely burns lungs and eyes. Extremely pungent smell. Large volume water dilution for skin contact.</li>
+      <li><strong>Anhydrous Ammonia:</strong> Agriculture (fertilizer injection). Cryogenic exposure causes instant frostbite + severe respiratory damage. Extremely hazardous to handle.</li>
+      <li><strong>Hydrogen Sulfide (H₂S):</strong> Sewers, manure pits, natural gas, oil refineries. Rotten egg smell at low concentrations — HIGH concentrations paralyze smell receptors and you cannot detect it. IDLH: 50 ppm. Lethal rapidly above 300 ppm.</li>
+      <li><strong>Carbon Monoxide:</strong> Generator exhaust, house fires, incomplete combustion. Colorless and odorless. Headache → confusion → unconsciousness. Treatment: fresh air; pure oxygen if available. Never run generators indoors.</li>
+    </ul>
+
+    <!-- ═══ DECON ═══ -->
+    <h2 id="decon">13. Universal Decontamination Principles</h2>
+
+    <div class="callout callout-amber">
+      <strong>The 80% Rule:</strong> Removing outer clothing and shoes eliminates approximately 80% of external chemical, biological, and radiological contamination. Do this first, before anything else, and do it OUTSIDE before entering any shelter. This single action saves more lives than any other decontamination step.
+    </div>
+
+    <h3>Chemical Decontamination Sequence</h3>
+    <ol>
+      <li><strong>Strip outer clothing</strong> — cut off rather than pull over head to avoid re-contaminating face. Bag and seal immediately.</li>
+      <li><strong>Blot (do not rub or scrub)</strong> — for liquid agents, blot off skin with dry absorbent material (paper towels, cloth, flour, cornstarch, or dry dirt). Rubbing drives agent deeper into skin.</li>
+      <li><strong>Flush with large volumes of water</strong> — minimum 10–15 minutes for skin; 15+ minutes for eyes. Tilt head toward affected eye to avoid cross-contamination.</li>
+      <li><strong>Soap and water wash</strong> — after the initial dilution flush, gentle washing with soap.</li>
+      <li><strong>Do NOT use bleach on skin</strong> — bleach can react dangerously with some agents and severely damages tissue.</li>
+    </ol>
+
+    <h3>Shelter-in-Place for Chemical Events</h3>
+    <ul>
+      <li>Close all windows, doors, fireplace dampers, HVAC vents. Switch off all HVAC.</li>
+      <li>Go to the highest floor available — most chemical agents are heavier than air and settle low.</li>
+      <li>Seal gaps under doors and around windows with wet towels or tape.</li>
+      <li>If caught outside: move upwind (wind at your back) AND uphill (agents pool in depressions and valleys).</li>
+      <li>Improvised respiratory protection: multiple layers of damp cloth provide minutes of protection against chlorine and some irritants — NOT effective against nerve agents.</li>
+      <li>Shelter-in-place is effective for 2–4 hours for most industrial spills. After that, agent concentration inside the structure may exceed outside. Monitor emergency broadcasts; evacuate if directed.</li>
+    </ul>
+
+    <div class="callout callout-amber">
+      <strong>Case Study — Bhopal 1984:</strong> Union Carbide plant released 40 tons of methyl isocyanate (MIC) over Bhopal, India. Estimated 3,800–15,000 deaths. MIC is heavier than air — victims in low-lying areas died at higher rates. People who ran through the cloud (increasing respiration rate and total agent inhaled) died at higher rates than those who sheltered in place and covered faces. Lesson: for chemical vapor clouds, shelter-in-place and minimize breathing rate is often safer than attempting to run through the plume.
+    </div>
+
+    <div class="nav-buttons">
+      <a href="../index.html" class="btn-nav">← Home</a>
+      <a href="disasters.html" class="btn-nav">Disasters →</a>
+    </div>
+
+    <div class="callout callout-amber" style="margin-top:2rem;">
+      <strong>Cross-References:</strong>
+      <a href="medicine.html">Medical Care</a> —
+      <a href="disasters.html">Disaster Response</a> —
+      <a href="../tools.html">Calculators &amp; Tools</a> —
+      <a href="../literature.html">Reference Library</a>
+    </div>
+
+    <nav class="section-pagination no-print" aria-label="Section navigation">
+      <a href="animal.html" class="pagination-btn pagination-prev">← Animal Husbandry</a>
+      <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+      <a href="disasters.html" class="pagination-btn pagination-next">Disasters →</a>
+    </nav>
+  </main>
+
+  <aside id="aria-panel">
+    <div class="aria-header">
+      <span class="status-dot"></span>
+      <span class="aria-status-label">Bunker Bot</span>
+      <span id="aria-model-badge">offline</span>
+      <button id="aria-close">✕</button>
+    </div>
+    <div id="aria-messages"></div>
+    <div class="aria-input-row">
+      <input type="text" id="aria-input" placeholder="Ask ARIA...">
+      <button id="aria-send">Send</button>
+    </div>
+  </aside>
+
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/aria.js"></script>
+</body>
+</html>

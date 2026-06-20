@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Governance — The Last Light Survival Guide</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .gov-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
+    .gov-nav a { background: var(--bg-1); border: 1px solid #5c4a1e; color: var(--amber); padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-size: 0.85em; }
+    .gov-nav a:hover { background: var(--amber); color: var(--bg-0); }
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .role-card { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 6px; padding: 0.85rem; }
+    .role-card h4 { color: var(--amber); margin: 0 0 0.4rem; font-size: 0.9em; }
+    .role-card p { font-size: 0.82em; color: #bbb; margin: 0; }
+    .model-card { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 6px; padding: 1rem; margin: 0.75rem 0; }
+    .model-card h4 { color: var(--amber); margin: 0 0 0.5rem; }
+    .template-box { background: #050805; border: 1px solid #c9a94e; border-radius: 6px; padding: 1.2rem; margin: 1rem 0; }
+    .template-box h3 { color: var(--amber); margin: 0 0 0.75rem; font-size: 1em; }
+    .template-line { border-bottom: 1px solid #2a2a2a; padding: 0.35rem 0; font-size: 0.85em; color: #888; }
+    .template-line span { color: #aaa; }
+    .warning-sign { border-left: 3px solid #ff4444; padding: 0.4rem 0.8rem; background: #1a0a0a; margin: 0.4rem 0; font-size: 0.88em; }
+    .good-sign { border-left: 3px solid #4a9; padding: 0.4rem 0.8rem; background: #0a1a10; margin: 0.4rem 0; font-size: 0.88em; }
+    .dunbar-bar { display: flex; align-items: center; gap: 0.75rem; margin: 0.5rem 0; }
+    .dunbar-fill { height: 18px; background: linear-gradient(90deg, var(--amber) 0%, #5c4a1e 100%); border-radius: 3px; min-width: 4px; }
+    .dunbar-label { font-size: 0.85em; color: #bbb; white-space: nowrap; }
+    .dunbar-num { font-size: 0.85em; color: var(--amber); font-weight: 600; min-width: 40px; }
+    @media print {
+      #sidebar, #aria-panel, .nav-buttons, .gov-nav { display: none !important; }
+      .template-box { break-inside: avoid; }
+      body { background: #fff !important; color: #000 !important; }
+      main { margin: 0 !important; padding: 1rem !important; }
+      .template-line { border-bottom: 1px solid #999; color: #333; }
+      .template-line span { color: #000; }
+      .template-box { border: 1px solid #999; background: #fff; }
+      h1, h2, h3, h4 { color: #000 !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="sidebar"><div id="nav-logo"><span>&#9762;</span> Last Light</div><div id="nav-links"></div></nav>
+  <main id="main-content">
+    <div id="breadcrumb"><a href="../index.html">Home</a> › Community Governance</div>
+
+    <header class="section-header">
+      <div class="section-badges">
+        <span class="badge badge-danger">CRITICAL</span>
+        <span class="badge">Group Size: 5–500</span>
+        <span class="badge">Long-term</span>
+      </div>
+      <h1>Community Organization &amp; Governance</h1>
+      <p class="section-subtitle">How to form, organize, govern, and sustain a community through extended crisis. Includes printable templates for charters, skill inventories, and trade ledgers.</p>
+    </header>
+
+    <div class="callout callout-red">
+      <strong>Day One Priorities — Before Anything Else:</strong>
+      <ol style="margin:0.5rem 0 0; padding-left:1.2rem;">
+        <li>Establish who makes decisions in an emergency (single leader or small council) — ambiguity in crisis = paralysis or conflict</li>
+        <li>Agree on and write down 5–10 non-negotiable rules that apply to everyone including leaders</li>
+        <li>Conduct a skill inventory of everyone present (use template at bottom of this page)</li>
+        <li>Assign minimum roles: medical, security, food/water, communications</li>
+        <li>Establish a daily group meeting time — even 15 minutes prevents information asymmetry</li>
+      </ol>
+    </div>
+
+    <nav class="gov-nav">
+      <a href="#forming">Forming a Group</a>
+      <a href="#roles">Critical Roles</a>
+      <a href="#vetting">Vetting Strangers</a>
+      <a href="#governance">Governance Models</a>
+      <a href="#tyranny">Tyranny Warning Signs</a>
+      <a href="#justice">Laws &amp; Justice</a>
+      <a href="#property">Property Rights</a>
+      <a href="#trade">Trade &amp; Economics</a>
+      <a href="#outsiders">Integrating Outsiders</a>
+      <a href="#records">Record Keeping</a>
+      <a href="#templates">Templates</a>
+    </nav>
+
+    <!-- ═══ FORMING A GROUP ═══ -->
+    <h2 id="forming">1. Forming a Group</h2>
+
+    <h3>Optimal Group Size — What the Research Shows</h3>
+    <p>Group size is not arbitrary — it has profound effects on trust, communication overhead, decision speed, and social cohesion. The research converges on natural size thresholds:</p>
+
+    <div style="max-width:480px;margin:1rem 0;">
+      <div class="dunbar-bar">
+        <div class="dunbar-num">5</div>
+        <div class="dunbar-fill" style="width:5%"></div>
+        <div class="dunbar-label">Support clique (close confidants)</div>
+      </div>
+      <div class="dunbar-bar">
+        <div class="dunbar-num">15</div>
+        <div class="dunbar-fill" style="width:15%"></div>
+        <div class="dunbar-label">Sympathy group (genuine trust)</div>
+      </div>
+      <div class="dunbar-bar">
+        <div class="dunbar-num">50</div>
+        <div class="dunbar-fill" style="width:50%"></div>
+        <div class="dunbar-label">Military unit / hunting band (functional team)</div>
+      </div>
+      <div class="dunbar-bar">
+        <div class="dunbar-num">150</div>
+        <div class="dunbar-fill" style="width:100%"></div>
+        <div class="dunbar-label">Dunbar's Number — maximum stable social group without formal hierarchy</div>
+      </div>
+      <div class="dunbar-bar">
+        <div class="dunbar-num">500</div>
+        <div class="dunbar-fill" style="width:100%;background:linear-gradient(90deg,#8b0000,#3a0000)"></div>
+        <div class="dunbar-label">Village / tribe — requires formal laws and governance structures</div>
+      </div>
+    </div>
+
+    <table>
+      <thead><tr><th>Group Size</th><th>Governance Needed</th><th>Historical Parallel</th><th>Key Challenge</th></tr></thead>
+      <tbody>
+        <tr><td>2–10</td><td>Informal consensus; one trusted leader for emergencies</td><td>Nuclear family, small team</td><td>Resource pooling, avoiding cliques</td></tr>
+        <tr><td>10–50</td><td>Council of 3–5; clear role assignments; weekly meetings</td><td>Military squad/platoon, Viking ship crew</td><td>Equitable labor distribution, free rider problem</td></tr>
+        <tr><td>50–150</td><td>Formal council, written rules, defined roles, property system</td><td>Medieval village, kibbutz founding</td><td>Sub-group formation, rumor management</td></tr>
+        <tr><td>150–500</td><td>Representative democracy or meritocracy; written law; judiciary function</td><td>Early New England town, Althing Iceland</td><td>Corruption, rule of law enforcement</td></tr>
+        <tr><td>500+</td><td>Full government structure; professional roles; taxation/resource allocation</td><td>Small city-state, frontier town</td><td>Legitimacy, defense, inter-group trade</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-amber">
+      <strong>The Free Rider Problem:</strong> In any group above 10 people, some individuals will consume resources without contributing proportionally. This is not laziness — it is a predictable social behavior documented across every human culture. Your governance system MUST account for it explicitly or resentment will fracture the group within weeks.
+    </div>
+
+    <!-- ═══ CRITICAL ROLES ═══ -->
+    <h2 id="roles">2. Critical Roles Every Group Needs</h2>
+    <p>Assign these roles on Day One. One person can hold multiple roles in small groups. Write down the current role holder and at least one backup for each.</p>
+
+    <div class="role-grid">
+      <div class="role-card">
+        <h4>Medical Officer</h4>
+        <p>Triage, wound care, medication management, disease surveillance, quarantine decisions. Backup is mandatory — the medic will become ill too. Highest priority skill for recruiting.</p>
+      </div>
+      <div class="role-card">
+        <h4>Security Lead</h4>
+        <p>Perimeter watch scheduling, threat assessment, patrol coordination, weapons discipline, incident response. Must have clear authority in immediate threat situations — committees don't work under fire.</p>
+      </div>
+      <div class="role-card">
+        <h4>Logistics</h4>
+        <p>Supply inventory, consumption tracking, scavenging coordination, tool maintenance, resource allocation. Must be trusted by everyone — controls access to food, water, and medical supplies.</p>
+      </div>
+      <div class="role-card">
+        <h4>Communications</h4>
+        <p>Radio operation, information gathering, external contact management, intelligence assessment. Controls what information enters and leaves the group — position of significant power.</p>
+      </div>
+      <div class="role-card">
+        <h4>Agriculture Lead</h4>
+        <p>Food production planning, planting calendar, soil management, water systems, animal husbandry. The most important long-term role; undervalued in crisis's first weeks, critical from month 2 onward.</p>
+      </div>
+      <div class="role-card">
+        <h4>Council Lead / Facilitator</h4>
+        <p>Meeting facilitation, dispute escalation point, external negotiations, charter enforcement. Not necessarily the "leader" in the military sense — the role is procedural, not hierarchical.</p>
+      </div>
+      <div class="role-card">
+        <h4>Education / Records</h4>
+        <p>Children's schooling, knowledge documentation, library management, skill training coordination. Often neglected; critical for multi-year sustainability and morale.</p>
+      </div>
+      <div class="role-card">
+        <h4>Construction / Engineering</h4>
+        <p>Shelter repair, infrastructure, tools, mechanical repair, sanitation systems. Irreplaceable during the first winter. Identify all mechanical aptitudes in skill inventory.</p>
+      </div>
+    </div>
+
+    <!-- ═══ VETTING STRANGERS ═══ -->
+    <h2 id="vetting">3. Vetting Strangers — Trust-Building Protocol</h2>
+
+    <h3>The Fundamental Tension</h3>
+    <p>Two real facts exist simultaneously: (1) Every group of survivors needs more skilled people; (2) A bad actor inside the perimeter is more dangerous than 10 outside it. Your vetting protocol must balance genuine hospitality with reasonable security. Blanket refusal of all strangers is short-sighted; blanket acceptance is reckless.</p>
+
+    <h3>Arrival Protocol</h3>
+    <ol>
+      <li><strong>Initial contact at distance</strong> — have one greeter with visual backup (security not visible to newcomer). Observe clothing, body language, direction of approach, who/what is behind them. They may be a scout.</li>
+      <li><strong>Brief interview outside perimeter</strong> — name, where they came from, who they were with, what happened. Note inconsistencies in the story. Offer water (observe how they handle it — is it for themselves or children first?). Listen more than you talk.</li>
+      <li><strong>Decision: turn away, observe hold, or provisional admission</strong> — turn away if obvious threat indicators; put into observe hold (separate shelter, no internal access) for 24–72 hours minimum; provisional admission with escort for assessed low-risk individuals with strong skills.</li>
+      <li><strong>Observe hold</strong> — separate from main group. Provide food and water. Rotate who interacts with them — inconsistency in stories emerges over time. Observe how they treat the animals, children, and lower-status group members.</li>
+      <li><strong>Probationary membership</strong> — if admitted after observe hold, 30-day probationary period with no access to supply storage, weapons cache, or sensitive group information (secondary location, radio codes, route plans).</li>
+      <li><strong>Full membership</strong> — full council vote after probationary period. No single person can grant full membership.</li>
+    </ol>
+
+    <h3>Information Compartmentalization</h3>
+    <ul>
+      <li><strong>Tier 1 (public knowledge):</strong> That you exist, approximate location, willingness to trade</li>
+      <li><strong>Tier 2 (provisional member access):</strong> Internal rules, basic resource levels, daily schedule</li>
+      <li><strong>Tier 3 (full member only):</strong> Secondary locations, supply quantities, radio frequencies, security patrol schedule, defense capabilities</li>
+      <li>Rule: never reveal Tier 3 to anyone who hasn't completed probation. Ever. The information doesn't become safe just because you like someone.</li>
+    </ul>
+
+    <h3>Non-Negotiable Day-One Rules</h3>
+    <p>Write these down and have everyone sign or thumb-print them within 24 hours of group formation:</p>
+    <ol>
+      <li><strong>No violence against group members.</strong> Any physical assault (except in self-defense against immediate attack) triggers mandatory council review with exile as the possible outcome.</li>
+      <li><strong>No theft from group stores.</strong> Discovery triggers mandatory council review. Second offense = exile.</li>
+      <li><strong>No rape or sexual assault.</strong> Exile on first finding. No exceptions, no probation.</li>
+      <li><strong>No unilateral decisions that affect the whole group.</strong> Any action with group-wide consequences requires council notification before execution if time allows, or immediate reporting if not.</li>
+      <li><strong>Everyone contributes to essential work.</strong> No exceptions for status, age (within reason), or prior social position. Work assignments are posted and tracked.</li>
+      <li><strong>Medical resources are allocated by medical officer, not by social position.</strong> The medic's triage decisions are final in medical emergencies.</li>
+      <li><strong>Truth-telling.</strong> Deliberate deception of the group on matters affecting security, health, or resources is grounds for exile review.</li>
+      <li><strong>Security protocol compliance.</strong> Security lead's decisions during a threat are immediate orders, not suggestions.</li>
+      <li><strong>Child protection.</strong> All children are under community protection regardless of parentage.</li>
+      <li><strong>No hoarding.</strong> Private stores must be declared to logistics; exception: a personal small reserve (defined by council) is permitted.</li>
+    </ol>
+
+    <!-- ═══ GOVERNANCE MODELS ═══ -->
+    <h2 id="governance">4. Governance Models</h2>
+
+    <div class="model-card">
+      <h4>Council Model</h4>
+      <p><strong>Best for:</strong> Groups of 15–150 where diverse skill domains require represented input.</p>
+      <p><strong>Structure:</strong> 3–7 members elected or selected by role (medical lead, security lead, logistics, agriculture, and 1–2 at-large). Rotating chair. Decisions by majority vote; supermajority (2/3) required for exile, charter amendment, or major resource reallocation.</p>
+      <p><strong>Quorum:</strong> Minimum 3 members or 60% of council, whichever is higher, for binding decisions.</p>
+      <p><strong>Veto:</strong> Medical officer has veto on health-related decisions. Security lead has veto on immediate tactical decisions. Veto can be overridden by unanimous remaining council vote.</p>
+      <p><strong>Historical examples:</strong> Swiss Landsgemeinde (open-air assembly voting), medieval English village manor courts, New England town meetings.</p>
+    </div>
+
+    <div class="model-card">
+      <h4>Meritocracy / Domain Authority Model</h4>
+      <p><strong>Best for:</strong> Small groups (5–30) with clear skill differentiation where speed of decision matters.</p>
+      <p><strong>Structure:</strong> Each domain leader has full authority within their domain. Medical officer controls all medical decisions. Security lead controls all security operations. Agriculture lead controls planting and harvest decisions. Council convenes only for cross-domain decisions and disputes.</p>
+      <p><strong>Risk:</strong> Domain leaders can become de facto autocrats. Mitigate with mandatory cross-domain consultation for decisions affecting resources above a defined threshold (e.g., any decision affecting more than 20% of a category of supplies requires council input).</p>
+    </div>
+
+    <div class="model-card">
+      <h4>Hybrid Model (Recommended)</h4>
+      <p><strong>Best for:</strong> Most groups; adapts to size changes.</p>
+      <p><strong>Structure:</strong> Domain meritocracy for day-to-day operations. Council for strategic decisions (resource allocation, membership, charter). Emergency executive authority vested in single leader (rotate monthly or elect term) for immediate-threat scenarios only, automatically reverts to council within 48 hours. Written procedure for when emergency executive authority activates — never leave this undefined.</p>
+    </div>
+
+    <h3>Scaling by Group Size</h3>
+    <table>
+      <thead><tr><th>Size</th><th>Model</th><th>Meeting Frequency</th><th>Key Structure</th></tr></thead>
+      <tbody>
+        <tr><td>2–10</td><td>Informal consensus</td><td>Daily brief; as-needed for decisions</td><td>Designated emergency decision maker; no formal council needed yet</td></tr>
+        <tr><td>10–50</td><td>Hybrid: domain leads + small council (3)</td><td>Weekly formal + daily brief</td><td>Written rules, posted work assignments, weekly resource report</td></tr>
+        <tr><td>50–150</td><td>Council (5–7) with domain leads</td><td>Biweekly formal + weekly brief</td><td>Written charter, formal membership, property registry, trade ledger</td></tr>
+        <tr><td>150–500</td><td>Representative council + judiciary</td><td>Monthly assembly + weekly council</td><td>Sub-neighborhood organization, professional roles, labor taxation</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Historical Models Worth Studying</h3>
+    <table>
+      <thead><tr><th>Model</th><th>Origin</th><th>What It Got Right</th><th>What Failed</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Althing (Iceland, 930 AD)</strong></td><td>Norse settlers; 930 CE</td><td>Open assembly where any free man could speak; no king; consensus-building over coercion; lasted 300+ years</td><td>No enforcement mechanism — powerful clans ignored judgments</td></tr>
+        <tr><td><strong>Iroquois Confederacy</strong></td><td>Northeast North America, pre-1500</td><td>Consensus requirement for major decisions; women held veto power; clear confederation structure allowing local autonomy; influenced US Constitution</td><td>Confederation structure collapsed under external colonial pressure</td></tr>
+        <tr><td><strong>Swiss Landsgemeinde</strong></td><td>Switzerland, 13th century+</td><td>Open-air direct democracy; still functional in two Swiss cantons today; extraordinary longevity; very high legitimacy because every adult participates directly</td><td>Difficult to scale beyond small communities; mob dynamics risk</td></tr>
+        <tr><td><strong>Kibbutz Model</strong></td><td>Israel, early 20th century</td><td>Complete economic equality; communal child-rearing; demonstrated sustained viability; peak period produced extraordinary agricultural and cultural output</td><td>Second-generation member retention; burnout from mandatory communal labor; evolved into less radical forms by 1980s</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ═══ TYRANNY WARNING SIGNS ═══ -->
+    <h2 id="tyranny">5. Warning Signs of Emerging Tyranny</h2>
+    <p>Groups that survive the initial crisis often fail 6–18 months later when a capable, charismatic leader consolidates power. Recognize these patterns early — they become nearly impossible to reverse after 6 months of entrenchment.</p>
+
+    <div class="warning-sign"><strong>Information control:</strong> Leader or inner circle is the only source of outside information. Radio communications are managed exclusively by one person who summarizes rather than shares raw content.</div>
+    <div class="warning-sign"><strong>Appointment creep:</strong> Roles that were supposed to rotate are "too important to change right now." The leader has been in place for multiple full terms without rotation.</div>
+    <div class="warning-sign"><strong>Selective enforcement:</strong> Rules apply differently to the leader's allies than to others. Infractions by inner circle members are quietly handled "internally."</div>
+    <div class="warning-sign"><strong>Resource asymmetry:</strong> The leader or council members eat better, sleep better, or work less than average members, beyond reasonable differences for essential role performance.</div>
+    <div class="warning-sign"><strong>Criticism suppression:</strong> People report hesitation to raise concerns in public meetings. Criticism of the leader is reframed as "morale threat" or "security risk."</div>
+    <div class="warning-sign"><strong>Preemptive loyalty tests:</strong> Members are asked to demonstrate loyalty before receiving information or resources. Informers are rewarded.</div>
+    <div class="warning-sign"><strong>Security force loyalty:</strong> Security personnel are selected for personal loyalty to the leader rather than competence, and their conduct is held to different standards.</div>
+
+    <div class="good-sign"><strong>Healthy sign:</strong> Leader is the first to acknowledge their own errors publicly.</div>
+    <div class="good-sign"><strong>Healthy sign:</strong> Any member can request a council session to raise grievances without retaliation.</div>
+    <div class="good-sign"><strong>Healthy sign:</strong> Decisions are explained with reasoning, not just issued as commands.</div>
+    <div class="good-sign"><strong>Healthy sign:</strong> Leaders rotate or face periodic votes of confidence on schedule.</div>
+
+    <h3>Recall &amp; Removal Mechanisms</h3>
+    <p>Write these procedures into your charter BEFORE you need them:</p>
+    <ol>
+      <li><strong>Petition:</strong> Any member can initiate a recall petition. Petition requires 20% of full members to sign to trigger a review hearing.</li>
+      <li><strong>Review hearing:</strong> Conducted by all council members except the subject. Subject presents their case. Witnesses may speak. Confidential vote.</li>
+      <li><strong>Removal threshold:</strong> 2/3 supermajority of council removes from role. Role reverts to interim appointment or new election.</li>
+      <li><strong>Emergency removal:</strong> If council determines an active, imminent threat from leader, temporary suspension pending full hearing — by unanimous vote of remaining council members.</li>
+      <li><strong>Succession procedure:</strong> Immediately after removal, the remaining council appoints an interim role-holder using established succession order (written in charter).</li>
+    </ol>
+
+    <!-- ═══ LAWS & JUSTICE ═══ -->
+    <h2 id="justice">6. Laws &amp; Justice</h2>
+
+    <h3>Conflict Resolution — Mediation Before Judgment</h3>
+    <p>Most disputes can be resolved without formal judgment. Reserve the formal process for failures of mediation. Sequence:</p>
+    <ol>
+      <li><strong>Direct resolution</strong> — parties attempt to resolve themselves within 24 hours</li>
+      <li><strong>Mediation</strong> — neutral third party (not in dispute, not a close ally of either party) facilitates a structured conversation: each party states their position; mediator restates it back; parties identify shared interests; propose solutions; agree or not</li>
+      <li><strong>Council review</strong> — if mediation fails, council hears the case within 3 days. Both parties present. Witnesses may speak. Council deliberates privately. Renders a decision with written reasoning.</li>
+      <li><strong>Appeal</strong> — one appeal permitted. Requires new information not presented at original hearing. Heard by full group meeting if council cannot reach agreement.</li>
+    </ol>
+
+    <figure class="svg-diagram" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1.5rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
+      <svg viewBox="0 0 560 520" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="conflict-flow-title">
+        <title id="conflict-flow-title">Community Conflict Resolution Flowchart</title>
+        <desc>Flowchart showing the four-step community conflict resolution process: direct resolution, mediation, council review, and appeal or community vote.</desc>
+        <defs>
+          <marker id="cf-arr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c9a94e"/></marker>
+          <marker id="cf-grn" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4b9e6a"/></marker>
+          <marker id="cf-red" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c84848"/></marker>
+        </defs>
+        <!-- START -->
+        <rect x="170" y="10" width="220" height="40" rx="20" fill="#243028" stroke="#c9a94e" stroke-width="2"/>
+        <text x="280" y="25" text-anchor="middle" font-size="12" fill="#c9a94e" font-family="sans-serif" font-weight="700">CONFLICT REPORTED</text>
+        <text x="280" y="41" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">Document in writing; notify both parties</text>
+        <!-- Arrow -->
+        <line x1="280" y1="50" x2="280" y2="74" stroke="#c9a94e" stroke-width="2" marker-end="url(#cf-arr)"/>
+        <!-- STEP 1 -->
+        <rect x="130" y="74" width="300" height="52" rx="6" fill="#182016" stroke="#4a80b5" stroke-width="1.5"/>
+        <text x="280" y="92" text-anchor="middle" font-size="11" fill="#eceee0" font-family="sans-serif" font-weight="700">STEP 1: Direct Resolution</text>
+        <text x="280" y="107" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">Parties attempt to resolve privately — 24 hours</text>
+        <text x="280" y="120" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">If children/danger involved, skip to Step 3</text>
+        <!-- Diamond -->
+        <line x1="280" y1="126" x2="280" y2="148" stroke="#c9a94e" stroke-width="2" marker-end="url(#cf-arr)"/>
+        <polygon points="280,148 360,180 280,212 200,180" fill="#182016" stroke="#c9a94e" stroke-width="1.5"/>
+        <text x="280" y="176" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">Resolved?</text>
+        <text x="280" y="190" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(both parties agree)</text>
+        <!-- YES right -->
+        <line x1="360" y1="180" x2="470" y2="180" stroke="#4b9e6a" stroke-width="2" marker-end="url(#cf-grn)"/>
+        <text x="415" y="173" text-anchor="middle" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">YES</text>
+        <rect x="470" y="162" width="84" height="36" rx="5" fill="#2a5a3c" stroke="#4b9e6a" stroke-width="1.5"/>
+        <text x="512" y="177" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">RESOLVED</text>
+        <text x="512" y="191" text-anchor="middle" font-size="9" fill="#eceee0" font-family="sans-serif">Document</text>
+        <!-- NO down -->
+        <line x1="280" y1="212" x2="280" y2="236" stroke="#c9a94e" stroke-width="2" marker-end="url(#cf-arr)"/>
+        <text x="294" y="228" font-size="10" fill="#c84848" font-family="sans-serif" font-weight="700">NO</text>
+        <!-- STEP 2 -->
+        <rect x="130" y="236" width="300" height="52" rx="6" fill="#182016" stroke="#4a80b5" stroke-width="1.5"/>
+        <text x="280" y="254" text-anchor="middle" font-size="11" fill="#eceee0" font-family="sans-serif" font-weight="700">STEP 2: Mediation</text>
+        <text x="280" y="269" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">Neutral mediator — neither party's ally</text>
+        <text x="280" y="282" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">Structured session: state positions → find shared interest → agree</text>
+        <!-- Diamond -->
+        <line x1="280" y1="288" x2="280" y2="310" stroke="#c9a94e" stroke-width="2" marker-end="url(#cf-arr)"/>
+        <polygon points="280,310 360,342 280,374 200,342" fill="#182016" stroke="#c9a94e" stroke-width="1.5"/>
+        <text x="280" y="338" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">Resolved?</text>
+        <text x="280" y="352" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(binding agreement?)</text>
+        <!-- YES right -->
+        <line x1="360" y1="342" x2="470" y2="342" stroke="#4b9e6a" stroke-width="2" marker-end="url(#cf-grn)"/>
+        <text x="415" y="335" text-anchor="middle" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">YES</text>
+        <rect x="470" y="324" width="84" height="36" rx="5" fill="#2a5a3c" stroke="#4b9e6a" stroke-width="1.5"/>
+        <text x="512" y="339" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">RESOLVED</text>
+        <text x="512" y="353" text-anchor="middle" font-size="9" fill="#eceee0" font-family="sans-serif">+ Written record</text>
+        <!-- NO down -->
+        <line x1="280" y1="374" x2="280" y2="398" stroke="#c9a94e" stroke-width="2" marker-end="url(#cf-arr)"/>
+        <text x="294" y="390" font-size="10" fill="#c84848" font-family="sans-serif" font-weight="700">NO</text>
+        <!-- STEP 3 -->
+        <rect x="130" y="398" width="300" height="52" rx="6" fill="#182016" stroke="#c87a40" stroke-width="2"/>
+        <text x="280" y="416" text-anchor="middle" font-size="11" fill="#eceee0" font-family="sans-serif" font-weight="700">STEP 3: Council Review</text>
+        <text x="280" y="431" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">3-person neutral panel · Both parties present</text>
+        <text x="280" y="444" text-anchor="middle" font-size="9" fill="#4d6048" font-family="sans-serif">Witnesses · Written decision with reasoning · One appeal</text>
+        <!-- Arrow to appeal / final -->
+        <line x1="280" y1="450" x2="280" y2="474" stroke="#c9a94e" stroke-width="2" marker-end="url(#cf-arr)"/>
+        <!-- STEP 4 / Final -->
+        <rect x="100" y="474" width="360" height="40" rx="6" fill="#243028" stroke="#c87a40" stroke-width="2"/>
+        <text x="280" y="490" text-anchor="middle" font-size="11" fill="#c87a40" font-family="sans-serif" font-weight="700">Binding Decision → Document → Implement</text>
+        <text x="280" y="506" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">Failure to comply = council escalation. Charter amendment requires supermajority.</text>
+        <!-- Timeline annotation on left -->
+        <text x="10" y="100" font-size="9" fill="#3a4838" font-family="sans-serif">24 hrs</text>
+        <text x="10" y="262" font-size="9" fill="#3a4838" font-family="sans-serif">3 days</text>
+        <text x="10" y="424" font-size="9" fill="#3a4838" font-family="sans-serif">7 days</text>
+        <line x1="80" y1="74" x2="80" y2="450" stroke="#3a4838" stroke-width="1" stroke-dasharray="3,3"/>
+        <polygon points="76,74 84,74 80,66" fill="#3a4838"/>
+        <polygon points="76,450 84,450 80,458" fill="#3a4838"/>
+        <text x="40" y="265" font-size="9" fill="#3a4838" font-family="sans-serif" transform="rotate(-90,40,265)">← Escalation timeline</text>
+      </svg>
+      <figcaption>Community conflict resolution process — designed to de-escalate before formal judgment. Most disputes should resolve at Steps 1 or 2. Document every stage in writing. The council serves the community, not the parties — its first job is to preserve group cohesion while achieving justice.</figcaption>
+    </figure>
+
+    <h3>Evidence Standards</h3>
+    <ul>
+      <li><strong>Accusation alone is not evidence.</strong> Never punish based solely on one person's claim against another, regardless of the accuser's status.</li>
+      <li><strong>Physical evidence</strong> — highest weight. Document it: describe it in writing, state who found it, when, and who witnessed the discovery.</li>
+      <li><strong>Multiple independent witnesses</strong> — high weight. "Independent" means people with no prior relationship or shared motive.</li>
+      <li><strong>Single witness</strong> — medium weight. Requires corroborating circumstantial evidence for serious charges.</li>
+      <li><strong>Character evidence</strong> — low weight. Prior bad behavior is relevant context, not proof. Prior good behavior does not exonerate.</li>
+      <li><strong>Confession</strong> — high weight only if voluntary and without coercion. Confessions made under duress are inadmissible.</li>
+      <li><strong>Burden of proof:</strong> The accuser bears the burden. The accused is presumed innocent until the council is convinced beyond reasonable doubt (for exile/severe punishment) or by preponderance of evidence (for lesser disputes).</li>
+    </ul>
+
+    <h3>Punishment Philosophy</h3>
+    <table>
+      <thead><tr><th>Offense Type</th><th>Preferred Response</th><th>Rationale</th></tr></thead>
+      <tbody>
+        <tr><td>Minor disputes (property, labor allocation)</td><td>Mediation; compensation to injured party; written record</td><td>Restorative — most efficient, preserves relationships, low cost</td></tr>
+        <tr><td>Rules violation (minor theft, deception)</td><td>Council hearing; formal warning; increased work contribution; probation</td><td>Corrective — gives opportunity to demonstrate change</td></tr>
+        <tr><td>Serious violation (assault, significant theft)</td><td>Council hearing; suspension of privileges; possible expulsion from role; community service</td><td>Deterrent + remedial</td></tr>
+        <tr><td>Capital offense (rape, premeditated murder, deliberate endangerment)</td><td>Council hearing; exile or, in extreme cases with no safe exile option, permanent confinement; death only if escape or confinement is impossible and ongoing threat is clear</td><td>Group protection paramount; avoid killing if any alternative exists</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-amber">
+      <strong>On Capital Punishment:</strong> Post-collapse, you have no prisons. The two real options are exile or execution. Exile is almost always preferable — it removes the threat without requiring your community to live with having killed someone. Exile to death-certain environment functions as execution. Reserve execution for cases where the individual is an immediate ongoing physical threat and exile is impossible (e.g., severe injury preventing them from leaving, or your perimeter cannot be secured against their return).
+    </div>
+
+    <h3>Exile — When and How</h3>
+    <ul>
+      <li><strong>Trigger conditions:</strong> Second serious offense after warning; first-offense rape/sexual assault; premeditated murder; deliberate endangerment of the group (sabotage, revealing location to hostile parties).</li>
+      <li><strong>Procedure:</strong> Council vote — supermajority (2/3) required. Subject is informed of the decision, reasoning, and timeline. Given opportunity to respond to council (not to change the decision, but to ensure process fairness).</li>
+      <li><strong>Execution:</strong> 24-hour preparation period; escorted to defined perimeter boundary; provided minimum humanitarian supplies (water for 24 hours, basic clothing appropriate to weather) unless a capital offense makes this politically impossible to maintain group morale.</li>
+      <li><strong>Record:</strong> Document the exile in the community record with full case file. This prevents revisionist history and provides evidence if the individual later returns claiming injustice.</li>
+    </ul>
+
+    <!-- ═══ PROPERTY RIGHTS ═══ -->
+    <h2 id="property">7. Property Rights</h2>
+
+    <h3>The Spectrum</h3>
+    <p>Pure communism (everything shared equally) and pure individualism (each person owns all they hold) both fail under stress. Historical successful communities use a hybrid:</p>
+    <table>
+      <thead><tr><th>Category</th><th>Ownership Model</th><th>Rationale</th></tr></thead>
+      <tbody>
+        <tr><td>Critical infrastructure (water source, perimeter, shelter)</td><td>Community</td><td>No individual ownership prevents free-rider problem and ownership disputes that fragment the group</td></tr>
+        <tr><td>Tools, livestock, vehicles</td><td>Community with assigned custody</td><td>Tracked to individual for accountability, but cannot be withheld from group need</td></tr>
+        <tr><td>Food stores (main)</td><td>Community allocation</td><td>Individual hoarding destroys group cohesion; equitable distribution is survival requirement</td></tr>
+        <tr><td>Personal reserve</td><td>Private (declared)</td><td>Human dignity; motivation to produce; prevents demoralization; small declared reserve reduces black market formation</td></tr>
+        <tr><td>Personal items (clothing, photographs, religious items)</td><td>Fully private</td><td>Invasion of these is a morale catastrophe; not worth any resource gain</td></tr>
+        <tr><td>Land</td><td>Custodial use rights, not ownership</td><td>Property title means nothing without enforcement; assign use rights (cultivated land stays with the cultivator while in use) rather than permanent ownership. Document in registry.</td></tr>
+        <tr><td>Knowledge and skills</td><td>Individual, with community obligation to teach</td><td>No one owns their knowledge, but they are not slaves to share it — incentivize teaching through recognition and trade goods</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Land Dispute Prevention</h3>
+    <p>Land becomes contentious when stakes become high. Prevent disputes by establishing clear rules early:</p>
+    <ol>
+      <li>Survey and map the land within the community's area of operation as early as possible.</li>
+      <li>Assign cultivation zones in the community register with names of responsible cultivators and date assigned.</li>
+      <li>Establish the rule: uncultivated land can be claimed by any member who commits to working it; land actively cultivated cannot be reassigned without council agreement and compensation.</li>
+      <li>Review land assignments annually. Abandoned plots revert to community allocation.</li>
+    </ol>
+
+    <!-- ═══ TRADE & ECONOMICS ═══ -->
+    <h2 id="trade">8. Trade &amp; Economics</h2>
+
+    <h3>What Actually Holds Value Post-Collapse</h3>
+    <p>The common belief is that gold and silver become the currency of collapse. This is true eventually but not immediately. The actual value hierarchy in the first months:</p>
+    <table>
+      <thead><tr><th>Time Period</th><th>Highest Value Items</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Week 1–4</td><td>Food, water, fuel, medications, batteries</td><td>Immediate survival; no alternatives yet; original supply consumed</td></tr>
+        <tr><td>Month 1–6</td><td>Skills (medical, mechanical, agricultural), tools, seeds, antibiotics</td><td>Production capability becomes more valuable than consumption goods</td></tr>
+        <tr><td>Month 6–24</td><td>Durable tools, livestock, land use rights, labor hours, textiles</td><td>Long-term production capability; luxury deficit sets in</td></tr>
+        <tr><td>Year 2+</td><td>Precious metals, durable goods, alcohol, tobacco, community connections</td><td>Store of value emerges; information networks have value</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Common Units of Exchange — Historical</h3>
+    <ul>
+      <li><strong>Salt:</strong> Historically one of the most important trade goods. Preserves food, essential mineral, compact. Highly recommended for stockpiling as trade good.</li>
+      <li><strong>Grain (measured):</strong> Most ancient economies used a standardized bushel of grain as the base unit. Simple, universal need, and difficult to fake.</li>
+      <li><strong>Labor hours:</strong> Time banking — explicit exchange of hours of work. Eliminates need for a commodity currency entirely. LETS (Local Exchange Trading System) is a modern adaptation.</li>
+      <li><strong>Alcohol:</strong> Historically called "liquid currency." Compact, stable, universally valued, and produces more of itself.</li>
+      <li><strong>Ammunition:</strong> Extremely valuable in an armed society, but creates dangerous incentives — people with surplus ammunition have coercive power. Approach with caution.</li>
+      <li><strong>Precious metals:</strong> Long-term store of value once basic production systems are reestablished. Silver more practical than gold for small transactions (lower denomination).</li>
+    </ul>
+
+    <h3>Barter System Design</h3>
+    <ol>
+      <li><strong>Establish a reference table</strong> — set approximate exchange ratios for common goods. 1 day of labor = X lbs of grain = Y doses of medication. Post it publicly. Update monthly based on supply/demand reality. This prevents exploitation of the uninformed.</li>
+      <li><strong>Market day</strong> — designate a specific time (weekly is common) and neutral location for inter-group and internal trading. Advance announcement allows people to prepare what they'll offer and what they need. Creates information market efficiency.</li>
+      <li><strong>Witness and record trades</strong> — significant trades (above a minimum threshold) should have a third-party witness and be recorded in the trade ledger. Prevents later "I never agreed to that" disputes.</li>
+      <li><strong>Credit system</strong> — allow deferred trades, recorded in ledger. "I'll give you 5 lbs of flour now; you'll give me 2 hrs of carpentry work next week." Requires trust and record-keeping but dramatically increases trade volume and community cooperation.</li>
+      <li><strong>Community fee</strong> — consider a small community fee (5–10% in goods) on all significant external trades. Funds community infrastructure projects and creates shared stake in market success.</li>
+    </ol>
+
+    <h3>Trade With Outside Groups</h3>
+    <ul>
+      <li><strong>Neutral ground:</strong> Trade meetings should occur outside both groups' perimeters when possible. Designate a known neutral location.</li>
+      <li><strong>Party size:</strong> Equal delegations; your security knows where you are and when to expect you back. Someone not in the trading party is monitoring.</li>
+      <li><strong>Escrow concept:</strong> For high-value trades with new partners, use a trusted third party holding goods from both sides until both confirm satisfaction. Prevents fraud.</li>
+      <li><strong>Information control:</strong> Do not reveal your group's size, exact location, or resource levels during trade negotiations. "We can trade X regularly" — not "we have a thousand pounds of it."</li>
+      <li><strong>Reciprocal good faith:</strong> Long-term trading relationships are more valuable than any single transaction. Don't cheat; don't let your traders cheat.</li>
+    </ul>
+
+    <h3>Preventing Hoarding &amp; Black Markets</h3>
+    <ul>
+      <li><strong>Acceptable private reserve:</strong> Explicitly define and communicate what private storage is permitted. People hoard when they fear arbitrary confiscation. If they know the rule is "you may keep up to 7 days of personal food in your quarters," they are less likely to hoard secretly.</li>
+      <li><strong>Address root causes:</strong> Black markets form when official allocation is perceived as unfair or insufficient. If people are sneaking food, the official ration may be inadequate or the distribution may be inequitable.</li>
+      <li><strong>No-punishment reporting:</strong> Someone who reports a hoard they discover (rather than taking from it themselves) should be protected from retaliation. Reward the reporting, not the raiding.</li>
+      <li><strong>Occasional voluntary stocktake:</strong> Not a punitive inspection, but a community-wide "let's count everything" exercise once a month. Transparency reduces the social conditions that breed secret-keeping.</li>
+    </ul>
+
+    <!-- ═══ OUTSIDERS ═══ -->
+    <h2 id="outsiders">9. Integrating Outsiders</h2>
+
+    <h3>The Moral and Practical Framework</h3>
+    <p>There is no ethically clean answer to the refugee question. Both "turn everyone away" and "admit everyone" lead to bad outcomes. The framework that works:</p>
+
+    <div class="callout callout-amber">
+      <strong>The Skills-to-Mouths Ratio:</strong> Every person admitted either increases or decreases your community's productive capacity per capita. The question is not "are they worthy" but "what is our current capacity, and does admitting them help or harm our survival probability and the survival probability of current members?" This is uncomfortable but honest. A community that admits so many mouths that it collapses serves no one.
+    </div>
+
+    <h3>Assessment Protocol for Newcomers</h3>
+    <table>
+      <thead><tr><th>Factor</th><th>Questions</th><th>Weight</th></tr></thead>
+      <tbody>
+        <tr><td>Critical skills</td><td>Medical training? Engineering? Food production experience? Security? Communications?</td><td>High — could offset multiple "mouths"</td></tr>
+        <tr><td>Physical capacity</td><td>Health, age, injuries? Can they contribute to physical labor?</td><td>Medium — important but not disqualifying</td></tr>
+        <tr><td>Social assets</td><td>Do they come with children or dependents? Do they bring relationships (trade contacts, information about the outside)?</td><td>Context-dependent</td></tr>
+        <tr><td>Risk factors</td><td>Were they followed? Are they infected? Do they have behavioral red flags from interview?</td><td>High — threat multiplier if ignored</td></tr>
+        <tr><td>Equipment</td><td>Do they bring tools, weapons, food, seeds, medications?</td><td>Medium — valuable but not a bribe</td></tr>
+        <tr><td>Background</td><td>Where were they before? Who can verify their account?</td><td>Medium — difficult to verify, still worth asking</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Children and Orphans</h3>
+    <p>Establish an explicit policy before you need it:</p>
+    <p><strong>Recommended:</strong> Unaccompanied children under age 14 receive automatic provisional admission for humanitarian reasons. The community takes collective responsibility. Assign them to an existing family unit or create a designated care structure. Children represent long-term investment — they are a workforce and next-generation community core within 5–10 years. Any community that leaves children to die outside its perimeter has made a choice about what kind of community it is.</p>
+    <p>Children with parents follow the parents' admission status. Admission of parents with children is not leverage — do not separate children from parents as a negotiating tactic.</p>
+
+    <h3>Cultural Integration</h3>
+    <ul>
+      <li>Integrate people into existing work structures from day one — shared work creates community faster than shared meals.</li>
+      <li>Explicitly state the community rules and have new members acknowledge them — not as a punishment, but as a welcome orientation.</li>
+      <li>Assign existing members as integration mentors (not guards) to new members during probation.</li>
+      <li>Do not expect cultural homogeneity. Different backgrounds are assets; different values about community rules are problems. Distinguish between them.</li>
+    </ul>
+
+    <!-- ═══ RECORD KEEPING ═══ -->
+    <h2 id="records">10. Record Keeping</h2>
+
+    <h3>Why Written Records Matter</h3>
+    <p>Human memory fails under stress, rationalizes self-interest, and diverges over time. Written records prevent: revisionist history; property disputes; medication dosing errors; distribution disputes; and the gradual erosion of agreed-upon rules. Without records, groups drift and fracture. <strong>Assign a record keeper as a formal role.</strong></p>
+
+    <h3>Archival Methods</h3>
+    <ul>
+      <li><strong>Paper:</strong> Use acid-free paper if available (will last 50–200 years vs. 5–30 for regular paper). Write in pencil or permanent ink — ballpoint pen degrades in 20 years.</li>
+      <li><strong>Storage:</strong> Keep records in airtight container (Ziploc or sealed tin) away from moisture and light. Silica gel desiccant extends life significantly.</li>
+      <li><strong>Multiple copies:</strong> Critical records (charter, membership list, land registry, food inventory) should have at least 2 copies in different physical locations.</li>
+      <li><strong>Handwriting clarity:</strong> Write legibly. Documents will be read by people who don't know your handwriting.</li>
+      <li><strong>Dating:</strong> Date every entry. If you've lost track of the calendar, create a community reference: "Day 1 = the day [event] occurred" and count from there.</li>
+    </ul>
+
+    <h3>Required Registers</h3>
+    <ul>
+      <li><strong>Membership register:</strong> Full name, date of admission, skills, physical description, any conditions of admission.</li>
+      <li><strong>Supply inventory:</strong> Weekly count of all food stores, medical supplies, fuel, tools. Columns: item, quantity, unit, daily consumption rate, estimated days remaining.</li>
+      <li><strong>Decision log:</strong> Date, decision made, who proposed, vote (Y/N/abstain per council member), and brief reasoning. This prevents "that was never actually decided" arguments.</li>
+      <li><strong>Land registry:</strong> Plot description, assigned cultivator, date assigned, crop plan, any improvements made.</li>
+      <li><strong>Trade ledger:</strong> Date, parties, items exchanged, witnesses, fulfilled/pending.</li>
+      <li><strong>Incident log:</strong> Date, incident description, parties involved, resolution, any follow-up required. Medical incidents, security incidents, disputes.</li>
+      <li><strong>Death register:</strong> Name, age, date, cause if known, witnesses, location of burial.</li>
+      <li><strong>Annual census:</strong> Full head count with age, sex, skill summary, health status. Conduct every spring.</li>
+    </ul>
+
+    <!-- ═══ TEMPLATES ═══ -->
+    <h2 id="templates">11. Printable Templates</h2>
+    <p style="font-size:0.85em;color:#888;">Print this page or save offline. Templates designed for paper reproduction.</p>
+
+    <!-- COMMUNITY CHARTER -->
+    <div class="template-box">
+      <h3>Community Charter — Starter Document</h3>
+      <div class="template-line"><span>Community Name:</span> _______________________________________________</div>
+      <div class="template-line"><span>Date Founded:</span> _______________ <span>Location:</span> _______________</div>
+      <div class="template-line"><span>Founding Members (sign below):</span></div>
+      <div class="template-line">1. __________________ 2. __________________ 3. __________________</div>
+      <div class="template-line">4. __________________ 5. __________________ 6. __________________</div>
+      <br>
+      <div class="template-line"><span>Mission Statement (what this community is for):</span></div>
+      <div class="template-line">_____________________________________________________________</div>
+      <div class="template-line">_____________________________________________________________</div>
+      <br>
+      <div class="template-line"><span>Governance Structure:</span> Council / Domain Meritocracy / Hybrid (circle one)</div>
+      <div class="template-line"><span>Council Members and Roles:</span></div>
+      <div class="template-line">Medical: ___________________ Security: ___________________ Logistics: ___________________</div>
+      <div class="template-line">Agriculture: ___________________ Comms: ___________________ At-Large: ___________________</div>
+      <br>
+      <div class="template-line"><span>Decision Rules:</span></div>
+      <div class="template-line">Simple decisions: _____ vote majority. Major decisions (resource allocation, exile): _____ / _____ supermajority.</div>
+      <div class="template-line">Emergency executive (who): ___________________ Duration before review: _____________</div>
+      <br>
+      <div class="template-line"><span>Non-Negotiable Rules (list, add additional below):</span></div>
+      <div class="template-line">1. No violence against members &nbsp;&nbsp; 2. No theft from group stores &nbsp;&nbsp; 3. No sexual assault (exile)</div>
+      <div class="template-line">4. _________________________________ 5. _________________________________</div>
+      <div class="template-line">6. _________________________________ 7. _________________________________</div>
+      <br>
+      <div class="template-line"><span>Private Reserve Allowance:</span> Each member may keep up to _____ days of personal food stores privately. Must declare to logistics officer. Undeclared stores discovered above this level = _______________</div>
+      <br>
+      <div class="template-line"><span>Membership process:</span> Arrive → _____ hour observe hold → probation ___ days → full council vote</div>
+      <div class="template-line"><span>Amendments:</span> Require _____ / _____ council vote + _____ days notice to all members before vote.</div>
+      <br>
+      <div class="template-line" style="color:#aaa;font-style:italic;font-size:0.8em;">All signing members affirm they have read, understood, and agree to abide by this charter and to hold all members including themselves to its terms.</div>
+    </div>
+
+    <!-- SKILL INVENTORY -->
+    <div class="template-box">
+      <h3>Community Skill Inventory Form</h3>
+      <div class="template-line"><span>Member Name:</span> ___________________________ <span>Date:</span> ___________</div>
+      <div class="template-line"><span>Age:</span> _____ <span>Physical limitations:</span> ___________________________</div>
+      <br>
+      <div class="template-line" style="color:var(--amber);font-size:0.82em;">Rate each skill: 0=None | 1=Beginner | 2=Intermediate | 3=Expert | T=Can Teach Others</div>
+      <br>
+      <table style="font-size:0.8em;width:100%">
+        <thead><tr><th>Category</th><th>Skill</th><th>Level (0–3/T)</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="4">Medical</td><td>Basic first aid / CPR</td><td>___</td><td>________________</td></tr>
+          <tr><td>Wound care / suturing</td><td>___</td><td>________________</td></tr>
+          <tr><td>Pharmacy / medications</td><td>___</td><td>________________</td></tr>
+          <tr><td>Obstetrics / midwifery</td><td>___</td><td>________________</td></tr>
+          <tr><td rowspan="3">Agriculture</td><td>Garden / vegetable crops</td><td>___</td><td>________________</td></tr>
+          <tr><td>Livestock care</td><td>___</td><td>________________</td></tr>
+          <tr><td>Soil / composting</td><td>___</td><td>________________</td></tr>
+          <tr><td rowspan="3">Engineering</td><td>Construction / carpentry</td><td>___</td><td>________________</td></tr>
+          <tr><td>Mechanical / vehicle repair</td><td>___</td><td>________________</td></tr>
+          <tr><td>Electrical / electronics</td><td>___</td><td>________________</td></tr>
+          <tr><td rowspan="2">Security</td><td>Firearms / weapons handling</td><td>___</td><td>________________</td></tr>
+          <tr><td>Tactics / military training</td><td>___</td><td>________________</td></tr>
+          <tr><td rowspan="2">Comms</td><td>Ham radio / radio operation</td><td>___</td><td>________________</td></tr>
+          <tr><td>Navigation / maps</td><td>___</td><td>________________</td></tr>
+          <tr><td rowspan="4">Crafts</td><td>Cooking / food preservation</td><td>___</td><td>________________</td></tr>
+          <tr><td>Sewing / textiles</td><td>___</td><td>________________</td></tr>
+          <tr><td>Blacksmithing / metalwork</td><td>___</td><td>________________</td></tr>
+          <tr><td>Soap / chemistry</td><td>___</td><td>________________</td></tr>
+          <tr><td rowspan="2">Leadership</td><td>Teaching / instruction</td><td>___</td><td>________________</td></tr>
+          <tr><td>Conflict mediation</td><td>___</td><td>________________</td></tr>
+        </tbody>
+      </table>
+      <br>
+      <div class="template-line"><span>Languages spoken:</span> _______________________________________________</div>
+      <div class="template-line"><span>Special equipment owned/brought:</span> ___________________________________</div>
+      <div class="template-line"><span>Medical conditions or limitations relevant to work assignment:</span> ___________</div>
+      <div class="template-line"><span>Other skills not listed:</span> ____________________________________________</div>
+    </div>
+
+    <!-- CONFLICT RESOLUTION FLOWCHART -->
+    <div class="template-box">
+      <h3>Conflict Resolution Procedure</h3>
+      <svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;background:#050805;border:none;display:block;margin:0.5rem auto;">
+        <!-- Start -->
+        <rect x="220" y="10" width="200" height="40" rx="20" fill="#1a2a1a" stroke="#4a9a4a" stroke-width="1.5"/>
+        <text x="320" y="35" text-anchor="middle" fill="#4a9a4a" font-size="11" font-family="system-ui" font-weight="bold">DISPUTE ARISES</text>
+
+        <!-- Arrow -->
+        <line x1="320" y1="50" x2="320" y2="70" stroke="#666" stroke-width="1.5"/>
+        <polygon points="316,68 320,78 324,68" fill="#666"/>
+
+        <!-- Step 1 -->
+        <rect x="160" y="78" width="320" height="40" rx="6" fill="#0d1a0d" stroke="#4a9a4a" stroke-width="1.5"/>
+        <text x="320" y="93" text-anchor="middle" fill="#ccc" font-size="10" font-family="system-ui" font-weight="bold">STEP 1: Direct Resolution</text>
+        <text x="320" y="108" text-anchor="middle" fill="#888" font-size="9" font-family="system-ui">Parties attempt to resolve themselves within 24 hours</text>
+
+        <!-- Decision diamond -->
+        <line x1="320" y1="118" x2="320" y2="135" stroke="#666" stroke-width="1.5"/>
+        <polygon points="316,133 320,143 324,133" fill="#666"/>
+        <polygon points="320,143 400,170 320,197 240,170" fill="#1a1a0a" stroke="#888" stroke-width="1.5"/>
+        <text x="320" y="168" text-anchor="middle" fill="#aaa" font-size="10" font-family="system-ui">Resolved?</text>
+
+        <!-- Yes branch -->
+        <line x1="400" y1="170" x2="460" y2="170" stroke="#4a9a4a" stroke-width="1.5"/>
+        <text x="420" y="165" fill="#4a9a4a" font-size="9" font-family="system-ui">YES</text>
+        <rect x="462" y="148" width="90" height="44" rx="6" fill="#0a1a0a" stroke="#4a9a4a" stroke-width="1.5"/>
+        <text x="507" y="167" text-anchor="middle" fill="#4a9a4a" font-size="10" font-family="system-ui" font-weight="bold">RESOLVED</text>
+        <text x="507" y="182" text-anchor="middle" fill="#888" font-size="8.5" font-family="system-ui">Log if significant</text>
+
+        <!-- No branch -->
+        <line x1="320" y1="197" x2="320" y2="215" stroke="#ff8844" stroke-width="1.5"/>
+        <polygon points="316,213 320,223 324,213" fill="#ff8844"/>
+        <text x="330" y="210" fill="#ff8844" font-size="9" font-family="system-ui">NO</text>
+
+        <!-- Step 2 -->
+        <rect x="160" y="223" width="320" height="40" rx="6" fill="#1a1500" stroke="#c9a94e" stroke-width="1.5"/>
+        <text x="320" y="238" text-anchor="middle" fill="#ccc" font-size="10" font-family="system-ui" font-weight="bold">STEP 2: Mediation</text>
+        <text x="320" y="253" text-anchor="middle" fill="#888" font-size="9" font-family="system-ui">Neutral third party; structured conversation; written notes</text>
+
+        <!-- Decision diamond 2 -->
+        <line x1="320" y1="263" x2="320" y2="278" stroke="#666" stroke-width="1.5"/>
+        <polygon points="316,276 320,286 324,276" fill="#666"/>
+        <polygon points="320,286 400,313 320,340 240,313" fill="#1a1a0a" stroke="#888" stroke-width="1.5"/>
+        <text x="320" y="311" text-anchor="middle" fill="#aaa" font-size="10" font-family="system-ui">Resolved?</text>
+
+        <!-- Yes 2 -->
+        <line x1="400" y1="313" x2="460" y2="313" stroke="#4a9a4a" stroke-width="1.5"/>
+        <text x="420" y="308" fill="#4a9a4a" font-size="9" font-family="system-ui">YES</text>
+        <rect x="462" y="291" width="90" height="44" rx="6" fill="#0a1a0a" stroke="#4a9a4a" stroke-width="1.5"/>
+        <text x="507" y="310" text-anchor="middle" fill="#4a9a4a" font-size="10" font-family="system-ui" font-weight="bold">RESOLVED</text>
+        <text x="507" y="325" text-anchor="middle" fill="#888" font-size="8.5" font-family="system-ui">Written agreement</text>
+
+        <!-- No 2 -->
+        <line x1="320" y1="340" x2="320" y2="358" stroke="#ff4444" stroke-width="1.5"/>
+        <polygon points="316,356 320,366 324,356" fill="#ff4444"/>
+        <text x="330" y="353" fill="#ff4444" font-size="9" font-family="system-ui">NO</text>
+
+        <!-- Step 3 -->
+        <rect x="160" y="366" width="320" height="40" rx="6" fill="#1a0808" stroke="#ff4444" stroke-width="1.5"/>
+        <text x="320" y="381" text-anchor="middle" fill="#ccc" font-size="10" font-family="system-ui" font-weight="bold">STEP 3: Council Hearing</text>
+        <text x="320" y="396" text-anchor="middle" fill="#888" font-size="9" font-family="system-ui">Formal hearing within 3 days; written decision with reasoning</text>
+
+        <!-- Left labels -->
+        <text x="70" y="94" fill="#666" font-size="8.5" font-family="system-ui">Timeline: 24 hrs</text>
+        <text x="70" y="238" fill="#666" font-size="8.5" font-family="system-ui">Timeline: 48 hrs</text>
+        <text x="70" y="381" fill="#666" font-size="8.5" font-family="system-ui">Timeline: 72 hrs</text>
+      </svg>
+    </div>
+
+    <!-- TRADE LEDGER -->
+    <div class="template-box">
+      <h3>Trade Ledger — Page Template</h3>
+      <div class="template-line" style="font-size:0.8em;color:var(--amber)">Community: __________________ Month/Period: __________________</div>
+      <table style="font-size:0.78em;width:100%;margin-top:0.5rem;">
+        <thead>
+          <tr>
+            <th style="width:12%">Date</th>
+            <th style="width:18%">Party A</th>
+            <th style="width:22%">Gave</th>
+            <th style="width:18%">Party B</th>
+            <th style="width:22%">Gave</th>
+            <th style="width:8%">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="height:24px"></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td style="height:24px"></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td style="height:24px"></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td style="height:24px"></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td style="height:24px"></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td style="height:24px"></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td style="height:24px"></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td style="height:24px"></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      <div class="template-line" style="margin-top:0.5rem;font-size:0.78em;color:#666">Status codes: C=Complete | P=Pending | D=Disputed | V=Voided</div>
+      <div class="template-line" style="font-size:0.78em;color:#666">Witness required for trades above ______ units. Record keeper initials: ______</div>
+    </div>
+
+    <!-- MEMBERSHIP AGREEMENT -->
+    <div class="template-box">
+      <h3>Membership Agreement</h3>
+      <div class="template-line"><span>I, </span>_________________________________, acknowledge that I have:</div>
+      <div class="template-line">□ Read or had read to me the Community Charter of ________________________</div>
+      <div class="template-line">□ Understand and agree to abide by all rules therein</div>
+      <div class="template-line">□ Completed my skill inventory form (attached)</div>
+      <div class="template-line">□ Declared all food stores and equipment I have brought with me</div>
+      <div class="template-line">□ Been informed of my probationary period of _____ days, during which I:</div>
+      <div class="template-line">&nbsp;&nbsp;&nbsp;&nbsp;• Will not have access to ____________________________________________</div>
+      <div class="template-line">&nbsp;&nbsp;&nbsp;&nbsp;• Will be assigned to ___________________ work detail</div>
+      <div class="template-line">&nbsp;&nbsp;&nbsp;&nbsp;• Will report to ___________________ as my integration mentor</div>
+      <br>
+      <div class="template-line"><span>I understand that the following will result in council review with possible exile:</span></div>
+      <div class="template-line">Violence against members, theft, sexual assault, deliberate deception on security matters, refusal of work assignment without cause, and other violations as defined in the Charter.</div>
+      <br>
+      <div class="template-line"><span>Signed:</span> _________________________________ <span>Date:</span> ___________</div>
+      <div class="template-line"><span>Witness 1:</span> ______________________________ <span>Witness 2:</span> ________________________</div>
+      <div class="template-line"><span>Admitted by council vote:</span> Y _____ / N _____ <span>Date of full membership (if probation passed):</span> ___________</div>
+    </div>
+
+    <div class="nav-buttons">
+      <a href="../index.html" class="btn-nav">← Home</a>
+      <a href="psychology.html" class="btn-nav">Psychology →</a>
+    </div>
+
+    <div class="callout callout-amber" style="margin-top:2rem;">
+      <strong>Cross-References:</strong>
+      <a href="psychology.html">Psychology &amp; Morale</a> —
+      <a href="../tools.html">Skill Inventory Tool</a> —
+      <a href="../literature.html">Reference Library</a> —
+      <a href="disasters.html">Disaster Response</a>
+    </div>
+
+    <nav class="section-pagination no-print" aria-label="Section navigation">
+      <a href="metallurgy.html" class="pagination-btn pagination-prev">← Metallurgy</a>
+      <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+      <a href="psychology.html" class="pagination-btn pagination-next">Psychology →</a>
+    </nav>
+  </main>
+
+  <aside id="aria-panel">
+    <div class="aria-header">
+      <span class="status-dot"></span>
+      <span class="aria-status-label">Bunker Bot</span>
+      <span id="aria-model-badge">offline</span>
+      <button id="aria-close">✕</button>
+    </div>
+    <div id="aria-messages"></div>
+    <div class="aria-input-row">
+      <input type="text" id="aria-input" placeholder="Ask ARIA...">
+      <button id="aria-send">Send</button>
+    </div>
+  </aside>
+
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/aria.js"></script>
+</body>
+</html>

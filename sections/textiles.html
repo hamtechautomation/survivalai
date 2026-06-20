@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Textiles &amp; Clothing — The Last Light Survival Guide</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/sidebar.css">
+  <style>
+    .tex-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
+    .tex-nav a { background: var(--bg-1); border: 1px solid #5c4a1e; color: var(--amber); padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-size: 0.85em; }
+    .tex-nav a:hover { background: var(--amber); color: var(--bg-0); }
+
+    .process-steps { counter-reset: step; }
+    .process-step { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.75rem 1rem; margin: 0.5rem 0; counter-increment: step; position: relative; padding-left: 3rem; }
+    .process-step::before { content: counter(step); position: absolute; left: 0.85rem; top: 0.75rem; color: var(--amber); font-weight: 700; font-size: 1.1em; }
+
+    .fiber-card { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 6px; padding: 0.85rem 1rem; margin: 0.5rem 0; }
+    .fiber-card h4 { color: var(--amber); margin: 0 0 0.4rem; font-size: 0.95em; }
+    .fiber-card p { margin: 0.25rem 0; font-size: 0.88em; color: #ccc; }
+
+    .stitch-demo { font-family: monospace; font-size: 0.82em; background: #050a05; border: 1px solid #2a4a2a; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.5rem 0; color: #aad4aa; }
+    .stitch-demo .stitch-name { color: var(--amber); font-weight: 700; font-size: 1em; display: block; margin-bottom: 0.4rem; }
+
+    .priority-list { list-style: none; padding: 0; margin: 0.75rem 0; counter-reset: priority; }
+    .priority-list li { counter-increment: priority; background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.6rem 0.9rem 0.6rem 3rem; margin: 0.4rem 0; position: relative; font-size: 0.9em; }
+    .priority-list li::before { content: "#" counter(priority); position: absolute; left: 0.75rem; top: 0.6rem; color: var(--amber); font-weight: 700; font-size: 0.85em; }
+
+    .callout-warn { background: #1a1000; border: 1px solid #8b6000; border-left: 4px solid #c09a00; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.75rem 0; font-size: 0.9em; }
+    .callout-warn strong { color: #e6c000; }
+
+    .callout-tip { background: #041408; border: 1px solid #0c4020; border-left: 4px solid #1a7040; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.75rem 0; font-size: 0.9em; }
+    .callout-tip strong { color: #3abf7a; }
+
+    .callout-critical { background: #140404; border: 1px solid #5c1010; border-left: 4px solid #b03030; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.75rem 0; font-size: 0.9em; }
+    .callout-critical strong { color: #e05050; }
+
+    .svg-figure { margin: 1.5rem 0; text-align: center; }
+    .svg-figure figcaption { font-size: 0.82em; color: #888; margin-top: 0.5rem; font-style: italic; }
+
+    .wpi-bar { display: flex; align-items: center; gap: 0.75rem; margin: 0.35rem 0; }
+    .wpi-fill { height: 12px; background: linear-gradient(90deg, var(--amber), #5c3a0e); border-radius: 2px; }
+    .wpi-label { font-size: 0.82em; color: #bbb; min-width: 90px; }
+    .wpi-val { font-size: 0.82em; color: var(--amber); font-weight: 600; min-width: 60px; }
+
+    .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.6rem; margin: 0.75rem 0; }
+    .tool-item { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.6rem 0.8rem; font-size: 0.88em; }
+    .tool-item strong { color: var(--amber); display: block; margin-bottom: 0.2rem; font-size: 0.9em; }
+
+    .repair-math { background: #050a14; border: 1px solid #1a2a5c; border-radius: 6px; padding: 1rem; margin: 0.75rem 0; }
+    .repair-math .math-line { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; border-bottom: 1px solid #1a2a3a; font-size: 0.9em; }
+    .repair-math .math-line:last-child { border-bottom: none; color: var(--amber); font-weight: 700; }
+    .repair-math .math-label { color: #bbb; }
+    .repair-math .math-val { color: #7aaccc; font-weight: 600; }
+
+    details { margin: 0.5rem 0; }
+    details summary { cursor: pointer; color: var(--amber); font-weight: 600; padding: 0.5rem 0; user-select: none; }
+    details summary:hover { opacity: 0.8; }
+    details[open] summary { margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div id="app-shell">
+    <nav id="sidebar" aria-label="Main navigation"></nav>
+    <div id="overlay" class="overlay"></div>
+    <div class="main-content">
+      <header class="top-bar">
+        <button id="menu-toggle" class="btn-icon" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb"><a href="../index.html">Home</a> › Textiles &amp; Clothing</div>
+        <button id="aria-toggle" class="btn btn-sm btn-ghost">🤖 Bunker Bot</button>
+      </header>
+      <div class="content-wrapper">
+
+        <!-- ═══ PAGE HEADER ═══ -->
+        <header class="section-hero">
+          <div class="section-badges">
+            <span class="badge badge-warning">FOUNDATIONAL SKILL</span>
+            <span class="badge">All Climates</span>
+            <span class="badge">Month 1 – Year 10+</span>
+          </div>
+          <h1>Textiles &amp; Clothing</h1>
+          <p class="section-subtitle">Fiber sources, spinning, weaving, knitting, sewing, leatherwork, boot making, and repair — from raw material to finished garment without modern manufacturing.</p>
+        </header>
+
+        <div class="alert-box warning">
+          <p>"Modern clothing lasts 2–5 years under normal use. Under survival conditions — hard labor, weather exposure, no washing machine — that drops to months. Within 2 years of grid-down, most synthetic clothing will be failing. Textile skills are civilizational infrastructure."</p>
+        </div>
+
+        <!-- Quick Nav -->
+        <nav class="tex-nav" aria-label="Section navigation">
+          <a href="#fiber-sources">1. Fiber Sources</a>
+          <a href="#spinning">2. Spinning</a>
+          <a href="#weaving">3. Weaving</a>
+          <a href="#knitting">4. Knitting &amp; Crochet</a>
+          <a href="#sewing">5. Sewing</a>
+          <a href="#leatherwork">6. Leatherworking</a>
+          <a href="#boots">7. Boot &amp; Shoe Making</a>
+          <a href="#repair">8. Repair &amp; Maintenance</a>
+          <a href="#insulation">9. Insulation &amp; Layering</a>
+        </nav>
+
+        <!-- ═══ SECTION 1: FIBER SOURCES ═══ -->
+        <h2 id="fiber-sources">1. Fiber Sources</h2>
+        <p>Every textile starts with a fiber. Know what grows or lives near you — your region's fiber availability determines your textile strategy.</p>
+
+        <h3>Animal Fibers</h3>
+
+        <div class="fiber-card">
+          <h4>Wool — Primary Survival Fiber</h4>
+          <p><strong>Sources:</strong> Sheep (most available), alpaca, rabbit (angora), dog fur (historically used).</p>
+          <p><strong>Shearing:</strong> Once per year, spring, before summer heat. Use sharp shears; keep fleece in one piece. Skirt the edges (remove soiled margins).</p>
+          <p><strong>Scouring (washing):</strong> Hot water (~60°C) + soap or wood ash lye. Soak 20–30 min. Do NOT agitate — agitation causes felting. Squeeze gently, never wring. Rinse in same-temperature water (temperature shock also felts wool). Repeat until water runs clear.</p>
+          <p><strong>Carding:</strong> Hand cards — paddle-shaped tools with wire teeth. Pull fiber through to align and clean. Produces a "rolag" — soft tube of aligned fiber ready for spinning.</p>
+          <p><strong>Combing:</strong> Metal-toothed combs for long fibers. Produces "top" — very parallel fiber for worsted spinning. Finer yarn, more lustrous, less warm than woolen.</p>
+          <p><strong>Grease wool:</strong> Raw unscoured wool retains lanolin — naturally water-resistant. Can spin "in the grease" for rope and outdoor use. Wash before wearing next to skin.</p>
+        </div>
+
+        <div class="fiber-card">
+          <h4>Sinew — Strongest Natural Thread</h4>
+          <p><strong>Sources:</strong> Leg tendons and backstrap (dorsal fascia) of large game — deer, elk, bison, cow. Backstrap sinew is finest and longest.</p>
+          <p><strong>Processing:</strong> Remove while fresh (before rigor). Split into thread-width strands with fingernails or dull blade. Dry flat. Dry sinew revives by soaking 10–15 min in warm water.</p>
+          <p><strong>Properties:</strong> Self-waxing from natural fat content. Waterproof when dry. Shrinks when dry — tightens knots and wraps. Stronger than any plant fiber thread. Used for bowstrings, lashing, and fine leather sewing.</p>
+        </div>
+
+        <div class="fiber-card">
+          <h4>Other Animal Fibers</h4>
+          <p><strong>Angora rabbit:</strong> Molt or clip 3× per year, ~1 oz per harvest. Exceptionally warm, very soft. Too slippery to spin alone — blend 20–30% with wool.</p>
+          <p><strong>Dog fur:</strong> Medium-long coated breeds produce spinnable fiber. Collect by brushing. Blend 50/50 with wool. Produces warm, water-resistant yarn (historically used by Coast Salish people).</p>
+          <p><strong>Cat fur:</strong> Too short to spin alone — blend only, and only if nothing better is available.</p>
+          <p><strong>Horsehair:</strong> Coarse, slippery — not a spinning fiber. Excellent for rope, bowstrings, weaving stiff fabric, upholstery stuffing. Tail hair is longest.</p>
+        </div>
+
+        <h3>Plant Fibers</h3>
+
+        <div class="fiber-card">
+          <h4>Flax → Linen (Complete Process)</h4>
+          <p>Flax produces the finest plant fiber. Labor-intensive but yields strong, beautiful cloth that improves with washing.</p>
+          <div class="process-steps">
+            <div class="process-step"><strong>Harvest:</strong> Pull plants from root — do not cut. Preserves full fiber length. Harvest when seeds begin turning brown (late summer). Bundle into "beets," dry standing upright.</div>
+            <div class="process-step"><strong>Retting:</strong> Decomposes woody stem to free fibers. <em>Water retting:</em> Submerge in pond/stream 7–14 days — faster, smells strongly. <em>Dew retting:</em> Spread on grass, wet with dew nightly, 4–6 weeks — gentler on fiber, no smell. Done when fibers separate easily from stem.</div>
+            <div class="process-step"><strong>Breaking:</strong> Wooden flax brake — two hinged boards. Crush dried retted stalks to break the woody "shive" without damaging fiber. Work in small bundles, strike repeatedly along length.</div>
+            <div class="process-step"><strong>Scutching:</strong> Using a flat scutching paddle and vertical board, scrape remaining shive fragments away from fiber bundle. Produces tow (short tangled bits) and long "line" fiber you keep.</div>
+            <div class="process-step"><strong>Hackling:</strong> Draw fiber through a hackle — bed of upright metal spikes. Use coarse hackle first, then medium, then fine. Separates short tow from long line fibers; aligns them parallel. Fine-hackled flax makes remarkably thin thread.</div>
+            <div class="process-step"><strong>Spinning:</strong> Long draw technique. Dampen fingers slightly — moisture helps fibers slide past each other. Wet-spin (fingers in water bowl) for very fine yarn.</div>
+          </div>
+        </div>
+
+        <div class="fiber-card">
+          <h4>Stinging Nettle</h4>
+          <p>Processed identically to flax: ret, break, scutch, hackle. Fiber actually stronger than linen. Grows abundantly in disturbed nitrogen-rich soils worldwide. Wear gloves when harvesting — stinging compounds disappear after retting. Slightly coarser than flax but comparable strength. Historically used across Europe and Asia for cloth before cotton.</p>
+        </div>
+
+        <div class="fiber-card">
+          <h4>Hemp</h4>
+          <p>Coarser than flax but significantly stronger. Same retting/breaking/scutching/hackling process. Exceptionally rot-resistant. Tow (short fibers) ideal for rope. Line fiber makes durable work cloth, bags, and canvas. Climate tolerant — grows almost anywhere. Water-ret away from living areas (smells strongly).</p>
+        </div>
+
+        <div class="fiber-card">
+          <h4>Cotton</h4>
+          <p>Climate-limited: requires warm zone (USDA zone 8+, 150+ frost-free days). <strong>Hand-gin:</strong> Roll a smooth dowel over seed cotton to squeeze seeds out, or build a simple roller gin from two smooth sticks turned together. Card with hand cards. Spin tightly — cotton is short-staple and needs high twist to hold together. Use supported spindle (see Spinning section) rather than drop spindle for cotton.</p>
+        </div>
+
+        <div class="fiber-card">
+          <h4>Cattail</h4>
+          <p><strong>Seed fluff:</strong> Collect brown heads before fully open. Excellent insulation for stuffing (vests, mittens, sleeping pads) but too short and slippery to spin. NOT a spinning fiber. <strong>Leaves:</strong> Harvest green, dry flat, dampen before working. Excellent for weaving mats, baskets, and sleeping surfaces. Available nearly everywhere wetlands exist.</p>
+        </div>
+
+        <div class="fiber-card">
+          <h4>Milkweed</h4>
+          <p>Seed floss is approximately 6× warmer than wool by weight when dry. Naturally water-resistant. Too slippery to spin alone — blend 20–30% with clean wool, or use alone as insulation fill. Harvest pods just as they split open; dry completely before using. Historically used as life-jacket filler in WWII.</p>
+        </div>
+
+        <h3>Fiber Comparison</h3>
+        <table class="data-table">
+          <thead>
+            <tr><th>Fiber</th><th>Strength</th><th>Warmth</th><th>Wet Performance</th><th>Processing Difficulty</th><th>Best Use</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Wool</td><td>Good</td><td>Excellent</td><td>Excellent (warm when wet)</td><td>Moderate</td><td>Clothing, blankets, socks</td></tr>
+            <tr><td>Sinew</td><td>Excellent</td><td>N/A</td><td>Good (waterproof)</td><td>Easy</td><td>Thread, bowstrings, lashing</td></tr>
+            <tr><td>Flax/Linen</td><td>Very Good</td><td>Low (cool fiber)</td><td>Good</td><td>Difficult</td><td>Summer clothing, canvas, rope</td></tr>
+            <tr><td>Nettle</td><td>Excellent</td><td>Low</td><td>Good</td><td>Difficult</td><td>Strong thread, rope, work cloth</td></tr>
+            <tr><td>Hemp</td><td>Very Good</td><td>Low</td><td>Excellent (rot resistant)</td><td>Difficult</td><td>Rope, canvas, bags</td></tr>
+            <tr><td>Cotton</td><td>Good</td><td>Low</td><td>Poor (heaviest when wet)</td><td>Moderate</td><td>Warm-weather clothing only</td></tr>
+            <tr><td>Cattail fluff</td><td>Poor</td><td>Good</td><td>Very poor (clumps)</td><td>Easy</td><td>Pillow/quilt stuffing</td></tr>
+            <tr><td>Milkweed floss</td><td>N/A</td><td>Exceptional</td><td>Moderate</td><td>Easy</td><td>Insulation fill only</td></tr>
+            <tr><td>Dog fur</td><td>Moderate</td><td>Good</td><td>Moderate</td><td>Easy (blend w/wool)</td><td>Socks, warm accessories</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ═══ SECTION 2: SPINNING ═══ -->
+        <h2 id="spinning">2. Spinning</h2>
+        <p>Spinning drafts (draws out) fibers and adds twist to create yarn. The drop spindle is the most important textile tool you can make — 30 minutes from scrap, produces all yarn weights, teaches the principles used on any spinning wheel.</p>
+
+        <h3>Drop Spindle — Build First</h3>
+        <div class="alert-box info">
+          <p><strong>Make it first.</strong> A functional drop spindle takes 30 minutes. A spinning wheel takes weeks to build. Learn on a spindle — everything transfers.</p>
+        </div>
+
+        <div class="fiber-card">
+          <h4>Construction</h4>
+          <p><strong>Whorl (disc):</strong> ~3" (7.5cm) diameter, ½" thick. Cut from any scrap wood; drill center hole to fit shaft exactly. A thick wooden disc, CD, or slice of branch all work.</p>
+          <p><strong>Shaft:</strong> Straight dowel or smoothed stick, 10–12" long, ~¼" diameter. Sand perfectly smooth — rough spots catch fiber.</p>
+          <p><strong>Hook:</strong> Bent wire, bent nail, or carved notch at top of shaft. Yarn loops over hook to hold twist while winding.</p>
+          <p><strong>Assembly:</strong> Push shaft through whorl hole. Bottom-whorl position (whorl ~2–3" from bottom) is most stable for beginners. Secure with wood glue or tight friction fit.</p>
+        </div>
+
+        <!-- SVG 1: Drop Spindle -->
+        <figure class="svg-figure">
+          <svg viewBox="0 0 300 430" width="260" height="430" xmlns="http://www.w3.org/2000/svg" aria-label="Drop spindle diagram with labeled parts: hook, shaft, yarn cop, whorl, and spin direction">
+            <rect width="300" height="430" fill="#070a09" rx="6"/>
+            <!-- Shaft -->
+            <rect x="146" y="28" width="8" height="350" fill="#8B6914" rx="2"/>
+            <!-- Hook at top -->
+            <path d="M150 28 Q150 12 163 12 Q176 12 176 24" stroke="#c9a94e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Whorl disc (3D look) -->
+            <ellipse cx="150" cy="338" rx="42" ry="10" fill="#5c4010" stroke="#c9a94e" stroke-width="1.5"/>
+            <rect x="108" y="328" width="84" height="14" fill="#6B4E10"/>
+            <ellipse cx="150" cy="328" rx="42" ry="10" fill="#6B4E10" stroke="#c9a94e" stroke-width="1.5"/>
+            <text x="150" y="333" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle">3" disc</text>
+            <!-- Yarn cop (wound on shaft) -->
+            <path d="M148 75 Q167 85 148 100 Q129 112 148 127 Q167 139 148 154 Q130 166 148 181 Q166 193 148 208" stroke="#c9a94e" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.75"/>
+            <!-- Spin direction arrow -->
+            <path d="M178 200 Q195 185 192 210 Q189 230 178 225" stroke="#3abf7a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <polygon points="178,220 172,232 184,228" fill="#3abf7a"/>
+            <text x="198" y="212" fill="#3abf7a" font-size="9" font-family="monospace">Z-twist</text>
+            <text x="196" y="223" fill="#3abf7a" font-size="9" font-family="monospace">(clockwise)</text>
+            <!-- Labels -->
+            <text x="190" y="20" fill="#c9a94e" font-size="11" font-family="monospace">Hook</text>
+            <line x1="176" y1="18" x2="188" y2="18" stroke="#c9a94e" stroke-width="1"/>
+            <text x="190" y="145" fill="#c9a94e" font-size="11" font-family="monospace">Yarn cop</text>
+            <line x1="163" y1="145" x2="188" y2="143" stroke="#c9a94e" stroke-width="1"/>
+            <text x="40" y="80" fill="#8B6914" font-size="11" font-family="monospace">Shaft</text>
+            <text x="40" y="93" fill="#555" font-size="9" font-family="monospace">10–12" long</text>
+            <line x1="72" y1="88" x2="144" y2="88" stroke="#8B6914" stroke-width="1"/>
+            <text x="45" y="332" fill="#c9a94e" font-size="11" font-family="monospace">Whorl</text>
+            <line x1="80" y1="330" x2="106" y2="330" stroke="#c9a94e" stroke-width="1"/>
+            <text x="100" y="415" fill="#555" font-size="10" font-family="monospace" text-anchor="middle">Bottom-whorl drop spindle</text>
+            <text x="100" y="427" fill="#444" font-size="9" font-family="monospace" text-anchor="middle">Build time: 20–30 minutes</text>
+          </svg>
+          <figcaption>Bottom-whorl drop spindle: shaft 10–12", whorl 3" diameter disc, hook at top. Z-twist (clockwise spin) for singles; S-twist for plying.</figcaption>
+        </figure>
+
+        <h3>Spinning Technique</h3>
+        <div class="two-col">
+          <div>
+            <h4>Park and Draft (Beginners)</h4>
+            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+              <li>Spin spindle, then "park" it under your arm or between knees</li>
+              <li>With both hands free, draft (pull out) a length of fiber</li>
+              <li>Release spindle — twist runs up into drafted fiber</li>
+              <li>Wind spun yarn onto cop below hook</li>
+              <li>Slow but very controlled; good for learning</li>
+            </ol>
+          </div>
+          <div>
+            <h4>Long Draw (Speed)</h4>
+            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+              <li>Set spindle spinning with one hand</li>
+              <li>Back-draft fiber quickly with other hand over 12–18"</li>
+              <li>Let twist chase into drafted zone</li>
+              <li>Much faster once mastered</li>
+              <li>Best for carded (woolen-prep) fiber</li>
+            </ol>
+          </div>
+        </div>
+
+        <h3>S-twist vs Z-twist and Plying</h3>
+        <div class="fiber-card">
+          <h4>Twist Direction</h4>
+          <p><strong>Z-twist:</strong> Spin clockwise (looking down shaft) — most common for singles. Fiber angle matches middle stroke of letter Z.</p>
+          <p><strong>S-twist:</strong> Spin counter-clockwise. Used for plying — opposing twists lock together and balance the yarn, preventing snarling.</p>
+          <p><strong>Singles:</strong> One strand. Lighter, weaker, prone to pilling. Fine for weaving warp/weft but not ideal for knitting.</p>
+          <p><strong>2-ply:</strong> Two Z-twist singles twisted together in S-direction. 30–40% stronger than either single. More balanced, better for knitting.</p>
+          <p><strong>3-ply:</strong> Very round and even. Ideal for socks and durable items. Takes three times the spinning time but worth it for hard-wear goods.</p>
+        </div>
+
+        <h3>Yarn Weight Reference (Wraps Per Inch)</h3>
+        <div class="wpi-bar"><span class="wpi-label">Lace weight</span><div class="wpi-fill" style="width:170px"></div><span class="wpi-val">30+ wpi</span></div>
+        <div class="wpi-bar"><span class="wpi-label">Fingering/sock</span><div class="wpi-fill" style="width:135px"></div><span class="wpi-val">18–22 wpi</span></div>
+        <div class="wpi-bar"><span class="wpi-label">DK weight</span><div class="wpi-fill" style="width:100px"></div><span class="wpi-val">12–15 wpi</span></div>
+        <div class="wpi-bar"><span class="wpi-label">Worsted</span><div class="wpi-fill" style="width:70px"></div><span class="wpi-val">9–12 wpi</span></div>
+        <div class="wpi-bar"><span class="wpi-label">Bulky</span><div class="wpi-fill" style="width:40px"></div><span class="wpi-val">5–8 wpi</span></div>
+        <div class="wpi-bar"><span class="wpi-label">Super bulky</span><div class="wpi-fill" style="width:20px"></div><span class="wpi-val">under 5 wpi</span></div>
+        <p style="font-size:0.82em;color:#888;margin-top:0.4rem;">Measure WPI: wrap yarn around a ruler for 1 inch, count wraps. Wrap snugly but not stretched.</p>
+
+        <div class="callout-tip">
+          <strong>Yield:</strong> 1 lb (450g) raw wool → ~¾ lb (340g) clean scoured fiber → approximately one adult sweater worth of yarn at worsted weight. Plan fiber gathering accordingly.
+        </div>
+
+        <details>
+          <summary>Supported Spindle (for short fibers: cotton, angora, cashmere)</summary>
+          <div style="padding:0.5rem 0 0 1rem;">
+            <p style="font-size:0.9em;color:#ccc;">Short-staple fibers break under the tension of a hanging drop spindle. A supported spindle rests in a bowl or ceramic plate — removes downward tension while spinning.</p>
+            <p style="font-size:0.9em;color:#ccc;"><strong>Tahkli:</strong> Tiny brass or wooden spindle spun in a small bowl. Traditional for cotton in India. Very fast once mastered.</p>
+            <p style="font-size:0.9em;color:#ccc;"><strong>Akha:</strong> Longer supported spindle on a flat plate. Common in Southeast Asia for short fiber work.</p>
+            <p style="font-size:0.9em;color:#ccc;">For improvised cotton spinning: any smooth-tipped spindle resting in a smooth bowl works. Spin between palms while drafting with the other hand.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Spinning Wheel Notes (if you have or can build one)</summary>
+          <div style="padding:0.5rem 0 0 1rem;">
+            <p style="font-size:0.9em;color:#ccc;"><strong>Saxony wheel (treadle):</strong> Most common traditional European style. Horizontal, large drive wheel connected by drive band to flyer assembly. Good all-purpose wheel.</p>
+            <p style="font-size:0.9em;color:#ccc;"><strong>Castle wheel:</strong> Vertical arrangement — compact footprint. Same mechanics, smaller space.</p>
+            <p style="font-size:0.9em;color:#ccc;"><strong>Great wheel / walking wheel:</strong> No treadle — spinner walks back while drafting. Fastest output for woolen yarns. Simplest construction; good first build.</p>
+            <p style="font-size:0.9em;color:#ccc;"><strong>Maintenance:</strong> Drive band (leather strip or twisted cord) stretches and needs periodic replacement. Oil all moving parts with linseed oil or mineral oil. Clean fiber debris from orifice and flyer hooks. Drive ratio determines twist speed — higher ratio = finer yarn.</p>
+          </div>
+        </details>
+
+        <!-- ═══ SECTION 3: WEAVING ═══ -->
+        <h2 id="weaving">3. Weaving</h2>
+        <p>Weaving interlaces two sets of threads (warp and weft) at right angles to produce fabric. A frame loom can be built in a day from scrap lumber and produces cloth-width fabric immediately.</p>
+
+        <h3>Frame Loom — Build First</h3>
+
+        <!-- SVG 2: Frame Loom -->
+        <figure class="svg-figure">
+          <svg viewBox="0 0 460 320" width="440" height="320" xmlns="http://www.w3.org/2000/svg" aria-label="Frame loom overhead view showing frame, warp threads, shed stick, and shuttle with weft">
+            <rect width="460" height="320" fill="#070a09" rx="6"/>
+            <!-- Outer frame -->
+            <rect x="40" y="30" width="280" height="250" fill="none" stroke="#8B6914" stroke-width="8" rx="4"/>
+            <text x="180" y="22" fill="#8B6914" font-size="11" font-family="monospace" text-anchor="middle">Wooden Frame (2×2 lumber)</text>
+            <!-- Warp threads (vertical) -->
+            <g stroke="#c9a94e" stroke-width="1.2" opacity="0.85">
+              <line x1="64" y1="38" x2="64" y2="272"/><line x1="79" y1="38" x2="79" y2="272"/>
+              <line x1="94" y1="38" x2="94" y2="272"/><line x1="109" y1="38" x2="109" y2="272"/>
+              <line x1="124" y1="38" x2="124" y2="272"/><line x1="139" y1="38" x2="139" y2="272"/>
+              <line x1="154" y1="38" x2="154" y2="272"/><line x1="169" y1="38" x2="169" y2="272"/>
+              <line x1="184" y1="38" x2="184" y2="272"/><line x1="199" y1="38" x2="199" y2="272"/>
+              <line x1="214" y1="38" x2="214" y2="272"/><line x1="229" y1="38" x2="229" y2="272"/>
+              <line x1="244" y1="38" x2="244" y2="272"/><line x1="259" y1="38" x2="259" y2="272"/>
+              <line x1="274" y1="38" x2="274" y2="272"/><line x1="304" y1="38" x2="304" y2="272"/>
+            </g>
+            <!-- Nail marks top/bottom -->
+            <text x="180" y="55" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle" opacity="0.6">▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾</text>
+            <text x="180" y="264" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle" opacity="0.6">▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴</text>
+            <!-- Weft rows (horizontal) -->
+            <path d="M48 105 Q64 100 79 105 Q94 110 109 105 Q124 100 139 105 Q154 110 169 105 Q184 100 199 105 Q214 110 229 105 Q244 100 259 105 Q274 110 312 105" stroke="#7a5a20" stroke-width="2.5" fill="none"/>
+            <path d="M48 121 Q64 126 79 121 Q94 116 109 121 Q124 126 139 121 Q154 116 169 121 Q184 126 199 121 Q214 116 229 121 Q244 126 259 121 Q274 116 312 121" stroke="#7a5a20" stroke-width="2.5" fill="none"/>
+            <path d="M48 137 Q64 132 79 137 Q94 142 109 137 Q124 132 139 137 Q154 142 169 137 Q184 132 199 137 Q214 142 229 137 Q244 132 259 137 Q274 142 312 137" stroke="#7a5a20" stroke-width="2.5" fill="none"/>
+            <!-- Shed stick -->
+            <rect x="48" y="165" width="268" height="8" rx="4" fill="#3a2000" stroke="#8B6914" stroke-width="1.5"/>
+            <text x="182" y="161" fill="#8B6914" font-size="9" font-family="monospace" text-anchor="middle">shed stick</text>
+            <!-- Shuttle -->
+            <rect x="148" y="195" width="65" height="14" rx="7" fill="#5c3a08" stroke="#c9a94e" stroke-width="1.5"/>
+            <text x="180" y="206" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle">SHUTTLE</text>
+            <!-- Beat arrow -->
+            <line x1="182" y1="220" x2="182" y2="145" stroke="#3abf7a" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <polygon points="182,140 177,150 187,150" fill="#3abf7a"/>
+            <text x="188" y="185" fill="#3abf7a" font-size="9" font-family="monospace">beat ↑</text>
+            <!-- Key panel -->
+            <rect x="345" y="40" width="105" height="240" fill="#0f1410" rx="4" stroke="#2a2a2a" stroke-width="1"/>
+            <text x="397" y="60" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">TERMS</text>
+            <text x="352" y="80" fill="#888" font-size="9" font-family="monospace">WARP: vertical</text>
+            <text x="352" y="93" fill="#888" font-size="9" font-family="monospace">threads held</text>
+            <text x="352" y="106" fill="#888" font-size="9" font-family="monospace">under tension</text>
+            <text x="352" y="124" fill="#888" font-size="9" font-family="monospace">WEFT: horizontal</text>
+            <text x="352" y="137" fill="#888" font-size="9" font-family="monospace">thread on shuttle</text>
+            <text x="352" y="155" fill="#888" font-size="9" font-family="monospace">SHED: opening</text>
+            <text x="352" y="168" fill="#888" font-size="9" font-family="monospace">between warp</text>
+            <text x="352" y="181" fill="#888" font-size="9" font-family="monospace">threads; shuttle</text>
+            <text x="352" y="194" fill="#888" font-size="9" font-family="monospace">passes through</text>
+            <text x="352" y="212" fill="#888" font-size="9" font-family="monospace">SETT: warp ends</text>
+            <text x="352" y="225" fill="#888" font-size="9" font-family="monospace">per inch (epi)</text>
+            <text x="352" y="243" fill="#888" font-size="9" font-family="monospace">BEAT: press weft</text>
+            <text x="352" y="256" fill="#888" font-size="9" font-family="monospace">rows together</text>
+            <text x="352" y="269" fill="#888" font-size="9" font-family="monospace">with comb/fork</text>
+          </svg>
+          <figcaption>Frame loom: 4 lumber pieces, nails/notches every ½" at top and bottom. Shed stick creates alternating sheds. Shuttle carries weft. Beat each pass with a comb or fork.</figcaption>
+        </figure>
+
+        <div class="two-col">
+          <div>
+            <h4>Construction</h4>
+            <ul style="font-size:0.9em;color:#ccc;">
+              <li>4 pieces 2×2 (or 1×3) lumber, screwed or nailed at corners</li>
+              <li>Notches or nails every ½" along top and bottom bars</li>
+              <li>Learning size: 12"×18"; fabric-width: 24"×36"</li>
+              <li>Shed stick: flat stick woven alternately through warp</li>
+              <li>Shuttle: flat stick 12" long, thin enough to pass through shed</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Sett (Warp Density)</h4>
+            <ul style="font-size:0.9em;color:#ccc;">
+              <li><strong>Bulky yarn:</strong> 4–6 epi</li>
+              <li><strong>Worsted:</strong> 8–10 epi</li>
+              <li><strong>DK:</strong> 10–12 epi</li>
+              <li><strong>Fingering:</strong> 14–18 epi</li>
+              <li>Wrong sett = fabric too open or too stiff. Test with a short sample first.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Basic Weave Structures</h3>
+        <pre class="diagram">
+PLAIN WEAVE (over 1, under 1) — balanced cloth:
+  ━━━━━━━━━━━━━━━━━━━━━━  ← weft pass
+  │ │ │ │ │ │ │ │ │ │ │  ← warp threads
+  ━━━━━━━━━━━━━━━━━━━━━━
+  │ │ │ │ │ │ │ │ │ │ │
+  Pass 1: shuttle over odd warps, under even
+  Pass 2: shuttle over even warps, under odd
+
+TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
+  ━━━━━━━━━━━━━━━━━━━━━━
+  █ │ │ █ │ │ █ │ │ █ │  ← thread goes over 2
+  ━━━━━━━━━━━━━━━━━━━━━━
+    █ │ │ █ │ │ █ │ │ █  ← pattern shifts 1 warp each row
+  Result: diagonal rib — stronger, more drapey fabric
+  Denim, canvas, and most workwear are twill weave</pre>
+
+        <h3>Other Loom Types</h3>
+        <div class="info-grid">
+          <div class="card">
+            <h3>Backstrap Loom</h3>
+            <p>One end tied to tree/post; other end looped around weaver's waist. Body tension controls warp tightness — lean back to tighten. Entire loom rolls up into a bundle. Ideal for travel or refugee scenarios. Produces tight, durable fabric. Traditional throughout Central/South America, Southeast Asia, and Africa.</p>
+          </div>
+          <div class="card">
+            <h3>Inkle Loom</h3>
+            <p>Pegged frame for warp-faced band weaving. Makes belts, straps for packs, hatbands, loom straps, shoelaces. Belt-width only (1–4 inches). Very fast once warped. Strong, tight bands good for load-bearing. Can be built in one afternoon from scrap lumber and dowels.</p>
+          </div>
+          <div class="card">
+            <h3>Warp-Weighted Loom</h3>
+            <p>Stands upright against wall. Warp hangs from top beam; clay, stone, or ceramic weights hang from warp groups to maintain tension. Weave from top down, pushing weft up. Excellent for heavy wool fabrics, rugs, and blankets. Nearly every European textile until 1200 AD was made on this loom.</p>
+          </div>
+          <div class="card">
+            <h3>Rigid Heddle Loom</h3>
+            <p>Slot-and-hole reed creates two sheds automatically — doubles weaving speed vs pure frame loom. Can be homemade from scrap wood. Slots for one warp set, holes for alternating set; raise/lower heddle alternately. Good intermediate step before a full floor loom.</p>
+          </div>
+        </div>
+
+        <!-- ═══ SECTION 4: KNITTING & CROCHET ═══ -->
+        <h2 id="knitting">4. Knitting &amp; Crochet</h2>
+        <p>Knitting and crochet produce stretchy fabric from a single continuous yarn — faster than weaving for shaped items like socks, hats, and mittens, with easy sizing adjustment.</p>
+
+        <h3>Making Needles</h3>
+        <div class="tool-grid">
+          <div class="tool-item">
+            <strong>Straight Needles (wood)</strong>
+            Sand dowels smooth; sharpen one end to gentle taper (not sharp — snags yarn). Diameter = needle size: 3mm sock, 5mm worsted, 8mm bulky. 9–14" length. Finish with beeswax for smooth yarn flow.
+          </div>
+          <div class="tool-item">
+            <strong>DPNs (double-pointed)</strong>
+            6–8" length, pointed both ends. Set of 4–5 needed. For tubes: socks, mittens, hats in the round. Bamboo skewers work in a pinch for fine yarn. Mark one needle with a rubber band to track round starts.
+          </div>
+          <div class="tool-item">
+            <strong>Circular (wire)</strong>
+            Straighten coat hanger wire; file ends smooth; slight bend at each end as tips. Flexible thinner wire in middle for large-circumference knitting. For sweater bodies, large hats, blanket edges.
+          </div>
+          <div class="tool-item">
+            <strong>Crochet Hook</strong>
+            Any smooth hardwood dowel. Carve or sand a smooth hook curve at one end; groove below hook catches yarn. Hook depth and throat shape matter — practice until yarn slides easily without catching.
+          </div>
+        </div>
+
+        <h3>Essential Knitting</h3>
+        <div class="two-col">
+          <div>
+            <h4>Long-Tail Cast-On (Fastest, Most Stable)</h4>
+            <p style="font-size:0.88em;color:#ccc;">Make a slip knot leaving a long tail (about 1" per stitch needed). Loop tail over thumb, working yarn over index finger. Insert needle under thumb loop, catch working yarn, pull through loop on thumb. Adjust tension. Repeat. Creates a firm, elastic edge.</p>
+            <h4>The Two Core Stitches</h4>
+            <ul style="font-size:0.88em;color:#ccc;">
+              <li><strong>Knit (k):</strong> Needle enters stitch from left to right; pull loop through front</li>
+              <li><strong>Purl (p):</strong> Needle enters stitch from right to left from front; pull loop through back</li>
+              <li>All knitting is combinations of these two</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Fabric Types by Stitch Pattern</h4>
+            <ul style="font-size:0.88em;color:#ccc;">
+              <li><strong>Stockinette</strong> (k RS, p WS): Smooth, stretchy, most common. Curls at edges.</li>
+              <li><strong>Garter</strong> (k every row): Flat, textured, reversible. Good for borders and scarves.</li>
+              <li><strong>Rib</strong> (k1p1 or k2p2): Very elastic. Essential for cuffs, hat brims, sock tops.</li>
+              <li><strong>Seed stitch</strong> (k1p1, alternate each row): Dense, flat-lying, textured. Good insulation and warmth.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Priority Knitting Projects</h3>
+        <ul class="priority-list">
+          <li><strong>Socks</strong> — Most critical. Foot wounds are disabling and slow to heal. Machine-knit socks wear out first. Knit toe-up on DPNs. One pair: 6–8 hours. Use thick wool worsted for durability.</li>
+          <li><strong>Mittens</strong> — Warmer than gloves (shared heat between fingers). Faster to knit. Cold hands lose dexterity rapidly. A pair takes 3–5 hours.</li>
+          <li><strong>Hat</strong> — Up to 30% of body heat lost through an uncovered head. Simple hat (knit in round, decrease at crown) takes 2–4 hours.</li>
+          <li><strong>Sweater</strong> — 40–60 hours of work for adult size. Labor-intensive but irreplaceable warmth return per hour. Work bottom-up in one piece when possible to minimize seaming.</li>
+        </ul>
+
+        <h3>Crochet</h3>
+        <div class="fiber-card">
+          <h4>Hook Making</h4>
+          <p>Any smooth hardwood dowel. Carve or sand a smooth hook curve at one end; cut a groove below the hook to catch yarn; finish with fine sandpaper. The hook depth and throat angle matter — test with scrap yarn before committing to a project.</p>
+        </div>
+        <div class="fiber-card">
+          <h4>Two Stitches That Cover Most Needs</h4>
+          <p><strong>Single crochet (sc):</strong> Insert hook, yarn over, pull through (2 loops on hook), yarn over, pull through both loops. Short dense stitch. Good for bags, pot holders, baskets.</p>
+          <p><strong>Double crochet (dc):</strong> Yarn over first, insert hook, pull through (3 loops on hook), [yarn over, pull through 2 loops] twice. Taller stitch, faster work, more drape. Good for blankets and garment fabric.</p>
+        </div>
+        <div class="callout-tip">
+          <strong>Crochet structural advantage:</strong> Crochet cannot unravel from a single broken stitch the way knitting can. Each crochet stitch holds independently. More forgiving for repairs and better suited to rough-use items.
+        </div>
+
+        <h3>Priority Crochet Items</h3>
+        <ul style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+          <li><strong>Net bags / market bags:</strong> Chain stitch grid, no pattern needed. Strong, stretchy, minimal yarn. Essential for foraging and storage.</li>
+          <li><strong>Baskets:</strong> Work in the round with bulky yarn or multiple strands, over a core of rope or twine. Structural without pattern.</li>
+          <li><strong>Dishcloths and pot holders:</strong> Quick, practical, high turnover. 20–30 minutes each. Use cotton or linen fiber.</li>
+          <li><strong>Granny squares from scraps:</strong> Build from waste yarn; join into blankets or patch garments. Nothing wasted.</li>
+        </ul>
+
+        <!-- ═══ SECTION 5: SEWING ═══ -->
+        <h2 id="sewing">5. Sewing</h2>
+        <p>Hand sewing requires only a needle and thread and can repair and create any garment. Six stitches cover essentially every need.</p>
+
+        <h3>Six Essential Hand Stitches</h3>
+
+        <div class="stitch-demo">
+          <span class="stitch-name">1. Running Stitch</span>
+          Fabric:  ━━━━━━━━━━━━━━━━━━━━━━━━━
+          Thread:    ──    ──    ──    ──
+                       ·        ·       ·
+          In-and-out at regular intervals. For gathering, basting (temporary), and light seams.
+        </div>
+
+        <div class="stitch-demo">
+          <span class="stitch-name">2. Backstitch — Strongest Hand Seam</span>
+          Fabric:  ━━━━━━━━━━━━━━━━━━━━━━━━━
+          Thread:  ████████████████████████
+                   ←back 1→ ←back 1→ ←back 1→
+          Each stitch goes BACK to meet end of previous stitch.
+          Creates continuous thread on top. Mimics machine stitch strength.
+        </div>
+
+        <div class="stitch-demo">
+          <span class="stitch-name">3. Whipstitch</span>
+          Edge A: ─────────────────────────
+                   ╲  ╲  ╲  ╲  ╲  ╲  ╲
+          Edge B: ─────────────────────────
+          Thread wraps over two edges diagonally. Joins edges, finishes raw edges.
+        </div>
+
+        <div class="stitch-demo">
+          <span class="stitch-name">4. Blanket Stitch — Edge Finishing / Leather Joining</span>
+          Edge: ━━━━━━━━━━━━━━━━━━━━━━━━━
+                │    │    │    │    │
+                └────┘    └────┘    └────
+          Thread passes through fabric perpendicular to edge, loops around edge thread.
+          Strong decorative edge that prevents fraying. Joins leather cleanly.
+        </div>
+
+        <div class="stitch-demo">
+          <span class="stitch-name">5. Darning Stitch — Hole Repair</span>
+          Step 1 warp: run parallel threads across hole
+            ──  ──  ──  ──  ──  ──  ──  ──
+          Step 2 weft: weave perpendicular over-under through warp threads
+            ╔═╗ ╔═╗ ╔═╗ ╔═╗ ╔═╗ ╔═╗ ╔═╗
+          Rebuilds fabric structure over the hole. Match yarn weight.
+        </div>
+
+        <div class="stitch-demo">
+          <span class="stitch-name">6. Ladder Stitch — Invisible Closure</span>
+          Folded edge A:  ──── · ──── · ──── ·
+                                  ╲ ↑  ╲ ↑  ╲ ↑
+          Folded edge B:  · ──── · ──── · ────
+          Take tiny bites alternately from each folded edge. Pull tight — seam disappears.
+          For closing stuffed items, pillows, or any opening after filling.
+        </div>
+
+        <h3>Making Needles</h3>
+        <div class="tool-grid">
+          <div class="tool-item">
+            <strong>Bone Needle</strong>
+            Split a leg bone from game; grind a splinter to needle shape on sandstone. Drill or burn eye with thin flint point or hot wire. Finalize on fine abrasive. Traditional for 40,000+ years — functional and durable.
+          </div>
+          <div class="tool-item">
+            <strong>Wire Needle</strong>
+            Straighten thin wire (picture frame wire, electrical wire). Flatten one end with hammer; pierce eye with awl or nail. File tip sharp on stone. Functional in under an hour.
+          </div>
+          <div class="tool-item">
+            <strong>Thorn Pins</strong>
+            Hawthorn, osage orange, honey locust thorns serve as sewing pins and emergency needles for basting. No preparation needed. Replace running-stitch needle in a pinch.
+          </div>
+          <div class="tool-item">
+            <strong>Needle Storage</strong>
+            Keep needles in a bone tube (hollow small bone), leather roll, or wooden case. Needles are tiny and irreplaceable — secure storage attached to your sewing kit is essential.
+          </div>
+        </div>
+
+        <h3>Thread Alternatives</h3>
+        <table class="data-table">
+          <thead><tr><th>Thread</th><th>Strength</th><th>Stretch</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Sinew</td><td>Excellent</td><td>None</td><td>Split to thread width; self-waxing; waterproof; best for leather</td></tr>
+            <tr><td>Spun plant fiber</td><td>Good</td><td>Minimal</td><td>Needs beeswax before use; fine for cloth sewing</td></tr>
+            <tr><td>Dental floss</td><td>Very Good</td><td>None</td><td>Pre-waxed monofilament; stores indefinitely; stock heavily</td></tr>
+            <tr><td>Stripped plant stems</td><td>Fair</td><td>Minimal</td><td>Nettles, dogbane, yucca; split fine; works for basting</td></tr>
+            <tr><td>Rawhide strips</td><td>Excellent (wet)</td><td>Some</td><td>Shrinks rock-hard when drying — use for lashing leather</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Pattern Drafting Without Patterns</h3>
+        <p>Traditional garments are built from rectangles and triangles. No pattern paper, no fitting sessions, no curved cuts.</p>
+
+        <details>
+          <summary>Medieval Tunic — The Universal Garment</summary>
+          <div style="padding:0.75rem 0 0 0;">
+            <!-- SVG 3: Tunic Cutting Diagram -->
+            <figure class="svg-figure">
+              <svg viewBox="0 0 480 270" width="450" height="270" xmlns="http://www.w3.org/2000/svg" aria-label="Medieval tunic cutting layout: front body, back body, two sleeves, two gusset squares">
+                <rect width="480" height="270" fill="#070a09" rx="4"/>
+                <!-- Front body -->
+                <rect x="20" y="40" width="105" height="185" fill="#1a0d00" stroke="#c9a94e" stroke-width="1.5"/>
+                <text x="72" y="130" fill="#c9a94e" font-size="12" font-family="monospace" text-anchor="middle">FRONT</text>
+                <text x="72" y="146" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">shoulder-to-</text>
+                <text x="72" y="158" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">shoulder + 4"</text>
+                <!-- Neck cut on front -->
+                <ellipse cx="72" cy="40" rx="18" ry="10" fill="#070a09" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+                <text x="72" y="30" fill="#888" font-size="8" font-family="monospace" text-anchor="middle">cut neck</text>
+                <!-- Back body -->
+                <rect x="140" y="40" width="105" height="185" fill="#1a0d00" stroke="#c9a94e" stroke-width="1.5"/>
+                <text x="192" y="130" fill="#c9a94e" font-size="12" font-family="monospace" text-anchor="middle">BACK</text>
+                <text x="192" y="146" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">same width</text>
+                <text x="192" y="158" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">as front</text>
+                <!-- Sleeve 1 (tapered) -->
+                <path d="M264 50 L354 50 L334 210 L264 210 Z" fill="#120800" stroke="#c9a94e" stroke-width="1.5"/>
+                <text x="305" y="128" fill="#c9a94e" font-size="12" font-family="monospace" text-anchor="middle">SLEEVE</text>
+                <text x="305" y="143" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">× 2</text>
+                <text x="305" y="156" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">tapers to</text>
+                <text x="305" y="168" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">wrist width</text>
+                <!-- Gusset squares -->
+                <rect x="374" y="80" width="48" height="48" fill="#050a00" stroke="#c9a94e" stroke-width="1.5"/>
+                <text x="398" y="102" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle">GUSSET</text>
+                <text x="398" y="115" fill="#888" font-size="8" font-family="monospace" text-anchor="middle">× 2</text>
+                <rect x="430" y="80" width="40" height="40" fill="#050a00" stroke="#5c4010" stroke-width="1" stroke-dasharray="3,2"/>
+                <!-- Dimension callouts -->
+                <line x1="20" y1="238" x2="125" y2="238" stroke="#5c4a1e" stroke-width="1"/>
+                <text x="72" y="252" fill="#5c4a1e" font-size="9" font-family="monospace" text-anchor="middle">~22–28"</text>
+                <line x1="10" y1="40" x2="10" y2="225" stroke="#5c4a1e" stroke-width="1"/>
+                <text x="6" y="140" fill="#5c4a1e" font-size="8" font-family="monospace" text-anchor="middle" transform="rotate(-90,6,140)">knee or hip length</text>
+                <!-- Fold line indicators -->
+                <line x1="140" y1="133" x2="245" y2="133" stroke="#3a2a00" stroke-width="1" stroke-dasharray="4,3"/>
+                <text x="192" y="250" fill="#555" font-size="9" font-family="monospace" text-anchor="middle">sew front to back at shoulder, then sides</text>
+              </svg>
+              <figcaption>Medieval tunic layout — 2 body rectangles + 2 tapered sleeves + 2 underarm gussets. All straight cuts. Only curved cut is the neck opening.</figcaption>
+            </figure>
+            <ul style="font-size:0.9em;color:#ccc;">
+              <li><strong>Body:</strong> Two rectangles (front/back). Width = shoulder-to-shoulder + 4" ease. Length = desired hem from shoulder.</li>
+              <li><strong>Sleeves:</strong> Two rectangles, tapered from armhole width to wrist width. Sew into tube; attach to body.</li>
+              <li><strong>Gussets:</strong> Two small squares (~4"×4") inserted at each armpit. Critical for arm mobility without tearing the seam.</li>
+              <li><strong>Neck:</strong> Cut T-slit or oval at center top of front piece. Finish edge with whipstitch or blanket stitch.</li>
+              <li><strong>Adjustable:</strong> Works for any body size — just scale the rectangles. Belt at waist for fit.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Norse Trousers — Four Rectangles + Two Gussets</summary>
+          <div style="padding:0.75rem 0 0 0;">
+            <ul style="font-size:0.9em;color:#ccc;">
+              <li><strong>Four leg panels:</strong> Two per leg. Width = thigh circumference ÷ 2 + 2" ease. Length = waist to ankle + 2" hem allowance.</li>
+              <li><strong>Crotch gusset:</strong> Two triangles or diamonds sewn between front and back panels at crotch. Provides mobility without fitted shaping.</li>
+              <li><strong>Waist:</strong> Fold top edge, sew channel, thread drawstring (cord or leather strip). Fits any waist size.</li>
+              <li><strong>Assembly:</strong> Sew each leg tube; join legs at center seam; insert crotch gussets. Hem at ankle.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Drawstring Smock — Zero Fitting Required</summary>
+          <div style="padding:0.75rem 0 0 0;">
+            <ul style="font-size:0.9em;color:#ccc;">
+              <li><strong>Single large rectangle:</strong> Width = 2× desired shoulder-to-shoulder. Length = shoulder to hip or knee.</li>
+              <li><strong>Neck channel:</strong> Fold top edge 2–3" and sew, leaving gaps on each side for drawstring. Insert cord and cinch to neck size.</li>
+              <li>Works as pullover for any body size. Add rectangle sleeves for cold weather.</li>
+              <li>The gathered neck creates armhole shapes naturally. Traditional smock shape used worldwide for millennia.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- ═══ SECTION 6: LEATHERWORKING ═══ -->
+        <h2 id="leatherwork">6. Leatherworking</h2>
+        <p>Leather is durable, water-resistant, and protects against abrasion better than woven cloth. Two tanning methods produce fundamentally different materials with different uses.</p>
+
+        <h3>Brain Tanning Process — Softest Leather</h3>
+        <div class="callout-tip">
+          <strong>Every animal has enough brain to tan its own hide.</strong> This is literally true — the fat-to-hide ratio is consistent across mammals. Brain tanning produces the softest, most pliable leather; ideal for clothing, moccasins, and gloves.
+        </div>
+        <div class="process-steps">
+          <div class="process-step"><strong>Flesh the hide:</strong> Drape hide over a fleshing beam (smooth log). Remove all fat, membrane, and meat scraps with a fleshing tool — dull knife or shaped bone scraper. Work from center outward. Any remaining fat causes uneven tanning.</div>
+          <div class="process-step"><strong>Remove hair:</strong> Option A — soak in ash/water or lime/water solution 3–5 days; hair slips off easily. Option B — scrape wet hide with dull blade. After hair removal, scrape the grain (outside) surface smooth with a draw knife or scraper.</div>
+          <div class="process-step"><strong>Brain application:</strong> Boil the animal's brain with a little water; mash into a paste. Rub thoroughly into both sides of the hide while still wet. Work the brain paste deep into every area. Let soak 30–60 minutes, then re-work.</div>
+          <div class="process-step"><strong>Stretch and work:</strong> Lace hide onto a wooden frame under tension. As it begins to dry (critical window), work the hide continuously — pull, stretch, fold, push through rings, rub over a rope. This breaks up the stiffening fibers. If you stop too early it stiffens; if you start too late it's already stiff.</div>
+          <div class="process-step"><strong>Optional smoking (recommended):</strong> Sew hide into a tube; suspend over a smoldering fire of rotten wood chips 30–60 minutes per side. Smoking crosslinks proteins, making the hide resist re-wetting and stiffening. Unsmoked brain-tan will stiffen if it gets wet.</div>
+        </div>
+
+        <h3>Vegetable Tanning — Stiff, Durable Leather</h3>
+        <p>Produces firm leather ideal for soles, belts, sheaths, straps, and harness. Process takes weeks but result is far more durable under hard use than brain tan.</p>
+        <div class="process-steps">
+          <div class="process-step">Boil oak bark (or chestnut, hemlock, sumac) in water until liquid turns dark brown. Cool before use. Oak bark is strongest; use what's available.</div>
+          <div class="process-step">Submerge fleshed, dehaired hide in weak solution (1:10 bark:water) for 2 weeks. This opens the leather to receive tannins without shocking it.</div>
+          <div class="process-step">Move to medium solution (1:5 bark:water) for 4 weeks. Check weekly — hide should darken evenly throughout.</div>
+          <div class="process-step">Move to strong solution or direct contact with spent bark for 4–12 more weeks. Thicker hides take longer. When cross-section shows uniform color throughout, tanning is complete.</div>
+          <div class="process-step">Remove and rinse. Oil thoroughly while damp — neatsfoot oil, linseed oil, or rendered tallow. Oil prevents brittleness. Dry slowly away from direct heat.</div>
+        </div>
+
+        <h3>Saddle Stitch — Always Use This for Leather</h3>
+        <div class="alert-box info">
+          <p><strong>Never single-thread leather.</strong> Saddle stitch uses two needles on one thread — each stitch passes both directions through every hole. If one thread breaks, all other stitches still hold. A machine stitch breaks at one point and the entire seam unzips.</p>
+        </div>
+
+        <pre class="diagram">
+SADDLE STITCH — Two Needle Method:
+
+Needle A → →  ●  ← ← Needle B
+              │
+         [leather]
+              │
+Needle A ← ← ●  → → Needle B
+
+Step 1: Pre-punch ALL holes with awl before sewing (entire seam)
+Step 2: Thread both ends of ONE long piece of thread, one needle each end
+Step 3: Pass Needle A through first hole left-to-right
+Step 4: Pass Needle B through SAME hole right-to-left
+Step 5: Pull both snug. Move to next hole. Repeat.
+Step 6: Lock final stitch by backstitching 2–3 holes
+
+Spacing: 3–4mm for general work; 2mm for fine items (sheaths, wallets)
+Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre>
+
+        <h3>Essential Leather Tools (All Can Be Made)</h3>
+        <table class="data-table">
+          <thead><tr><th>Tool</th><th>Function</th><th>Improvise From</th></tr></thead>
+          <tbody>
+            <tr><td>Stitching awl</td><td>Pierce holes for sewing</td><td>Nail sharpened to diamond point, set in wooden handle</td></tr>
+            <tr><td>Skiver</td><td>Thin leather edges for clean joins</td><td>Very sharp knife held at low angle</td></tr>
+            <tr><td>Edge beveler</td><td>Round and smooth cut edges</td><td>Chisel angled and dragged along corner</td></tr>
+            <tr><td>Bone folder</td><td>Mark lines, crease folds, burnish</td><td>Any smooth polished bone</td></tr>
+            <tr><td>Wooden mallet</td><td>Drive awl, set stitches</td><td>Turned hardwood — never metal hammer on leather</td></tr>
+            <tr><td>Stitching clam</td><td>Hold work while both hands sew</td><td>Two boards hinged, clamped between knees while seated</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Priority Leather Projects</h3>
+        <ul class="priority-list">
+          <li><strong>Boot soles</strong> — Most critical. Foot wounds are disproportionately dangerous. Thick vegetable-tanned sole stitched to fabric or soft leather upper. See Boot Making section.</li>
+          <li><strong>Work gloves</strong> — Hand protection for splitting wood, handling thorns, construction, foraging. Thick palm, thinner back. Saddle stitch all seams.</li>
+          <li><strong>Knife and tool sheaths</strong> — Protect blades and the person carrying them. Wet-form to specific blade; let dry in shape for tight fit.</li>
+          <li><strong>Belts and straps</strong> — Load-bearing, used every day, wears out. Cut strap, punch holes, add carved bone or wood buckle. 1½–2" for general use.</li>
+          <li><strong>Bags and saddlebags</strong> — Carrying capacity extension. Simple fold-and-stitch construction; no fitted patterns needed.</li>
+          <li><strong>Hardened armor</strong> — Multiple layers of vegetable-tanned leather, boiled or wet-formed and dried in shape. Secondary priority after functional gear.</li>
+        </ul>
+
+        <!-- ═══ SECTION 7: BOOTS & SHOES ═══ -->
+        <h2 id="boots">7. Boot &amp; Shoe Making</h2>
+        <p>Foot wounds under survival conditions are disproportionately dangerous — they prevent mobility and heal slowly. Making functional footwear is critical infrastructure, not a craft luxury.</p>
+
+        <h3>Making a Last (Foot Form)</h3>
+        <p>A last is the foot-shaped form shoes are built on. Without one, shoes won't fit correctly and will cause blisters and injury.</p>
+        <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+          <li>Trace foot on paper. Transfer to wood. Cut foot silhouette from 1" thick board.</li>
+          <li>Laminate boards or carve scrap wood to approximate foot depth — roughly 3–4" at ball, 2" at heel.</li>
+          <li>Shape with knife and rasp. Must be slightly LARGER than foot (~3/8" at toe, ¼" at sides) to allow wearing.</li>
+          <li>For removal: split last vertically through ball area — two-piece last that comes apart after shoe is formed around it.</li>
+          <li>Clay or packed rags substitute for a temporary last in an emergency.</li>
+        </ol>
+
+        <h3>Simple Moccasin — One Piece, 30–60 Minutes</h3>
+
+        <!-- SVG 4: Moccasin Cutting Pattern -->
+        <figure class="svg-figure">
+          <svg viewBox="0 0 400 270" width="370" height="270" xmlns="http://www.w3.org/2000/svg" aria-label="Moccasin one-piece cutting pattern showing foot trace inside 2-inch margin, gather at toe, heel seam line">
+            <rect width="400" height="270" fill="#070a09" rx="4"/>
+            <!-- Outer cut line (2" margin all around) — dashed amber -->
+            <path d="M62 228 Q50 196 52 162 Q54 130 58 110 Q66 82 80 68 Q98 52 122 46 Q144 40 165 40 Q188 40 208 46 Q228 56 240 74 Q252 94 254 120 Q254 148 250 174 Q244 200 234 220 Q220 240 200 250 Q180 258 162 258 Q138 258 114 248 Q84 236 62 228 Z"
+              fill="#1a0d00" stroke="#c9a94e" stroke-width="2" stroke-dasharray="7,3"/>
+            <!-- Foot outline (inner) -->
+            <path d="M88 220 Q82 194 84 166 Q86 140 90 122 Q98 100 114 86 Q130 72 152 68 Q172 64 190 70 Q208 78 218 96 Q226 114 226 138 Q224 162 218 186 Q210 210 200 222 Q186 238 164 244 Q144 244 120 236 Q100 228 88 220 Z"
+              fill="#0a0500" stroke="#8B6914" stroke-width="1.5"/>
+            <!-- Foot label -->
+            <text x="165" y="158" fill="#8B6914" font-size="12" font-family="monospace" text-anchor="middle">foot trace</text>
+            <text x="165" y="174" fill="#555" font-size="10" font-family="monospace" text-anchor="middle">(your actual foot)</text>
+            <!-- 2" margin arrow -->
+            <line x1="88" y1="155" x2="62" y2="155" stroke="#c9a94e" stroke-width="1" stroke-dasharray="2,2"/>
+            <line x1="62" y1="145" x2="62" y2="165" stroke="#c9a94e" stroke-width="1"/>
+            <text x="34" y="158" fill="#c9a94e" font-size="10" font-family="monospace">2"</text>
+            <!-- Toe gather point -->
+            <circle cx="165" cy="40" r="6" fill="none" stroke="#e05050" stroke-width="2.5"/>
+            <text x="178" y="32" fill="#e05050" font-size="10" font-family="monospace">gather toe here</text>
+            <!-- Small cuts at toe (allow gathering) -->
+            <line x1="148" y1="40" x2="140" y2="52" stroke="#e05050" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <line x1="182" y1="40" x2="190" y2="52" stroke="#e05050" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <!-- Heel seam -->
+            <line x1="86" y1="222" x2="60" y2="230" stroke="#e05050" stroke-width="2.5"/>
+            <text x="18" y="246" fill="#e05050" font-size="10" font-family="monospace">heel seam ↑</text>
+            <!-- Labels -->
+            <text x="282" y="85" fill="#c9a94e" font-size="10" font-family="monospace">- - - cut line</text>
+            <text x="282" y="105" fill="#8B6914" font-size="10" font-family="monospace">─── foot outline</text>
+            <text x="282" y="125" fill="#e05050" font-size="10" font-family="monospace">─── seam lines</text>
+            <text x="282" y="160" fill="#888" font-size="9" font-family="monospace">One piece of hide.</text>
+            <text x="282" y="174" fill="#888" font-size="9" font-family="monospace">Two seams only:</text>
+            <text x="282" y="188" fill="#888" font-size="9" font-family="monospace">gathered toe +</text>
+            <text x="282" y="202" fill="#888" font-size="9" font-family="monospace">back heel seam.</text>
+          </svg>
+          <figcaption>Moccasin one-piece pattern: trace foot with 2" margin all around. Gather excess at toe; whipstitch heel seam up back. Single cut, two seams. Build time: 30–60 minutes.</figcaption>
+        </figure>
+
+        <div class="process-steps">
+          <div class="process-step">Trace foot on brain-tanned hide with ~2" margin all around. This extra material becomes the upper sides.</div>
+          <div class="process-step">Cut out the single piece. Dampen leather slightly — moist leather is easier to work and holds shape as it dries.</div>
+          <div class="process-step">Bring toe edge up and gather it across the toe of the foot. Make small cuts near toe edge (allows gathering without puckering). Pinch and stitch gathered toe — running stitch or whipstitch.</div>
+          <div class="process-step">Bring heel edges together and seam up the back of the heel with backstitch or whipstitch. Trim excess leather at heel seam.</div>
+          <div class="process-step">For ankle coverage, leave extra length at back heel, fold, and lace or tie over the ankle through punched holes. Try on; adjust while leather is still slightly damp.</div>
+        </div>
+
+        <div class="callout-warn">
+          <strong>Soft-soled moccasins wear out fast on rough terrain.</strong> For durability, add a hard sole: cut a second piece of heavy (6–8 oz) vegetable-tanned leather to foot shape and attach beneath with saddle stitch. Alternatively, cut and attach a tire tread sole.
+        </div>
+
+        <h3>Tire Sandal — Indestructible Emergency Footwear</h3>
+        <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+          <li>Use flat tread section of old tire — avoid curved sidewall area.</li>
+          <li>Trace foot outline on tread. Cut with sharp knife using hard sawing pressure. Score deeply first; don't try to cut through in one stroke.</li>
+          <li>Punch 4–6 holes around perimeter with nail and hammer.</li>
+          <li>Thread inner tube strips or leather through holes: one strap across toes, one around heel. Adjust to foot; tie off.</li>
+          <li>Truck tire tread lasts years of hard use. Far better than bare feet or failed boots.</li>
+        </ol>
+
+        <details>
+          <summary>Boot Cross-Section: Welt Construction (Full Soled Shoe)</summary>
+          <div style="padding:0.75rem 0 0 0;">
+            <!-- SVG 6: Boot cross-section -->
+            <figure class="svg-figure">
+              <svg viewBox="0 0 440 260" width="420" height="260" xmlns="http://www.w3.org/2000/svg" aria-label="Boot cross-section diagram showing layers: upper, insole, welt strip, outsole, and stitch lines">
+                <rect width="440" height="260" fill="#070a09" rx="4"/>
+                <!-- Last shape (foot silhouette side view) -->
+                <path d="M60 60 Q62 40 100 36 Q160 30 220 34 Q270 36 300 46 Q320 54 326 68 Q330 82 322 90 Q310 98 280 100 L80 100 Q62 100 60 82 Z"
+                  fill="#3a2800" stroke="#5c4010" stroke-width="1.5" stroke-dasharray="4,2"/>
+                <text x="190" y="72" fill="#5c4010" font-size="10" font-family="monospace" text-anchor="middle">LAST (foot form — removed after)</text>
+                <!-- Upper leather layer -->
+                <path d="M60 100 L280 100 Q310 100 322 90 Q330 82 332 100 L332 115 Q330 125 310 128 L80 128 Q62 128 60 115 Z"
+                  fill="#5c3a10" stroke="#c9a94e" stroke-width="1.5"/>
+                <text x="195" y="118" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">UPPER (medium-weight leather, wetformed)</text>
+                <!-- Insole -->
+                <rect x="60" y="128" width="272" height="14" fill="#3a2000" stroke="#8B6914" stroke-width="1.5"/>
+                <text x="196" y="140" fill="#8B6914" font-size="10" font-family="monospace" text-anchor="middle">INSOLE (medium leather, attached to last)</text>
+                <!-- Welt strip -->
+                <rect x="52" y="142" width="288" height="10" fill="#6B4E10" stroke="#e6a020" stroke-width="2"/>
+                <text x="200" y="152" fill="#e6a020" font-size="10" font-family="monospace" text-anchor="middle">WELT (narrow leather strip — joins all layers)</text>
+                <!-- Stitch line through welt -->
+                <g stroke="#c9a94e" stroke-width="1.2" stroke-dasharray="3,2" opacity="0.7">
+                  <line x1="70" y1="136" x2="70" y2="152"/><line x1="90" y1="136" x2="90" y2="152"/>
+                  <line x1="110" y1="136" x2="110" y2="152"/><line x1="130" y1="136" x2="130" y2="152"/>
+                  <line x1="150" y1="136" x2="150" y2="152"/><line x1="170" y1="136" x2="170" y2="152"/>
+                  <line x1="190" y1="136" x2="190" y2="152"/><line x1="210" y1="136" x2="210" y2="152"/>
+                  <line x1="230" y1="136" x2="230" y2="152"/><line x1="250" y1="136" x2="250" y2="152"/>
+                  <line x1="270" y1="136" x2="270" y2="152"/><line x1="290" y1="136" x2="290" y2="152"/>
+                  <line x1="310" y1="136" x2="310" y2="152"/>
+                </g>
+                <!-- Outsole -->
+                <rect x="48" y="152" width="296" height="28" fill="#1a0e00" stroke="#c9a94e" stroke-width="2"/>
+                <text x="196" y="170" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">OUTSOLE (heavy 8–10 oz veg-tanned leather or tire rubber)</text>
+                <!-- Stitch line through outsole/welt -->
+                <g stroke="#8B6914" stroke-width="1.2" stroke-dasharray="3,2" opacity="0.7">
+                  <line x1="70" y1="152" x2="70" y2="180"/><line x1="90" y1="152" x2="90" y2="180"/>
+                  <line x1="110" y1="152" x2="110" y2="180"/><line x1="130" y1="152" x2="130" y2="180"/>
+                  <line x1="150" y1="152" x2="150" y2="180"/><line x1="170" y1="152" x2="170" y2="180"/>
+                  <line x1="190" y1="152" x2="190" y2="180"/><line x1="210" y1="152" x2="210" y2="180"/>
+                  <line x1="230" y1="152" x2="230" y2="180"/><line x1="250" y1="152" x2="250" y2="180"/>
+                  <line x1="270" y1="152" x2="270" y2="180"/><line x1="290" y1="152" x2="290" y2="180"/>
+                  <line x1="310" y1="152" x2="310" y2="180"/>
+                </g>
+                <!-- Labels panel right -->
+                <rect x="358" y="90" width="74" height="150" fill="#0f1410" rx="3" stroke="#2a2a2a" stroke-width="1"/>
+                <text x="395" y="108" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle">WELT</text>
+                <text x="395" y="120" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle">ADVANTAGE:</text>
+                <text x="362" y="136" fill="#888" font-size="8" font-family="monospace">When outsole</text>
+                <text x="362" y="148" fill="#888" font-size="8" font-family="monospace">wears through,</text>
+                <text x="362" y="160" fill="#888" font-size="8" font-family="monospace">replace it alone</text>
+                <text x="362" y="172" fill="#888" font-size="8" font-family="monospace">without damaging</text>
+                <text x="362" y="184" fill="#888" font-size="8" font-family="monospace">the upper.</text>
+                <text x="362" y="200" fill="#888" font-size="8" font-family="monospace">Upper lasts</text>
+                <text x="362" y="212" fill="#888" font-size="8" font-family="monospace">many sole</text>
+                <text x="362" y="224" fill="#888" font-size="8" font-family="monospace">replacements.</text>
+                <!-- Ground line -->
+                <line x1="40" y1="188" x2="355" y2="188" stroke="#2a2a2a" stroke-width="2"/>
+                <text x="195" y="205" fill="#444" font-size="9" font-family="monospace" text-anchor="middle">ground surface</text>
+              </svg>
+              <figcaption>Welt construction boot: upper wraps over last, stitched to insole via welt strip. Outsole stitched to welt. When sole wears out, replace it without destroying the upper.</figcaption>
+            </figure>
+            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+              <li><strong>Last:</strong> Build or acquire a foot form. Stuff inside with paper to maintain shape while building.</li>
+              <li><strong>Insole:</strong> Cut medium-weight leather to foot shape; attach to bottom of last temporarily.</li>
+              <li><strong>Upper:</strong> Cut from lighter leather. Wet; stretch over last; tack around bottom edge to insole. Let dry in shape.</li>
+              <li><strong>Welt:</strong> Narrow strip (~¾" wide) saddle-stitched all around perimeter through upper and insole. This joins everything and allows sole replacement.</li>
+              <li><strong>Outsole:</strong> Heavy leather (8–10 oz) or rubber from tire. Saddle-stitched to welt around full perimeter.</li>
+              <li><strong>Finish:</strong> Burnish edges; treat with tallow or beeswax. Remove last carefully.</li>
+            </ol>
+          </div>
+        </details>
+
+        <!-- ═══ SECTION 8: REPAIR & MAINTENANCE ═══ -->
+        <h2 id="repair">8. Repair &amp; Maintenance</h2>
+
+        <div class="repair-math">
+          <div class="math-line">
+            <span class="math-label">Hours to spin + weave enough fiber for one shirt</span>
+            <span class="math-val">~40 hours</span>
+          </div>
+          <div class="math-line">
+            <span class="math-label">Hours to knit a pair of socks</span>
+            <span class="math-val">~7 hours</span>
+          </div>
+          <div class="math-line">
+            <span class="math-label">Hours to repair a worn sock heel (darning)</span>
+            <span class="math-val">20 minutes</span>
+          </div>
+          <div class="math-line">
+            <span class="math-label">→ Repair first. Always repair at first sign of wear — not after failure.</span>
+            <span class="math-val">200:1 ratio</span>
+          </div>
+        </div>
+
+        <div class="alert-box warning">
+          <p><strong>Harvest patches from completely worn garments before discarding.</strong> A shirt too far gone to wear still contains usable fabric for patches, thread to unravel, and buttons/closures. Nothing from a worn garment goes straight to the trash.</p>
+        </div>
+
+        <h3>Darning (Fabric Hole Repair)</h3>
+        <div class="two-col">
+          <div>
+            <h4>Tools Needed</h4>
+            <ul style="font-size:0.9em;color:#ccc;">
+              <li>Darning mushroom or dome — supports fabric over hole (lightbulb, smooth stone, rounded bottle all work)</li>
+              <li>Yarn or thread matching original fabric weight</li>
+              <li>Needle with eye large enough for yarn</li>
+              <li>Good light — you're weaving fine structure</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Technique</h4>
+            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+              <li>Stretch fabric over dome, hole centered</li>
+              <li>Run parallel threads across hole (warp) — extend ¼" past hole edges into sound fabric each side</li>
+              <li>Turn work 90°; weave perpendicular thread over-under through warp threads and existing fabric</li>
+              <li>Work right up to original fabric at all edges</li>
+              <li>Weave ends into existing fabric; do not knot</li>
+            </ol>
+          </div>
+        </div>
+
+        <h3>Sashiko-Style Preventive Reinforcement</h3>
+
+        <!-- SVG 5: Sashiko Stitch Patterns -->
+        <figure class="svg-figure">
+          <svg viewBox="0 0 420 210" width="420" height="210" xmlns="http://www.w3.org/2000/svg" aria-label="Three sashiko reinforcement patterns: straight grid, diagonal grid, and wave pattern">
+            <rect width="420" height="210" fill="#041408" rx="4" stroke="#0c4020" stroke-width="1"/>
+            <!-- PATTERN 1: Straight grid -->
+            <rect x="10" y="10" width="118" height="118" fill="#050a08" stroke="#0c4020" stroke-width="1" rx="2"/>
+            <text x="69" y="142" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">Straight Grid</text>
+            <!-- Horizontal stitches -->
+            <g stroke="#c9a94e" stroke-width="1.8" stroke-linecap="round">
+              <line x1="16" y1="25" x2="28" y2="25"/><line x1="32" y1="25" x2="44" y2="25"/>
+              <line x1="48" y1="25" x2="60" y2="25"/><line x1="64" y1="25" x2="76" y2="25"/>
+              <line x1="80" y1="25" x2="92" y2="25"/><line x1="96" y1="25" x2="108" y2="25"/>
+              <line x1="16" y1="45" x2="28" y2="45"/><line x1="32" y1="45" x2="44" y2="45"/>
+              <line x1="48" y1="45" x2="60" y2="45"/><line x1="64" y1="45" x2="76" y2="45"/>
+              <line x1="80" y1="45" x2="92" y2="45"/><line x1="96" y1="45" x2="108" y2="45"/>
+              <line x1="16" y1="65" x2="28" y2="65"/><line x1="32" y1="65" x2="44" y2="65"/>
+              <line x1="48" y1="65" x2="60" y2="65"/><line x1="64" y1="65" x2="76" y2="65"/>
+              <line x1="80" y1="65" x2="92" y2="65"/><line x1="96" y1="65" x2="108" y2="65"/>
+              <line x1="16" y1="85" x2="28" y2="85"/><line x1="32" y1="85" x2="44" y2="85"/>
+              <line x1="48" y1="85" x2="60" y2="85"/><line x1="64" y1="85" x2="76" y2="85"/>
+              <line x1="80" y1="85" x2="92" y2="85"/><line x1="96" y1="85" x2="108" y2="85"/>
+              <line x1="16" y1="105" x2="28" y2="105"/><line x1="32" y1="105" x2="44" y2="105"/>
+              <line x1="48" y1="105" x2="60" y2="105"/><line x1="64" y1="105" x2="76" y2="105"/>
+              <line x1="80" y1="105" x2="92" y2="105"/><line x1="96" y1="105" x2="108" y2="105"/>
+            </g>
+            <!-- Vertical stitches -->
+            <g stroke="#7aaccc" stroke-width="1.5" stroke-linecap="round" opacity="0.8">
+              <line x1="30" y1="18" x2="30" y2="30"/><line x1="30" y1="38" x2="30" y2="50"/>
+              <line x1="30" y1="58" x2="30" y2="70"/><line x1="30" y1="78" x2="30" y2="90"/>
+              <line x1="30" y1="98" x2="30" y2="110"/>
+              <line x1="62" y1="18" x2="62" y2="30"/><line x1="62" y1="38" x2="62" y2="50"/>
+              <line x1="62" y1="58" x2="62" y2="70"/><line x1="62" y1="78" x2="62" y2="90"/>
+              <line x1="62" y1="98" x2="62" y2="110"/>
+              <line x1="94" y1="18" x2="94" y2="30"/><line x1="94" y1="38" x2="94" y2="50"/>
+              <line x1="94" y1="58" x2="94" y2="70"/><line x1="94" y1="78" x2="94" y2="90"/>
+              <line x1="94" y1="98" x2="94" y2="110"/>
+            </g>
+            <!-- PATTERN 2: Diagonal grid -->
+            <rect x="145" y="10" width="118" height="118" fill="#050a08" stroke="#0c4020" stroke-width="1" rx="2"/>
+            <text x="204" y="142" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">Diagonal Grid</text>
+            <g stroke="#c9a94e" stroke-width="1.8" stroke-linecap="round">
+              <line x1="152" y1="18" x2="162" y2="28"/><line x1="165" y1="31" x2="175" y2="41"/>
+              <line x1="178" y1="44" x2="188" y2="54"/><line x1="191" y1="57" x2="201" y2="67"/>
+              <line x1="204" y1="70" x2="214" y2="80"/><line x1="217" y1="83" x2="227" y2="93"/>
+              <line x1="230" y1="96" x2="240" y2="106"/>
+              <line x1="152" y1="38" x2="162" y2="48"/><line x1="165" y1="51" x2="175" y2="61"/>
+              <line x1="178" y1="64" x2="188" y2="74"/><line x1="191" y1="77" x2="201" y2="87"/>
+              <line x1="204" y1="90" x2="214" y2="100"/><line x1="217" y1="103" x2="227" y2="113"/>
+              <line x1="152" y1="58" x2="162" y2="68"/><line x1="165" y1="71" x2="175" y2="81"/>
+              <line x1="178" y1="84" x2="188" y2="94"/><line x1="191" y1="97" x2="201" y2="107"/>
+              <line x1="152" y1="78" x2="162" y2="88"/><line x1="165" y1="91" x2="175" y2="101"/>
+              <line x1="178" y1="104" x2="188" y2="114"/>
+            </g>
+            <g stroke="#7aaccc" stroke-width="1.5" stroke-linecap="round" opacity="0.8">
+              <line x1="240" y1="18" x2="230" y2="28"/><line x1="227" y1="31" x2="217" y2="41"/>
+              <line x1="214" y1="44" x2="204" y2="54"/><line x1="201" y1="57" x2="191" y2="67"/>
+              <line x1="188" y1="70" x2="178" y2="80"/><line x1="175" y1="83" x2="165" y2="93"/>
+              <line x1="162" y1="96" x2="152" y2="106"/>
+              <line x1="240" y1="38" x2="230" y2="48"/><line x1="227" y1="51" x2="217" y2="61"/>
+              <line x1="214" y1="64" x2="204" y2="74"/><line x1="201" y1="77" x2="191" y2="87"/>
+              <line x1="188" y1="90" x2="178" y2="100"/><line x1="175" y1="103" x2="165" y2="113"/>
+              <line x1="240" y1="58" x2="230" y2="68"/><line x1="227" y1="71" x2="217" y2="81"/>
+              <line x1="214" y1="84" x2="204" y2="94"/><line x1="201" y1="97" x2="191" y2="107"/>
+              <line x1="240" y1="78" x2="230" y2="88"/><line x1="227" y1="91" x2="217" y2="101"/>
+            </g>
+            <!-- PATTERN 3: Wave / seikaiha -->
+            <rect x="280" y="10" width="130" height="118" fill="#050a08" stroke="#0c4020" stroke-width="1" rx="2"/>
+            <text x="345" y="142" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">Wave (seikaiha)</text>
+            <g stroke="#c9a94e" stroke-width="1.8" fill="none" stroke-linecap="round">
+              <path d="M286 30 Q298 18 310 30 Q322 42 334 30 Q346 18 358 30 Q370 42 382 30 Q394 18 404 30"/>
+              <path d="M286 50 Q298 38 310 50 Q322 62 334 50 Q346 38 358 50 Q370 62 382 50 Q394 38 404 50"/>
+              <path d="M286 70 Q298 58 310 70 Q322 82 334 70 Q346 58 358 70 Q370 82 382 70 Q394 58 404 70"/>
+              <path d="M286 90 Q298 78 310 90 Q322 102 334 90 Q346 78 358 90 Q370 102 382 90 Q394 78 404 90"/>
+              <path d="M286 110 Q298 98 310 110 Q322 122 334 110 Q346 98 358 110 Q370 122 382 110 Q394 98 404 110"/>
+            </g>
+            <!-- Legend -->
+            <rect x="10" y="160" width="400" height="42" fill="#050a08" rx="3" stroke="#0c4020" stroke-width="1"/>
+            <line x1="20" y1="175" x2="50" y2="175" stroke="#c9a94e" stroke-width="2" stroke-linecap="round"/>
+            <text x="58" y="179" fill="#ccc" font-size="9" font-family="monospace">Running stitches in contrasting thread</text>
+            <text x="58" y="195" fill="#888" font-size="9" font-family="monospace">Apply BEFORE fabric fails — at thin spots, knees, elbows, seat. Japanese "boro" tradition of layered repair extends garment life by years.</text>
+          </svg>
+          <figcaption>Three sashiko reinforcement patterns. Applied to high-wear areas before failure. A 20-minute investment prevents reconstruction.</figcaption>
+        </figure>
+
+        <h3>Waterproofing Treatments</h3>
+        <table class="data-table">
+          <thead><tr><th>Treatment</th><th>Apply To</th><th>Method</th><th>Durability</th></tr></thead>
+          <tbody>
+            <tr><td>Beeswax</td><td>Wool, canvas, leather</td><td>Rub cold; heat with sun or warm stone to set into fibers</td><td>Good; reapply seasonally</td></tr>
+            <tr><td>Lanolin</td><td>Wool, leather</td><td>Extract from wool washing water; apply and work in while warm</td><td>Excellent for wool; moderate for leather</td></tr>
+            <tr><td>Pine pitch + fat</td><td>Canvas, leather</td><td>Dissolve pitch in animal fat (3:1); apply warm</td><td>Heavy waterproofing; stiff finish</td></tr>
+            <tr><td>Boiled linseed oil</td><td>Canvas</td><td>Apply thin coat; spread flat to air dry — FIRE RISK if rags piled</td><td>Good; polymerizes to film; reapply yearly</td></tr>
+            <tr><td>Tallow</td><td>Leather</td><td>Warm and work in thoroughly; feeds the leather</td><td>Good; traditional; prevents cracking</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Washing Without Machines</h3>
+        <div class="two-col">
+          <div>
+            <h4>Methods</h4>
+            <ul style="font-size:0.9em;color:#ccc;">
+              <li><strong>Washboard:</strong> Wooden board with ridges or corrugated bark. Soap and scrub. Effective for heavy soil.</li>
+              <li><strong>Plunger bucket:</strong> 5-gallon bucket + standard plunger. Surprisingly effective agitation. Better than hand-squeezing alone.</li>
+              <li><strong>Stream rock:</strong> Beat soapy wet clothing against flat rocks at stream edge. Traditional worldwide.</li>
+              <li><strong>Spot treatment:</strong> Use far less soap than you think. Pre-soak in cold water; treat only dirty areas.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Rules by Fiber</h4>
+            <ul style="font-size:0.9em;color:#ccc;">
+              <li><strong>Wool:</strong> Cold water ONLY. Hot water + agitation = felting (irreversible). Squeeze gently; never wring. Rinse at same temperature. Dry flat — never hang (stretches). No direct sun.</li>
+              <li><strong>Cotton/linen:</strong> Tolerates hot water and scrubbing. Can boil. Wringing is fine. Sun bleaches and disinfects.</li>
+              <li><strong>Leather:</strong> Do not wash in water. Wipe clean with damp cloth; re-oil immediately after.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ═══ SECTION 9: INSULATION & LAYERING ═══ -->
+        <h2 id="insulation">9. Insulation &amp; Layering</h2>
+
+        <h3>Down Alternatives Comparison</h3>
+        <table class="data-table">
+          <thead>
+            <tr><th>Material</th><th>Warmth vs Down</th><th>Wet Performance</th><th>Weight</th><th>Availability</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Down (reference)</td><td>100%</td><td>Poor (clumps, loses loft)</td><td>Very light</td><td>Harvest from geese/ducks</td></tr>
+            <tr><td>Milkweed floss</td><td>~150% by weight</td><td>Moderate</td><td>Very light</td><td>Common (disturbed areas)</td></tr>
+            <tr><td>Cattail fluff</td><td>~70%</td><td>Very poor (clumps)</td><td>Light</td><td>Very common (wetlands)</td></tr>
+            <tr><td>Wool batting</td><td>~60%</td><td>Excellent (warm when wet)</td><td>Moderate</td><td>Good if sheep available</td></tr>
+            <tr><td>Dog/rabbit fur</td><td>~50%</td><td>Moderate</td><td>Light–moderate</td><td>Variable</td></tr>
+            <tr><td>Feathers (non-down)</td><td>~40%</td><td>Poor</td><td>Moderate</td><td>Poultry or waterfowl</td></tr>
+            <tr><td>Dry grass</td><td>~30%</td><td>Very poor</td><td>Heavy</td><td>Universal</td></tr>
+            <tr><td>Newspaper layers</td><td>~25%</td><td>Very poor</td><td>Moderate</td><td>Emergency only</td></tr>
+          </tbody>
+        </table>
+
+        <h3>The Three-Layer System (Without Synthetics)</h3>
+        <div class="info-grid">
+          <div class="card">
+            <h3>Base Layer (Next to Skin)</h3>
+            <p><strong>Wool wins.</strong> Wicks moisture, stays warm when damp, naturally antibacterial. Fine wool or linen both work. <strong>Never cotton in cold or wet conditions</strong> — "cotton kills" is a real principle. Wet cotton loses all insulation value and conducts heat away from the body.</p>
+          </div>
+          <div class="card">
+            <h3>Mid Layer (Insulation)</h3>
+            <p>Wool sweater or quilted insulated garment. Your primary heat-trapping layer. Dead air space between fibers insulates — thickness matters. A knit wool sweater works. A linen shell stuffed with milkweed or cattail fluff works. Multiple thinner layers beat one thick layer.</p>
+          </div>
+          <div class="card">
+            <h3>Outer Layer (Shell)</h3>
+            <p>Blocks wind and rain. Waxed canvas: best balance of wind/water resistance and breathability. Leather: excellent wind and rain block; heavy but durable for decades. Tightly woven fulled wool: naturally somewhat water resistant; warm even when damp.</p>
+          </div>
+          <div class="card">
+            <h3>Extremities First</h3>
+            <p>Hands, feet, and head lose heat fastest. Wool socks (change when wet — wet socks cause trench foot); fat-treated leather boots; wool mittens with waxed canvas shell; wool hat covering ears. Replace extremity gear before central garments fail.</p>
+          </div>
+        </div>
+
+        <div class="callout-critical">
+          <strong>Cotton kills in cold/wet conditions.</strong> Wet cotton has nearly zero insulating value and accelerates heat loss. A person in wet cotton at 50°F (10°C) with wind can develop hypothermia in under two hours. In cold climates, replacing cotton base layers with wool is a survival priority, not a preference.
+        </div>
+
+        <h3>Emergency Insulation</h3>
+        <div class="info-grid">
+          <div class="card">
+            <h3>Newspaper Between Layers</h3>
+            <p>Newspapers tucked between shirt and jacket trap air and provide surprisingly effective insulation — the dead air in the paper is the mechanism. Multiple layers work better. Works only while dry. A newspaper vest extends warmth by an estimated 20–30% in an emergency.</p>
+          </div>
+          <div class="card">
+            <h3>Dry Leaves in a Bag</h3>
+            <p>Fill a large bag (feed sack, garbage bag) with dry leaves. Wear under jacket. Dead air space in the leaves insulates — same principle as a debris hut, applied to clothing. Replace stuffing when wet — wet material takes space while providing zero warmth.</p>
+          </div>
+          <div class="card">
+            <h3>Bubble Wrap</h3>
+            <p>Pre-collapse cache item. Each bubble is a sealed dead-air cell — excellent insulation by weight. Wrap limbs or torso. Doesn't breathe; causes sweating under activity. Best for sheltered rest or short emergency cold exposure. Seals out wind entirely.</p>
+          </div>
+          <div class="card">
+            <h3>Stuffing Any Shell Garment</h3>
+            <p>Any outer shell can be stuffed with dry grass, cattail fluff, moss, or crumpled paper for emergency insulation. Lace or tie openings closed. Crude but functional. The Inuit principle: trap air, block wind, you survive.</p>
+          </div>
+        </div>
+
+        <!-- ═══ QUICK REFERENCE ═══ -->
+        <h2 id="quick-ref">Quick Reference</h2>
+        <div class="info-grid">
+          <div class="card">
+            <h3>First Things to Make (Priority Order)</h3>
+            <ol style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+              <li>Drop spindle (30 min, any scrap wood)</li>
+              <li>Frame loom (4–6 hours, scrap lumber)</li>
+              <li>Repair existing clothing before making new</li>
+              <li>Wool socks (DPN knitting or woven)</li>
+              <li>Wool hat (fastest knit; highest warmth impact)</li>
+              <li>Simple moccasins from leather scraps</li>
+              <li>Waterproof outer shell (wax existing canvas)</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>Cache Before Collapse</h3>
+            <ul style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+              <li>Dental floss (1 lb+ per person — extraordinary thread)</li>
+              <li>Needles (sewing, darning, tapestry sizes)</li>
+              <li>Beeswax blocks (waterproofing + thread wax)</li>
+              <li>Hand cards (for carding fiber)</li>
+              <li>Wool roving or raw fleece</li>
+              <li>Leather scraps (various weights)</li>
+              <li>Waxed linen thread</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Rules That Matter Most</h3>
+            <ul style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+              <li>Repair at first sign of wear — not after failure</li>
+              <li>No cotton base layers in cold or wet</li>
+              <li>Wool warm when wet; cotton is a hazard</li>
+              <li>Never hot-wash wool — cold only, no agitation</li>
+              <li>Saddle stitch leather; never single-thread</li>
+              <li>Dry insulation = insulation; wet = conduction</li>
+              <li>Alternate wet and dry footwear to let each dry</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Time Estimates</h3>
+            <ul style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+              <li>Drop spindle: 30 min to build</li>
+              <li>Frame loom: 4–6 hours to build</li>
+              <li>Darning a sock hole: 20 min</li>
+              <li>Soft moccasins: 30–60 min</li>
+              <li>Wool socks (knit): 6–8 hours</li>
+              <li>Wool hat (knit): 2–4 hours</li>
+              <li>Wool mittens: 3–5 hours</li>
+              <li>Adult sweater: 40–60 hours</li>
+              <li>Full shirt (spin/weave/sew): 80–120 hours</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="alert-box info">
+          <p><strong>The core principle:</strong> Every hour invested in textile skills compounds. Learning to darn now means every future garment lasts 3–5× longer. Learning to spin means fiber from animals and plants becomes clothing. These skills cannot be improvised under stress — practice before they are needed.</p>
+        </div>
+
+      <nav class="section-pagination no-print" aria-label="Section navigation">
+        <a href="chemistry.html" class="pagination-btn pagination-prev">← Chemistry</a>
+        <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+        <a href="vehicles.html" class="pagination-btn pagination-next">Vehicles →</a>
+      </nav>
+      </div><!-- /content-wrapper -->
+    </div><!-- /main-content -->
+
+    <aside id="aria-panel" class="aria-panel">
+      <div class="aria-header">
+        <div class="aria-status">
+          <span class="status-dot"></span>
+          <span class="aria-status-label">Bunker Bot</span>
+          <span id="aria-model-badge" class="model-badge"></span>
+        </div>
+        <button id="aria-close" class="btn-icon">✕</button>
+      </div>
+      <div id="aria-messages" class="aria-messages"></div>
+      <div class="aria-input-row">
+        <input type="text" id="aria-input" placeholder="Ask Bunker Bot…" autocomplete="off">
+        <button id="aria-send" class="btn btn-sm btn-amber">Send</button>
+      </div>
+    </aside>
+  </div><!-- /app-shell -->
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/search.js"></script>
+  <script src="../assets/js/aria.js"></script>
+</body>
+</html>

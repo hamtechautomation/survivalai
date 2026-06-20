@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Climate &amp; Regional Survival — zone-specific survival strategies, UK wild edibles, foraging calendar, and country-specific hazards.">
+  <title>Climate &amp; Regional Survival — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* ── Climate zone picker ── */
+    .zone-picker {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .6rem;
+      margin: 1.2rem 0;
+    }
+    @media (max-width: 600px) { .zone-picker { grid-template-columns: repeat(2, 1fr); } }
+
+    .zone-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .3rem;
+      padding: .65rem .4rem;
+      background: var(--bg-2);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-1);
+      cursor: pointer;
+      font-size: .8rem;
+      text-align: center;
+      transition: border-color .15s, background .15s, color .15s;
+      line-height: 1.25;
+    }
+    .zone-btn .zone-icon { font-size: 1.5rem; }
+    .zone-btn .zone-name { font-weight: 600; }
+    .zone-btn .zone-sub  { font-size: .7rem; color: var(--text-2); }
+    .zone-btn:hover  { border-color: var(--amber); }
+    .zone-btn.active { border-color: var(--amber); background: var(--bg-3); color: var(--amber); }
+    .zone-btn.active .zone-sub { color: var(--amber-dim); }
+
+    /* ── Zone info panel ── */
+    .zone-info {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .25s ease, transform .25s ease;
+      pointer-events: none;
+    }
+    .zone-info.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .zone-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .75rem;
+      margin: .75rem 0;
+    }
+    @media (max-width: 600px) { .zone-grid { grid-template-columns: 1fr; } }
+
+    .zone-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .75rem;
+    }
+    .zone-card h4 {
+      margin: 0 0 .4rem;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--amber);
+    }
+    .zone-card p, .zone-card li {
+      font-size: .875rem;
+      color: var(--text-1);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .zone-card ul { margin: .3rem 0 0; padding-left: 1.1rem; }
+    .zone-card li { margin: .15rem 0; }
+    .zone-banner {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .6rem .85rem;
+      border-radius: 8px;
+      margin-bottom: .6rem;
+      font-weight: 600;
+    }
+    .zone-banner .banner-icon { font-size: 1.8rem; }
+    .zone-banner .banner-text { flex: 1; }
+    .zone-banner .banner-sub { font-size: .75rem; font-weight: 400; opacity: .8; }
+
+    /* ── Foraging wheel ── */
+    .foraging-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      margin: 1rem 0;
+    }
+    @media (max-width: 700px) {
+      .foraging-layout { grid-template-columns: 1fr; }
+      #foraging-wheel { max-width: 280px; margin: 0 auto; display: block; }
+    }
+    #foraging-wheel { width: 100%; cursor: pointer; }
+    .month-arc {
+      transition: opacity .15s;
+      cursor: pointer;
+    }
+    .month-arc:hover .month-seg { opacity: .8; }
+
+    .month-detail {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .85rem 1rem;
+      min-height: 200px;
+    }
+    .month-detail h3 {
+      margin: 0 0 .5rem;
+      font-size: 1rem;
+      color: var(--amber);
+    }
+    .month-detail .avail-row {
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      margin: .35rem 0;
+      font-size: .85rem;
+    }
+    .avail-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: .2rem;
+    }
+    .month-detail .peak-label {
+      font-size: .7rem;
+      color: var(--amber);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .wheel-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem .75rem;
+      margin: .5rem 0;
+      font-size: .75rem;
+      color: var(--text-2);
+    }
+    .legend-dot {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      margin-right: .25rem;
+      vertical-align: middle;
+    }
+
+    /* ── UK edibles table ── */
+    .edible-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    .edible-table th { background: var(--bg-3); color: var(--amber); text-align: left; padding: .4rem .6rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }
+    .edible-table td { padding: .4rem .6rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .edible-table tr:hover td { background: var(--bg-2); }
+    .edible-table .plant-name { font-weight: 600; color: var(--text-0); }
+    .edible-table .plant-latin { font-size: .72rem; color: var(--text-2); display: block; }
+    .tag-safe    { background: #1a3a1a; color: #6abf6a; border-radius: 3px; padding: .1rem .35rem; font-size: .7rem; }
+    .tag-caution { background: #3a2a00; color: #d4a843; border-radius: 3px; padding: .1rem .35rem; font-size: .7rem; }
+    .tag-coastal { background: #001a2a; color: #4aabcf; border-radius: 3px; padding: .1rem .35rem; font-size: .7rem; }
+
+    /* ── Season strip ── */
+    .season-strip { display: flex; gap: 0; border-radius: 4px; overflow: hidden; margin: .4rem 0; height: 8px; }
+    .season-strip span { flex: 1; }
+    .s-off  { background: var(--bg-4); }
+    .s-low  { background: #4a6e1a; }
+    .s-peak { background: #6abf2a; }
+
+    /* ── Climate band SVG diagram ── */
+    .climate-band-diagram { margin: 1rem 0; }
+
+    /* ── Hazard tags ── */
+    .hazard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .5rem;
+      margin: .75rem 0;
+    }
+    .hazard-item {
+      background: var(--bg-2);
+      border-left: 3px solid var(--red, #c0392b);
+      border-radius: 0 6px 6px 0;
+      padding: .4rem .65rem;
+      font-size: .85rem;
+    }
+    .hazard-item strong { display: block; color: var(--text-0); font-size: .8rem; }
+    .hazard-item span  { color: var(--text-2); font-size: .75rem; }
+  </style>
+</head>
+<body>
+
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Climate &amp; Regional Survival</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline no-print" data-print>🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary no-print">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>🌍 Climate &amp; Regional Survival</h1>
+    <p class="section-desc">
+      Survival strategy is climate strategy. What kills you in the UK (wet-cold) is irrelevant in the Sahara (dehydration at dawn).
+      This section gives you zone-by-zone cheat sheets — with a deep focus on the United Kingdom,
+      including a seasonal foraging calendar and wild edibles field guide.
+    </p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2026-06"></span></span>
+      <span class="meta-item">⏱️ <span id="reading-time"></span></span>
+      <span class="meta-item">🇬🇧 UK-focused</span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#climate-zones">Survival by Climate Zone</a></li>
+      <li><a href="#uk-focus">United Kingdom — Field Guide</a></li>
+      <li><a href="#uk-edibles">UK Wild Edibles — Illustrated Guide</a></li>
+      <li><a href="#uk-edibles-table">UK Wild Edibles A–Z Table</a></li>
+      <li><a href="#free-resources">Free Reference PDFs &amp; Resources</a></li>
+      <li><a href="#uk-hazards">UK-Specific Hazards</a></li>
+      <li><a href="#plant-safety">Plant ID Safety Rules</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-content">
+      <strong>Never eat a plant you cannot positively identify.</strong>
+      Several deadly UK species (hemlock water dropwort, giant hogweed, deadly nightshade) closely resemble edible ones.
+      Use at least two identification features. When in doubt, leave it out.
+    </div>
+  </div>
+
+  <!-- =================== SECTION 1: CLIMATE ZONES =================== -->
+  <section id="climate-zones">
+    <h2>1. Survival by Climate Zone</h2>
+    <p>Select your climate zone to see zone-specific priorities. The UK sits in the <strong>Temperate Maritime</strong> zone — selected by default.</p>
+
+    <!-- Zone picker buttons (rendered by JS) -->
+    <div class="zone-picker" id="zone-picker" role="tablist" aria-label="Climate zone selector"></div>
+
+    <!-- Animated info panel (rendered by JS) -->
+    <div id="zone-info-panel"></div>
+  </section>
+
+  <!-- =================== SECTION 2: UK DEEP DIVE =================== -->
+  <section id="uk-focus">
+    <h2>2. United Kingdom — Field Guide</h2>
+
+    <div class="callout callout-green" style="margin-bottom:1.2rem">
+      <span class="callout-icon">🇬🇧</span>
+      <div class="callout-content">
+        <strong>The UK advantage:</strong> Temperate climate, very high rainfall, and exceptionally rich hedgerow and woodland ecosystems mean food
+        and water are rarely the immediate killer. Hypothermia is. Keep dry, keep moving, and the British countryside is remarkably survivable.
+      </div>
+    </div>
+
+    <h3 id="foraging-calendar">Seasonal Foraging Calendar</h3>
+    <p>Click any month on the wheel to see what's available. Rings show: <strong>leaves/greens</strong>, <strong>flowers</strong>, <strong>berries &amp; fruit</strong>, <strong>nuts</strong>, and <strong>fungi</strong>.</p>
+
+    <div class="foraging-layout">
+      <div>
+        <svg id="foraging-wheel" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"
+             role="img" aria-label="UK foraging calendar wheel — click a month to see what's in season">
+          <!-- Generated by JS below -->
+        </svg>
+        <div class="wheel-legend" id="wheel-legend"></div>
+      </div>
+      <div id="month-detail" class="month-detail">
+        <h3>Select a month</h3>
+        <p style="color:var(--text-2);font-size:.85rem">Click any segment on the wheel to see what's in season across the UK.</p>
+      </div>
+    </div>
+
+    <h3>UK Water Sources</h3>
+    <table class="data-table" style="margin:.75rem 0">
+      <thead><tr><th>Source</th><th>Quality</th><th>Treatment needed</th></tr></thead>
+      <tbody>
+        <tr><td>Chalk streams (S. England)</td><td>Excellent — natural filtration through chalk</td><td>Boil or filter as precaution</td></tr>
+        <tr><td>Moorland streams (peat-stained)</td><td>Good — brown colour is tannin, not contamination</td><td>Filter + boil; brown comes out</td></tr>
+        <tr><td>Lowland rivers (Thames, Severn)</td><td>Fair — agriculture runoff, urban pollution</td><td>Filter + purify; avoid near farms</td></tr>
+        <tr><td>Rainwater (roof or tarp collection)</td><td>Excellent — UK averages 885mm/year</td><td>First-flush rule (discard first 5 min)</td></tr>
+        <tr><td>Coastal springs</td><td>Good — test for salt intrusion</td><td>Taste test; avoid if salty</td></tr>
+        <tr><td>Dew (grass, leaves)</td><td>Clean</td><td>None required; collection rate low</td></tr>
+      </tbody>
+    </table>
+
+    <h3>UK Shelter Priorities</h3>
+    <ol>
+      <li><strong>Windbreak first.</strong> Wet + wind = fast hypothermia even at 10°C. A windbreak drops effective temperature dramatically.</li>
+      <li><strong>Woodland over open ground.</strong> Broadleaf woodland (oak, beech, hazel) provides natural shelter, fuel, and food.</li>
+      <li><strong>Debris hut construction.</strong> Ridge pole between two trees + bracken/leaf litter insulation. Dry bracken is excellent — it traps air. Aim for 1m of dry leaf insulation on all sides.</li>
+      <li><strong>Dry stone walls.</strong> Common in upland areas (Yorkshire Dales, Dartmoor, Brecon Beacons). A wall provides an immediate windbreak and the basis of a lean-to.</li>
+      <li><strong>Never on low ground near water.</strong> UK rivers flood quickly and without much warning. Sleep on raised ground.</li>
+    </ol>
+
+    <h3>UK Fire Starting</h3>
+    <div class="callout callout-amber" style="margin:.6rem 0">
+      <span class="callout-icon">🔥</span>
+      <div class="callout-content">
+        <strong>Everything is wet in the UK.</strong> Carry multiple ignition sources. Never rely on a single method.
+      </div>
+    </div>
+    <ul>
+      <li><strong>Birch bark:</strong> The most reliable UK tinder. The white outer bark contains oils that burn even when damp. Peel back to dry inner layers.</li>
+      <li><strong>Dead bracken:</strong> Dry, crinkled fronds (look inside the mass for dry centres). Burns fast — use as kindling, not tinder.</li>
+      <li><strong>Elder pith:</strong> The spongy centre of elder stems. Light, dry inside even in rain. Excellent char cloth substitute.</li>
+      <li><strong>Jute twine / fatwood:</strong> Carry commercial fire starters as backup. Pine resin (look for sticky wounds on Scots pine) makes excellent firestarters.</li>
+      <li><strong>Inside fallen logs:</strong> Split a dead log — the interior wood is often completely dry even after weeks of rain.</li>
+      <li><strong>Feather sticks:</strong> Shave dry inner wood into curls with a knife. Creates a high-surface-area tinder bundle that catches easily.</li>
+    </ul>
+
+    <h3>UK Navigation Notes</h3>
+    <ul>
+      <li><strong>Ordnance Survey (OS) maps:</strong> The UK has the world's most detailed publicly available topographic maps. Download OsmAnd or OS Maps for offline use before an emergency.</li>
+      <li><strong>Rights of Way:</strong> England and Wales have over 140,000 miles of public footpaths. Scotland has right to roam. These create natural movement corridors.</li>
+      <li><strong>Hedgerows as nav aids:</strong> Hedgerows mark ancient field boundaries and parish lines. Follow them to find settlements.</li>
+      <li><strong>Church towers:</strong> Historically visible from most of the English countryside. If you can see a church, follow the highest ground toward it.</li>
+      <li><strong>Downhill = civilization (usually):</strong> Follow water downhill. In the UK, all rivers eventually reach an inhabited valley.</li>
+    </ul>
+  </section>
+
+  <!-- =================== SECTION 3: UK EDIBLES =================== -->
+  <section id="uk-edibles">
+    <h2>3. UK Wild Edibles — Illustrated Guide</h2>
+    <p>Each sketch highlights the <strong>single most important identification feature</strong>. Study the leaf shape — it's what you see in the field before flowers or fruit appear.
+       The final card shows the UK's most dangerous lookalike — <strong>know it before you forage</strong>.</p>
+
+    <style>
+      .plant-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0; }
+      .plant-card { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+      .plant-card.danger { border-color: #8a2020; }
+      .plant-card svg { width: 100%; display: block; }
+      .plant-card-info { padding: .55rem .75rem; }
+      .plant-card-info h4 { margin: 0 0 .2rem; font-size: .85rem; color: var(--text-0); }
+      .plant-card-info .latin { font-size: .72rem; color: var(--text-2); font-style: italic; display: block; margin-bottom: .35rem; }
+      .plant-card-info ul { margin: 0; padding-left: 1rem; }
+      .plant-card-info li { font-size: .78rem; color: var(--text-1); margin: .12rem 0; line-height: 1.35; }
+      .plant-card-info .warn-tag { background: #3a0000; color: #ff8888; border-radius: 3px; padding: .1rem .35rem; font-size: .7rem; display: inline-block; margin-bottom: .3rem; }
+      .plant-card-info .safe-tag { background: #003a00; color: #6abf6a; border-radius: 3px; padding: .1rem .35rem; font-size: .7rem; display: inline-block; margin-bottom: .3rem; }
+    </style>
+
+    <div class="plant-grid">
+
+      <!-- ═══ NETTLE ═══ -->
+      <div class="plant-card">
+        <svg viewBox="0 0 220 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="165" fill="#0c140c"/>
+          <!-- stem -->
+          <line x1="110" y1="8" x2="110" y2="155" stroke="#4a7a4a" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- upper-left leaf body -->
+          <path d="M110,52 C104,48 88,40 74,38 C60,36 50,40 50,50 C50,60 64,65 82,62 C96,60 107,55 110,52 Z" fill="#1e4a1e" stroke="#5abf5a" stroke-width="1.5"/>
+          <!-- serrations upper-left (spikes along top edge) -->
+          <path d="M74,38 L71,33 L75,37 L72,31 L77,36 L73,29 L79,34 L76,28 L82,33 L79,27 L85,32 L82,26 L88,31 L86,26 L92,30 L89,25 L96,30 L94,25 L100,29 L98,24 L105,28 L103,24 L109,28" stroke="#5abf5a" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <!-- midrib upper-left -->
+          <line x1="110" y1="52" x2="52" y2="46" stroke="#3a9f3a" stroke-width="0.8"/>
+          <!-- upper-right leaf body (mirror) -->
+          <path d="M110,52 C116,48 132,40 146,38 C160,36 170,40 170,50 C170,60 156,65 138,62 C124,60 113,55 110,52 Z" fill="#1e4a1e" stroke="#5abf5a" stroke-width="1.5"/>
+          <!-- serrations upper-right -->
+          <path d="M146,38 L149,33 L145,37 L148,31 L143,36 L147,29 L141,34 L144,28 L138,33 L141,27 L135,32 L138,26 L132,31 L134,26 L128,30 L131,25 L124,30 L126,25 L120,29 L122,24 L115,28 L117,24 L111,28" stroke="#5abf5a" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <line x1="110" y1="52" x2="168" y2="46" stroke="#3a9f3a" stroke-width="0.8"/>
+          <!-- lower-left leaf (bigger) -->
+          <path d="M110,98 C102,93 78,80 58,78 C38,76 24,82 24,95 C24,108 46,114 76,110 C96,107 107,103 110,98 Z" fill="#1e4a1e" stroke="#5abf5a" stroke-width="1.5"/>
+          <path d="M58,78 L55,72 L60,76 L56,70 L62,75 L58,68 L64,73 L60,66 L67,71 L63,65 L70,69 L67,63 L74,68 L71,62 L78,67 L76,61 L83,65 L81,60 L88,64 L86,59 L93,63 L92,58 L99,63 L98,58 L105,62 L104,57 L110,62" stroke="#5abf5a" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <line x1="110" y1="98" x2="27" y2="88" stroke="#3a9f3a" stroke-width="0.8"/>
+          <!-- lower-right leaf (bigger, mirror) -->
+          <path d="M110,98 C118,93 142,80 162,78 C182,76 196,82 196,95 C196,108 174,114 144,110 C124,107 113,103 110,98 Z" fill="#1e4a1e" stroke="#5abf5a" stroke-width="1.5"/>
+          <path d="M162,78 L165,72 L160,76 L164,70 L158,75 L162,68 L156,73 L160,66 L153,71 L157,65 L150,69 L153,63 L146,68 L149,62 L142,67 L144,61 L137,65 L139,60 L132,64 L134,59 L127,63 L128,58 L121,63 L122,58 L115,62 L116,57 L110,62" stroke="#5abf5a" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <line x1="110" y1="98" x2="193" y2="88" stroke="#3a9f3a" stroke-width="0.8"/>
+          <!-- stinging hair dots -->
+          <circle cx="68" cy="56" r="1.5" fill="#aaff88" opacity=".7"/>
+          <circle cx="62" cy="49" r="1.5" fill="#aaff88" opacity=".7"/>
+          <!-- label: opposite pairs -->
+          <line x1="110" y1="75" x2="14" y2="75" stroke="#888" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <text x="12" y="73" font-size="8" fill="#aaa" font-family="monospace" text-anchor="end">opposite</text>
+          <text x="12" y="82" font-size="8" fill="#aaa" font-family="monospace" text-anchor="end">pairs</text>
+          <!-- label: serrated -->
+          <line x1="72" y1="32" x2="52" y2="22" stroke="#888" stroke-width="0.8"/>
+          <text x="50" y="20" font-size="7.5" fill="#88ee88" font-family="monospace" text-anchor="middle">serrated</text>
+          <!-- caption -->
+          <rect x="0" y="148" width="220" height="17" fill="#0a200a"/>
+          <text x="110" y="160" text-anchor="middle" font-size="8.5" fill="#5abf5a" font-family="monospace" font-weight="600">STINGING NETTLE</text>
+        </svg>
+        <div class="plant-card-info">
+          <span class="safe-tag">Safe — boil/blanch</span>
+          <h4>Stinging Nettle <em style="font-weight:400;color:var(--text-2)">Urtica dioica</em></h4>
+          <ul>
+            <li>Leaves in <strong>opposite pairs</strong>, deeply serrated/toothed</li>
+            <li>Square stem with visible stinging hairs</li>
+            <li>Heart-shaped leaf base; tip pointed</li>
+            <li>Boil or blanch for 30 sec — removes sting completely</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ WILD GARLIC ═══ -->
+      <div class="plant-card">
+        <svg viewBox="0 0 220 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="165" fill="#0c140c"/>
+          <!-- Large oval leaf - smooth edges, NO teeth -->
+          <path d="M110,152 C90,140 45,115 30,80 C15,45 35,20 60,22 C80,24 95,40 110,60 C125,40 140,24 160,22 C185,20 205,45 190,80 C175,115 130,140 110,152 Z" fill="#1a4a1a" stroke="#5abf5a" stroke-width="1.8"/>
+          <!-- parallel veins (the KEY feature — straight, from midrib to edge) -->
+          <line x1="110" y1="152" x2="110" y2="20" stroke="#3a9f3a" stroke-width="1.2"/>
+          <line x1="110" y1="140" x2="65" y2="60" stroke="#2a7a2a" stroke-width="0.9"/>
+          <line x1="110" y1="140" x2="155" y2="60" stroke="#2a7a2a" stroke-width="0.9"/>
+          <line x1="110" y1="125" x2="44" y2="75" stroke="#2a6a2a" stroke-width="0.8"/>
+          <line x1="110" y1="125" x2="176" y2="75" stroke="#2a6a2a" stroke-width="0.8"/>
+          <line x1="110" y1="108" x2="30" y2="88" stroke="#1a5a1a" stroke-width="0.7"/>
+          <line x1="110" y1="108" x2="190" y2="88" stroke="#1a5a1a" stroke-width="0.7"/>
+          <!-- flower cluster (white stars, top right) -->
+          <g transform="translate(170, 38)">
+            <!-- small star flowers -->
+            <circle cx="0" cy="0" r="3" fill="#eee" stroke="#ccc" stroke-width="0.5"/>
+            <circle cx="12" cy="-5" r="3" fill="#eee" stroke="#ccc" stroke-width="0.5"/>
+            <circle cx="8" cy="8" r="3" fill="#eee" stroke="#ccc" stroke-width="0.5"/>
+            <circle cx="-5" cy="9" r="3" fill="#eee" stroke="#ccc" stroke-width="0.5"/>
+            <circle cx="-10" cy="-2" r="3" fill="#eee" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="0" y1="0" x2="0" y2="18" stroke="#4a8a4a" stroke-width="1"/>
+          </g>
+          <!-- label: SMOOTH edges (no teeth) -->
+          <line x1="35" y1="65" x2="10" y2="55" stroke="#888" stroke-width="0.8"/>
+          <text x="8" y="50" font-size="7.5" fill="#88ee88" font-family="monospace" text-anchor="middle">SMOOTH</text>
+          <text x="8" y="59" font-size="7.5" fill="#88ee88" font-family="monospace" text-anchor="middle">edges</text>
+          <!-- label: parallel veins -->
+          <line x1="65" y1="60" x2="42" y2="42" stroke="#888" stroke-width="0.8"/>
+          <text x="40" y="36" font-size="7.5" fill="#aaa" font-family="monospace" text-anchor="middle">parallel</text>
+          <text x="40" y="44" font-size="7.5" fill="#aaa" font-family="monospace" text-anchor="middle">veins</text>
+          <!-- CRITICAL: smell warning -->
+          <rect x="4" y="8" width="116" height="13" fill="#1a1a00" rx="2"/>
+          <text x="62" y="18" text-anchor="middle" font-size="8.5" fill="#ffdd44" font-family="monospace" font-weight="bold">⚠️ MUST smell of garlic</text>
+          <!-- caption -->
+          <rect x="0" y="148" width="220" height="17" fill="#0a200a"/>
+          <text x="110" y="160" text-anchor="middle" font-size="8.5" fill="#5abf5a" font-family="monospace" font-weight="600">WILD GARLIC</text>
+        </svg>
+        <div class="plant-card-info">
+          <span class="safe-tag">Safe — confirm smell first</span>
+          <h4>Wild Garlic <em style="font-weight:400;color:var(--text-2)">Allium ursinum</em></h4>
+          <ul>
+            <li>Single broad oval leaf — <strong>smooth edges, NO teeth</strong></li>
+            <li><strong>Parallel veins</strong> running length of leaf (not branching)</li>
+            <li>Crushed leaf <strong>must smell strongly of garlic</strong> — this is your safety check</li>
+            <li>Lookalikes (lily of valley, lords &amp; ladies) have no smell</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ BLACKBERRY ═══ -->
+      <div class="plant-card">
+        <svg viewBox="0 0 220 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="165" fill="#0c140c"/>
+          <!-- arching cane (stem) with thorns -->
+          <path d="M20,145 C40,100 90,60 200,30" fill="none" stroke="#6a4a2a" stroke-width="3" stroke-linecap="round"/>
+          <!-- thorns (hooked) -->
+          <path d="M55,118 L48,112 L54,115" fill="none" stroke="#9a7a4a" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M90,95 L82,88 L89,92" fill="none" stroke="#9a7a4a" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M130,70 L122,63 L129,67" fill="none" stroke="#9a7a4a" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M165,50 L157,43 L164,47" fill="none" stroke="#9a7a4a" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- compound leaf (3 leaflets on petiole) -->
+          <line x1="90" y1="95" x2="90" y2="55" stroke="#5a7a3a" stroke-width="1.5"/>
+          <!-- Centre leaflet -->
+          <path d="M90,55 C82,50 68,46 62,50 C56,54 58,64 68,66 C78,68 88,62 90,55 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.4"/>
+          <path d="M62,50 L59,46 L63,49 L60,44 L65,48 L62,43 L67,47 L64,42 L70,46 L67,41 L74,45 L71,40 L78,44 L75,40 L82,43 L79,39 L86,43 L84,39 L90,43" stroke="#4abf4a" stroke-width="0.9" fill="none"/>
+          <line x1="90" y1="55" x2="63" y2="53" stroke="#2a8f2a" stroke-width="0.7"/>
+          <!-- Left leaflet -->
+          <line x1="90" y1="70" x2="70" y2="60" stroke="#5a7a3a" stroke-width="1.2"/>
+          <path d="M70,60 C63,56 52,53 47,57 C42,61 44,69 53,71 C62,73 68,68 70,60 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.2"/>
+          <!-- Right leaflet -->
+          <line x1="90" y1="70" x2="112" y2="60" stroke="#5a7a3a" stroke-width="1.2"/>
+          <path d="M112,60 C118,56 128,53 133,57 C138,61 136,69 127,71 C118,73 113,68 112,60 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.2"/>
+          <!-- Berry cluster (drupelets) -->
+          <g transform="translate(155, 100)">
+            <!-- green unripe -->
+            <circle cx="0" cy="0" r="7" fill="#2a5a2a" stroke="#4a8a4a" stroke-width="1"/>
+            <!-- red ripening -->
+            <circle cx="12" cy="-4" r="7" fill="#8a1a1a" stroke="#aa3a3a" stroke-width="1"/>
+            <!-- black ripe berries -->
+            <circle cx="6" cy="10" r="7" fill="#1a0a1a" stroke="#5a2a5a" stroke-width="1"/>
+            <circle cx="20" cy="8" r="7" fill="#1a0a1a" stroke="#5a2a5a" stroke-width="1"/>
+            <circle cx="24" cy="-2" r="7" fill="#0a0a0a" stroke="#4a1a4a" stroke-width="1"/>
+            <!-- drupelet texture on one berry -->
+            <circle cx="6" cy="10" r="3" fill="none" stroke="#3a1a3a" stroke-width="1"/>
+            <circle cx="6" cy="7" r="1.5" fill="#2a1a2a"/>
+            <circle cx="9" cy="12" r="1.5" fill="#2a1a2a"/>
+            <circle cx="3" cy="12" r="1.5" fill="#2a1a2a"/>
+          </g>
+          <!-- labels -->
+          <text x="48" y="40" font-size="8" fill="#4abf4a" font-family="monospace">3 leaflets</text>
+          <line x1="55" y1="42" x2="75" y2="51" stroke="#888" stroke-width="0.8"/>
+          <text x="44" y="110" font-size="8" fill="#9a7a4a" font-family="monospace">hooked</text>
+          <text x="44" y="119" font-size="8" fill="#9a7a4a" font-family="monospace">thorns</text>
+          <line x1="62" y1="112" x2="83" y2="100" stroke="#888" stroke-width="0.8"/>
+          <text x="142" y="126" font-size="7.5" fill="#aa88aa" font-family="monospace">drupelets</text>
+          <!-- caption -->
+          <rect x="0" y="148" width="220" height="17" fill="#0a200a"/>
+          <text x="110" y="160" text-anchor="middle" font-size="8.5" fill="#5abf5a" font-family="monospace" font-weight="600">BLACKBERRY — Hooked thorns + 3 leaflets</text>
+        </svg>
+        <div class="plant-card-info">
+          <span class="safe-tag">Safe</span>
+          <h4>Blackberry <em style="font-weight:400;color:var(--text-2)">Rubus fruticosus</em></h4>
+          <ul>
+            <li>Compound leaf with <strong>3–5 oval leaflets</strong>, serrated edges</li>
+            <li>Arching canes with <strong>curved/hooked thorns</strong> — unmistakable</li>
+            <li>Berries ripen green → red → black (Aug–Oct)</li>
+            <li>No dangerous lookalikes — one of the safest UK forage plants</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ ELDER ═══ -->
+      <div class="plant-card">
+        <svg viewBox="0 0 220 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="165" fill="#0c140c"/>
+          <!-- Main stem -->
+          <line x1="80" y1="155" x2="80" y2="80" stroke="#6a5a3a" stroke-width="3"/>
+          <!-- Pinnate leaf: central rib -->
+          <line x1="80" y1="80" x2="80" y2="30" stroke="#5a7a3a" stroke-width="1.8"/>
+          <!-- 5 leaflets on pinnate leaf -->
+          <!-- Pair 1 (top) -->
+          <path d="M80,34 C73,30 60,28 55,33 C50,38 54,47 64,47 C72,47 79,42 80,34 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.3"/>
+          <path d="M80,34 C87,30 100,28 105,33 C110,38 106,47 96,47 C88,47 81,42 80,34 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.3"/>
+          <!-- Pair 2 -->
+          <line x1="80" y1="48" x2="60" y2="42" stroke="#5a7a3a" stroke-width="1.2"/>
+          <path d="M60,42 C53,38 42,37 38,42 C34,47 38,55 47,55 C55,55 60,50 60,42 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.2"/>
+          <line x1="80" y1="48" x2="100" y2="42" stroke="#5a7a3a" stroke-width="1.2"/>
+          <path d="M100,42 C107,38 118,37 122,42 C126,47 122,55 113,55 C105,55 100,50 100,42 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.2"/>
+          <!-- Pair 3 (bottom) -->
+          <line x1="80" y1="62" x2="55" y2="56" stroke="#5a7a3a" stroke-width="1.2"/>
+          <path d="M55,56 C47,52 36,51 32,56 C28,62 33,70 43,70 C52,70 55,64 55,56 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.2"/>
+          <line x1="80" y1="62" x2="105" y2="56" stroke="#5a7a3a" stroke-width="1.2"/>
+          <path d="M105,56 C113,52 124,51 128,56 C132,62 127,70 117,70 C108,70 105,64 105,56 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.2"/>
+          <!-- FLAT umbel flower head (critical ID: flat-topped not domed) -->
+          <line x1="80" y1="80" x2="130" y2="60" stroke="#6a5a3a" stroke-width="2"/>
+          <line x1="130" y1="60" x2="140" y2="52" stroke="#5a7a3a" stroke-width="1.5"/>
+          <line x1="130" y1="60" x2="148" y2="56" stroke="#5a7a3a" stroke-width="1.5"/>
+          <line x1="130" y1="60" x2="150" y2="62" stroke="#5a7a3a" stroke-width="1.5"/>
+          <line x1="130" y1="60" x2="148" y2="68" stroke="#5a7a3a" stroke-width="1.5"/>
+          <line x1="130" y1="60" x2="140" y2="70" stroke="#5a7a3a" stroke-width="1.5"/>
+          <!-- white flower clusters at tips -->
+          <circle cx="140" cy="50" r="5" fill="#ddd" stroke="#ccc" stroke-width="0.5"/>
+          <circle cx="150" cy="54" r="5" fill="#ddd" stroke="#ccc" stroke-width="0.5"/>
+          <circle cx="152" cy="62" r="5" fill="#ddd" stroke="#ccc" stroke-width="0.5"/>
+          <circle cx="149" cy="70" r="5" fill="#ddd" stroke="#ccc" stroke-width="0.5"/>
+          <circle cx="140" cy="72" r="5" fill="#ddd" stroke="#ccc" stroke-width="0.5"/>
+          <!-- center flower cluster -->
+          <circle cx="145" cy="62" r="4" fill="#eee" stroke="#ccc" stroke-width="0.5"/>
+          <!-- label: flat-topped = elder -->
+          <line x1="148" y1="60" x2="195" y2="48" stroke="#888" stroke-width="0.8"/>
+          <text x="197" y="44" font-size="7.5" fill="#ffdd44" font-family="monospace">FLAT-topped</text>
+          <text x="197" y="52" font-size="7.5" fill="#ffdd44" font-family="monospace">umbel ← key ID</text>
+          <!-- label: 5 leaflets -->
+          <text x="6" y="52" font-size="7.5" fill="#4abf4a" font-family="monospace">5 leaflets</text>
+          <line x1="30" y1="52" x2="50" y2="48" stroke="#888" stroke-width="0.8"/>
+          <!-- berries warning -->
+          <rect x="5" y="110" width="100" height="22" fill="#1a0a00" rx="3"/>
+          <text x="55" y="120" text-anchor="middle" font-size="7.5" fill="#ff8888" font-family="monospace">⚠️ Berries:</text>
+          <text x="55" y="129" text-anchor="middle" font-size="7.5" fill="#ff8888" font-family="monospace">COOK FIRST</text>
+          <!-- caption -->
+          <rect x="0" y="148" width="220" height="17" fill="#0a200a"/>
+          <text x="110" y="160" text-anchor="middle" font-size="8.5" fill="#5abf5a" font-family="monospace" font-weight="600">ELDER — Flat umbel; 5 leaflets</text>
+        </svg>
+        <div class="plant-card-info">
+          <span class="safe-tag">Flowers safe raw</span>
+          <span class="warn-tag">Berries: cook first</span>
+          <h4>Elder <em style="font-weight:400;color:var(--text-2)">Sambucus nigra</em></h4>
+          <ul>
+            <li>Pinnate leaf with <strong>5–7 leaflets</strong></li>
+            <li>Flowers: <strong>flat-topped</strong> cream umbel (not domed)</li>
+            <li>Berries droop in clusters; deep purple-black when ripe</li>
+            <li>Raw berries cause vomiting — always cook or strain</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ ROSEHIP ═══ -->
+      <div class="plant-card">
+        <svg viewBox="0 0 220 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="165" fill="#0c140c"/>
+          <!-- Branch -->
+          <path d="M30,155 C50,130 90,100 120,70" fill="none" stroke="#6a5a3a" stroke-width="2.5"/>
+          <!-- Small thorns on branch -->
+          <path d="M60,128 L54,122 L60,125" fill="none" stroke="#9a7a4a" stroke-width="1.5"/>
+          <path d="M85,108 L79,102 L85,105" fill="none" stroke="#9a7a4a" stroke-width="1.5"/>
+          <!-- Pinnate leaf (on left branch) -->
+          <line x1="70" y1="118" x2="35" y2="95" stroke="#5a7a3a" stroke-width="1.5"/>
+          <path d="M35,95 C28,91 18,90 15,95 C12,100 16,108 25,108 C32,108 35,103 35,95 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.2"/>
+          <line x1="50" y1="107" x2="36" y2="100" stroke="#5a7a3a" stroke-width="1.1"/>
+          <path d="M36,100 C30,96 21,95 18,100 C15,105 19,112 28,111 C35,110 37,106 36,100 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.1"/>
+          <line x1="50" y1="107" x2="66" y2="100" stroke="#5a7a3a" stroke-width="1.1"/>
+          <path d="M66,100 C72,96 80,95 83,100 C86,105 82,112 73,111 C66,110 64,106 66,100 Z" fill="#1a3a1a" stroke="#4abf4a" stroke-width="1.1"/>
+          <!-- Large rosehip (the main feature) -->
+          <path d="M130,75 C115,65 110,50 118,38 C126,26 145,23 157,32 C169,41 168,60 156,72 C148,80 138,83 130,75 Z" fill="#cc2222" stroke="#ee4444" stroke-width="2"/>
+          <!-- 5 sepal points at top (THE KEY ID FEATURE) -->
+          <line x1="135" y1="31" x2="133" y2="14" stroke="#4a8a4a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="144" y1="27" x2="145" y2="10" stroke="#4a8a4a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="153" y1="29" x2="158" y2="13" stroke="#4a8a4a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="159" y1="37" x2="168" y2="24" stroke="#4a8a4a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="160" y1="47" x2="172" y2="38" stroke="#4a8a4a" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- label: 5 sepal points -->
+          <line x1="145" y1="10" x2="145" y2="2" stroke="#888" stroke-width="0.8"/>
+          <text x="145" y="-2" font-size="8" fill="#ffdd44" font-family="monospace" text-anchor="middle" dominant-baseline="auto">5 sepal</text>
+          <!-- Fix: move the text inside viewBox -->
+          <text x="110" y="12" font-size="8" fill="#ffdd44" font-family="monospace" text-anchor="middle">← 5 sepal tips at top = rosehip</text>
+          <!-- hairy seeds warning -->
+          <rect x="6" y="100" width="115" height="22" fill="#1a1000" rx="3"/>
+          <text x="62" y="110" text-anchor="middle" font-size="7.5" fill="#ffbb44" font-family="monospace">⚠️ Hairy seeds inside</text>
+          <text x="62" y="119" text-anchor="middle" font-size="7.5" fill="#ffbb44" font-family="monospace">— strain all preparations</text>
+          <!-- caption -->
+          <rect x="0" y="148" width="220" height="17" fill="#0a200a"/>
+          <text x="110" y="160" text-anchor="middle" font-size="8.5" fill="#5abf5a" font-family="monospace" font-weight="600">ROSEHIP — 5 sepal tips; red oval</text>
+        </svg>
+        <div class="plant-card-info">
+          <span class="safe-tag">Safe — strain seeds</span>
+          <h4>Rosehip <em style="font-weight:400;color:var(--text-2)">Rosa canina</em></h4>
+          <ul>
+            <li>Red oval berry with <strong>5 pointed sepal remnants</strong> at the top</li>
+            <li>On thorny rose stems with pinnate leaves</li>
+            <li>Best after first frost — softens and sweetens</li>
+            <li>20× vitamin C of oranges — critical for long-term nutrition; seeds have irritant hairs, always strain</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ DANDELION ═══ -->
+      <div class="plant-card">
+        <svg viewBox="0 0 220 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="165" fill="#0c140c"/>
+          <!-- Rosette of leaves from center -->
+          <!-- 8 leaves radiating from center point (105,115) -->
+          <!-- Each leaf: deeply lobed (dandelion tooth = deep cuts almost to midrib) -->
+          <!-- Leaf 1: pointing up -->
+          <path d="M105,115 L100,95 L96,88 L101,92 L97,82 L103,87 L99,77 L105,82 L101,72 L107,77 L103,67 L109,72 L108,62 L112,68 L109,58 L113,64 L115,55 L116,62 L120,55 L119,63 L124,57 L122,65 L127,60 L124,68 L128,64 L124,73 L128,70 L123,78 L127,76 L121,83 L124,82 L117,88 L120,88 L112,93 L115,94 L108,98 L109,100 L105,115 Z" fill="#1e4a1e" stroke="#5abf5a" stroke-width="1"/>
+          <!-- Leaf 2: pointing right -->
+          <path d="M105,115 L122,112 L130,107 L125,110 L135,105 L129,109 L139,106 L132,111 L142,109 L135,115 L144,115 L137,119 L146,120 L138,123 L146,126 L137,127 L144,131 L135,131 L141,136 L132,135 L136,141 L128,138 L130,145 L122,141 L122,148 L116,143 L114,150 L110,144 L107,150 L105,144 L105,115 Z" fill="#1e4a1e" stroke="#5abf5a" stroke-width="1"/>
+          <!-- Leaf 3: pointing left -->
+          <path d="M105,115 L88,112 L80,107 L85,110 L75,105 L81,109 L71,106 L78,111 L68,109 L75,115 L66,115 L73,119 L64,120 L72,123 L64,126 L73,127 L66,131 L75,131 L69,136 L78,135 L74,141 L82,138 L80,145 L88,141 L88,148 L94,143 L96,150 L100,144 L103,150 L105,144 L105,115 Z" fill="#1e4a1e" stroke="#5abf5a" stroke-width="1"/>
+          <!-- Leaf 4: pointing upper-right -->
+          <path d="M105,115 L116,100 L120,91 L116,96 L120,85 L115,91 L119,80 L113,86 L116,75 L110,82 L112,71 L107,78 L108,68 L105,75 L105,115 Z" fill="#1e4a1e" stroke="#5abf5a" stroke-width="1"/>
+          <!-- Leaf 5: pointing upper-left -->
+          <path d="M105,115 L94,100 L90,91 L94,96 L90,85 L95,91 L91,80 L97,86 L94,75 L100,82 L98,71 L103,78 L102,68 L105,75 L105,115 Z" fill="#1e4a1e" stroke="#5abf5a" stroke-width="1"/>
+          <!-- Hollow stem (two parallel lines) -->
+          <line x1="102" y1="50" x2="102" y2="30" stroke="#4a8a3a" stroke-width="1.5"/>
+          <line x1="108" y1="50" x2="108" y2="30" stroke="#4a8a3a" stroke-width="1.5"/>
+          <!-- Yellow flower head -->
+          <circle cx="105" cy="22" r="14" fill="#cc9900" stroke="#ffcc00" stroke-width="1.5"/>
+          <!-- Radiating petals -->
+          <line x1="105" y1="8" x2="105" y2="4" stroke="#ffee44" stroke-width="1.5"/>
+          <line x1="114" y1="11" x2="117" y2="8" stroke="#ffee44" stroke-width="1.5"/>
+          <line x1="119" y1="22" x2="123" y2="22" stroke="#ffee44" stroke-width="1.5"/>
+          <line x1="114" y1="33" x2="117" y2="36" stroke="#ffee44" stroke-width="1.5"/>
+          <line x1="96" y1="11" x2="93" y2="8" stroke="#ffee44" stroke-width="1.5"/>
+          <line x1="91" y1="22" x2="87" y2="22" stroke="#ffee44" stroke-width="1.5"/>
+          <line x1="96" y1="33" x2="93" y2="36" stroke="#ffee44" stroke-width="1.5"/>
+          <!-- labels -->
+          <text x="175" y="80" font-size="7.5" fill="#4abf4a" font-family="monospace">deeply</text>
+          <text x="175" y="89" font-size="7.5" fill="#4abf4a" font-family="monospace">lobed</text>
+          <text x="175" y="98" font-size="7.5" fill="#4abf4a" font-family="monospace">leaves</text>
+          <line x1="172" y1="88" x2="140" y2="100" stroke="#888" stroke-width="0.8"/>
+          <text x="136" y="30" font-size="7.5" fill="#aaa" font-family="monospace">hollow</text>
+          <text x="136" y="39" font-size="7.5" fill="#aaa" font-family="monospace">stem</text>
+          <line x1="134" y1="36" x2="110" y2="40" stroke="#888" stroke-width="0.8"/>
+          <!-- caption -->
+          <rect x="0" y="148" width="220" height="17" fill="#0a200a"/>
+          <text x="110" y="160" text-anchor="middle" font-size="8.5" fill="#5abf5a" font-family="monospace" font-weight="600">DANDELION — Year-round; hollow stem</text>
+        </svg>
+        <div class="plant-card-info">
+          <span class="safe-tag">Safe — year-round</span>
+          <h4>Dandelion <em style="font-weight:400;color:var(--text-2)">Taraxacum officinale</em></h4>
+          <ul>
+            <li><strong>Deeply lobed</strong> leaves (cuts reach almost to midrib)</li>
+            <li>Single <strong>hollow stem</strong> with milky white sap — no other stem leaves</li>
+            <li>Yellow composite flower. Root roasted = coffee substitute</li>
+            <li>Available every month — the UK's best all-year survival plant</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ CHANTERELLE ═══ -->
+      <div class="plant-card">
+        <svg viewBox="0 0 220 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="165" fill="#0c140c"/>
+          <!-- Side profile of chanterelle (funnel/vase shape) -->
+          <!-- Cap (rolled-down, wavy edge) -->
+          <path d="M40,70 C40,65 50,55 80,48 C100,43 120,43 140,48 C170,55 180,65 180,70 C180,72 175,75 170,73 C155,66 140,62 110,60 C80,62 65,66 50,73 C45,75 40,72 40,70 Z" fill="#cc8a00" stroke="#ffaa22" stroke-width="1.5"/>
+          <!-- Cap dome top (simple arch) -->
+          <path d="M50,73 C50,60 65,48 110,44 C155,48 170,60 170,73" fill="#dd9900" stroke="#ffaa22" stroke-width="1.5"/>
+          <!-- Stem (solid, tapering) -->
+          <path d="M90,130 C88,110 88,90 95,75 L125,75 C132,90 132,110 130,130 Z" fill="#cc8a00" stroke="#ffaa22" stroke-width="1.5"/>
+          <!-- RIDGES underneath (KEY FEATURE — not gills; they fork and run onto stem) -->
+          <!-- These are the critical forking ridges -->
+          <path d="M60,72 C62,85 70,100 86,115 L90,125" fill="none" stroke="#ffcc44" stroke-width="1.2"/>
+          <path d="M70,70 C72,83 76,97 88,112 L91,122" fill="none" stroke="#ffcc44" stroke-width="1.2"/>
+          <path d="M80,68 C80,80 82,94 90,110 L92,120" fill="none" stroke="#ffcc44" stroke-width="1.2"/>
+          <path d="M90,67 C88,79 90,93 95,110" fill="none" stroke="#ffcc44" stroke-width="1.2"/>
+          <path d="M100,67 C100,80 102,95 107,112" fill="none" stroke="#ffcc44" stroke-width="1.2"/>
+          <path d="M110,68 C112,80 116,95 120,110 L120,120" fill="none" stroke="#ffcc44" stroke-width="1.2"/>
+          <path d="M120,70 C124,83 128,97 127,112 L126,122" fill="none" stroke="#ffcc44" stroke-width="1.2"/>
+          <path d="M130,72 C136,85 140,100 130,115 L128,125" fill="none" stroke="#ffcc44" stroke-width="1.2"/>
+          <path d="M140,74 C148,87 145,102 135,117 L130,126" fill="none" stroke="#ffcc44" stroke-width="1.2"/>
+          <!-- Forking ridge example (show one forking) -->
+          <path d="M75,71 C73,80 72,88 74,95" fill="none" stroke="#ffdd66" stroke-width="0.9" stroke-dasharray="2,1.5"/>
+          <path d="M80,68 C78,75 76,82 76,88" fill="none" stroke="#ffdd66" stroke-width="0.9" stroke-dasharray="2,1.5"/>
+          <!-- label: RIDGES not gills -->
+          <rect x="4" y="82" width="86" height="28" fill="#1a1000" rx="3"/>
+          <text x="47" y="92" text-anchor="middle" font-size="8" fill="#ffcc44" font-family="monospace" font-weight="bold">RIDGES not gills</text>
+          <text x="47" y="102" text-anchor="middle" font-size="7.5" fill="#ffcc44" font-family="monospace">fork + run to stem</text>
+          <line x1="86" y1="94" x2="100" y2="90" stroke="#888" stroke-width="0.8"/>
+          <!-- label: golden colour -->
+          <text x="160" y="55" font-size="7.5" fill="#ffaa22" font-family="monospace" text-anchor="middle">golden</text>
+          <text x="160" y="64" font-size="7.5" fill="#ffaa22" font-family="monospace" text-anchor="middle">amber</text>
+          <!-- False chanterelle warning -->
+          <rect x="4" y="120" width="150" height="18" fill="#1a0000" rx="3"/>
+          <text x="79" y="132" text-anchor="middle" font-size="8" fill="#ff8888" font-family="monospace">⚠️ False chanterelle: true gills</text>
+          <!-- caption -->
+          <rect x="0" y="148" width="220" height="17" fill="#1a0e00"/>
+          <text x="110" y="160" text-anchor="middle" font-size="8.5" fill="#ffaa22" font-family="monospace" font-weight="600">CHANTERELLE — Forking ridges; golden</text>
+        </svg>
+        <div class="plant-card-info">
+          <span class="safe-tag">Safe — confirm ridges</span>
+          <h4>Chanterelle <em style="font-weight:400;color:var(--text-2)">Cantharellus cibarius</em></h4>
+          <ul>
+            <li>Golden-amber funnel/vase shape</li>
+            <li><strong>Forking ridges</strong> run from cap edge down to stem — NOT true gills</li>
+            <li>Smells faintly of apricots; fruity</li>
+            <li>⚠️ False chanterelle has true separate gills and is toxic — learn this in person first</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ HEMLOCK WATER DROPWORT — DEADLY ═══ -->
+      <div class="plant-card danger">
+        <svg viewBox="0 0 220 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="165" fill="#140808"/>
+          <!-- Warning banner -->
+          <rect x="0" y="0" width="220" height="18" fill="#8a0000"/>
+          <text x="110" y="13" text-anchor="middle" font-size="9" fill="#fff" font-family="monospace" font-weight="bold">⛔ DO NOT EAT — DEADLY LOOKALIKE</text>
+          <!-- Main stem: HOLLOW + PURPLE SPOTS (the critical ID) -->
+          <rect x="100" y="24" width="18" height="115" rx="9" fill="#2a1a2a" stroke="#888" stroke-width="1.5"/>
+          <!-- hollow interior (cross-section hint) -->
+          <ellipse cx="109" cy="50" rx="5" ry="7" fill="#140808" stroke="#666" stroke-width="0.8"/>
+          <!-- PURPLE BLOTCHES on stem — the key ID feature -->
+          <ellipse cx="104" cy="65" rx="4" ry="2.5" fill="#6a1a6a" opacity="0.9"/>
+          <ellipse cx="112" cy="80" rx="3" ry="2" fill="#6a1a6a" opacity="0.9"/>
+          <ellipse cx="106" cy="95" rx="4.5" ry="2.5" fill="#6a1a6a" opacity="0.9"/>
+          <ellipse cx="113" cy="110" rx="3" ry="2" fill="#6a1a6a" opacity="0.9"/>
+          <ellipse cx="103" cy="125" rx="4" ry="2.5" fill="#6a1a6a" opacity="0.9"/>
+          <!-- White umbel (carrot-family look) -->
+          <!-- Umbel spokes -->
+          <line x1="109" y1="24" x2="70" y2="38" stroke="#7a9a7a" stroke-width="1.3"/>
+          <line x1="109" y1="24" x2="85" y2="30" stroke="#7a9a7a" stroke-width="1.3"/>
+          <line x1="109" y1="24" x2="100" y2="26" stroke="#7a9a7a" stroke-width="1.3"/>
+          <line x1="109" y1="24" x2="118" y2="25" stroke="#7a9a7a" stroke-width="1.3"/>
+          <line x1="109" y1="24" x2="133" y2="29" stroke="#7a9a7a" stroke-width="1.3"/>
+          <line x1="109" y1="24" x2="148" y2="37" stroke="#7a9a7a" stroke-width="1.3"/>
+          <!-- White flower clusters at tips -->
+          <circle cx="70" cy="36" r="6" fill="#ddd" stroke="#ccc" stroke-width="0.5"/>
+          <circle cx="85" cy="28" r="6" fill="#ddd" stroke="#ccc" stroke-width="0.5"/>
+          <circle cx="100" cy="24" r="5" fill="#ddd" stroke="#ccc" stroke-width="0.5"/>
+          <circle cx="118" cy="23" r="5" fill="#ddd" stroke="#ccc" stroke-width="0.5"/>
+          <circle cx="133" cy="27" r="6" fill="#ddd" stroke="#ccc" stroke-width="0.5"/>
+          <circle cx="148" cy="35" r="6" fill="#ddd" stroke="#ccc" stroke-width="0.5"/>
+          <!-- Labels: purple spots -->
+          <line x1="100" y1="95" x2="55" y2="95" stroke="#ff6666" stroke-width="1.2"/>
+          <rect x="4" y="86" width="50" height="22" fill="#2a0000" rx="2"/>
+          <text x="29" y="95" text-anchor="middle" font-size="7.5" fill="#ff8888" font-family="monospace" font-weight="bold">PURPLE</text>
+          <text x="29" y="104" text-anchor="middle" font-size="7.5" fill="#ff8888" font-family="monospace" font-weight="bold">SPOTS</text>
+          <!-- hollow stem label -->
+          <line x1="118" y1="50" x2="160" y2="50" stroke="#ff6666" stroke-width="1.2"/>
+          <text x="165" y="54" font-size="7.5" fill="#ff8888" font-family="monospace">hollow</text>
+          <text x="165" y="62" font-size="7.5" fill="#ff8888" font-family="monospace">stem</text>
+          <!-- white umbel label -->
+          <text x="6" y="58" font-size="7.5" fill="#ffaa44" font-family="monospace">white</text>
+          <text x="6" y="67" font-size="7.5" fill="#ffaa44" font-family="monospace">umbel</text>
+          <line x1="36" y1="60" x2="65" y2="42" stroke="#ff6666" stroke-width="0.8"/>
+          <!-- Looks like carrot note -->
+          <rect x="4" y="130" width="212" height="14" fill="#2a0000" rx="2"/>
+          <text x="110" y="140" text-anchor="middle" font-size="7.5" fill="#ff8888" font-family="monospace">Carrot/parsley scent. Most toxic UK plant.</text>
+          <!-- caption -->
+          <rect x="0" y="148" width="220" height="17" fill="#2a0000"/>
+          <text x="110" y="160" text-anchor="middle" font-size="8.5" fill="#ff6666" font-family="monospace" font-weight="600">HEMLOCK WATER DROPWORT — AVOID</text>
+        </svg>
+        <div class="plant-card-info">
+          <span class="warn-tag">⛔ DEADLY — Do not touch or eat</span>
+          <h4>Hemlock Water Dropwort <em style="font-weight:400;color:var(--text-2)">Oenanthe crocata</em></h4>
+          <ul>
+            <li>White umbel flowers (carrot/parsley family look)</li>
+            <li><strong>Hollow stem with purple-violet blotches</strong> — the key danger sign</li>
+            <li>Smells faintly of parsley/carrot — <strong>never eat near water by smell alone</strong></li>
+            <li>UK's most toxic plant. Can kill in hours. Found in ditches, river margins, wet meadows</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /.plant-grid -->
+
+    <!-- ─── FREE RESOURCES ─── -->
+    <section id="free-resources" style="margin-top:2rem">
+      <h3>Free Reference Resources for UK Foraging &amp; Survival</h3>
+      <p>The best UK foraging books (<em>Food for Free</em> by Richard Mabey, Roger Phillips' <em>Mushrooms</em>) are paid — but widely available at UK libraries free of charge via the library card.
+         The following are genuinely freely accessible:</p>
+
+      <table class="data-table" style="margin:.75rem 0;font-size:.85rem">
+        <thead><tr><th>Resource</th><th>Where to find it</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>A Modern Herbal</strong> — Mrs. M. Grieve (1931)</td>
+            <td><code>botanical.com</code> — full text free online</td>
+            <td>Public domain. Comprehensive UK plant medicinal &amp; edible properties. Excellent for wild garlic, elder, rosehip, nettle.</td>
+          </tr>
+          <tr>
+            <td><strong>Woodland Trust Foraging Guides</strong></td>
+            <td><code>woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/</code></td>
+            <td>Free seasonal guides. Especially good for berries, fungi, and hedgerow plants. Printable.</td>
+          </tr>
+          <tr>
+            <td><strong>Plantlife UK Wildflower ID</strong></td>
+            <td><code>plantlife.org.uk</code> → Learn → Identify</td>
+            <td>Free species guides and county wildflower surveys. Good photography reference.</td>
+          </tr>
+          <tr>
+            <td><strong>BSBI (Botanical Society of Britain &amp; Ireland)</strong></td>
+            <td><code>bsbi.org</code> → Identification</td>
+            <td>Free plant identification keys and guides. Professional standard. Good for resolving lookalike confusion.</td>
+          </tr>
+          <tr>
+            <td><strong>Plants for a Future (PFAF)</strong></td>
+            <td><code>pfaf.org</code></td>
+            <td>Free searchable database of 7,000+ edible and medicinal plants with UK suitability ratings, growing info, and uses.</td>
+          </tr>
+          <tr>
+            <td><strong>US Army FM 21-76 "Survival"</strong></td>
+            <td><code>archive.org</code> → search "FM 21-76"</td>
+            <td>Public domain. General survival skills, plant edibility test, water sourcing, signalling, navigation. US-centric but universally applicable.</td>
+          </tr>
+          <tr>
+            <td><strong>Wild Food UK (identification guides)</strong></td>
+            <td><code>wildfooduk.com</code></td>
+            <td>Free online ID guides with good photography. UK-focused. Seasonal calendars and recipes.</td>
+          </tr>
+          <tr>
+            <td><strong>First Aid Manual (St John Ambulance)</strong></td>
+            <td>Free PDF sample chapters: <code>sja.org.uk</code></td>
+            <td>Full edition ~£15 but widely available in UK libraries. Essential survival reference — covers wound care, fractures, burns, cardiac.</td>
+          </tr>
+          <tr>
+            <td><strong>Natural Resources Wales / Natural England</strong></td>
+            <td>Gov.uk / naturalresourceswales.gov.uk</td>
+            <td>Free hedgerow and wildflower survey guides. Useful for habitat identification to guide foraging location.</td>
+          </tr>
+          <tr>
+            <td><strong>Nuclear War Survival Skills</strong> — Cresson Kearny</td>
+            <td><code>archive.org</code> → search "Nuclear War Survival Skills OISM"</td>
+            <td>Public domain (OISM). Radiation protection, expedient shelters, food production post-event. Highly relevant to NBC section.</td>
+          </tr>
+          <tr>
+            <td><strong>Hesperian Health Guides</strong> — "Where There Is No Doctor"</td>
+            <td><code>hesperian.org</code> → Free Download</td>
+            <td>CC licensed. Medical care without professional resources. Used by NGOs worldwide. Free PDF download.</td>
+          </tr>
+          <tr>
+            <td><strong>Roger Phillips' Mushroom Guide</strong> (library)</td>
+            <td>UK public library — free with library card</td>
+            <td>Not a free PDF, but <em>Mushrooms</em> (Roger Phillips) is the definitive UK fungi ID guide and available at virtually every UK library. Do not forage fungi without it.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-amber" style="margin-top:.75rem">
+        <span class="callout-icon">📥</span>
+        <div class="callout-content">
+          <strong>Download before you need them.</strong> Save PDF copies of these resources alongside this guide on your USB drive now.
+          Internet access to look them up may not be available in an emergency.
+        </div>
+      </div>
+    </section>
+
+    <h3 id="uk-edibles-table" style="margin-top:1.5rem">UK Wild Edibles — Detailed Reference Table</h3>
+    <div class="callout callout-amber" style="margin-bottom:1rem">
+      <span class="callout-icon">📋</span>
+      <div class="callout-content">
+        <strong>Seasons are approximate for central England (Midlands baseline).</strong>
+        Scotland runs 2–3 weeks later; SW England 1–2 weeks earlier.
+      </div>
+    </div>
+
+    <table class="edible-table">
+      <thead>
+        <tr>
+          <th>Plant</th>
+          <th>Edible Parts</th>
+          <th>Season</th>
+          <th>Habitat</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="plant-name">Stinging Nettle <span class="tag-safe">Safe</span></span><span class="plant-latin">Urtica dioica</span></td>
+          <td>Young leaves (top 4), seeds (Aug–Sep), roots</td>
+          <td><div class="season-strip"><span class="s-low"></span><span class="s-low"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span><span class="s-off"></span><span class="s-low"></span><span class="s-low"></span><span class="s-off"></span><span class="s-off"></span></div>Mar–Jun best</td>
+          <td>Disturbed ground, riverbanks, woodland edges</td>
+          <td>Boil or blanch to remove sting. Very high iron and vitamin C. One of the best UK survival plants.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Wild Garlic <span class="tag-safe">Safe</span></span><span class="plant-latin">Allium ursinum</span></td>
+          <td>Leaves, flowers, bulbs, seed pods</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span></div>Mar–May</td>
+          <td>Damp deciduous woodland, often carpets forest floor</td>
+          <td>⚠️ <strong>Confirm by smell</strong> — leaves look similar to lily of the valley (toxic) and lords &amp; ladies (toxic). Crushed leaf must smell strongly of garlic.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Blackberry <span class="tag-safe">Safe</span></span><span class="plant-latin">Rubus fruticosus</span></td>
+          <td>Fruit, young shoot tips (spring), leaves (tea)</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-low"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span><span class="s-off"></span></div>Jul–Oct</td>
+          <td>Hedgerows, woodland edges, waste ground — ubiquitous UK</td>
+          <td>One of Britain's most reliable and calorie-dense wild foods. Old folk rule: don't pick after Michaelmas Day (29 Sep) — quality declines but food safety is fine.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Elder <span class="tag-safe">Flowers safe; berries cook first</span></span><span class="plant-latin">Sambucus nigra</span></td>
+          <td>Flowers (fritters, cordial), berries (cooked), bark (medicinal)</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-off"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span></div>Flowers May–Jun; berries Aug–Sep</td>
+          <td>Hedgerows, woodland margins, disturbed ground — very common</td>
+          <td>⚠️ Raw berries cause vomiting — always cook. Flowers safe raw. Seeds mildly toxic — strain cordial. The pith of dried elder twigs is excellent fire tinder.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Rosehip <span class="tag-safe">Safe</span></span><span class="plant-latin">Rosa canina</span></td>
+          <td>Fruit (flesh only — remove hairy seeds)</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-low"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span></div>Aug–Nov (best after first frost)</td>
+          <td>Hedgerows, scrub, roadsides — UK's most common rose</td>
+          <td>Contains ~20× the vitamin C of oranges. Critical for scurvy prevention in a long-term scenario. ⚠️ The seed hairs are a skin irritant (itching powder) — strain all preparations.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Hawthorn <span class="tag-safe">Safe</span></span><span class="plant-latin">Crataegus monogyna</span></td>
+          <td>Young leaves ("bread &amp; cheese"), flowers, berries (haws), seeds</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span><span class="s-off"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span></div>Leaves Apr–May; haws Sep–Oct</td>
+          <td>Hedgerows everywhere — one of UK's most common trees</td>
+          <td>Young spring leaves are nutty and mild — a traditional UK snack ("bread and cheese"). Haws are mealy — cook in stews. High in antioxidants.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Hazel <span class="tag-safe">Safe</span></span><span class="plant-latin">Corylus avellana</span></td>
+          <td>Nuts (hazelnuts), catkins (pollen, eaten raw)</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span><span class="s-off"></span></div>Aug–Oct</td>
+          <td>Woodland understorey, hedgerows, especially clay soils</td>
+          <td>High in fat and calories — critical survival food. Squirrels harvest first — look from mid-Aug. Coppiced hazel rods are excellent for shelter frames and snare construction.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Sloe Berry <span class="tag-caution">Caution — very astringent raw</span></span><span class="plant-latin">Prunus spinosa</span></td>
+          <td>Berries (best after frost), flowers</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-low"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span></div>Sep–Dec</td>
+          <td>Hedgerows, scrub, chalk downland</td>
+          <td>Raw sloes are extremely astringent (puckers the mouth severely) but edible. Frost breaks them down — cook in water with rosehips to make jelly. Good caloric value.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Crab Apple <span class="tag-safe">Safe</span></span><span class="plant-latin">Malus sylvestris</span></td>
+          <td>Fruit (best cooked)</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-low"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span></div>Aug–Oct</td>
+          <td>Hedgerows, ancient woodland, orchards (feral)</td>
+          <td>Very tart raw — excellent cooked. High in pectin (natural preservative/thickener). Juice ferments easily. An overlooked survival calorie source.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Sweet Chestnut <span class="tag-safe">Safe</span></span><span class="plant-latin">Castanea sativa</span></td>
+          <td>Nuts</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-low"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span></div>Sep–Nov</td>
+          <td>Woodland, parkland, especially SE England</td>
+          <td>⚠️ <strong>Not to be confused with horse chestnut (conkers) — horse chestnuts are toxic.</strong> Sweet chestnut husks have long soft spines; horse chestnut has short thick spines. High carbohydrate, can be roasted or boiled.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Dandelion <span class="tag-safe">Safe</span></span><span class="plant-latin">Taraxacum officinale</span></td>
+          <td>Leaves, flowers, roots (roasted as coffee substitute)</td>
+          <td><div class="season-strip"><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span></div>Year round</td>
+          <td>Grassland, roadsides, garden lawns — ubiquitous</td>
+          <td>Every part edible. Young spring leaves least bitter. High in vitamins A, C, K. Roots roasted at 200°C make a caffeine-free coffee substitute. Flowers make wine/fritters.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Wood Sorrel <span class="tag-caution">Small quantities</span></span><span class="plant-latin">Oxalis acetosella</span></td>
+          <td>Leaves, flowers</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span></div>Mar–Jun</td>
+          <td>Shaded woodland floor — especially under beech</td>
+          <td>Heart-shaped leaves with lemony taste. ⚠️ Contains oxalic acid — fine as a trail snack or salad addition but do not eat large quantities (kidney stone risk with chronic overconsumption).</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Watercress <span class="tag-caution">Requires treatment</span></span><span class="plant-latin">Nasturtium officinale</span></td>
+          <td>Leaves, stems</td>
+          <td><div class="season-strip"><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-off"></span><span class="s-off"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span></div>Year round except midsummer heat</td>
+          <td>Shallow clean streams, chalk springs</td>
+          <td>⚠️ <strong>Always cook or thoroughly wash.</strong> Raw watercress from slow water can carry liver fluke (Fasciola hepatica), a serious parasite from grazing livestock upstream. Chalk stream watercress is lowest risk. Peppery, high in iron.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Rock Samphire <span class="tag-safe">Safe</span><span class="tag-coastal">Coastal</span></span><span class="plant-latin">Crithmum maritimum</span></td>
+          <td>Leaves, stems</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span><span class="s-off"></span></div>May–Sep</td>
+          <td>Sea cliffs, rocky shores — SW England, Wales, Ireland</td>
+          <td>Aromatic, slightly anise-flavoured. Excellent raw or blanched. Good salt substitute if dried. High in vitamins. Historical UK foraging food — mentioned in King Lear.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Sea Purslane <span class="tag-safe">Safe</span><span class="tag-coastal">Coastal</span></span><span class="plant-latin">Atriplex portulacoides</span></td>
+          <td>Leaves, young shoots</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-off"></span><span class="s-off"></span></div>May–Oct</td>
+          <td>Salt marshes, tidal mudflats around UK coast</td>
+          <td>Salty, succulent leaves. Blanch briefly to reduce saltiness. High in omega-3. Provides electrolytes. Available from most UK coastal salt marshes.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Chanterelle <span class="tag-safe">Safe — with ID</span></span><span class="plant-latin">Cantharellus cibarius</span></td>
+          <td>Whole fruiting body</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-low"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-low"></span><span class="s-off"></span><span class="s-off"></span></div>Jun–Oct</td>
+          <td>Deciduous woodland (oak, beech), often near moss</td>
+          <td>Golden-orange, egg-yolk colour. Ridges (not gills) run down the stem. Apricot smell. ⚠️ False chanterelle (Hygrophoropsis aurantiaca) is toxic — has true gills and deeper orange. Learn in person before foraging alone.</td>
+        </tr>
+        <tr>
+          <td><span class="plant-name">Cep / Porcini <span class="tag-safe">Safe — with ID</span></span><span class="plant-latin">Boletus edulis</span></td>
+          <td>Cap, stem</td>
+          <td><div class="season-strip"><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-off"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-peak"></span><span class="s-off"></span><span class="s-off"></span></div>Aug–Oct</td>
+          <td>Pine and mixed woodland, Scotland especially productive</td>
+          <td>White/cream sponge pores (not gills). Brown cap. Reticulate stem pattern. ⚠️ Some boletes have red pores and are toxic (Satan's bolete). Rule: if it has red pores or turns blue when cut — do not eat.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- =================== SECTION 4: UK HAZARDS =================== -->
+  <section id="uk-hazards">
+    <h2>4. UK-Specific Hazards</h2>
+
+    <div class="hazard-grid">
+      <div class="hazard-item">
+        <strong>🌡️ Wet-Bulb Hypothermia</strong>
+        <span>UK's #1 outdoor killer. Fatal at 10°C with wind and rain. Wear wool or synthetics — not cotton.</span>
+      </div>
+      <div class="hazard-item">
+        <strong>🦟 Lyme Disease (Ticks)</strong>
+        <span>Ixodes ricinus ticks in long grass and woodland. Check body after walks. Remove within 24hrs with fine-tip tweezers. Bull's-eye rash = seek treatment.</span>
+      </div>
+      <div class="hazard-item">
+        <strong>🌊 Flash Flooding</strong>
+        <span>UK rivers can rise metres in hours (Boscastle 2004, Lynmouth 1952). Never camp in a valley bottom or beside a moorland stream.</span>
+      </div>
+      <div class="hazard-item">
+        <strong>🌫️ Moorland Mist</strong>
+        <span>Navigation is nearly impossible in hill fog. Dartmoor, Pennines, Scottish Highlands: carry compass and OS map. Stay on path or follow water downhill.</span>
+      </div>
+      <div class="hazard-item">
+        <strong>🐄 Livestock</strong>
+        <span>Cattle with calves kill more people in the UK than any wild animal. Give them space, keep dogs on leads, and if charged — release the dog and climb a fence.</span>
+      </div>
+      <div class="hazard-item">
+        <strong>🌿 Toxic Plants</strong>
+        <span>Hemlock water dropwort (white flowers, near water — deadly), giant hogweed (causes phytophotodermatitis — severe burns), deadly nightshade (shiny berries).</span>
+      </div>
+      <div class="hazard-item">
+        <strong>🏚️ Bog &amp; Quicksand</strong>
+        <span>Dartmoor, Bodmin, Flow Country (Scotland): peat bogs can swallow people. Test ground with a stick before committing weight. Stay on ridgelines.</span>
+      </div>
+      <div class="hazard-item">
+        <strong>💧 Blue-Green Algae</strong>
+        <span>Cyanobacteria blooms in still lakes during hot weather. Bright blue-green scum near shore = do not drink, swim, or wash in the water. Toxic to humans and fatal to dogs.</span>
+      </div>
+    </div>
+
+    <h3>UK Emergency Contacts &amp; Frequencies</h3>
+    <table class="data-table" style="margin:.75rem 0">
+      <thead><tr><th>Service</th><th>Contact</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Emergency (all services)</td><td><strong>999</strong></td><td>UK standard emergency number</td></tr>
+        <tr><td>Emergency (EU / roaming)</td><td><strong>112</strong></td><td>Works from most mobile networks including when out of credit</td></tr>
+        <tr><td>Mountain Rescue</td><td><strong>999 → ask for Police → Mountain Rescue</strong></td><td>Volunteer service, free to call; also coordinated by police</td></tr>
+        <tr><td>Coastguard (sea/cliff)</td><td><strong>999 or VHF Ch 16</strong></td><td>HM Coastguard monitors VHF Ch 16 at all times</td></tr>
+        <tr><td>RNLI (lifeboat)</td><td><strong>999 → ask for Coastguard</strong></td><td>Free service; world-class volunteers</td></tr>
+        <tr><td>NHS non-emergency</td><td><strong>111</strong></td><td>Medical advice; for non-life-threatening situations</td></tr>
+        <tr><td>Marine VHF distress</td><td><strong>Channel 16 (156.800 MHz)</strong></td><td>International distress frequency</td></tr>
+        <tr><td>UK PMR446 (walkie-talkie)</td><td><strong>446.00625–446.19375 MHz</strong></td><td>No licence required; short range (~2–5km)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- =================== SECTION 5: PLANT SAFETY =================== -->
+  <section id="plant-safety">
+    <h2>5. Plant Identification Safety Rules</h2>
+
+    <div class="callout callout-red" style="margin-bottom:.75rem">
+      <span class="callout-icon">⛔</span>
+      <div class="callout-content">
+        <strong>The Deadly UK Five — Know These Before Foraging</strong>
+        <ol style="margin:.4rem 0 0;padding-left:1.2rem;font-size:.875rem">
+          <li><strong>Hemlock Water Dropwort</strong> (Oenanthe crocata) — white umbel flowers, near water, smells faintly of parsley. Most toxic plant in UK. Can kill in hours.</li>
+          <li><strong>Fool's Watercress</strong> (Apium nodiflorum) — looks identical to watercress in similar habitat. Not as toxic but dangerous at scale.</li>
+          <li><strong>Lily of the Valley</strong> (Convallaria majalis) — white bell flowers, looks like young wild garlic leaves. No garlic smell.</li>
+          <li><strong>Lords and Ladies</strong> (Arum maculatum) — arrow-shaped leaves in spring, looks like young wild garlic. Berries brilliant red, extremely toxic.</li>
+          <li><strong>Deadly Nightshade</strong> (Atropa belladonna) — shiny black berries, bell-shaped purple flowers. 3 berries can kill a child.</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>The Rule of Fives (foraging safety protocol)</h3>
+    <ol>
+      <li><strong>Positive ID with at least 2 features.</strong> Leaf shape + smell, or flower + habitat. Never rely on one feature alone.</li>
+      <li><strong>Check all 5 parts:</strong> leaves, stem, flowers/fruits, roots, and smell.</li>
+      <li><strong>Cross-reference 2 sources.</strong> A single field guide can be wrong or misprint a photo.</li>
+      <li><strong>Start small.</strong> Even a correctly identified plant may cause a personal allergic reaction. Try a small amount first and wait 30 minutes.</li>
+      <li><strong>When in doubt, do without.</strong> No food is worth dying for. In the UK, there is almost always something safely identifiable nearby instead.</li>
+    </ol>
+
+    <h3>Universal Edibility Test (last resort)</h3>
+    <p>If you cannot identify a plant and must test it:</p>
+    <ol>
+      <li>Separate the plant into parts: leaves, stem, root, seeds, flowers.</li>
+      <li>Test only one part at a time. Fast for 8 hours before testing.</li>
+      <li>Rub on inner wrist for 15 min. Wait 8 hours — stop if reaction.</li>
+      <li>Touch a small piece to outer lip. Wait 3 min — stop if burning/itching.</li>
+      <li>Chew a small piece without swallowing. Wait 15 min — stop if reaction.</li>
+      <li>Swallow a teaspoon. Wait 8 hours. If no reaction — proceed cautiously.</li>
+    </ol>
+    <p class="callout callout-amber" style="padding:.5rem .75rem;border-radius:6px;font-size:.85rem">
+      ⚠️ This test does NOT work for mushrooms. Do not apply the universal edibility test to fungi — some lethal species (death cap) cause no immediate reaction but destroy the liver over 24–72 hours.
+    </p>
+  </section>
+
+  <!-- Pagination -->
+  <nav class="section-pagination no-print" aria-label="Section navigation">
+    <a href="disasters.html" class="pagination-btn pagination-prev">← Disaster Playbooks</a>
+    <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+    <a href="metallurgy.html" class="pagination-btn pagination-next">Metallurgy →</a>
+  </nav>
+
+</div>
+</main>
+
+<!-- Bunker Bot Panel -->
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title">
+      <div class="aria-avatar">🤖</div>
+      <div class="aria-title-text">
+        <strong>Bunker Bot</strong>
+        <small>Offline Survival AI</small>
+      </div>
+    </div>
+    <button id="aria-close" class="btn-icon" aria-label="Close Bunker Bot">✕</button>
+  </div>
+  <div class="aria-status">
+    <span class="status-dot checking"></span>
+    <span class="aria-status-label">Checking connection…</span>
+    &nbsp;·&nbsp;
+    <span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span>
+  </div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome">
+      <div class="aria-message-content">
+        <p>I'm <strong>Bunker Bot</strong>. You're reading the Climate &amp; Regional Survival section. Ask me about UK foraging, hypothermia prevention, specific plant identification, or survival in any climate zone.</p>
+        <p class="aria-note">⚠️ Requires Ollama running locally. <a href="../ai-setup.html">Setup guide →</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2" aria-label="Message Bunker Bot"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+
+<button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+
+<!-- Page-specific interactive JS -->
+<script>
+(function () {
+  'use strict';
+
+  /* ──────────────────────────────────────────
+     CLIMATE ZONE DATA
+  ────────────────────────────────────────── */
+  var ZONES = [
+    {
+      id: 'maritime',
+      icon: '🌧️',
+      name: 'Temperate Maritime',
+      sub: 'UK · Ireland · Pacific NW',
+      color: '#4a9e4a',
+      bgColor: 'rgba(74,158,74,0.12)',
+      koppen: 'Cfb',
+      regions: 'UK, Ireland, W. Norway, Pacific Northwest USA, New Zealand, SW Chile',
+      temp: '−5°C to 30°C (23–86°F)',
+      rain: '600–2,500 mm · year-round',
+      threats: [
+        'Wet-cold hypothermia — fatal at 10°C with wind and rain',
+        'Flash flooding — rivers rise metres in hours',
+        'Lyme disease from ticks in long grass / woodland',
+        'Moorland fog — navigation becomes nearly impossible',
+      ],
+      water: 'Abundant. Rain collection is easy and productive (UK: ~885mm/year average). Peat-stained moorland streams are safe after filtering — brown colour is tannin, not contamination. Chalk streams are exceptionally clean.',
+      shelter: 'Windbreak is the #1 priority. A debris hut with dry bracken insulation works very well. Coppiced hazel rods make an excellent frame. Never sleep in valley bottoms — flooding risk.',
+      fire: 'Everything is wet. Carry multiple ignition sources. Birch bark (inner layers), dead bracken (dry inner core), elder pith, and split log interiors are UK\'s best dry tinder sources.',
+      edibles: ['Nettles (spring)', 'Blackberries', 'Elderberries', 'Hazelnuts', 'Rosehips (vitamin C)', 'Wild garlic', 'Watercress (cook)', 'Dandelion (year-round)', 'Sloes', 'Crab apples', 'Chanterelle / porcini'],
+      travel: 'Follow streams downhill to settlements. Hedgerows mark ancient paths. UK public footpaths (140,000+ miles) are marked on OS maps.',
+    },
+    {
+      id: 'mediterranean',
+      icon: '☀️',
+      name: 'Mediterranean',
+      sub: 'S. Europe · California · W. Australia',
+      color: '#d4a843',
+      bgColor: 'rgba(212,168,67,0.12)',
+      koppen: 'Csa / Csb',
+      regions: 'Southern Europe, California, SW Australia, N. Africa coast, Cape of Good Hope',
+      temp: '0°C to 45°C (32–113°F)',
+      rain: '300–800 mm · winter only; summer drought',
+      threats: [
+        'Dehydration and heat stroke in summer — onset surprisingly fast',
+        'Hypothermia in winter nights — cold is underestimated',
+        'Wildfire — landscape is tinder-dry Jun–Sep',
+        'Flash floods after summer storms — dry riverbeds fill explosively',
+      ],
+      water: 'Springs emerge from limestone; seasonal streams dry up by June. Collect dew on cold nights (rock surfaces, metal). Prickly pear cactus pads contain water. Prioritise water over food in summer.',
+      shelter: 'Shade from 10am–4pm is survival. Rock overhangs and cave entries. Never shelter in dry riverbeds. In winter: insulation needed — nights can be near freezing at altitude.',
+      fire: 'Easy in summer (very dry). Rockrose resin, dried grasses, juniper bark all ignite readily. Fire risk to surroundings is extreme — be careful.',
+      edibles: ['Wild olives (autumn)', 'Figs (summer)', 'Pine nuts (autumn)', 'Prickly pear (summer)', 'Mallow (spring leaves)', 'Purslane (summer)', 'Wild asparagus (spring)', 'Sea fennel', 'Acorns (leach tannins)', 'Rock samphire'],
+      travel: 'Move at dawn and dusk. Rest in shade midday. Ridge walks are cooler and have better views for navigation. Mark water sources on your route.',
+    },
+    {
+      id: 'continental',
+      icon: '🌨️',
+      name: 'Continental',
+      sub: 'E. Europe · Canada · Russia',
+      color: '#7a9ec0',
+      bgColor: 'rgba(122,158,192,0.12)',
+      koppen: 'Dfa / Dfb / Dfc',
+      regions: 'E. Europe, N. America interior, most of Russia, N. China, Manchuria',
+      temp: '−40°C to 35°C (−40–95°F) — extreme seasonal variation',
+      rain: '400–700 mm · well-distributed; heavy winter snow',
+      threats: [
+        'Frostbite and hypothermia in winter — exposed skin freezes in minutes at −20°C',
+        'Blizzard whiteout — disorientation and rapid exposure',
+        'Spring flooding from snowmelt — river ice breaking unpredictably',
+        'Summer lightning and tornado risk in interior zones',
+      ],
+      water: 'Melt snow (requires significant calories — pair with food). Ice fishing in winter (cut through ice, use jig). Springs don\'t freeze. Streams follow terrain reliably.',
+      shelter: 'Insulation is everything. Below-ground or snow structures are warmer than above-ground. A snow trench (1.8m deep) can maintain −5°C inside at −30°C outside. Keep the entrance lower than sleeping surface — cold air sinks.',
+      fire: 'Birch bark is the universal fire starter for this zone. Resinous pine branches, spruce sap, and dry inner wood from standing dead trees.',
+      edibles: ['Cattail (all year — roots, pollen, shoots)', 'Pine cambium (inner bark)', 'Nettles (spring)', 'Blueberries / bilberries (summer)', 'Cranberries (bog, autumn)', 'Spruce tips (spring — vitamin C)', 'Fish (year-round)', 'Game (deer, rabbit, grouse)'],
+      travel: 'Travel in daylight only in winter. Mark your camp before leaving. Conifer trees point roughly south (denser branches on south side). Rivers run south in most of this zone.',
+    },
+    {
+      id: 'tropical',
+      icon: '🌴',
+      name: 'Tropical',
+      sub: 'Central Africa · SE Asia · Amazon',
+      color: '#2a8a2a',
+      bgColor: 'rgba(42,138,42,0.12)',
+      koppen: 'Af / Am / Aw',
+      regions: 'Amazon basin, Central Africa, SE Asia, Central America, Pacific islands',
+      temp: '20°C to 40°C (68–104°F) · high humidity year-round',
+      rain: '1,500–5,000+ mm · daily rain (equatorial) or monsoon seasonal',
+      threats: [
+        'Heat exhaustion — high humidity blocks sweating effectiveness',
+        'Infections — any wound goes septic in 24–48 hours; cover all cuts',
+        'Venomous wildlife — snakes, centipedes, spiders, fish, jellyfish',
+        'Tropical disease — malaria, dengue, leptospirosis from water',
+        'Dense vegetation limiting travel to ~1–2 km/hour',
+      ],
+      water: 'Water is everywhere but must always be purified — tropical pathogens (vibrio, leptospira) are invisible. Green bamboo contains drinkable water (cut above a node and drain). Vines can be cut and drained. Coconut water (green coconuts) is sterile.',
+      shelter: 'Get off the ground — insects, snakes, and flooding. A hammock between two trees with a tarp above is the standard tropical shelter. Prioritise ventilation over insulation.',
+      fire: 'Damp but achievable. Bamboo fire saw (friction). Bamboo shavings, inner dry grass, and the inside of large fallen logs.',
+      edibles: ['Coconut (all parts)', 'Banana (all parts — fruit, flower, young leaves for wrapping)', 'Bamboo shoots (boil first)', 'Palm heart', 'Breadfruit', 'Papaya', 'Jackfruit', 'Rambutan', 'Wild taro (cook thoroughly — raw is toxic)'],
+      travel: 'Follow rivers downstream. Avoid travel through thick jungle (exhausting and dangerous). Use waterways where possible. Travel in dry season if you can plan. Machete is essential.',
+    },
+    {
+      id: 'desert',
+      icon: '🏜️',
+      name: 'Desert / Arid',
+      sub: 'Sahara · Middle East · Australia',
+      color: '#c8781a',
+      bgColor: 'rgba(200,120,26,0.12)',
+      koppen: 'BWh / BWk / BSh',
+      regions: 'Sahara, Arabian desert, Australian outback, Atacama, Sonoran, Central Asian deserts',
+      temp: '−5°C to 55°C (23–131°F) · extreme day/night variation',
+      rain: 'Under 250 mm / year — and unreliable',
+      threats: [
+        'Dehydration — can be life-threatening in under 6 hours without water',
+        'Heat stroke — core temp above 40°C (104°F) is a medical emergency',
+        'Hypothermia at night — desert nights can be near freezing',
+        'Flash floods — dry wadis/arroyos fill explosively with zero local rain',
+        'Venomous scorpions, spiders, snakes active at night',
+      ],
+      water: 'Your only task. Dig at the outside bend of dry riverbeds (lowest point of the curve). Collect dew on cold rocks at dawn (before 7am). Solar still (2L/day — low but better than nothing). Morning dew on vegetation. Prickly pear pads contain significant water.',
+      shelter: 'Shade 10am–4pm. Never shade in a dry riverbed. Rock overhangs, north-facing cliff base. Use reflective materials. Burrow into sand for insulation against both heat and night cold.',
+      fire: 'Easy — dead desert scrub, dried cactus pulp. Fire risk to surroundings is low (sparse fuel). Use for signalling before temperature extremes — smoke visible for 50+ miles.',
+      edibles: ['Prickly pear cactus (pads + fruit)', 'Mesquite pods (dried, grind to flour)', 'Date palms (fruit, heart)', 'Pine nuts (higher/cooler deserts)', 'Insects (grasshoppers, termites — high protein, safe roasted)', 'Lizards (high protein)'],
+      travel: 'Move only at dawn and dusk. Find shade and rest from 10am–4pm. Navigate by stars at night — Polaris (N. hemisphere) or Southern Cross (S. hemisphere). Leave marked trails with rocks.',
+    },
+    {
+      id: 'arctic',
+      icon: '❄️',
+      name: 'Subarctic / Arctic',
+      sub: 'Scandinavia · Alaska · Siberia',
+      color: '#6aa4cf',
+      bgColor: 'rgba(106,164,207,0.12)',
+      koppen: 'Dfc / ET / EF',
+      regions: 'Northern Scandinavia, most of Alaska, Canada north of 55°N, Siberia, Greenland, Antarctica',
+      temp: '−60°C to 20°C (−76–68°F)',
+      rain: 'Low precipitation — but persistent snow cover Oct–May',
+      threats: [
+        'Frostbite — exposed skin can freeze in 2–5 minutes at −30°C with wind',
+        'Whiteout — complete loss of horizon and depth perception in blizzard',
+        'Carbon monoxide — enclosed snow shelters trap CO from stoves',
+        'Ice fall — thin lake/sea ice without warning; test with a pole',
+        'Polar bear risk in high Arctic (N. Canada, Svalbard, Alaska)',
+      ],
+      water: 'Melt old blue sea ice (desalinated) or freshwater snow. Do NOT eat snow directly — consuming frozen water drops core temperature fast. Melt in a container. Rivers and lakes under snow require careful ice-thickness assessment (minimum 10cm for walking).',
+      shelter: 'Below-ground or snow is warmer than above-ground and blocks wind. Quinzhee (pack snow mound, hollow out) or snow trench. Keep sleeping area higher than entrance (cold air sinks). A single candle provides meaningful heat in a snow shelter.',
+      fire: 'Bring it with you. Natural tinder sources are minimal. Carry a good fire kit and know how to build a star fire (feed logs in from a circle) which maintains itself. Birch bark if birch trees are present.',
+      edibles: ['Arctic char and other fish (year-round through ice fishing)', 'Ptarmigan (grouse-like bird, all year, excellent camouflage)', 'Reindeer/caribou lichen (Cladonia rangiferina — boil to reduce acids)', 'Cloudberries (Aug, where present)', 'Crowberries (Aug–Sep)', 'Kelp and seaweed (coastal Arctic)', 'Pine cambium (subarctic tree line)'],
+      travel: 'Travel on ridgelines to avoid avalanche risk. In whiteout — stop, shelter, wait. Snowshoes essential in deep powder. Mark your path with flagging or cairns. Ski poles triple as probing ice.',
+    },
+  ];
+
+  /* ──────────────────────────────────────────
+     RENDER ZONE PICKER
+  ────────────────────────────────────────── */
+  var picker  = document.getElementById('zone-picker');
+  var panel   = document.getElementById('zone-info-panel');
+  var current = null;
+
+  ZONES.forEach(function (z, i) {
+    var btn = document.createElement('button');
+    btn.className = 'zone-btn' + (i === 0 ? ' active' : '');
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    btn.setAttribute('aria-controls', 'zone-info-panel');
+    btn.dataset.zoneId = z.id;
+    btn.innerHTML =
+      '<span class="zone-icon">' + z.icon + '</span>' +
+      '<span class="zone-name">' + z.name + '</span>' +
+      '<span class="zone-sub">' + z.sub + '</span>';
+    btn.addEventListener('click', function () { selectZone(z, btn); });
+    picker.appendChild(btn);
+  });
+
+  function selectZone(z, btn) {
+    /* Update button states */
+    picker.querySelectorAll('.zone-btn').forEach(function (b) {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+
+    /* Animate out */
+    var existing = panel.querySelector('.zone-info');
+    if (existing) {
+      existing.classList.remove('visible');
+      setTimeout(function () { renderZone(z); }, 200);
+    } else {
+      renderZone(z);
+    }
+  }
+
+  function renderZone(z) {
+    var edibleList = z.edibles.map(function (e) { return '<li>' + e + '</li>'; }).join('');
+    var threatList = z.threats.map(function (t) { return '<li>' + t + '</li>'; }).join('');
+
+    panel.innerHTML = '<div class="zone-info" id="zone-info-rendered">' +
+      '<div class="zone-banner" style="background:' + z.bgColor + ';border:1px solid ' + z.color + '40">' +
+        '<span class="banner-icon">' + z.icon + '</span>' +
+        '<div class="banner-text">' +
+          '<div>' + z.name + ' <small style="font-weight:400;color:var(--text-2)">· Köppen ' + z.koppen + '</small></div>' +
+          '<div class="banner-sub">' + z.regions + '</div>' +
+        '</div>' +
+        '<div style="text-align:right;flex-shrink:0">' +
+          '<div style="font-size:.75rem;color:var(--text-2)">Temp range</div>' +
+          '<div style="font-size:.8rem;font-weight:600">' + z.temp + '</div>' +
+          '<div style="font-size:.75rem;color:var(--text-2);margin-top:.2rem">Rainfall</div>' +
+          '<div style="font-size:.8rem">' + z.rain + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="zone-grid">' +
+        '<div class="zone-card"><h4>⚠️ Key Threats</h4><ul>' + threatList + '</ul></div>' +
+        '<div class="zone-card"><h4>💧 Water</h4><p>' + z.water + '</p></div>' +
+        '<div class="zone-card"><h4>🏕️ Shelter</h4><p>' + z.shelter + '</p></div>' +
+        '<div class="zone-card"><h4>🍃 Key Edibles</h4><ul>' + edibleList + '</ul></div>' +
+        '<div class="zone-card" style="grid-column:1/-1"><h4>🔥 Fire &amp; Travel</h4>' +
+          '<p><strong>Fire:</strong> ' + z.fire + '</p>' +
+          '<p style="margin-top:.4rem"><strong>Travel:</strong> ' + z.travel + '</p>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+    /* Trigger animation on next frame */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        var el = document.getElementById('zone-info-rendered');
+        if (el) el.classList.add('visible');
+      });
+    });
+  }
+
+  /* Render first zone on load */
+  selectZone(ZONES[0], picker.querySelector('.zone-btn'));
+
+  /* ──────────────────────────────────────────
+     UK FORAGING WHEEL
+  ────────────────────────────────────────── */
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  /* availability: 0=none, 1=low, 2=peak */
+  var CATEGORIES = [
+    { name: 'Leaves & Greens', color: '#4a9e4a',
+      avail: [2,2,2,2,2,2,1,1,2,2,1,1] },   /* dandelion/nettle year-round */
+    { name: 'Flowers',         color: '#d4a843',
+      avail: [0,0,0,1,2,2,1,0,0,0,0,0] },   /* hawthorn, elder */
+    { name: 'Berries & Fruit', color: '#e07030',
+      avail: [0,0,0,0,0,0,1,2,2,2,1,0] },   /* blackberry, elder, crab apple */
+    { name: 'Nuts & Seeds',    color: '#8b6914',
+      avail: [0,0,0,0,0,0,0,2,2,2,1,0] },   /* hazel, chestnut, acorn */
+    { name: 'Fungi',           color: '#9b59b6',
+      avail: [0,0,0,0,0,1,2,2,2,2,1,0] },   /* chanterelle, porcini */
+  ];
+
+  var MONTH_DATA = [
+    { summary: 'Sparse season. Dandelion leaves and roots available. Watercress in running streams. Some evergreen plants accessible.', peak: [] },
+    { summary: 'First signs of spring. Hawthorn buds swelling. Dandelion leaves. Watercress. Hazel catkins (pollen edible).', peak: [] },
+    { summary: 'Wild garlic carpets damp woodland — strong garlic smell confirms ID. Nettles shooting up. Three-cornered leek.', peak: ['Wild garlic', 'Nettles'] },
+    { summary: 'Wild garlic at peak. Nettle tops. Hawthorn young leaves (\'bread and cheese\'). Wood sorrel. Alexanders.', peak: ['Wild garlic', 'Hawthorn leaves', 'Wood sorrel'] },
+    { summary: 'Elder flowers (fritters, cordial). Hawthorn flowers. Nettles maturing — use seeds. Sea purslane starts.', peak: ['Elderflower', 'Nettles'] },
+    { summary: 'Elder flowers peak. Wild strawberries. Sea purslane and rock samphire on coast. First chanterelles possible.', peak: ['Elderflower', 'Wild strawberries', 'Chanterelle'] },
+    { summary: 'First blackberries. Elderberries ripening. Rosehips forming. Chanterelles. Bilberries on moorland.', peak: ['Blackberries', 'Bilberries', 'Chanterelle'] },
+    { summary: 'Blackberries at peak. Elderberries. Rosehips. Hazelnuts early. Porcini and chanterelle season. Crab apples.', peak: ['Blackberries', 'Elderberries', 'Hazelnuts', 'Chanterelle', 'Porcini'] },
+    { summary: 'Peak fungi season — chanterelle, porcini, hedgehog mushroom, bay bolete. Sloes after first frost. Crab apples. Sweet chestnuts.', peak: ['Porcini', 'Sloes', 'Sweet chestnut', 'Crab apple'] },
+    { summary: 'Sloes best after hard frost. Crab apples. Remaining rosehips. Late fungi including velvet shank. Rowan berries.', peak: ['Sloes', 'Rosehips', 'Rowan berries'] },
+    { summary: 'End of main season. Rosehips persisting. Some late fungi. Hawthorn berries (haws). Bark harvesting season.', peak: ['Rosehips', 'Haws'] },
+    { summary: 'Dormant period. Watercress in running water. Dried rosehips from stores. Pine needle tea (vitamin C). Holly berries (birds only — mildly toxic to humans).', peak: [] },
+  ];
+
+  var svg = document.getElementById('foraging-wheel');
+  var CX = 150, CY = 150, R_IN = 55, R_MONTH = 80;
+  var RING_W = 10, RING_GAP = 2;
+  var ns = 'http://www.w3.org/2000/svg';
+
+  function polarToXY(cx, cy, r, angleDeg) {
+    var rad = (angleDeg - 90) * Math.PI / 180;
+    return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+  }
+
+  function arcPath(cx, cy, r, startDeg, endDeg) {
+    var s = polarToXY(cx, cy, r, startDeg);
+    var e = polarToXY(cx, cy, r, endDeg);
+    var large = endDeg - startDeg > 180 ? 1 : 0;
+    return 'M ' + s.x + ' ' + s.y + ' A ' + r + ' ' + r + ' 0 ' + large + ' 1 ' + e.x + ' ' + e.y;
+  }
+
+  function sectorPath(cx, cy, r1, r2, startDeg, endDeg) {
+    var p1 = polarToXY(cx, cy, r1, startDeg);
+    var p2 = polarToXY(cx, cy, r2, startDeg);
+    var p3 = polarToXY(cx, cy, r2, endDeg);
+    var p4 = polarToXY(cx, cy, r1, endDeg);
+    var large = endDeg - startDeg > 180 ? 1 : 0;
+    return 'M ' + p1.x + ',' + p1.y +
+           ' L ' + p2.x + ',' + p2.y +
+           ' A ' + r2 + ',' + r2 + ' 0 ' + large + ',1 ' + p3.x + ',' + p3.y +
+           ' L ' + p4.x + ',' + p4.y +
+           ' A ' + r1 + ',' + r1 + ' 0 ' + large + ',0 ' + p1.x + ',' + p1.y +
+           ' Z';
+  }
+
+  /* Draw centre circle */
+  var centreCirc = document.createElementNS(ns, 'circle');
+  centreCirc.setAttribute('cx', CX); centreCirc.setAttribute('cy', CY);
+  centreCirc.setAttribute('r', R_IN - 4);
+  centreCirc.setAttribute('fill', '#1a1a1a');
+  centreCirc.setAttribute('stroke', '#444');
+  centreCirc.setAttribute('stroke-width', '1');
+  svg.appendChild(centreCirc);
+
+  var centreTxt = document.createElementNS(ns, 'text');
+  centreTxt.setAttribute('x', CX); centreTxt.setAttribute('y', CY - 6);
+  centreTxt.setAttribute('text-anchor', 'middle');
+  centreTxt.setAttribute('font-size', '9');
+  centreTxt.setAttribute('fill', '#888');
+  centreTxt.setAttribute('font-family', 'monospace');
+  centreTxt.textContent = 'UK';
+  svg.appendChild(centreTxt);
+  var centreTxt2 = document.createElementNS(ns, 'text');
+  centreTxt2.setAttribute('x', CX); centreTxt2.setAttribute('y', CY + 6);
+  centreTxt2.setAttribute('text-anchor', 'middle');
+  centreTxt2.setAttribute('font-size', '8');
+  centreTxt2.setAttribute('fill', '#666');
+  centreTxt2.setAttribute('font-family', 'monospace');
+  centreTxt2.textContent = 'FORAGING';
+  svg.appendChild(centreTxt2);
+  var centreTxt3 = document.createElementNS(ns, 'text');
+  centreTxt3.setAttribute('x', CX); centreTxt3.setAttribute('y', CY + 16);
+  centreTxt3.setAttribute('text-anchor', 'middle');
+  centreTxt3.setAttribute('font-size', '7');
+  centreTxt3.setAttribute('fill', '#555');
+  centreTxt3.setAttribute('font-family', 'monospace');
+  centreTxt3.textContent = 'WHEEL';
+  svg.appendChild(centreTxt3);
+
+  var selectedMonth = -1;
+
+  MONTHS.forEach(function (month, mi) {
+    var startDeg = mi * 30;
+    var endDeg   = startDeg + 28; /* 2° gap between months */
+    var midDeg   = startDeg + 15;
+
+    var g = document.createElementNS(ns, 'g');
+    g.setAttribute('class', 'month-arc');
+    g.setAttribute('role', 'button');
+    g.setAttribute('tabindex', '0');
+    g.setAttribute('aria-label', month);
+    g.style.cursor = 'pointer';
+
+    /* Month segment */
+    var seg = document.createElementNS(ns, 'path');
+    seg.setAttribute('d', sectorPath(CX, CY, R_IN, R_MONTH, startDeg, endDeg));
+    seg.setAttribute('fill', mi === selectedMonth ? '#333' : '#252525');
+    seg.setAttribute('stroke', '#444');
+    seg.setAttribute('stroke-width', '0.5');
+    seg.setAttribute('class', 'month-seg');
+    seg.setAttribute('data-mi', mi);
+    g.appendChild(seg);
+
+    /* Month label */
+    var lp = polarToXY(CX, CY, R_MONTH + 13, midDeg);
+    var lbl = document.createElementNS(ns, 'text');
+    lbl.setAttribute('x', lp.x); lbl.setAttribute('y', lp.y);
+    lbl.setAttribute('text-anchor', 'middle');
+    lbl.setAttribute('dominant-baseline', 'middle');
+    lbl.setAttribute('font-size', '8.5');
+    lbl.setAttribute('fill', '#aaa');
+    lbl.setAttribute('font-family', 'monospace');
+    lbl.setAttribute('font-weight', '600');
+    lbl.setAttribute('data-mi', mi);
+    lbl.textContent = month;
+    g.appendChild(lbl);
+
+    /* Availability rings */
+    CATEGORIES.forEach(function (cat, ci) {
+      var rInner = R_MONTH + 22 + ci * (RING_W + RING_GAP);
+      var rOuter = rInner + RING_W;
+      var avail  = cat.avail[mi];
+      if (avail === 0) return;
+
+      var arc = document.createElementNS(ns, 'path');
+      arc.setAttribute('d', sectorPath(CX, CY, rInner, rOuter, startDeg, endDeg));
+      arc.setAttribute('fill', avail === 2 ? cat.color : cat.color + '60');
+      arc.setAttribute('stroke', 'none');
+      g.appendChild(arc);
+    });
+
+    g.addEventListener('click', function () { highlightMonth(mi); });
+    g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); highlightMonth(mi); } });
+    svg.appendChild(g);
+  });
+
+  function highlightMonth(mi) {
+    selectedMonth = mi;
+    /* Reset all segments */
+    svg.querySelectorAll('.month-seg').forEach(function (seg) {
+      seg.setAttribute('fill', '#252525');
+    });
+    svg.querySelectorAll('text[data-mi]').forEach(function (lbl) {
+      lbl.setAttribute('fill', '#aaa');
+    });
+    /* Highlight selected */
+    svg.querySelectorAll('[data-mi="' + mi + '"]').forEach(function (el) {
+      if (el.tagName === 'path') el.setAttribute('fill', '#3a3a2a');
+      if (el.tagName === 'text') el.setAttribute('fill', '#d4a843');
+    });
+
+    /* Show detail panel */
+    var data  = MONTH_DATA[mi];
+    var peaks = data.peak.length
+      ? '<div class="peak-label">Peak this month:</div>' + data.peak.map(function (p) { return '<div class="avail-row"><span class="avail-dot" style="background:#6abf2a"></span>' + p + '</div>'; }).join('')
+      : '<div style="color:var(--text-2);font-size:.8rem">No peak foods — forage carefully</div>';
+
+    var avRows = CATEGORIES.map(function (cat) {
+      var av = cat.avail[mi];
+      if (av === 0) return '';
+      return '<div class="avail-row">' +
+        '<span class="avail-dot" style="background:' + cat.color + '"></span>' +
+        '<span>' + cat.name + (av === 2 ? ' — <strong>peak</strong>' : ' — low') + '</span>' +
+        '</div>';
+    }).join('');
+
+    document.getElementById('month-detail').innerHTML =
+      '<h3>' + MONTHS[mi] + '</h3>' +
+      '<p style="font-size:.85rem;color:var(--text-2);margin-bottom:.6rem">' + data.summary + '</p>' +
+      (avRows || '<p style="color:var(--text-2);font-size:.85rem">Very little available — rely on stored/dried food</p>') +
+      '<div style="margin-top:.6rem">' + peaks + '</div>';
+  }
+
+  /* Build legend */
+  var legend = document.getElementById('wheel-legend');
+  CATEGORIES.forEach(function (cat) {
+    legend.innerHTML += '<span><span class="legend-dot" style="background:' + cat.color + '"></span>' + cat.name + '</span>';
+  });
+
+  /* Auto-select current month */
+  var now = new Date().getMonth();
+  setTimeout(function () { highlightMonth(now); }, 100);
+
+})();
+</script>
+
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/aria.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

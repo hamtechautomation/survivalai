@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Master Gear List — every item in The Last Light Survival Guide organized by category, priority tier, and preparedness progress.">
+  <title>Master Gear List — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* =================== GEAR PAGE STYLES =================== */
+    .gear-hero {
+      background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .gear-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .gear-stat {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .gear-stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--amber);
+      display: block;
+      line-height: 1;
+    }
+
+    .gear-stat-label {
+      font-size: .75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-top: .3rem;
+      display: block;
+    }
+
+    .progress-block {
+      margin-top: 1rem;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .85rem;
+      color: var(--text-secondary);
+      margin-bottom: .5rem;
+    }
+
+    .progress-pct {
+      font-weight: 700;
+      color: var(--amber);
+      font-size: 1.1rem;
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 14px;
+      background: var(--bg-2);
+      border-radius: 7px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 7px;
+      background: linear-gradient(90deg, var(--amber), #e8c46a);
+      transition: width .4s ease;
+      min-width: 0;
+    }
+
+    .progress-bar-fill.complete {
+      background: linear-gradient(90deg, var(--green), #6fc96f);
+    }
+
+    /* =================== FILTER CONTROLS =================== */
+    .gear-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .gear-controls-label {
+      font-size: .8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-right: .25rem;
+    }
+
+    .filter-btn {
+      padding: .35rem .85rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg-2);
+      color: var(--text-secondary);
+      font-size: .8rem;
+      cursor: pointer;
+      transition: all .15s;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover { border-color: var(--amber); color: var(--amber); }
+    .filter-btn.active { background: var(--amber); color: var(--bg-0); border-color: var(--amber); font-weight: 600; }
+    .filter-btn.f-critical.active { background: #c0392b; border-color: #c0392b; color: #fff; }
+    .filter-btn.f-important.active { background: #d68910; border-color: #d68910; color: var(--bg-0); }
+    .filter-btn.f-nice.active { background: #2980b9; border-color: #2980b9; color: #fff; }
+
+    .gear-actions {
+      display: flex;
+      gap: .5rem;
+      margin-left: auto;
+      flex-wrap: wrap;
+    }
+
+    /* =================== CATEGORY SECTION =================== */
+    .gear-category {
+      margin-bottom: 2.5rem;
+    }
+
+    .gear-category-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .75rem 1rem;
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: 8px 8px 0 0;
+      border-bottom: 2px solid var(--amber);
+    }
+
+    .gear-category-icon { font-size: 1.3rem; }
+    .gear-category-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+    .gear-category-count {
+      margin-left: auto;
+      font-size: .75rem;
+      color: var(--text-muted);
+      background: var(--bg-2);
+      padding: .2rem .6rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .gear-category-progress {
+      margin-left: .5rem;
+      font-size: .75rem;
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    .gear-items-list {
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+    }
+
+    /* =================== GEAR ITEM =================== */
+    .gear-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      transition: background .1s;
+      position: relative;
+    }
+
+    .gear-item:last-child { border-bottom: none; }
+    .gear-item:hover { background: var(--bg-1); }
+    .gear-item.is-checked { opacity: .5; }
+    .gear-item.is-checked .gear-item-label { text-decoration: line-through; color: var(--text-muted); }
+
+    .gear-item-check {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      accent-color: var(--amber);
+      cursor: pointer;
+    }
+
+    .gear-item-content { flex: 1; min-width: 0; }
+
+    .gear-item-label {
+      font-size: .9rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: block;
+      line-height: 1.4;
+    }
+
+    .gear-item-meta {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: .3rem;
+      flex-wrap: wrap;
+    }
+
+    .gear-item-qty {
+      font-size: .72rem;
+      color: var(--text-muted);
+    }
+
+    .gear-item-source {
+      font-size: .7rem;
+      color: var(--text-muted);
+      background: var(--bg-2);
+      padding: .1rem .4rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* Priority badges */
+    .priority-badge {
+      font-size: .65rem;
+      font-weight: 700;
+      padding: .15rem .45rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .priority-critical { background: rgba(192, 57, 43, .15); color: #e74c3c; border: 1px solid rgba(192, 57, 43, .3); }
+    .priority-important { background: rgba(214, 137, 16, .15); color: #e67e22; border: 1px solid rgba(214, 137, 16, .3); }
+    .priority-nice { background: rgba(41, 128, 185, .12); color: #3498db; border: 1px solid rgba(41, 128, 185, .25); }
+
+    /* Hidden by filter */
+    .gear-item.hidden-by-filter { display: none; }
+    .gear-category.all-hidden { display: none; }
+
+    /* =================== PRINT STYLES =================== */
+    @media print {
+      .gear-controls, .header-actions, #back-to-top, .site-header .btn,
+      .sidebar, .aria-panel, #overlay { display: none !important; }
+
+      body { background: #fff !important; color: #000 !important; }
+      .gear-hero { background: none !important; border: 1px solid #ccc !important; }
+      .gear-stat { background: none !important; border: 1px solid #ccc !important; }
+      .gear-stat-number { color: #000 !important; }
+      .progress-bar-track { background: #eee !important; border-color: #ccc !important; }
+      .progress-bar-fill { background: #333 !important; }
+      .gear-category-header { background: #f5f5f5 !important; border-color: #ccc !important; border-bottom: 2px solid #000 !important; }
+      .gear-item { border-color: #eee !important; }
+      .gear-item:hover { background: none !important; }
+      .priority-critical { background: #fee !important; color: #c00 !important; border-color: #c00 !important; }
+      .priority-important { background: #fff3e0 !important; color: #c60 !important; border-color: #c60 !important; }
+      .priority-nice { background: #e8f4f8 !important; color: #069 !important; border-color: #069 !important; }
+
+      /* Shopping list mode: hide checked items */
+      body.print-shopping .gear-item.is-checked { display: none !important; }
+      body.print-shopping .print-shopping-title { display: block !important; }
+
+      .print-shopping-title {
+        display: none;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        padding-bottom: .5rem;
+        border-bottom: 2px solid #000;
+      }
+
+      /* Full list mode: show everything */
+      body:not(.print-shopping) .gear-item.is-checked { opacity: 1 !important; }
+      body:not(.print-shopping) .gear-item.is-checked .gear-item-label {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+    }
+
+    .print-shopping-title {
+      display: none;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    /* =================== RESET CONFIRM =================== */
+    .reset-note {
+      font-size: .75rem;
+      color: var(--text-muted);
+      margin-top: .25rem;
+    }
+
+    @media (max-width: 600px) {
+      .gear-stat-number { font-size: 1.5rem; }
+      .gear-actions { margin-left: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Master Gear List</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="printFullList()" class="btn btn-sm btn-outline">🖨️ Print All</button>
+    <button onclick="printShoppingList()" class="btn btn-sm btn-danger">🛒 Shopping List</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="print-shopping-title">🛒 Survival Gear — Shopping List (Unchecked Items)</div>
+
+  <div class="section-header">
+    <h1>📦 Master Gear List</h1>
+    <p class="section-desc">Every piece of equipment referenced in The Last Light Survival Guide, organized by category and priority tier. Check items as you acquire them — your progress saves automatically.</p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2025-06"></span></span>
+      <span class="meta-item">📖 Compiled from all 8 sections</span>
+    </div>
+  </div>
+
+  <!-- Progress Dashboard -->
+  <div class="gear-hero">
+    <div class="gear-stats">
+      <div class="gear-stat">
+        <span class="gear-stat-number" id="stat-total">0</span>
+        <span class="gear-stat-label">Total Items</span>
+      </div>
+      <div class="gear-stat">
+        <span class="gear-stat-number" id="stat-checked">0</span>
+        <span class="gear-stat-label">Acquired</span>
+      </div>
+      <div class="gear-stat">
+        <span class="gear-stat-number" id="stat-critical-total">0</span>
+        <span class="gear-stat-label">Critical Items</span>
+      </div>
+      <div class="gear-stat">
+        <span class="gear-stat-number" id="stat-critical-checked" style="color:var(--green)">0</span>
+        <span class="gear-stat-label">Critical Acquired</span>
+      </div>
+    </div>
+    <div class="progress-block">
+      <div class="progress-label">
+        <span>Critical Items Readiness</span>
+        <span class="progress-pct"><span id="progress-pct">0</span>%</span>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+      </div>
+      <div class="reset-note">Checkboxes saved in your browser. <button onclick="confirmReset()" style="background:none;border:none;color:var(--text-muted);font-size:.75rem;cursor:pointer;text-decoration:underline;font-family:inherit;padding:0">Reset all</button></div>
+    </div>
+  </div>
+
+  <!-- Filter Controls -->
+  <div class="gear-controls">
+    <span class="gear-controls-label">Filter:</span>
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">All Items</button>
+    <button class="filter-btn f-critical" data-filter="critical" onclick="setFilter('critical', this)">🔴 Critical</button>
+    <button class="filter-btn f-important" data-filter="important" onclick="setFilter('important', this)">🟡 Important</button>
+    <button class="filter-btn f-nice" data-filter="nice" onclick="setFilter('nice', this)">🔵 Nice to Have</button>
+    <div class="gear-actions">
+      <button onclick="checkAll()" class="btn btn-sm btn-ghost">Check All</button>
+      <button onclick="uncheckAll()" class="btn btn-sm btn-ghost">Uncheck All</button>
+    </div>
+  </div>
+
+  <!-- Gear list rendered by JS -->
+  <div id="gear-list"></div>
+
+  <div class="callout callout-info" style="margin-top:2rem">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-content">
+      <strong>Priority Key</strong>
+      <p><strong style="color:#e74c3c">Critical</strong> — must-have before any emergency. Without these, survival is severely compromised. Acquire first.<br>
+      <strong style="color:#e67e22">Important</strong> — significantly improves outcomes and resilience. Acquire after Critical items are covered.<br>
+      <strong style="color:#3498db">Nice to Have</strong> — valuable enhancements once the essentials are secured.</p>
+    </div>
+  </div>
+
+</div><!-- /content-wrapper -->
+</main>
+
+<!-- Bunker Bot Panel -->
+<aside id="aria-panel" class="aria-panel" aria-label="ARIA AI assistant">
+  <div class="aria-header">
+    <div class="aria-title-block">
+      <span class="aria-logo">🤖</span>
+      <div>
+        <span class="aria-title">Bunker Bot</span>
+        <span class="aria-subtitle">Gear &amp; Preparedness Advisor</span>
+      </div>
+    </div>
+    <div class="aria-header-actions">
+      <span class="status-dot checking"></span>
+      <span class="aria-status-label">Checking…</span>
+      <button onclick="window.ariaClear && ariaClear()" class="btn-icon" title="Clear chat">↺</button>
+      <button id="aria-close" class="btn-icon" aria-label="Close Bunker Bot">✕</button>
+    </div>
+  </div>
+  <div class="aria-model-bar">
+    Model: <span id="aria-model-badge">llama3</span>
+  </div>
+  <div id="aria-messages" class="aria-messages">
+    <div class="aria-message aria-welcome">
+      <p>I can help you prioritize your gear, suggest alternatives for items you can't find, and explain why each item matters for survival. What do you need?</p>
+    </div>
+  </div>
+  <div class="aria-input-bar">
+    <textarea id="aria-input" class="aria-input" placeholder="Ask about gear priorities…" rows="1"></textarea>
+    <button id="aria-send" class="btn btn-primary btn-sm">Send</button>
+  </div>
+</aside>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/search.js"></script>
+<script src="assets/js/aria.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* =================== GEAR DATA =================== */
+  const GEAR_DATA = [
+    {
+      id: 'water',
+      icon: '💧',
+      title: 'Water & Purification',
+      items: [
+        { id: 'w01', label: 'Water filter (Sawyer Squeeze or LifeStraw)', priority: 'critical', qty: '1–2 units', source: 'Food & Water' },
+        { id: 'w02', label: 'Water purification tablets (iodine or chlorine)', priority: 'critical', qty: '2+ bottles', source: 'Food & Water' },
+        { id: 'w03', label: 'Unscented household bleach (6–8% sodium hypochlorite)', priority: 'critical', qty: '1 gallon+', source: 'Food & Water' },
+        { id: 'w04', label: 'Food-grade water storage containers', priority: 'critical', qty: '5–7 gal each, 3+ containers', source: 'Food & Water' },
+        { id: 'w05', label: 'Collapsible water carriers', priority: 'important', qty: '2–4 units', source: 'Food & Water' },
+        { id: 'w06', label: 'SODIS bottles (clear PET, 2L)', priority: 'nice', qty: '4–6', source: 'Food & Water' },
+        { id: 'w07', label: 'Activated carbon (pre-treatment filtration)', priority: 'nice', qty: '2 lbs', source: 'Food & Water' },
+      ]
+    },
+    {
+      id: 'food',
+      icon: '🥫',
+      title: 'Food & Cooking',
+      items: [
+        { id: 'f01', label: '3-day emergency food supply (non-perishable, ready to eat)', priority: 'critical', qty: 'Per person', source: 'Food & Water' },
+        { id: 'f02', label: 'Salt (non-iodized, for food preservation)', priority: 'critical', qty: '5+ lbs', source: 'Food & Water' },
+        { id: 'f03', label: 'Camp stove + fuel canisters', priority: 'critical', qty: '1 stove, 4+ canisters', source: 'Food & Water' },
+        { id: 'f04', label: 'Manual can opener', priority: 'critical', qty: '2 (one backup)', source: 'Food & Water' },
+        { id: 'f05', label: '30-day food supply (rotation stock)', priority: 'important', qty: 'Per person', source: 'Food & Water' },
+        { id: 'f06', label: 'Cast iron skillet / Dutch oven', priority: 'important', qty: '1–2 pieces', source: 'Food & Water' },
+        { id: 'f07', label: 'Pressure canner + mason jars + replacement lids', priority: 'important', qty: '1 canner, 24+ jars', source: 'Food & Water' },
+        { id: 'f08', label: 'Mylar bags (1-gallon) + oxygen absorbers (300cc)', priority: 'important', qty: '50+ bags', source: 'Food & Water' },
+        { id: 'f09', label: 'Food-grade 5-gallon buckets with gamma-seal lids', priority: 'important', qty: '6+', source: 'Food & Water' },
+        { id: 'f10', label: 'Fishing kit (rod, line, hooks, sinkers, bobbers)', priority: 'nice', qty: '1 kit', source: 'Food & Water' },
+        { id: 'f11', label: 'Wire snares for trapping (22-gauge wire)', priority: 'nice', qty: '20+ snares', source: 'Food & Water' },
+        { id: 'f12', label: 'Hand-crank grain mill', priority: 'nice', qty: '1', source: 'Food & Water' },
+      ]
+    },
+    {
+      id: 'medical',
+      icon: '🏥',
+      title: 'Medical & First Aid',
+      items: [
+        { id: 'm01', label: 'Tourniquet — CAT or SOFTT-W (NOT improvised)', priority: 'critical', qty: '2 per person', source: 'Medical' },
+        { id: 'm02', label: 'Hemostatic gauze (QuikClot Combat Gauze or Celox)', priority: 'critical', qty: '4+ packages', source: 'Medical' },
+        { id: 'm03', label: 'Pressure bandage (Israeli Emergency Bandage)', priority: 'critical', qty: '4–6', source: 'Medical' },
+        { id: 'm04', label: 'Nitrile exam gloves (powder-free)', priority: 'critical', qty: '2 boxes (200 gloves)', source: 'Medical' },
+        { id: 'm05', label: '"Where There Is No Doctor" — Hesperian Foundation', priority: 'critical', qty: '1 printed copy', source: 'Medical' },
+        { id: 'm06', label: 'Broad-spectrum antibiotics (amoxicillin, ciprofloxacin — Rx)', priority: 'critical', qty: 'Full treatment courses', source: 'Medical' },
+        { id: 'm07', label: 'Ibuprofen (600–800mg doses)', priority: 'critical', qty: '500+ tablets', source: 'Medical' },
+        { id: 'm08', label: 'Acetaminophen (500mg)', priority: 'critical', qty: '500+ tablets', source: 'Medical' },
+        { id: 'm09', label: 'Diphenhydramine / antihistamine', priority: 'critical', qty: '200+ tablets', source: 'Medical' },
+        { id: 'm10', label: 'ORS packets or ingredients (sugar + salt)', priority: 'critical', qty: '50+ packets', source: 'Medical' },
+        { id: 'm11', label: 'Epinephrine auto-injector (EpiPen)', priority: 'critical', qty: '2 (if allergies present)', source: 'Medical' },
+        { id: 'm12', label: 'Suture kit (silk 3-0 and 4-0, needle driver, forceps)', priority: 'important', qty: '2 kits', source: 'Medical' },
+        { id: 'm13', label: 'SAM splints (various sizes)', priority: 'important', qty: '4+', source: 'Medical' },
+        { id: 'm14', label: 'Burn dressings (non-adherent, hydrogel)', priority: 'important', qty: '6+', source: 'Medical' },
+        { id: 'm15', label: 'Blood pressure cuff (manual aneroid)', priority: 'important', qty: '1', source: 'Medical' },
+        { id: 'm16', label: 'Stethoscope', priority: 'important', qty: '1', source: 'Medical' },
+        { id: 'm17', label: 'Thermometer (analog / non-battery)', priority: 'important', qty: '2', source: 'Medical' },
+        { id: 'm18', label: 'Dental emergency kit (clove oil, zinc oxide temp cement)', priority: 'important', qty: '1 kit', source: 'Medical' },
+        { id: 'm19', label: 'Eye wash solution', priority: 'important', qty: '4 bottles', source: 'Medical' },
+        { id: 'm20', label: 'Misoprostol 600mcg (postpartum hemorrhage prevention)', priority: 'important', qty: '10+ tablets', source: 'Medical' },
+        { id: 'm21', label: 'Herbal medicine kit (elderberry, echinacea, yarrow, etc.)', priority: 'nice', qty: '1 kit', source: 'Medical' },
+      ]
+    },
+    {
+      id: 'energy',
+      icon: '⚡',
+      title: 'Energy & Power',
+      items: [
+        { id: 'e01', label: 'Solar panel (100W rigid monocrystalline, minimum)', priority: 'critical', qty: '1–2 panels', source: 'Energy' },
+        { id: 'e02', label: 'Deep-cycle AGM battery (100Ah at 12V)', priority: 'critical', qty: '1–2', source: 'Energy' },
+        { id: 'e03', label: 'MPPT charge controller (30A minimum)', priority: 'critical', qty: '1', source: 'Energy' },
+        { id: 'e04', label: 'LED headlamps', priority: 'critical', qty: '1 per person + 2 spares', source: 'Energy' },
+        { id: 'e05', label: 'Spare batteries (AA, AAA, 18650)', priority: 'critical', qty: '24+ of each type', source: 'Energy' },
+        { id: 'e06', label: 'Candles + waterproof matches + lighters', priority: 'critical', qty: '48+ candles, 6 lighters', source: 'Energy' },
+        { id: 'e07', label: 'Power inverter (pure sine wave, 1000W+)', priority: 'important', qty: '1', source: 'Energy' },
+        { id: 'e08', label: 'Portable solar phone/device charger', priority: 'important', qty: '1', source: 'Energy' },
+        { id: 'e09', label: 'Faraday cage container (EMP protection for electronics)', priority: 'important', qty: '1', source: 'Energy' },
+        { id: 'e10', label: 'Fuel stabilizer (Sta-Bil for stored gasoline)', priority: 'important', qty: '1 bottle per 5 gal stored', source: 'Energy' },
+        { id: 'e11', label: 'Battery desulfation charger', priority: 'nice', qty: '1', source: 'Energy' },
+        { id: 'e12', label: 'Portable wind turbine', priority: 'nice', qty: '1', source: 'Energy' },
+      ]
+    },
+    {
+      id: 'shelter',
+      icon: '🏕️',
+      title: 'Shelter & Clothing',
+      items: [
+        { id: 's01', label: 'Heavy-duty tarps (10×12 ft minimum)', priority: 'critical', qty: '2–4', source: 'Shelter' },
+        { id: 's02', label: 'Paracord 550 (100 ft)', priority: 'critical', qty: '2+ rolls', source: 'Shelter' },
+        { id: 's03', label: 'Emergency mylar blankets', priority: 'critical', qty: '1 per person + 4 spares', source: 'Shelter' },
+        { id: 's04', label: 'Sleeping bag (rated to 0°F / −18°C)', priority: 'critical', qty: '1 per person', source: 'Shelter' },
+        { id: 's05', label: 'Quality rain gear (waterproof jacket + pants)', priority: 'critical', qty: '1 set per person', source: 'Shelter' },
+        { id: 's06', label: 'Sturdy waterproof work boots', priority: 'critical', qty: '1 pair per person', source: 'Shelter' },
+        { id: 's07', label: 'Work gloves (leather, heavy duty)', priority: 'critical', qty: '2 pairs per person', source: 'Shelter' },
+        { id: 's08', label: 'Duct tape', priority: 'critical', qty: '4+ rolls', source: 'Shelter' },
+        { id: 's09', label: 'Tent (3–4 season)', priority: 'important', qty: '1 per group', source: 'Shelter' },
+        { id: 's10', label: 'Wool / fleece base layers', priority: 'important', qty: '2 sets per person', source: 'Shelter' },
+        { id: 's11', label: 'Rope (Manila or nylon, 50 ft)', priority: 'important', qty: '2+ coils', source: 'Shelter' },
+        { id: 's12', label: 'Zip ties (heavy duty, 8-inch)', priority: 'important', qty: '100-pack', source: 'Shelter' },
+        { id: 's13', label: 'Tarp stakes + guy line cord', priority: 'important', qty: '20 stakes, 50 ft cord', source: 'Shelter' },
+        { id: 's14', label: 'Sleeping pad / foam mat', priority: 'important', qty: '1 per person', source: 'Shelter' },
+      ]
+    },
+    {
+      id: 'comms',
+      icon: '📻',
+      title: 'Communications & Electronics',
+      items: [
+        { id: 'c01', label: 'Handheld ham radio (Baofeng UV-5R or equivalent)', priority: 'critical', qty: '2+ radios', source: 'Communications' },
+        { id: 'c02', label: 'NOAA weather radio (battery + hand-crank backup)', priority: 'critical', qty: '1', source: 'Communications' },
+        { id: 'c03', label: 'Spare radio batteries / charging cradle', priority: 'critical', qty: '4+ battery packs', source: 'Communications' },
+        { id: 'c04', label: 'Emergency frequency list (laminated)', priority: 'critical', qty: '1 per radio', source: 'Communications' },
+        { id: 'c05', label: 'Signal mirror (glass, military-spec)', priority: 'critical', qty: '2', source: 'Communications' },
+        { id: 'c06', label: 'Pealess survival whistle (Fox 40 or equivalent)', priority: 'critical', qty: '1 per person', source: 'Communications' },
+        { id: 'c07', label: 'Meshtastic device (LILYGO T-Beam or Heltec)', priority: 'important', qty: '2+', source: 'Communications' },
+        { id: 'c08', label: 'Upgraded antenna (SMA female, 15–25 dBi gain)', priority: 'important', qty: '1 per radio', source: 'Communications' },
+        { id: 'c09', label: 'Printed ham radio license copy', priority: 'important', qty: '1', source: 'Communications' },
+        { id: 'c10', label: 'USB drive with offline Kiwix content + guide', priority: 'important', qty: '2 drives (backup)', source: 'Communications' },
+        { id: 'c11', label: 'Laptop / tablet (loaded with offline content)', priority: 'nice', qty: '1', source: 'Communications' },
+      ]
+    },
+    {
+      id: 'nav',
+      icon: '🧭',
+      title: 'Navigation',
+      items: [
+        { id: 'n01', label: 'Compass (liquid-filled, sighting, e.g., Suunto A-10)', priority: 'critical', qty: '2 (one backup)', source: 'Navigation' },
+        { id: 'n02', label: 'Topographic maps — local area (1:24,000 scale)', priority: 'critical', qty: '1 set, laminated or in map case', source: 'Navigation' },
+        { id: 'n03', label: 'Regional road + trail maps (paper)', priority: 'critical', qty: '1 set', source: 'Navigation' },
+        { id: 'n04', label: 'Emergency quick-reference card (this guide, laminated)', priority: 'critical', qty: '1 per person', source: 'Navigation' },
+        { id: 'n05', label: 'UTM grid reader / roamer tool', priority: 'important', qty: '1', source: 'Navigation' },
+        { id: 'n06', label: 'Waterproof map case', priority: 'important', qty: '1', source: 'Navigation' },
+        { id: 'n07', label: 'Printed star chart (Northern Hemisphere)', priority: 'nice', qty: '1 laminated', source: 'Navigation' },
+        { id: 'n08', label: 'Altimeter watch (barometric)', priority: 'nice', qty: '1', source: 'Navigation' },
+      ]
+    },
+    {
+      id: 'security',
+      icon: '🛡️',
+      title: 'Security & Defense',
+      items: [
+        { id: 'sec01', label: 'Quality deadbolt locks (grade 1 ANSI)', priority: 'important', qty: 'All exterior doors', source: 'Security' },
+        { id: 'sec02', label: 'Door security bar / barricade (4×4 timber)', priority: 'important', qty: '1 per entry door', source: 'Security' },
+        { id: 'sec03', label: 'Binoculars (8×42 waterproof)', priority: 'important', qty: '1 pair', source: 'Security' },
+        { id: 'sec04', label: 'Pepper spray / OC spray (1–2% major capsaicinoids)', priority: 'important', qty: '1 per adult', source: 'Security' },
+        { id: 'sec05', label: 'Tactical flashlight (1000+ lumens)', priority: 'important', qty: '2', source: 'Security' },
+        { id: 'sec06', label: 'Perimeter alarm (trip wire + cans w/rocks, or commercial)', priority: 'important', qty: '1 system', source: 'Security' },
+        { id: 'sec07', label: 'Firearm + ammunition (per local law and competency)', priority: 'important', qty: '500+ rounds minimum', source: 'Security' },
+        { id: 'sec08', label: 'Solar motion-activated security lights', priority: 'nice', qty: '4+', source: 'Security' },
+      ]
+    },
+    {
+      id: 'tools',
+      icon: '🔧',
+      title: 'Tools & Construction',
+      items: [
+        { id: 't01', label: 'Fixed-blade knife (4–6 inch, full tang)', priority: 'critical', qty: '1 per adult + 1 spare', source: 'Shelter' },
+        { id: 't02', label: 'Multi-tool (Leatherman Wave+ or equivalent)', priority: 'critical', qty: '1 per person', source: 'Shelter' },
+        { id: 't03', label: 'Axe or hatchet (full-size + hatchet)', priority: 'important', qty: '2', source: 'Shelter' },
+        { id: 't04', label: 'Folding pruning saw (21-inch curved blade)', priority: 'important', qty: '1', source: 'Shelter' },
+        { id: 't05', label: 'Flat shovel + pointed shovel (entrenching)', priority: 'important', qty: '1 of each', source: 'Shelter' },
+        { id: 't06', label: 'Pry bar / crowbar (36 inch)', priority: 'important', qty: '1', source: 'Shelter' },
+        { id: 't07', label: 'Hammer + assorted nails (common, 16d and 8d)', priority: 'important', qty: '1 hammer, 5 lbs nails', source: 'Shelter' },
+        { id: 't08', label: 'Baling wire + electrical wire (assorted)', priority: 'important', qty: '1 coil each', source: 'Shelter' },
+        { id: 't09', label: 'Sharpening stone / whetstone', priority: 'important', qty: '1', source: 'Shelter' },
+        { id: 't10', label: 'Hand drill (brace) + bits', priority: 'nice', qty: '1 set', source: 'Shelter' },
+        { id: 't11', label: 'Drawknife / spokeshave', priority: 'nice', qty: '1', source: 'Shelter' },
+        { id: 't12', label: 'Chainsaw + extra chain + bar oil (electric or gas)', priority: 'nice', qty: '1', source: 'Shelter' },
+      ]
+    },
+    {
+      id: 'hygiene',
+      icon: '🧼',
+      title: 'Hygiene & Sanitation',
+      items: [
+        { id: 'h01', label: 'Bar soap', priority: 'critical', qty: '24+ bars', source: 'Food & Water' },
+        { id: 'h02', label: 'Hand sanitizer (70%+ alcohol)', priority: 'critical', qty: '2 liters+', source: 'Food & Water' },
+        { id: 'h03', label: 'Feminine hygiene products (tampons, pads)', priority: 'critical', qty: '6-month supply if applicable', source: 'Food & Water' },
+        { id: 'h04', label: 'Toilet paper', priority: 'important', qty: '48+ rolls', source: 'Food & Water' },
+        { id: 'h05', label: 'Toothbrush + toothpaste', priority: 'important', qty: '2 per person', source: 'Food & Water' },
+        { id: 'h06', label: 'Heavy-duty trash bags (30-gal)', priority: 'important', qty: '2 boxes (50+ bags)', source: 'Food & Water' },
+        { id: 'h07', label: 'Lime powder / quicklime (latrine treatment)', priority: 'important', qty: '25 lbs', source: 'Food & Water' },
+        { id: 'h08', label: 'Portable toilet / 5-gallon bucket with snap-on seat', priority: 'important', qty: '1', source: 'Food & Water' },
+        { id: 'h09', label: 'Menstrual cup (reusable)', priority: 'nice', qty: '1 per person', source: 'Food & Water' },
+        { id: 'h10', label: 'Camp / solar shower bag (5-gal)', priority: 'nice', qty: '2', source: 'Food & Water' },
+      ]
+    },
+    {
+      id: 'knowledge',
+      icon: '📚',
+      title: 'Knowledge & Documents',
+      items: [
+        { id: 'k01', label: 'Emergency quick-reference card (printed + laminated)', priority: 'critical', qty: '1 per person', source: 'Knowledge' },
+        { id: 'k02', label: 'Printed emergency contacts list (waterproofed)', priority: 'critical', qty: '1 per person', source: 'Knowledge' },
+        { id: 'k03', label: 'Copies of ID, passports, insurance, medical records (waterproof bag)', priority: 'critical', qty: '1 packet per person', source: 'Knowledge' },
+        { id: 'k04', label: 'Cash (small denomination bills)', priority: 'critical', qty: '$200+ minimum per person', source: 'Security' },
+        { id: 'k05', label: '"Where There Is No Doctor" (Hesperian)', priority: 'critical', qty: '1 copy (also in medical)', source: 'Knowledge' },
+        { id: 'k06', label: 'Printed copy of this survival guide', priority: 'critical', qty: '1 copy', source: 'Knowledge' },
+        { id: 'k07', label: 'Seed bank (heirloom, non-hybrid, vacuum-sealed)', priority: 'important', qty: '1 collection', source: 'Knowledge' },
+        { id: 'k08', label: '"Encyclopedia of Country Living" — Carla Emery', priority: 'important', qty: '1 copy', source: 'Knowledge' },
+        { id: 'k09', label: 'Blank hardcover notebooks', priority: 'important', qty: '10+', source: 'Knowledge' },
+        { id: 'k10', label: 'Pens (waterproof ink) + pencils', priority: 'important', qty: '20+ pens, 10 pencils', source: 'Knowledge' },
+        { id: 'k11', label: 'M-DISC archival optical discs + USB drive reader', priority: 'nice', qty: '10 discs', source: 'Knowledge' },
+        { id: 'k12', label: 'Raspberry Pi 4 (offline digital library server)', priority: 'nice', qty: '1 kit', source: 'Knowledge' },
+      ]
+    },
+    {
+      id: 'bob',
+      icon: '🎒',
+      title: 'Bug-Out Bag (72-Hour Kit)',
+      items: [
+        { id: 'b01', label: 'Quality backpack (65–80L, waterproof or with rain cover)', priority: 'critical', qty: '1 per person', source: 'Security' },
+        { id: 'b02', label: 'Water (3 liters, packed and ready)', priority: 'critical', qty: 'Per person', source: 'Security' },
+        { id: 'b03', label: 'Emergency food bars (2,400 cal minimum)', priority: 'critical', qty: '1–2 per person', source: 'Security' },
+        { id: 'b04', label: 'Emergency bivvy / space blanket', priority: 'critical', qty: '1 per person', source: 'Security' },
+        { id: 'b05', label: 'Compact first aid kit', priority: 'critical', qty: '1 per bag', source: 'Security' },
+        { id: 'b06', label: 'Fire-starting kit (lighter + waterproof matches + ferro rod)', priority: 'critical', qty: '1 set per bag', source: 'Security' },
+        { id: 'b07', label: 'Fixed-blade knife (in bag)', priority: 'critical', qty: '1 per bag', source: 'Security' },
+        { id: 'b08', label: 'Headlamp + spare batteries', priority: 'critical', qty: '1 per person', source: 'Security' },
+        { id: 'b09', label: 'Emergency whistle', priority: 'critical', qty: '1 per person', source: 'Security' },
+        { id: 'b10', label: 'Compact compass', priority: 'critical', qty: '1 per bag', source: 'Security' },
+        { id: 'b11', label: 'Cash (small bills, in bag)', priority: 'critical', qty: '$100+ per bag', source: 'Security' },
+        { id: 'b12', label: 'Document copies in waterproof bag', priority: 'critical', qty: '1 per bag', source: 'Security' },
+        { id: 'b13', label: 'Personal prescription medications (3-day supply)', priority: 'critical', qty: 'Per person', source: 'Medical' },
+        { id: 'b14', label: 'N95 / KN95 dust/particle masks', priority: 'important', qty: '4 per bag', source: 'Medical' },
+        { id: 'b15', label: 'Change of clothing (weather-appropriate, quick-dry)', priority: 'important', qty: '1 set per person', source: 'Security' },
+        { id: 'b16', label: 'Paracord (25 ft)', priority: 'important', qty: '1 per bag', source: 'Security' },
+        { id: 'b17', label: 'Small duct tape roll', priority: 'important', qty: '1 per bag', source: 'Security' },
+        { id: 'b18', label: 'Portable battery bank (10,000+ mAh)', priority: 'important', qty: '1 per bag', source: 'Communications' },
+      ]
+    },
+  ];
+
+  /* =================== STATE =================== */
+  const STORAGE_KEY_PREFIX = 'gear-';
+  let currentFilter = 'all';
+
+  function getState(itemId) {
+    try { return localStorage.getItem(STORAGE_KEY_PREFIX + itemId) === '1'; } catch (_) { return false; }
+  }
+  function setState(itemId, checked) {
+    try { localStorage.setItem(STORAGE_KEY_PREFIX + itemId, checked ? '1' : '0'); } catch (_) {}
+  }
+
+  /* =================== RENDER =================== */
+  function render() {
+    const container = document.getElementById('gear-list');
+    if (!container) return;
+    let html = '';
+
+    GEAR_DATA.forEach(cat => {
+      const total = cat.items.length;
+      const checkedCount = cat.items.filter(i => getState(i.id)).length;
+
+      html += `<div class="gear-category" id="cat-${cat.id}">
+        <div class="gear-category-header">
+          <span class="gear-category-icon">${cat.icon}</span>
+          <span class="gear-category-title">${cat.title}</span>
+          <span class="gear-category-progress">${checkedCount}/${total}</span>
+          <span class="gear-category-count">${total} items</span>
+        </div>
+        <div class="gear-items-list">`;
+
+      cat.items.forEach(item => {
+        const checked = getState(item.id);
+        const badgeClass = `priority-${item.priority}`;
+        const badgeLabel = item.priority === 'nice' ? 'Nice to Have' : item.priority.charAt(0).toUpperCase() + item.priority.slice(1);
+        html += `<div class="gear-item${checked ? ' is-checked' : ''}" id="item-${item.id}" data-priority="${item.priority}">
+          <input type="checkbox" class="gear-item-check" id="chk-${item.id}" ${checked ? 'checked' : ''}
+            onchange="toggleItem('${item.id}', this.checked)">
+          <div class="gear-item-content">
+            <label class="gear-item-label" for="chk-${item.id}">${item.label}</label>
+            <div class="gear-item-meta">
+              <span class="priority-badge ${badgeClass}">${badgeLabel}</span>
+              <span class="gear-item-qty">${item.qty}</span>
+              <span class="gear-item-source">§ ${item.source}</span>
+            </div>
+          </div>
+        </div>`;
+      });
+
+      html += `</div></div>`;
+    });
+
+    container.innerHTML = html;
+    updateStats();
+    applyFilter(currentFilter);
+  }
+
+  /* =================== TOGGLE =================== */
+  window.toggleItem = function (itemId, checked) {
+    setState(itemId, checked);
+    const el = document.getElementById('item-' + itemId);
+    if (el) el.classList.toggle('is-checked', checked);
+    updateStats();
+    updateCategoryProgress();
+  };
+
+  /* =================== STATS =================== */
+  function updateStats() {
+    let total = 0, checked = 0, critTotal = 0, critChecked = 0;
+    GEAR_DATA.forEach(cat => {
+      cat.items.forEach(item => {
+        total++;
+        const isChecked = getState(item.id);
+        if (isChecked) checked++;
+        if (item.priority === 'critical') {
+          critTotal++;
+          if (isChecked) critChecked++;
+        }
+      });
+    });
+
+    setText('stat-total', total);
+    setText('stat-checked', checked);
+    setText('stat-critical-total', critTotal);
+    setText('stat-critical-checked', critChecked);
+
+    const pct = critTotal > 0 ? Math.round((critChecked / critTotal) * 100) : 0;
+    setText('progress-pct', pct);
+    const bar = document.getElementById('progress-bar');
+    if (bar) {
+      bar.style.width = pct + '%';
+      bar.classList.toggle('complete', pct === 100);
+    }
+  }
+
+  function updateCategoryProgress() {
+    GEAR_DATA.forEach(cat => {
+      const el = document.querySelector(`#cat-${cat.id} .gear-category-progress`);
+      if (!el) return;
+      const checkedCount = cat.items.filter(i => getState(i.id)).length;
+      el.textContent = `${checkedCount}/${cat.items.length}`;
+    });
+  }
+
+  function setText(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  }
+
+  /* =================== FILTER =================== */
+  window.setFilter = function (filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    applyFilter(filter);
+  };
+
+  function applyFilter(filter) {
+    GEAR_DATA.forEach(cat => {
+      const catEl = document.getElementById('cat-' + cat.id);
+      if (!catEl) return;
+      let visibleCount = 0;
+      cat.items.forEach(item => {
+        const itemEl = document.getElementById('item-' + item.id);
+        if (!itemEl) return;
+        const show = filter === 'all' || item.priority === filter;
+        itemEl.classList.toggle('hidden-by-filter', !show);
+        if (show) visibleCount++;
+      });
+      catEl.classList.toggle('all-hidden', visibleCount === 0);
+    });
+  }
+
+  /* =================== BULK ACTIONS =================== */
+  window.checkAll = function () {
+    GEAR_DATA.forEach(cat => {
+      cat.items.forEach(item => {
+        const visible = currentFilter === 'all' || item.priority === currentFilter;
+        if (!visible) return;
+        setState(item.id, true);
+        const el = document.getElementById('item-' + item.id);
+        const chk = document.getElementById('chk-' + item.id);
+        if (el) el.classList.add('is-checked');
+        if (chk) chk.checked = true;
+      });
+    });
+    updateStats();
+    updateCategoryProgress();
+  };
+
+  window.uncheckAll = function () {
+    GEAR_DATA.forEach(cat => {
+      cat.items.forEach(item => {
+        const visible = currentFilter === 'all' || item.priority === currentFilter;
+        if (!visible) return;
+        setState(item.id, false);
+        const el = document.getElementById('item-' + item.id);
+        const chk = document.getElementById('chk-' + item.id);
+        if (el) el.classList.remove('is-checked');
+        if (chk) chk.checked = false;
+      });
+    });
+    updateStats();
+    updateCategoryProgress();
+  };
+
+  window.confirmReset = function () {
+    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
+    GEAR_DATA.forEach(cat => {
+      cat.items.forEach(item => {
+        try { localStorage.removeItem(STORAGE_KEY_PREFIX + item.id); } catch (_) {}
+      });
+    });
+    render();
+  };
+
+  /* =================== PRINT =================== */
+  window.printFullList = function () {
+    document.body.classList.remove('print-shopping');
+    window.print();
+  };
+
+  window.printShoppingList = function () {
+    document.body.classList.add('print-shopping');
+    window.print();
+    /* Remove class after dialog closes — requestAnimationFrame trick */
+    window.addEventListener('focus', function removePrintClass() {
+      document.body.classList.remove('print-shopping');
+      window.removeEventListener('focus', removePrintClass);
+    }, { once: true });
+  };
+
+  /* =================== BOOT =================== */
+  document.addEventListener('DOMContentLoaded', render);
+
+})();
+</script>
+</body>
+</html>

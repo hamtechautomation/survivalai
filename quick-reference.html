@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Emergency Quick Reference Card — critical survival information on one printable page.">
+  <title>Emergency Quick Reference — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .main-content { margin-left: var(--sidebar-w); }
+    @media (max-width: 900px) { .main-content { margin-left: 0; } }
+    @media print {
+      .qr-page { font-size: 9pt; }
+      .qr-header { border: 2px solid #000 !important; padding: 8px !important; }
+      .qr-section { margin-bottom: 6px !important; }
+      .qr-section-title { padding: 3px 8px !important; font-size: 8pt; background: #ddd !important; color: #000 !important; }
+      .qr-content { padding: 5px 8px !important; }
+      .qr-grid { grid-template-columns: 1fr 1fr !important; }
+      .qr-item { font-size: 8pt; margin-bottom: 3px; }
+      table { font-size: 7.5pt; }
+      td, th { padding: 2px 5px !important; }
+      pre { font-size: 7pt; padding: 4px !important; }
+      h1 { font-size: 18pt !important; }
+      h2 { font-size: 12pt !important; font-size: 12pt; }
+      h3 { font-size: 10pt !important; }
+      .callout { display: none; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header no-print">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Emergency Quick Reference</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-danger">🖨️ Print This Card</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="callout callout-info no-print" style="margin-bottom:var(--sp-xl)">
+    <span class="callout-icon">🖨️</span>
+    <div class="callout-content">
+      <strong>Print this page</strong>
+      <p>Click the <strong>Print This Card</strong> button above to generate a clean, printer-friendly emergency reference card. Print double-sided on a single sheet of paper. Laminate it for durability. Keep one in your go-bag, car, and home.</p>
+    </div>
+  </div>
+
+  <div class="qr-page">
+
+    <!-- Header -->
+    <div class="qr-header" style="text-align:center;border:3px solid var(--amber);border-radius:8px;padding:var(--sp-md);margin-bottom:var(--sp-lg)">
+      <div style="font-size:2rem">⚡</div>
+      <h1 style="margin:var(--sp-xs) 0;color:var(--amber-light)">THE LAST LIGHT SURVIVAL GUIDE</h1>
+      <h2 style="margin:0;font-size:1.1rem;color:var(--text-1);border:none;padding:0">EMERGENCY QUICK REFERENCE CARD</h2>
+      <p style="margin:var(--sp-sm) 0 0;font-size:.8rem;color:var(--text-2)">For full information, see the complete guide · June 2025</p>
+    </div>
+
+    <!-- Rule of Threes -->
+    <div class="qr-section">
+      <div class="qr-section-title">🆘 RULE OF THREES — PRIORITY ORDER</div>
+      <div class="qr-content">
+        <div class="qr-grid">
+          <div class="qr-item"><strong>3 minutes</strong> <span>without air / bleeding out</span></div>
+          <div class="qr-item"><strong>3 hours</strong> <span>without shelter (extreme cold)</span></div>
+          <div class="qr-item"><strong>3 days</strong> <span>without water</span></div>
+          <div class="qr-item"><strong>3 weeks</strong> <span>without food</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bleeding / Airway -->
+    <div class="qr-section">
+      <div class="qr-section-title">🩸 STOP BLEEDING</div>
+      <div class="qr-content">
+        <div class="qr-grid">
+          <div class="qr-item">
+            <strong>Direct Pressure</strong>
+            <span>Press cloth firmly on wound. Do NOT lift for 10 min. Most bleeding stops.</span>
+          </div>
+          <div class="qr-item">
+            <strong>Tourniquet (limbs only)</strong>
+            <span>2–3" above wound. Tighten until bleeding stops. Note time. Do not remove.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Water Purification -->
+    <div class="qr-section">
+      <div class="qr-section-title">💧 WATER PURIFICATION</div>
+      <div class="qr-content">
+        <div class="table-wrap" style="margin:0">
+          <table>
+            <thead><tr><th>Method</th><th>How</th><th>Wait</th></tr></thead>
+            <tbody>
+              <tr><td>Boiling</td><td>Rolling boil 1 min (3 min at altitude)</td><td>Cool</td></tr>
+              <tr><td>Bleach (6–8%)</td><td>8 drops/gallon clear · 16 drops/gallon cloudy</td><td>30 min</td></tr>
+              <tr><td>Iodine tabs</td><td>1 tab/liter clear · 2 tabs/liter cloudy</td><td>30–60 min</td></tr>
+              <tr><td>SODIS</td><td>Clear PET bottle in direct sun (6 hours min)</td><td>6 hrs</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Burns -->
+    <div class="qr-section">
+      <div class="qr-section-title">🔥 BURNS</div>
+      <div class="qr-content">
+        <ul style="margin:0;padding-left:1.2em;font-size:.85rem">
+          <li>Cool with cool (not cold) water for 10–20 min immediately</li>
+          <li>Do NOT use ice, butter, toothpaste, or any home remedy</li>
+          <li>Cover with clean non-stick dressing. Do not pop blisters.</li>
+          <li>Airway burn (singed nose hairs, hoarse voice) → keep upright, emergency priority</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hypothermia / Heat -->
+    <div class="qr-section">
+      <div class="qr-section-title">🌡️ TEMPERATURE EMERGENCIES</div>
+      <div class="qr-content">
+        <div class="qr-grid">
+          <div class="qr-item">
+            <strong>Hypothermia</strong>
+            <span>Remove wet clothes, insulate, warm core (armpits/groin/neck — NOT hands/feet). Handle gently. "Not dead until warm and dead."</span>
+          </div>
+          <div class="qr-item">
+            <strong>Heat Stroke</strong>
+            <span>Hot DRY skin + confusion = emergency. Cool aggressively: immerse in cool water, ice to neck/armpits/groin. Call for help.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Triage -->
+    <div class="qr-section">
+      <div class="qr-section-title">🏥 START TRIAGE (Multiple Victims)</div>
+      <div class="qr-content">
+        <div class="table-wrap" style="margin:0">
+          <table>
+            <thead><tr><th>Tag</th><th>Criteria</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--red)">RED</td><td>Not walking · respirations abnormal · no radial pulse · can't follow commands</td><td>Treat first</td></tr>
+              <tr><td style="color:var(--orange)">YELLOW</td><td>Not walking but stable — passes above checks</td><td>Treat after red</td></tr>
+              <tr><td style="color:var(--green)">GREEN</td><td>Walking wounded</td><td>Treat last</td></tr>
+              <tr><td style="color:var(--text-3)">BLACK</td><td>No pulse after airway open · unsurvivable injury</td><td>No resources</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORS -->
+    <div class="qr-section">
+      <div class="qr-section-title">🥄 ORAL REHYDRATION SOLUTION (ORS)</div>
+      <div class="qr-content">
+        <p style="margin:0;font-size:.9rem"><strong>1 liter clean water + 6 tsp sugar + ½ tsp salt</strong> → Give continuously in small sips. Adults: 200–400mL/hr. Prevents death from diarrheal dehydration.</p>
+      </div>
+    </div>
+
+    <!-- Emergency Frequencies -->
+    <div class="qr-section">
+      <div class="qr-section-title">📻 EMERGENCY RADIO FREQUENCIES</div>
+      <div class="qr-content">
+        <div class="qr-grid">
+          <div class="qr-item"><strong>146.520 MHz FM</strong><span>National VHF simplex calling</span></div>
+          <div class="qr-item"><strong>446.000 MHz FM</strong><span>National UHF simplex calling</span></div>
+          <div class="qr-item"><strong>162.400–162.550</strong><span>NOAA Weather (7 channels)</span></div>
+          <div class="qr-item"><strong>121.500 MHz</strong><span>Aviation distress (monitored by aircraft)</span></div>
+          <div class="qr-item"><strong>156.800 MHz</strong><span>Marine Channel 16 distress</span></div>
+          <div class="qr-item"><strong>7.200–7.300 MHz</strong><span>40m HF emergency nets (regional)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Morse SOS + Ground Signals -->
+    <div class="qr-section">
+      <div class="qr-section-title">📡 DISTRESS SIGNALS</div>
+      <div class="qr-content">
+        <div class="qr-grid">
+          <div class="qr-item">
+            <strong>SOS (Morse)</strong>
+            <span>· · · — — — · · · (flash/sound: 3 short, 3 long, 3 short)</span>
+          </div>
+          <div class="qr-item">
+            <strong>Ground-to-Air</strong>
+            <span>X = need medical · V = need help · → = going this direction · 3 fires in triangle = distress</span>
+          </div>
+          <div class="qr-item">
+            <strong>Mirror Flash</strong>
+            <span>Reflect sun at aircraft. Visible 50+ miles in clear conditions.</span>
+          </div>
+          <div class="qr-item">
+            <strong>Signal Fire</strong>
+            <span>Green leaves = white smoke against dark background · Rubber/plastic = black smoke against snow/sky</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="qr-section">
+      <div class="qr-section-title">🧭 NAVIGATION</div>
+      <div class="qr-content">
+        <div class="qr-grid">
+          <div class="qr-item">
+            <strong>Find North (Night)</strong>
+            <span>Big Dipper pointer stars × 5 = Polaris = True North</span>
+          </div>
+          <div class="qr-item">
+            <strong>Shadow Stick</strong>
+            <span>Mark stick shadow tip. Wait 15 min. Mark again. First mark = West. Second = East.</span>
+          </div>
+          <div class="qr-item">
+            <strong>Lost? STOP</strong>
+            <span>Stop · Think · Observe · Plan. Don't panic-move. Signal for rescue first.</span>
+          </div>
+          <div class="qr-item">
+            <strong>Follow Water</strong>
+            <span>Downstream always leads to lower elevation, civilization, help.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Food Safety -->
+    <div class="qr-section">
+      <div class="qr-section-title">🍄 FORAGING SAFETY</div>
+      <div class="qr-content">
+        <div class="qr-grid">
+          <div class="qr-item"><strong>Always safe (low ID risk)</strong><span>Dandelion, cattail, clover, blackberry/raspberry, plantain, lambsquarters</span></div>
+          <div class="qr-item"><strong>Mushroom rule</strong><span>100% certain or don't eat. No folk tests (silver, peeling) reliably work.</span></div>
+          <div class="qr-item"><strong>AVOID</strong><span>White umbrella mushrooms, carrot/parsley family plants unless expert, white/red berries (high risk), milky sap plants</span></div>
+          <div class="qr-item"><strong>Universal test</strong><span>One body part at a time. Fast 8hr. Test on skin → lips → tongue → swallow small → wait 8hr.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shelter Priorities -->
+    <div class="qr-section">
+      <div class="qr-section-title">🏕️ EMERGENCY SHELTER PRIORITIES</div>
+      <div class="qr-content">
+        <ul style="margin:0;padding-left:1.2em;font-size:.85rem;columns:2;column-gap:1rem">
+          <li>Insulate from ground first (most heat loss)</li>
+          <li>Debris hut = best no-equipment cold shelter</li>
+          <li>Interior should be just big enough to fit you</li>
+          <li>60cm+ debris layer = adequate insulation</li>
+          <li>Block entrance when inside</li>
+          <li>North wind = most dangerous; face shelter south</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Security -->
+    <div class="qr-section">
+      <div class="qr-section-title">🛡️ IMMEDIATE SECURITY</div>
+      <div class="qr-content">
+        <div class="qr-grid">
+          <div class="qr-item"><strong>Bug-In vs Bug-Out</strong><span>Stay unless: immediate physical danger, confirmed safe destination, all routes viable. Movement is risk.</span></div>
+          <div class="qr-item"><strong>De-escalation first</strong><span>Most threats are desperate people. Listen. Trade. Redirect. Force is last resort with irreversible consequences.</span></div>
+          <div class="qr-item"><strong>Firearm safety</strong><span>Treat as always loaded. Never point at anything unwilling to destroy. Finger off trigger until ready to fire. Know your backstop.</span></div>
+          <div class="qr-item"><strong>OPSEC</strong><span>Don't share: what you have, how many you are, where you're going, your vulnerabilities.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bleach Ratios Reference -->
+    <div class="qr-section">
+      <div class="qr-section-title">⚗️ CRITICAL RATIOS REFERENCE</div>
+      <div class="qr-content">
+        <div class="table-wrap" style="margin:0">
+          <table>
+            <thead><tr><th>Task</th><th>Ratio / Formula</th></tr></thead>
+            <tbody>
+              <tr><td>Bleach (6%) to purify clear water</td><td>8 drops per gallon / 2 drops per liter</td></tr>
+              <tr><td>ORS recipe</td><td>1L water + 6 tsp sugar + ½ tsp salt</td></tr>
+              <tr><td>Wound irrigation saline</td><td>1 tsp salt per 1 liter clean water</td></tr>
+              <tr><td>Brine (20%) for preserving vegetables</td><td>3–4 cups salt per gallon water</td></tr>
+              <tr><td>Alcohol sanitizer minimum</td><td>60% isopropyl or ethanol</td></tr>
+              <tr><td>Solar (SODIS) minimum exposure</td><td>6 hours clear weather, full sun, clear PET bottle</td></tr>
+              <tr><td>Soil to sand ratio for cob walls</td><td>1 part clay soil : 2 parts coarse sand + straw</td></tr>
+              <tr><td>Solar panel sizing (basic)</td><td>Daily Wh ÷ Peak Sun Hours ÷ 0.85 = Panel Watts</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Morse Code Quick Reference -->
+    <div class="qr-section">
+      <div class="qr-section-title">· — MORSE CODE QUICK REFERENCE</div>
+      <div class="qr-content">
+        <pre style="font-size:.7rem;line-height:1.7;columns:3;column-gap:1rem;margin:0">A · —    N — ·
+B — · · ·  O — — —
+C — · — ·  P · — — ·
+D — · ·    Q — — · —
+E ·        R · — ·
+F · · — ·  S · · ·
+G — — ·    T —
+H · · · ·  U · · —
+I · ·      V · · · —
+J · — — —  W · — —
+K — · —    X — · · —
+L · — · ·  Y — · — —
+M — —      Z — — · ·
+
+SOS: · · · — — — · · ·</pre>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align:center;margin-top:var(--sp-lg);padding-top:var(--sp-md);border-top:1px solid var(--border);font-size:.75rem;color:var(--text-3)">
+      The Last Light Survival Guide · Version 1.0 · Public Domain · Reproduce freely · Full guide: open index.html
+    </div>
+
+  </div><!-- /qr-page -->
+
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel no-print" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">🤖</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're on the Emergency Quick Reference. Print this page for a laminated card. Ask me anything.<p class="aria-note">⚠️ Requires Ollama. <a href="ai-setup.html">Setup →</a></p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top no-print" title="Back to top">↑</button>
+<script src="assets/js/search.js"></script>
+<script src="assets/js/aria.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Security & Defense — community organization, perimeter security, de-escalation, firearms, non-lethal defense, OPSEC, fortification, and bug-out decisions.">
+  <title>Security &amp; Defense — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Security &amp; Defense</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>🛡️ Security &amp; Defense</h1>
+    <p class="section-desc">Security is about deterrence, awareness, and community — not just weapons. Most threats in a crisis scenario are best resolved through negotiation, community organization, and clear communication rather than force.</p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2025-06"></span></span>
+      <span class="meta-item">⏱️ <span id="reading-time"></span></span>
+      <span class="meta-item">📖 Section 7 of 8</span>
+    </div>
+  </div>
+
+  <div class="callout callout-warning">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-content">
+      <strong>Legal Disclaimer</strong>
+      <p>This section provides educational information about security concepts. Always act within the laws of your jurisdiction. Use of force laws vary by location. This guide does not recommend offensive or unlawful action against other persons. The goal is community safety, deterrence, and de-escalation — not violence.</p>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#community">Community Organization &amp; Watch Systems</a></li>
+      <li><a href="#perimeter">Perimeter Security</a></li>
+      <li><a href="#negotiation">Conflict De-escalation &amp; Negotiation</a></li>
+      <li><a href="#firearms">Firearms Basics</a></li>
+      <li><a href="#non-lethal">Non-Lethal Defense Options</a></li>
+      <li><a href="#opsec">Operational Security (OPSEC)</a></li>
+      <li><a href="#fortification">Fortifying a Building</a></li>
+      <li><a href="#bug-out">Bug-Out vs. Bug-In Decision Framework</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">⏱️</span>
+    <div class="callout-content">
+      <strong>First 24 Hours — Security Priorities</strong>
+      <ol style="margin:.5rem 0 0;padding-left:1.2rem">
+        <li>Take a headcount — confirm who is in your group and where each person is.</li>
+        <li>Reduce your perimeter to what you can actually watch. One entry/exit point.</li>
+        <li>Lock and bar all doors and windows. Identify and reinforce the weakest entry point tonight.</li>
+        <li>Meet your nearest neighbors immediately — assess their situation, resources, and intentions.</li>
+        <li>Brief everyone on three things: where to gather if alarmed, what the alert signal is, who is in charge.</li>
+        <li>Set a first watch rotation — even passive listening from inside counts on night one.</li>
+        <li>Turn off exterior lights that reveal your position. Interior light discipline after dark.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- =================== COMMUNITY =================== -->
+  <section id="community">
+    <h2>1. Community Organization &amp; Watch Systems</h2>
+
+    <p>A cohesive community is the most powerful security asset. More eyes, more capacity, more deterrence, and less vulnerability than any individual or isolated family. Community building should begin now, before a crisis.</p>
+
+    <h3>Immediate Community Assessment</h3>
+    <ul>
+      <li>Who are your neighbors? Do you know their names, skills, needs, and vulnerabilities?</li>
+      <li>Who has medical training, mechanical skills, military/law enforcement background, food production experience?</li>
+      <li>Who will be a liability (elderly, very young, medically dependent) and need additional resources?</li>
+      <li>What are the key community resources — vehicles, tools, food stocks, water sources, shelter capacity?</li>
+    </ul>
+
+    <h3>Establishing Governance</h3>
+    <p>In an extended crisis, community decisions require a decision-making structure. Informal consensus works initially but breaks down under sustained stress.</p>
+    <ul>
+      <li>Form a council representing different households/groups. Decisions by majority or consensus.</li>
+      <li>Designate functional roles: security coordinator, medical coordinator, food/water coordinator, communications, labor organization.</li>
+      <li>Establish clear rules of conduct, resource sharing agreements, and consequences for violations — in writing, agreed to by all.</li>
+      <li>Rotate watch and labor duties fairly. Visible equity reduces resentment.</li>
+    </ul>
+
+    <h3>Watch Schedule</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Shift</th><th>Hours</th><th>People Required</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Day 1</td><td>06:00–12:00</td><td>2 minimum</td><td>Highest activity, easiest duty</td></tr>
+          <tr><td>Day 2</td><td>12:00–18:00</td><td>2 minimum</td><td>Peak heat; hydrate watchers</td></tr>
+          <tr><td>Evening</td><td>18:00–00:00</td><td>2–3</td><td>Highest risk period; active lighting check</td></tr>
+          <tr><td>Night</td><td>00:00–06:00</td><td>2–3</td><td>Hardest shift — rotate capable adults; no children</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul>
+      <li>No solo watch shifts — a lone sentry can be overcome or fall asleep. Two minimum.</li>
+      <li>Establish radio check-in protocol (if radios available) — check in every 30 minutes. Missed check-in = immediate response.</li>
+      <li>Establish challenge-and-response protocols (code words) so sentries can verify who is approaching in the dark.</li>
+    </ul>
+  </section>
+
+  <!-- =================== PERIMETER =================== -->
+  <section id="perimeter">
+    <h2>2. Perimeter Security</h2>
+
+    <h3>Threat Detection Principles</h3>
+    <p>The goal is early warning — detect an approach long before it becomes a confrontation, giving your group time to respond, withdraw, or negotiate from a position of awareness rather than surprise.</p>
+
+    <div class="diagram">
+  LAYERED DEFENSE CONCEPT
+
+  Outer Layer (100–300m):
+  ├── Natural terrain features, observation posts on high ground
+  ├── Trails and entry points identified and monitored
+  └── Long-range observation (binoculars, elevated posts)
+
+  Middle Layer (30–100m):
+  ├── Trip wires with noise makers (cans, bells)
+  ├── Natural barriers (brambles, thorn bushes, water)
+  └── Visible deterrents (fencing, signage)
+
+  Inner Layer (0–30m):
+  ├── Physical barriers (walls, fences, reinforced doors)
+  ├── Lighting (motion-activated, solar)
+  └── Dog alert systems
+
+  Core (your shelter):
+  └── Hardened entrance, safe room option
+    </div>
+
+    <h3>Trip Wire Alarms</h3>
+    <ul>
+      <li><strong>Basic can alarm:</strong> Stretch fishing line or thin wire across a likely approach path at shin height (15–30cm). Attach the wire to a string of tin cans filled with small rocks. Intruder disturbs the wire → cans rattle. Simple, free, effective.</li>
+      <li><strong>Mousetrap alarm:</strong> Attach a mousetrap to a post. The spring arm, when released by a disturbed trip wire, strikes a metal plate or bell. Louder than can alarms.</li>
+      <li><strong>Spacing:</strong> Place trip wires at irregular intervals along likely approach routes. Do NOT place them along trails you use regularly — mark safe corridors clearly for your group using a pre-agreed system.</li>
+      <li><strong>Documentation:</strong> Map every alarm location. Uncharted alarms become hazards to your own community.</li>
+    </ul>
+
+    <h3>Natural Barriers</h3>
+    <ul>
+      <li><strong>Thorny hedges:</strong> Hawthorn, blackthorn, pyracantha, and multiflora rose are dense, thorny, and difficult to penetrate quickly. Plant around perimeter where fencing is impractical. Takes 1–3 years to establish but is self-maintaining and free.</li>
+      <li><strong>Water:</strong> A stream, ditch, or constructed moat (as little as knee-deep and wide) significantly slows approach. Any water obstacle requires bridging — control the bridges and you control access.</li>
+      <li><strong>Terrain:</strong> A building on a hillside with one approach is more defensible than one on flat land with multiple approaches. Work with terrain, not against it.</li>
+    </ul>
+
+    <h3>Lighting</h3>
+    <ul>
+      <li>Motion-activated flood lights on all approaches dramatically deter nocturnal intrusion.</li>
+      <li>Solar-powered motion lights require no infrastructure and work independently.</li>
+      <li>Light the approaches, not the interior — the goal is to illuminate intruders while keeping defenders in darkness.</li>
+      <li>Guard against your own silhouetting — don't stand in doorways with light behind you.</li>
+    </ul>
+  </section>
+
+  <!-- =================== NEGOTIATION =================== -->
+  <section id="negotiation">
+    <h2>3. Conflict De-escalation &amp; Negotiation</h2>
+
+    <p>The overwhelming majority of post-disaster conflicts arise from desperation, fear, and miscommunication — not from predatory intent. Most people in crisis want to trade, cooperate, or simply pass through. Meeting people with immediate aggression forecloses these possibilities and can escalate to violence that no one wanted.</p>
+
+    <h3>First Contact Protocol</h3>
+    <ol class="steps">
+      <li><strong>Maintain distance and cover:</strong> Don't approach strangers in the open. Speak from behind cover with clear exits available. Distance is time — time to assess and respond.</li>
+      <li><strong>Establish communication:</strong> Call out clearly. Identify yourself and your community. Ask for their identity and purpose. Most legitimate travelers will respond normally.</li>
+      <li><strong>Show numerical strength (without threatening):</strong> Ensure you are visibly multiple people. A community that appears organized and numerous is far less likely to be targeted than a single individual.</li>
+      <li><strong>Offer limited engagement:</strong> "We can talk at the gate, but we don't invite strangers into our community." Have a designated meeting point outside your perimeter.</li>
+      <li><strong>Listen first:</strong> What do they actually need? Many apparent threats are simply people looking for water, food, medical care, or directions. Turning away genuinely desperate people when you have resources breeds resentment and long-term risk.</li>
+    </ol>
+
+    <h3>Negotiation Principles</h3>
+    <ul>
+      <li><strong>Separate needs from positions:</strong> Someone demanding food (position) may really need to know where food is available (underlying need). Address needs, not just positions.</li>
+      <li><strong>Create options:</strong> "We can't give you food, but we can tell you where to find it." or "We can't take you in, but you can camp in that field."</li>
+      <li><strong>Trade:</strong> If you have surplus, trade is safer than charity. It creates a relationship of mutual benefit and establishes value. What skills or goods does the other party have?</li>
+      <li><strong>Document agreements:</strong> In a crisis, written agreements (even simple ones) create accountability and reduce misunderstanding.</li>
+    </ul>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✅</span>
+      <div class="callout-content">
+        <strong>Threat Assessment</strong>
+        <p>Actual predatory groups show consistent warning signs: advance scouts checking your security, inconsistencies in their story, reluctance to identify themselves, probing questions about your resources and security, hostility to reasonable requests, or attempting to enter without permission. These are distinct from desperate individuals who are forthcoming about their situation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== FIREARMS =================== -->
+  <section id="firearms">
+    <h2>4. Firearms Basics</h2>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Four Rules of Firearm Safety — Non-Negotiable</strong>
+        <p>1. Treat every firearm as if it is loaded — always. 2. Never point the muzzle at anything you are not willing to destroy. 3. Keep your finger off the trigger until your sights are on target and you have decided to fire. 4. Know your target and what is beyond it — bullets penetrate walls, trees, and vehicles.</p>
+      </div>
+    </div>
+
+    <h3>Caliber Guide for Survival Use</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Caliber</th><th>Platform</th><th>Strengths</th><th>Best Use</th></tr></thead>
+        <tbody>
+          <tr><td>.22 LR</td><td>Rifle, pistol</td><td>Cheapest, most abundant, quiet, low recoil; hunt small game</td><td>Small game, training, backup</td></tr>
+          <tr><td>9mm</td><td>Pistol</td><td>Most common handgun round worldwide; manageable recoil; 15–20+ round capacity</td><td>Personal defense</td></tr>
+          <tr><td>5.56 / .223</td><td>Rifle (AR-15)</td><td>Widespread ammo; light weight; versatile; effective at 200–500m</td><td>Defense; light hunting</td></tr>
+          <tr><td>.308 / 7.62×51</td><td>Rifle</td><td>Effective 500–800m; hunts all North American game; slower follow-up shots</td><td>Large game hunting; long-range defense</td></tr>
+          <tr><td>12 Gauge</td><td>Shotgun</td><td>Devastating at close range; versatile (shot, slugs, less-lethal); simple mechanism</td><td>Home/property defense, hunting (birds and large game with slugs)</td></tr>
+          <tr><td>.45 ACP</td><td>Pistol</td><td>Large, heavy projectile; reliable stopping power at close range</td><td>Personal defense</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Maintenance Without Commercial Products</h3>
+    <ul>
+      <li><strong>Bore cleaning:</strong> Run a dry patch, then an oil-dampened patch through the bore. Improvised solvents: motor oil (use sparingly), high-proof alcohol, kerosene. Not as effective as proper solvents but functional.</li>
+      <li><strong>Lubrication:</strong> Guns need light lubrication on moving metal parts (bolt carrier, slide rails, trigger group). Improvised: motor oil, petroleum jelly (Vaseline), cooking oil (last resort — attracts carbon).</li>
+      <li><strong>Rust prevention:</strong> Wipe all external metal surfaces with a lightly oiled cloth after handling. Fingerprints are corrosive — wipe them off. Store in a low-humidity environment or with silica gel desiccant packets.</li>
+    </ul>
+
+    <h3>Safe Storage</h3>
+    <ul>
+      <li>Firearms must be inaccessible to children at all times. A quick-access safe (biometric or combination, mounted to a fixed object) is the minimum standard.</li>
+      <li>Ammunition stored separately from unloaded firearms where possible.</li>
+      <li>A firearm in daily use (personal defense) should be in a retention holster on your person or in a quick-access location — not a locked cabinet that takes 90 seconds to access under stress.</li>
+    </ul>
+  </section>
+
+  <!-- =================== NON-LETHAL =================== -->
+  <section id="non-lethal">
+    <h2>5. Non-Lethal Defense Options</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Option</th><th>Effective Range</th><th>Advantages</th><th>Limitations</th></tr></thead>
+        <tbody>
+          <tr><td>Pepper spray (OC)</td><td>3–5m</td><td>Immediate incapacitation; legal most places; no permanent injury</td><td>Wind-affected; affects user if indoors; range limited</td></tr>
+          <tr><td>Taser/stun gun</td><td>Contact or 5m (Taser)</td><td>Highly effective incapacitation; generally non-lethal</td><td>Needs charging; fails on thick clothing; one-shot (Taser)</td></tr>
+          <tr><td>Baton / impact weapon</td><td>Close contact</td><td>No battery dependency; multipurpose; legal most places</td><td>Requires close proximity; skill-dependent</td></tr>
+          <tr><td>Guard dog(s)</td><td>Property-wide</td><td>Early warning + deterrence + protection; self-motivated; intimidating</td><td>Requires care and feeding; can be circumvented or harmed</td></tr>
+          <tr><td>Alarm systems</td><td>Property-wide</td><td>Early warning; no confrontation needed; effective deterrent</td><td>Passive — doesn't stop determined intruder</td></tr>
+          <tr><td>Barriers</td><td>Property-wide</td><td>Passive and continuous; forces intruder to commit visibly</td><td>Fixed; takes resources to install</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Physical Security Without Weapons</h3>
+    <ul>
+      <li><strong>Defensive positioning:</strong> Higher ground, chokepoints, cover are equalizers. Three defenders in a well-positioned chokepoint can resist many more attackers. Know your terrain.</li>
+      <li><strong>Noise deterrence:</strong> Air horns, whistles, banging metal — most casual intruders do not want attention drawn to their actions. Loud noise in response to intrusion is often sufficient.</li>
+      <li><strong>Deterrence signaling:</strong> Visible security measures (cameras, fencing, dogs, multiple people) reduce the perceived payoff of attempting an intrusion. Most attackers select targets based on ease — appear difficult.</li>
+    </ul>
+  </section>
+
+  <!-- =================== OPSEC =================== -->
+  <section id="opsec">
+    <h2>6. Operational Security (OPSEC)</h2>
+
+    <p>OPSEC means controlling what information you reveal about your capabilities, resources, and intentions. In a crisis, information about your food stocks, water supply, weapons, or community size can make you a target. What you don't share can't be used against you.</p>
+
+    <h3>What Not to Share</h3>
+    <ul>
+      <li>How much food and water you have stored</li>
+      <li>How many people are in your group and their capabilities</li>
+      <li>What weapons you have and where they are stored</li>
+      <li>Your plans (routes, destinations, timeline)</li>
+      <li>Vulnerabilities in your security or community</li>
+      <li>Who in your community is medically dependent or vulnerable</li>
+    </ul>
+
+    <h3>Information Hygiene Practices</h3>
+    <ul>
+      <li>Establish community agreements about what is not discussed with outsiders.</li>
+      <li>Hold sensitive discussions in private — sound travels at night; assume others can hear.</li>
+      <li>Be vague when asked direct questions about resources: "We're managing." not "We have 6 months of food."</li>
+      <li>On radio communications: use brevity codes. Assume all radio traffic is monitored by anyone with a receiver.</li>
+      <li>Limit who knows the full picture. Need-to-know is the basis of operational security — not secrecy for its own sake.</li>
+    </ul>
+
+    <div class="callout callout-amber">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>OPSEC ≠ Paranoia</strong>
+        <p>OPSEC is about reasonable information control, not refusing to engage with your community. Be open, collaborative, and build trust within your community. Reserve discretion for information that could make you a target if it reached hostile actors. The community you build through openness is your greatest security asset.</p>
+      </div>
+    </div>
+
+    <h3>Digital OPSEC</h3>
+    <ul>
+      <li>Assume social media posts about preparedness, stockpiles, and weapons are visible to anyone — including potential adversaries who remember what you posted.</li>
+      <li>If using radios: use the minimum information necessary. Avoid revealing locations, quantities, or plans in plain text transmissions.</li>
+      <li>Meshtastic (mesh radio) uses AES256 encryption — set a community-specific channel key that you do not share publicly.</li>
+    </ul>
+  </section>
+
+  <!-- =================== FORTIFICATION =================== -->
+  <section id="fortification">
+    <h2>7. Fortifying a Building</h2>
+
+    <h3>Door Hardening</h3>
+    <ul>
+      <li><strong>Door itself:</strong> Hollow-core interior doors offer no resistance. Solid-core or metal-clad doors are the minimum. A reinforced door can be improvised by nailing planks horizontally across the interior face.</li>
+      <li><strong>Door frame:</strong> Most residential doors fail at the frame when kicked, not the door itself. Install a door reinforcement kit (long-screw striker plate) or add a steel bar/wooden 2×6 across the door at bar holders mounted into the studs.</li>
+      <li><strong>Door bar:</strong> The most secure option — a 4×4 timber bar in steel floor-mounted brackets. Requires someone to bar from inside (not suitable for exterior-only fortification).</li>
+      <li><strong>Hinges:</strong> Exterior hinges can be defeated by removing the hinge pins. Install hinge security bolts (a screw set into the hinge leaf that engages the opposite leaf when the door closes).</li>
+      <li><strong>Multiple locks:</strong> Add a deadbolt at a different height from the existing lock. Consider a foot-operated floor bolt for the bottom of the door.</li>
+    </ul>
+
+    <h3>Window Security</h3>
+    <ul>
+      <li>Standard glass is easily broken. Laminated safety glass, polycarbonate ("Lexan"), or boarding with plywood provides meaningful resistance.</li>
+      <li><strong>Plywood boarding:</strong> 3/4" plywood bolted (not nailed) to the exterior provides significant protection. Install bolt-through from inside — exterior-accessible fasteners can be removed.</li>
+      <li><strong>Window bars:</strong> Iron bars welded or bolted into the frame. <span class="badge badge-danger">Fire Egress</span> — ensure at least one window per room provides emergency exit capability. Quick-release bars are available. Never fully close all fire egress routes.</li>
+      <li>Ground-floor windows are primary vulnerability. Upper-floor windows (accessible only by ladder) are much lower risk.</li>
+    </ul>
+
+    <h3>Safe Room</h3>
+    <p>A designated inner room that provides a last resort protected position. Ideally: an interior bathroom (concrete or masonry walls, small/no windows) or a reinforced closet.</p>
+    <ul>
+      <li>Reinforce the door with a bar or improvised brace.</li>
+      <li>Stock with: water (1 gallon minimum), first aid kit, communications device (radio or phone), flashlight, and any defensive tools.</li>
+      <li>The goal of a safe room is to survive long enough for the threat to pass or for help to arrive — not to fight from it.</li>
+    </ul>
+
+    <h3>Observation Points</h3>
+    <ul>
+      <li>Cut observation ports in boarded windows — a small hole angled downward allows surveillance while keeping the observer protected.</li>
+      <li>Upper-floor or rooftop observation posts provide early warning and positional advantage.</li>
+      <li>Never illuminate yourself — observe from darkness into light.</li>
+    </ul>
+  </section>
+
+  <!-- =================== BUG OUT =================== -->
+  <section id="bug-out">
+    <h2>8. Bug-Out vs. Bug-In Decision Framework</h2>
+
+    <p>This is one of the most consequential decisions you may face. Most survival experts recommend staying in place ("bug in") unless the threat makes your location untenable. Moving exposes you to unpredictable hazards; your home has known resources.</p>
+
+    <h3>Bug-In (Stay) — Default Choice When:</h3>
+    <ul class="checklist">
+      <li>Your location has food and water for at least 2 weeks</li>
+      <li>You have adequate shelter and security</li>
+      <li>The threat is temporary (storm, short-term civil unrest)</li>
+      <li>Evacuation routes are compromised (gridlock, flooding, hostile)</li>
+      <li>You have children, elderly, or medically dependent people who cannot travel safely</li>
+      <li>Your community is there and provides mutual support</li>
+      <li>You have no clear destination that is significantly safer</li>
+    </ul>
+
+    <h3>Bug-Out (Evacuate) — When You Must Move:</h3>
+    <ul class="checklist">
+      <li>Immediate physical danger (fire, flood, structural failure, direct attack)</li>
+      <li>Location is confirmed compromised (contamination, disease outbreak)</li>
+      <li>You have a clear, confirmed destination significantly safer than current location</li>
+      <li>Resources at current location are critically depleted and cannot be resupplied</li>
+      <li>Mandatory evacuation orders exist and the threat is real</li>
+    </ul>
+
+    <figure class="svg-diagram" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1.5rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
+      <svg viewBox="0 0 580 520" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bugout-tree-title">
+        <title id="bugout-tree-title">Bug-Out vs. Bug-In Decision Flowchart</title>
+        <desc>A flowchart for deciding whether to evacuate or shelter in place during an emergency. Starts at top with an emergency situation, then guides through four yes/no questions to reach a recommendation.</desc>
+        <!-- Start node -->
+        <rect x="170" y="10" width="240" height="44" rx="22" fill="#243028" stroke="#c9a94e" stroke-width="2.5"/>
+        <text x="290" y="27" text-anchor="middle" font-size="12" fill="#c9a94e" font-family="sans-serif" font-weight="800">EMERGENCY SITUATION</text>
+        <text x="290" y="43" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">Step through each question in order</text>
+        <!-- Arrow down -->
+        <line x1="290" y1="54" x2="290" y2="80" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr-g)"/>
+        <defs>
+          <marker id="arr-g" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c9a94e"/></marker>
+          <marker id="arr-r" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c84848"/></marker>
+          <marker id="arr-green" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4b9e6a"/></marker>
+          <marker id="arr-amb" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c87a40"/></marker>
+        </defs>
+        <!-- Q1 Diamond -->
+        <polygon points="290,80 390,120 290,160 190,120" fill="#182016" stroke="#c84848" stroke-width="2"/>
+        <text x="290" y="113" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">Immediate mortal danger</text>
+        <text x="290" y="127" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">at current location?</text>
+        <text x="290" y="141" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(fire, flood, attack, collapse)</text>
+        <!-- Q1 YES → left → EVACUATE NOW -->
+        <line x1="190" y1="120" x2="80" y2="120" stroke="#c84848" stroke-width="2" marker-end="url(#arr-r)"/>
+        <text x="135" y="113" text-anchor="middle" font-size="10" fill="#c84848" font-family="sans-serif" font-weight="700">YES</text>
+        <rect x="10" y="100" width="70" height="40" rx="6" fill="#6e2828" stroke="#c84848" stroke-width="2.5"/>
+        <text x="45" y="118" text-anchor="middle" font-size="11" fill="#eceee0" font-family="sans-serif" font-weight="800">GO NOW</text>
+        <text x="45" y="132" text-anchor="middle" font-size="9" fill="#eceee0" font-family="sans-serif">Do not wait</text>
+        <!-- Q1 NO → down -->
+        <line x1="290" y1="160" x2="290" y2="188" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr-g)"/>
+        <text x="305" y="178" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">NO</text>
+        <!-- Q2 Diamond -->
+        <polygon points="290,188 390,228 290,268 190,228" fill="#182016" stroke="#c9a94e" stroke-width="2"/>
+        <text x="290" y="221" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">Water, food, shelter secure</text>
+        <text x="290" y="235" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">for 72+ hours?</text>
+        <text x="290" y="249" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(include group needs)</text>
+        <!-- Q2 YES → right → STAY -->
+        <line x1="390" y1="228" x2="500" y2="228" stroke="#4b9e6a" stroke-width="2" marker-end="url(#arr-green)"/>
+        <text x="445" y="221" text-anchor="middle" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">YES</text>
+        <rect x="500" y="208" width="78" height="40" rx="6" fill="#2a5a3c" stroke="#4b9e6a" stroke-width="2.5"/>
+        <text x="539" y="224" text-anchor="middle" font-size="11" fill="#eceee0" font-family="sans-serif" font-weight="800">STAY</text>
+        <text x="539" y="238" text-anchor="middle" font-size="9" fill="#eceee0" font-family="sans-serif">Monitor &amp; prepare</text>
+        <!-- Q2 NO → down -->
+        <line x1="290" y1="268" x2="290" y2="296" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr-g)"/>
+        <text x="305" y="286" font-size="10" fill="#c84848" font-family="sans-serif" font-weight="700">NO</text>
+        <!-- Q3 Diamond -->
+        <polygon points="290,296 390,336 290,376 190,336" fill="#182016" stroke="#c9a94e" stroke-width="2"/>
+        <text x="290" y="329" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">Evacuation routes</text>
+        <text x="290" y="343" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">accessible &amp; safe?</text>
+        <text x="290" y="357" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(not flooded, hostile, gridlocked)</text>
+        <!-- Q3 NO → left → SHELTER IN PLACE -->
+        <line x1="190" y1="336" x2="80" y2="336" stroke="#c87a40" stroke-width="2" marker-end="url(#arr-amb)"/>
+        <text x="135" y="329" text-anchor="middle" font-size="10" fill="#c87a40" font-family="sans-serif" font-weight="700">NO</text>
+        <rect x="5" y="314" width="75" height="44" rx="6" fill="#3d2010" stroke="#c87a40" stroke-width="2"/>
+        <text x="42" y="330" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">SHELTER</text>
+        <text x="42" y="343" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">IN PLACE</text>
+        <text x="42" y="354" text-anchor="middle" font-size="8" fill="#8a9e86" font-family="sans-serif">Fortify, conserve</text>
+        <!-- Q3 YES → down -->
+        <line x1="290" y1="376" x2="290" y2="404" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr-g)"/>
+        <text x="305" y="394" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">YES</text>
+        <!-- Q4 Diamond -->
+        <polygon points="290,404 390,444 290,484 190,444" fill="#182016" stroke="#c9a94e" stroke-width="2"/>
+        <text x="290" y="437" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">Known safe destination</text>
+        <text x="290" y="451" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">confirmed available?</text>
+        <text x="290" y="465" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(pre-arranged contact made?)</text>
+        <!-- Q4 YES → right → BUG OUT -->
+        <line x1="390" y1="444" x2="500" y2="444" stroke="#c87a40" stroke-width="2" marker-end="url(#arr-amb)"/>
+        <text x="445" y="437" text-anchor="middle" font-size="10" fill="#c87a40" font-family="sans-serif" font-weight="700">YES</text>
+        <rect x="500" y="422" width="78" height="44" rx="6" fill="#3d2010" stroke="#c87a40" stroke-width="2.5"/>
+        <text x="539" y="438" text-anchor="middle" font-size="11" fill="#eceee0" font-family="sans-serif" font-weight="800">BUG OUT</text>
+        <text x="539" y="451" text-anchor="middle" font-size="9" fill="#eceee0" font-family="sans-serif">Execute plan</text>
+        <text x="539" y="462" text-anchor="middle" font-size="8" fill="#8a9e86" font-family="sans-serif">Tell someone route</text>
+        <!-- Q4 NO → left → shelter in place / evaluate -->
+        <line x1="190" y1="444" x2="80" y2="444" stroke="#c87a40" stroke-width="2" marker-end="url(#arr-amb)"/>
+        <text x="135" y="437" text-anchor="middle" font-size="10" fill="#c87a40" font-family="sans-serif" font-weight="700">NO</text>
+        <rect x="5" y="422" width="75" height="44" rx="6" fill="#182016" stroke="#c87a40" stroke-width="2"/>
+        <text x="42" y="438" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">SHELTER</text>
+        <text x="42" y="451" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">IN PLACE</text>
+        <text x="42" y="462" text-anchor="middle" font-size="8" fill="#8a9e86" font-family="sans-serif">Keep finding options</text>
+        <!-- Legend -->
+        <rect x="10" y="498" width="12" height="12" rx="2" fill="#6e2828" stroke="#c84848" stroke-width="1.5"/>
+        <text x="26" y="509" font-size="9" fill="#8a9e86" font-family="sans-serif">Immediate action</text>
+        <rect x="130" y="498" width="12" height="12" rx="2" fill="#2a5a3c" stroke="#4b9e6a" stroke-width="1.5"/>
+        <text x="146" y="509" font-size="9" fill="#8a9e86" font-family="sans-serif">Stay (preferred when safe)</text>
+        <rect x="320" y="498" width="12" height="12" rx="2" fill="#3d2010" stroke="#c87a40" stroke-width="1.5"/>
+        <text x="336" y="509" font-size="9" fill="#8a9e86" font-family="sans-serif">Situational — assess fully</text>
+      </svg>
+      <figcaption>Bug-out decision flowchart — work top to bottom. Moving exposes you to unpredictable hazards; the default choice is always to shelter in place unless a specific question triggers evacuation. Never bug out without a confirmed destination.</figcaption>
+    </figure>
+
+    <h3>72-Hour Go-Bag Contents</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Category</th><th>Items</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Water</td><td>2L per person + filter + iodine tablets</td><td>Water is heavy — prioritize purification over carrying</td></tr>
+          <tr><td>Food</td><td>3 days calories — bars, jerky, nuts, freeze-dried</td><td>High-calorie density, no cooking required, familiar foods</td></tr>
+          <tr><td>Shelter</td><td>Emergency tarp, space blanket, paracord (30m)</td><td>For sleeping in the field</td></tr>
+          <tr><td>Fire</td><td>Lighter × 3, waterproof matches, ferrocerium rod</td><td>Redundancy critical</td></tr>
+          <tr><td>Medical</td><td>IFAK (individual first aid kit): tourniquet, gauze, Israeli bandage, SAM splint, OTC meds</td><td>Trauma-focused, not a full kit</td></tr>
+          <tr><td>Navigation</td><td>Topo maps of your area, compass, printed address list</td><td>Don't rely on GPS alone</td></tr>
+          <tr><td>Communication</td><td>Baofeng radio + charged batteries, phone + power bank</td><td>Know your out-of-area contact plan</td></tr>
+          <tr><td>Documents</td><td>Copies of ID, passport, insurance, deeds, cash (small bills)</td><td>Waterproofed in ziplocks</td></tr>
+          <tr><td>Clothing</td><td>Change of clothes per person, rain gear, sturdy footwear</td><td>Season-appropriate; blisters are debilitating</td></tr>
+          <tr><td>Tools</td><td>Multi-tool, knife, headlamp × 2, duct tape</td><td>More valuable than almost anything else</td></tr>
+          <tr><td>Hygiene</td><td>Hand sanitizer, soap, toothbrush, toilet paper, feminine products</td><td>Disease prevention matters on the road too</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Pre-Designate Meeting Points</strong>
+        <p>Agree on meeting points with your household and community BEFORE an event, when you can have a calm, detailed conversation. Designate: (1) a local meeting point in case you're separated within your neighborhood, (2) a regional meeting point 10–30 miles away, (3) an out-of-area contact everyone knows to call. Practice these routes with all household members, including children.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-md);margin-top:var(--sp-xl)">
+    <a href="navigation.html" class="btn btn-outline">← Navigation</a>
+    <a href="knowledge.html" class="btn btn-primary">Next: Knowledge →</a>
+  </div>
+  <div class="callout callout-tip" style="margin-top:var(--sp-xl)">
+    <span class="callout-icon">🔗</span>
+    <div class="callout-content">
+      <strong>Related Sections</strong>
+      <p>
+        <a href="communications.html#ham-radio">Communications → Watch schedules and radio contact</a> ·
+        <a href="navigation.html#map-making">Navigation → Mapping your patrol perimeter</a> ·
+        <a href="medical.html">Medical → Treating injuries from conflict</a> ·
+        <a href="knowledge.html#library">Knowledge → Community governance and dispute resolution</a>
+      </p>
+    </div>
+  </div>
+
+<nav class="section-pagination no-print" aria-label="Section navigation">
+  <a href="navigation.html" class="pagination-btn pagination-prev">← Navigation</a>
+  <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+  <a href="knowledge.html" class="pagination-btn pagination-next">Knowledge →</a>
+</nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">🤖</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're reading Security &amp; Defense. Ask me about community security, perimeter setups, OPSEC, bug-out decisions, or de-escalation.<p class="aria-note">⚠️ Requires Ollama. <a href="../ai-setup.html">Setup →</a></p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/aria.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>
