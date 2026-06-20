@@ -9,7 +9,7 @@ const URLS_TO_CACHE = [
   '/sections/nbc.html', '/sections/disasters.html', '/sections/governance.html',
   '/sections/chemistry.html', '/sections/metallurgy.html', '/sections/psychology.html',
   '/sections/textiles.html', '/sections/vehicles.html', '/sections/knowledge.html',
-  '/assets/css/style.css', '/assets/js/app.js', '/assets/js/search.js', '/assets/js/aria.js',
+  '/assets/css/style.css', '/assets/js/app.js', '/assets/js/search.js', '/assets/js/bunker-bot.js',
   '/assets/js/librarian.js', '/assets/js/tools.js',
   '/search/search-index.json', '/search/pdf-chunks.json',
   '/sections/climate.html'

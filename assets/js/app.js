@@ -37,6 +37,7 @@
 
   function init() {
     addSkipNav();
+    injectManifest();
     buildNav();
     setActiveNav();
     setupSidebar();
@@ -49,6 +50,22 @@
     setupCopyCode();
     setupModeBar();
     setupServiceWorker();
+  }
+
+  /* =================== PWA MANIFEST =================== */
+  function injectManifest() {
+    if (document.querySelector('link[rel="manifest"]')) return;
+    const isSection = window.location.pathname.includes('/sections/');
+    const isPdfs    = window.location.pathname.includes('/pdfs/');
+    const base      = (isSection || isPdfs) ? '../' : '';
+    const link = document.createElement('link');
+    link.rel  = 'manifest';
+    link.href = `${base}manifest.json`;
+    document.head.appendChild(link);
+    const touch = document.createElement('link');
+    touch.rel  = 'apple-touch-icon';
+    touch.href = `${base}assets/icons/icon.svg`;
+    document.head.appendChild(touch);
   }
 
   /* =================== SKIP NAVIGATION =================== */

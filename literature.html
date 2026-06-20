@@ -31,14 +31,14 @@
     .tag-critical { background: #3d1212; color: #e74c3c; border: 1px solid #5a1a1a; }
     .tag-important { background: #2d1a08; color: #e67e22; border: 1px solid #4a2a0a; }
     .tag-nice { background: #0d2a14; color: #27ae60; border: 1px solid #1a4a22; }
-    .tag-free { background: #0d2030; color: #3498db; border: 1px solid #1a3a50; }
+    .tag-free { background: rgba(74,128,181,0.1); color: var(--blue); border: 1px solid var(--blue-dim); }
     .tag-cat { background: #1a1a2a; color: #8a8aaa; border: 1px solid #2a2a3a; }
     .tag-level { background: #1a1a1a; color: #888; border: 1px solid #333; }
     .book-desc { font-size: 0.85em; color: #bbb; line-height: 1.55; margin: 0.4rem 0; }
     .book-keychapters { font-size: 0.8em; color: #888; margin: 0.3rem 0; }
     .book-keychapters strong { color: #aaa; }
-    .book-link { display: inline-block; font-size: 0.78em; color: #3498db; text-decoration: none; margin-top: 0.4rem; border: 1px solid #1a3a50; padding: 0.2rem 0.5rem; border-radius: 3px; background: #0d2030; }
-    .book-link:hover { background: #3498db; color: #fff; border-color: #3498db; }
+    .book-link { display: inline-block; font-size: 0.78em; color: var(--blue); text-decoration: none; margin-top: 0.4rem; border: 1px solid var(--blue-dim); padding: 0.2rem 0.5rem; border-radius: 3px; background: rgba(74,128,181,0.1); }
+    .book-link:hover { background: var(--blue); color: var(--bg-0); border-color: var(--blue); }
     .section-divider { color: var(--amber); font-size: 1.1em; font-weight: 700; border-bottom: 1px solid #2a2a2a; padding-bottom: 0.4rem; margin: 1.5rem 0 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
     .section-count { font-size: 0.8em; color: #666; font-weight: normal; }
     .reading-box { background: #0a1a0a; border: 1px solid #27ae60; border-radius: 6px; padding: 1rem 1.2rem; margin: 1rem 0; }
@@ -69,7 +69,7 @@
     .pdf-card-meta { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.25rem; }
     .pdf-badge { font-size: 0.72em; padding: 0.1rem 0.45rem; border-radius: 3px; font-weight: 500; }
     .pdf-badge-size { background: #1a1a2a; color: #8a8aff; border: 1px solid #2a2a4a; }
-    .pdf-badge-domain { background: #0d2030; color: #3498db; border: 1px solid #1a3a50; }
+    .pdf-badge-domain { background: rgba(74,128,181,0.1); color: var(--blue); border: 1px solid var(--blue-dim); }
     .pdf-badge-uk { background: #0d2a14; color: #27ae60; border: 1px solid #1a4a22; }
     .pdf-card-actions { display: flex; gap: 0.5rem; margin-top: 0.4rem; }
     .pdf-open-btn { flex: 1; background: #1a1a0a; border: 1px solid var(--amber); color: var(--amber); padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.8em; text-align: center; text-decoration: none; transition: all 0.15s; }
@@ -1569,11 +1569,40 @@
     </div>
   </div>
 
-  <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot"></aside>
+  <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+    <div class="aria-header">
+      <div class="aria-title">
+        <div class="aria-avatar">🤖</div>
+        <div class="aria-title-text">
+          <strong>Bunker Bot</strong>
+          <small>Offline Survival AI</small>
+        </div>
+      </div>
+      <button id="aria-close" class="btn-icon" aria-label="Close Bunker Bot">✕</button>
+    </div>
+    <div class="aria-status">
+      <span class="status-dot checking"></span>
+      <span class="aria-status-label">Checking connection…</span>
+      &nbsp;·&nbsp;
+      <span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span>
+    </div>
+    <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+      <div class="aria-message aria-welcome">
+        <div class="aria-message-content">
+          <p>Hello, I'm <strong>Bunker Bot</strong>. Load the PDF index above and I'll cite passages from the bundled library when answering your questions.</p>
+          <p class="aria-note">⚠️ Requires Ollama running locally. <a href="ai-setup.html">Setup guide →</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="aria-input-area">
+      <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2" aria-label="Message Bunker Bot"></textarea>
+      <button id="aria-send" class="btn btn-sm btn-amber">Send</button>
+    </div>
+  </aside>
 
   <script src="assets/js/app.js"></script>
   <script src="assets/js/librarian.js"></script>
-  <script src="assets/js/aria.js"></script>
+  <script src="assets/js/bunker-bot.js"></script>
   <script>
     const STORAGE_KEY = 'lib-obtained';
     let obtained = new Set();
@@ -1782,7 +1811,7 @@
           ${e.author ? `<div class="pdf-card-author">${escHtml(e.author)}</div>` : ''}
           ${e.desc   ? `<div class="pdf-card-desc">${escHtml(e.desc)}</div>` : ''}
           ${e.tags.length ? `<div class="pdf-card-meta">${e.tags.map(t => `<span class="pdf-badge" style="background:#1a1a2a;color:#8a8aaa;border:1px solid #2a2a3a;">${escHtml(t)}</span>`).join('')}</div>` : ''}
-          ${e.notes ? `<div style="font-size:0.74em;color:#3498db;margin-top:0.3rem;">📖 Notes saved — Bunker Bot can reference these</div>` : ''}
+          ${e.notes ? `<div style="font-size:0.74em;color:var(--blue);margin-top:0.3rem;">📖 Notes saved — Bunker Bot can reference these</div>` : ''}
           <div style="font-size:0.72em;color:#444;margin-top:0.3rem;">Added ${e.added}</div>
           <div class="pdf-card-actions" style="margin-top:0.5rem;">
             ${e.url ? `<a href="${escHtml(e.url)}" target="_blank" rel="noopener" class="pdf-open-btn">Open</a>` : ''}

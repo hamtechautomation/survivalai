@@ -1,6 +1,6 @@
 /* =========================================
    THE LAST LIGHT SURVIVAL GUIDE
-   aria.js — Bunker Bot AI Chat Panel
+   bunker-bot.js — Bunker Bot AI Chat Panel
    Providers: Ollama (offline) | Claude API (online)
    ========================================= */
 

@@ -919,12 +919,20 @@
 <!-- Bunker Bot Panel -->
 <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
   <div class="aria-header">
-    <div class="aria-status">
-      <span class="status-dot"></span>
-      <span class="aria-status-label">Bunker Bot</span>
-      <span id="aria-model-badge" class="model-badge"></span>
+    <div class="aria-title">
+      <div class="aria-avatar">🤖</div>
+      <div class="aria-title-text">
+        <strong>Bunker Bot</strong>
+        <small>Offline Survival AI</small>
+      </div>
     </div>
     <button id="aria-close" class="btn-icon" aria-label="Close Bunker Bot">✕</button>
+  </div>
+  <div class="aria-status">
+    <span class="status-dot checking"></span>
+    <span class="aria-status-label">Checking connection…</span>
+    &nbsp;·&nbsp;
+    <span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span>
   </div>
   <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
     <div class="aria-message aria-welcome">
@@ -934,8 +942,8 @@
       </div>
     </div>
   </div>
-  <div class="aria-input-row">
-    <input type="text" id="aria-input" placeholder="Ask Bunker Bot…" autocomplete="off" aria-label="Message Bunker Bot">
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2" aria-label="Message Bunker Bot"></textarea>
     <button id="aria-send" class="btn btn-sm btn-amber">Send</button>
   </div>
 </aside>
@@ -944,7 +952,7 @@
 
 <script src="assets/js/app.js"></script>
 <script src="assets/js/search.js"></script>
-<script src="assets/js/aria.js"></script>
+<script src="assets/js/bunker-bot.js"></script>
 
 <script>
 (function () {

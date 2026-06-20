@@ -256,7 +256,7 @@
   </div>
 
   <div class="hidden-notice">
-    🔒 This page is not linked in the main navigation. Access it directly at <code>aria-prompt.html</code>.
+    🔒 This page is not linked in the main navigation. Access it directly at <code>bunker-bot-prompt.html</code>.
   </div>
 
   <!-- Hero -->
@@ -522,34 +522,35 @@ ollama run aria</code></pre>
 </div><!-- /content-wrapper -->
 </main>
 
-<!-- Bunker Bot Panel (meta — Bunker Bot explaining itself) -->
-<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot AI assistant">
+<!-- Bunker Bot Panel -->
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
   <div class="aria-header">
-    <div class="aria-title-block">
-      <span class="aria-logo">🤖</span>
-      <div>
-        <span class="aria-title">Bunker Bot</span>
-        <span class="aria-subtitle">Offline Survival AI</span>
+    <div class="aria-title">
+      <div class="aria-avatar">🤖</div>
+      <div class="aria-title-text">
+        <strong>Bunker Bot</strong>
+        <small>Offline Survival AI</small>
       </div>
     </div>
-    <div class="aria-header-actions">
-      <span class="status-dot checking"></span>
-      <span class="aria-status-label">Checking…</span>
-      <button onclick="window.ariaClear && ariaClear()" class="btn-icon" title="Clear chat">↺</button>
-      <button id="aria-close" class="btn-icon" aria-label="Close Bunker Bot">✕</button>
-    </div>
+    <button id="aria-close" class="btn-icon" aria-label="Close Bunker Bot">✕</button>
   </div>
-  <div class="aria-model-bar">
-    Model: <span id="aria-model-badge">llama3</span>
+  <div class="aria-status">
+    <span class="status-dot checking"></span>
+    <span class="aria-status-label">Checking connection…</span>
+    &nbsp;·&nbsp;
+    <span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span>
   </div>
-  <div id="aria-messages" class="aria-messages">
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
     <div class="aria-message aria-welcome">
-      <p>Questions about configuring AI tools, model selection, or getting the best survival advice from any AI? Ask me here.</p>
+      <div class="aria-message-content">
+        <p>Questions about configuring AI tools, model selection, or getting the best survival advice from any AI? Ask me here.</p>
+        <p class="aria-note">⚠️ Requires Ollama running locally. <a href="ai-setup.html">Setup guide →</a></p>
+      </div>
     </div>
   </div>
-  <div class="aria-input-bar">
-    <textarea id="aria-input" class="aria-input" placeholder="Ask Bunker Bot anything survival-related…" rows="1"></textarea>
-    <button id="aria-send" class="btn btn-primary btn-sm">Send</button>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2" aria-label="Message Bunker Bot"></textarea>
+    <button id="aria-send" class="btn btn-sm btn-amber">Send</button>
   </div>
 </aside>
 
@@ -560,7 +561,7 @@ ollama run aria</code></pre>
 
 <script src="assets/js/app.js"></script>
 <script src="assets/js/search.js"></script>
-<script src="assets/js/aria.js"></script>
+<script src="assets/js/bunker-bot.js"></script>
 <script>
   function showToast(msg) {
     const toast = document.getElementById('copy-toast');

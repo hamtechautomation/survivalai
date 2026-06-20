@@ -1,0 +1,34 @@
+{
+  "name": "The Last Light Survival Guide",
+  "short_name": "Last Light",
+  "description": "Complete offline emergency preparedness reference — 20 sections, 14 PDFs, AI-powered. No internet required.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#070a09",
+  "theme_color": "#c9a94e",
+  "orientation": "portrait-primary",
+  "lang": "en",
+  "categories": ["education", "health", "utilities"],
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Emergency Card",
+      "short_name": "Emergency",
+      "url": "quick-reference.html",
+      "description": "Quick-reference emergency card"
+    },
+    {
+      "name": "Bunker Bot AI",
+      "short_name": "Bunker Bot",
+      "url": "ai-setup.html",
+      "description": "Offline AI assistant setup"
+    }
+  ]
+}

@@ -235,7 +235,7 @@
     { id:'gear-bob', title:'Bug-Out Bag Contents', section:'gear', sectionLabel:'Gear List', file:'gear.html', anchor:'#cat-bob', content:'bug out bag 72 hour kit go bag evacuation backpack essentials food water shelter fire navigation', tags:['gear','bug out bag','72 hour','go bag'] },
 
     /* BUNKER BOT PROMPT */
-    { id:'aria-prompt', title:'Bunker Bot System Prompt', section:'aria-prompt', sectionLabel:'Bunker Bot Prompt', file:'aria-prompt.html', anchor:'', content:'Bunker Bot system prompt copy ChatGPT Claude Gemini Ollama AI persona survival assistant instructions Modelfile', tags:['Bunker Bot','system prompt','ChatGPT','Claude','Ollama','AI'] },
+    { id:'aria-prompt', title:'Bunker Bot System Prompt', section:'aria-prompt', sectionLabel:'Bunker Bot Prompt', file:'bunker-bot-prompt.html', anchor:'', content:'Bunker Bot system prompt copy ChatGPT Claude Gemini Ollama AI persona survival assistant instructions Modelfile', tags:['Bunker Bot','system prompt','ChatGPT','Claude','Ollama','AI'] },
 
     /* CHANGELOG */
     { id:'changelog', title:'Changelog & Version History', section:'changelog', sectionLabel:'Changelog', file:'changelog.html', anchor:'', content:'changelog version history updates improvements release notes what changed', tags:['changelog','version','history','updates'] },
