@@ -131,6 +131,8 @@
     const menuBtn   = document.getElementById('menu-toggle');
     if (!sidebar || !overlay || !menuBtn) return;
 
+    let _scrollY = 0;
+
     menuBtn.addEventListener('click', openSidebar);
     overlay.addEventListener('click', closeSidebar);
 
@@ -142,12 +144,21 @@
     function openSidebar() {
       sidebar.classList.add('open');
       overlay.classList.add('active');
+      /* iOS Safari fix: position:fixed prevents background scroll */
+      _scrollY = window.scrollY;
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top      = `-${_scrollY}px`;
+      document.body.style.width    = '100%';
     }
     function closeSidebar() {
       sidebar.classList.remove('open');
       overlay.classList.remove('active');
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top      = '';
+      document.body.style.width    = '';
+      window.scrollTo(0, _scrollY);
     }
 
     /* Close sidebar on nav item click (mobile) */

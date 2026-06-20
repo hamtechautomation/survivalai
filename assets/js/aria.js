@@ -91,8 +91,21 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
     const panel = $('aria-panel');
     if (!panel) return;
 
-    /* ── System prompt collapsible ── */
+    /* ── Settings gear button in header ── */
     const header = panel.querySelector('.aria-header');
+    if (header && !panel.querySelector('#aria-settings-toggle')) {
+      const gear = document.createElement('button');
+      gear.id        = 'aria-settings-toggle';
+      gear.className = 'btn-icon';
+      gear.title     = 'Settings';
+      gear.style.cssText = 'font-size:.9rem;opacity:.6;transition:opacity .2s';
+      gear.textContent = '⚙️';
+      const closeBtn = header.querySelector('#aria-close') || header.querySelector('.btn-icon');
+      if (closeBtn) header.insertBefore(gear, closeBtn);
+      else header.appendChild(gear);
+    }
+
+    /* ── System prompt collapsible ── */
     if (header && !panel.querySelector('.aria-system-prompt')) {
       const sysEl = document.createElement('details');
       sysEl.className = 'aria-system-prompt no-print';
@@ -100,11 +113,12 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
       header.after(sysEl);
     }
 
-    /* ── Main toolbar (after .aria-status) ── */
+    /* ── Main toolbar (after .aria-status) — collapsed by default ── */
     const statusEl = panel.querySelector('.aria-status');
     if (statusEl && !panel.querySelector('.aria-toolbar')) {
       const tb = document.createElement('div');
       tb.className = 'aria-toolbar no-print';
+      tb.style.display = 'none';
       tb.innerHTML = `
         <!-- Provider toggle -->
         <div class="aria-toolbar-row aria-provider-row">
@@ -146,6 +160,14 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
           <span id="aria-temp-value" class="aria-slider-val">0.7</span>
         </div>`;
       statusEl.after(tb);
+
+      /* Wire gear toggle */
+      $('aria-settings-toggle')?.addEventListener('click', () => {
+        const open = tb.style.display === 'none';
+        tb.style.display = open ? '' : 'none';
+        const gear = $('aria-settings-toggle');
+        if (gear) gear.style.opacity = open ? '1' : '.6';
+      });
 
       /* Wire provider toggle */
       $('aria-provider-local') ?.addEventListener('click', () => switchProvider(PROVIDER_LOCAL));
