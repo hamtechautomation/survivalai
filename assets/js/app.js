@@ -50,22 +50,48 @@
     setupCopyCode();
     setupModeBar();
     setupServiceWorker();
+    setupInstallPrompt();
+    markStandalone();
   }
 
-  /* =================== PWA MANIFEST =================== */
+  /* =================== PWA MANIFEST + IOS META =================== */
   function injectManifest() {
     if (document.querySelector('link[rel="manifest"]')) return;
     const isSection = window.location.pathname.includes('/sections/');
     const isPdfs    = window.location.pathname.includes('/pdfs/');
     const base      = (isSection || isPdfs) ? '../' : '';
+
     const link = document.createElement('link');
     link.rel  = 'manifest';
     link.href = `${base}manifest.json`;
     document.head.appendChild(link);
+
     const touch = document.createElement('link');
     touch.rel  = 'apple-touch-icon';
     touch.href = `${base}assets/icons/icon.svg`;
     document.head.appendChild(touch);
+
+    /* iOS standalone PWA meta tags */
+    const iosMeta = [
+      ['apple-mobile-web-app-capable',        'yes'],
+      ['apple-mobile-web-app-status-bar-style','black-translucent'],
+      ['apple-mobile-web-app-title',           'Last Light'],
+      ['theme-color',                          '#070a09'],
+    ];
+    iosMeta.forEach(([name, content]) => {
+      if (document.querySelector(`meta[name="${name}"]`)) return;
+      const m = document.createElement('meta');
+      m.name = name; m.content = content;
+      document.head.appendChild(m);
+    });
+  }
+
+  /* Add class when running as installed PWA (standalone mode) */
+  function markStandalone() {
+    const isStandalone =
+      window.navigator.standalone === true ||
+      window.matchMedia('(display-mode: standalone)').matches;
+    if (isStandalone) document.documentElement.classList.add('pwa-standalone');
   }
 
   /* =================== SKIP NAVIGATION =================== */
@@ -353,6 +379,83 @@
         localStorage.setItem('font-size', btn.dataset.font);
       });
     });
+  }
+
+  /* =================== INSTALL PROMPT =================== */
+  function setupInstallPrompt() {
+    /* Don't show if already running as installed PWA */
+    if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) return;
+
+    /* Only on mobile */
+    if (window.innerWidth > 900) return;
+
+    /* Track visits; show on 2nd+ visit only */
+    const visits = parseInt(localStorage.getItem('ll-visits') || '0') + 1;
+    localStorage.setItem('ll-visits', visits);
+    if (visits < 2) return;
+
+    /* Respect a 30-day dismiss */
+    const dismissed = parseInt(localStorage.getItem('ll-install-dismissed') || '0');
+    if (dismissed && Date.now() - dismissed < 30 * 86400000) return;
+
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    let deferred = null;
+
+    function showBanner() {
+      if (document.getElementById('install-banner')) return;
+      const banner = document.createElement('div');
+      banner.id = 'install-banner';
+      banner.setAttribute('role', 'complementary');
+      banner.setAttribute('aria-label', 'Install app');
+
+      if (isIOS) {
+        banner.innerHTML = `
+          <span class="ib-icon">⚡</span>
+          <div class="ib-text">
+            <strong>Install Last Light</strong>
+            <small>Tap <strong>Share ↑</strong> then <strong>Add to Home Screen</strong></small>
+          </div>
+          <button class="ib-dismiss" aria-label="Dismiss">✕</button>`;
+      } else {
+        banner.innerHTML = `
+          <span class="ib-icon">⚡</span>
+          <div class="ib-text">
+            <strong>Install Last Light</strong>
+            <small>Works fully offline — no app store needed</small>
+          </div>
+          <button class="ib-install btn btn-sm btn-primary">Install</button>
+          <button class="ib-dismiss" aria-label="Dismiss">✕</button>`;
+      }
+
+      document.body.appendChild(banner);
+
+      banner.querySelector('.ib-dismiss').addEventListener('click', () => {
+        banner.remove();
+        localStorage.setItem('ll-install-dismissed', Date.now());
+      });
+
+      banner.querySelector('.ib-install')?.addEventListener('click', () => {
+        if (!deferred) return;
+        deferred.prompt();
+        deferred.userChoice.then(({ outcome }) => {
+          if (outcome === 'accepted') banner.remove();
+          deferred = null;
+        });
+      });
+
+      /* Auto-hide after 12 s if user ignores it */
+      setTimeout(() => banner?.remove(), 12000);
+    }
+
+    /* Android/Chrome: capture the native install event */
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault();
+      deferred = e;
+      showBanner();
+    });
+
+    /* iOS: show instructions after a short delay */
+    if (isIOS) setTimeout(showBanner, 2000);
   }
 
 })();

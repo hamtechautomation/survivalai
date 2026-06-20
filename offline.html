@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Offline — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <style>
+    :root {
+      --bg-0:#070a09; --bg-2:#111714; --bg-3:#161d1a;
+      --amber:#c9a94e; --amber-dim:#8a7035;
+      --text-1:#e8e0cc; --text-2:#9a9488; --text-3:#5a5650;
+      --border:#1e2720; --border-hi:#2a3430;
+      --red:#c0392b;
+      --sp-sm:.5rem; --sp-md:1rem; --sp-lg:1.5rem; --sp-xl:2rem;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-0);
+      color: var(--text-1);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--sp-xl) var(--sp-md);
+      padding-top: calc(var(--sp-xl) + env(safe-area-inset-top));
+      padding-bottom: calc(var(--sp-xl) + env(safe-area-inset-bottom));
+      text-align: center;
+    }
+    .icon { font-size: 4rem; margin-bottom: var(--sp-md); opacity: .6; }
+    h1 { font-size: 1.4rem; color: var(--amber); margin-bottom: var(--sp-sm); }
+    p { color: var(--text-2); font-size: .9rem; line-height: 1.6; max-width: 340px; margin: 0 auto var(--sp-lg); }
+    .links { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; width: 100%; max-width: 380px; margin-bottom: var(--sp-xl); }
+    .link-btn {
+      display: flex; flex-direction: column; align-items: center; gap: .2rem;
+      padding: .75rem .5rem;
+      background: var(--bg-3); border: 1px solid var(--border-hi); border-radius: 8px;
+      color: var(--text-1); text-decoration: none; font-size: .78rem;
+      transition: border-color .15s;
+    }
+    .link-btn:hover { border-color: var(--amber); }
+    .link-btn span { font-size: 1.4rem; }
+    .retry { font-size: .75rem; color: var(--text-3); }
+    .retry a { color: var(--amber-dim); }
+  </style>
+</head>
+<body>
+  <div class="icon">📡</div>
+  <h1>You're offline</h1>
+  <p>No network connection detected. All guide sections below are available offline — tap any to continue reading.</p>
+
+  <div class="links">
+    <a href="quick-reference.html" class="link-btn"><span>🚨</span>Emergency Card</a>
+    <a href="sections/medical.html" class="link-btn"><span>🏥</span>Medical</a>
+    <a href="sections/food.html" class="link-btn"><span>💧</span>Food & Water</a>
+    <a href="sections/shelter.html" class="link-btn"><span>🏕️</span>Shelter</a>
+    <a href="sections/navigation.html" class="link-btn"><span>🧭</span>Navigation</a>
+    <a href="sections/communications.html" class="link-btn"><span>📻</span>Comms</a>
+    <a href="sections/energy.html" class="link-btn"><span>⚡</span>Energy</a>
+    <a href="index.html" class="link-btn"><span>🏠</span>Home</a>
+  </div>
+
+  <p class="retry">When connected, <a href="javascript:location.reload()">reload this page</a> to return to where you were.</p>
+</body>
+</html>
