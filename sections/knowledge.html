@@ -33,12 +33,14 @@
       <span class="meta-item">📅 Updated: <span data-updated="2025-06"></span></span>
       <span class="meta-item">⏱️ <span id="reading-time"></span></span>
       <span class="meta-item">📖 Section 8 of 8</span>
+      <span class="meta-item">⏳ 8 topics</span>
     </div>
   </div>
 
   <nav class="toc" aria-label="Page contents">
     <div class="toc-title">Contents</div>
     <ol>
+      <li><a href="#history">Brief History of Mankind</a></li>
       <li><a href="#preserve">Preserving Books &amp; Documents</a></li>
       <li><a href="#reading-list">Essential Reading List</a></li>
       <li><a href="#library">Community Library Setup</a></li>
@@ -64,9 +66,148 @@
     </div>
   </div>
 
+  <!-- =================== HISTORY =================== -->
+  <section id="history">
+    <h2>1. Brief History of Mankind</h2>
+
+    <p>Understanding where we came from — how humans invented agriculture, built cities, discovered science, and survived catastrophes — is not nostalgia. It is a map. Every technique that kept civilization alive through plague, collapse, and war is a technique available again. The timeline below is the condensed story of our species.</p>
+
+    <div class="callout callout-amber" style="margin-bottom:var(--sp-lg)">
+      <span class="callout-icon">📖</span>
+      <div class="callout-content">
+        <strong>Recommended Reading: <em>The Story of Mankind</em></strong>
+        <p>Hendrik Willem van Loon's 1921 Newbery Medal winner is the most readable one-volume history of human civilization ever written. It covers everything in the timeline below, in narrative form, with van Loon's own illustrations. <strong>Free download</strong> at <strong>gutenberg.org/ebooks/754</strong> (EPUB — convert to PDF with Calibre and add to <a href="../pdfs/index.html">the PDF Library</a>).</p>
+      </div>
+    </div>
+
+    <style>
+      .history-timeline { position:relative; padding-left:2.5rem; margin:var(--sp-lg) 0; }
+      .history-timeline::before { content:''; position:absolute; left:.75rem; top:0; bottom:0; width:2px; background:linear-gradient(to bottom, var(--amber), var(--green), var(--blue), var(--amber-dim)); opacity:.4; }
+      .ht-era { position:relative; margin-bottom:var(--sp-xl); }
+      .ht-era::before { content:''; position:absolute; left:-1.85rem; top:.35rem; width:.9rem; height:.9rem; border-radius:50%; background:var(--amber); border:2px solid var(--bg-0); box-shadow:0 0 6px var(--amber); }
+      .ht-era.era-ancient::before { background:var(--green); box-shadow:0 0 6px var(--green); }
+      .ht-era.era-medieval::before { background:var(--blue); box-shadow:0 0 6px var(--blue); }
+      .ht-era.era-modern::before { background:var(--amber-dim); box-shadow:0 0 6px var(--amber-dim); }
+      .ht-era.era-industrial::before { background:var(--text-3); box-shadow:none; }
+      .ht-era.era-now::before { background:var(--red); box-shadow:0 0 8px var(--red); }
+      .ht-date { font-size:.7rem; font-family:monospace; color:var(--amber); letter-spacing:.05em; margin-bottom:.2rem; }
+      .ht-era.era-ancient .ht-date { color:var(--green); }
+      .ht-era.era-medieval .ht-date { color:var(--blue); }
+      .ht-era.era-modern .ht-date { color:var(--amber-dim); }
+      .ht-era.era-industrial .ht-date { color:var(--text-3); }
+      .ht-era.era-now .ht-date { color:var(--red); }
+      .ht-era h3 { margin:.1rem 0 .4rem; font-size:.95rem; }
+      .ht-era ul { margin:.4rem 0 0; padding-left:1.1rem; }
+      .ht-era li { font-size:.85rem; margin-bottom:.25rem; color:var(--text-2); }
+      .ht-era li strong { color:var(--text-1); }
+      .ht-lesson { display:inline-block; margin-top:.5rem; font-size:.72rem; background:var(--bg-3); border-left:2px solid var(--amber); padding:.2rem .6rem; border-radius:0 4px 4px 0; color:var(--text-2); font-style:italic; }
+      .ht-era.era-ancient .ht-lesson { border-color:var(--green); }
+      .ht-era.era-medieval .ht-lesson { border-color:var(--blue); }
+    </style>
+
+    <div class="history-timeline">
+
+      <div class="ht-era">
+        <div class="ht-date">~300,000 BCE – 3,000 BCE · PREHISTORIC</div>
+        <h3>The Stone Age &amp; Dawn of Civilization</h3>
+        <ul>
+          <li><strong>~300,000 BCE</strong> — <em>Homo sapiens</em> emerges in Africa. Larger brains, language, cooperation.</li>
+          <li><strong>~1,000,000 BCE</strong> — Fire controlled and used for cooking, warmth, and protection.</li>
+          <li><strong>~70,000 BCE</strong> — Great migration out of Africa. Humans spread across Asia, Europe, and the Americas.</li>
+          <li><strong>~40,000 BCE</strong> — Art appears: cave paintings, bone flutes. Abstract thought.</li>
+          <li><strong>~10,000 BCE</strong> — <strong>Agricultural Revolution</strong> (Fertile Crescent). Wild grasses become wheat and barley. Goats, sheep, and cattle domesticated. Humanity shifts from nomadic to settled.</li>
+          <li><strong>~4,000 BCE</strong> — Wheel invented. Copper smelted. First cities appear in Sumer (Mesopotamia).</li>
+          <li><strong>~3,200 BCE</strong> — <strong>Writing invented</strong> (cuneiform, then Egyptian hieroglyphs). Knowledge can now outlast a single human life.</li>
+        </ul>
+        <span class="ht-lesson">Survival lesson: agriculture and writing are the two foundations of civilization — both can be rebuilt from knowledge alone.</span>
+      </div>
+
+      <div class="ht-era era-ancient">
+        <div class="ht-date">~3,000 BCE – 500 CE · ANCIENT WORLD</div>
+        <h3>Empires, Philosophy &amp; the First Collapses</h3>
+        <ul>
+          <li><strong>~3,000–1,200 BCE</strong> — <strong>Bronze Age</strong>: trade networks span continents. Egypt, Akkad, Indus Valley, and Shang China rise simultaneously — then most collapse around 1,200 BCE (Bronze Age Collapse). Causes: drought, migrations, supply chain failure.</li>
+          <li><strong>~1,200 BCE</strong> — <strong>Iron Age</strong>: iron is more abundant than tin and copper. Cheaper tools and weapons democratize power.</li>
+          <li><strong>~500 BCE</strong> — Greek Golden Age: democracy in Athens, Socrates, Plato, Aristotle. Geometry, logic, and scientific method born.</li>
+          <li><strong>~300 BCE</strong> — Alexander the Great spreads Greek knowledge from Egypt to India. Library of Alexandria founded.</li>
+          <li><strong>~200 BCE – 200 CE</strong> — Roman Empire at peak. Roads, law, aqueducts, engineering. Han Dynasty China: paper, compass, silk roads.</li>
+          <li><strong>~1–400 CE</strong> — Major religions crystallize: Buddhism spreads across Asia; Christianity spreads across Rome; early Islam emerging in Arabia.</li>
+          <li><strong>476 CE</strong> — Fall of Western Roman Empire. Roads crumble, literacy falls, trade networks collapse.</li>
+        </ul>
+        <span class="ht-lesson era-ancient">Survival lesson: the Bronze Age Collapse shows how interconnected systems fail together — and that the communities that survived were those with local food production.</span>
+      </div>
+
+      <div class="ht-era era-medieval">
+        <div class="ht-date">500 – 1500 CE · MEDIEVAL PERIOD</div>
+        <h3>Feudalism, Faith &amp; the Islamic Golden Age</h3>
+        <ul>
+          <li><strong>500–1000 CE</strong> — <strong>Dark Ages</strong> in Western Europe: feudal agriculture, Church as repository of literacy, Roman knowledge partly preserved by monasteries and Irish monks.</li>
+          <li><strong>622 CE</strong> — Islam founded. Within 100 years, Arab armies unify territory from Spain to Central Asia.</li>
+          <li><strong>~800–1200 CE</strong> — <strong>Islamic Golden Age</strong>: algebra, optics, medicine, navigation. Greek texts translated and preserved when European libraries were burning. Scholars like Ibn Sina (medicine) and Al-Khwarizmi (algebra) advance science centuries ahead of Europe.</li>
+          <li><strong>1206–1368 CE</strong> — Mongol Empire: largest contiguous land empire in history. Silk Road trade flourishes briefly; devastation is total for cities that resist.</li>
+          <li><strong>1347–1351 CE</strong> — <strong>Black Death</strong> kills 30–50% of Europe's population. Labor becomes scarce; feudalism weakens; survivors gain bargaining power.</li>
+          <li><strong>~1440 CE</strong> — Gutenberg's printing press. Books cost 1/300th of previous price within decades. Knowledge spreads exponentially.</li>
+        </ul>
+        <span class="ht-lesson era-medieval">Survival lesson: when Western knowledge nearly died, Islamic scholars kept it alive. Knowledge survives through the people who copy it — not the institutions that hold it.</span>
+      </div>
+
+      <div class="ht-era era-modern">
+        <div class="ht-date">1500 – 1800 CE · EARLY MODERN</div>
+        <h3>Exploration, Science &amp; Revolution</h3>
+        <ul>
+          <li><strong>1492</strong> — Columbus reaches the Americas. The <strong>Columbian Exchange</strong>: potatoes, maize, tomatoes, and tobacco go to Europe; smallpox, measles, and influenza devastate the Americas (90% population loss in some regions).</li>
+          <li><strong>1517</strong> — Martin Luther's Reformation. The printing press makes it unstoppable. Religious wars follow.</li>
+          <li><strong>1543–1687</strong> — <strong>Scientific Revolution</strong>: Copernicus, Galileo, Newton. Observation and mathematics replace authority. How the universe actually works becomes knowable.</li>
+          <li><strong>1600s</strong> — Colonial expansion. European powers extract resources from Asia, Africa, and the Americas. Global trade flows begin.</li>
+          <li><strong>1776 / 1789</strong> — American and French Revolutions. Enlightenment ideas — rights, reason, democracy — become political realities. Monarchies start to fall.</li>
+        </ul>
+        <span class="ht-lesson era-modern">Survival lesson: the Columbian Exchange shows how disease travels with trade. The scientific method — test, observe, revise — is humanity's most powerful tool for solving new problems.</span>
+      </div>
+
+      <div class="ht-era era-industrial">
+        <div class="ht-date">1800 – 1945 CE · INDUSTRIAL AGE</div>
+        <h3>Steam, Science &amp; World Wars</h3>
+        <ul>
+          <li><strong>~1760–1850</strong> — <strong>Industrial Revolution</strong> (Britain, then global): steam engines, factories, railroads. Urbanization. Life expectancy doubles in industrialized nations over 150 years.</li>
+          <li><strong>1860s</strong> — Germ theory of disease (Pasteur, Lister). Sanitation and vaccines begin eliminating ancient killers. Perhaps the single greatest improvement in human wellbeing.</li>
+          <li><strong>1876–1905</strong> — Electricity (Edison, Tesla), telephone (Bell), automobiles (Benz), radio (Marconi), flight (Wright brothers). Modern infrastructure is born.</li>
+          <li><strong>1914–1918</strong> — <strong>World War I</strong>: 20M dead. Machine guns, poison gas, trench warfare. Old empires collapse (Ottoman, Austro-Hungarian, Russian, German).</li>
+          <li><strong>1918–1919</strong> — <strong>Spanish Flu</strong> pandemic: 50–100M dead worldwide — more than WWI.</li>
+          <li><strong>1929–1939</strong> — Great Depression: global financial system collapse. Mass unemployment. Rise of fascism in Europe.</li>
+          <li><strong>1939–1945</strong> — <strong>World War II</strong>: 70–85M dead. Holocaust. Nuclear weapons deployed. The most destructive event in human history.</li>
+        </ul>
+        <span class="ht-lesson">Survival lesson: germ theory and sanitation — not medicine or surgery — saved the most lives. Clean water and waste separation remain the highest-value health interventions without modern infrastructure.</span>
+      </div>
+
+      <div class="ht-era era-now">
+        <div class="ht-date">1945 – PRESENT · MODERN ERA</div>
+        <h3>The Long Peace, Globalization &amp; New Threats</h3>
+        <ul>
+          <li><strong>1945–1991</strong> — Cold War: US and USSR nuclear standoff. Decolonization of Asia and Africa. Space race (Sputnik 1957; Moon landing 1969).</li>
+          <li><strong>1950s–1970s</strong> — <strong>Green Revolution</strong>: high-yield crops, fertilizers, and irrigation triple global food output. Famine largely eliminated in much of the world — but dependence on industrial inputs created.</li>
+          <li><strong>1960s–1980s</strong> — Vaccines eliminate smallpox (1980), near-eliminate polio. Global child mortality falls by 80%.</li>
+          <li><strong>1991</strong> — Soviet Union dissolves. Brief "unipolar moment." Global trade and travel accelerate.</li>
+          <li><strong>1990s–2000s</strong> — Internet connects the world. Global information infrastructure creates unprecedented knowledge access — and unprecedented fragility.</li>
+          <li><strong>2000s–present</strong> — Climate change, antibiotic resistance, pandemic risk, and geopolitical fragmentation emerge as systemic threats. The era of infinite growth assumptions is ending.</li>
+          <li><strong>8 billion humans</strong> depend on global supply chains, industrial agriculture, and electronic infrastructure that didn't exist 80 years ago.</li>
+        </ul>
+        <span class="ht-lesson" style="border-color:var(--red);color:var(--text-2)">Survival lesson: modernity solved ancient problems by creating systemic dependencies. Understanding what came before modernity is the foundation for rebuilding if those systems fail.</span>
+      </div>
+
+    </div>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">📚</span>
+      <div class="callout-content">
+        <strong>Go Deeper</strong>
+        <p><em>The Story of Mankind</em> (van Loon, 1921) covers all of the above in vivid narrative form — bundled in this guide's PDF library. For the forces behind why civilizations rose and fell, see <em>Guns, Germs, and Steel</em> (Jared Diamond) and <em>The Collapse of Complex Societies</em> (Joseph Tainter) in the Essential Reading List below.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- =================== PRESERVE =================== -->
   <section id="preserve">
-    <h2>1. Preserving Books &amp; Documents</h2>
+    <h2>2. Preserving Books &amp; Documents</h2>
 
     <p>Paper is fragile. Enemies are: moisture, light, insects, fire, physical damage, and acid degradation. Books that aren't protected will be unreadable within decades.</p>
 
@@ -96,7 +237,7 @@
 
   <!-- =================== READING LIST =================== -->
   <section id="reading-list">
-    <h2>2. Essential Reading List</h2>
+    <h2>3. Essential Reading List</h2>
 
     <p>These books represent the minimum library for a community attempting to rebuild or sustain civilization. Prioritize acquiring these before a crisis. Project Gutenberg and the Internet Archive contain free, offline-downloadable versions of many pre-1928 titles.</p>
 
@@ -160,6 +301,7 @@
       <table>
         <thead><tr><th>Title</th><th>Why Essential</th></tr></thead>
         <tbody>
+          <tr><td><strong>The Story of Mankind</strong> (Hendrik Willem van Loon, 1921) <span style="font-size:.7rem;background:var(--bg-3);color:var(--amber);border:1px solid var(--amber-dim);border-radius:3px;padding:1px 5px;margin-left:.3rem">FREE · gutenberg.org/ebooks/754</span></td><td>First Newbery Medal winner. Readable, beautifully written narrative of all human history from Stone Age to WWI. Public domain. The best single-volume introduction to civilization for any age.</td></tr>
           <tr><td>Guns, Germs, and Steel (Jared Diamond)</td><td>Why civilizations developed the way they did. Understanding the forces shaping societies.</td></tr>
           <tr><td>The Collapse of Complex Societies (Joseph Tainter)</td><td>Analysis of historical collapses. What causes societies to fail and what allows some to survive.</td></tr>
           <tr><td>Man's Search for Meaning (Viktor Frankl)</td><td>Survival under extreme conditions. Finding purpose and maintaining sanity. Essential psychological resource.</td></tr>
@@ -185,7 +327,7 @@
 
   <!-- =================== LIBRARY =================== -->
   <section id="library">
-    <h2>3. Community Library Setup</h2>
+    <h2>4. Community Library Setup</h2>
 
     <h3>Organization</h3>
     <ul>
@@ -212,7 +354,7 @@
 
   <!-- =================== TEACHING =================== -->
   <section id="teaching">
-    <h2>4. Teaching &amp; Apprenticeship Systems</h2>
+    <h2>5. Teaching &amp; Apprenticeship Systems</h2>
 
     <p>Books transmit knowledge. People transmit skills. The difference matters — reading about suturing a wound is not the same as having sutured a wound under supervision. For skills that require physical practice, apprenticeship (learning by doing alongside an expert) is irreplaceable.</p>
 
@@ -255,7 +397,7 @@
 
   <!-- =================== RECORDS =================== -->
   <section id="records">
-    <h2>5. Record Keeping Without Computers</h2>
+    <h2>6. Record Keeping Without Computers</h2>
 
     <p>In a post-grid society, maintaining records of births, deaths, property, agreements, inventories, and accounts becomes a community function. Without records, property disputes multiply, agreements are forgotten, and community history is lost.</p>
 
@@ -297,7 +439,7 @@
 
   <!-- =================== DIGITAL =================== -->
   <section id="digital">
-    <h2>6. Archiving Digital Data Offline</h2>
+    <h2>7. Archiving Digital Data Offline</h2>
 
     <h3>Why Digital Archiving Matters</h3>
     <p>Digital data — Wikipedia, technical manuals, medical databases, maps, this survival guide — contains more practical knowledge than could fit in any physical library. The challenge: digital storage requires powered devices to read it. A USB drive is useless without a working computer.</p>
@@ -338,7 +480,7 @@
 
   <!-- =================== CHILDREN =================== -->
   <section id="children">
-    <h2>7. Essential Skills to Teach Children</h2>
+    <h2>8. Essential Skills to Teach Children</h2>
 
     <p>Children are survivors. They adapt rapidly, learn without the resistance adults often show, and will carry skills and values into the next generation. Teaching children useful skills is one of the highest-return investments a community can make.</p>
 
