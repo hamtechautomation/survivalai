@@ -95,7 +95,8 @@ const Librarian = (() => {
     pdfLoading = true;
     try {
       onProgress?.('Fetching PDF index...');
-      const r = await fetch('search/pdf-chunks.json');
+      const inSub = window.location.pathname.match(/\/(sections|pdfs)\//);
+      const r = await fetch((inSub ? '../' : '') + 'search/pdf-chunks.json');
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       onProgress?.('Parsing index...');
       const data = await r.json();

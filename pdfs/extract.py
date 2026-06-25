@@ -15,25 +15,42 @@ Each chunk: {"s": "source title", "p": page_number, "t": "text content"}
 
 import os, sys, json, re, textwrap
 
-# ── Dependency check ──────────────────────────────────────────────────────────
-try:
-    import pypdf as _pdf_lib
+# ── Dependency check — auto-install if missing ────────────────────────────────
+def _try_import():
+    try:
+        import pypdf as lib
+        return lib, 'pypdf'
+    except ImportError:
+        pass
+    try:
+        import PyPDF2 as lib
+        return lib, 'PyPDF2'
+    except ImportError:
+        pass
+    return None, None
+
+_pdf_lib, _lib_name = _try_import()
+
+if _pdf_lib is None:
+    print("pypdf not found — installing automatically...")
+    import subprocess
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pypdf', '-q'])
+    _pdf_lib, _lib_name = _try_import()
+    if _pdf_lib is None:
+        print("ERROR: Could not install pypdf. Run:  pip3 install pypdf")
+        sys.exit(1)
+
+print(f"Using: {_lib_name}")
+
+if _lib_name == 'pypdf':
     def extract_pages(path):
         reader = _pdf_lib.PdfReader(path, strict=False)
         return [p.extract_text() or '' for p in reader.pages]
-    print("Using: pypdf")
-except ImportError:
-    try:
-        import PyPDF2 as _pdf_lib
-        def extract_pages(path):
-            with open(path, 'rb') as f:
-                reader = _pdf_lib.PdfReader(f, strict=False)
-                return [p.extract_text() or '' for p in reader.pages]
-        print("Using: PyPDF2")
-    except ImportError:
-        print("ERROR: No PDF library found.")
-        print("Install one:  pip3 install pypdf")
-        sys.exit(1)
+else:
+    def extract_pages(path):
+        with open(path, 'rb') as f:
+            reader = _pdf_lib.PdfReader(f, strict=False)
+            return [p.extract_text() or '' for p in reader.pages]
 
 # ── Config ────────────────────────────────────────────────────────────────────
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

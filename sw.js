@@ -1,5 +1,5 @@
-/* The Last Light Survival Guide — Service Worker v3 */
-const CACHE = 'last-light-v3';
+/* The Last Light Survival Guide — Service Worker v4 */
+const CACHE = 'last-light-v6';
 
 /* Pre-cache: all HTML, CSS, JS, icons, manifest.
    pdf-chunks.json (5.7MB) is intentionally excluded from pre-cache to avoid
@@ -35,12 +35,20 @@ const PRECACHE = [
   '/sections/chemistry.html',
   '/sections/textiles.html',
   '/sections/vehicles.html',
+  '/sections/build-power.html',
+  '/sections/build-structures.html',
+  '/sections/medicine-making.html',
+  '/sections/build-water.html',
   '/assets/css/style.css',
+  '/skills.html',
   '/assets/js/app.js',
   '/assets/js/search.js',
   '/assets/js/bunker-bot.js',
   '/assets/js/librarian.js',
   '/assets/js/tools.js',
+  '/assets/js/shared-progress.js',
+  '/assets/js/skills-data.js',
+  '/assets/js/skills.js',
   '/search/search-index.json',
   '/manifest.json',
   '/assets/icons/icon.svg',
@@ -72,8 +80,11 @@ self.addEventListener('fetch', event => {
 
   const url = new URL(event.request.url);
 
-  /* Skip SW entirely for actual PDF files — serve direct, avoid storage pressure */
-  if (url.pathname.match(/\/pdfs\/.+\.pdf$/)) return;
+  /* PDF files — not pre-cached, but serve from cache if the user manually saved one offline */
+  if (url.pathname.match(/\/pdfs\/.+\.pdf$/)) {
+    event.respondWith(cacheFirst(event.request));
+    return;
+  }
 
   /* pdf-chunks.json is 5.7MB — network-first, cache on demand only */
   if (url.pathname.endsWith('pdf-chunks.json')) {

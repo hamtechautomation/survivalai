@@ -124,9 +124,12 @@ body {
   color: var(--amber);
 }
 .logo-icon {
-  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: logo-glow 4s ease-in-out infinite;
 }
+.logo-icon svg { width: 22px; height: 22px; display: block; }
 .logo-text {
   font-size: 1.05rem;
   font-weight: 700;
@@ -252,7 +255,8 @@ body {
   animation: nav-scan 3.5s ease-in-out infinite;
   pointer-events: none;
 }
-.nav-item .nav-icon { font-size: 1rem; width: 1.2rem; text-align: center; }
+.nav-item .nav-icon { width: 1.25rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nav-item .nav-icon svg { width: 15px; height: 15px; display: block; }
 .nav-item .nav-badge {
   margin-left: auto;
   font-size: 0.65rem;
@@ -724,6 +728,7 @@ td:first-child { color: var(--text-0); font-weight: 600; }
 
 .btn-sm { padding: 0.3rem 0.75rem; font-size: 0.78rem; }
 .btn-full { width: 100%; justify-content: center; }
+.btn svg { width: 14px; height: 14px; flex-shrink: 0; display: block; }
 
 .btn-icon {
   background: none;
@@ -782,6 +787,7 @@ td:first-child { color: var(--text-0); font-weight: 600; }
   justify-content: center;
   font-size: 1rem;
 }
+.aria-avatar svg { width: 1.1rem; height: 1.1rem; display: block; color: var(--bg-0); }
 .aria-title-text { line-height: 1.2; }
 .aria-title-text strong { font-size: 0.95rem; color: var(--amber-light); display: block; }
 .aria-title-text small { font-size: 0.68rem; color: var(--text-3); }
@@ -1052,6 +1058,83 @@ td:first-child { color: var(--text-0); font-weight: 600; }
 .badge-success { background: var(--green-dim); color: #77dd99; }
 .badge-info { background: var(--blue-dim); color: #88bbee; }
 .badge-amber { background: var(--amber-dim); color: var(--amber-light); }
+
+/* Skill level tags */
+.skill-tag {
+  display: inline-flex; align-items: center;
+  padding: 2px 9px; border-radius: 999px;
+  font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em;
+  margin-right: 4px;
+}
+.skill-beginner     { background: var(--green-dim);  color: #77dd99; }
+.skill-intermediate { background: var(--amber-dim);  color: var(--amber-light); }
+.skill-advanced     { background: var(--red-dim);    color: #ff9999; }
+
+/* Timeline tags */
+.timeline-tag {
+  display: inline-flex; align-items: center;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 0.68rem; font-family: var(--mono);
+  font-weight: 600; border: 1px solid;
+  margin-right: 3px;
+}
+.tag-72hr   { color: var(--red);       border-color: var(--red-dim);    background: rgba(192,57,43,.1); }
+.tag-2week  { color: var(--orange);    border-color: var(--orange-dim); background: rgba(204,120,50,.1); }
+.tag-3month { color: var(--amber);     border-color: var(--amber-dim);  background: rgba(201,169,78,.1); }
+.tag-1year  { color: var(--green);     border-color: var(--green-dim);  background: rgba(39,174,96,.1); }
+.tag-5year  { color: var(--blue);      border-color: var(--blue-dim);   background: rgba(74,128,181,.1); }
+
+/* Climate zone tags */
+.climate-tag {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px; border-radius: 4px;
+  font-size: 0.67rem; color: var(--text-2);
+  background: var(--bg-4); border: 1px solid var(--border);
+  margin-right: 3px;
+}
+
+/* SVG technical diagram wrapper */
+.svg-diagram {
+  background: var(--bg-1);
+  border: 1px solid var(--border-hi);
+  border-radius: 8px;
+  margin: var(--sp-lg) 0;
+  overflow: hidden;
+}
+.svg-diagram svg { display: block; width: 100%; height: auto; }
+.svg-diagram figcaption {
+  font-size: 0.75rem; color: var(--text-2);
+  padding: .4rem var(--sp-md);
+  border-top: 1px solid var(--border);
+  font-style: italic;
+}
+
+/* Section tag row (skill + timeline + climate together) */
+.section-tags { display: flex; flex-wrap: wrap; gap: .3rem; margin: var(--sp-sm) 0 var(--sp-md); }
+
+/* Quick-reference print card */
+.print-card {
+  background: var(--bg-3);
+  border: 2px solid var(--amber-dim);
+  border-radius: 8px;
+  padding: var(--sp-lg);
+  margin: var(--sp-xl) 0;
+  page-break-inside: avoid;
+}
+.print-card h3 {
+  color: var(--amber);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: var(--sp-md);
+  border-bottom: 1px solid var(--amber-dim);
+  padding-bottom: .4rem;
+}
+@media print {
+  .print-card { border-color: #000; background: #fff; color: #000; }
+  .print-card h3 { color: #000; border-color: #000; }
+}
 
 /* Two column layout within content */
 .col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-xl); }

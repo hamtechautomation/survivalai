@@ -6,30 +6,94 @@
 (function () {
   'use strict';
 
+  /* =================== ICON SET =================== */
+  /* Compact inline SVG icons — stroke-based, currentColor, 24×24 viewbox */
+  const ICONS = {
+    // Navigation
+    home:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L12 3l9 9"/><path d="M5 10v9h5v-5h4v5h5v-9"/></svg>`,
+    water:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 7 5 11 5 15a7 7 0 0014 0c0-4-4-8-7-13z"/></svg>`,
+    medical:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v5h5v8h-5v5H8v-5H3V8h5z"/></svg>`,
+    energy:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>`,
+    shelter:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M12 4L2 20M12 4l10 16M9 20l3-6 3 6"/></svg>`,
+    comms:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="9" x2="12" y2="18"/><path d="M9 12a4 4 0 006 0"/><path d="M6 9a8 8 0 0012 0"/><path d="M3 6a12 12 0 0018 0"/></svg>`,
+    compass:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="16.24,7.76 13.12,13.12 7.76,16.24 10.88,10.88"/></svg>`,
+    shield:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 6v6c0 5.5 3.9 10.7 9 12 5.1-1.3 9-6.5 9-12V6z"/></svg>`,
+    book:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 012-2h12v14H6a2 2 0 000 4h12v-2"/></svg>`,
+    leaf:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V11"/><path d="M12 11C12 6 8 2 3 3c0 5 3 8 9 8z"/><path d="M12 11c0-5 4-8 9-8-1 5-4 8-9 8z"/></svg>`,
+    paw:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="6.5" r="2"/><circle cx="18.5" cy="6.5" r="2"/><circle cx="9.5" cy="4.5" r="2"/><circle cx="14.5" cy="4.5" r="2"/><path d="M12 19c-4 0-7-3-7-5 0-1.5 1.5-2.5 3-1l4 3.5 4-3.5c1.5-1.5 3-.5 3 1 0 2-3 5-7 5z"/></svg>`,
+    nbc:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><path d="M12 9.5V4M14.2 10.7l4.6-2.7M14.2 13.3l4.6 2.7M12 14.5V20M9.8 13.3l-4.6 2.7M9.8 10.7L5.2 8"/></svg>`,
+    tornado:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 4h14M7 8h10M9 12h6M11 16h2M12 20v-4"/></svg>`,
+    globe:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2 3-3 6-3 9s1 6 3 9M12 3c2 3 3 6 3 9s-1 6-3 9"/><path d="M3 12h18"/></svg>`,
+    hammer:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L4 16l2 2L17 7z"/><path d="M15 5l3-3 4 4-3 3z"/><path d="M6 18l-3 3"/></svg>`,
+    columns:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M2 20h20"/><path d="M4 20V9M8 20V9M12 20V9M16 20V9M20 20V9"/><path d="M2 9h20M2 6l10-4 10 4"/></svg>`,
+    brain:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A4 4 0 005 6c0 .9.3 1.8.7 2.5A4 4 0 003 12a4 4 0 003.3 3.9A3.5 3.5 0 0010 19h4a3.5 3.5 0 003.7-3.1A4 4 0 0021 12a4 4 0 00-2.7-3.5c.4-.7.7-1.6.7-2.5a4 4 0 00-4.5-4"/></svg>`,
+    flask:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M9 3v7L4 20h16L15 10V3"/><path d="M7 14h10"/></svg>`,
+    scissors: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>`,
+    wheel:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg>`,
+    gear:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>`,
+    building: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V8l8-6 8 6v12"/><path d="M9 20v-5h6v5"/></svg>`,
+    mortar:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16l-2 9H6l-2-9z"/><path d="M12 5v6"/><path d="M9 7h6"/><path d="M2 20h20"/></svg>`,
+    tap:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8H3a1 1 0 000 2h1v3a3 3 0 006 0v-3h1V8z"/><path d="M14 10h2a3 3 0 013 3v5"/><path d="M21 18H17"/><path d="M7 3v5"/></svg>`,
+    target:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>`,
+    wrench:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.77 3.77z"/></svg>`,
+    books:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h4V4H4zM10 4v16h4V4h-4z"/><path d="M17 6l3.5 14M17 6l3 1"/></svg>`,
+    // UI
+    print:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M9 18v4h6v-4H9z"/></svg>`,
+    robot:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M8 10V8a4 4 0 018 0v2"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><path d="M9 19h6"/><line x1="12" y1="3" x2="12" y2="5"/></svg>`,
+    alert:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+    clipboard:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><path d="M9 5a2 2 0 002 2h2a2 2 0 002-2 2 2 0 00-2-2h-2a2 2 0 00-2 2z"/><polyline points="9 12 11 14 15 10"/></svg>`,
+    save:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>`,
+    file:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`,
+    changelog:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>`,
+    // Skills categories
+    fire:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 7 6 10 6 14a6 6 0 0012 0c0-4-3-7-6-12z"/><path d="M10 18a2 2 0 004 0c0-2-2-4-2-4s-2 2-2 4z"/></svg>`,
+    knot:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M8 4c0 0-2 4 1 7s5 7 1 11M16 4c0 0 2 4-1 7s-5 7-1 11M8 20c2-1 6-1 8 0M8 4c2 1 6 1 8 0"/></svg>`,
+    firstaid: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12h6M12 9v6"/></svg>`,
+    hunting:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="3" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="3" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="21" y2="12"/><circle cx="12" cy="12" r="3"/></svg>`,
+    axe:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="15" y2="9"/><path d="M12 6L6 12l4 4 6-6-1-1"/><path d="M15 9l3-3 3 3-3 3z"/></svg>`,
+    grid4:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>`,
+    // Misc UI
+    bag:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>`,
+    box:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+    wallet:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 12h.01M2 10h20"/></svg>`,
+    food:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="2" x2="8" y2="12"/><path d="M5 2v10c0 2.2 1.3 4 3 4s3-1.8 3-4V2"/><path d="M16 2a5 5 0 015 5v15"/><path d="M16 9h5"/></svg>`,
+    pill:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5L3.5 13.5a5 5 0 017-7l7 7a5 5 0 01-7 7z"/><line x1="8.5" y1="11.5" x2="14" y2="17"/></svg>`,
+    solar:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>`,
+    car:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V9a2 2 0 012-2h1l2-4h10l2 4h1a2 2 0 012 2v6a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>`,
+    radio:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="12" rx="2"/><path d="M2 15h20M7 12h.01M17 13h2M17 17h2M4 9L12 3l8 6"/></svg>`,
+    calendar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+  };
+  window.ICONS = ICONS;
+
   /* =================== CONSTANTS =================== */
   const NAV_PAGES = [
-    { id: 'home',           href: 'index.html',                    icon: '🏠', label: 'Home' },
-    { id: 'food',           href: 'sections/food.html',            icon: '💧', label: 'Food & Water' },
-    { id: 'medical',        href: 'sections/medical.html',         icon: '🏥', label: 'Medical & First Aid' },
-    { id: 'energy',         href: 'sections/energy.html',          icon: '⚡', label: 'Energy' },
-    { id: 'shelter',        href: 'sections/shelter.html',         icon: '🏕️', label: 'Shelter & Construction' },
-    { id: 'communications', href: 'sections/communications.html',  icon: '📻', label: 'Communications' },
-    { id: 'navigation',     href: 'sections/navigation.html',      icon: '🧭', label: 'Navigation & Maps' },
-    { id: 'security',       href: 'sections/security.html',        icon: '🛡️', label: 'Security & Defense' },
-    { id: 'knowledge',      href: 'sections/knowledge.html',       icon: '📚', label: 'Knowledge & Literacy' },
-    { id: 'agriculture',    href: 'sections/agriculture.html',     icon: '🌱', label: 'Agriculture' },
-    { id: 'animal',         href: 'sections/animal.html',          icon: '🐄', label: 'Animal Husbandry' },
-    { id: 'nbc',            href: 'sections/nbc.html',             icon: '☢️', label: 'NBC / EMP Threats' },
-    { id: 'disasters',      href: 'sections/disasters.html',       icon: '🌪️', label: 'Disaster Playbooks' },
-    { id: 'climate',        href: 'sections/climate.html',         icon: '🌍', label: 'Climate & Regional' },
-    { id: 'metallurgy',     href: 'sections/metallurgy.html',      icon: '⚒️', label: 'Metallurgy' },
-    { id: 'governance',     href: 'sections/governance.html',      icon: '🏛️', label: 'Governance' },
-    { id: 'psychology',     href: 'sections/psychology.html',      icon: '🧠', label: 'Psychology & Morale' },
-    { id: 'chemistry',      href: 'sections/chemistry.html',       icon: '🧪', label: 'Chemistry & Materials' },
-    { id: 'textiles',       href: 'sections/textiles.html',        icon: '🧵', label: 'Textiles & Clothing' },
-    { id: 'vehicles',       href: 'sections/vehicles.html',        icon: '🚗', label: 'Vehicles & Transport' },
-    { id: 'tools',          href: 'tools.html',                    icon: '🔧', label: 'Calculators & Tools' },
-    { id: 'literature',     href: 'literature.html',               icon: '📚', label: 'Reference Library' },
+    { id: 'home',             href: 'index.html',                      icon: ICONS.home,     label: 'Home' },
+    { id: 'food',             href: 'sections/food.html',              icon: ICONS.water,    label: 'Food & Water' },
+    { id: 'medical',          href: 'sections/medical.html',           icon: ICONS.medical,  label: 'Medical & First Aid' },
+    { id: 'energy',           href: 'sections/energy.html',            icon: ICONS.energy,   label: 'Energy' },
+    { id: 'shelter',          href: 'sections/shelter.html',           icon: ICONS.shelter,  label: 'Shelter & Construction' },
+    { id: 'communications',   href: 'sections/communications.html',    icon: ICONS.comms,    label: 'Communications' },
+    { id: 'navigation',       href: 'sections/navigation.html',        icon: ICONS.compass,  label: 'Navigation & Maps' },
+    { id: 'security',         href: 'sections/security.html',          icon: ICONS.shield,   label: 'Security & Defense' },
+    { id: 'knowledge',        href: 'sections/knowledge.html',         icon: ICONS.book,     label: 'Knowledge & Literacy' },
+    { id: 'agriculture',      href: 'sections/agriculture.html',       icon: ICONS.leaf,     label: 'Agriculture' },
+    { id: 'animal',           href: 'sections/animal.html',            icon: ICONS.paw,      label: 'Animal Husbandry' },
+    { id: 'nbc',              href: 'sections/nbc.html',               icon: ICONS.nbc,      label: 'NBC / EMP Threats' },
+    { id: 'disasters',        href: 'sections/disasters.html',         icon: ICONS.tornado,  label: 'Disaster Playbooks' },
+    { id: 'climate',          href: 'sections/climate.html',           icon: ICONS.globe,    label: 'Climate & Regional' },
+    { id: 'metallurgy',       href: 'sections/metallurgy.html',        icon: ICONS.hammer,   label: 'Metallurgy' },
+    { id: 'governance',       href: 'sections/governance.html',        icon: ICONS.columns,  label: 'Governance' },
+    { id: 'psychology',       href: 'sections/psychology.html',        icon: ICONS.brain,    label: 'Psychology & Morale' },
+    { id: 'chemistry',        href: 'sections/chemistry.html',         icon: ICONS.flask,    label: 'Chemistry & Materials' },
+    { id: 'textiles',         href: 'sections/textiles.html',          icon: ICONS.scissors, label: 'Textiles & Clothing' },
+    { id: 'vehicles',         href: 'sections/vehicles.html',          icon: ICONS.wheel,    label: 'Vehicles & Transport' },
+    { id: 'build-power',      href: 'sections/build-power.html',       icon: ICONS.gear,     label: 'Power Generation' },
+    { id: 'build-structures', href: 'sections/build-structures.html',  icon: ICONS.building, label: 'Building & Structures' },
+    { id: 'medicine-making',  href: 'sections/medicine-making.html',   icon: ICONS.mortar,   label: 'Medicine Making' },
+    { id: 'build-water',      href: 'sections/build-water.html',       icon: ICONS.tap,      label: 'Water Systems' },
+    { id: 'skills',           href: 'skills.html',                     icon: ICONS.target,   label: 'Practical Skills' },
+    { id: 'tools',            href: 'tools.html',                      icon: ICONS.wrench,   label: 'Calculators & Tools' },
+    { id: 'literature',       href: 'literature.html',                 icon: ICONS.books,    label: 'Reference Library' },
   ];
 
   /* =================== INIT =================== */
@@ -117,7 +181,7 @@
     const headerHTML = `
       <div class="sidebar-header">
         <a href="${base}index.html" class="logo-link">
-          <span class="logo-icon">⚡</span>
+          <span class="logo-icon">${ICONS.energy}</span>
           <span class="logo-text-block">
             <span class="logo-text">Last Light</span>
             <span class="logo-sub">Survival Guide</span>
@@ -140,10 +204,10 @@
 
     const footerHTML = `
       <div class="sidebar-footer">
-        <a href="${base}quick-reference.html" class="btn btn-danger btn-full">🚨 Emergency Card</a>
-        <a href="${base}gear.html" class="btn btn-outline btn-full">📦 Gear Checklist</a>
-        <a href="${base}ai-setup.html" class="btn btn-ghost btn-full">🤖 Bunker Bot</a>
-        <a href="${base}changelog.html" class="btn btn-ghost btn-full" style="opacity:.6;font-size:.75rem">📋 Changelog</a>
+        <a href="${base}quick-reference.html" class="btn btn-danger btn-full">${ICONS.alert} Emergency Card</a>
+        <a href="${base}gear.html" class="btn btn-outline btn-full">${ICONS.clipboard} Gear Checklist</a>
+        <a href="${base}ai-setup.html" class="btn btn-ghost btn-full">${ICONS.robot} Bunker Bot</a>
+        <a href="${base}changelog.html" class="btn btn-ghost btn-full" style="opacity:.6;font-size:.75rem">${ICONS.changelog} Changelog</a>
         <div class="sidebar-live-indicator">
           <span class="sidebar-live-dot"></span>
           <span class="sidebar-live-label">Guide loaded · offline ready</span>
@@ -410,7 +474,7 @@
 
       if (isIOS) {
         banner.innerHTML = `
-          <span class="ib-icon">⚡</span>
+          <span class="ib-icon">${ICONS.energy}</span>
           <div class="ib-text">
             <strong>Install Last Light</strong>
             <small>Tap <strong>Share ↑</strong> then <strong>Add to Home Screen</strong></small>
@@ -418,7 +482,7 @@
           <button class="ib-dismiss" aria-label="Dismiss">✕</button>`;
       } else {
         banner.innerHTML = `
-          <span class="ib-icon">⚡</span>
+          <span class="ib-icon">${ICONS.energy}</span>
           <div class="ib-text">
             <strong>Install Last Light</strong>
             <small>Works fully offline — no app store needed</small>

@@ -22,11 +22,13 @@
       padding: var(--sp-2xl) 0 var(--sp-xl);
     }
     .hero-dashboard .hero-icon {
-      font-size: 3rem;
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: var(--sp-md);
       filter: drop-shadow(0 0 24px rgba(201,169,78,0.4));
     }
+    .hero-dashboard .hero-icon svg { width: 3rem; height: 3rem; color: var(--amber); }
     .hero-dashboard h1 {
       font-size: clamp(1.8rem, 5vw, 2.8rem);
       font-weight: 800;
@@ -124,7 +126,8 @@
     .readiness-card.rc-amber { --rc-color: #c9a94e; }
     .readiness-card.rc-red   { --rc-color: #c84848; }
     .readiness-card.rc-gray  { --rc-color: var(--border-hi); }
-    .rc-icon { font-size: 1.4rem; margin-bottom: var(--sp-sm); display: block; }
+    .rc-icon { margin-bottom: var(--sp-sm); display: flex; }
+    .rc-icon svg { width: 22px; height: 22px; display: block; color: var(--text-2); }
     .rc-label {
       font-size: 0.72rem;
       text-transform: uppercase;
@@ -185,7 +188,8 @@
       gap: var(--sp-sm);
       margin-bottom: 2px;
     }
-    .qa-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+    .qa-icon { display: flex; align-items: flex-start; flex-shrink: 0; padding-top: 2px; }
+    .qa-icon svg { width: 18px; height: 18px; display: block; }
     .qa-title {
       font-weight: 700;
       font-size: 0.92rem;
@@ -289,7 +293,8 @@
       border-radius: 4px;
       padding: 1px 5px;
     }
-    .sg-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1.4; }
+    .sg-icon { display: flex; align-items: center; flex-shrink: 0; }
+    .sg-icon svg { width: 20px; height: 20px; display: block; }
     .sg-body { flex: 1; min-width: 0; }
     .sg-title {
       font-size: 0.88rem;
@@ -336,7 +341,8 @@
       background: var(--bg-3);
       border-color: var(--border-hi);
     }
-    .tool-chip-icon { font-size: 1rem; flex-shrink: 0; }
+    .tool-chip-icon { display: flex; flex-shrink: 0; }
+    .tool-chip-icon svg { width: 15px; height: 15px; display: block; }
     .tool-chip-name {
       font-size: 0.78rem;
       color: var(--text-1);
@@ -376,7 +382,8 @@
       background: var(--bg-3);
       border-color: var(--border-hi);
     }
-    .bl-icon { font-size: 1.8rem; }
+    .bl-icon { display: flex; justify-content: center; }
+    .bl-icon svg { width: 28px; height: 28px; display: block; }
     .bl-title {
       font-size: 0.85rem;
       font-weight: 700;
@@ -446,8 +453,8 @@
     <span class="page-title">The Last Light Survival Guide</span>
   </div>
   <div class="header-actions">
-    <button onclick="window.print()" class="btn btn-sm btn-outline" title="Print to PDF">🖨️ Print</button>
-    <button id="aria-toggle" class="btn btn-sm btn-primary" title="Open Bunker Bot — Offline AI Assistant">🤖 Bunker Bot</button>
+    <button onclick="window.print()" class="btn btn-sm btn-outline" title="Print to PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M9 18v4h6v-4H9z"/></svg> Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary" title="Open Bunker Bot — Offline AI Assistant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M8 10V8a4 4 0 018 0v2"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><path d="M9 19h6"/><line x1="12" y1="3" x2="12" y2="5"/></svg> Bunker Bot</button>
   </div>
 </header>
 
@@ -457,20 +464,20 @@
 
     <!-- ── HERO ── -->
     <section class="hero-dashboard">
-      <span class="hero-icon">⚡</span>
+      <span class="hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span>
       <h1>The Last Light<br>Survival Guide</h1>
       <p class="hero-subtitle">The complete offline emergency preparedness reference</p>
       <div class="hero-stats">
-        <span class="hero-stat">📚 20 sections</span>
-        <span class="hero-stat">📄 14 bundled PDFs</span>
-        <span class="hero-stat">🤖 AI-powered</span>
-        <span class="hero-stat">⚡ Works offline</span>
+        <span class="hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:inline;width:12px;height:12px;vertical-align:middle;margin-right:3px"><path d="M4 19V5a2 2 0 012-2h12v14H6a2 2 0 000 4h12v-2"/></svg>24 sections</span>
+        <span class="hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:inline;width:12px;height:12px;vertical-align:middle;margin-right:3px"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>14 bundled PDFs</span>
+        <span class="hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:inline;width:12px;height:12px;vertical-align:middle;margin-right:3px"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M8 10V8a4 4 0 018 0v2"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/></svg>AI-powered</span>
+        <span class="hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:inline;width:12px;height:12px;vertical-align:middle;margin-right:3px"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Works offline</span>
       </div>
       <span class="hero-version">v1.0.0 · June 2026</span>
       <div class="hero-actions">
-        <a href="quick-reference.html" class="btn btn-danger">🚨 Emergency Card</a>
+        <a href="quick-reference.html" class="btn btn-danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Emergency Card</a>
         <a href="sections/food.html" class="btn btn-primary">Start Reading →</a>
-        <a href="ai-setup.html" class="btn btn-outline">🤖 Setup Bunker Bot</a>
+        <a href="ai-setup.html" class="btn btn-outline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M8 10V8a4 4 0 018 0v2"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><path d="M9 19h6"/><line x1="12" y1="3" x2="12" y2="5"/></svg> Setup Bunker Bot</a>
       </div>
     </section>
 
@@ -483,19 +490,19 @@
 
       <div class="readiness-grid">
         <a href="gear.html" class="readiness-card rc-gray" id="rc-gear">
-          <span class="rc-icon">🎒</span>
+          <span class="rc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>
           <div class="rc-label">Gear Readiness</div>
           <div class="rc-value rc-val-gray" id="rc-gear-value">Not assessed</div>
           <div class="rc-sub" id="rc-gear-sub">Visit Gear Checklist to begin</div>
         </a>
         <a href="tools.html#tool-4" class="readiness-card rc-gray" id="rc-supply">
-          <span class="rc-icon">📦</span>
+          <span class="rc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
           <div class="rc-label">Supply Status</div>
           <div class="rc-value rc-val-gray" id="rc-supply-value">Not assessed</div>
           <div class="rc-sub" id="rc-supply-sub">Visit Supply Tracker to begin</div>
         </a>
         <a href="tools.html#tool-5" class="readiness-card rc-gray" id="rc-skill">
-          <span class="rc-icon">🧠</span>
+          <span class="rc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A4 4 0 005 6c0 .9.3 1.8.7 2.5A4 4 0 003 12a4 4 0 003.3 3.9A3.5 3.5 0 0010 19h4a3.5 3.5 0 003.7-3.1A4 4 0 0021 12a4 4 0 00-2.7-3.5c.4-.7.7-1.6.7-2.5a4 4 0 00-4.5-4"/></svg></span>
           <div class="rc-label">Skill Coverage</div>
           <div class="rc-value rc-val-gray" id="rc-skill-value">Not assessed</div>
           <div class="rc-sub" id="rc-skill-sub">Visit Skill Inventory to begin</div>
@@ -516,7 +523,7 @@
         <div class="qa-card">
           <a href="sections/food.html" class="qa-card-link">
             <div class="qa-icon-title">
-              <span class="qa-icon">💧</span>
+              <span class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 7 5 11 5 15a7 7 0 0014 0c0-4-4-8-7-13z"/></svg></span>
               <div>
                 <div class="qa-subtitle">Water Emergency</div>
                 <div class="qa-title">How to purify water right now</div>
@@ -537,7 +544,7 @@
         <div class="qa-card">
           <a href="sections/medical.html" class="qa-card-link">
             <div class="qa-icon-title">
-              <span class="qa-icon">🏥</span>
+              <span class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v5h5v8h-5v5H8v-5H3V8h5z"/></svg></span>
               <div>
                 <div class="qa-subtitle">Medical Emergency</div>
                 <div class="qa-title">If someone is injured right now</div>
@@ -558,7 +565,7 @@
         <div class="qa-card">
           <a href="sections/communications.html" class="qa-card-link">
             <div class="qa-icon-title">
-              <span class="qa-icon">📻</span>
+              <span class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="12" rx="2"/><path d="M2 15h20M7 12h.01M17 13h2M17 17h2M4 9L12 3l8 6"/></svg></span>
               <div>
                 <div class="qa-subtitle">Radio Frequencies</div>
                 <div class="qa-title">Emergency frequencies right now</div>
@@ -579,7 +586,7 @@
         <div class="qa-card">
           <a href="tools.html#tool-7" class="qa-card-link">
             <div class="qa-icon-title">
-              <span class="qa-icon">🚗</span>
+              <span class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V9a2 2 0 012-2h1l2-4h10l2 4h1a2 2 0 012 2v6a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg></span>
               <div>
                 <div class="qa-subtitle">Stay or Go?</div>
                 <div class="qa-title">Should you leave right now?</div>
@@ -600,7 +607,7 @@
         <div class="qa-card">
           <a href="sections/food.html" class="qa-card-link">
             <div class="qa-icon-title">
-              <span class="qa-icon">🍽️</span>
+              <span class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="2" x2="8" y2="12"/><path d="M5 2v10c0 2.2 1.3 4 3 4s3-1.8 3-4V2"/><path d="M16 2a5 5 0 015 5v15"/><path d="M16 9h5"/></svg></span>
               <div>
                 <div class="qa-subtitle">Emergency Food</div>
                 <div class="qa-title">Immediate calorie sources</div>
@@ -620,7 +627,7 @@
         <!-- Ask Bunker Bot -->
         <div class="qa-card">
           <div class="qa-icon-title">
-            <span class="qa-icon">🤖</span>
+            <span class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M8 10V8a4 4 0 018 0v2"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><path d="M9 19h6"/><line x1="12" y1="3" x2="12" y2="5"/></svg></span>
             <div>
               <div class="qa-subtitle">Ask Bunker Bot</div>
               <div class="qa-title">AI assistant — works offline</div>
@@ -648,7 +655,7 @@
       <div class="sections-grid-layout">
 
         <a href="sections/food.html" class="sg-card start-here">
-          <span class="sg-icon">💧</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 7 5 11 5 15a7 7 0 0014 0c0-4-4-8-7-13z"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Food &amp; Water</div>
             <div class="sg-desc">Safe water, caloric storage, hunting &amp; foraging</div>
@@ -657,7 +664,7 @@
         </a>
 
         <a href="sections/medical.html" class="sg-card start-here">
-          <span class="sg-icon">🏥</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v5h5v8h-5v5H8v-5H3V8h5z"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Medical &amp; First Aid</div>
             <div class="sg-desc">Trauma care, field surgery, herbal medicine</div>
@@ -666,7 +673,7 @@
         </a>
 
         <a href="sections/energy.html" class="sg-card">
-          <span class="sg-icon">⚡</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Energy</div>
             <div class="sg-desc">Solar, wind, generators, and grid independence</div>
@@ -675,7 +682,7 @@
         </a>
 
         <a href="sections/shelter.html" class="sg-card">
-          <span class="sg-icon">🏕️</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M12 4L2 20M12 4l10 16M9 20l3-6 3 6"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Shelter &amp; Construction</div>
             <div class="sg-desc">Debris huts to permanent structures</div>
@@ -684,7 +691,7 @@
         </a>
 
         <a href="sections/communications.html" class="sg-card">
-          <span class="sg-icon">📻</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="9" x2="12" y2="18"/><path d="M9 12a4 4 0 006 0"/><path d="M6 9a8 8 0 0012 0"/><path d="M3 6a12 12 0 0018 0"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Communications</div>
             <div class="sg-desc">HAM radio, Meshtastic, signal protocol</div>
@@ -693,7 +700,7 @@
         </a>
 
         <a href="sections/navigation.html" class="sg-card">
-          <span class="sg-icon">🧭</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="16.24,7.76 13.12,13.12 7.76,16.24 10.88,10.88"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Navigation</div>
             <div class="sg-desc">Maps, celestial navigation, orienteering</div>
@@ -702,7 +709,7 @@
         </a>
 
         <a href="sections/security.html" class="sg-card">
-          <span class="sg-icon">🛡️</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 6v6c0 5.5 3.9 10.7 9 12 5.1-1.3 9-6.5 9-12V6z"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Security &amp; Defense</div>
             <div class="sg-desc">Community security, threat assessment</div>
@@ -711,7 +718,7 @@
         </a>
 
         <a href="sections/knowledge.html" class="sg-card">
-          <span class="sg-icon">📚</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 012-2h12v14H6a2 2 0 000 4h12v-2"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Knowledge &amp; Literacy</div>
             <div class="sg-desc">Preserving and transmitting knowledge</div>
@@ -720,7 +727,7 @@
         </a>
 
         <a href="sections/agriculture.html" class="sg-card">
-          <span class="sg-icon">🌱</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V11"/><path d="M12 11C12 6 8 2 3 3c0 5 3 8 9 8z"/><path d="M12 11c0-5 4-8 9-8-1 5-4 8-9 8z"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Agriculture</div>
             <div class="sg-desc">Soil, planting, crop rotation, seed saving</div>
@@ -729,7 +736,7 @@
         </a>
 
         <a href="sections/animal.html" class="sg-card">
-          <span class="sg-icon">🐄</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="6.5" r="2"/><circle cx="18.5" cy="6.5" r="2"/><circle cx="9.5" cy="4.5" r="2"/><circle cx="14.5" cy="4.5" r="2"/><path d="M12 19c-4 0-7-3-7-5 0-1.5 1.5-2.5 3-1l4 3.5 4-3.5c1.5-1.5 3-.5 3 1 0 2-3 5-7 5z"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Animal Husbandry</div>
             <div class="sg-desc">Chickens, goats, cattle, rabbits</div>
@@ -738,7 +745,7 @@
         </a>
 
         <a href="sections/nbc.html" class="sg-card">
-          <span class="sg-icon">☢️</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><path d="M12 9.5V4M14.2 10.7l4.6-2.7M14.2 13.3l4.6 2.7M12 14.5V20M9.8 13.3l-4.6 2.7M9.8 10.7L5.2 8"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">NBC / EMP Threats</div>
             <div class="sg-desc">Nuclear, biological, chemical, EMP response</div>
@@ -747,7 +754,7 @@
         </a>
 
         <a href="sections/disasters.html" class="sg-card">
-          <span class="sg-icon">🌪️</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 4h14M7 8h10M9 12h6M11 16h2M12 20v-4"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Disaster Playbooks</div>
             <div class="sg-desc">Specific scenarios: earthquake, flood, pandemic</div>
@@ -756,7 +763,7 @@
         </a>
 
         <a href="sections/climate.html" class="sg-card">
-          <span class="sg-icon">🌍</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2 3-3 6-3 9s1 6 3 9M12 3c2 3 3 6 3 9s-1 6-3 9"/><path d="M3 12h18"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Climate &amp; Regional</div>
             <div class="sg-desc">Zone-by-zone survival + UK foraging calendar &amp; wild edibles</div>
@@ -765,7 +772,7 @@
         </a>
 
         <a href="sections/metallurgy.html" class="sg-card">
-          <span class="sg-icon">⚒️</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L4 16l2 2L17 7z"/><path d="M15 5l3-3 4 4-3 3z"/><path d="M6 18l-3 3"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Metallurgy</div>
             <div class="sg-desc">Forge, blacksmithing, casting metal</div>
@@ -774,7 +781,7 @@
         </a>
 
         <a href="sections/governance.html" class="sg-card">
-          <span class="sg-icon">🏛️</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M2 20h20"/><path d="M4 20V9M8 20V9M12 20V9M16 20V9M20 20V9"/><path d="M2 9h20M2 6l10-4 10 4"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Governance</div>
             <div class="sg-desc">Community organization, laws, trade</div>
@@ -783,7 +790,7 @@
         </a>
 
         <a href="sections/psychology.html" class="sg-card">
-          <span class="sg-icon">🧠</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A4 4 0 005 6c0 .9.3 1.8.7 2.5A4 4 0 003 12a4 4 0 003.3 3.9A3.5 3.5 0 0010 19h4a3.5 3.5 0 003.7-3.1A4 4 0 0021 12a4 4 0 00-2.7-3.5c.4-.7.7-1.6.7-2.5a4 4 0 00-4.5-4"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Psychology &amp; Morale</div>
             <div class="sg-desc">Mental health, stress, group dynamics</div>
@@ -792,7 +799,7 @@
         </a>
 
         <a href="sections/chemistry.html" class="sg-card">
-          <span class="sg-icon">🧪</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M9 3v7L4 20h16L15 10V3"/><path d="M7 14h10"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Chemistry &amp; Materials</div>
             <div class="sg-desc">Soap, alcohol, tanning, adhesives</div>
@@ -801,7 +808,7 @@
         </a>
 
         <a href="sections/textiles.html" class="sg-card">
-          <span class="sg-icon">🧵</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Textiles &amp; Clothing</div>
             <div class="sg-desc">Spinning, weaving, sewing, leather</div>
@@ -810,10 +817,46 @@
         </a>
 
         <a href="sections/vehicles.html" class="sg-card">
-          <span class="sg-icon">🚗</span>
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg></span>
           <div class="sg-body">
             <div class="sg-title">Vehicles &amp; Transport</div>
             <div class="sg-desc">Bicycle, engines, wood gas, animals</div>
+          </div>
+          <span class="sg-arrow">→</span>
+        </a>
+
+        <a href="sections/build-power.html" class="sg-card">
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></span>
+          <div class="sg-body">
+            <div class="sg-title">Power Generation</div>
+            <div class="sg-desc">Pedal generators, water wheels, wind, biogas, steam</div>
+          </div>
+          <span class="sg-arrow">→</span>
+        </a>
+
+        <a href="sections/build-structures.html" class="sg-card">
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V8l8-6 8 6v12"/><path d="M9 20v-5h6v5"/></svg></span>
+          <div class="sg-body">
+            <div class="sg-title">Building &amp; Structures</div>
+            <div class="sg-desc">Cob, earthbag, timber frame, defences, site selection</div>
+          </div>
+          <span class="sg-arrow">→</span>
+        </a>
+
+        <a href="sections/medicine-making.html" class="sg-card">
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16l-2 9H6l-2-9z"/><path d="M12 5v6"/><path d="M9 7h6"/><path d="M2 20h20"/></svg></span>
+          <div class="sg-body">
+            <div class="sg-title">Medicine Making</div>
+            <div class="sg-desc">Tinctures, ORS, antiseptics, medicinal plants</div>
+          </div>
+          <span class="sg-arrow">→</span>
+        </a>
+
+        <a href="sections/build-water.html" class="sg-card">
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8H3a1 1 0 000 2h1v3a3 3 0 006 0v-3h1V8z"/><path d="M14 10h2a3 3 0 013 3v5"/><path d="M21 18H17"/><path d="M7 3v5"/></svg></span>
+          <div class="sg-body">
+            <div class="sg-title">Water Systems</div>
+            <div class="sg-desc">Rainwater harvesting, wells, gravity distribution, irrigation</div>
           </div>
           <span class="sg-arrow">→</span>
         </a>
@@ -830,39 +873,39 @@
 
       <div class="tools-row">
         <a href="tools.html#tool-1" class="tool-chip">
-          <span class="tool-chip-icon">🍽️</span>
+          <span class="tool-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="2" x2="8" y2="12"/><path d="M5 2v10c0 2.2 1.3 4 3 4s3-1.8 3-4V2"/><path d="M16 2a5 5 0 015 5v15"/><path d="M16 9h5"/></svg></span>
           <span class="tool-chip-name">Calorie Calc</span>
         </a>
         <a href="tools.html#tool-2" class="tool-chip">
-          <span class="tool-chip-icon">💧</span>
+          <span class="tool-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 7 5 11 5 15a7 7 0 0014 0c0-4-4-8-7-13z"/></svg></span>
           <span class="tool-chip-name">Water Budget</span>
         </a>
         <a href="tools.html#tool-3" class="tool-chip">
-          <span class="tool-chip-icon">⚡</span>
+          <span class="tool-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>
           <span class="tool-chip-name">Solar Sizing</span>
         </a>
         <a href="tools.html#tool-4" class="tool-chip">
-          <span class="tool-chip-icon">📦</span>
+          <span class="tool-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
           <span class="tool-chip-name">Supply Tracker</span>
         </a>
         <a href="tools.html#tool-5" class="tool-chip">
-          <span class="tool-chip-icon">🧠</span>
+          <span class="tool-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
           <span class="tool-chip-name">Skill Inventory</span>
         </a>
         <a href="tools.html#tool-6" class="tool-chip">
-          <span class="tool-chip-icon">🌱</span>
+          <span class="tool-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
           <span class="tool-chip-name">Planting Calendar</span>
         </a>
         <a href="tools.html#tool-7" class="tool-chip">
-          <span class="tool-chip-icon">🚗</span>
+          <span class="tool-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V9a2 2 0 012-2h1l2-4h10l2 4h1a2 2 0 012 2v6a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg></span>
           <span class="tool-chip-name">Stay or Go?</span>
         </a>
         <a href="tools.html#tool-8" class="tool-chip">
-          <span class="tool-chip-icon">📻</span>
+          <span class="tool-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="12" rx="2"/><path d="M2 15h20M7 12h.01M17 13h2M17 17h2M4 9L12 3l8 6"/></svg></span>
           <span class="tool-chip-name">Radio Freqs</span>
         </a>
         <a href="tools.html#tool-9" class="tool-chip">
-          <span class="tool-chip-icon">💊</span>
+          <span class="tool-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5L3.5 13.5a5 5 0 017-7l7 7a5 5 0 01-7 7z"/><line x1="8.5" y1="11.5" x2="14" y2="17"/></svg></span>
           <span class="tool-chip-name">Medications</span>
         </a>
       </div>
@@ -881,19 +924,19 @@
 
       <div class="bottom-links-grid">
         <a href="literature.html" class="bl-card">
-          <span class="bl-icon">📚</span>
+          <span class="bl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h4V4H4zM10 4v16h4V4h-4z"/><path d="M17 6l3.5 14M17 6l3 1"/></svg></span>
           <span class="bl-title">Reference Library</span>
         </a>
         <a href="quick-reference.html" class="bl-card">
-          <span class="bl-icon">🚨</span>
+          <span class="bl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
           <span class="bl-title">Emergency Card</span>
         </a>
         <a href="cards.html" class="bl-card">
-          <span class="bl-icon">💳</span>
+          <span class="bl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 12h.01M2 10h20"/></svg></span>
           <span class="bl-title">Wallet Cards</span>
         </a>
         <a href="gear.html" class="bl-card">
-          <span class="bl-icon">📦</span>
+          <span class="bl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><path d="M9 5a2 2 0 002 2h2a2 2 0 002-2 2 2 0 00-2-2h-2a2 2 0 00-2 2z"/><polyline points="9 12 11 14 15 10"/></svg></span>
           <span class="bl-title">Gear Checklist</span>
         </a>
       </div>
@@ -909,7 +952,7 @@
           <a href="quick-reference.html">Emergency Card</a>
           <a href="literature.html">Library</a>
         </nav>
-        <span>⚡ No internet required</span>
+        <span style="display:inline-flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;display:block"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg> No internet required</span>
       </div>
     </footer>
 
@@ -920,7 +963,7 @@
 <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
   <div class="aria-header">
     <div class="aria-title">
-      <div class="aria-avatar">🤖</div>
+      <div class="aria-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M8 10V8a4 4 0 018 0v2"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><path d="M9 19h6"/><line x1="12" y1="3" x2="12" y2="5"/></svg></div>
       <div class="aria-title-text">
         <strong>Bunker Bot</strong>
         <small>Offline Survival AI</small>

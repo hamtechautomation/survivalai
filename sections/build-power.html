@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Build your own power generation from scratch: pedal generators, water wheels, wind turbines, biogas digesters, thermoelectric generators, and steam engines.">
+  <title>Power Generation — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Power Generation</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>⚡ Generating Your Own Power</h1>
+    <p class="section-desc">Building electricity from nothing but mechanical ingenuity, flowing water, wind, organic waste, and fire. Every method here can be built by hand, from salvaged or locally available materials, with no supply chain dependency.</p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2026-06"></span></span>
+      <span class="meta-item">⏱️ <span id="reading-time"></span></span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#pedal">Hand-Crank &amp; Pedal Generators</a></li>
+      <li><a href="#waterwheel">Water Wheel Generators</a></li>
+      <li><a href="#wind">Wind Generators</a></li>
+      <li><a href="#pelton">Micro-Hydro Pelton Wheel</a></li>
+      <li><a href="#biogas">Biogas Digester</a></li>
+      <li><a href="#teg">Thermoelectric Generators (TEG)</a></li>
+      <li><a href="#steam">Steam Power — Advanced</a></li>
+      <li><a href="#quick-ref">Quick Reference Card</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">⚡</span>
+    <div class="callout-content">
+      <strong>Power Generation Priorities</strong>
+      <p>TEG from a wood stove is available tonight with £20–40 of parts. A pedal generator can be built in a weekend. A water wheel takes weeks but produces continuous power. Order: TEG → pedal → water wheel/wind → biogas. Match the source to your site — water and wind are intermittent, biogas is continuous.</p>
+    </div>
+  </div>
+
+  <!-- =================== PEDAL =================== -->
+  <section id="pedal">
+    <h2>1. Hand-Crank &amp; Pedal Generators</h2>
+    <div class="section-tags">
+      <span class="skill-tag skill-intermediate">Intermediate</span>
+      <span class="timeline-tag tag-2week">2-Week Build</span>
+    </div>
+
+    <h3>How It Works</h3>
+    <p>A DC motor is a generator running in reverse: spin the shaft mechanically, and it produces electricity. Any permanent-magnet DC motor works. The higher the RPM, the higher the output voltage. A rectifier bridge converts AC (from some motors) to DC; a voltage regulator holds output steady at 12V; a blocking diode prevents the battery discharging back through the motor when you stop pedalling.</p>
+
+    <h3>Salvaging Motors</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Source</th><th>Motor Type</th><th>Typical Voltage</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Treadmill</td><td>Permanent-magnet DC</td><td>90–180V DC</td><td>Best option — large, robust, generates at walking pace</td></tr>
+          <tr><td>Washing machine</td><td>Universal AC motor</td><td>Varies</td><td>Needs rectifier; brushed motors work better as generators</td></tr>
+          <tr><td>Car alternator</td><td>3-phase AC</td><td>12–14V at 1000+ RPM</td><td>Needs high RPM — requires gearing up</td></tr>
+          <tr><td>Electric drill</td><td>Brushed DC or Universal</td><td>12–36V</td><td>Small; limited output but easy to rig</td></tr>
+          <tr><td>Printer stepper motor</td><td>Stepper</td><td>Low V at low RPM</td><td>Very low RPM generation — wire multiple in series</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Wiring a Generator Circuit</h3>
+    <ul>
+      <li><strong>Rectifier bridge:</strong> 4 × 1N4007 diodes (or a pre-made bridge rectifier); converts pulsing AC to smooth DC</li>
+      <li><strong>Voltage regulator:</strong> LM7812 IC + 2 capacitors — clamps output to 12V regardless of RPM variation</li>
+      <li><strong>Blocking diode:</strong> 1N5408 (3A rated) in series — prevents battery current flowing back into motor at rest</li>
+      <li><strong>Ammeter:</strong> optional but useful — shows you are actually charging</li>
+      <li><strong>Fuse:</strong> 10A blade fuse between output and battery positive terminal</li>
+    </ul>
+
+    <h3>Bicycle Pedal Generator</h3>
+    <p>Rear wheel friction-drives a roller which spins the motor shaft. Alternatively, a chain from the bottom bracket sprocket drives the motor directly (more efficient, requires fabrication).</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Component</th><th>Quantity</th><th>Approx Cost</th><th>Alternative Source</th></tr></thead>
+        <tbody>
+          <tr><td>Treadmill motor (90V DC)</td><td>1</td><td>Free–£30</td><td>Scrapyard, Facebook Marketplace</td></tr>
+          <tr><td>Old bicycle (rear wheel only needed)</td><td>1</td><td>Free–£10</td><td>Skip, charity shop</td></tr>
+          <tr><td>Steel angle iron frame (25×25mm)</td><td>4m</td><td>£15</td><td>Scrap steel, welded or bolted</td></tr>
+          <tr><td>Friction roller (25mm steel rod)</td><td>1</td><td>£5</td><td>Any round steel bar, turned on lathe or used as-is</td></tr>
+          <tr><td>V-belt + pulleys</td><td>1 set</td><td>£12</td><td>Chain and sprockets from another bicycle</td></tr>
+          <tr><td>Bridge rectifier (50A)</td><td>1</td><td>£3</td><td>4 × 1N4007 diodes + heatshrink</td></tr>
+          <tr><td>LM7812 voltage regulator + heatsink</td><td>1</td><td>£2</td><td>MPPT charge controller (better option)</td></tr>
+          <tr><td>12V lead-acid battery (100Ah)</td><td>1</td><td>£60–80</td><td>Car battery (less deep-cycle capacity)</td></tr>
+          <tr><td>MPPT charge controller (12V)</td><td>1</td><td>£20</td><td>PWM controller (cheaper, less efficient)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure class="svg-diagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320">
+        <rect width="700" height="320" fill="#0c0f0e"/>
+        <text x="350" y="22" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="12" font-weight="bold">PEDAL GENERATOR — SYSTEM SCHEMATIC</text>
+        <!-- Bicycle frame (simplified diamond) -->
+        <g stroke="#c9a94e" stroke-width="2" fill="none">
+          <line x1="60" y1="200" x2="130" y2="130"/><!-- down tube -->
+          <line x1="130" y1="130" x2="190" y2="200"/><!-- seat tube -->
+          <line x1="60" y1="200" x2="190" y2="200"/><!-- bottom bracket -->
+          <line x1="130" y1="130" x2="60" y2="200"/><!-- head tube -->
+          <line x1="190" y1="200" x2="240" y2="130"/><!-- chainstay -->
+          <line x1="130" y1="130" x2="240" y2="130"/><!-- top tube -->
+          <!-- Rear wheel -->
+          <circle cx="240" cy="200" r="50" stroke="#8a7035"/>
+          <!-- Front wheel implied -->
+          <circle cx="60" cy="200" r="35" stroke="#8a7035" stroke-dasharray="4,3"/>
+          <!-- Rider (stick figure) -->
+          <circle cx="160" cy="100" r="12" stroke="#4a80b5"/>
+          <line x1="160" y1="112" x2="160" y2="155" stroke="#4a80b5"/>
+          <line x1="145" y1="130" x2="175" y2="130" stroke="#4a80b5"/>
+          <line x1="160" y1="155" x2="175" y2="180" stroke="#4a80b5"/>
+          <line x1="160" y1="155" x2="145" y2="180" stroke="#4a80b5"/>
+        </g>
+        <!-- Friction roller touching rear wheel top -->
+        <circle cx="265" cy="148" r="12" fill="#2a3430" stroke="#c9a94e" stroke-width="2"/>
+        <text x="265" y="136" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">ROLLER</text>
+        <!-- Rotation arrows -->
+        <path d="M 240 148 A 52 52 0 0 1 292 200" fill="none" stroke="#27ae60" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- Belt from roller to motor -->
+        <line x1="277" y1="148" x2="340" y2="160" stroke="#c9a94e" stroke-width="2" stroke-dasharray="5,3"/>
+        <!-- Motor box -->
+        <rect x="340" y="145" width="80" height="50" rx="4" fill="#161d1a" stroke="#c9a94e" stroke-width="2"/>
+        <text x="380" y="166" text-anchor="middle" fill="#e8e0cc" font-family="monospace" font-size="10" font-weight="bold">DC</text>
+        <text x="380" y="180" text-anchor="middle" fill="#e8e0cc" font-family="monospace" font-size="10" font-weight="bold">MOTOR</text>
+        <text x="380" y="192" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">AC/DC out</text>
+        <!-- Wire AC out -->
+        <line x1="420" y1="170" x2="460" y2="170" stroke="#f0c040" stroke-width="2"/>
+        <!-- Rectifier box -->
+        <rect x="460" y="155" width="60" height="30" rx="3" fill="#0d2030" stroke="#4a80b5" stroke-width="1.5"/>
+        <text x="490" y="174" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="9">RECTIFIER</text>
+        <!-- Wire DC out -->
+        <line x1="520" y1="170" x2="560" y2="170" stroke="#27ae60" stroke-width="2"/>
+        <!-- Charge controller -->
+        <rect x="560" y="150" width="80" height="40" rx="3" fill="#0d3320" stroke="#27ae60" stroke-width="1.5"/>
+        <text x="600" y="166" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="9">CHARGE</text>
+        <text x="600" y="179" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="9">CTRL</text>
+        <!-- Wire to battery -->
+        <line x1="640" y1="170" x2="640" y2="240" stroke="#27ae60" stroke-width="2"/>
+        <line x1="560" y1="170" x2="540" y2="240" stroke="#c0392b" stroke-width="2" stroke-dasharray="3,2"/>
+        <!-- Battery -->
+        <rect x="530" y="240" width="120" height="50" rx="4" fill="#161d1a" stroke="#c9a94e" stroke-width="2"/>
+        <text x="590" y="260" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="10" font-weight="bold">12V BATTERY</text>
+        <text x="590" y="276" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">100Ah lead-acid</text>
+        <text x="537" y="262" fill="#27ae60" font-family="monospace" font-size="12" font-weight="bold">+</text>
+        <text x="637" y="262" fill="#c0392b" font-family="monospace" font-size="12" font-weight="bold">−</text>
+        <!-- Load -->
+        <rect x="340" y="255" width="70" height="35" rx="3" fill="#161d1a" stroke="#8a7035" stroke-width="1.5"/>
+        <text x="375" y="271" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">LOADS</text>
+        <text x="375" y="283" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">LED / radio</text>
+        <line x1="410" y1="272" x2="530" y2="265" stroke="#c9a94e" stroke-width="1.5"/>
+        <!-- Output labels -->
+        <text x="240" y="290" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">50–150W sustained</text>
+        <!-- Legend -->
+        <line x1="50" y1="295" x2="75" y2="295" stroke="#f0c040" stroke-width="2"/>
+        <text x="78" y="298" fill="#9a9488" font-family="monospace" font-size="8">AC</text>
+        <line x1="100" y1="295" x2="125" y2="295" stroke="#27ae60" stroke-width="2"/>
+        <text x="128" y="298" fill="#9a9488" font-family="monospace" font-size="8">12V DC</text>
+        <line x1="150" y1="295" x2="175" y2="295" stroke="#c0392b" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="178" y="298" fill="#9a9488" font-family="monospace" font-size="8">Ground</text>
+      </svg>
+      <figcaption>Pedal generator system schematic — from bicycle rear wheel through motor, rectifier, charge controller, to battery bank. Treadmill motors are preferred: large permanent magnets, generate at low RPM.</figcaption>
+    </figure>
+
+    <h3>Hand-Crank Version</h3>
+    <p>Without a bicycle, build a hand-crank: mount the motor and add a gear train for mechanical advantage. You need at least a 10:1 ratio (hand cranks at ~60 RPM; motor needs 600+ RPM). Wooden gears can be cut with a hand saw — mark teeth with a compass. Output: 20–50W, less than pedal but still enough for LED lighting and phone charging.</p>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Common Failures</strong>
+        <ul>
+          <li><strong>No output at walking pace:</strong> motor needs higher RPM — increase gear ratio or use a treadmill motor (generates at low speed)</li>
+          <li><strong>Motor overheats:</strong> limit continuous use to 30 min; add cooling fins cut from aluminium sheet; run at 70% of rated current</li>
+          <li><strong>Battery won't charge:</strong> output voltage must exceed battery voltage by 1-2V; check with voltmeter across motor terminals under load</li>
+          <li><strong>Roller slips on wheel:</strong> add rubber sleeve (bicycle inner tube) around roller to increase grip</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== WATER WHEEL =================== -->
+  <section id="waterwheel">
+    <h2>2. Water Wheel Generators</h2>
+    <div class="section-tags">
+      <span class="skill-tag skill-intermediate">Intermediate</span>
+      <span class="timeline-tag tag-3month">3-Month Build</span>
+      <span class="climate-tag">🌊 Running Water Required</span>
+    </div>
+
+    <p>Water wheels convert flowing water into rotational energy that drives a generator. The power available depends on <strong>head</strong> (vertical drop) and <strong>flow</strong> (volume per second). A small stream with even a 1m head can produce useful power continuously.</p>
+
+    <h3>Site Assessment</h3>
+    <ul>
+      <li><strong>Minimum viable site:</strong> 1m head (vertical drop), 10 litres/second flow</li>
+      <li><strong>Measuring flow:</strong> bucket method — divert stream into a known-volume container, measure seconds to fill. 20L bucket fills in 2s = 10 L/s</li>
+      <li><strong>Measuring head:</strong> water level difference between intake and wheel — use a level and measuring pole</li>
+      <li><strong>Power formula:</strong> P(Watts) = head(m) × flow(L/s) × 9.81 × efficiency</li>
+    </ul>
+
+    <div class="quick-facts">
+      <div class="quick-fact"><span class="qf-value">~85%</span><span class="qf-label">Overshot efficiency</span></div>
+      <div class="quick-fact"><span class="qf-value">~30%</span><span class="qf-label">Undershot efficiency</span></div>
+      <div class="quick-fact"><span class="qf-value">1m × 10 L/s</span><span class="qf-label">Minimum viable site</span></div>
+      <div class="quick-fact"><span class="qf-value">1500–3000</span><span class="qf-label">Target generator RPM</span></div>
+    </div>
+
+    <figure class="svg-diagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340">
+        <rect width="700" height="340" fill="#0c0f0e"/>
+        <text x="350" y="22" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="12" font-weight="bold">WATER WHEEL TYPES — COMPARISON</text>
+        <!-- OVERSHOT -->
+        <text x="116" y="48" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="11" font-weight="bold">OVERSHOT</text>
+        <text x="116" y="62" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">~85% efficient</text>
+        <!-- Wheel -->
+        <circle cx="116" cy="190" r="80" fill="none" stroke="#c9a94e" stroke-width="2"/>
+        <!-- Spokes -->
+        <g stroke="#8a7035" stroke-width="1">
+          <line x1="116" y1="110" x2="116" y2="270"/>
+          <line x1="36" y1="190" x2="196" y2="190"/>
+          <line x1="59" y1="133" x2="173" y2="247"/>
+          <line x1="59" y1="247" x2="173" y2="133"/>
+        </g>
+        <!-- Buckets (small rectangles on rim) -->
+        <g fill="#1c2620" stroke="#c9a94e" stroke-width="1">
+          <rect x="108" y="108" width="16" height="10" rx="1"/>
+          <rect x="148" y="120" width="10" height="16" rx="1"/>
+          <rect x="182" y="150" width="10" height="16" rx="1"/>
+          <rect x="182" y="214" width="10" height="16" rx="1"/>
+          <rect x="36" y="182" width="16" height="10" rx="1"/>
+        </g>
+        <!-- Water pouring from top -->
+        <g fill="#1a3a50" stroke="#4a80b5" stroke-width="1">
+          <line x1="116" y1="60" x2="110" y2="105" stroke="#4a80b5" stroke-width="2"/>
+          <line x1="116" y1="60" x2="116" y2="108" stroke="#4a80b5" stroke-width="2"/>
+          <line x1="116" y1="60" x2="122" y2="105" stroke="#4a80b5" stroke-width="2"/>
+        </g>
+        <text x="135" y="80" fill="#4a80b5" font-family="monospace" font-size="9">water</text>
+        <text x="135" y="90" fill="#4a80b5" font-family="monospace" font-size="9">from above</text>
+        <!-- Shaft output -->
+        <line x1="196" y1="190" x2="230" y2="190" stroke="#c9a94e" stroke-width="3"/>
+        <text x="235" y="194" fill="#9a9488" font-family="monospace" font-size="8">SHAFT</text>
+        <!-- Rotation arrow -->
+        <path d="M 116 145 A 45 45 0 0 1 161 190" fill="none" stroke="#27ae60" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <!-- Water exit at bottom -->
+        <path d="M 70 265 Q 116 290 162 265" fill="none" stroke="#4a80b5" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="116" y="308" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="8">tailrace →</text>
+        <text x="116" y="325" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">High head, low flow</text>
+
+        <!-- Divider -->
+        <line x1="248" y1="40" x2="248" y2="330" stroke="#2a3430" stroke-width="1"/>
+
+        <!-- UNDERSHOT -->
+        <text x="400" y="48" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="11" font-weight="bold">UNDERSHOT</text>
+        <text x="400" y="62" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">~25–35% efficient</text>
+        <!-- Stream -->
+        <rect x="264" y="230" width="270" height="30" fill="#1a3a50" stroke="#4a80b5" stroke-width="1" rx="2"/>
+        <text x="399" y="249" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="9">STREAM FLOW →</text>
+        <!-- Wheel partially submerged -->
+        <circle cx="400" cy="215" r="70" fill="none" stroke="#c9a94e" stroke-width="2"/>
+        <g stroke="#8a7035" stroke-width="1">
+          <line x1="400" y1="145" x2="400" y2="285"/>
+          <line x1="330" y1="215" x2="470" y2="215"/>
+          <line x1="351" y1="166" x2="449" y2="264"/>
+          <line x1="351" y1="264" x2="449" y2="166"/>
+        </g>
+        <!-- Paddles -->
+        <g fill="#1c2620" stroke="#c9a94e" stroke-width="1">
+          <rect x="392" y="143" width="16" height="8" rx="1"/>
+          <rect x="461" y="175" width="8" height="16" rx="1"/>
+          <rect x="323" y="207" width="8" height="16" rx="1"/>
+          <rect x="392" y="277" width="16" height="8" rx="1"/>
+          <rect x="441" y="256" width="8" height="16" rx="1"/>
+        </g>
+        <path d="M 400 175 A 40 40 0 0 0 360 215" fill="none" stroke="#27ae60" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <text x="400" y="325" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">Low head, high flow</text>
+
+        <!-- Divider -->
+        <line x1="535" y1="40" x2="535" y2="330" stroke="#2a3430" stroke-width="1"/>
+
+        <!-- PELTON (propeller) -->
+        <text x="617" y="48" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="11" font-weight="bold">PELTON</text>
+        <text x="617" y="62" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">~85%+ efficient</text>
+        <!-- Pipe -->
+        <rect x="553" y="140" width="20" height="80" fill="#1c2620" stroke="#c9a94e" stroke-width="1.5" rx="2"/>
+        <text x="543" y="155" fill="#9a9488" font-family="monospace" font-size="7">HDPE</text>
+        <text x="543" y="165" fill="#9a9488" font-family="monospace" font-size="7">PIPE</text>
+        <!-- Nozzle -->
+        <polygon points="573,195 590,188 590,212" fill="#8a7035" stroke="#c9a94e" stroke-width="1"/>
+        <!-- Water jet -->
+        <line x1="590" y1="200" x2="620" y2="200" stroke="#4a80b5" stroke-width="3"/>
+        <!-- Pelton wheel (side view) -->
+        <circle cx="640" cy="200" r="40" fill="none" stroke="#c9a94e" stroke-width="2"/>
+        <g fill="#1c2620" stroke="#4a80b5" stroke-width="1">
+          <path d="M 640 160 C 630 168 628 178 640 180 C 652 178 650 168 640 160 Z"/>
+          <path d="M 640 220 C 630 222 628 232 640 240 C 652 232 650 222 640 220 Z"/>
+          <path d="M 600 200 C 602 190 612 188 620 200 C 612 212 602 210 600 200 Z"/>
+          <path d="M 660 200 C 662 190 672 188 680 200 C 672 212 662 210 660 200 Z"/>
+        </g>
+        <text x="617" y="265" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">cups catch jet</text>
+        <text x="617" y="325" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">High head, low flow</text>
+      </svg>
+      <figcaption>Three water wheel types. Overshot (left) is most efficient and best for high-head sites. Undershot (centre) suits fast-flowing low-head streams. Pelton (right) is optimal for high-head small streams — a pipe amplifies pressure.</figcaption>
+    </figure>
+
+    <h3>Generator Coupling</h3>
+    <p>Water wheels turn slowly (10–60 RPM). Most generators need 1500–3000 RPM. Use a belt drive with pulleys — small pulley on the wheel shaft, large pulley on the motor — to multiply RPM. Ratio needed: 3000 RPM ÷ wheel RPM = pulley ratio. Example: 30 RPM wheel × 100:1 belt ratio = 3000 RPM at generator.</p>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Common Failures</strong>
+        <ul>
+          <li><strong>Debris clogging:</strong> install a trash rack (parallel metal bars) upstream — clean weekly</li>
+          <li><strong>Ice in winter:</strong> keep wheel moving or add a weir bypass; ice in buckets destroys balance</li>
+          <li><strong>Bearing failure:</strong> grease bearings monthly; use sealed bearings and shield from water spray</li>
+          <li><strong>Structural failure:</strong> brace the axle supports well — wheel weight plus water is substantial</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== WIND =================== -->
+  <section id="wind">
+    <h2>3. Wind Generators</h2>
+    <div class="section-tags">
+      <span class="skill-tag skill-advanced">Advanced</span>
+      <span class="timeline-tag tag-3month">3-Month Build</span>
+      <span class="climate-tag">💨 Exposed Site Required</span>
+    </div>
+
+    <h3>Site Assessment</h3>
+    <ul>
+      <li>Minimum 10 mph / 16 kph average wind speed (use anemometer or local weather data)</li>
+      <li>Best locations: hilltops, cliff edges, open coastal areas; avoid forests and buildings (turbulence)</li>
+      <li>Wind power formula: P = 0.5 × 1.225 (air density) × swept area (m²) × wind speed³ (m/s)</li>
+      <li>Example: 1m radius blade (3.14m² swept) in 8 m/s wind = 0.5 × 1.225 × 3.14 × 512 ≈ <strong>985W theoretical, ~350W practical</strong></li>
+    </ul>
+
+    <h3>Blade Design</h3>
+    <p>Use 3 blades for stability (2-blade wobbles, 4+ adds weight without proportional gain). Blade profile: curved on the front (high-pressure), flat on the back (low-pressure) — this creates lift, like an aircraft wing rotating about a vertical axis.</p>
+
+    <figure class="svg-diagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280">
+        <rect width="600" height="280" fill="#0c0f0e"/>
+        <text x="300" y="22" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="12" font-weight="bold">WIND TURBINE BLADE — PROFILE &amp; TWIST</text>
+        <!-- Aerofoil cross-section -->
+        <text x="300" y="50" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">AEROFOIL CROSS-SECTION (view from tip)</text>
+        <path d="M 80 120 C 100 85 260 85 380 105 C 420 110 440 118 440 125 C 440 132 390 140 350 142 C 200 148 100 142 80 120 Z" fill="#1c2620" stroke="#c9a94e" stroke-width="2"/>
+        <text x="260" y="98" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="8">CURVED FACE (high pressure)</text>
+        <text x="260" y="148" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">FLAT BACK (low pressure)</text>
+        <text x="65" y="124" text-anchor="end" fill="#9a9488" font-family="monospace" font-size="8">LEADING EDGE</text>
+        <text x="460" y="124" text-anchor="start" fill="#9a9488" font-family="monospace" font-size="8">TRAILING EDGE</text>
+        <!-- Lift arrow -->
+        <line x1="380" y1="115" x2="380" y2="75" stroke="#27ae60" stroke-width="2" marker-end="url(#larr)"/>
+        <text x="395" y="85" fill="#27ae60" font-family="monospace" font-size="9">LIFT</text>
+
+        <!-- Twist diagram -->
+        <text x="300" y="180" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">BLADE TWIST ANGLE (view from side)</text>
+        <!-- Reference horizontal line -->
+        <line x1="60" y1="235" x2="540" y2="235" stroke="#2a3430" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="550" y="238" fill="#2a3430" font-family="monospace" font-size="8">Reference</text>
+        <!-- Root section (30°) -->
+        <rect x="80" y="215" width="40" height="14" rx="2" fill="#1c2620" stroke="#c9a94e" stroke-width="1.5" transform="rotate(-30, 100, 222)"/>
+        <text x="100" y="265" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="9">ROOT</text>
+        <text x="100" y="275" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="8">30° pitch</text>
+        <!-- Mid section -->
+        <rect x="220" y="220" width="40" height="14" rx="2" fill="#1c2620" stroke="#8a7035" stroke-width="1.5" transform="rotate(-22, 240, 227)"/>
+        <text x="240" y="265" text-anchor="middle" fill="#8a7035" font-family="monospace" font-size="9">MID</text>
+        <text x="240" y="275" text-anchor="middle" fill="#8a7035" font-family="monospace" font-size="8">22° pitch</text>
+        <!-- Tip section (15°) -->
+        <rect x="380" y="223" width="40" height="14" rx="2" fill="#1c2620" stroke="#27ae60" stroke-width="1.5" transform="rotate(-15, 400, 230)"/>
+        <text x="400" y="265" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="9">TIP</text>
+        <text x="400" y="275" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">15° pitch</text>
+        <!-- Arrow showing twist direction -->
+        <path d="M 130 230 Q 265 210 370 228" fill="none" stroke="#9a9488" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#sarr)"/>
+        <text x="250" y="205" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">twist decreases root → tip</text>
+      </svg>
+      <figcaption>Top: aerofoil cross-section — curved leading face creates lift. Bottom: blade twist from 30° at root to 15° at tip compensates for the different relative wind speeds experienced at different radii.</figcaption>
+    </figure>
+
+    <h3>Materials for Blades</h3>
+    <ul>
+      <li><strong>Carved wood (pine or spruce):</strong> best option; hand-carve with drawknife and spoke shave; coat with linseed oil or exterior paint</li>
+      <li><strong>PVC drain pipe (200mm):</strong> cut longitudinally, shape with heat gun; light, easy, less strong</li>
+      <li><strong>Aluminium flashing:</strong> sheet metal bent to profile; durable but harder to shape correctly</li>
+    </ul>
+
+    <h3>Tower &amp; Hub</h3>
+    <ul>
+      <li>Guyed mast: steel pipe sections (50mm OD), guy wires every 3m of height, minimum 6m above nearest obstruction within 100m</li>
+      <li>Tilt-up design: hinge at base, raise and lower for maintenance without climbing</li>
+      <li>Alternator: salvaged stepper motor from printer/CNC generates at low RPM — easiest option. Car alternator needs 1000+ RPM (requires gearing up).</li>
+      <li>Furling tail: mount tail fin offset from rotor axis — in high winds, rotor turns sideways out of wind automatically</li>
+    </ul>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Common Failures</strong>
+        <ul>
+          <li><strong>Overspeed in storm:</strong> without furling or a braking resistor, generator can overvoltage and fail; always fit furling or a dump load resistor</li>
+          <li><strong>Tower collapse:</strong> guy wires must be tensioned correctly; check after every storm</li>
+          <li><strong>Blade imbalance vibration:</strong> all blades must be same weight — weigh and match before mounting</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== PELTON =================== -->
+  <section id="pelton">
+    <h2>4. Micro-Hydro Pelton Wheel</h2>
+    <div class="section-tags">
+      <span class="skill-tag skill-intermediate">Intermediate</span>
+      <span class="timeline-tag tag-3month">3-Month Build</span>
+    </div>
+
+    <p>The Pelton wheel is the most efficient turbine for <strong>high head (5m+), low flow</strong> streams. A pipe from an elevated intake converts head pressure into a high-speed water jet, which strikes double-cupped buckets on the wheel rim. Output: 200–500W from a stream with 10m+ head.</p>
+
+    <div class="diagram">
+MICRO-HYDRO PELTON SYSTEM LAYOUT:
+
+  INTAKE SCREEN
+     │
+     │  HDPE pressure pipe (≥32mm)
+     │  sealed, no air pockets
+     │
+  [ELEVATION = HEAD]
+  10m head = 1 bar = 142 PSI
+     │
+     ▼
+  NOZZLE (brass fitting + needle valve)
+  → HIGH-SPEED WATER JET →
+                         ⊙  PELTON WHEEL
+                         │  (wooden cups on plywood disc)
+                         │
+                    [GENERATOR]
+                    DC motor 12–24V
+                         │
+                  [CHARGE CONTROLLER]
+                         │
+                    [BATTERY BANK]
+                         │
+                    [LOADS / INVERTER]
+
+  TAILRACE → back to stream (below wheel)
+    </div>
+
+    <p>Nozzle construction: brass garden hose fitting with a needle valve for flow control. Wheel: 300–500mm diameter plywood disc with 16–24 wooden cups attached at the rim. Each cup has a central ridge to split the jet and deflect water sideways.</p>
+  </section>
+
+  <!-- =================== BIOGAS =================== -->
+  <section id="biogas">
+    <h2>5. Biogas Digester</h2>
+    <div class="section-tags">
+      <span class="skill-tag skill-intermediate">Intermediate</span>
+      <span class="timeline-tag tag-3month">3-Month Build</span>
+      <span class="timeline-tag tag-1year">1-Year Payoff</span>
+    </div>
+
+    <p>Anaerobic bacteria in a sealed tank decompose organic waste into methane (CH₄) and CO₂. The methane is captured and used for cooking or heating. The residual slurry is an excellent fertiliser — better than the raw inputs. <strong>1 cow produces enough waste for a 1m³ digester, generating enough gas for 2–3 hours of cooking daily.</strong></p>
+
+    <figure class="svg-diagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+        <rect width="600" height="400" fill="#0c0f0e"/>
+        <text x="300" y="22" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="12" font-weight="bold">FIXED DOME BIOGAS DIGESTER — CROSS-SECTION</text>
+        <!-- Ground line -->
+        <line x1="40" y1="180" x2="560" y2="180" stroke="#27ae60" stroke-width="1.5"/>
+        <text x="570" y="184" fill="#27ae60" font-family="monospace" font-size="9">GROUND</text>
+        <!-- Dome below ground -->
+        <ellipse cx="300" cy="270" rx="200" ry="130" fill="#161d1a" stroke="#c9a94e" stroke-width="2"/>
+        <!-- Brick texture on dome wall -->
+        <g stroke="#8a7035" stroke-width="0.5" fill="none">
+          <rect x="108" y="240" width="18" height="10" rx="1"/>
+          <rect x="126" y="250" width="18" height="10" rx="1"/>
+          <rect x="100" y="260" width="18" height="10" rx="1"/>
+          <rect x="473" y="240" width="18" height="10" rx="1"/>
+          <rect x="457" y="250" width="18" height="10" rx="1"/>
+          <rect x="475" y="260" width="18" height="10" rx="1"/>
+        </g>
+        <!-- Gas accumulation zone (top) -->
+        <ellipse cx="300" cy="165" rx="130" ry="35" fill="#0d2030" stroke="#4a80b5" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="300" y="162" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="9">BIOGAS ACCUMULATION</text>
+        <text x="300" y="173" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="8">CH₄ + CO₂</text>
+        <!-- Bubbles -->
+        <g fill="none" stroke="#4a80b5" stroke-width="0.8">
+          <circle cx="250" cy="195" r="5"/>
+          <circle cx="280" cy="205" r="4"/>
+          <circle cx="320" cy="198" r="6"/>
+          <circle cx="350" cy="207" r="3"/>
+        </g>
+        <!-- Slurry level -->
+        <path d="M 105 215 Q 300 225 495 215" fill="#1a2b1a" stroke="#27ae60" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="500" y="214" fill="#27ae60" font-family="monospace" font-size="8">SLURRY</text>
+        <!-- Organic waste below -->
+        <text x="300" y="290" text-anchor="middle" fill="#5a5650" font-family="monospace" font-size="10">MIXED WASTE + WATER</text>
+        <text x="300" y="306" text-anchor="middle" fill="#5a5650" font-family="monospace" font-size="8">(manure, food scraps, crop residue)</text>
+        <!-- Inlet pipe (left side, angled) -->
+        <line x1="40" y1="155" x2="130" y2="235" stroke="#c9a94e" stroke-width="4"/>
+        <rect x="20" y="135" width="60" height="30" rx="3" fill="#0d3320" stroke="#27ae60" stroke-width="1.5"/>
+        <text x="50" y="153" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">INLET</text>
+        <text x="50" y="162" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="7">waste + water</text>
+        <!-- Gas outlet (top centre, vertical) -->
+        <line x1="300" y1="130" x2="300" y2="50" stroke="#4a80b5" stroke-width="3"/>
+        <rect x="265" y="35" width="70" height="25" rx="3" fill="#0d2030" stroke="#4a80b5" stroke-width="1.5"/>
+        <text x="300" y="52" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="9">GAS OUTLET</text>
+        <!-- Gas pipe going right -->
+        <line x1="300" y1="45" x2="560" y2="45" stroke="#4a80b5" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="480" y="35" fill="#4a80b5" font-family="monospace" font-size="8">to stove / storage</text>
+        <!-- Pressure relief arrow -->
+        <text x="420" y="60" fill="#9a9488" font-family="monospace" font-size="7">+ pressure relief valve</text>
+        <!-- Slurry outlet (right side) -->
+        <line x1="465" y1="240" x2="555" y2="195" stroke="#c9a94e" stroke-width="4"/>
+        <rect x="545" y="175" width="50" height="35" rx="3" fill="#0d3320" stroke="#27ae60" stroke-width="1.5"/>
+        <text x="570" y="191" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">SLURRY</text>
+        <text x="570" y="202" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">OUTLET</text>
+        <!-- Depth label -->
+        <line x1="55" y1="180" x2="55" y2="395" stroke="#9a9488" stroke-width="1" stroke-dasharray="2,2"/>
+        <line x1="50" y1="180" x2="60" y2="180" stroke="#9a9488" stroke-width="1"/>
+        <line x1="50" y1="395" x2="60" y2="395" stroke="#9a9488" stroke-width="1"/>
+        <text x="20" y="295" fill="#9a9488" font-family="monospace" font-size="8" transform="rotate(-90, 20, 295)">DEPTH 1–2m</text>
+      </svg>
+      <figcaption>Fixed dome biogas digester cross-section. The dome is built below ground from brick and mortar. Gas accumulates at the top, displacing slurry through the outlet. The system is fully sealed — no gas escapes except through the controlled outlet.</figcaption>
+    </figure>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">🔥</span>
+      <div class="callout-content">
+        <strong>Biogas Safety</strong>
+        <ul>
+          <li>Methane is explosive (5–15% concentration in air). Never use an open flame near the digester inlet or outlet</li>
+          <li>Install a pressure relief valve — if gas cannot escape, pressure builds and can rupture the dome</li>
+          <li>Hydrogen sulphide (H₂S) in the gas smells of rotten eggs and is toxic. Filter through iron filings (iron oxide reacts with H₂S) before use</li>
+          <li>Always ventilate areas where biogas equipment is stored</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== TEG =================== -->
+  <section id="teg">
+    <h2>6. Thermoelectric Generators (TEG)</h2>
+    <div class="section-tags">
+      <span class="skill-tag skill-beginner">Beginner</span>
+      <span class="timeline-tag tag-72hr">Can Start Tonight</span>
+    </div>
+
+    <p>TEG modules exploit the Seebeck effect: a temperature difference across a special ceramic tile generates a small DC voltage. Mount the hot side on your wood stove flue pipe, the cold side on a heatsink in the air — and you're generating electricity from the heat you were already producing.</p>
+
+    <div class="quick-facts">
+      <div class="quick-fact"><span class="qf-value">5–30W</span><span class="qf-label">Output from wood stove</span></div>
+      <div class="quick-fact"><span class="qf-value">£20–40</span><span class="qf-label">Enough for phone + LEDs</span></div>
+      <div class="quick-fact"><span class="qf-value">SP1848</span><span class="qf-label">Common module (27145SA)</span></div>
+      <div class="quick-fact"><span class="qf-value">0W</span><span class="qf-label">Extra fuel cost</span></div>
+    </div>
+
+    <h3>Installation</h3>
+    <ul>
+      <li><strong>Module placement:</strong> hot side flat against stove body or flue pipe (200–300°C range); cold side with large aluminium heatsink + fan if possible</li>
+      <li><strong>Thermal compound:</strong> CPU thermal paste between surfaces dramatically improves conductivity</li>
+      <li><strong>Wiring:</strong> connect modules in series to increase voltage; in parallel to increase current. Target: 12V+ open circuit to charge batteries</li>
+      <li><strong>Protection:</strong> add a diode and 15V Zener to prevent overvoltage when stove is very hot</li>
+      <li><strong>4–6 modules</strong> in series give ~12V and 2–5A = 24–60W from a hot stove</li>
+    </ul>
+  </section>
+
+  <!-- =================== STEAM =================== -->
+  <section id="steam">
+    <h2>7. Steam Power — Advanced</h2>
+    <div class="section-tags">
+      <span class="skill-tag skill-advanced">Advanced</span>
+      <span class="timeline-tag tag-1year">1-Year Build</span>
+    </div>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">☠️</span>
+      <div class="callout-content">
+        <strong>Boiler Safety — Non-Negotiable</strong>
+        <p>A boiler without a pressure relief valve WILL eventually explode. Boiler explosions are among the most destructive accidents in industrial history. <strong>Every steam system must have a properly rated pressure relief valve set at or below the vessel's rated pressure.</strong> Never seal a boiler without a tested, functional relief valve. Never operate above 60 PSI without a professionally rated pressure vessel. Do not build this until you fully understand boiler metallurgy and pressure testing.</p>
+      </div>
+    </div>
+
+    <p>Steam engines powered the entire Industrial Revolution. They can be rebuilt from basic metalwork skills. A small steam engine (100–500W) can pump water, grind grain, drive a generator, or power a sawmill — running on any combustible fuel.</p>
+
+    <h3>Basic Components</h3>
+    <ul>
+      <li><strong>Boiler:</strong> steel pressure vessel, rated minimum 150 PSI working pressure; test at 1.5× working pressure before use</li>
+      <li><strong>Pressure relief valve:</strong> spring-loaded, set at 60 PSI for safe small-scale operation</li>
+      <li><strong>Single-acting cylinder:</strong> steel pipe with machined or cast piston; steam enters one end, pushes piston, exhausts on return</li>
+      <li><strong>Slide valve:</strong> controls steam admission timing; oscillating valve is simplest to build</li>
+      <li><strong>Flywheel:</strong> heavy disc maintains rotation through dead centres; any large iron disc works</li>
+      <li><strong>Crankshaft:</strong> converts linear piston motion to rotation; can be forged or machined from steel</li>
+    </ul>
+
+    <p>Historical note: James Watt's first separate condenser engine of 1769 was built by hand with similar tools. The technology that powered the Industrial Revolution is fully rebuildable from first principles with basic machining skills.</p>
+  </section>
+
+  <!-- =================== QUICK REF =================== -->
+  <section id="quick-ref">
+    <h2>8. Quick Reference Card</h2>
+    <div class="print-card">
+      <h3>⚡ Power Generation Quick Reference</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>Output</th><th>Build Time</th><th>Cost</th><th>Continuous?</th></tr></thead>
+          <tbody>
+            <tr><td>TEG (stove)</td><td>5–30W</td><td>Hours</td><td>£20–40</td><td>While fire burns</td></tr>
+            <tr><td>Hand-crank generator</td><td>20–50W</td><td>1 weekend</td><td>£30–60</td><td>No (manual)</td></tr>
+            <tr><td>Pedal generator</td><td>50–150W</td><td>1 weekend</td><td>£80–120</td><td>No (manual)</td></tr>
+            <tr><td>Wind (1m blade, 20mph)</td><td>~100W</td><td>3 months</td><td>£100–200</td><td>When windy</td></tr>
+            <tr><td>Water wheel (1m head, 10 L/s)</td><td>60–200W</td><td>4–8 weeks</td><td>£80–200</td><td>Yes</td></tr>
+            <tr><td>Pelton (10m head)</td><td>200–500W</td><td>6–12 weeks</td><td>£150–300</td><td>Yes</td></tr>
+            <tr><td>Biogas (1 cow)</td><td>Cooking 2–3 hr/day</td><td>3 months</td><td>£100–300</td><td>Yes</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Key Formulas:</strong><br>
+      Hydro power: P(W) = head(m) × flow(L/s) × 9.81 × efficiency<br>
+      Wind power: P(W) = 0.5 × 1.225 × swept_area(m²) × speed³(m/s)</p>
+      <p style="font-size:.75rem;color:var(--text-3);margin-top:.5rem">⚡ The Last Light Survival Guide · See energy.html for solar &amp; battery sizing</p>
+    </div>
+  </section>
+
+  <hr>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-md);margin-top:var(--sp-xl)">
+    <a href="energy.html" class="btn btn-outline">← Energy</a>
+    <a href="../index.html" class="btn btn-primary">Back to Home →</a>
+  </div>
+  <div class="callout callout-tip" style="margin-top:var(--sp-xl)">
+    <span class="callout-icon">🔗</span>
+    <div class="callout-content">
+      <strong>Related Sections</strong>
+      <p>
+        <a href="energy.html">Energy → Solar panels, battery banks, inverters, 12V system wiring</a> ·
+        <a href="build-structures.html">Building → Structures to house generators and protect systems</a> ·
+        <a href="build-water.html">Water Systems → Hydro intake structures and pipe sizing</a> ·
+        <a href="metallurgy.html">Metallurgy → Fabricating shafts, gears, and pressure vessels</a>
+      </p>
+    </div>
+  </div>
+  <nav class="section-pagination no-print" aria-label="Section navigation">
+    <a href="energy.html" class="pagination-btn pagination-prev">← Energy</a>
+    <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+    <a href="build-structures.html" class="pagination-btn pagination-next">Building →</a>
+  </nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">🤖</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're reading Power Generation. Ask me how to build a pedal generator, calculate water wheel output, size a biogas digester, or wire TEG modules in series.</p><p class="aria-note">⚠️ Requires Ollama or Claude API. <a href="../ai-setup.html">Setup →</a></p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/bunker-bot.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

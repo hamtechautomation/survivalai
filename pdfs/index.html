@@ -6,70 +6,249 @@
   <title>PDF Library — The Last Light Survival Guide</title>
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
+    /* ── Layout ── */
+    .lib-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: var(--sp-xl);
+    }
+    .lib-header h1 { margin: 0 0 .3rem; font-size: 1.4rem; }
+    .lib-header p  { margin: 0; color: var(--text-2); font-size: .85rem; max-width: 500px; line-height: 1.5; }
+
+    /* ── Storage bar ── */
+    .storage-bar {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      margin-bottom: var(--sp-lg);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .storage-track {
+      flex: 1; min-width: 120px;
+      height: 6px;
+      background: var(--bg-4);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .storage-fill {
+      height: 100%;
+      background: var(--green, #27ae60);
+      border-radius: 3px;
+      transition: width .4s ease;
+    }
+    .storage-label { font-size: .78rem; color: var(--text-2); white-space: nowrap; }
+    .storage-label strong { color: var(--text-0); }
+
+    /* ── Filters ── */
+    .lib-filters {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: var(--sp-lg);
+      align-items: center;
+    }
+    .filter-btn {
+      font-size: .75rem;
+      padding: .25rem .75rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg-2);
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all .15s;
+      font-family: inherit;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--amber-dim);
+      border-color: var(--amber);
+      color: var(--amber-light);
+    }
+
+    /* ── Grid ── */
     .pdf-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 0.85rem;
-      margin-top: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: .85rem;
     }
+    @media (max-width: 640px) { .pdf-grid { grid-template-columns: 1fr; } }
+
+    /* ── Card ── */
     .pdf-card {
-      background: var(--bg-1);
+      background: var(--bg-2);
       border: 1px solid var(--border);
-      border-top: 2px solid var(--amber);
-      border-radius: 6px;
-      padding: 1rem 1.1rem;
+      border-radius: 8px;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
-      transition: border-color 0.15s;
+      transition: border-color .15s;
+      overflow: hidden;
     }
-    .pdf-card:hover { border-color: #555; border-top-color: var(--amber); }
-    .pdf-title  { font-weight: 700; color: var(--amber); font-size: 0.95em; line-height: 1.3; }
-    .pdf-author { color: var(--text-2); font-size: 0.78em; }
-    .pdf-desc   { color: var(--text-1); font-size: 0.83em; line-height: 1.55; flex: 1; margin-top: 0.2rem; }
-    .pdf-meta   { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.3rem; }
-    .badge-size   { font-size: 0.72em; padding: 0.1rem 0.45rem; border-radius: 3px; background: #1a1a2a; color: #8a8aff; border: 1px solid #2a2a4a; }
-    .badge-license{ font-size: 0.72em; padding: 0.1rem 0.45rem; border-radius: 3px; background: #0d2030; color: #3498db; border: 1px solid #1a3a50; }
-    .badge-uk     { font-size: 0.72em; padding: 0.1rem 0.45rem; border-radius: 3px; background: #0d2a14; color: #27ae60; border: 1px solid #1a4a22; }
-    .pdf-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+    .pdf-card:hover { border-color: var(--border-hi); }
+    .pdf-card.is-cached { border-color: rgba(39,174,96,.35); }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      padding: .9rem 1rem .5rem;
+    }
+    .card-status-dot {
+      flex-shrink: 0;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      margin-top: 5px;
+      background: var(--bg-4);
+      border: 1px solid var(--border-hi);
+      transition: background .3s;
+    }
+    .is-cached .card-status-dot { background: #27ae60; border-color: #27ae60; box-shadow: 0 0 6px rgba(39,174,96,.4); }
+
+    .card-title-block { flex: 1; min-width: 0; }
+    .card-title {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text-0);
+      line-height: 1.3;
+      margin-bottom: .15rem;
+    }
+    .card-author { font-size: .75rem; color: var(--text-3); }
+
+    .card-desc {
+      font-size: .8rem;
+      color: var(--text-2);
+      line-height: 1.55;
+      padding: 0 1rem .6rem;
+      flex: 1;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .3rem;
+      padding: 0 1rem .65rem;
+    }
+    .badge {
+      font-size: .67rem;
+      padding: .1rem .45rem;
+      border-radius: 3px;
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
+    .badge-size     { background: #1a1a2a; color: #8a8aff; border: 1px solid #2a2a4a; }
+    .badge-pd       { background: #0d2030; color: #3498db; border: 1px solid #1a3a50; }
+    .badge-free     { background: #0d2030; color: #5dade2; border: 1px solid #1a3040; }
+    .badge-crown    { background: #0d2a14; color: #27ae60; border: 1px solid #1a4a22; }
+    .badge-indexed  { background: #0d2a14; color: #27ae60; border: 1px solid #1a4a22; }
+    .badge-scanned  { background: #2a1a0d; color: #c9773e; border: 1px solid #4a2a10; }
+    .badge-cached   { background: rgba(39,174,96,.12); color: #27ae60; border: 1px solid rgba(39,174,96,.3); }
+
+    /* ── Actions ── */
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: .4rem;
+      padding: .55rem 1rem .8rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-1);
+      align-items: center;
+    }
     .btn-open {
-      flex: 1; text-align: center; text-decoration: none;
-      background: #1a1a0a; border: 1px solid var(--amber); color: var(--amber);
-      padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.82em; cursor: pointer;
-      transition: background 0.15s, color 0.15s;
+      text-align: center;
+      text-decoration: none;
+      background: rgba(201,169,78,.08);
+      border: 1px solid var(--amber-dim);
+      color: var(--amber);
+      padding: .3rem .7rem;
+      border-radius: 5px;
+      font-size: .8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+      font-family: inherit;
     }
-    .btn-open:hover { background: var(--amber); color: var(--bg-0); }
+    .btn-open:hover { background: rgba(201,169,78,.18); }
+
+    .btn-cache {
+      text-align: center;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      padding: .3rem .65rem;
+      border-radius: 5px;
+      font-size: .8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+    .btn-cache:hover:not(:disabled) { background: var(--bg-4); color: var(--text-0); }
+    .btn-cache.cached {
+      background: rgba(39,174,96,.1);
+      border-color: rgba(39,174,96,.3);
+      color: #27ae60;
+    }
+    .btn-cache.caching { opacity: .6; cursor: default; }
+    .btn-cache:disabled { opacity: .4; cursor: default; }
+
     .btn-dl {
-      flex: 0; padding: 0.3rem 0.55rem;
-      text-decoration: none; background: var(--bg-3); border: 1px solid var(--border);
-      color: var(--text-2); border-radius: 4px; font-size: 0.82em;
-      transition: background 0.15s;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-3);
+      padding: .3rem .5rem;
+      border-radius: 5px;
+      font-size: .82rem;
+      text-decoration: none;
+      transition: all .15s;
+      line-height: 1;
     }
-    .btn-dl:hover { background: var(--bg-4); color: var(--text-0); }
-    .back-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 0.75rem;
-      padding: 0.75rem 0 1.25rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 0.5rem;
+    .btn-dl:hover { background: var(--bg-4); color: var(--text-1); border-color: var(--border-hi); }
+
+    /* ── Not-bundled card (van Loon etc.) ── */
+    .pdf-card.not-bundled {
+      opacity: .6;
+      pointer-events: none;
     }
-    .back-link {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      color: var(--amber); text-decoration: none; font-size: 0.9em; font-weight: 600;
+    .pdf-card.not-bundled .card-actions { pointer-events: none; opacity: .4; }
+
+    /* ── Cache-all button ── */
+    .btn-cache-all {
+      background: var(--amber-dim);
+      border: 1px solid var(--amber);
+      color: var(--amber);
+      padding: .4rem 1rem;
+      border-radius: 5px;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .15s;
+      font-family: inherit;
+      white-space: nowrap;
     }
-    .back-link:hover { text-decoration: underline; }
-    .dl-all-btn {
-      background: var(--amber-dim); border: 1px solid var(--amber); color: var(--amber);
-      padding: 0.35rem 0.9rem; border-radius: 4px; font-size: 0.82em; cursor: pointer;
-      font-weight: 600; transition: background 0.15s;
+    .btn-cache-all:hover:not(:disabled) { background: var(--amber); color: var(--bg-0); }
+    .btn-cache-all:disabled { opacity: .5; cursor: default; }
+
+    /* ── Footer note ── */
+    .lib-note {
+      font-size: .78rem;
+      color: var(--text-3);
+      margin-top: var(--sp-xl);
+      padding-top: var(--sp-lg);
+      border-top: 1px solid var(--border);
+      line-height: 1.65;
     }
-    .dl-all-btn:hover { background: var(--amber); color: var(--bg-0); }
-    .index-note {
-      font-size: 0.8em; color: var(--text-3); margin-top: 2rem;
-      padding-top: 1rem; border-top: 1px solid var(--border);
-    }
-    @media (max-width: 600px) {
-      .pdf-grid { grid-template-columns: 1fr; }
+    .lib-note code {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: .05rem .35rem;
+      font-size: .9em;
     }
   </style>
 </head>
@@ -84,6 +263,7 @@
       <span class="page-title">PDF Library</span>
     </div>
     <div class="header-actions">
+      <button onclick="window.print()" class="btn btn-sm btn-outline">🖨️ Print</button>
       <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
     </div>
   </header>
@@ -91,379 +271,390 @@
   <main class="main-content" id="main-content">
   <div class="content-wrapper">
 
-    <div class="back-bar">
-      <a href="../literature.html" class="back-link">← Reference Library</a>
-      <button class="dl-all-btn" onclick="downloadAll()">⬇ Download All (14 PDFs)</button>
+    <!-- Header -->
+    <div class="lib-header">
+      <div>
+        <h1>📚 PDF Library</h1>
+        <p>14 military manuals and reference texts — open any PDF directly, or save individual files offline so they work without a network connection on any device.</p>
+      </div>
+      <button class="btn-cache-all" id="btn-cache-all" onclick="cacheAll()">
+        💾 Save all offline
+      </button>
     </div>
 
-    <div class="section-header">
-      <div class="section-badges">
-        <span class="badge">14 PDFs</span>
-        <span class="badge">~219 MB total</span>
-        <span class="badge">100% Offline</span>
+    <!-- Storage status bar -->
+    <div class="storage-bar">
+      <div class="storage-track">
+        <div class="storage-fill" id="storage-fill" style="width:0%"></div>
       </div>
-      <h1>📚 PDF Library</h1>
-      <p class="section-subtitle">All files are bundled locally — open or download any PDF without an internet connection. Bunker Bot can search the contents of all text-readable PDFs.</p>
+      <span class="storage-label" id="storage-label">Checking…</span>
     </div>
 
-    <div class="pdf-grid">
-
-      <div class="pdf-card">
-        <div class="pdf-title">US Army Survival Manual FM 3-05.70</div>
-        <div class="pdf-author">US Dept. of the Army · 2002</div>
-        <div class="pdf-desc">The definitive military survival reference — shelter, water, fire, food, navigation, and SERE across every climate. 676 pages.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">20 MB</span>
-          <span class="badge-license">Public Domain</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="fm-3-05-70-survival.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="fm-3-05-70-survival.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">US Army Survival Manual FM 21-76 (1957)</div>
-        <div class="pdf-author">US Dept. of the Army · 1957</div>
-        <div class="pdf-desc">The original survival field manual — evasion, escape, and primitive techniques not always in the modern edition. 314 pages.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">18 MB</span>
-          <span class="badge-license">Public Domain</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="fm-21-76-survival-1957.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="fm-21-76-survival-1957.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">First Aid — FM 4-25.11</div>
-        <div class="pdf-author">US Army / Navy / USAF / USMC · 2004</div>
-        <div class="pdf-desc">Military first aid — trauma, wounds, fractures, burns, airway management, hypothermia, mass-casualty triage. 227 pages.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">2.5 MB</span>
-          <span class="badge-license">Public Domain</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="fm-4-25-11-first-aid.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="fm-4-25-11-first-aid.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">Field Hygiene &amp; Sanitation FM 21-10</div>
-        <div class="pdf-author">US Army / USMC · 2000</div>
-        <div class="pdf-desc">Water purification, latrines, waste disposal, pest control, disease prevention. The illnesses that kill most survivors are preventable.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">2.8 MB</span>
-          <span class="badge-license">Public Domain</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="fm-21-10-field-hygiene.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="fm-21-10-field-hygiene.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">US Army Ranger Handbook SH 21-76</div>
-        <div class="pdf-author">US Army · 2006</div>
-        <div class="pdf-desc">Small-unit tactics, demolitions, reconnaissance, battle drills, and leadership under pressure. Concise and action-oriented.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">3.7 MB</span>
-          <span class="badge-license">Public Domain</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="ranger-handbook.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="ranger-handbook.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">US Army Signal Operations FM 6-02</div>
-        <div class="pdf-author">US Dept. of the Army · 2019</div>
-        <div class="pdf-desc">Military communications: radio networks, encryption, frequencies, antenna theory, and maintaining comms under degraded conditions.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">5.3 MB</span>
-          <span class="badge-license">Public Domain</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="fm-6-02-signal-ops.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="fm-6-02-signal-ops.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">Emergency War Surgery (5th Ed.)</div>
-        <div class="pdf-author">US Army Borden Institute · 2018</div>
-        <div class="pdf-desc">Advanced trauma surgery without hospital infrastructure — haemorrhage control, blast injuries, burns, amputations, field anaesthesia.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">29 MB</span>
-          <span class="badge-license">Public Domain</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="emergency-war-surgery.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="emergency-war-surgery.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">Nuclear War Survival Skills</div>
-        <div class="pdf-author">Cresson H. Kearny · Oak Ridge National Lab · 1987</div>
-        <div class="pdf-desc">Peer-reviewed nuclear survival guide — expedient shelters, KFM dosimeter construction, fallout decontamination, medical effects of radiation.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">70 MB</span>
-          <span class="badge-license">Public Domain</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="nuclear-war-survival.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="nuclear-war-survival.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">Where There Is No Doctor</div>
-        <div class="pdf-author">David Werner et al. · Hesperian · 2012</div>
-        <div class="pdf-desc">The world's most-used community health guide — diagnosis, treatment, and prevention for remote areas without medical professionals. 503 pages.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">8.3 MB</span>
-          <span class="badge-license">Hesperian Free License</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="where-there-is-no-doctor.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="where-there-is-no-doctor.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">Where There Is No Dentist</div>
-        <div class="pdf-author">Murray Dickson · Hesperian · 2012</div>
-        <div class="pdf-desc">Practical dental care without a dentist — extractions, fillings, infections, pain relief, and prevention. Illustrated procedures.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">7.2 MB</span>
-          <span class="badge-license">Hesperian Free License</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="where-there-is-no-dentist.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="where-there-is-no-dentist.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">The Humanure Handbook (3rd Ed.)</div>
-        <div class="pdf-author">Joseph Jenkins · 2005</div>
-        <div class="pdf-desc">Safe composting of human waste into fertile soil. Critical sanitation when sewage fails — thermophilic composting, pathogen safety, system construction.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">22 MB</span>
-          <span class="badge-license">Author Free Release</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="humanure-handbook.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="humanure-handbook.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">Aerie Wilderness Medicine (15th Ed.)</div>
-        <div class="pdf-author">Aerie Backcountry Medicine · 2025</div>
-        <div class="pdf-desc">Current wilderness medicine curriculum — patient assessment, trauma, environmental injuries, altitude sickness, evacuation decisions. WEMT standard.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">13 MB</span>
-          <span class="badge-license">Educator Free License</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="aerie-backcountry-medicine.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="aerie-backcountry-medicine.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">UK Emergency Preparedness Guide</div>
-        <div class="pdf-author">UK Cabinet Office · 2016</div>
-        <div class="pdf-desc">Official UK government guidance for individuals, families, and communities — flooding, power cuts, evacuation, and community resilience.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">285 KB</span>
-          <span class="badge-uk">Crown Copyright</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="uk-emergency-preparedness.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="uk-emergency-preparedness.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-title">The Art of War</div>
-        <div class="pdf-author">Sun Tzu · trans. Lionel Giles · c.500 BCE</div>
-        <div class="pdf-desc">Strategic thinking, deception, intelligence, and leadership under pressure. Foundational text on conflict and resource management — applies to security and community defence.</div>
-        <div class="pdf-meta">
-          <span class="badge-size">0.9 MB</span>
-          <span class="badge-license">Public Domain</span>
-        </div>
-        <div class="pdf-actions">
-          <a href="art-of-war-sun-tzu.pdf" target="_blank" class="btn-open">Open</a>
-          <a href="art-of-war-sun-tzu.pdf" download class="btn-dl" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card" style="border-top-color:var(--text-3);opacity:.8">
-        <div class="pdf-title">The Story of Mankind <span style="font-size:.7rem;background:var(--bg-3);color:var(--text-3);border-radius:3px;padding:1px 5px;margin-left:.3rem">ADD MANUALLY</span></div>
-        <div class="pdf-author">Hendrik Willem van Loon · 1921 · First Newbery Medal Winner</div>
-        <div class="pdf-desc">The most readable one-volume history of human civilization ever written — Stone Age through WWI. Public domain. Download the EPUB from <strong>gutenberg.org/ebooks/754</strong>, convert to PDF with Calibre (free, calibre-ebook.com), then save as <code>story-of-mankind-van-loon.pdf</code> in this folder.</div>
-        <div class="pdf-meta">
-          <span class="badge-license">Public Domain</span>
-        </div>
-        <div class="pdf-actions" style="opacity:.4;pointer-events:none">
-          <span class="btn-open" style="cursor:default">Not bundled</span>
-        </div>
-      </div>
-
+    <!-- Filters -->
+    <div class="lib-filters">
+      <span style="font-size:.75rem;color:var(--text-3);margin-right:.2rem">Filter:</span>
+      <button class="filter-btn active" data-filter="all"   onclick="setFilter('all')">All 14</button>
+      <button class="filter-btn"       data-filter="cached" onclick="setFilter('cached')">💾 Saved offline</button>
+      <button class="filter-btn"       data-filter="medical" onclick="setFilter('medical')">Medical</button>
+      <button class="filter-btn"       data-filter="military" onclick="setFilter('military')">Military</button>
+      <button class="filter-btn"       data-filter="indexed" onclick="setFilter('indexed')">🔍 AI-searchable</button>
     </div>
 
-    <p class="index-note">
-      Bunker Bot can search the text of all PDFs above (except Nuclear War Survival Skills, which is a scanned image).
-      To re-index after adding new PDFs: <code>cd pdfs &amp;&amp; python3 extract.py</code>.
-      Go to <a href="../literature.html">Reference Library</a> to manage your personal library and Bunker Bot knowledge base.
+    <!-- PDF Grid (rendered by JS) -->
+    <div class="pdf-grid" id="pdf-grid"></div>
+
+    <!-- Footer note -->
+    <p class="lib-note">
+      <strong>AI search:</strong> Bunker Bot can search the text of all PDFs marked 🔍 Indexed.
+      <em>Nuclear War Survival Skills</em> is a scanned image — its text isn't extractable.
+      After adding new PDFs to the <code>pdfs/</code> folder, run <code>python3 pdfs/extract.py</code> to rebuild the search index.
+      &nbsp;·&nbsp;
+      <strong>Save offline:</strong> Use the 💾 buttons to cache PDFs in your browser for offline use.
+      Cached files survive network outages and work on installed PWA.
+      To remove a cached file, click the ✓ Saved button again.
     </p>
 
-  </div><!-- /content-wrapper -->
+  </div>
   </main>
 
-  <!-- Download confirmation modal -->
-  <div id="dl-confirm" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9200;align-items:center;justify-content:center;" onclick="if(event.target===this)cancelDownload()">
-    <div style="background:var(--bg-2);border:1px solid var(--border-hi);border-top:2px solid var(--amber);border-radius:8px;padding:1.4rem 1.6rem;width:min(400px,92vw);">
-      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);margin-bottom:0.5rem;">Download PDF</div>
-      <div id="confirm-title" style="font-weight:700;color:var(--amber-light);font-size:0.97rem;line-height:1.4;margin-bottom:0.35rem;"></div>
-      <div style="font-size:0.78rem;color:var(--text-3);margin-bottom:1.1rem;"><span id="confirm-size"></span><span id="confirm-file" style="font-family:monospace;"></span></div>
-      <div style="display:flex;gap:0.6rem;justify-content:flex-end;">
-        <button onclick="cancelDownload()" style="background:var(--bg-4);border:1px solid var(--border-hi);color:var(--text-1);padding:0.4rem 1rem;border-radius:4px;font-size:0.85em;cursor:pointer;font-weight:600;">Cancel</button>
-        <button onclick="confirmDownload()" style="background:var(--amber-dim);border:1px solid var(--amber);color:var(--amber-light);padding:0.4rem 1rem;border-radius:4px;font-size:0.85em;cursor:pointer;font-weight:700;">⬇ Download</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Download guide modal -->
-  <div id="dl-guide" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9100;align-items:center;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
-    <div style="background:var(--bg-2);border:1px solid var(--border-hi);border-top:2px solid var(--amber);border-radius:8px;padding:1.5rem 1.75rem;width:min(460px,92vw);">
-      <h3 style="margin:0 0 0.75rem;color:var(--amber);font-size:1rem;">⬇ Downloading All PDFs</h3>
-      <p style="font-size:0.85em;color:var(--text-1);line-height:1.6;margin:0 0 0.85rem;">
-        Browsers block automatic multi-file downloads. The quickest approach:
-      </p>
-      <ol style="font-size:0.84em;color:var(--text-1);line-height:1.9;margin:0 0 1rem;padding-left:1.2rem;">
-        <li>Click the <strong style="color:var(--amber)">⬇</strong> button on each card below — they're real links your browser won't block.</li>
-        <li><strong>Or</strong> — copy the entire <code>survivalai/pdfs/</code> folder to a USB drive. All 14 files are already there.</li>
-        <li>Already downloaded? Your browser just adds <code>(1)</code> to the filename — the originals are safe.</li>
-      </ol>
-      <div style="text-align:right;">
-        <button onclick="document.getElementById('dl-guide').style.display='none'" style="background:var(--bg-4);border:1px solid var(--border-hi);color:var(--text-1);padding:0.35rem 0.85rem;border-radius:4px;font-size:0.83em;cursor:pointer;">Got it</button>
-      </div>
-    </div>
-  </div>
-
-  <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
-    <div class="aria-header">
-      <div class="aria-title">
-        <div class="aria-avatar">🤖</div>
-        <div class="aria-title-text">
-          <strong>Bunker Bot</strong>
-          <small>Offline Survival AI</small>
-        </div>
-      </div>
-      <button id="aria-close" class="btn-icon" aria-label="Close Bunker Bot">✕</button>
-    </div>
-    <div class="aria-status">
-      <span class="status-dot checking"></span>
-      <span class="aria-status-label">Checking connection…</span>
-      &nbsp;·&nbsp;
-      <span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span>
-    </div>
-    <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
-      <div class="aria-message aria-welcome">
-        <div class="aria-message-content">
-          <p>Hello, I'm <strong>Bunker Bot</strong>. Ask me about any of the PDFs in this library, or any survival and preparedness question.</p>
-          <p class="aria-note">⚠️ Requires Ollama running locally. <a href="../ai-setup.html">Setup guide →</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="aria-input-area">
-      <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2" aria-label="Message Bunker Bot"></textarea>
-      <button id="aria-send" class="btn btn-sm btn-amber">Send</button>
-    </div>
-  </aside>
-
+  <div id="aria-panel"></div>
   <script src="../assets/js/app.js"></script>
-  <script src="../assets/js/librarian.js"></script>
   <script src="../assets/js/bunker-bot.js"></script>
   <script>
-    const PDF_FILES = [
-      'fm-3-05-70-survival.pdf',
-      'fm-21-76-survival-1957.pdf',
-      'fm-4-25-11-first-aid.pdf',
-      'fm-21-10-field-hygiene.pdf',
-      'ranger-handbook.pdf',
-      'fm-6-02-signal-ops.pdf',
-      'emergency-war-surgery.pdf',
-      'nuclear-war-survival.pdf',
-      'where-there-is-no-doctor.pdf',
-      'where-there-is-no-dentist.pdf',
-      'humanure-handbook.pdf',
-      'aerie-backcountry-medicine.pdf',
-      'uk-emergency-preparedness.pdf',
-      'art-of-war-sun-tzu.pdf',
-    ];
+  /* ─────────────────────────────────────────────────────────
+     PDF LIBRARY DATA
+  ───────────────────────────────────────────────────────── */
+  const PDFS = [
+    {
+      file:    'fm-3-05-70-survival.pdf',
+      title:   'US Army Survival Manual FM 3-05.70',
+      author:  'US Dept. of the Army · 2002',
+      desc:    'The definitive military survival reference — shelter, water, fire, food, navigation, and SERE across every climate zone. 676 pages.',
+      size:    '20 MB',
+      license: 'Public Domain', licenseClass: 'badge-pd',
+      indexed: true,
+      tags:    ['military','survival','navigation'],
+    },
+    {
+      file:    'fm-21-76-survival-1957.pdf',
+      title:   'US Army Survival Manual FM 21-76 (1957)',
+      author:  'US Dept. of the Army · 1957',
+      desc:    'The original survival field manual — evasion, escape, and primitive techniques not always in the modern edition. 314 pages.',
+      size:    '18 MB',
+      license: 'Public Domain', licenseClass: 'badge-pd',
+      indexed: true,
+      tags:    ['military','survival'],
+    },
+    {
+      file:    'fm-4-25-11-first-aid.pdf',
+      title:   'First Aid FM 4-25.11',
+      author:  'US Army / Navy / USAF / USMC · 2004',
+      desc:    'Military first aid — trauma, wounds, fractures, burns, airway management, hypothermia, and mass-casualty triage. 227 pages.',
+      size:    '2.5 MB',
+      license: 'Public Domain', licenseClass: 'badge-pd',
+      indexed: true,
+      tags:    ['medical','military'],
+    },
+    {
+      file:    'fm-21-10-field-hygiene.pdf',
+      title:   'Field Hygiene & Sanitation FM 21-10',
+      author:  'US Army / USMC · 2000',
+      desc:    'Water purification, latrines, pest control, disease prevention. The illnesses that kill most survivors are preventable.',
+      size:    '2.8 MB',
+      license: 'Public Domain', licenseClass: 'badge-pd',
+      indexed: true,
+      tags:    ['medical','military','survival'],
+    },
+    {
+      file:    'ranger-handbook.pdf',
+      title:   'US Army Ranger Handbook SH 21-76',
+      author:  'US Army · 2006',
+      desc:    'Small-unit tactics, demolitions, reconnaissance, battle drills, and leadership under pressure. Concise and action-oriented.',
+      size:    '3.7 MB',
+      license: 'Public Domain', licenseClass: 'badge-pd',
+      indexed: true,
+      tags:    ['military'],
+    },
+    {
+      file:    'fm-6-02-signal-ops.pdf',
+      title:   'US Army Signal Operations FM 6-02',
+      author:  'US Dept. of the Army · 2019',
+      desc:    'Military communications — radio networks, frequencies, antenna theory, and maintaining comms under degraded conditions.',
+      size:    '5.3 MB',
+      license: 'Public Domain', licenseClass: 'badge-pd',
+      indexed: true,
+      tags:    ['military'],
+    },
+    {
+      file:    'emergency-war-surgery.pdf',
+      title:   'Emergency War Surgery (5th Ed.)',
+      author:  'US Army Borden Institute · 2018',
+      desc:    'Advanced trauma surgery without hospital infrastructure — haemorrhage control, blast injuries, burns, amputations, field anaesthesia.',
+      size:    '29 MB',
+      license: 'Public Domain', licenseClass: 'badge-pd',
+      indexed: true,
+      tags:    ['medical','military'],
+    },
+    {
+      file:    'nuclear-war-survival.pdf',
+      title:   'Nuclear War Survival Skills',
+      author:  'Cresson H. Kearny · Oak Ridge National Lab · 1987',
+      desc:    'Peer-reviewed nuclear survival guide — expedient shelters, KFM dosimeter construction, fallout decontamination, and medical effects of radiation.',
+      size:    '70 MB',
+      license: 'Public Domain', licenseClass: 'badge-pd',
+      indexed: false,
+      tags:    ['survival'],
+    },
+    {
+      file:    'where-there-is-no-doctor.pdf',
+      title:   'Where There Is No Doctor',
+      author:  'David Werner et al. · Hesperian · 2012',
+      desc:    "The world's most-used community health guide — diagnosis, treatment, and prevention for remote areas without medical professionals. 503 pages.",
+      size:    '8.3 MB',
+      license: 'Free to Share', licenseClass: 'badge-free',
+      indexed: true,
+      tags:    ['medical'],
+    },
+    {
+      file:    'where-there-is-no-dentist.pdf',
+      title:   'Where There Is No Dentist',
+      author:  'Murray Dickson · Hesperian · 2012',
+      desc:    'Practical dental care without a dentist — extractions, fillings, infections, pain relief, and prevention. Illustrated procedures.',
+      size:    '7.2 MB',
+      license: 'Free to Share', licenseClass: 'badge-free',
+      indexed: true,
+      tags:    ['medical'],
+    },
+    {
+      file:    'humanure-handbook.pdf',
+      title:   'The Humanure Handbook (3rd Ed.)',
+      author:  'Joseph Jenkins · 2005',
+      desc:    'Safe composting of human waste into fertile soil — thermophilic composting, pathogen safety, system construction. Critical when sewage fails.',
+      size:    '22 MB',
+      license: 'Free to Share', licenseClass: 'badge-free',
+      indexed: true,
+      tags:    ['survival'],
+    },
+    {
+      file:    'aerie-backcountry-medicine.pdf',
+      title:   'Aerie Wilderness Medicine (15th Ed.)',
+      author:  'Aerie Backcountry Medicine · 2025',
+      desc:    'Current wilderness medicine curriculum — patient assessment, trauma, environmental injuries, altitude sickness, evacuation decisions. WEMT standard.',
+      size:    '13 MB',
+      license: 'Free to Share', licenseClass: 'badge-free',
+      indexed: true,
+      tags:    ['medical'],
+    },
+    {
+      file:    'uk-emergency-preparedness.pdf',
+      title:   'UK Emergency Preparedness Guide',
+      author:  'UK Cabinet Office · 2016',
+      desc:    'Official UK guidance for individuals, families, and communities — flooding, power cuts, evacuation, and community resilience.',
+      size:    '285 KB',
+      license: 'Crown Copyright', licenseClass: 'badge-crown',
+      indexed: true,
+      tags:    ['survival'],
+    },
+    {
+      file:    'art-of-war-sun-tzu.pdf',
+      title:   'The Art of War',
+      author:  'Sun Tzu · trans. Lionel Giles · c.500 BCE',
+      desc:    'Strategic thinking, deception, and leadership under pressure. Foundational text on conflict and resource management — applies to security and community defence.',
+      size:    '0.9 MB',
+      license: 'Public Domain', licenseClass: 'badge-pd',
+      indexed: true,
+      tags:    ['military','survival'],
+    },
+  ];
 
-    function downloadAll() {
-      document.getElementById('dl-guide').style.display = 'flex';
-    }
+  /* ─────────────────────────────────────────────────────────
+     CACHE API
+  ───────────────────────────────────────────────────────── */
+  const CACHE_NAME = 'last-light-v4';
 
-    // ── Download confirmation ──────────────────────────────
-    const PDF_META = {
-      'fm-3-05-70-survival.pdf':      { title: 'US Army Survival Manual FM 3-05.70',     size: '20 MB' },
-      'fm-21-76-survival-1957.pdf':   { title: 'US Army Survival Manual FM 21-76 (1957)',size: '18 MB' },
-      'fm-4-25-11-first-aid.pdf':     { title: 'First Aid FM 4-25.11',                   size: '2.5 MB' },
-      'fm-21-10-field-hygiene.pdf':   { title: 'Field Hygiene & Sanitation FM 21-10',    size: '2.8 MB' },
-      'ranger-handbook.pdf':          { title: 'US Army Ranger Handbook SH 21-76',       size: '3.7 MB' },
-      'fm-6-02-signal-ops.pdf':       { title: 'US Army Signal Operations FM 6-02',      size: '5.3 MB' },
-      'emergency-war-surgery.pdf':    { title: 'Emergency War Surgery (5th Ed.)',         size: '29 MB' },
-      'nuclear-war-survival.pdf':     { title: 'Nuclear War Survival Skills',             size: '70 MB' },
-      'where-there-is-no-doctor.pdf': { title: 'Where There Is No Doctor',               size: '8.3 MB' },
-      'where-there-is-no-dentist.pdf':{ title: 'Where There Is No Dentist',              size: '7.2 MB' },
-      'humanure-handbook.pdf':        { title: 'The Humanure Handbook',                  size: '22 MB' },
-      'aerie-backcountry-medicine.pdf':{ title: 'Aerie Wilderness Medicine (15th Ed.)',  size: '13 MB' },
-      'uk-emergency-preparedness.pdf':{ title: 'UK Emergency Preparedness Guide',        size: '285 KB' },
-      'art-of-war-sun-tzu.pdf':       { title: 'The Art of War',                         size: '0.9 MB' },
-    };
+  function pdfUrl(file) {
+    return new URL(file, window.location.href).href;
+  }
 
-    let _pendingHref = null;
+  async function isCached(file) {
+    if (!('caches' in window)) return false;
+    try {
+      const cache = await caches.open(CACHE_NAME);
+      const match = await cache.match(pdfUrl(file));
+      return !!match;
+    } catch { return false; }
+  }
 
-    document.addEventListener('click', e => {
-      const link = e.target.closest('a[download]');
-      if (!link) return;
-      e.preventDefault();
-      const file = link.getAttribute('href').split('/').pop();
-      const meta = PDF_META[file] || { title: file, size: '' };
-      _pendingHref = link.href;
-      document.getElementById('confirm-title').textContent = meta.title;
-      document.getElementById('confirm-size').textContent  = meta.size ? meta.size + ' · ' : '';
-      document.getElementById('confirm-file').textContent  = file;
-      document.getElementById('dl-confirm').style.display  = 'flex';
+  async function cachePdf(file) {
+    if (!('caches' in window)) throw new Error('Cache API unavailable');
+    const cache  = await caches.open(CACHE_NAME);
+    const url    = pdfUrl(file);
+    const resp   = await fetch(url);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    await cache.put(url, resp);
+  }
+
+  async function uncachePdf(file) {
+    if (!('caches' in window)) return;
+    const cache = await caches.open(CACHE_NAME);
+    await cache.delete(pdfUrl(file));
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     RENDER
+  ───────────────────────────────────────────────────────── */
+  let cachedSet  = new Set();
+  let activeFilter = 'all';
+
+  function renderGrid() {
+    const grid = document.getElementById('pdf-grid');
+    const filtered = PDFS.filter(p => {
+      if (activeFilter === 'cached')  return cachedSet.has(p.file);
+      if (activeFilter === 'indexed') return p.indexed;
+      if (activeFilter === 'medical') return p.tags.includes('medical');
+      if (activeFilter === 'military')return p.tags.includes('military');
+      return true;
     });
 
-    function confirmDownload() {
-      if (_pendingHref) {
-        const a = document.createElement('a');
-        a.href = _pendingHref;
-        a.download = '';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        _pendingHref = null;
-      }
-      document.getElementById('dl-confirm').style.display = 'none';
+    if (!filtered.length) {
+      grid.innerHTML = `<p style="color:var(--text-3);font-size:.85rem;grid-column:1/-1;padding:var(--sp-xl) 0">No PDFs match this filter.</p>`;
+      return;
     }
 
-    function cancelDownload() {
-      _pendingHref = null;
-      document.getElementById('dl-confirm').style.display = 'none';
+    grid.innerHTML = filtered.map(p => {
+      const cached  = cachedSet.has(p.file);
+      const cacheLabel = cached ? '✓ Saved' : '💾 Save offline';
+      const cacheClass = cached ? 'btn-cache cached' : 'btn-cache';
+      return `
+        <div class="pdf-card${cached ? ' is-cached' : ''}" data-file="${p.file}">
+          <div class="card-top">
+            <div class="card-status-dot" title="${cached ? 'Saved offline' : 'Not saved offline'}"></div>
+            <div class="card-title-block">
+              <div class="card-title">${p.title}</div>
+              <div class="card-author">${p.author}</div>
+            </div>
+          </div>
+          <p class="card-desc">${p.desc}</p>
+          <div class="card-meta">
+            <span class="badge badge-size">${p.size}</span>
+            <span class="badge ${p.licenseClass}">${p.license}</span>
+            <span class="badge ${p.indexed ? 'badge-indexed' : 'badge-scanned'}">${p.indexed ? '🔍 Indexed' : '🖼 Scanned'}</span>
+            ${cached ? '<span class="badge badge-cached">💾 Offline</span>' : ''}
+          </div>
+          <div class="card-actions">
+            <a href="${p.file}" target="_blank" rel="noopener" class="btn-open">📖 Open</a>
+            <button class="${cacheClass}" onclick="toggleCache('${p.file}', this)" title="${cached ? 'Click to remove offline copy' : 'Save for offline use'}">${cacheLabel}</button>
+            <a href="${p.file}" download title="Download to device" class="btn-dl">⬇</a>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function setFilter(f) {
+    activeFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.filter === f);
+    });
+    renderGrid();
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     CACHE TOGGLE
+  ───────────────────────────────────────────────────────── */
+  async function toggleCache(file, btn) {
+    if (!('caches' in window)) {
+      alert('Offline caching requires the app to be served over HTTP (not file://). Try running: python3 -m http.server 8080');
+      return;
     }
+    const wasCached = cachedSet.has(file);
+    btn.disabled = true;
+    btn.textContent = wasCached ? 'Removing…' : 'Saving…';
+    btn.classList.add('caching');
+    try {
+      if (wasCached) {
+        await uncachePdf(file);
+        cachedSet.delete(file);
+      } else {
+        await cachePdf(file);
+        cachedSet.add(file);
+      }
+    } catch (e) {
+      btn.disabled = false;
+      btn.classList.remove('caching');
+      btn.textContent = wasCached ? '✓ Saved' : '💾 Save offline';
+      alert(`Could not ${wasCached ? 'remove' : 'cache'} file: ${e.message}`);
+      return;
+    }
+    renderGrid();
+    updateStorageBar();
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     CACHE ALL
+  ───────────────────────────────────────────────────────── */
+  async function cacheAll() {
+    if (!('caches' in window)) {
+      alert('Offline caching requires HTTP (not file://). Run: python3 -m http.server 8080');
+      return;
+    }
+    const btn = document.getElementById('btn-cache-all');
+    const todo = PDFS.filter(p => !cachedSet.has(p.file));
+    if (!todo.length) {
+      btn.textContent = '✓ All saved';
+      return;
+    }
+    btn.disabled = true;
+    for (let i = 0; i < todo.length; i++) {
+      btn.textContent = `Saving ${i + 1} / ${todo.length}…`;
+      try {
+        await cachePdf(todo[i].file);
+        cachedSet.add(todo[i].file);
+        renderGrid();
+        updateStorageBar();
+      } catch (e) {
+        console.warn('Failed to cache', todo[i].file, e);
+      }
+    }
+    btn.disabled = false;
+    btn.textContent = '✓ All saved';
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     STORAGE BAR
+  ───────────────────────────────────────────────────────── */
+  function updateStorageBar() {
+    const count = cachedSet.size;
+    const total = PDFS.length;
+    const pct   = total ? Math.round(count / total * 100) : 0;
+    document.getElementById('storage-fill').style.width  = pct + '%';
+    const cacheAllBtn = document.getElementById('btn-cache-all');
+
+    if (count === 0) {
+      document.getElementById('storage-label').innerHTML =
+        `<strong>0</strong> of ${total} PDFs saved offline`;
+      cacheAllBtn.textContent = '💾 Save all offline';
+    } else if (count === total) {
+      document.getElementById('storage-label').innerHTML =
+        `<strong>All ${total} PDFs</strong> saved offline`;
+      cacheAllBtn.textContent = '✓ All saved';
+    } else {
+      document.getElementById('storage-label').innerHTML =
+        `<strong>${count}</strong> of ${total} PDFs saved offline`;
+      cacheAllBtn.textContent = `💾 Save remaining ${total - count}`;
+    }
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     INIT — check cache status for all PDFs on load
+  ───────────────────────────────────────────────────────── */
+  (async () => {
+    document.getElementById('storage-label').textContent = 'Checking offline status…';
+    const results = await Promise.all(PDFS.map(p => isCached(p.file)));
+    PDFS.forEach((p, i) => { if (results[i]) cachedSet.add(p.file); });
+    renderGrid();
+    updateStorageBar();
+  })();
   </script>
 </body>
 </html>
