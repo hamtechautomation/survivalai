@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="First principles for rebuilding: the periodic table, core physics and chemistry, the equations that actually matter in the field, and a method for inventing your own tools and systems from scratch.">
+  <title>First Principles — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* ── Periodic table ── */
+    .ptable-wrap { overflow-x: auto; padding-bottom: .5rem; margin: 1rem 0; }
+    .ptable {
+      display: grid;
+      grid-template-columns: repeat(18, minmax(34px, 1fr));
+      grid-auto-rows: minmax(34px, auto);
+      gap: 3px;
+      min-width: 720px;
+    }
+    .pt-cell {
+      border: 1px solid var(--border-hi);
+      border-radius: 3px;
+      padding: 2px 3px;
+      font-size: .55rem;
+      line-height: 1.05;
+      cursor: pointer;
+      position: relative;
+      background: var(--bg-2);
+      transition: transform .08s var(--ease), border-color .08s var(--ease);
+    }
+    .pt-cell:hover { transform: scale(1.12); border-color: var(--amber); z-index: 5; }
+    .pt-cell .pt-num { font-size: .5rem; color: var(--text-3); }
+    .pt-cell .pt-sym { font-size: .82rem; font-weight: 700; color: var(--text-0); display: block; }
+    .pt-cell .pt-name { font-size: .45rem; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    /* category colours — desaturated so they read by torchlight */
+    .cat-alkali        { background: #3a1f1f; border-color: #6e3636; }
+    .cat-alkaline      { background: #3a2c1f; border-color: #6e5236; }
+    .cat-transition    { background: #1f2c3a; border-color: #36526e; }
+    .cat-posttrans     { background: #1f3a2f; border-color: #366e54; }
+    .cat-metalloid     { background: #2f1f3a; border-color: #54366e; }
+    .cat-nonmetal      { background: #1f3a3a; border-color: #366e6e; }
+    .cat-halogen       { background: #3a3a1f; border-color: #6e6e36; }
+    .cat-noble         { background: #2a1f3a; border-color: #4a366e; }
+    .cat-lanthanide    { background: #381f33; border-color: #6e3661; }
+    .cat-actinide      { background: #1f1f38; border-color: #36366e; }
+    .cat-unknown       { background: var(--bg-3); border-color: var(--border-hi); }
+    .pt-survival::after { content: "★"; position: absolute; top: 1px; right: 2px; font-size: .5rem; color: var(--amber); }
+    .pt-legend { display: flex; flex-wrap: wrap; gap: .4rem; margin: .75rem 0; font-size: .68rem; }
+    .pt-legend span { padding: 2px 8px; border-radius: 999px; border: 1px solid; }
+    #pt-detail {
+      background: var(--bg-2); border: 1px solid var(--amber-dim); border-radius: 6px;
+      padding: .85rem 1rem; margin: .75rem 0; min-height: 60px; font-size: .85rem;
+    }
+    #pt-detail.empty { color: var(--text-3); border-color: var(--border); font-style: italic; }
+    #pt-detail strong { color: var(--amber-light); }
+    /* ── Equation cards ── */
+    .eq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: .75rem; margin: 1rem 0; }
+    .eq-card { background: var(--bg-2); border: 1px solid var(--border); border-left: 3px solid var(--amber-dim); border-radius: 4px; padding: .75rem .9rem; }
+    .eq-card h4 { margin: 0 0 .3rem; color: var(--amber-light); font-size: .9rem; }
+    .eq-formula { font-family: var(--mono); font-size: 1.05rem; color: var(--text-0); background: var(--bg-0); border-radius: 3px; padding: .35rem .6rem; margin: .3rem 0; display: block; }
+    .eq-where { font-size: .76rem; color: var(--text-2); line-height: 1.5; }
+    .eq-use { font-size: .76rem; color: #6ecca8; margin-top: .35rem; }
+    /* ── Principle blocks ── */
+    .principle { background: var(--bg-2); border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1.1rem; margin: .7rem 0; }
+    .principle h4 { margin: 0 0 .35rem; color: var(--amber-light); }
+    .principle .why { font-size: .8rem; color: #6ecca8; margin-top: .4rem; }
+    table.ref { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .82rem; }
+    table.ref th, table.ref td { border: 1px solid var(--border); padding: .4rem .6rem; text-align: left; }
+    table.ref th { background: var(--bg-3); color: var(--amber-light); }
+    table.ref td:first-child { font-family: var(--mono); color: var(--text-0); }
+    .callout-invent { background: #0a1410; border: 1px solid #2a4a3a; border-left: 4px solid #4b9e6a; border-radius: 4px; padding: .85rem 1rem; margin: .75rem 0; }
+    .callout-invent strong { color: #6ecca8; }
+  </style>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">First Principles</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>First Principles — Science, Maths &amp; Invention</h1>
+    <p class="section-desc">The other sections tell you <em>what</em> to build. This one tells you <em>why</em> it works — so when you have no plan, no parts, and no internet, you can reason your way to a working solution from the ground up. The periodic table, the physics and chemistry that run the world, the equations worth memorising, and a repeatable method for inventing your own tools.</p>
+    <div class="section-meta">
+      <span class="meta-item">Updated: <span data-updated="2026-06"></span></span>
+      <span class="meta-item"><span id="reading-time"></span></span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#ptable">The Periodic Table</a></li>
+      <li><a href="#constants">Constants, Units &amp; Conversions</a></li>
+      <li><a href="#equations">Equations That Matter</a></li>
+      <li><a href="#physics">Physics First Principles</a></li>
+      <li><a href="#chemistry">Chemistry First Principles</a></li>
+      <li><a href="#maths">Field Mathematics</a></li>
+      <li><a href="#invention">The Invention Method</a></li>
+    </ol>
+  </nav>
+
+  <!-- ════════ PERIODIC TABLE ════════ -->
+  <section id="ptable">
+    <h2>1. The Periodic Table</h2>
+    <p>Every material in the world is built from these. The <span style="color:var(--amber)">★</span> marks elements you can realistically source, use, or must respect in a grid-down world. Tap any element for its survival relevance.</p>
+
+    <div class="pt-legend">
+      <span class="cat-alkali">Alkali metal</span>
+      <span class="cat-alkaline">Alkaline earth</span>
+      <span class="cat-transition">Transition metal</span>
+      <span class="cat-posttrans">Post-transition</span>
+      <span class="cat-metalloid">Metalloid</span>
+      <span class="cat-nonmetal">Nonmetal</span>
+      <span class="cat-halogen">Halogen</span>
+      <span class="cat-noble">Noble gas</span>
+      <span class="cat-lanthanide">Lanthanide</span>
+      <span class="cat-actinide">Actinide</span>
+    </div>
+
+    <div id="pt-detail" class="empty">Tap an element to see what it's good for.</div>
+    <div class="ptable-wrap"><div class="ptable" id="ptable-grid"></div></div>
+  </section>
+
+  <!-- ════════ CONSTANTS ════════ -->
+  <section id="constants">
+    <h2>2. Constants, Units &amp; Conversions</h2>
+    <p>The numbers you can't derive and shouldn't have to remember wrong.</p>
+    <table class="ref">
+      <tr><th>Quantity</th><th>Value</th><th>Why it matters</th></tr>
+      <tr><td>g (gravity)</td><td>9.81 m/s²</td><td>Falling, pendulums, water pressure, ballistics</td></tr>
+      <tr><td>Water density</td><td>1000 kg/m³ (1 kg/L)</td><td>1 litre = 1 kg. Sizing tanks, rafts, counterweights</td></tr>
+      <tr><td>Water freeze / boil</td><td>0 °C / 100 °C (at sea level)</td><td>Boiling point drops ~1 °C per 285 m altitude</td></tr>
+      <tr><td>Atmospheric pressure</td><td>101 kPa ≈ 14.7 psi ≈ 1 bar</td><td>Siphons, pumps, pressure cooking, diving</td></tr>
+      <tr><td>Speed of sound (air)</td><td>343 m/s (≈ 1 km / 3 s)</td><td>Count seconds after a flash: distance to lightning/blast</td></tr>
+      <tr><td>Energy to heat water</td><td>4.18 kJ per kg per °C</td><td>Fuel needed to boil/pasteurise; solar heater sizing</td></tr>
+      <tr><td>Human daily energy</td><td>~2000–2800 kcal (8–12 MJ)</td><td>Food planning. 1 kcal = 4.18 kJ</td></tr>
+      <tr><td>1 horsepower</td><td>746 W</td><td>A fit human sustains ~75–100 W; sprints ~300 W</td></tr>
+    </table>
+    <table class="ref">
+      <tr><th>Convert</th><th>Multiply by</th><th>Convert</th><th>Multiply by</th></tr>
+      <tr><td>inches → cm</td><td>2.54</td><td>miles → km</td><td>1.609</td></tr>
+      <tr><td>lb → kg</td><td>0.454</td><td>gallons (US) → L</td><td>3.785</td></tr>
+      <tr><td>°F → °C</td><td>(F−32) × 5/9</td><td>°C → °F</td><td>C × 9/5 + 32</td></tr>
+      <tr><td>psi → kPa</td><td>6.895</td><td>acres → m²</td><td>4047</td></tr>
+    </table>
+  </section>
+
+  <!-- ════════ EQUATIONS ════════ -->
+  <section id="equations">
+    <h2>3. Equations That Matter</h2>
+    <p>Not a textbook — the handful that solve real grid-down problems.</p>
+    <div class="eq-grid">
+      <div class="eq-card">
+        <h4>Ohm's Law</h4>
+        <span class="eq-formula">V = I × R</span>
+        <div class="eq-where">V = volts, I = current (amps), R = resistance (ohms). Power: <strong>P = V × I</strong>.</div>
+        <div class="eq-use">Size wires, fuses, and solar gear. A 12 V, 100 W load draws 8.3 A → needs thick wire.</div>
+      </div>
+      <div class="eq-card">
+        <h4>Mechanical Advantage (lever)</h4>
+        <span class="eq-formula">Load × a = Effort × b</span>
+        <div class="eq-where">a = load arm, b = effort arm from the pivot. Longer effort arm = less force needed.</div>
+        <div class="eq-use">Move a boulder, build a well lever (shadoof), press a cider/oil press.</div>
+      </div>
+      <div class="eq-card">
+        <h4>Water Pressure / Head</h4>
+        <span class="eq-formula">P = ρ × g × h</span>
+        <div class="eq-where">Every 1 m of height = ~9.8 kPa (1.42 psi). ρ = 1000, g = 9.81, h = height in metres.</div>
+        <div class="eq-use">A tank 10 m up gives ~14 psi at the tap — enough for a shower, no pump.</div>
+      </div>
+      <div class="eq-card">
+        <h4>Pythagoras (right angles)</h4>
+        <span class="eq-formula">a² + b² = c²</span>
+        <div class="eq-where">The <strong>3-4-5 rule</strong>: a triangle with sides 3, 4, 5 has a perfect 90° corner.</div>
+        <div class="eq-use">Lay out square foundations, true walls, check a frame is not skewed.</div>
+      </div>
+      <div class="eq-card">
+        <h4>Heat Energy</h4>
+        <span class="eq-formula">Q = m × c × ΔT</span>
+        <div class="eq-where">Q = energy (J), m = mass (kg), c = 4180 for water, ΔT = temperature rise.</div>
+        <div class="eq-use">Boiling 5 L from 15→100 °C needs ~1.8 MJ ≈ 0.45 kg of dry wood.</div>
+      </div>
+      <div class="eq-card">
+        <h4>Gear / Pulley Ratio</h4>
+        <span class="eq-formula">ratio = teeth_out / teeth_in</span>
+        <div class="eq-where">n pulleys supporting a load divide the effort by ~n (ignoring friction).</div>
+        <div class="eq-use">Trade speed for torque on a hand-crank generator, winch, or quern.</div>
+      </div>
+      <div class="eq-card">
+        <h4>Projectile Range (flat ground)</h4>
+        <span class="eq-formula">R = v² × sin(2θ) / g</span>
+        <div class="eq-where">Max range at θ = 45°. v = launch speed, g = 9.81.</div>
+        <div class="eq-use">Slings, bows, catapults, water cannons, signalling line-throwers.</div>
+      </div>
+      <div class="eq-card">
+        <h4>Battery Runtime</h4>
+        <span class="eq-formula">hours ≈ (Ah × V × 0.8) / W</span>
+        <div class="eq-where">0.8 = usable depth-of-discharge for lead-acid (use 0.9 for LiFePO₄).</div>
+        <div class="eq-use">A 100 Ah, 12 V battery runs a 40 W load ~24 h.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ PHYSICS ════════ -->
+  <section id="physics">
+    <h2>4. Physics First Principles</h2>
+    <div class="principle">
+      <h4>Energy is never created or destroyed — only moved or converted</h4>
+      <p>Everything you build is a way of routing energy: fire (chemical→heat), a water wheel (gravity→rotation→electricity), a bow (muscle→stored spring→motion). Ask of any problem: <em>where is the energy coming from, and where do I want it to go?</em></p>
+      <div class="why">Why it matters: it tells you instantly whether an idea can work. A "free energy" machine can't — but a heavy roof draining to a low tank absolutely can.</div>
+    </div>
+    <div class="principle">
+      <h4>Heat always flows hot → cold, three ways</h4>
+      <p><strong>Conduction</strong> (touch — metal steals body heat fast), <strong>convection</strong> (moving air/water — wind chill, chimney draft), <strong>radiation</strong> (line-of-sight infrared — a fire warms your front, a foil blanket reflects you back).</p>
+      <div class="why">Why it matters: every shelter, stove, cooler, and cold-weather decision is a heat-flow problem. Block the path that's killing you: insulation (air gaps) stops conduction/convection; reflective layers stop radiation.</div>
+    </div>
+    <div class="principle">
+      <h4>Pressure differences move fluids — and you can make them</h4>
+      <p>Fluids flow from high to low pressure. Heat air and it rises (rocket stove, solar chimney). Lift water and gravity gives it pressure. Suck air out and atmosphere pushes water up a straw — that's a siphon and a pump.</p>
+      <div class="why">Why it matters: wells, irrigation, ventilation, and stove draft all run on this with no electricity.</div>
+    </div>
+    <div class="principle">
+      <h4>Mechanical advantage trades distance for force</h4>
+      <p>Levers, pulleys, screws, gears, and inclined planes all let a weak input move a heavy load — by moving the input <em>further</em>. You never get something for nothing; you get force in exchange for distance.</p>
+      <div class="why">Why it matters: one person can lift an engine, split stone, or press oil with the right ratio and a long enough lever.</div>
+    </div>
+  </section>
+
+  <!-- ════════ CHEMISTRY ════════ -->
+  <section id="chemistry">
+    <h2>5. Chemistry First Principles</h2>
+    <div class="principle">
+      <h4>Acids and bases neutralise each other (the pH scale, 0–14)</h4>
+      <p>0–6 acid (vinegar ~3, stomach ~2), 7 neutral (pure water), 8–14 base (ash/lye ~12, baking soda ~9). An acid + a base → salt + water, releasing heat.</p>
+      <div class="why">Why it matters: ash water (lye) makes soap from fat; baking soda neutralises acid burns and sour soil; vinegar cuts limescale and base spills. Test pH with red cabbage juice — pink=acid, green=base.</div>
+    </div>
+    <div class="principle">
+      <h4>Oxidation: things combine with oxygen and release energy</h4>
+      <p>Fire, rust, and metabolism are the same reaction at different speeds. Fast = flame; slow = rust and rot; controlled = your body burning food. Starve it of oxygen (smother) or fuel and it stops.</p>
+      <div class="why">Why it matters: fire control, preventing tool rust (oil = an oxygen barrier), food spoilage, and charcoal-making (heating wood <em>without</em> oxygen) all follow from this.</div>
+    </div>
+    <div class="principle">
+      <h4>Salt, sugar, acid, smoke, and cold all stop microbes</h4>
+      <p>Microbes need water, warmth, and a near-neutral pH. Remove water (drying, salting, sugaring), drop the pH (fermenting, pickling), add antimicrobial smoke, or remove warmth (cellar/ice) and food keeps for months.</p>
+      <div class="why">Why it matters: this single principle is the whole of food preservation. Combine methods (salt + smoke + dry = jerky) for redundancy.</div>
+    </div>
+    <div class="principle">
+      <h4>States change at fixed points — exploit them to separate mixtures</h4>
+      <p>Different substances boil and freeze at different temperatures. Boil salt water and only the water leaves as steam — catch it and you have distilled water (and salt left behind). Freeze cider and the water ices first.</p>
+      <div class="why">Why it matters: distillation purifies water and concentrates alcohol; evaporation harvests salt; this is how you separate what nature mixed.</div>
+    </div>
+  </section>
+
+  <!-- ════════ MATHS ════════ -->
+  <section id="maths">
+    <h2>6. Field Mathematics</h2>
+    <p>Estimation and geometry you can do with a stick, a string, and your own body.</p>
+    <table class="ref">
+      <tr><th>Need</th><th>Method</th></tr>
+      <tr><td>Measure length</td><td>Know your body: hand span (~22 cm), forearm/cubit (~45 cm), pace (~75 cm), arm-span ≈ your height. Pace-count a known 100 m once and remember it.</td></tr>
+      <tr><td>Right angle</td><td>3-4-5 rule: measure 3 units along one line, 4 along the other; when the diagonal is exactly 5, the corner is 90°.</td></tr>
+      <tr><td>Height of a tree/wall</td><td>Stand back until you can sight the top over a stick held at arm's length; or measure your shadow vs. the object's shadow — heights are in the same ratio as shadows.</td></tr>
+      <tr><td>Width of a river</td><td>Pick an object on the far bank. Walk a right-angle baseline along your side; use similar triangles (walk a known distance, sight the angle) to scale the crossing.</td></tr>
+      <tr><td>Estimate big numbers</td><td>Count a small sample, measure the area/volume it filled, multiply up. Good for seed counts, herd size, crowd size, storage.</td></tr>
+      <tr><td>Area of a circle</td><td>A ≈ 3.14 × r². Circumference ≈ 3.14 × diameter. For tanks, wheels, fields.</td></tr>
+      <tr><td>Volume of a tank</td><td>Cylinder: 3.14 × r² × height. In litres if you measure in metres × 1000. A 1 m × 1 m × 1 m cube = 1000 L = 1 tonne of water.</td></tr>
+      <tr><td>Angles without a protractor</td><td>A fist at arm's length ≈ 10°. The horizon to overhead = 90° = ~9 fists. Useful for sun height, latitude (Polaris angle ≈ your latitude), and slopes.</td></tr>
+    </table>
+  </section>
+
+  <!-- ════════ INVENTION ════════ -->
+  <section id="invention">
+    <h2>7. The Invention Method</h2>
+    <p>When no section has your exact answer, you invent one. This is a repeatable loop, not a flash of genius.</p>
+
+    <div class="callout-invent">
+      <strong>First-principles thinking:</strong> strip the problem to physics, not products. You don't need "a pump" — you need "water moved from low to high." That reframing opens dozens of solutions (siphon, ram pump, Archimedes screw, bucket-and-lever) instead of one you can't buy.
+    </div>
+
+    <div class="principle">
+      <h4>Step 1 — State the function, not the object</h4>
+      <p>Write the job as a verb + outcome: "keep food below 10 °C," "cut wood faster," "signal 2 km." Banish brand names and specific parts. The looser the wording, the wider your options.</p>
+    </div>
+    <div class="principle">
+      <h4>Step 2 — Find the governing principle</h4>
+      <p>Match the function to a first principle above. Cooling? → heat flows hot-to-cold + evaporation cools (a wet cloth pot, a zeer fridge). Lifting? → mechanical advantage. Each principle hands you a family of known solutions to copy.</p>
+    </div>
+    <div class="principle">
+      <h4>Step 3 — Inventory what you actually have</h4>
+      <p>List materials by <em>property</em>, not name: rigid, flexible, waterproof, conductive, springy, heat-resistant, absorbent. A bicycle is a frame + bearings + chain + wheels + a spring saddle — five subsystems you can harvest. Salvage beats fabrication every time.</p>
+    </div>
+    <div class="principle">
+      <h4>Step 4 — Substitute and analogise</h4>
+      <p>Ask "what in nature or history did this job?" before electricity existed. Refrigeration → evaporation and cellars. Glue → hide, pine pitch, starch. Bearings → smooth stone, hardwood, glass. The pre-industrial world solved every survival problem at least once; copy it.</p>
+      <div class="why">Most "inventions" in a collapse are re-discoveries. Your library is your edge — that's why the <a href="knowledge.html">Knowledge</a> and <a href="../literature.html">Reference Library</a> sections matter.</div>
+    </div>
+    <div class="principle">
+      <h4>Step 5 — Build the ugliest version that could work</h4>
+      <p>Prototype with cardboard, mud, scrap — anything fast. The goal is to <em>learn</em>, not to finish. A failed 20-minute mock-up teaches you more than a perfect plan. Expect 3–5 iterations.</p>
+    </div>
+    <div class="principle">
+      <h4>Step 6 — Test to failure, then add margin</h4>
+      <p>Load it until it breaks; now you know the real limit. Build the keeper at half that load (a 2× safety factor — 3× for anything overhead or over a person). Write down what failed and why — that note is the actual invention.</p>
+      <div class="why">Why it matters: a tool that fails under load in a crisis is worse than no tool. Margin and honest testing are what separate a gadget from equipment you'll trust your life to.</div>
+    </div>
+    <div class="callout-invent">
+      <strong>Capture it:</strong> the moment something works, document it — sketch, dimensions, materials, failure modes. An undocumented invention dies with you or with one dropped tool. A documented one becomes a skill your whole community keeps. Feed it back into your copy of this guide.
+    </div>
+  </section>
+
+  <nav class="section-pagination no-print" aria-label="Section navigation">
+    <a href="chemistry.html" class="pagination-btn pagination-prev">← Chemistry</a>
+    <a href="../index.html" class="pagination-btn pagination-home">Home</a>
+    <a href="knowledge.html" class="pagination-btn pagination-next">Knowledge →</a>
+  </nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">⚛</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're reading First Principles. Ask me to work an equation (wire size, tank pressure, fuel to boil water), explain a reaction, or walk the invention method for a problem you're facing.</p><p class="aria-note">⚠️ Requires Ollama or Claude API. <a href="../ai-setup.html">Setup →</a></p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+
+<script>
+/* Periodic table — data + render. file://-safe, no fetch. */
+(function () {
+  'use strict';
+  // [num, symbol, name, category, group(1-18), period, survival-note]
+  var EL = [
+    [1,'H','Hydrogen','nonmetal',1,1,'Lightest element. Made by electrolysis or acid+metal. Lifts balloons, but flammable.'],
+    [2,'He','Helium','noble',18,1,'Inert lifting gas; not field-producible.'],
+    [3,'Li','Lithium','alkali',1,2,'Modern rechargeable batteries (LiFePO₄ best for off-grid storage).'],
+    [4,'Be','Beryllium','alkaline',2,2,'Toxic dust; avoid.'],
+    [5,'B','Boron','metalloid',13,2,'Borax: flux for metalwork, soap booster, ant/roach control.'],
+    [6,'C','Carbon','nonmetal',14,2,'★ Charcoal: fuel, water/air filter, gunpowder, steel-making, drawing. The most useful element you can make.'],
+    [7,'N','Nitrogen','nonmetal',15,2,'★ 78% of air. Plant growth (manure, legumes, compost). Saltpetre for preserving & powder.'],
+    [8,'O','Oxygen','nonmetal',16,2,'★ Combustion and life. Control airflow = control fire.'],
+    [9,'F','Fluorine','halogen',17,2,'Extremely reactive/toxic gas. Trace fluoride strengthens teeth.'],
+    [10,'Ne','Neon','noble',18,2,'Inert; signage gas.'],
+    [11,'Na','Sodium','alkali',1,3,'★ As salt (NaCl): preservation, electrolytes, tanning, soap. Pure sodium is violently reactive.'],
+    [12,'Mg','Magnesium','alkaline',2,3,'★ Firestarter shavings, lightweight alloy, Epsom salt (MgSO₄) as laxative/soak.'],
+    [13,'Al','Aluminium','posttrans',13,3,'★ Salvage everywhere. Pots, foil (radiant barrier, Faraday), reflectors. Never mix with lye.'],
+    [14,'Si','Silicon','metalloid',14,3,'★ Sand/glass/quartz. Solar cells, glass-making, concrete, knapping tools.'],
+    [15,'P','Phosphorus','nonmetal',15,3,'★ Match heads, fertiliser (bone meal), tracer of life in soil.'],
+    [16,'S','Sulfur','nonmetal',16,3,'★ Gunpowder, vulcanising rubber, fungicide, sulphuric acid, food preservative.'],
+    [17,'Cl','Chlorine','halogen',17,3,'★ Bleach/pool shock disinfects water (a few drops/L). From electrolysing salt water.'],
+    [18,'Ar','Argon','noble',18,3,'Inert shielding gas for welding.'],
+    [19,'K','Potassium','alkali',1,4,'★ Wood-ash potash: fertiliser, soap, saltpetre. Vital electrolyte.'],
+    [20,'Ca','Calcium','alkaline',2,4,'★ Limestone→quicklime→mortar, plaster, whitewash, lye, water treatment. Bones, eggshell.'],
+    [21,'Sc','Scandium','transition',3,4,'Niche alloys; not field-relevant.'],
+    [22,'Ti','Titanium','transition',4,4,'Strong, light, corrosion-proof. Salvaged tools/implants.'],
+    [23,'V','Vanadium','transition',5,4,'Tool-steel hardener.'],
+    [24,'Cr','Chromium','transition',6,4,'★ Stainless steel, plating — corrosion resistance.'],
+    [25,'Mn','Manganese','transition',7,4,'Steel toughener; battery cathodes.'],
+    [26,'Fe','Iron','transition',8,4,'★ The backbone of tools. Smelt from ore/bog iron; forge into anything. Rusts — keep oiled.'],
+    [27,'Co','Cobalt','transition',9,4,'Magnets, battery chemistry, blue pigment.'],
+    [28,'Ni','Nickel','transition',10,4,'★ Corrosion-resistant plating, NiFe/NiMH batteries, coins.'],
+    [29,'Cu','Copper','transition',11,4,'★ Wiring, pipes, stills, antimicrobial surfaces. Salvage from cable/motors. Top conductor after silver.'],
+    [30,'Zn','Zinc','posttrans',12,4,'★ Galvanising (rust-proofing), brass, batteries, wound ointment.'],
+    [31,'Ga','Gallium','posttrans',13,4,'Semiconductors; melts in hand.'],
+    [32,'Ge','Germanium','metalloid',14,4,'Early diodes, IR optics.'],
+    [33,'As','Arsenic','metalloid',15,4,'Poison — know it to avoid it (old pesticides, contaminated wells).'],
+    [34,'Se','Selenium','nonmetal',16,4,'Trace nutrient; toxic in excess.'],
+    [35,'Br','Bromine','halogen',17,4,'Disinfectant, flame retardant.'],
+    [36,'Kr','Krypton','noble',18,4,'Inert; lighting.'],
+    [37,'Rb','Rubidium','alkali',1,5,'Not field-relevant.'],
+    [38,'Sr','Strontium','alkaline',2,5,'Red fireworks/flares; Sr-90 is a fallout hazard.'],
+    [39,'Y','Yttrium','transition',3,5,'Phosphors, alloys.'],
+    [40,'Zr','Zirconium','transition',4,5,'Corrosion-proof; ceramic blades.'],
+    [41,'Nb','Niobium','transition',5,5,'Superalloys.'],
+    [42,'Mo','Molybdenum','transition',6,5,'★ High-strength tool steel; plant micronutrient.'],
+    [43,'Tc','Technetium','transition',7,5,'Radioactive; lab/medical only.'],
+    [44,'Ru','Ruthenium','transition',8,5,'Catalyst, contacts.'],
+    [45,'Rh','Rhodium','transition',9,5,'Catalytic converters.'],
+    [46,'Pd','Palladium','transition',10,5,'Catalyst; salvage from electronics.'],
+    [47,'Ag','Silver','transition',11,5,'★ Best conductor, antimicrobial (wound dressings, water), barter metal, photography.'],
+    [48,'Cd','Cadmium','posttrans',12,5,'Toxic; old NiCd batteries — handle with care.'],
+    [49,'In','Indium','posttrans',13,5,'Touchscreens, solders.'],
+    [50,'Sn','Tin','posttrans',14,5,'★ Solder, bronze (with copper), tin-plating cans, pewter.'],
+    [51,'Sb','Antimony','metalloid',15,5,'Hardens lead (bullets, bearings), flame retardant.'],
+    [52,'Te','Tellurium','metalloid',16,5,'Alloying, solar films.'],
+    [53,'I','Iodine','halogen',17,5,'★ Water disinfectant, wound antiseptic, thyroid protection (see KI in NBC).'],
+    [54,'Xe','Xenon','noble',18,5,'Inert; bright lamps.'],
+    [55,'Cs','Caesium','alkali',1,6,'Atomic clocks; Cs-137 fallout hazard.'],
+    [56,'Ba','Barium','alkaline',2,6,'Green flares; drilling; soluble salts toxic.'],
+    [57,'La','Lanthanum','lanthanide',3,6,'In "mischmetal" firesteel rods, camera lenses.'],
+    [58,'Ce','Cerium','lanthanide',4,9,'★ Main metal in ferrocerium fire-starter rods; lighter flints.'],
+    [59,'Pr','Praseodymium','lanthanide',5,9,'Magnets, glass tint.'],
+    [60,'Nd','Neodymium','lanthanide',6,9,'★ Strongest permanent magnets — generators, salvage from drives/speakers.'],
+    [61,'Pm','Promethium','lanthanide',7,9,'Radioactive; glow paint.'],
+    [62,'Sm','Samarium','lanthanide',8,9,'Heat-stable magnets.'],
+    [63,'Eu','Europium','lanthanide',9,9,'Phosphors (red/blue).'],
+    [64,'Gd','Gadolinium','lanthanide',10,9,'MRI; neutron shielding.'],
+    [65,'Tb','Terbium','lanthanide',11,9,'Green phosphors.'],
+    [66,'Dy','Dysprosium','lanthanide',12,9,'Keeps magnets strong when hot.'],
+    [67,'Ho','Holmium','lanthanide',13,9,'Lasers.'],
+    [68,'Er','Erbium','lanthanide',14,9,'Fibre-optic amplifiers.'],
+    [69,'Tm','Thulium','lanthanide',15,9,'Portable X-ray sources.'],
+    [70,'Yb','Ytterbium','lanthanide',16,9,'Lasers, alloys.'],
+    [71,'Lu','Lutetium','lanthanide',17,9,'Catalysts.'],
+    [72,'Hf','Hafnium','transition',4,6,'Reactor control rods.'],
+    [73,'Ta','Tantalum','transition',5,6,'★ Capacitors (salvage electronics); corrosion-proof.'],
+    [74,'W','Tungsten','transition',6,6,'★ Highest melting point. Lamp filaments, cutting/drilling bits, arc electrodes.'],
+    [75,'Re','Rhenium','transition',7,6,'Jet superalloys.'],
+    [76,'Os','Osmium','transition',8,6,'Densest element; hard tips.'],
+    [77,'Ir','Iridium','transition',9,6,'Spark-plug tips; very corrosion-proof.'],
+    [78,'Pt','Platinum','transition',10,6,'★ Catalyst, electrodes, barter; salvage from catalytic converters.'],
+    [79,'Au','Gold','transition',11,6,'★ Inert barter metal, corrosion-proof contacts, salvage from electronics.'],
+    [80,'Hg','Mercury','posttrans',12,6,'Toxic liquid metal — thermometers, old switches. Handle with extreme care.'],
+    [81,'Tl','Thallium','posttrans',13,6,'Deadly poison (old rat bait).'],
+    [82,'Pb','Lead','posttrans',14,6,'★ Batteries, fishing weights, bullets, radiation shielding, solder. Cumulative poison — never in cookware/water.'],
+    [83,'Bi','Bismuth','posttrans',15,6,'Low-melt alloys, stomach medicine (Pepto).'],
+    [84,'Po','Polonium','posttrans',16,6,'Intensely radioactive.'],
+    [85,'At','Astatine','halogen',17,6,'Vanishingly rare/radioactive.'],
+    [86,'Rn','Radon','noble',18,6,'★ Radioactive gas — collects in basements/cellars. Ventilate sealed shelters.'],
+    [87,'Fr','Francium','alkali',1,7,'Vanishes instantly; lab curiosity.'],
+    [88,'Ra','Radium','alkaline',2,7,'Radioactive; old glow dials — do not scrape.'],
+    [89,'Ac','Actinium','actinide',3,7,'Intensely radioactive.'],
+    [90,'Th','Thorium','actinide',4,10,'Old lantern mantles; potential fuel.'],
+    [91,'Pa','Protactinium','actinide',5,10,'Rare, radioactive.'],
+    [92,'U','Uranium','actinide',6,10,'Nuclear fuel/weapons; ore is a radiation hazard (see NBC).'],
+    [93,'Np','Neptunium','actinide',7,10,'Reactor by-product.'],
+    [94,'Pu','Plutonium','actinide',8,10,'Weapons/reactor material; extremely hazardous.'],
+    [95,'Am','Americium','actinide',9,10,'★ The source in smoke detectors (tiny). Salvageable ionisation source.'],
+    [96,'Cm','Curium','actinide',10,10,'Radioactive power sources.'],
+    [97,'Bk','Berkelium','actinide',11,10,'Synthetic; research only.'],
+    [98,'Cf','Californium','actinide',12,10,'Neutron source.'],
+    [99,'Es','Einsteinium','actinide',13,10,'Synthetic; research only.'],
+    [100,'Fm','Fermium','actinide',14,10,'Synthetic.'],
+    [101,'Md','Mendelevium','actinide',15,10,'Synthetic.'],
+    [102,'No','Nobelium','actinide',16,10,'Synthetic.'],
+    [103,'Lr','Lawrencium','actinide',17,10,'Synthetic.'],
+    [104,'Rf','Rutherfordium','transition',4,7,'Synthetic; seconds of life.'],
+    [105,'Db','Dubnium','transition',5,7,'Synthetic.'],
+    [106,'Sg','Seaborgium','transition',6,7,'Synthetic.'],
+    [107,'Bh','Bohrium','transition',7,7,'Synthetic.'],
+    [108,'Hs','Hassium','transition',8,7,'Synthetic.'],
+    [109,'Mt','Meitnerium','unknown',9,7,'Synthetic.'],
+    [110,'Ds','Darmstadtium','unknown',10,7,'Synthetic.'],
+    [111,'Rg','Roentgenium','unknown',11,7,'Synthetic.'],
+    [112,'Cn','Copernicium','posttrans',12,7,'Synthetic.'],
+    [113,'Nh','Nihonium','posttrans',13,7,'Synthetic.'],
+    [114,'Fl','Flerovium','posttrans',14,7,'Synthetic.'],
+    [115,'Mc','Moscovium','posttrans',15,7,'Synthetic.'],
+    [116,'Lv','Livermorium','posttrans',16,7,'Synthetic.'],
+    [117,'Ts','Tennessine','halogen',17,7,'Synthetic.'],
+    [118,'Og','Oganesson','noble',18,7,'Synthetic; heaviest known.']
+  ];
+
+  var grid = document.getElementById('ptable-grid');
+  var detail = document.getElementById('pt-detail');
+  if (!grid) return;
+
+  EL.forEach(function (e) {
+    var num=e[0], sym=e[1], name=e[2], cat=e[3], group=e[4], period=e[5], note=e[6];
+    var cell = document.createElement('div');
+    cell.className = 'pt-cell cat-' + cat + (note && note.indexOf('★') === 0 ? ' pt-survival' : '');
+    cell.style.gridColumn = group;
+    cell.style.gridRow = period;
+    cell.innerHTML = '<span class="pt-num">'+num+'</span><span class="pt-sym">'+sym+'</span><span class="pt-name">'+name+'</span>';
+    cell.addEventListener('click', function () {
+      detail.classList.remove('empty');
+      detail.innerHTML = '<strong>'+num+' · '+name+' ('+sym+')</strong> — '+note.replace(/^★\s*/,'');
+    });
+    grid.appendChild(cell);
+  });
+
+  // placeholder markers in main table for La/Ac series
+  [[3,6,'57–71'],[3,7,'89–103']].forEach(function (p) {
+    var ph = document.createElement('div');
+    ph.className = 'pt-cell cat-unknown';
+    ph.style.gridColumn = p[0]; ph.style.gridRow = p[1];
+    ph.style.cursor = 'default';
+    ph.innerHTML = '<span class="pt-name" style="white-space:normal">'+p[2]+'</span>';
+    grid.appendChild(ph);
+  });
+})();
+</script>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/bunker-bot.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

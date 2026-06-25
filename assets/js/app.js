@@ -37,6 +37,7 @@
     target:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>`,
     wrench:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.77 3.77z"/></svg>`,
     books:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h4V4H4zM10 4v16h4V4h-4z"/><path d="M17 6l3.5 14M17 6l3 1"/></svg>`,
+    atom:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/></svg>`,
     // UI
     print:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M9 18v4h6v-4H9z"/></svg>`,
     robot:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M8 10V8a4 4 0 018 0v2"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><path d="M9 19h6"/><line x1="12" y1="3" x2="12" y2="5"/></svg>`,
@@ -76,6 +77,7 @@
     { id: 'navigation',       href: 'sections/navigation.html',        icon: ICONS.compass,  label: 'Navigation & Maps' },
     { id: 'security',         href: 'sections/security.html',          icon: ICONS.shield,   label: 'Security & Defense' },
     { id: 'knowledge',        href: 'sections/knowledge.html',         icon: ICONS.book,     label: 'Knowledge & Literacy' },
+    { id: 'science',          href: 'sections/science.html',           icon: ICONS.atom,     label: 'First Principles' },
     { id: 'agriculture',      href: 'sections/agriculture.html',       icon: ICONS.leaf,     label: 'Agriculture' },
     { id: 'animal',           href: 'sections/animal.html',            icon: ICONS.paw,      label: 'Animal Husbandry' },
     { id: 'nbc',              href: 'sections/nbc.html',               icon: ICONS.nbc,      label: 'NBC / EMP Threats' },

@@ -3,166 +3,2745 @@
   "generated": "2026-06-19",
   "note": "This index mirrors the embedded SEARCH_INDEX in assets/js/search.js. Update both when adding content.",
   "entries": [
-    {"id":"home-intro","title":"Survival Guide Home","section":"home","sectionLabel":"Home","file":"index.html","anchor":"","content":"survival guide emergency preparedness offline last light introduction overview dashboard","tags":["survival","guide","home","intro"]},
-    {"id":"food-water-overview","title":"Food, Water & Sanitation Overview","section":"food","sectionLabel":"Food & Water","file":"sections/food.html","anchor":"","content":"food water sanitation survival basics overview","tags":["food","water","overview"]},
-    {"id":"food-water-sourcing","title":"Water Sourcing","section":"food","sectionLabel":"Food & Water","file":"sections/food.html","anchor":"#water-sourcing","content":"water sourcing finding water streams rivers rain groundwater springs water table digging wells","tags":["water","sourcing","well","stream","rain"]},
-    {"id":"food-water-purification","title":"Water Purification","section":"food","sectionLabel":"Food & Water","file":"sections/food.html","anchor":"#water-purification","content":"water purification boiling bleach sodium hypochlorite solar disinfection SODIS filter activated carbon sand gravel distillation iodine tablets","tags":["water","purification","boiling","bleach","filter","SODIS","distillation"]},
-    {"id":"food-water-storage","title":"Water Storage","section":"food","sectionLabel":"Food & Water","file":"sections/food.html","anchor":"#water-storage","content":"water storage containers food grade BPA free rotation schedule long term barrels","tags":["water","storage","containers"]},
-    {"id":"food-rainwater","title":"Rainwater Collection","section":"food","sectionLabel":"Food & Water","file":"sections/food.html","anchor":"#rainwater","content":"rainwater collection system catchment roof gutters first flush diverter barrel storage cistern","tags":["rainwater","collection","catchment"]},
-    {"id":"food-preservation","title":"Food Preservation","section":"food","sectionLabel":"Food & Water","file":"sections/food.html","anchor":"#food-preservation","content":"food preservation canning pressure canning water bath canning smoking salt curing fermentation dehydration freeze drying jerky","tags":["food","preservation","canning","smoking","salt","fermentation","dehydration"]},
-    {"id":"food-foraging","title":"Foraging & Wild Plants","section":"food","sectionLabel":"Food & Water","file":"sections/food.html","anchor":"#foraging","content":"foraging wild edible plants mushrooms identification dandelion cattail acorn pine needle berries nuts roots tubers avoid poisonous","tags":["foraging","wild plants","edible","mushrooms","berries"]},
-    {"id":"food-hunting","title":"Hunting & Trapping","section":"food","sectionLabel":"Food & Water","file":"sections/food.html","anchor":"#hunting","content":"hunting trapping snares deadfall trap figure four box trap rabbit squirrel deer field dressing game cleaning","tags":["hunting","trapping","snares","deadfall","game"]},
-    {"id":"food-sanitation","title":"Sanitation Without Running Water","section":"food","sectionLabel":"Food & Water","file":"sections/food.html","anchor":"#sanitation","content":"sanitation latrine outhouse composting toilet greywater waste disposal hygiene hand washing soap disease prevention cholera typhoid","tags":["sanitation","latrine","hygiene","disease","greywater"]},
-    {"id":"med-overview","title":"Medical & First Aid Overview","section":"medical","sectionLabel":"Medical","file":"sections/medical.html","anchor":"","content":"medical first aid emergency treatment survival overview","tags":["medical","first aid","overview"]},
-    {"id":"med-wounds","title":"Wound Care & Infection Control","section":"medical","sectionLabel":"Medical","file":"sections/medical.html","anchor":"#wound-care","content":"wound care cleaning irrigation suturing improvised stitches butterfly closure steri-strips infection control antibiotics signs of infection","tags":["wounds","sutures","infection","bleeding"]},
-    {"id":"med-fractures","title":"Fractures & Splinting","section":"medical","sectionLabel":"Medical","file":"sections/medical.html","anchor":"#fractures","content":"fracture broken bone splinting immobilization improvised splint traction closed open fracture reduction","tags":["fracture","broken bone","splint"]},
-    {"id":"med-burns","title":"Burns Treatment","section":"medical","sectionLabel":"Medical","file":"sections/medical.html","anchor":"#burns","content":"burns first second third degree cool water no ice butter treatment dressing infection","tags":["burns","treatment"]},
-    {"id":"med-hypothermia","title":"Hypothermia & Heat Stroke","section":"medical","sectionLabel":"Medical","file":"sections/medical.html","anchor":"#temperature","content":"hypothermia heat stroke heat exhaustion temperature core body warming cooling treatment signs symptoms","tags":["hypothermia","heat stroke","temperature"]},
-    {"id":"med-childbirth","title":"Emergency Childbirth","section":"medical","sectionLabel":"Medical","file":"sections/medical.html","anchor":"#childbirth","content":"emergency childbirth delivery labor complications umbilical cord placenta postpartum","tags":["childbirth","delivery","labor"]},
-    {"id":"med-herbal","title":"Herbal Medicine","section":"medical","sectionLabel":"Medical","file":"sections/medical.html","anchor":"#herbal","content":"herbal medicine plants medicinal yarrow plantain garlic willow bark aspirin fever pain infection tincture poultice","tags":["herbal","medicine","plants","tincture","poultice"]},
-    {"id":"med-meds","title":"Medications & Stockpiling","section":"medical","sectionLabel":"Medical","file":"sections/medical.html","anchor":"#medications","content":"medications stockpiling antibiotics painkillers antihistamine antidiarrheal epinephrine insulin storage expiration rationing","tags":["medications","stockpile","antibiotics"]},
-    {"id":"med-triage","title":"Triage & Mass Casualty","section":"medical","sectionLabel":"Medical","file":"sections/medical.html","anchor":"#triage","content":"triage mass casualty START triage red yellow green black tag prioritization multiple victims","tags":["triage","mass casualty","START"]},
-    {"id":"med-mental","title":"Mental Health in Survival","section":"medical","sectionLabel":"Medical","file":"sections/medical.html","anchor":"#mental-health","content":"mental health survival stress anxiety PTSD grief community support routine normalcy children","tags":["mental health","stress","anxiety","PTSD"]},
-    {"id":"energy-overview","title":"Energy Creation & Management","section":"energy","sectionLabel":"Energy","file":"sections/energy.html","anchor":"","content":"energy solar wind hydro battery generator power survival electricity","tags":["energy","power","solar","battery"]},
-    {"id":"energy-solar","title":"Solar Power Systems","section":"energy","sectionLabel":"Energy","file":"sections/energy.html","anchor":"#solar","content":"solar panels photovoltaic wiring battery bank charge controller MPPT PWM inverter sizing watt hour ampere 12V 24V 48V system","tags":["solar","panels","battery","inverter","MPPT"]},
-    {"id":"energy-generator","title":"Hand-Crank & Pedal Generators","section":"energy","sectionLabel":"Energy","file":"sections/energy.html","anchor":"#generators","content":"hand crank pedal generator bicycle alternator DIY build motor winding coil magnet","tags":["generator","pedal","bicycle","hand crank"]},
-    {"id":"energy-hydro","title":"Micro-Hydro Power","section":"energy","sectionLabel":"Energy","file":"sections/energy.html","anchor":"#hydro","content":"micro hydro power stream water wheel turbine pelton wheel flow rate head pressure piping","tags":["hydro","water wheel","turbine","stream"]},
-    {"id":"energy-wind","title":"Wind Turbines","section":"energy","sectionLabel":"Energy","file":"sections/energy.html","anchor":"#wind","content":"wind turbine DIY blades alternator tower guy wires furling tail rotor","tags":["wind","turbine","DIY"]},
-    {"id":"energy-gasification","title":"Wood Gasification","section":"energy","sectionLabel":"Energy","file":"sections/energy.html","anchor":"#gasification","content":"wood gas gasification producer gas syngas wood charcoal gasifier engine run generator","tags":["gasification","wood gas","syngas"]},
-    {"id":"energy-batteries","title":"Battery Maintenance & Improvised Batteries","section":"energy","sectionLabel":"Energy","file":"sections/energy.html","anchor":"#batteries","content":"battery lead acid lithium maintenance desulfation equalization improvised battery electrolyte specific gravity hydrometer","tags":["battery","maintenance","lead acid"]},
-    {"id":"energy-faraday","title":"Faraday Cages & EMP Protection","section":"energy","sectionLabel":"Energy","file":"sections/energy.html","anchor":"#faraday","content":"faraday cage EMP electromagnetic pulse protection electronics metal box grounding nested shielding","tags":["faraday","EMP","protection","electronics"]},
-    {"id":"energy-fuel","title":"Fuel Storage Safety","section":"energy","sectionLabel":"Energy","file":"sections/energy.html","anchor":"#fuel","content":"fuel storage gasoline propane diesel safety stabilizer rotation container venting fire hazard","tags":["fuel","storage","gasoline","propane","diesel"]},
-    {"id":"shelter-overview","title":"Shelter & Construction Overview","section":"shelter","sectionLabel":"Shelter","file":"sections/shelter.html","anchor":"","content":"shelter construction building site emergency survival housing","tags":["shelter","construction","building"]},
-    {"id":"shelter-site","title":"Site Selection","section":"shelter","sectionLabel":"Shelter","file":"sections/shelter.html","anchor":"#site-selection","content":"site selection flood plain elevation wind sun orientation defensibility water access soil type drainage","tags":["site selection","location","flood","wind"]},
-    {"id":"shelter-emergency","title":"Emergency Shelters","section":"shelter","sectionLabel":"Shelter","file":"sections/shelter.html","anchor":"#emergency-shelters","content":"emergency shelter debris hut lean-to tarp setup A-frame quinzhee snow shelter immediate improvised","tags":["emergency shelter","debris hut","lean-to","tarp"]},
-    {"id":"shelter-longterm","title":"Long-Term Construction","section":"shelter","sectionLabel":"Shelter","file":"sections/shelter.html","anchor":"#long-term","content":"long term construction timber frame earthbag cob building natural building post and beam mortise tenon joinery","tags":["construction","timber frame","earthbag","cob"]},
-    {"id":"shelter-insulation","title":"Insulation & Ventilation","section":"shelter","sectionLabel":"Shelter","file":"sections/shelter.html","anchor":"#insulation","content":"insulation ventilation passive solar thermal mass air flow vapor barrier R-value natural materials straw clay","tags":["insulation","ventilation","passive solar"]},
-    {"id":"shelter-tools","title":"Construction Tools","section":"shelter","sectionLabel":"Shelter","file":"sections/shelter.html","anchor":"#tools","content":"tools hand tools saw axe chisel mallet level square plane drawknife froe improvised tools","tags":["tools","hand tools","construction"]},
-    {"id":"comms-overview","title":"Communications & Signals Overview","section":"communications","sectionLabel":"Communications","file":"sections/communications.html","anchor":"","content":"communications radio signals emergency contact ham radio frequency","tags":["communications","radio","signals"]},
-    {"id":"comms-ham","title":"Ham Radio Basics","section":"communications","sectionLabel":"Communications","file":"sections/communications.html","anchor":"#ham-radio","content":"ham radio amateur radio licensing Technician General Extra frequencies VHF UHF HF bands repeater simplex APRS","tags":["ham radio","amateur radio","frequencies","repeater"]},
-    {"id":"comms-baofeng","title":"Baofeng Radio Guide","section":"communications","sectionLabel":"Communications","file":"sections/communications.html","anchor":"#baofeng","content":"baofeng UV-5R UV-82 programming setup CHIRP frequencies emergency police fire NOAA weather channels memory","tags":["baofeng","UV-5R","programming","CHIRP"]},
-    {"id":"comms-morse","title":"Morse Code Reference","section":"communications","sectionLabel":"Communications","file":"sections/communications.html","anchor":"#morse","content":"morse code CW telegraph dots dashes SOS emergency signals alphabet numbers international","tags":["morse code","CW","SOS","telegraph"]},
-    {"id":"comms-signals","title":"Visual Signals","section":"communications","sectionLabel":"Communications","file":"sections/communications.html","anchor":"#visual-signals","content":"signal fire mirror heliograph ground to air signals rescue pattern sos X V arrow markings rocks","tags":["signal fire","mirror","ground to air","rescue"]},
-    {"id":"comms-mesh","title":"Mesh Networks (Meshtastic/LoRa)","section":"communications","sectionLabel":"Communications","file":"sections/communications.html","anchor":"#mesh","content":"meshtastic LoRa mesh network decentralized no internet radio packet T-Beam T-Echo local network community","tags":["meshtastic","LoRa","mesh","network"]},
-    {"id":"comms-noaa","title":"NOAA Weather Radio","section":"communications","sectionLabel":"Communications","file":"sections/communications.html","anchor":"#noaa","content":"NOAA weather radio WX frequencies 162.400 alerts EAS emergency alert system battery hand crank","tags":["NOAA","weather radio","alerts"]},
-    {"id":"comms-deaddrops","title":"Dead Drop Communication","section":"communications","sectionLabel":"Communications","file":"sections/communications.html","anchor":"#dead-drops","content":"dead drop communication OPSEC covert messaging locations codes ciphers signal chalk mark","tags":["dead drop","covert","OPSEC","cipher"]},
-    {"id":"nav-overview","title":"Navigation & Maps Overview","section":"navigation","sectionLabel":"Navigation","file":"sections/navigation.html","anchor":"","content":"navigation maps compass topographic celestial natural landmarks star charts","tags":["navigation","maps","compass","stars"]},
-    {"id":"nav-topo","title":"Topographic Maps","section":"navigation","sectionLabel":"Navigation","file":"sections/navigation.html","anchor":"#topo-maps","content":"topographic map reading contour lines elevation relief scale legend symbols trails water features UTM grid MGRS","tags":["topographic","maps","contour","UTM"]},
-    {"id":"nav-compass","title":"Compass Use & Triangulation","section":"navigation","sectionLabel":"Navigation","file":"sections/navigation.html","anchor":"#compass","content":"compass bearing declination magnetic north true north triangulation resection baseplate lensatic using compass","tags":["compass","bearing","declination","triangulation"]},
-    {"id":"nav-celestial","title":"Celestial Navigation","section":"navigation","sectionLabel":"Navigation","file":"sections/navigation.html","anchor":"#celestial","content":"celestial navigation stars north star polaris big dipper orion southern cross sun shadow stick position latitude longitude","tags":["celestial","stars","polaris","sun","navigation"]},
-    {"id":"nav-starcharts","title":"Star Charts — Northern & Southern Hemisphere","section":"navigation","sectionLabel":"Navigation","file":"sections/navigation.html","anchor":"#celestial","content":"star charts northern hemisphere southern hemisphere Polaris Big Dipper Cassiopeia Southern Cross Crux Centauri Canopus Magellanic","tags":["star charts","polaris","southern cross","Crux","navigation","celestial"]},
-    {"id":"nav-natural","title":"Natural Navigation","section":"navigation","sectionLabel":"Navigation","file":"sections/navigation.html","anchor":"#natural","content":"natural navigation moss trees wind patterns water flow animal trails landscape sun position time of day","tags":["natural navigation","moss","wind","water flow"]},
-    {"id":"nav-maps","title":"Creating Your Own Maps","section":"navigation","sectionLabel":"Navigation","file":"sections/navigation.html","anchor":"#map-making","content":"map making cartography sketch dead reckoning pace counting landmarks local area survey hand drawn","tags":["map making","cartography","sketch"]},
-    {"id":"sec-overview","title":"Security & Defense Overview","section":"security","sectionLabel":"Security","file":"sections/security.html","anchor":"","content":"security defense community protection watch perimeter bug out decision","tags":["security","defense","protection"]},
-    {"id":"sec-community","title":"Community Organization & Watch","section":"security","sectionLabel":"Security","file":"sections/security.html","anchor":"#community","content":"community organization neighborhood watch shifts roles responsibilities communication chain of command council leadership","tags":["community","watch","organization"]},
-    {"id":"sec-perimeter","title":"Perimeter Security","section":"security","sectionLabel":"Security","file":"sections/security.html","anchor":"#perimeter","content":"perimeter security trip wire alarm noise makers lights dog patrol fence wall barrier detection early warning","tags":["perimeter","trip wire","alarm","detection"]},
-    {"id":"sec-negotiation","title":"Conflict De-escalation","section":"security","sectionLabel":"Security","file":"sections/security.html","anchor":"#negotiation","content":"conflict de-escalation negotiation communication trade barter peaceful resolution threat assessment","tags":["negotiation","de-escalation","conflict"]},
-    {"id":"sec-firearms","title":"Firearms Basics","section":"security","sectionLabel":"Security","file":"sections/security.html","anchor":"#firearms","content":"firearms handgun rifle shotgun caliber ammunition storage maintenance cleaning safe storage legal","tags":["firearms","handgun","rifle","ammunition","safety"]},
-    {"id":"sec-nonlethal","title":"Non-Lethal Defense","section":"security","sectionLabel":"Security","file":"sections/security.html","anchor":"#non-lethal","content":"non lethal defense pepper spray taser stun baton improvised barriers alarm deterrent dog patrol","tags":["non-lethal","pepper spray","defense"]},
-    {"id":"sec-opsec","title":"Operational Security (OPSEC)","section":"security","sectionLabel":"Security","file":"sections/security.html","anchor":"#opsec","content":"OPSEC operational security what not to share information security loose lips stockpile secrecy community trust anonymity","tags":["OPSEC","security","information"]},
-    {"id":"sec-fortify","title":"Fortifying a Building","section":"security","sectionLabel":"Security","file":"sections/security.html","anchor":"#fortification","content":"fortification building hardening door reinforcement window barricade safe room bottleneck entry points defensive","tags":["fortification","hardening","door","windows"]},
-    {"id":"sec-bugout","title":"Bug-Out vs Bug-In Decision","section":"security","sectionLabel":"Security","file":"sections/security.html","anchor":"#bug-out","content":"bug out bug in decision framework shelter in place evacuation go bag BOB 72 hour kit when to leave stay flowchart","tags":["bug out","bug in","evacuation","go bag","decision tree"]},
-    {"id":"know-overview","title":"Knowledge Preservation Overview","section":"knowledge","sectionLabel":"Knowledge","file":"sections/knowledge.html","anchor":"","content":"knowledge preservation library books education community learning history mankind civilization","tags":["knowledge","preservation","library","education","history"]},
-    {"id":"know-history","title":"Brief History of Mankind","section":"knowledge","sectionLabel":"Knowledge","file":"sections/knowledge.html","anchor":"#history","content":"history mankind civilization timeline prehistoric stone age bronze age iron age ancient rome greece medieval renaissance industrial revolution world war agriculture writing fire Homo sapiens van Loon Story of Mankind","tags":["history","civilization","timeline","mankind","ancient","medieval","modern"]},
-    {"id":"know-preserve","title":"Preserving Books & Documents","section":"knowledge","sectionLabel":"Knowledge","file":"sections/knowledge.html","anchor":"#preserve","content":"preserving books documents lamination dry storage mylar silica gel archival acid-free paper dark storage humidity","tags":["books","preservation","documents","storage"]},
-    {"id":"know-library","title":"Community Library Setup","section":"knowledge","sectionLabel":"Knowledge","file":"sections/knowledge.html","anchor":"#library","content":"community library post-collapse catalog system checkout lending repair rebind organization volunteer librarian","tags":["library","community","organization"]},
-    {"id":"know-teaching","title":"Teaching & Apprenticeship","section":"knowledge","sectionLabel":"Knowledge","file":"sections/knowledge.html","anchor":"#teaching","content":"teaching apprenticeship skills transfer hands on learning mentorship guild system children education curriculum","tags":["teaching","apprenticeship","education","children"]},
-    {"id":"know-digital","title":"Archiving Digital Data Offline","section":"knowledge","sectionLabel":"Knowledge","file":"sections/knowledge.html","anchor":"#digital","content":"digital archiving offline hard drive SSD optical disc DVD M-DISC microfilm USB cold storage backup redundancy","tags":["digital","archiving","hard drive","backup","M-DISC"]},
-    {"id":"nbc-overview","title":"NBC & EMP Threats Overview","section":"nbc","sectionLabel":"NBC Threats","file":"sections/nbc.html","anchor":"","content":"nuclear biological chemical EMP threats CBRN overview","tags":["NBC","nuclear","biological","chemical","EMP"]},
-    {"id":"nbc-nuclear","title":"Nuclear Threats & Blast Zones","section":"nbc","sectionLabel":"NBC Threats","file":"sections/nbc.html","anchor":"#nuclear","content":"nuclear detonation tactical dirty bomb RDD reactor accident blast radius fireball thermal pulse overpressure fallout","tags":["nuclear","blast","fireball","dirty bomb","fallout"]},
-    {"id":"nbc-fallout","title":"Fallout Shelter & 7-10 Rule","section":"nbc","sectionLabel":"NBC Threats","file":"sections/nbc.html","anchor":"#fallout","content":"fallout shelter 7-10 rule radiation decay protection factor PF basement concrete underground shelter in place","tags":["fallout","shelter","7-10 rule","protection factor","radiation"]},
-    {"id":"nbc-kfm","title":"Kearny Fallout Meter (KFM)","section":"nbc","sectionLabel":"NBC Threats","file":"sections/nbc.html","anchor":"#kfm","content":"KFM kearny fallout meter improvised dosimeter radiation measurement aluminum foil thread desiccant build DIY","tags":["KFM","dosimeter","radiation meter","kearny","fallout"]},
-    {"id":"nbc-ki","title":"Potassium Iodide (KI) Dosing","section":"nbc","sectionLabel":"NBC Threats","file":"sections/nbc.html","anchor":"#ki-dosing","content":"potassium iodide KI dosing thyroid iodine-131 reactor nuclear adult child infant dosage 130mg 65mg 32mg 16mg","tags":["KI","potassium iodide","thyroid","radiation","dosing"]},
-    {"id":"nbc-emp","title":"EMP — Electromagnetic Pulse","section":"nbc","sectionLabel":"NBC Threats","file":"sections/nbc.html","anchor":"#emp","content":"EMP electromagnetic pulse nuclear high altitude HEMP Carrington solar geomagnetic storm damage electronics grid recovery E1 E2 E3","tags":["EMP","electromagnetic pulse","Carrington","solar storm","grid"]},
-    {"id":"nbc-bio","title":"Biological Threats & Quarantine","section":"nbc","sectionLabel":"NBC Threats","file":"sections/nbc.html","anchor":"#biological","content":"biological threats pandemic engineered pathogen quarantine sick room PPE decontamination bleach alcohol disinfection vector control","tags":["biological","pandemic","quarantine","PPE","decontamination"]},
-    {"id":"nbc-decon","title":"Decontamination Protocols","section":"nbc","sectionLabel":"NBC Threats","file":"sections/nbc.html","anchor":"#decon","content":"decontamination 80% rule remove clothing water flush soap biological radiological chemical universal decon","tags":["decontamination","decon","80% rule","wash","flush"]},
-    {"id":"agri-overview","title":"Agriculture & Food Production Overview","section":"agriculture","sectionLabel":"Agriculture","file":"sections/agriculture.html","anchor":"","content":"agriculture food production gardening crops livestock soil water planting calendar aquaponics bees","tags":["agriculture","gardening","crops","soil","food production"]},
-    {"id":"agri-soil","title":"Soil Building Without Inputs","section":"agriculture","sectionLabel":"Agriculture","file":"sections/agriculture.html","anchor":"#soil","content":"soil building no inputs composting biochar vermicomposting sheet mulching no-till cover crops nitrogen fixation fertility","tags":["soil","composting","biochar","vermicomposting","fertility"]},
-    {"id":"agri-crops","title":"Crop Planning & Rotation","section":"agriculture","sectionLabel":"Agriculture","file":"sections/agriculture.html","anchor":"#crops","content":"crop rotation planning four year rotation legumes brassicas roots alliums companion planting three sisters","tags":["crop rotation","companion planting","three sisters","planning"]},
-    {"id":"agri-water","title":"Water Management & Irrigation","section":"agriculture","sectionLabel":"Agriculture","file":"sections/agriculture.html","anchor":"#water","content":"water management irrigation swale contour drip wicking beds rainwater harvest drought resilience keyline","tags":["irrigation","swale","rainwater","drought","water management"]},
-    {"id":"agri-seeds","title":"Seed Saving","section":"agriculture","sectionLabel":"Agriculture","file":"sections/agriculture.html","anchor":"#seeds","content":"seed saving open pollinated heirloom isolation fermentation drying storage varieties year after year","tags":["seed saving","heirloom","open pollinated","isolation"]},
-    {"id":"agri-aqua","title":"Aquaponics","section":"agriculture","sectionLabel":"Agriculture","file":"sections/agriculture.html","anchor":"#aquaponics","content":"aquaponics fish plants nitrogen cycle tilapia catfish NFT media bed water culture integrated system","tags":["aquaponics","fish","nitrogen cycle","tilapia"]},
-    {"id":"metal-overview","title":"Metallurgy & Blacksmithing Overview","section":"metallurgy","sectionLabel":"Metallurgy","file":"sections/metallurgy.html","anchor":"","content":"metallurgy blacksmithing forge anvil tools heat treating steel iron casting JABOD nail making","tags":["metallurgy","blacksmithing","forge","anvil","steel"]},
-    {"id":"metal-forge","title":"Building a Forge","section":"metallurgy","sectionLabel":"Metallurgy","file":"sections/metallurgy.html","anchor":"#forge","content":"forge building brake drum forge JABOD pipe blower air supply fire pot coal charcoal coke refractory","tags":["forge","brake drum","JABOD","coal","charcoal","blower"]},
-    {"id":"metal-technique","title":"Blacksmithing Techniques","section":"metallurgy","sectionLabel":"Metallurgy","file":"sections/metallurgy.html","anchor":"#technique","content":"blacksmithing hammer anvil drawing upsetting punching drifting bending welding forge weld heat color temperature","tags":["blacksmithing","hammer","drawing","forge weld","heat color"]},
-    {"id":"metal-heat","title":"Heat Treating & Tempering","section":"metallurgy","sectionLabel":"Metallurgy","file":"sections/metallurgy.html","anchor":"#heat-treating","content":"heat treating tempering quench hardening annealing normalizing steel carbon high medium low temperature color","tags":["heat treating","tempering","quench","hardening","annealing"]},
-    {"id":"metal-nails","title":"Making Nails","section":"metallurgy","sectionLabel":"Metallurgy","file":"sections/metallurgy.html","anchor":"#nails","content":"nail making nail header tool forge nail point shank hot cut framing nails production rate","tags":["nails","nail header","blacksmithing","forge","construction"]},
-    {"id":"metal-casting","title":"Metal Casting","section":"metallurgy","sectionLabel":"Metallurgy","file":"sections/metallurgy.html","anchor":"#casting","content":"metal casting crucible furnace sand casting green sand cope drag pattern pouring aluminum bronze copper","tags":["casting","crucible","sand casting","aluminum","bronze"]},
-    {"id":"gov-overview","title":"Community Governance Overview","section":"governance","sectionLabel":"Governance","file":"sections/governance.html","anchor":"","content":"community governance group organization council leadership roles decision making post collapse conflict resolution","tags":["governance","community","council","leadership","organization"]},
-    {"id":"gov-forming","title":"Forming a Group","section":"governance","sectionLabel":"Governance","file":"sections/governance.html","anchor":"#forming","content":"forming group optimal size Dunbar number 150 village squad platoon skill inventory free rider problem","tags":["group formation","Dunbar","group size","community","free rider"]},
-    {"id":"gov-roles","title":"Critical Community Roles","section":"governance","sectionLabel":"Governance","file":"sections/governance.html","anchor":"#roles","content":"critical roles medical officer security lead logistics communications agriculture council lead education construction engineering","tags":["roles","medical officer","security lead","logistics","community roles"]},
-    {"id":"gov-justice","title":"Laws & Justice System","section":"governance","sectionLabel":"Governance","file":"sections/governance.html","anchor":"#justice","content":"laws justice conflict resolution mediation evidence standards punishment exile restorative punitive deterrent flowchart","tags":["justice","laws","conflict resolution","mediation","exile","punishment"]},
-    {"id":"gov-trade","title":"Trade & Post-Collapse Economics","section":"governance","sectionLabel":"Governance","file":"sections/governance.html","anchor":"#trade","content":"trade economics barter salt grain labor hours alcohol gold silver exchange ratio market day credit ledger hoarding black market","tags":["trade","barter","economics","exchange","market","hoarding"]},
-    {"id":"psych-overview","title":"Psychology & Morale Overview","section":"psychology","sectionLabel":"Psychology","file":"sections/psychology.html","anchor":"","content":"psychology morale trauma PTSD grief group dynamics survivor traits mental health crisis breathing","tags":["psychology","morale","trauma","PTSD","mental health"]},
-    {"id":"psych-stress","title":"Acute Stress & Tactical Breathing","section":"psychology","sectionLabel":"Psychology","file":"sections/psychology.html","anchor":"#stress","content":"acute stress tactical breathing box breathing 4-4-4-4 cortisol adrenaline freeze panic response grounding 5-4-3-2-1 animation","tags":["stress","tactical breathing","box breathing","grounding","panic"]},
-    {"id":"psych-trauma","title":"Trauma, Grief & PTSD","section":"psychology","sectionLabel":"Psychology","file":"sections/psychology.html","anchor":"#trauma","content":"trauma PTSD grief processing stages acute stress disorder psychological first aid moral injury survivors guilt","tags":["trauma","PTSD","grief","moral injury","psychological first aid"]},
-    {"id":"psych-morale","title":"Morale Management","section":"psychology","sectionLabel":"Psychology","file":"sections/psychology.html","anchor":"#morale","content":"morale management routine ritual celebration Shackleton leadership purpose meaning small wins recognition","tags":["morale","routine","Shackleton","leadership","meaning","ritual"]},
-    {"id":"psych-group","title":"Group Dynamics & Conflict","section":"psychology","sectionLabel":"Psychology","file":"sections/psychology.html","anchor":"#group","content":"group dynamics conflict factions scapegoating rumor control decision making under pressure leadership crisis","tags":["group dynamics","conflict","factions","rumor","decision making"]},
-    {"id":"chem-overview","title":"Chemistry & Materials Overview","section":"chemistry","sectionLabel":"Chemistry","file":"sections/chemistry.html","anchor":"","content":"chemistry materials soap lye alcohol fermentation charcoal tanning dyes disinfectants vinegar","tags":["chemistry","soap","lye","alcohol","charcoal","tanning"]},
-    {"id":"chem-lye","title":"Lye from Wood Ash","section":"chemistry","sectionLabel":"Chemistry","file":"sections/chemistry.html","anchor":"#lye","content":"lye wood ash potassium hydroxide KOH leaching rain water hardwood ash lye testing potato egg float saponification","tags":["lye","wood ash","potassium hydroxide","KOH","leaching","saponification"]},
-    {"id":"chem-soap","title":"Soap Making (Cold Process)","section":"chemistry","sectionLabel":"Chemistry","file":"sections/chemistry.html","anchor":"#soap","content":"soap making cold process saponification tallow lard fat oil ash lye soft soap hard soap mold cure weeks","tags":["soap","cold process","saponification","tallow","lard","fat"]},
-    {"id":"chem-alcohol","title":"Alcohol Fermentation & Distillation","section":"chemistry","sectionLabel":"Chemistry","file":"sections/chemistry.html","anchor":"#alcohol","content":"alcohol fermentation distillation yeast sugar fruit grain ethanol methanol pot still column still wort wash","tags":["alcohol","fermentation","distillation","ethanol","methanol","still","yeast"]},
-    {"id":"chem-tanning","title":"Bark & Brain Tanning","section":"chemistry","sectionLabel":"Chemistry","file":"sections/chemistry.html","anchor":"#tanning","content":"tanning bark oak tannin brain brains hide leather brain tanning smoke process buckskin dehairing fleshing","tags":["tanning","bark tanning","brain tanning","leather","hide","buckskin"]},
-    {"id":"text-overview","title":"Textiles & Clothing Overview","section":"textiles","sectionLabel":"Textiles","file":"sections/textiles.html","anchor":"","content":"textiles clothing fiber spinning weaving knitting sewing leather waterproofing cotton wool loom spindle","tags":["textiles","clothing","fiber","spinning","weaving","leather"]},
-    {"id":"text-spinning","title":"Drop Spindle & Spinning","section":"textiles","sectionLabel":"Textiles","file":"sections/textiles.html","anchor":"#spinning","content":"drop spindle spinning wheel yarn ply twist draft drafting whorl spindle DIY wood disk dowel","tags":["drop spindle","spinning","yarn","ply","twist"]},
-    {"id":"text-weaving","title":"Weaving on a Frame Loom","section":"textiles","sectionLabel":"Textiles","file":"sections/textiles.html","anchor":"#weaving","content":"weaving loom warp weft plain weave twill shed heddle shuttle frame loom backstrap cardweaving","tags":["weaving","loom","warp","weft","plain weave","twill"]},
-    {"id":"text-sewing","title":"Hand Sewing & Repair","section":"textiles","sectionLabel":"Textiles","file":"sections/textiles.html","anchor":"#sewing","content":"hand sewing repair patch darning saddle stitch running stitch backstitch waxed thread needle awl buttonhole","tags":["sewing","repair","patch","saddle stitch","darning","needle"]},
-    {"id":"text-leather","title":"Leather Working","section":"textiles","sectionLabel":"Textiles","file":"sections/textiles.html","anchor":"#leather","content":"leather working stitching awl waxed thread saddler stitch harness moccasin boots belt pouch punch needle","tags":["leather","saddler stitch","awl","moccasin","boots"]},
-    {"id":"veh-overview","title":"Vehicles & Transport Overview","section":"vehicles","sectionLabel":"Vehicles","file":"sections/vehicles.html","anchor":"","content":"vehicles transport engine repair fuel biodiesel wood gas ethanol bicycle animal boat canoe gasifier","tags":["vehicles","transport","engine","fuel","bicycle","biodiesel"]},
-    {"id":"veh-repair","title":"Basic Engine Repair","section":"vehicles","sectionLabel":"Vehicles","file":"sections/vehicles.html","anchor":"#repair","content":"engine repair diagnostic SFEC spark fuel engine compression carburetor battery ignition alternator belt fluid check","tags":["engine repair","diagnostic","SFEC","spark","compression","carburetor"]},
-    {"id":"veh-biodiesel","title":"Biodiesel Production","section":"vehicles","sectionLabel":"Vehicles","file":"sections/vehicles.html","anchor":"#biodiesel","content":"biodiesel production vegetable oil NaOH sodium hydroxide methanol transesterification glycerin batch recipe liter","tags":["biodiesel","vegetable oil","transesterification","methanol","NaOH","fuel"]},
-    {"id":"veh-woodgas","title":"Wood Gas Gasifier","section":"vehicles","sectionLabel":"Vehicles","file":"sections/vehicles.html","anchor":"#woodgas","content":"wood gas gasifier downdraft updraft generator vehicle run fuel producer gas syngas carbon monoxide Sweden WWII history","tags":["wood gas","gasifier","downdraft","producer gas","syngas","Sweden"]},
-    {"id":"veh-bicycle","title":"Bicycle Maintenance & Use","section":"vehicles","sectionLabel":"Vehicles","file":"sections/vehicles.html","anchor":"#bicycle","content":"bicycle maintenance repair tire tube patch chain derailleur brake cable spoke tension cargo trailer hauling","tags":["bicycle","maintenance","chain","tire","cargo","trailer"]},
-    {"id":"veh-boat","title":"Boats & Water Transport","section":"vehicles","sectionLabel":"Vehicles","file":"sections/vehicles.html","anchor":"#boat","content":"boat construction flat bottom skiff plywood canoe dugout portage paddle oar sail river lake transport","tags":["boat","flat bottom","skiff","plywood","canoe","paddle"]},
-    {"id":"animal-overview","title":"Animal Husbandry Overview","section":"animal","sectionLabel":"Animal Husbandry","file":"sections/animal.html","anchor":"","content":"animal husbandry livestock chickens goats rabbits cattle pigs veterinary care slaughter breeding bees","tags":["animal husbandry","livestock","veterinary","breeding","slaughter"]},
-    {"id":"animal-chickens","title":"Chickens — Laying Hens & Meat Breeds","section":"animal","sectionLabel":"Animal Husbandry","file":"sections/animal.html","anchor":"#chickens","content":"chickens laying hens meat breeds Rhode Island Red Plymouth Rock Cornish cross egg production feed grain scratch water housing coop predator proofing","tags":["chickens","hens","eggs","coop","poultry","laying"]},
-    {"id":"animal-goats","title":"Goats — Dairy & Meat","section":"animal","sectionLabel":"Animal Husbandry","file":"sections/animal.html","anchor":"#goats","content":"goats dairy Nubian Alpine LaMancha meat Boer milk production breeding kidding minerals deworming parasite fencing browse","tags":["goats","dairy","milk","Nubian","Boer","kidding","deworming"]},
-    {"id":"animal-bees","title":"Beekeeping Basics","section":"animal","sectionLabel":"Animal Husbandry","file":"sections/animal.html","anchor":"#bees","content":"beekeeping langstroth top bar hive honey beeswax propolis colony inspection varroa mite treatment queen swarm split harvest extraction","tags":["beekeeping","bees","honey","beeswax","hive","varroa","swarm"]},
-    {"id":"disasters-overview","title":"Disaster Playbooks Overview","section":"disasters","sectionLabel":"Disasters","file":"sections/disasters.html","anchor":"","content":"disaster playbooks earthquake hurricane wildfire flood pandemic grid-down civil unrest chemical spill EMP","tags":["disaster","playbook","emergency","response"]},
-    {"id":"disasters-earthquake","title":"Earthquake Response","section":"disasters","sectionLabel":"Disasters","file":"sections/disasters.html","anchor":"#earthquake","content":"earthquake drop cover hold on aftershock structural collapse search rescue gas leak fire building damage","tags":["earthquake","drop cover","aftershock","structural collapse"]},
-    {"id":"disasters-hurricane","title":"Hurricane Survival","section":"disasters","sectionLabel":"Disasters","file":"sections/disasters.html","anchor":"#hurricane","content":"hurricane typhoon cyclone shelter evacuation storm surge flood wind damage Katrina lesson attic axe","tags":["hurricane","storm surge","evacuation","shelter"]},
-    {"id":"disasters-gridown","title":"Grid-Down / EMP Response","section":"disasters","sectionLabel":"Disasters","file":"sections/disasters.html","anchor":"#grid-down","content":"grid down EMP power outage generator fuel water storage food refrigeration communications alternative energy","tags":["grid down","EMP","power outage","generator"]},
-    {"id":"tools-calc","title":"Survival Calculators & Tools","section":"tools","sectionLabel":"Tools","file":"tools.html","anchor":"","content":"calculators calorie water solar sizing supply tracker skill inventory planting calendar bug out decision radio frequencies medication interactive tools","tags":["calculators","tools","calorie","water","solar","supply tracker"]},
-    {"id":"tools-calorie","title":"Calorie Needs Calculator","section":"tools","sectionLabel":"Tools","file":"tools.html","anchor":"#tool-1","content":"calorie calculator BMR daily needs people group age gender activity level food supply days remaining","tags":["calorie","calculator","BMR","food supply","days remaining"]},
-    {"id":"tools-water","title":"Water Requirements Calculator","section":"tools","sectionLabel":"Tools","file":"tools.html","anchor":"#tool-2","content":"water requirements calculator climate activity stored collected needed daily liters gallons","tags":["water","calculator","requirements","climate","activity"]},
-    {"id":"tools-solar","title":"Solar Sizing Tool","section":"tools","sectionLabel":"Tools","file":"tools.html","anchor":"#tool-3","content":"solar sizing tool panel watts battery bank watt hours sun hours depth of discharge loads calculator","tags":["solar","sizing","panel","battery","watt hours","calculator"]},
-    {"id":"tools-supply","title":"Supply Tracker","section":"tools","sectionLabel":"Tools","file":"tools.html","anchor":"#tool-4","content":"supply tracker inventory days remaining items consumption rate CSV export storage tracking","tags":["supply tracker","inventory","days remaining","consumption"]},
-    {"id":"tools-skills","title":"Community Skill Inventory","section":"tools","sectionLabel":"Tools","file":"tools.html","anchor":"#tool-5","content":"skill inventory community 22 skills medical agricultural mechanical radio beginner intermediate expert gap detection","tags":["skill inventory","community","skills","gap detection"]},
-    {"id":"tools-bugout","title":"Bug-Out Decision Tree","section":"tools","sectionLabel":"Tools","file":"tools.html","anchor":"#tool-7","content":"bug out decision tree stay go shelter in place evacuate immediate danger yes no interactive checklist recommendation","tags":["bug out","stay","go","evacuation","decision tree","shelter in place"]},
-    {"id":"tools-radio","title":"Emergency Radio Frequencies","section":"tools","sectionLabel":"Tools","file":"tools.html","anchor":"#tool-8","content":"radio frequencies NOAA VHF UHF ham calling marine CB channel 16 9 FRS MURS GMRS Meshtastic LoRa emergency custom","tags":["radio","frequencies","NOAA","ham","CB","marine","FRS","GMRS"]},
-    {"id":"tools-meds","title":"Medication Reference & Drug Interactions","section":"tools","sectionLabel":"Tools","file":"tools.html","anchor":"#tool-9","content":"medication reference drug interactions amoxicillin doxycycline ciprofloxacin metronidazole ibuprofen acetaminophen epinephrine naloxone potassium iodide dosage checker","tags":["medication","drugs","antibiotics","interactions","dosage","reference"]},
-    {"id":"lit-overview","title":"Reference Library — 60 Books","section":"literature","sectionLabel":"Reference Library","file":"literature.html","anchor":"","content":"reference library books 60 survival preparedness medicine agriculture engineering communications security psychology history","tags":["library","books","reference","survival","reading list"]},
-    {"id":"ai-setup","title":"Bunker Bot Setup Guide","section":"ai-setup","sectionLabel":"Bunker Bot Setup","file":"ai-setup.html","anchor":"","content":"Bunker Bot ollama AI setup llama3 gemma3 phi3 install download model offline local LLM phi3:mini mistral","tags":["Bunker Bot","ollama","AI","LLM","setup"]},
-    {"id":"quick-ref","title":"Emergency Quick Reference Card","section":"quick-reference","sectionLabel":"Quick Reference","file":"quick-reference.html","anchor":"","content":"emergency quick reference card printable critical information first aid water purification signals","tags":["emergency","quick reference","printable","card"]},
-    {"id":"gear-overview","title":"Master Gear List","section":"gear","sectionLabel":"Gear List","file":"gear.html","anchor":"","content":"gear list checklist equipment supplies critical important preparedness readiness checklist survival kit","tags":["gear","checklist","equipment","supplies","kit"]},
-    {"id":"cards-ref","title":"Emergency Wallet Cards","section":"cards","sectionLabel":"Emergency Cards","file":"cards.html","anchor":"","content":"wallet cards printable emergency reference morse code radio frequencies wound care triage knots Bunker Bot setup","tags":["cards","wallet","printable","morse","triage","knots"]},
-    {"id":"changelog","title":"Changelog & Version History","section":"changelog","sectionLabel":"Changelog","file":"changelog.html","anchor":"","content":"changelog version history updates improvements release notes what changed v1.0.0","tags":["changelog","version","history","updates"]},
-    {"id":"bpower-overview","title":"Power Generation from Scratch","section":"build-power","sectionLabel":"Power Generation","file":"sections/build-power.html","anchor":"","content":"power generation pedal bicycle generator water wheel wind turbine biogas digester thermoelectric TEG steam engine off-grid electricity hand-built DIY","tags":["power","generator","water wheel","wind","biogas","steam","TEG"]},
-    {"id":"bpower-pedal","title":"Pedal & Hand-Crank Generators","section":"build-power","sectionLabel":"Power Generation","file":"sections/build-power.html","anchor":"#pedal","content":"pedal generator hand crank bicycle rear wheel friction roller DC motor rectifier charge controller battery wiring 12V output watt alternator","tags":["pedal generator","hand crank","bicycle","motor","rectifier","battery","12V"]},
-    {"id":"bpower-waterwheel","title":"Water Wheel Generators","section":"build-power","sectionLabel":"Power Generation","file":"sections/build-power.html","anchor":"#waterwheel","content":"water wheel overshot undershot stream river millrace efficiency bucket spoke armature gravity-fed head flow rate timber steel","tags":["water wheel","overshot","undershot","stream","mill","head","flow rate"]},
-    {"id":"bpower-wind","title":"Wind Generators (DIY)","section":"build-power","sectionLabel":"Power Generation","file":"sections/build-power.html","anchor":"#wind","content":"wind turbine DIY blades alternator aerofoil profile twist angle carving timber aluminum copper coil magnet rotor stator HAWT","tags":["wind turbine","DIY","blades","aerofoil","rotor","stator","alternator"]},
-    {"id":"bpower-biogas","title":"Biogas Digesters","section":"build-power","sectionLabel":"Power Generation","file":"sections/build-power.html","anchor":"#biogas","content":"biogas digester fixed dome floating drum manure dung animal waste methane gas cooker lamp generator burner inlet outlet slurry","tags":["biogas","digester","methane","manure","gas","dome","slurry"]},
-    {"id":"bstruct-overview","title":"Building That Lasts — Structures & Defences","section":"build-structures","sectionLabel":"Building & Structures","file":"sections/build-structures.html","anchor":"","content":"building structures defences site selection cob earthbag timber frame A-frame perimeter wall watchtower fortification natural building","tags":["building","structures","cob","earthbag","timber frame","defences","perimeter"]},
-    {"id":"bstruct-cob","title":"Cob Building","section":"build-structures","sectionLabel":"Building & Structures","file":"sections/build-structures.html","anchor":"#cob","content":"cob building clay soil sand straw mixture walls foundation rubble trench DPC plaster render lime interior mass thermal mass natural building","tags":["cob","clay","straw","sand","natural building","walls","plaster","lime"]},
-    {"id":"bstruct-earthbag","title":"Earthbag Construction","section":"build-structures","sectionLabel":"Building & Structures","file":"sections/build-structures.html","anchor":"#earthbag","content":"earthbag construction polypropylene bags soil fill barbed wire dome vault arch courses pinning rebar foundation drainage gravel","tags":["earthbag","bags","soil","barbed wire","dome","vault","foundation"]},
-    {"id":"bstruct-timber","title":"Timber Frame Construction","section":"build-structures","sectionLabel":"Building & Structures","file":"sections/build-structures.html","anchor":"#timber","content":"timber frame mortise tenon half lap drawboring joinery hand tools post beam ridge rafter tie beam A-frame woodworking chainsaw froe axe chisel","tags":["timber frame","mortise tenon","joinery","post beam","rafter","woodworking","A-frame"]},
-    {"id":"bstruct-defence","title":"Defensive Perimeter Design","section":"build-structures","sectionLabel":"Building & Structures","file":"sections/build-structures.html","anchor":"#defence","content":"defensive perimeter hedge ditch wall watchtower coverage arc gate obstacle berm fields of fire community village layout top-down design","tags":["defensive","perimeter","wall","watchtower","hedge","ditch","gate","berm"]},
-    {"id":"med-making-overview","title":"Compounding Basic Medicines","section":"medicine-making","sectionLabel":"Medicine Making","file":"sections/medicine-making.html","anchor":"","content":"medicine making compounding tincture salve antiseptic ORS oral rehydration solution herbal medicine plant identification fever pain infection","tags":["medicine","compounding","tincture","salve","antiseptic","ORS","herbal","plants"]},
-    {"id":"med-making-ors","title":"Oral Rehydration Solution (ORS)","section":"medicine-making","sectionLabel":"Medicine Making","file":"sections/medicine-making.html","anchor":"#ors","content":"ORS oral rehydration solution WHO recipe 6 teaspoons sugar half teaspoon salt 1 litre water diarrhoea cholera dehydration children electrolyte","tags":["ORS","oral rehydration","sugar","salt","electrolyte","diarrhoea","cholera","WHO"]},
-    {"id":"med-making-tinctures","title":"Herbal Tinctures","section":"medicine-making","sectionLabel":"Medicine Making","file":"sections/medicine-making.html","anchor":"#tinctures","content":"tincture alcohol maceration herb plant extract jar vodka everclear seal shake strain amber bottle menstruum plant material ratio","tags":["tincture","alcohol","herbal extract","maceration","jar","amber bottle","menstruum"]},
-    {"id":"med-making-plants","title":"Medicinal Plant Identification","section":"medicine-making","sectionLabel":"Medicine Making","file":"sections/medicine-making.html","anchor":"#plants","content":"medicinal plants yarrow elder garlic plantain comfrey willow bark raspberry nettle lavender calendula chamomile identification lookalikes hemlock lily of the valley toxic","tags":["medicinal plants","yarrow","elderberry","comfrey","willow","plantain","lookalikes","toxic","identification"]},
-    {"id":"bwater-overview","title":"Water Systems — Collection, Storage, Distribution","section":"build-water","sectionLabel":"Water Systems","file":"sections/build-water.html","anchor":"","content":"water systems rainwater harvesting tank well gravity distribution irrigation purification first flush biosand filter IBC ferrocement cistern","tags":["water","rainwater","harvesting","tank","well","gravity","irrigation","purification"]},
-    {"id":"bwater-rainwater","title":"Rainwater Harvesting","section":"build-water","sectionLabel":"Water Systems","file":"sections/build-water.html","anchor":"#rainwater","content":"rainwater harvesting roof catchment gutter downpipe yield calculation UK rainfall 650mm runoff coefficient tarp fog collection dew","tags":["rainwater","roof","gutter","catchment","yield","UK","fog","dew"]},
-    {"id":"bwater-tanks","title":"Tank Construction — IBC, Ferrocement, Cistern","section":"build-water","sectionLabel":"Water Systems","file":"sections/build-water.html","anchor":"#tanks","content":"water tank IBC tote ferrocement cistern buried storage 1000 litre chicken wire mortar cement waterproof render pump submersible daily needs calculation","tags":["tank","IBC","ferrocement","cistern","1000L","storage","cement","buried","pump"]},
-    {"id":"bwater-firstflush","title":"First Flush Diverters","section":"build-water","sectionLabel":"Water Systems","file":"sections/build-water.html","anchor":"#firstflush","content":"first flush diverter standpipe T-junction ball float drain hole contamination bird droppings roof first rainfall divert clean water quality","tags":["first flush","diverter","standpipe","T-junction","ball float","bird","contamination"]},
-    {"id":"bwater-gravity","title":"Gravity Water Distribution Systems","section":"build-water","sectionLabel":"Water Systems","file":"sections/build-water.html","anchor":"#gravity","content":"gravity distribution head pressure 0.1 bar per metre MDPE pipe sizing frost protection buried 600mm lagging drain valve elevated IBC tank platform","tags":["gravity","head pressure","bar","MDPE","pipe","frost","distribution","platform"]},
-    {"id":"bwater-wells","title":"Well Construction","section":"build-water","sectionLabel":"Water Systems","file":"sections/build-water.html","anchor":"#wells","content":"well hand-dug borehole 1.2 metre diameter brick lining seal open-jointed water table saturated zone concrete rings India Mark II hand pump cave-in safety","tags":["well","hand-dug","borehole","brick","lining","water table","India Mark II","pump","cave-in"]},
-    {"id":"bwater-purification","title":"Water Testing & Purification","section":"build-water","sectionLabel":"Water Systems","file":"sections/build-water.html","anchor":"#testing","content":"water testing purification test strips coliform nitrate pH biosand filter boil chlorinate SODIS sodium hypochlorite bleach well shock treatment schmutzdecke","tags":["water testing","purification","coliform","pH","biosand","boil","bleach","chlorinate","SODIS","schmutzdecke"]},
-    {"id":"bwater-irrigation","title":"Irrigation Systems — Swales, Drip, Ollas","section":"build-water","sectionLabel":"Water Systems","file":"sections/build-water.html","anchor":"#irrigation","content":"irrigation swale contour A-frame level berm tree gravity drip tape emitter olla buried clay pot terracotta water reduction passive","tags":["irrigation","swale","contour","A-frame","berm","drip","olla","clay pot","terracotta","passive"]},
-    {"id":"skills-overview","title":"Practical Skills — Interactive Guides","section":"skills","sectionLabel":"Practical Skills","file":"skills.html","anchor":"","content":"practical skills interactive step-by-step visual guides fire knots navigation first aid hunting fishing plant identification construction practice competency teaching","tags":["skills","fire","knots","navigation","first aid","hunting","plants","construction","practice","competency"]},
-    {"id":"skills-fire","title":"Fire Skills — Lays, Bow Drill, Reading Fire","section":"skills","sectionLabel":"Practical Skills","file":"skills.html","anchor":"","content":"fire lay teepee log cabin star long fire dakota hole bow drill friction fire spindle fireboard tinder ember reading fire flame colour smoke","tags":["fire","bow drill","friction fire","teepee","log cabin","star lay","dakota hole","tinder","ember"]},
-    {"id":"skills-knots","title":"Knots — Bowline, Lashing, Prusik and More","section":"skills","sectionLabel":"Practical Skills","file":"skills.html","anchor":"","content":"knots bowline clove hitch trucker hitch sheet bend figure eight prusik constrictor square lashing shear lashing rope making cordage","tags":["knots","bowline","clove hitch","trucker hitch","prusik","lashing","rope making","cordage"]},
-    {"id":"skills-firstaid","title":"First Aid Skills — Bleeding, CPR, Fractures","section":"skills","sectionLabel":"Practical Skills","file":"skills.html","anchor":"","content":"first aid bleeding control direct pressure wound packing tourniquet CPR choking recovery position fracture splinting wound closure steri-strip","tags":["first aid","CPR","tourniquet","bleeding","fracture","wound closure","choking","recovery position"]},
-    {"id":"skills-navigation","title":"Navigation Skills — Compass, Stars, Shadow Stick","section":"skills","sectionLabel":"Practical Skills","file":"skills.html","anchor":"","content":"navigation compass bearing triangulation topographic map contour lines shadow stick stars polaris plough natural navigation signs","tags":["navigation","compass","bearing","triangulation","topo map","shadow stick","stars","polaris","natural navigation"]}
+    {
+      "id": "home-intro",
+      "title": "Survival Guide Home",
+      "section": "home",
+      "sectionLabel": "Home",
+      "file": "index.html",
+      "anchor": "",
+      "content": "survival guide emergency preparedness offline last light introduction overview dashboard",
+      "tags": [
+        "survival",
+        "guide",
+        "home",
+        "intro"
+      ]
+    },
+    {
+      "id": "food-water-overview",
+      "title": "Food, Water & Sanitation Overview",
+      "section": "food",
+      "sectionLabel": "Food & Water",
+      "file": "sections/food.html",
+      "anchor": "",
+      "content": "food water sanitation survival basics overview",
+      "tags": [
+        "food",
+        "water",
+        "overview"
+      ]
+    },
+    {
+      "id": "food-water-sourcing",
+      "title": "Water Sourcing",
+      "section": "food",
+      "sectionLabel": "Food & Water",
+      "file": "sections/food.html",
+      "anchor": "#water-sourcing",
+      "content": "water sourcing finding water streams rivers rain groundwater springs water table digging wells",
+      "tags": [
+        "water",
+        "sourcing",
+        "well",
+        "stream",
+        "rain"
+      ]
+    },
+    {
+      "id": "food-water-purification",
+      "title": "Water Purification",
+      "section": "food",
+      "sectionLabel": "Food & Water",
+      "file": "sections/food.html",
+      "anchor": "#water-purification",
+      "content": "water purification boiling bleach sodium hypochlorite solar disinfection SODIS filter activated carbon sand gravel distillation iodine tablets",
+      "tags": [
+        "water",
+        "purification",
+        "boiling",
+        "bleach",
+        "filter",
+        "SODIS",
+        "distillation"
+      ]
+    },
+    {
+      "id": "food-water-storage",
+      "title": "Water Storage",
+      "section": "food",
+      "sectionLabel": "Food & Water",
+      "file": "sections/food.html",
+      "anchor": "#water-storage",
+      "content": "water storage containers food grade BPA free rotation schedule long term barrels",
+      "tags": [
+        "water",
+        "storage",
+        "containers"
+      ]
+    },
+    {
+      "id": "food-rainwater",
+      "title": "Rainwater Collection",
+      "section": "food",
+      "sectionLabel": "Food & Water",
+      "file": "sections/food.html",
+      "anchor": "#rainwater",
+      "content": "rainwater collection system catchment roof gutters first flush diverter barrel storage cistern",
+      "tags": [
+        "rainwater",
+        "collection",
+        "catchment"
+      ]
+    },
+    {
+      "id": "food-preservation",
+      "title": "Food Preservation",
+      "section": "food",
+      "sectionLabel": "Food & Water",
+      "file": "sections/food.html",
+      "anchor": "#food-preservation",
+      "content": "food preservation canning pressure canning water bath canning smoking salt curing fermentation dehydration freeze drying jerky",
+      "tags": [
+        "food",
+        "preservation",
+        "canning",
+        "smoking",
+        "salt",
+        "fermentation",
+        "dehydration"
+      ]
+    },
+    {
+      "id": "food-foraging",
+      "title": "Foraging & Wild Plants",
+      "section": "food",
+      "sectionLabel": "Food & Water",
+      "file": "sections/food.html",
+      "anchor": "#foraging",
+      "content": "foraging wild edible plants mushrooms identification dandelion cattail acorn pine needle berries nuts roots tubers avoid poisonous",
+      "tags": [
+        "foraging",
+        "wild plants",
+        "edible",
+        "mushrooms",
+        "berries"
+      ]
+    },
+    {
+      "id": "food-hunting",
+      "title": "Hunting & Trapping",
+      "section": "food",
+      "sectionLabel": "Food & Water",
+      "file": "sections/food.html",
+      "anchor": "#hunting",
+      "content": "hunting trapping snares deadfall trap figure four box trap rabbit squirrel deer field dressing game cleaning",
+      "tags": [
+        "hunting",
+        "trapping",
+        "snares",
+        "deadfall",
+        "game"
+      ]
+    },
+    {
+      "id": "food-sanitation",
+      "title": "Sanitation Without Running Water",
+      "section": "food",
+      "sectionLabel": "Food & Water",
+      "file": "sections/food.html",
+      "anchor": "#sanitation",
+      "content": "sanitation latrine outhouse composting toilet greywater waste disposal hygiene hand washing soap disease prevention cholera typhoid",
+      "tags": [
+        "sanitation",
+        "latrine",
+        "hygiene",
+        "disease",
+        "greywater"
+      ]
+    },
+    {
+      "id": "med-overview",
+      "title": "Medical & First Aid Overview",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "",
+      "content": "medical first aid emergency treatment survival overview",
+      "tags": [
+        "medical",
+        "first aid",
+        "overview"
+      ]
+    },
+    {
+      "id": "med-wounds",
+      "title": "Wound Care & Infection Control",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#wound-care",
+      "content": "wound care cleaning irrigation suturing improvised stitches butterfly closure steri-strips infection control antibiotics signs of infection",
+      "tags": [
+        "wounds",
+        "sutures",
+        "infection",
+        "bleeding"
+      ]
+    },
+    {
+      "id": "med-fractures",
+      "title": "Fractures & Splinting",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#fractures",
+      "content": "fracture broken bone splinting immobilization improvised splint traction closed open fracture reduction",
+      "tags": [
+        "fracture",
+        "broken bone",
+        "splint"
+      ]
+    },
+    {
+      "id": "med-burns",
+      "title": "Burns Treatment",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#burns",
+      "content": "burns first second third degree cool water no ice butter treatment dressing infection",
+      "tags": [
+        "burns",
+        "treatment"
+      ]
+    },
+    {
+      "id": "med-hypothermia",
+      "title": "Hypothermia & Heat Stroke",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#temperature",
+      "content": "hypothermia heat stroke heat exhaustion temperature core body warming cooling treatment signs symptoms",
+      "tags": [
+        "hypothermia",
+        "heat stroke",
+        "temperature"
+      ]
+    },
+    {
+      "id": "med-childbirth",
+      "title": "Emergency Childbirth",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#childbirth",
+      "content": "emergency childbirth delivery labor complications umbilical cord placenta postpartum",
+      "tags": [
+        "childbirth",
+        "delivery",
+        "labor"
+      ]
+    },
+    {
+      "id": "med-herbal",
+      "title": "Herbal Medicine",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#herbal",
+      "content": "herbal medicine plants medicinal yarrow plantain garlic willow bark aspirin fever pain infection tincture poultice",
+      "tags": [
+        "herbal",
+        "medicine",
+        "plants",
+        "tincture",
+        "poultice"
+      ]
+    },
+    {
+      "id": "med-meds",
+      "title": "Medications & Stockpiling",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#medications",
+      "content": "medications stockpiling antibiotics painkillers antihistamine antidiarrheal epinephrine insulin storage expiration rationing",
+      "tags": [
+        "medications",
+        "stockpile",
+        "antibiotics"
+      ]
+    },
+    {
+      "id": "med-triage",
+      "title": "Triage & Mass Casualty",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#triage",
+      "content": "triage mass casualty START triage red yellow green black tag prioritization multiple victims",
+      "tags": [
+        "triage",
+        "mass casualty",
+        "START"
+      ]
+    },
+    {
+      "id": "med-mental",
+      "title": "Mental Health in Survival",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#mental-health",
+      "content": "mental health survival stress anxiety PTSD grief community support routine normalcy children",
+      "tags": [
+        "mental health",
+        "stress",
+        "anxiety",
+        "PTSD"
+      ]
+    },
+    {
+      "id": "energy-overview",
+      "title": "Energy Creation & Management",
+      "section": "energy",
+      "sectionLabel": "Energy",
+      "file": "sections/energy.html",
+      "anchor": "",
+      "content": "energy solar wind hydro battery generator power survival electricity",
+      "tags": [
+        "energy",
+        "power",
+        "solar",
+        "battery"
+      ]
+    },
+    {
+      "id": "energy-solar",
+      "title": "Solar Power Systems",
+      "section": "energy",
+      "sectionLabel": "Energy",
+      "file": "sections/energy.html",
+      "anchor": "#solar",
+      "content": "solar panels photovoltaic wiring battery bank charge controller MPPT PWM inverter sizing watt hour ampere 12V 24V 48V system",
+      "tags": [
+        "solar",
+        "panels",
+        "battery",
+        "inverter",
+        "MPPT"
+      ]
+    },
+    {
+      "id": "energy-generator",
+      "title": "Hand-Crank & Pedal Generators",
+      "section": "energy",
+      "sectionLabel": "Energy",
+      "file": "sections/energy.html",
+      "anchor": "#generators",
+      "content": "hand crank pedal generator bicycle alternator DIY build motor winding coil magnet",
+      "tags": [
+        "generator",
+        "pedal",
+        "bicycle",
+        "hand crank"
+      ]
+    },
+    {
+      "id": "energy-hydro",
+      "title": "Micro-Hydro Power",
+      "section": "energy",
+      "sectionLabel": "Energy",
+      "file": "sections/energy.html",
+      "anchor": "#hydro",
+      "content": "micro hydro power stream water wheel turbine pelton wheel flow rate head pressure piping",
+      "tags": [
+        "hydro",
+        "water wheel",
+        "turbine",
+        "stream"
+      ]
+    },
+    {
+      "id": "energy-wind",
+      "title": "Wind Turbines",
+      "section": "energy",
+      "sectionLabel": "Energy",
+      "file": "sections/energy.html",
+      "anchor": "#wind",
+      "content": "wind turbine DIY blades alternator tower guy wires furling tail rotor",
+      "tags": [
+        "wind",
+        "turbine",
+        "DIY"
+      ]
+    },
+    {
+      "id": "energy-gasification",
+      "title": "Wood Gasification",
+      "section": "energy",
+      "sectionLabel": "Energy",
+      "file": "sections/energy.html",
+      "anchor": "#gasification",
+      "content": "wood gas gasification producer gas syngas wood charcoal gasifier engine run generator",
+      "tags": [
+        "gasification",
+        "wood gas",
+        "syngas"
+      ]
+    },
+    {
+      "id": "energy-batteries",
+      "title": "Battery Maintenance & Improvised Batteries",
+      "section": "energy",
+      "sectionLabel": "Energy",
+      "file": "sections/energy.html",
+      "anchor": "#batteries",
+      "content": "battery lead acid lithium maintenance desulfation equalization improvised battery electrolyte specific gravity hydrometer",
+      "tags": [
+        "battery",
+        "maintenance",
+        "lead acid"
+      ]
+    },
+    {
+      "id": "energy-faraday",
+      "title": "Faraday Cages & EMP Protection",
+      "section": "energy",
+      "sectionLabel": "Energy",
+      "file": "sections/energy.html",
+      "anchor": "#faraday",
+      "content": "faraday cage EMP electromagnetic pulse protection electronics metal box grounding nested shielding",
+      "tags": [
+        "faraday",
+        "EMP",
+        "protection",
+        "electronics"
+      ]
+    },
+    {
+      "id": "energy-fuel",
+      "title": "Fuel Storage Safety",
+      "section": "energy",
+      "sectionLabel": "Energy",
+      "file": "sections/energy.html",
+      "anchor": "#fuel",
+      "content": "fuel storage gasoline propane diesel safety stabilizer rotation container venting fire hazard",
+      "tags": [
+        "fuel",
+        "storage",
+        "gasoline",
+        "propane",
+        "diesel"
+      ]
+    },
+    {
+      "id": "shelter-overview",
+      "title": "Shelter & Construction Overview",
+      "section": "shelter",
+      "sectionLabel": "Shelter",
+      "file": "sections/shelter.html",
+      "anchor": "",
+      "content": "shelter construction building site emergency survival housing",
+      "tags": [
+        "shelter",
+        "construction",
+        "building"
+      ]
+    },
+    {
+      "id": "shelter-site",
+      "title": "Site Selection",
+      "section": "shelter",
+      "sectionLabel": "Shelter",
+      "file": "sections/shelter.html",
+      "anchor": "#site-selection",
+      "content": "site selection flood plain elevation wind sun orientation defensibility water access soil type drainage",
+      "tags": [
+        "site selection",
+        "location",
+        "flood",
+        "wind"
+      ]
+    },
+    {
+      "id": "shelter-emergency",
+      "title": "Emergency Shelters",
+      "section": "shelter",
+      "sectionLabel": "Shelter",
+      "file": "sections/shelter.html",
+      "anchor": "#emergency-shelters",
+      "content": "emergency shelter debris hut lean-to tarp setup A-frame quinzhee snow shelter immediate improvised",
+      "tags": [
+        "emergency shelter",
+        "debris hut",
+        "lean-to",
+        "tarp"
+      ]
+    },
+    {
+      "id": "shelter-longterm",
+      "title": "Long-Term Construction",
+      "section": "shelter",
+      "sectionLabel": "Shelter",
+      "file": "sections/shelter.html",
+      "anchor": "#long-term",
+      "content": "long term construction timber frame earthbag cob building natural building post and beam mortise tenon joinery",
+      "tags": [
+        "construction",
+        "timber frame",
+        "earthbag",
+        "cob"
+      ]
+    },
+    {
+      "id": "shelter-insulation",
+      "title": "Insulation & Ventilation",
+      "section": "shelter",
+      "sectionLabel": "Shelter",
+      "file": "sections/shelter.html",
+      "anchor": "#insulation",
+      "content": "insulation ventilation passive solar thermal mass air flow vapor barrier R-value natural materials straw clay",
+      "tags": [
+        "insulation",
+        "ventilation",
+        "passive solar"
+      ]
+    },
+    {
+      "id": "shelter-tools",
+      "title": "Construction Tools",
+      "section": "shelter",
+      "sectionLabel": "Shelter",
+      "file": "sections/shelter.html",
+      "anchor": "#tools",
+      "content": "tools hand tools saw axe chisel mallet level square plane drawknife froe improvised tools",
+      "tags": [
+        "tools",
+        "hand tools",
+        "construction"
+      ]
+    },
+    {
+      "id": "comms-overview",
+      "title": "Communications & Signals Overview",
+      "section": "communications",
+      "sectionLabel": "Communications",
+      "file": "sections/communications.html",
+      "anchor": "",
+      "content": "communications radio signals emergency contact ham radio frequency",
+      "tags": [
+        "communications",
+        "radio",
+        "signals"
+      ]
+    },
+    {
+      "id": "comms-ham",
+      "title": "Ham Radio Basics",
+      "section": "communications",
+      "sectionLabel": "Communications",
+      "file": "sections/communications.html",
+      "anchor": "#ham-radio",
+      "content": "ham radio amateur radio licensing Technician General Extra frequencies VHF UHF HF bands repeater simplex APRS",
+      "tags": [
+        "ham radio",
+        "amateur radio",
+        "frequencies",
+        "repeater"
+      ]
+    },
+    {
+      "id": "comms-baofeng",
+      "title": "Baofeng Radio Guide",
+      "section": "communications",
+      "sectionLabel": "Communications",
+      "file": "sections/communications.html",
+      "anchor": "#baofeng",
+      "content": "baofeng UV-5R UV-82 programming setup CHIRP frequencies emergency police fire NOAA weather channels memory",
+      "tags": [
+        "baofeng",
+        "UV-5R",
+        "programming",
+        "CHIRP"
+      ]
+    },
+    {
+      "id": "comms-morse",
+      "title": "Morse Code Reference",
+      "section": "communications",
+      "sectionLabel": "Communications",
+      "file": "sections/communications.html",
+      "anchor": "#morse",
+      "content": "morse code CW telegraph dots dashes SOS emergency signals alphabet numbers international",
+      "tags": [
+        "morse code",
+        "CW",
+        "SOS",
+        "telegraph"
+      ]
+    },
+    {
+      "id": "comms-signals",
+      "title": "Visual Signals",
+      "section": "communications",
+      "sectionLabel": "Communications",
+      "file": "sections/communications.html",
+      "anchor": "#visual-signals",
+      "content": "signal fire mirror heliograph ground to air signals rescue pattern sos X V arrow markings rocks",
+      "tags": [
+        "signal fire",
+        "mirror",
+        "ground to air",
+        "rescue"
+      ]
+    },
+    {
+      "id": "comms-mesh",
+      "title": "Mesh Networks (Meshtastic/LoRa)",
+      "section": "communications",
+      "sectionLabel": "Communications",
+      "file": "sections/communications.html",
+      "anchor": "#mesh",
+      "content": "meshtastic LoRa mesh network decentralized no internet radio packet T-Beam T-Echo local network community",
+      "tags": [
+        "meshtastic",
+        "LoRa",
+        "mesh",
+        "network"
+      ]
+    },
+    {
+      "id": "comms-noaa",
+      "title": "NOAA Weather Radio",
+      "section": "communications",
+      "sectionLabel": "Communications",
+      "file": "sections/communications.html",
+      "anchor": "#noaa",
+      "content": "NOAA weather radio WX frequencies 162.400 alerts EAS emergency alert system battery hand crank",
+      "tags": [
+        "NOAA",
+        "weather radio",
+        "alerts"
+      ]
+    },
+    {
+      "id": "comms-deaddrops",
+      "title": "Dead Drop Communication",
+      "section": "communications",
+      "sectionLabel": "Communications",
+      "file": "sections/communications.html",
+      "anchor": "#dead-drops",
+      "content": "dead drop communication OPSEC covert messaging locations codes ciphers signal chalk mark",
+      "tags": [
+        "dead drop",
+        "covert",
+        "OPSEC",
+        "cipher"
+      ]
+    },
+    {
+      "id": "nav-overview",
+      "title": "Navigation & Maps Overview",
+      "section": "navigation",
+      "sectionLabel": "Navigation",
+      "file": "sections/navigation.html",
+      "anchor": "",
+      "content": "navigation maps compass topographic celestial natural landmarks star charts",
+      "tags": [
+        "navigation",
+        "maps",
+        "compass",
+        "stars"
+      ]
+    },
+    {
+      "id": "nav-topo",
+      "title": "Topographic Maps",
+      "section": "navigation",
+      "sectionLabel": "Navigation",
+      "file": "sections/navigation.html",
+      "anchor": "#topo-maps",
+      "content": "topographic map reading contour lines elevation relief scale legend symbols trails water features UTM grid MGRS",
+      "tags": [
+        "topographic",
+        "maps",
+        "contour",
+        "UTM"
+      ]
+    },
+    {
+      "id": "nav-compass",
+      "title": "Compass Use & Triangulation",
+      "section": "navigation",
+      "sectionLabel": "Navigation",
+      "file": "sections/navigation.html",
+      "anchor": "#compass",
+      "content": "compass bearing declination magnetic north true north triangulation resection baseplate lensatic using compass",
+      "tags": [
+        "compass",
+        "bearing",
+        "declination",
+        "triangulation"
+      ]
+    },
+    {
+      "id": "nav-celestial",
+      "title": "Celestial Navigation",
+      "section": "navigation",
+      "sectionLabel": "Navigation",
+      "file": "sections/navigation.html",
+      "anchor": "#celestial",
+      "content": "celestial navigation stars north star polaris big dipper orion southern cross sun shadow stick position latitude longitude",
+      "tags": [
+        "celestial",
+        "stars",
+        "polaris",
+        "sun",
+        "navigation"
+      ]
+    },
+    {
+      "id": "nav-starcharts",
+      "title": "Star Charts — Northern & Southern Hemisphere",
+      "section": "navigation",
+      "sectionLabel": "Navigation",
+      "file": "sections/navigation.html",
+      "anchor": "#celestial",
+      "content": "star charts northern hemisphere southern hemisphere Polaris Big Dipper Cassiopeia Southern Cross Crux Centauri Canopus Magellanic",
+      "tags": [
+        "star charts",
+        "polaris",
+        "southern cross",
+        "Crux",
+        "navigation",
+        "celestial"
+      ]
+    },
+    {
+      "id": "nav-natural",
+      "title": "Natural Navigation",
+      "section": "navigation",
+      "sectionLabel": "Navigation",
+      "file": "sections/navigation.html",
+      "anchor": "#natural",
+      "content": "natural navigation moss trees wind patterns water flow animal trails landscape sun position time of day",
+      "tags": [
+        "natural navigation",
+        "moss",
+        "wind",
+        "water flow"
+      ]
+    },
+    {
+      "id": "nav-maps",
+      "title": "Creating Your Own Maps",
+      "section": "navigation",
+      "sectionLabel": "Navigation",
+      "file": "sections/navigation.html",
+      "anchor": "#map-making",
+      "content": "map making cartography sketch dead reckoning pace counting landmarks local area survey hand drawn",
+      "tags": [
+        "map making",
+        "cartography",
+        "sketch"
+      ]
+    },
+    {
+      "id": "sec-overview",
+      "title": "Security & Defense Overview",
+      "section": "security",
+      "sectionLabel": "Security",
+      "file": "sections/security.html",
+      "anchor": "",
+      "content": "security defense community protection watch perimeter bug out decision",
+      "tags": [
+        "security",
+        "defense",
+        "protection"
+      ]
+    },
+    {
+      "id": "sec-community",
+      "title": "Community Organization & Watch",
+      "section": "security",
+      "sectionLabel": "Security",
+      "file": "sections/security.html",
+      "anchor": "#community",
+      "content": "community organization neighborhood watch shifts roles responsibilities communication chain of command council leadership",
+      "tags": [
+        "community",
+        "watch",
+        "organization"
+      ]
+    },
+    {
+      "id": "sec-perimeter",
+      "title": "Perimeter Security",
+      "section": "security",
+      "sectionLabel": "Security",
+      "file": "sections/security.html",
+      "anchor": "#perimeter",
+      "content": "perimeter security trip wire alarm noise makers lights dog patrol fence wall barrier detection early warning",
+      "tags": [
+        "perimeter",
+        "trip wire",
+        "alarm",
+        "detection"
+      ]
+    },
+    {
+      "id": "sec-negotiation",
+      "title": "Conflict De-escalation",
+      "section": "security",
+      "sectionLabel": "Security",
+      "file": "sections/security.html",
+      "anchor": "#negotiation",
+      "content": "conflict de-escalation negotiation communication trade barter peaceful resolution threat assessment",
+      "tags": [
+        "negotiation",
+        "de-escalation",
+        "conflict"
+      ]
+    },
+    {
+      "id": "sec-firearms",
+      "title": "Firearms Basics",
+      "section": "security",
+      "sectionLabel": "Security",
+      "file": "sections/security.html",
+      "anchor": "#firearms",
+      "content": "firearms handgun rifle shotgun caliber ammunition storage maintenance cleaning safe storage legal",
+      "tags": [
+        "firearms",
+        "handgun",
+        "rifle",
+        "ammunition",
+        "safety"
+      ]
+    },
+    {
+      "id": "sec-nonlethal",
+      "title": "Non-Lethal Defense",
+      "section": "security",
+      "sectionLabel": "Security",
+      "file": "sections/security.html",
+      "anchor": "#non-lethal",
+      "content": "non lethal defense pepper spray taser stun baton improvised barriers alarm deterrent dog patrol",
+      "tags": [
+        "non-lethal",
+        "pepper spray",
+        "defense"
+      ]
+    },
+    {
+      "id": "sec-opsec",
+      "title": "Operational Security (OPSEC)",
+      "section": "security",
+      "sectionLabel": "Security",
+      "file": "sections/security.html",
+      "anchor": "#opsec",
+      "content": "OPSEC operational security what not to share information security loose lips stockpile secrecy community trust anonymity",
+      "tags": [
+        "OPSEC",
+        "security",
+        "information"
+      ]
+    },
+    {
+      "id": "sec-fortify",
+      "title": "Fortifying a Building",
+      "section": "security",
+      "sectionLabel": "Security",
+      "file": "sections/security.html",
+      "anchor": "#fortification",
+      "content": "fortification building hardening door reinforcement window barricade safe room bottleneck entry points defensive",
+      "tags": [
+        "fortification",
+        "hardening",
+        "door",
+        "windows"
+      ]
+    },
+    {
+      "id": "sec-bugout",
+      "title": "Bug-Out vs Bug-In Decision",
+      "section": "security",
+      "sectionLabel": "Security",
+      "file": "sections/security.html",
+      "anchor": "#bug-out",
+      "content": "bug out bug in decision framework shelter in place evacuation go bag BOB 72 hour kit when to leave stay flowchart",
+      "tags": [
+        "bug out",
+        "bug in",
+        "evacuation",
+        "go bag",
+        "decision tree"
+      ]
+    },
+    {
+      "id": "know-overview",
+      "title": "Knowledge Preservation Overview",
+      "section": "knowledge",
+      "sectionLabel": "Knowledge",
+      "file": "sections/knowledge.html",
+      "anchor": "",
+      "content": "knowledge preservation library books education community learning history mankind civilization",
+      "tags": [
+        "knowledge",
+        "preservation",
+        "library",
+        "education",
+        "history"
+      ]
+    },
+    {
+      "id": "know-history",
+      "title": "Brief History of Mankind",
+      "section": "knowledge",
+      "sectionLabel": "Knowledge",
+      "file": "sections/knowledge.html",
+      "anchor": "#history",
+      "content": "history mankind civilization timeline prehistoric stone age bronze age iron age ancient rome greece medieval renaissance industrial revolution world war agriculture writing fire Homo sapiens van Loon Story of Mankind",
+      "tags": [
+        "history",
+        "civilization",
+        "timeline",
+        "mankind",
+        "ancient",
+        "medieval",
+        "modern"
+      ]
+    },
+    {
+      "id": "know-preserve",
+      "title": "Preserving Books & Documents",
+      "section": "knowledge",
+      "sectionLabel": "Knowledge",
+      "file": "sections/knowledge.html",
+      "anchor": "#preserve",
+      "content": "preserving books documents lamination dry storage mylar silica gel archival acid-free paper dark storage humidity",
+      "tags": [
+        "books",
+        "preservation",
+        "documents",
+        "storage"
+      ]
+    },
+    {
+      "id": "know-library",
+      "title": "Community Library Setup",
+      "section": "knowledge",
+      "sectionLabel": "Knowledge",
+      "file": "sections/knowledge.html",
+      "anchor": "#library",
+      "content": "community library post-collapse catalog system checkout lending repair rebind organization volunteer librarian",
+      "tags": [
+        "library",
+        "community",
+        "organization"
+      ]
+    },
+    {
+      "id": "know-teaching",
+      "title": "Teaching & Apprenticeship",
+      "section": "knowledge",
+      "sectionLabel": "Knowledge",
+      "file": "sections/knowledge.html",
+      "anchor": "#teaching",
+      "content": "teaching apprenticeship skills transfer hands on learning mentorship guild system children education curriculum",
+      "tags": [
+        "teaching",
+        "apprenticeship",
+        "education",
+        "children"
+      ]
+    },
+    {
+      "id": "know-digital",
+      "title": "Archiving Digital Data Offline",
+      "section": "knowledge",
+      "sectionLabel": "Knowledge",
+      "file": "sections/knowledge.html",
+      "anchor": "#digital",
+      "content": "digital archiving offline hard drive SSD optical disc DVD M-DISC microfilm USB cold storage backup redundancy",
+      "tags": [
+        "digital",
+        "archiving",
+        "hard drive",
+        "backup",
+        "M-DISC"
+      ]
+    },
+    {
+      "id": "sci-overview",
+      "title": "First Principles — Science, Maths & Invention",
+      "section": "science",
+      "sectionLabel": "First Principles",
+      "file": "sections/science.html",
+      "anchor": "",
+      "content": "science physics chemistry maths mathematics equations first principles invention engineering why it works reasoning from scratch",
+      "tags": [
+        "science",
+        "physics",
+        "chemistry",
+        "maths",
+        "first principles"
+      ]
+    },
+    {
+      "id": "sci-ptable",
+      "title": "The Periodic Table",
+      "section": "science",
+      "sectionLabel": "First Principles",
+      "file": "sections/science.html",
+      "anchor": "#ptable",
+      "content": "periodic table elements chemistry carbon iron copper salt sodium calcium sulfur lead silver gold magnesium oxygen nitrogen atomic number symbol element categories metals",
+      "tags": [
+        "periodic table",
+        "elements",
+        "chemistry",
+        "metals"
+      ]
+    },
+    {
+      "id": "sci-constants",
+      "title": "Constants, Units & Conversions",
+      "section": "science",
+      "sectionLabel": "First Principles",
+      "file": "sections/science.html",
+      "anchor": "#constants",
+      "content": "constants units conversions gravity water density pressure temperature celsius fahrenheit metric imperial calories joules horsepower watts",
+      "tags": [
+        "constants",
+        "units",
+        "conversions",
+        "metric",
+        "imperial"
+      ]
+    },
+    {
+      "id": "sci-equations",
+      "title": "Equations That Matter",
+      "section": "science",
+      "sectionLabel": "First Principles",
+      "file": "sections/science.html",
+      "anchor": "#equations",
+      "content": "equations ohms law power voltage current mechanical advantage lever water pressure head pythagoras 3-4-5 heat energy gear ratio pulley projectile range battery runtime",
+      "tags": [
+        "equations",
+        "ohms law",
+        "lever",
+        "pressure",
+        "pythagoras",
+        "battery"
+      ]
+    },
+    {
+      "id": "sci-physics",
+      "title": "Physics First Principles",
+      "section": "science",
+      "sectionLabel": "First Principles",
+      "file": "sections/science.html",
+      "anchor": "#physics",
+      "content": "physics energy conservation heat transfer conduction convection radiation pressure fluids mechanical advantage levers pulleys insulation",
+      "tags": [
+        "physics",
+        "energy",
+        "heat",
+        "pressure",
+        "mechanical advantage"
+      ]
+    },
+    {
+      "id": "sci-chemistry",
+      "title": "Chemistry First Principles",
+      "section": "science",
+      "sectionLabel": "First Principles",
+      "file": "sections/science.html",
+      "anchor": "#chemistry",
+      "content": "chemistry acids bases pH scale neutralisation oxidation rust fire combustion preservation salt sugar fermentation distillation states of matter",
+      "tags": [
+        "chemistry",
+        "pH",
+        "acid",
+        "base",
+        "oxidation",
+        "distillation"
+      ]
+    },
+    {
+      "id": "sci-maths",
+      "title": "Field Mathematics",
+      "section": "science",
+      "sectionLabel": "First Principles",
+      "file": "sections/science.html",
+      "anchor": "#maths",
+      "content": "field mathematics estimation measuring body span pace right angle 3-4-5 tree height river width area circle volume tank angles fist latitude geometry",
+      "tags": [
+        "maths",
+        "estimation",
+        "geometry",
+        "measuring",
+        "angles"
+      ]
+    },
+    {
+      "id": "sci-invention",
+      "title": "The Invention Method",
+      "section": "science",
+      "sectionLabel": "First Principles",
+      "file": "sections/science.html",
+      "anchor": "#invention",
+      "content": "invention method first principles thinking design loop prototype reverse engineering materials substitution analogy testing to failure safety factor improvise build your own systems workarounds",
+      "tags": [
+        "invention",
+        "design",
+        "prototype",
+        "first principles",
+        "improvise"
+      ]
+    },
+    {
+      "id": "nbc-overview",
+      "title": "NBC & EMP Threats Overview",
+      "section": "nbc",
+      "sectionLabel": "NBC Threats",
+      "file": "sections/nbc.html",
+      "anchor": "",
+      "content": "nuclear biological chemical EMP threats CBRN overview",
+      "tags": [
+        "NBC",
+        "nuclear",
+        "biological",
+        "chemical",
+        "EMP"
+      ]
+    },
+    {
+      "id": "nbc-nuclear",
+      "title": "Nuclear Threats & Blast Zones",
+      "section": "nbc",
+      "sectionLabel": "NBC Threats",
+      "file": "sections/nbc.html",
+      "anchor": "#nuclear",
+      "content": "nuclear detonation tactical dirty bomb RDD reactor accident blast radius fireball thermal pulse overpressure fallout",
+      "tags": [
+        "nuclear",
+        "blast",
+        "fireball",
+        "dirty bomb",
+        "fallout"
+      ]
+    },
+    {
+      "id": "nbc-fallout",
+      "title": "Fallout Shelter & 7-10 Rule",
+      "section": "nbc",
+      "sectionLabel": "NBC Threats",
+      "file": "sections/nbc.html",
+      "anchor": "#fallout",
+      "content": "fallout shelter 7-10 rule radiation decay protection factor PF basement concrete underground shelter in place",
+      "tags": [
+        "fallout",
+        "shelter",
+        "7-10 rule",
+        "protection factor",
+        "radiation"
+      ]
+    },
+    {
+      "id": "nbc-kfm",
+      "title": "Kearny Fallout Meter (KFM)",
+      "section": "nbc",
+      "sectionLabel": "NBC Threats",
+      "file": "sections/nbc.html",
+      "anchor": "#kfm",
+      "content": "KFM kearny fallout meter improvised dosimeter radiation measurement aluminum foil thread desiccant build DIY",
+      "tags": [
+        "KFM",
+        "dosimeter",
+        "radiation meter",
+        "kearny",
+        "fallout"
+      ]
+    },
+    {
+      "id": "nbc-ki",
+      "title": "Potassium Iodide (KI) Dosing",
+      "section": "nbc",
+      "sectionLabel": "NBC Threats",
+      "file": "sections/nbc.html",
+      "anchor": "#ki-dosing",
+      "content": "potassium iodide KI dosing thyroid iodine-131 reactor nuclear adult child infant dosage 130mg 65mg 32mg 16mg",
+      "tags": [
+        "KI",
+        "potassium iodide",
+        "thyroid",
+        "radiation",
+        "dosing"
+      ]
+    },
+    {
+      "id": "nbc-emp",
+      "title": "EMP — Electromagnetic Pulse",
+      "section": "nbc",
+      "sectionLabel": "NBC Threats",
+      "file": "sections/nbc.html",
+      "anchor": "#emp",
+      "content": "EMP electromagnetic pulse nuclear high altitude HEMP Carrington solar geomagnetic storm damage electronics grid recovery E1 E2 E3",
+      "tags": [
+        "EMP",
+        "electromagnetic pulse",
+        "Carrington",
+        "solar storm",
+        "grid"
+      ]
+    },
+    {
+      "id": "nbc-bio",
+      "title": "Biological Threats & Quarantine",
+      "section": "nbc",
+      "sectionLabel": "NBC Threats",
+      "file": "sections/nbc.html",
+      "anchor": "#biological",
+      "content": "biological threats pandemic engineered pathogen quarantine sick room PPE decontamination bleach alcohol disinfection vector control",
+      "tags": [
+        "biological",
+        "pandemic",
+        "quarantine",
+        "PPE",
+        "decontamination"
+      ]
+    },
+    {
+      "id": "nbc-decon",
+      "title": "Decontamination Protocols",
+      "section": "nbc",
+      "sectionLabel": "NBC Threats",
+      "file": "sections/nbc.html",
+      "anchor": "#decon",
+      "content": "decontamination 80% rule remove clothing water flush soap biological radiological chemical universal decon",
+      "tags": [
+        "decontamination",
+        "decon",
+        "80% rule",
+        "wash",
+        "flush"
+      ]
+    },
+    {
+      "id": "agri-overview",
+      "title": "Agriculture & Food Production Overview",
+      "section": "agriculture",
+      "sectionLabel": "Agriculture",
+      "file": "sections/agriculture.html",
+      "anchor": "",
+      "content": "agriculture food production gardening crops livestock soil water planting calendar aquaponics bees",
+      "tags": [
+        "agriculture",
+        "gardening",
+        "crops",
+        "soil",
+        "food production"
+      ]
+    },
+    {
+      "id": "agri-soil",
+      "title": "Soil Building Without Inputs",
+      "section": "agriculture",
+      "sectionLabel": "Agriculture",
+      "file": "sections/agriculture.html",
+      "anchor": "#soil",
+      "content": "soil building no inputs composting biochar vermicomposting sheet mulching no-till cover crops nitrogen fixation fertility",
+      "tags": [
+        "soil",
+        "composting",
+        "biochar",
+        "vermicomposting",
+        "fertility"
+      ]
+    },
+    {
+      "id": "agri-crops",
+      "title": "Crop Planning & Rotation",
+      "section": "agriculture",
+      "sectionLabel": "Agriculture",
+      "file": "sections/agriculture.html",
+      "anchor": "#crops",
+      "content": "crop rotation planning four year rotation legumes brassicas roots alliums companion planting three sisters",
+      "tags": [
+        "crop rotation",
+        "companion planting",
+        "three sisters",
+        "planning"
+      ]
+    },
+    {
+      "id": "agri-water",
+      "title": "Water Management & Irrigation",
+      "section": "agriculture",
+      "sectionLabel": "Agriculture",
+      "file": "sections/agriculture.html",
+      "anchor": "#water",
+      "content": "water management irrigation swale contour drip wicking beds rainwater harvest drought resilience keyline",
+      "tags": [
+        "irrigation",
+        "swale",
+        "rainwater",
+        "drought",
+        "water management"
+      ]
+    },
+    {
+      "id": "agri-seeds",
+      "title": "Seed Saving",
+      "section": "agriculture",
+      "sectionLabel": "Agriculture",
+      "file": "sections/agriculture.html",
+      "anchor": "#seeds",
+      "content": "seed saving open pollinated heirloom isolation fermentation drying storage varieties year after year",
+      "tags": [
+        "seed saving",
+        "heirloom",
+        "open pollinated",
+        "isolation"
+      ]
+    },
+    {
+      "id": "agri-aqua",
+      "title": "Aquaponics",
+      "section": "agriculture",
+      "sectionLabel": "Agriculture",
+      "file": "sections/agriculture.html",
+      "anchor": "#aquaponics",
+      "content": "aquaponics fish plants nitrogen cycle tilapia catfish NFT media bed water culture integrated system",
+      "tags": [
+        "aquaponics",
+        "fish",
+        "nitrogen cycle",
+        "tilapia"
+      ]
+    },
+    {
+      "id": "metal-overview",
+      "title": "Metallurgy & Blacksmithing Overview",
+      "section": "metallurgy",
+      "sectionLabel": "Metallurgy",
+      "file": "sections/metallurgy.html",
+      "anchor": "",
+      "content": "metallurgy blacksmithing forge anvil tools heat treating steel iron casting JABOD nail making",
+      "tags": [
+        "metallurgy",
+        "blacksmithing",
+        "forge",
+        "anvil",
+        "steel"
+      ]
+    },
+    {
+      "id": "metal-forge",
+      "title": "Building a Forge",
+      "section": "metallurgy",
+      "sectionLabel": "Metallurgy",
+      "file": "sections/metallurgy.html",
+      "anchor": "#forge",
+      "content": "forge building brake drum forge JABOD pipe blower air supply fire pot coal charcoal coke refractory",
+      "tags": [
+        "forge",
+        "brake drum",
+        "JABOD",
+        "coal",
+        "charcoal",
+        "blower"
+      ]
+    },
+    {
+      "id": "metal-technique",
+      "title": "Blacksmithing Techniques",
+      "section": "metallurgy",
+      "sectionLabel": "Metallurgy",
+      "file": "sections/metallurgy.html",
+      "anchor": "#technique",
+      "content": "blacksmithing hammer anvil drawing upsetting punching drifting bending welding forge weld heat color temperature",
+      "tags": [
+        "blacksmithing",
+        "hammer",
+        "drawing",
+        "forge weld",
+        "heat color"
+      ]
+    },
+    {
+      "id": "metal-heat",
+      "title": "Heat Treating & Tempering",
+      "section": "metallurgy",
+      "sectionLabel": "Metallurgy",
+      "file": "sections/metallurgy.html",
+      "anchor": "#heat-treating",
+      "content": "heat treating tempering quench hardening annealing normalizing steel carbon high medium low temperature color",
+      "tags": [
+        "heat treating",
+        "tempering",
+        "quench",
+        "hardening",
+        "annealing"
+      ]
+    },
+    {
+      "id": "metal-nails",
+      "title": "Making Nails",
+      "section": "metallurgy",
+      "sectionLabel": "Metallurgy",
+      "file": "sections/metallurgy.html",
+      "anchor": "#nails",
+      "content": "nail making nail header tool forge nail point shank hot cut framing nails production rate",
+      "tags": [
+        "nails",
+        "nail header",
+        "blacksmithing",
+        "forge",
+        "construction"
+      ]
+    },
+    {
+      "id": "metal-casting",
+      "title": "Metal Casting",
+      "section": "metallurgy",
+      "sectionLabel": "Metallurgy",
+      "file": "sections/metallurgy.html",
+      "anchor": "#casting",
+      "content": "metal casting crucible furnace sand casting green sand cope drag pattern pouring aluminum bronze copper",
+      "tags": [
+        "casting",
+        "crucible",
+        "sand casting",
+        "aluminum",
+        "bronze"
+      ]
+    },
+    {
+      "id": "gov-overview",
+      "title": "Community Governance Overview",
+      "section": "governance",
+      "sectionLabel": "Governance",
+      "file": "sections/governance.html",
+      "anchor": "",
+      "content": "community governance group organization council leadership roles decision making post collapse conflict resolution",
+      "tags": [
+        "governance",
+        "community",
+        "council",
+        "leadership",
+        "organization"
+      ]
+    },
+    {
+      "id": "gov-forming",
+      "title": "Forming a Group",
+      "section": "governance",
+      "sectionLabel": "Governance",
+      "file": "sections/governance.html",
+      "anchor": "#forming",
+      "content": "forming group optimal size Dunbar number 150 village squad platoon skill inventory free rider problem",
+      "tags": [
+        "group formation",
+        "Dunbar",
+        "group size",
+        "community",
+        "free rider"
+      ]
+    },
+    {
+      "id": "gov-roles",
+      "title": "Critical Community Roles",
+      "section": "governance",
+      "sectionLabel": "Governance",
+      "file": "sections/governance.html",
+      "anchor": "#roles",
+      "content": "critical roles medical officer security lead logistics communications agriculture council lead education construction engineering",
+      "tags": [
+        "roles",
+        "medical officer",
+        "security lead",
+        "logistics",
+        "community roles"
+      ]
+    },
+    {
+      "id": "gov-justice",
+      "title": "Laws & Justice System",
+      "section": "governance",
+      "sectionLabel": "Governance",
+      "file": "sections/governance.html",
+      "anchor": "#justice",
+      "content": "laws justice conflict resolution mediation evidence standards punishment exile restorative punitive deterrent flowchart",
+      "tags": [
+        "justice",
+        "laws",
+        "conflict resolution",
+        "mediation",
+        "exile",
+        "punishment"
+      ]
+    },
+    {
+      "id": "gov-trade",
+      "title": "Trade & Post-Collapse Economics",
+      "section": "governance",
+      "sectionLabel": "Governance",
+      "file": "sections/governance.html",
+      "anchor": "#trade",
+      "content": "trade economics barter salt grain labor hours alcohol gold silver exchange ratio market day credit ledger hoarding black market",
+      "tags": [
+        "trade",
+        "barter",
+        "economics",
+        "exchange",
+        "market",
+        "hoarding"
+      ]
+    },
+    {
+      "id": "psych-overview",
+      "title": "Psychology & Morale Overview",
+      "section": "psychology",
+      "sectionLabel": "Psychology",
+      "file": "sections/psychology.html",
+      "anchor": "",
+      "content": "psychology morale trauma PTSD grief group dynamics survivor traits mental health crisis breathing",
+      "tags": [
+        "psychology",
+        "morale",
+        "trauma",
+        "PTSD",
+        "mental health"
+      ]
+    },
+    {
+      "id": "psych-stress",
+      "title": "Acute Stress & Tactical Breathing",
+      "section": "psychology",
+      "sectionLabel": "Psychology",
+      "file": "sections/psychology.html",
+      "anchor": "#stress",
+      "content": "acute stress tactical breathing box breathing 4-4-4-4 cortisol adrenaline freeze panic response grounding 5-4-3-2-1 animation",
+      "tags": [
+        "stress",
+        "tactical breathing",
+        "box breathing",
+        "grounding",
+        "panic"
+      ]
+    },
+    {
+      "id": "psych-trauma",
+      "title": "Trauma, Grief & PTSD",
+      "section": "psychology",
+      "sectionLabel": "Psychology",
+      "file": "sections/psychology.html",
+      "anchor": "#trauma",
+      "content": "trauma PTSD grief processing stages acute stress disorder psychological first aid moral injury survivors guilt",
+      "tags": [
+        "trauma",
+        "PTSD",
+        "grief",
+        "moral injury",
+        "psychological first aid"
+      ]
+    },
+    {
+      "id": "psych-morale",
+      "title": "Morale Management",
+      "section": "psychology",
+      "sectionLabel": "Psychology",
+      "file": "sections/psychology.html",
+      "anchor": "#morale",
+      "content": "morale management routine ritual celebration Shackleton leadership purpose meaning small wins recognition",
+      "tags": [
+        "morale",
+        "routine",
+        "Shackleton",
+        "leadership",
+        "meaning",
+        "ritual"
+      ]
+    },
+    {
+      "id": "psych-group",
+      "title": "Group Dynamics & Conflict",
+      "section": "psychology",
+      "sectionLabel": "Psychology",
+      "file": "sections/psychology.html",
+      "anchor": "#group",
+      "content": "group dynamics conflict factions scapegoating rumor control decision making under pressure leadership crisis",
+      "tags": [
+        "group dynamics",
+        "conflict",
+        "factions",
+        "rumor",
+        "decision making"
+      ]
+    },
+    {
+      "id": "chem-overview",
+      "title": "Chemistry & Materials Overview",
+      "section": "chemistry",
+      "sectionLabel": "Chemistry",
+      "file": "sections/chemistry.html",
+      "anchor": "",
+      "content": "chemistry materials soap lye alcohol fermentation charcoal tanning dyes disinfectants vinegar",
+      "tags": [
+        "chemistry",
+        "soap",
+        "lye",
+        "alcohol",
+        "charcoal",
+        "tanning"
+      ]
+    },
+    {
+      "id": "chem-lye",
+      "title": "Lye from Wood Ash",
+      "section": "chemistry",
+      "sectionLabel": "Chemistry",
+      "file": "sections/chemistry.html",
+      "anchor": "#lye",
+      "content": "lye wood ash potassium hydroxide KOH leaching rain water hardwood ash lye testing potato egg float saponification",
+      "tags": [
+        "lye",
+        "wood ash",
+        "potassium hydroxide",
+        "KOH",
+        "leaching",
+        "saponification"
+      ]
+    },
+    {
+      "id": "chem-soap",
+      "title": "Soap Making (Cold Process)",
+      "section": "chemistry",
+      "sectionLabel": "Chemistry",
+      "file": "sections/chemistry.html",
+      "anchor": "#soap",
+      "content": "soap making cold process saponification tallow lard fat oil ash lye soft soap hard soap mold cure weeks",
+      "tags": [
+        "soap",
+        "cold process",
+        "saponification",
+        "tallow",
+        "lard",
+        "fat"
+      ]
+    },
+    {
+      "id": "chem-alcohol",
+      "title": "Alcohol Fermentation & Distillation",
+      "section": "chemistry",
+      "sectionLabel": "Chemistry",
+      "file": "sections/chemistry.html",
+      "anchor": "#alcohol",
+      "content": "alcohol fermentation distillation yeast sugar fruit grain ethanol methanol pot still column still wort wash",
+      "tags": [
+        "alcohol",
+        "fermentation",
+        "distillation",
+        "ethanol",
+        "methanol",
+        "still",
+        "yeast"
+      ]
+    },
+    {
+      "id": "chem-tanning",
+      "title": "Bark & Brain Tanning",
+      "section": "chemistry",
+      "sectionLabel": "Chemistry",
+      "file": "sections/chemistry.html",
+      "anchor": "#tanning",
+      "content": "tanning bark oak tannin brain brains hide leather brain tanning smoke process buckskin dehairing fleshing",
+      "tags": [
+        "tanning",
+        "bark tanning",
+        "brain tanning",
+        "leather",
+        "hide",
+        "buckskin"
+      ]
+    },
+    {
+      "id": "text-overview",
+      "title": "Textiles & Clothing Overview",
+      "section": "textiles",
+      "sectionLabel": "Textiles",
+      "file": "sections/textiles.html",
+      "anchor": "",
+      "content": "textiles clothing fiber spinning weaving knitting sewing leather waterproofing cotton wool loom spindle",
+      "tags": [
+        "textiles",
+        "clothing",
+        "fiber",
+        "spinning",
+        "weaving",
+        "leather"
+      ]
+    },
+    {
+      "id": "text-spinning",
+      "title": "Drop Spindle & Spinning",
+      "section": "textiles",
+      "sectionLabel": "Textiles",
+      "file": "sections/textiles.html",
+      "anchor": "#spinning",
+      "content": "drop spindle spinning wheel yarn ply twist draft drafting whorl spindle DIY wood disk dowel",
+      "tags": [
+        "drop spindle",
+        "spinning",
+        "yarn",
+        "ply",
+        "twist"
+      ]
+    },
+    {
+      "id": "text-weaving",
+      "title": "Weaving on a Frame Loom",
+      "section": "textiles",
+      "sectionLabel": "Textiles",
+      "file": "sections/textiles.html",
+      "anchor": "#weaving",
+      "content": "weaving loom warp weft plain weave twill shed heddle shuttle frame loom backstrap cardweaving",
+      "tags": [
+        "weaving",
+        "loom",
+        "warp",
+        "weft",
+        "plain weave",
+        "twill"
+      ]
+    },
+    {
+      "id": "text-sewing",
+      "title": "Hand Sewing & Repair",
+      "section": "textiles",
+      "sectionLabel": "Textiles",
+      "file": "sections/textiles.html",
+      "anchor": "#sewing",
+      "content": "hand sewing repair patch darning saddle stitch running stitch backstitch waxed thread needle awl buttonhole",
+      "tags": [
+        "sewing",
+        "repair",
+        "patch",
+        "saddle stitch",
+        "darning",
+        "needle"
+      ]
+    },
+    {
+      "id": "text-leather",
+      "title": "Leather Working",
+      "section": "textiles",
+      "sectionLabel": "Textiles",
+      "file": "sections/textiles.html",
+      "anchor": "#leather",
+      "content": "leather working stitching awl waxed thread saddler stitch harness moccasin boots belt pouch punch needle",
+      "tags": [
+        "leather",
+        "saddler stitch",
+        "awl",
+        "moccasin",
+        "boots"
+      ]
+    },
+    {
+      "id": "veh-overview",
+      "title": "Vehicles & Transport Overview",
+      "section": "vehicles",
+      "sectionLabel": "Vehicles",
+      "file": "sections/vehicles.html",
+      "anchor": "",
+      "content": "vehicles transport engine repair fuel biodiesel wood gas ethanol bicycle animal boat canoe gasifier",
+      "tags": [
+        "vehicles",
+        "transport",
+        "engine",
+        "fuel",
+        "bicycle",
+        "biodiesel"
+      ]
+    },
+    {
+      "id": "veh-repair",
+      "title": "Basic Engine Repair",
+      "section": "vehicles",
+      "sectionLabel": "Vehicles",
+      "file": "sections/vehicles.html",
+      "anchor": "#repair",
+      "content": "engine repair diagnostic SFEC spark fuel engine compression carburetor battery ignition alternator belt fluid check",
+      "tags": [
+        "engine repair",
+        "diagnostic",
+        "SFEC",
+        "spark",
+        "compression",
+        "carburetor"
+      ]
+    },
+    {
+      "id": "veh-biodiesel",
+      "title": "Biodiesel Production",
+      "section": "vehicles",
+      "sectionLabel": "Vehicles",
+      "file": "sections/vehicles.html",
+      "anchor": "#biodiesel",
+      "content": "biodiesel production vegetable oil NaOH sodium hydroxide methanol transesterification glycerin batch recipe liter",
+      "tags": [
+        "biodiesel",
+        "vegetable oil",
+        "transesterification",
+        "methanol",
+        "NaOH",
+        "fuel"
+      ]
+    },
+    {
+      "id": "veh-woodgas",
+      "title": "Wood Gas Gasifier",
+      "section": "vehicles",
+      "sectionLabel": "Vehicles",
+      "file": "sections/vehicles.html",
+      "anchor": "#woodgas",
+      "content": "wood gas gasifier downdraft updraft generator vehicle run fuel producer gas syngas carbon monoxide Sweden WWII history",
+      "tags": [
+        "wood gas",
+        "gasifier",
+        "downdraft",
+        "producer gas",
+        "syngas",
+        "Sweden"
+      ]
+    },
+    {
+      "id": "veh-bicycle",
+      "title": "Bicycle Maintenance & Use",
+      "section": "vehicles",
+      "sectionLabel": "Vehicles",
+      "file": "sections/vehicles.html",
+      "anchor": "#bicycle",
+      "content": "bicycle maintenance repair tire tube patch chain derailleur brake cable spoke tension cargo trailer hauling",
+      "tags": [
+        "bicycle",
+        "maintenance",
+        "chain",
+        "tire",
+        "cargo",
+        "trailer"
+      ]
+    },
+    {
+      "id": "veh-boat",
+      "title": "Boats & Water Transport",
+      "section": "vehicles",
+      "sectionLabel": "Vehicles",
+      "file": "sections/vehicles.html",
+      "anchor": "#boat",
+      "content": "boat construction flat bottom skiff plywood canoe dugout portage paddle oar sail river lake transport",
+      "tags": [
+        "boat",
+        "flat bottom",
+        "skiff",
+        "plywood",
+        "canoe",
+        "paddle"
+      ]
+    },
+    {
+      "id": "animal-overview",
+      "title": "Animal Husbandry Overview",
+      "section": "animal",
+      "sectionLabel": "Animal Husbandry",
+      "file": "sections/animal.html",
+      "anchor": "",
+      "content": "animal husbandry livestock chickens goats rabbits cattle pigs veterinary care slaughter breeding bees",
+      "tags": [
+        "animal husbandry",
+        "livestock",
+        "veterinary",
+        "breeding",
+        "slaughter"
+      ]
+    },
+    {
+      "id": "animal-chickens",
+      "title": "Chickens — Laying Hens & Meat Breeds",
+      "section": "animal",
+      "sectionLabel": "Animal Husbandry",
+      "file": "sections/animal.html",
+      "anchor": "#chickens",
+      "content": "chickens laying hens meat breeds Rhode Island Red Plymouth Rock Cornish cross egg production feed grain scratch water housing coop predator proofing",
+      "tags": [
+        "chickens",
+        "hens",
+        "eggs",
+        "coop",
+        "poultry",
+        "laying"
+      ]
+    },
+    {
+      "id": "animal-goats",
+      "title": "Goats — Dairy & Meat",
+      "section": "animal",
+      "sectionLabel": "Animal Husbandry",
+      "file": "sections/animal.html",
+      "anchor": "#goats",
+      "content": "goats dairy Nubian Alpine LaMancha meat Boer milk production breeding kidding minerals deworming parasite fencing browse",
+      "tags": [
+        "goats",
+        "dairy",
+        "milk",
+        "Nubian",
+        "Boer",
+        "kidding",
+        "deworming"
+      ]
+    },
+    {
+      "id": "animal-bees",
+      "title": "Beekeeping Basics",
+      "section": "animal",
+      "sectionLabel": "Animal Husbandry",
+      "file": "sections/animal.html",
+      "anchor": "#bees",
+      "content": "beekeeping langstroth top bar hive honey beeswax propolis colony inspection varroa mite treatment queen swarm split harvest extraction",
+      "tags": [
+        "beekeeping",
+        "bees",
+        "honey",
+        "beeswax",
+        "hive",
+        "varroa",
+        "swarm"
+      ]
+    },
+    {
+      "id": "disasters-overview",
+      "title": "Disaster Playbooks Overview",
+      "section": "disasters",
+      "sectionLabel": "Disasters",
+      "file": "sections/disasters.html",
+      "anchor": "",
+      "content": "disaster playbooks earthquake hurricane wildfire flood pandemic grid-down civil unrest chemical spill EMP",
+      "tags": [
+        "disaster",
+        "playbook",
+        "emergency",
+        "response"
+      ]
+    },
+    {
+      "id": "disasters-earthquake",
+      "title": "Earthquake Response",
+      "section": "disasters",
+      "sectionLabel": "Disasters",
+      "file": "sections/disasters.html",
+      "anchor": "#earthquake",
+      "content": "earthquake drop cover hold on aftershock structural collapse search rescue gas leak fire building damage",
+      "tags": [
+        "earthquake",
+        "drop cover",
+        "aftershock",
+        "structural collapse"
+      ]
+    },
+    {
+      "id": "disasters-hurricane",
+      "title": "Hurricane Survival",
+      "section": "disasters",
+      "sectionLabel": "Disasters",
+      "file": "sections/disasters.html",
+      "anchor": "#hurricane",
+      "content": "hurricane typhoon cyclone shelter evacuation storm surge flood wind damage Katrina lesson attic axe",
+      "tags": [
+        "hurricane",
+        "storm surge",
+        "evacuation",
+        "shelter"
+      ]
+    },
+    {
+      "id": "disasters-gridown",
+      "title": "Grid-Down / EMP Response",
+      "section": "disasters",
+      "sectionLabel": "Disasters",
+      "file": "sections/disasters.html",
+      "anchor": "#grid-down",
+      "content": "grid down EMP power outage generator fuel water storage food refrigeration communications alternative energy",
+      "tags": [
+        "grid down",
+        "EMP",
+        "power outage",
+        "generator"
+      ]
+    },
+    {
+      "id": "tools-calc",
+      "title": "Survival Calculators & Tools",
+      "section": "tools",
+      "sectionLabel": "Tools",
+      "file": "tools.html",
+      "anchor": "",
+      "content": "calculators calorie water solar sizing supply tracker skill inventory planting calendar bug out decision radio frequencies medication interactive tools",
+      "tags": [
+        "calculators",
+        "tools",
+        "calorie",
+        "water",
+        "solar",
+        "supply tracker"
+      ]
+    },
+    {
+      "id": "tools-calorie",
+      "title": "Calorie Needs Calculator",
+      "section": "tools",
+      "sectionLabel": "Tools",
+      "file": "tools.html",
+      "anchor": "#tool-1",
+      "content": "calorie calculator BMR daily needs people group age gender activity level food supply days remaining",
+      "tags": [
+        "calorie",
+        "calculator",
+        "BMR",
+        "food supply",
+        "days remaining"
+      ]
+    },
+    {
+      "id": "tools-water",
+      "title": "Water Requirements Calculator",
+      "section": "tools",
+      "sectionLabel": "Tools",
+      "file": "tools.html",
+      "anchor": "#tool-2",
+      "content": "water requirements calculator climate activity stored collected needed daily liters gallons",
+      "tags": [
+        "water",
+        "calculator",
+        "requirements",
+        "climate",
+        "activity"
+      ]
+    },
+    {
+      "id": "tools-solar",
+      "title": "Solar Sizing Tool",
+      "section": "tools",
+      "sectionLabel": "Tools",
+      "file": "tools.html",
+      "anchor": "#tool-3",
+      "content": "solar sizing tool panel watts battery bank watt hours sun hours depth of discharge loads calculator",
+      "tags": [
+        "solar",
+        "sizing",
+        "panel",
+        "battery",
+        "watt hours",
+        "calculator"
+      ]
+    },
+    {
+      "id": "tools-supply",
+      "title": "Supply Tracker",
+      "section": "tools",
+      "sectionLabel": "Tools",
+      "file": "tools.html",
+      "anchor": "#tool-4",
+      "content": "supply tracker inventory days remaining items consumption rate CSV export storage tracking",
+      "tags": [
+        "supply tracker",
+        "inventory",
+        "days remaining",
+        "consumption"
+      ]
+    },
+    {
+      "id": "tools-skills",
+      "title": "Community Skill Inventory",
+      "section": "tools",
+      "sectionLabel": "Tools",
+      "file": "tools.html",
+      "anchor": "#tool-5",
+      "content": "skill inventory community 22 skills medical agricultural mechanical radio beginner intermediate expert gap detection",
+      "tags": [
+        "skill inventory",
+        "community",
+        "skills",
+        "gap detection"
+      ]
+    },
+    {
+      "id": "tools-bugout",
+      "title": "Bug-Out Decision Tree",
+      "section": "tools",
+      "sectionLabel": "Tools",
+      "file": "tools.html",
+      "anchor": "#tool-7",
+      "content": "bug out decision tree stay go shelter in place evacuate immediate danger yes no interactive checklist recommendation",
+      "tags": [
+        "bug out",
+        "stay",
+        "go",
+        "evacuation",
+        "decision tree",
+        "shelter in place"
+      ]
+    },
+    {
+      "id": "tools-radio",
+      "title": "Emergency Radio Frequencies",
+      "section": "tools",
+      "sectionLabel": "Tools",
+      "file": "tools.html",
+      "anchor": "#tool-8",
+      "content": "radio frequencies NOAA VHF UHF ham calling marine CB channel 16 9 FRS MURS GMRS Meshtastic LoRa emergency custom",
+      "tags": [
+        "radio",
+        "frequencies",
+        "NOAA",
+        "ham",
+        "CB",
+        "marine",
+        "FRS",
+        "GMRS"
+      ]
+    },
+    {
+      "id": "tools-meds",
+      "title": "Medication Reference & Drug Interactions",
+      "section": "tools",
+      "sectionLabel": "Tools",
+      "file": "tools.html",
+      "anchor": "#tool-9",
+      "content": "medication reference drug interactions amoxicillin doxycycline ciprofloxacin metronidazole ibuprofen acetaminophen epinephrine naloxone potassium iodide dosage checker",
+      "tags": [
+        "medication",
+        "drugs",
+        "antibiotics",
+        "interactions",
+        "dosage",
+        "reference"
+      ]
+    },
+    {
+      "id": "lit-overview",
+      "title": "Reference Library — 60 Books",
+      "section": "literature",
+      "sectionLabel": "Reference Library",
+      "file": "literature.html",
+      "anchor": "",
+      "content": "reference library books 60 survival preparedness medicine agriculture engineering communications security psychology history",
+      "tags": [
+        "library",
+        "books",
+        "reference",
+        "survival",
+        "reading list"
+      ]
+    },
+    {
+      "id": "ai-setup",
+      "title": "Bunker Bot Setup Guide",
+      "section": "ai-setup",
+      "sectionLabel": "Bunker Bot Setup",
+      "file": "ai-setup.html",
+      "anchor": "",
+      "content": "Bunker Bot ollama AI setup llama3 gemma3 phi3 install download model offline local LLM phi3:mini mistral",
+      "tags": [
+        "Bunker Bot",
+        "ollama",
+        "AI",
+        "LLM",
+        "setup"
+      ]
+    },
+    {
+      "id": "quick-ref",
+      "title": "Emergency Quick Reference Card",
+      "section": "quick-reference",
+      "sectionLabel": "Quick Reference",
+      "file": "quick-reference.html",
+      "anchor": "",
+      "content": "emergency quick reference card printable critical information first aid water purification signals",
+      "tags": [
+        "emergency",
+        "quick reference",
+        "printable",
+        "card"
+      ]
+    },
+    {
+      "id": "gear-overview",
+      "title": "Master Gear List",
+      "section": "gear",
+      "sectionLabel": "Gear List",
+      "file": "gear.html",
+      "anchor": "",
+      "content": "gear list checklist equipment supplies critical important preparedness readiness checklist survival kit",
+      "tags": [
+        "gear",
+        "checklist",
+        "equipment",
+        "supplies",
+        "kit"
+      ]
+    },
+    {
+      "id": "cards-ref",
+      "title": "Emergency Wallet Cards",
+      "section": "cards",
+      "sectionLabel": "Emergency Cards",
+      "file": "cards.html",
+      "anchor": "",
+      "content": "wallet cards printable emergency reference morse code radio frequencies wound care triage knots Bunker Bot setup",
+      "tags": [
+        "cards",
+        "wallet",
+        "printable",
+        "morse",
+        "triage",
+        "knots"
+      ]
+    },
+    {
+      "id": "changelog",
+      "title": "Changelog & Version History",
+      "section": "changelog",
+      "sectionLabel": "Changelog",
+      "file": "changelog.html",
+      "anchor": "",
+      "content": "changelog version history updates improvements release notes what changed v1.0.0",
+      "tags": [
+        "changelog",
+        "version",
+        "history",
+        "updates"
+      ]
+    },
+    {
+      "id": "bpower-overview",
+      "title": "Power Generation from Scratch",
+      "section": "build-power",
+      "sectionLabel": "Power Generation",
+      "file": "sections/build-power.html",
+      "anchor": "",
+      "content": "power generation pedal bicycle generator water wheel wind turbine biogas digester thermoelectric TEG steam engine off-grid electricity hand-built DIY",
+      "tags": [
+        "power",
+        "generator",
+        "water wheel",
+        "wind",
+        "biogas",
+        "steam",
+        "TEG"
+      ]
+    },
+    {
+      "id": "bpower-pedal",
+      "title": "Pedal & Hand-Crank Generators",
+      "section": "build-power",
+      "sectionLabel": "Power Generation",
+      "file": "sections/build-power.html",
+      "anchor": "#pedal",
+      "content": "pedal generator hand crank bicycle rear wheel friction roller DC motor rectifier charge controller battery wiring 12V output watt alternator",
+      "tags": [
+        "pedal generator",
+        "hand crank",
+        "bicycle",
+        "motor",
+        "rectifier",
+        "battery",
+        "12V"
+      ]
+    },
+    {
+      "id": "bpower-waterwheel",
+      "title": "Water Wheel Generators",
+      "section": "build-power",
+      "sectionLabel": "Power Generation",
+      "file": "sections/build-power.html",
+      "anchor": "#waterwheel",
+      "content": "water wheel overshot undershot stream river millrace efficiency bucket spoke armature gravity-fed head flow rate timber steel",
+      "tags": [
+        "water wheel",
+        "overshot",
+        "undershot",
+        "stream",
+        "mill",
+        "head",
+        "flow rate"
+      ]
+    },
+    {
+      "id": "bpower-wind",
+      "title": "Wind Generators (DIY)",
+      "section": "build-power",
+      "sectionLabel": "Power Generation",
+      "file": "sections/build-power.html",
+      "anchor": "#wind",
+      "content": "wind turbine DIY blades alternator aerofoil profile twist angle carving timber aluminum copper coil magnet rotor stator HAWT",
+      "tags": [
+        "wind turbine",
+        "DIY",
+        "blades",
+        "aerofoil",
+        "rotor",
+        "stator",
+        "alternator"
+      ]
+    },
+    {
+      "id": "bpower-biogas",
+      "title": "Biogas Digesters",
+      "section": "build-power",
+      "sectionLabel": "Power Generation",
+      "file": "sections/build-power.html",
+      "anchor": "#biogas",
+      "content": "biogas digester fixed dome floating drum manure dung animal waste methane gas cooker lamp generator burner inlet outlet slurry",
+      "tags": [
+        "biogas",
+        "digester",
+        "methane",
+        "manure",
+        "gas",
+        "dome",
+        "slurry"
+      ]
+    },
+    {
+      "id": "bstruct-overview",
+      "title": "Building That Lasts — Structures & Defences",
+      "section": "build-structures",
+      "sectionLabel": "Building & Structures",
+      "file": "sections/build-structures.html",
+      "anchor": "",
+      "content": "building structures defences site selection cob earthbag timber frame A-frame perimeter wall watchtower fortification natural building",
+      "tags": [
+        "building",
+        "structures",
+        "cob",
+        "earthbag",
+        "timber frame",
+        "defences",
+        "perimeter"
+      ]
+    },
+    {
+      "id": "bstruct-cob",
+      "title": "Cob Building",
+      "section": "build-structures",
+      "sectionLabel": "Building & Structures",
+      "file": "sections/build-structures.html",
+      "anchor": "#cob",
+      "content": "cob building clay soil sand straw mixture walls foundation rubble trench DPC plaster render lime interior mass thermal mass natural building",
+      "tags": [
+        "cob",
+        "clay",
+        "straw",
+        "sand",
+        "natural building",
+        "walls",
+        "plaster",
+        "lime"
+      ]
+    },
+    {
+      "id": "bstruct-earthbag",
+      "title": "Earthbag Construction",
+      "section": "build-structures",
+      "sectionLabel": "Building & Structures",
+      "file": "sections/build-structures.html",
+      "anchor": "#earthbag",
+      "content": "earthbag construction polypropylene bags soil fill barbed wire dome vault arch courses pinning rebar foundation drainage gravel",
+      "tags": [
+        "earthbag",
+        "bags",
+        "soil",
+        "barbed wire",
+        "dome",
+        "vault",
+        "foundation"
+      ]
+    },
+    {
+      "id": "bstruct-timber",
+      "title": "Timber Frame Construction",
+      "section": "build-structures",
+      "sectionLabel": "Building & Structures",
+      "file": "sections/build-structures.html",
+      "anchor": "#timber",
+      "content": "timber frame mortise tenon half lap drawboring joinery hand tools post beam ridge rafter tie beam A-frame woodworking chainsaw froe axe chisel",
+      "tags": [
+        "timber frame",
+        "mortise tenon",
+        "joinery",
+        "post beam",
+        "rafter",
+        "woodworking",
+        "A-frame"
+      ]
+    },
+    {
+      "id": "bstruct-defence",
+      "title": "Defensive Perimeter Design",
+      "section": "build-structures",
+      "sectionLabel": "Building & Structures",
+      "file": "sections/build-structures.html",
+      "anchor": "#defence",
+      "content": "defensive perimeter hedge ditch wall watchtower coverage arc gate obstacle berm fields of fire community village layout top-down design",
+      "tags": [
+        "defensive",
+        "perimeter",
+        "wall",
+        "watchtower",
+        "hedge",
+        "ditch",
+        "gate",
+        "berm"
+      ]
+    },
+    {
+      "id": "med-making-overview",
+      "title": "Compounding Basic Medicines",
+      "section": "medicine-making",
+      "sectionLabel": "Medicine Making",
+      "file": "sections/medicine-making.html",
+      "anchor": "",
+      "content": "medicine making compounding tincture salve antiseptic ORS oral rehydration solution herbal medicine plant identification fever pain infection",
+      "tags": [
+        "medicine",
+        "compounding",
+        "tincture",
+        "salve",
+        "antiseptic",
+        "ORS",
+        "herbal",
+        "plants"
+      ]
+    },
+    {
+      "id": "med-making-ors",
+      "title": "Oral Rehydration Solution (ORS)",
+      "section": "medicine-making",
+      "sectionLabel": "Medicine Making",
+      "file": "sections/medicine-making.html",
+      "anchor": "#ors",
+      "content": "ORS oral rehydration solution WHO recipe 6 teaspoons sugar half teaspoon salt 1 litre water diarrhoea cholera dehydration children electrolyte",
+      "tags": [
+        "ORS",
+        "oral rehydration",
+        "sugar",
+        "salt",
+        "electrolyte",
+        "diarrhoea",
+        "cholera",
+        "WHO"
+      ]
+    },
+    {
+      "id": "med-making-tinctures",
+      "title": "Herbal Tinctures",
+      "section": "medicine-making",
+      "sectionLabel": "Medicine Making",
+      "file": "sections/medicine-making.html",
+      "anchor": "#tinctures",
+      "content": "tincture alcohol maceration herb plant extract jar vodka everclear seal shake strain amber bottle menstruum plant material ratio",
+      "tags": [
+        "tincture",
+        "alcohol",
+        "herbal extract",
+        "maceration",
+        "jar",
+        "amber bottle",
+        "menstruum"
+      ]
+    },
+    {
+      "id": "med-making-plants",
+      "title": "Medicinal Plant Identification",
+      "section": "medicine-making",
+      "sectionLabel": "Medicine Making",
+      "file": "sections/medicine-making.html",
+      "anchor": "#plants",
+      "content": "medicinal plants yarrow elder garlic plantain comfrey willow bark raspberry nettle lavender calendula chamomile identification lookalikes hemlock lily of the valley toxic",
+      "tags": [
+        "medicinal plants",
+        "yarrow",
+        "elderberry",
+        "comfrey",
+        "willow",
+        "plantain",
+        "lookalikes",
+        "toxic",
+        "identification"
+      ]
+    },
+    {
+      "id": "bwater-overview",
+      "title": "Water Systems — Collection, Storage, Distribution",
+      "section": "build-water",
+      "sectionLabel": "Water Systems",
+      "file": "sections/build-water.html",
+      "anchor": "",
+      "content": "water systems rainwater harvesting tank well gravity distribution irrigation purification first flush biosand filter IBC ferrocement cistern",
+      "tags": [
+        "water",
+        "rainwater",
+        "harvesting",
+        "tank",
+        "well",
+        "gravity",
+        "irrigation",
+        "purification"
+      ]
+    },
+    {
+      "id": "bwater-rainwater",
+      "title": "Rainwater Harvesting",
+      "section": "build-water",
+      "sectionLabel": "Water Systems",
+      "file": "sections/build-water.html",
+      "anchor": "#rainwater",
+      "content": "rainwater harvesting roof catchment gutter downpipe yield calculation UK rainfall 650mm runoff coefficient tarp fog collection dew",
+      "tags": [
+        "rainwater",
+        "roof",
+        "gutter",
+        "catchment",
+        "yield",
+        "UK",
+        "fog",
+        "dew"
+      ]
+    },
+    {
+      "id": "bwater-tanks",
+      "title": "Tank Construction — IBC, Ferrocement, Cistern",
+      "section": "build-water",
+      "sectionLabel": "Water Systems",
+      "file": "sections/build-water.html",
+      "anchor": "#tanks",
+      "content": "water tank IBC tote ferrocement cistern buried storage 1000 litre chicken wire mortar cement waterproof render pump submersible daily needs calculation",
+      "tags": [
+        "tank",
+        "IBC",
+        "ferrocement",
+        "cistern",
+        "1000L",
+        "storage",
+        "cement",
+        "buried",
+        "pump"
+      ]
+    },
+    {
+      "id": "bwater-firstflush",
+      "title": "First Flush Diverters",
+      "section": "build-water",
+      "sectionLabel": "Water Systems",
+      "file": "sections/build-water.html",
+      "anchor": "#firstflush",
+      "content": "first flush diverter standpipe T-junction ball float drain hole contamination bird droppings roof first rainfall divert clean water quality",
+      "tags": [
+        "first flush",
+        "diverter",
+        "standpipe",
+        "T-junction",
+        "ball float",
+        "bird",
+        "contamination"
+      ]
+    },
+    {
+      "id": "bwater-gravity",
+      "title": "Gravity Water Distribution Systems",
+      "section": "build-water",
+      "sectionLabel": "Water Systems",
+      "file": "sections/build-water.html",
+      "anchor": "#gravity",
+      "content": "gravity distribution head pressure 0.1 bar per metre MDPE pipe sizing frost protection buried 600mm lagging drain valve elevated IBC tank platform",
+      "tags": [
+        "gravity",
+        "head pressure",
+        "bar",
+        "MDPE",
+        "pipe",
+        "frost",
+        "distribution",
+        "platform"
+      ]
+    },
+    {
+      "id": "bwater-wells",
+      "title": "Well Construction",
+      "section": "build-water",
+      "sectionLabel": "Water Systems",
+      "file": "sections/build-water.html",
+      "anchor": "#wells",
+      "content": "well hand-dug borehole 1.2 metre diameter brick lining seal open-jointed water table saturated zone concrete rings India Mark II hand pump cave-in safety",
+      "tags": [
+        "well",
+        "hand-dug",
+        "borehole",
+        "brick",
+        "lining",
+        "water table",
+        "India Mark II",
+        "pump",
+        "cave-in"
+      ]
+    },
+    {
+      "id": "bwater-purification",
+      "title": "Water Testing & Purification",
+      "section": "build-water",
+      "sectionLabel": "Water Systems",
+      "file": "sections/build-water.html",
+      "anchor": "#testing",
+      "content": "water testing purification test strips coliform nitrate pH biosand filter boil chlorinate SODIS sodium hypochlorite bleach well shock treatment schmutzdecke",
+      "tags": [
+        "water testing",
+        "purification",
+        "coliform",
+        "pH",
+        "biosand",
+        "boil",
+        "bleach",
+        "chlorinate",
+        "SODIS",
+        "schmutzdecke"
+      ]
+    },
+    {
+      "id": "bwater-irrigation",
+      "title": "Irrigation Systems — Swales, Drip, Ollas",
+      "section": "build-water",
+      "sectionLabel": "Water Systems",
+      "file": "sections/build-water.html",
+      "anchor": "#irrigation",
+      "content": "irrigation swale contour A-frame level berm tree gravity drip tape emitter olla buried clay pot terracotta water reduction passive",
+      "tags": [
+        "irrigation",
+        "swale",
+        "contour",
+        "A-frame",
+        "berm",
+        "drip",
+        "olla",
+        "clay pot",
+        "terracotta",
+        "passive"
+      ]
+    },
+    {
+      "id": "skills-overview",
+      "title": "Practical Skills — Interactive Guides",
+      "section": "skills",
+      "sectionLabel": "Practical Skills",
+      "file": "skills.html",
+      "anchor": "",
+      "content": "practical skills interactive step-by-step visual guides fire knots navigation first aid hunting fishing plant identification construction practice competency teaching",
+      "tags": [
+        "skills",
+        "fire",
+        "knots",
+        "navigation",
+        "first aid",
+        "hunting",
+        "plants",
+        "construction",
+        "practice",
+        "competency"
+      ]
+    },
+    {
+      "id": "skills-fire",
+      "title": "Fire Skills — Lays, Bow Drill, Reading Fire",
+      "section": "skills",
+      "sectionLabel": "Practical Skills",
+      "file": "skills.html",
+      "anchor": "",
+      "content": "fire lay teepee log cabin star long fire dakota hole bow drill friction fire spindle fireboard tinder ember reading fire flame colour smoke",
+      "tags": [
+        "fire",
+        "bow drill",
+        "friction fire",
+        "teepee",
+        "log cabin",
+        "star lay",
+        "dakota hole",
+        "tinder",
+        "ember"
+      ]
+    },
+    {
+      "id": "skills-knots",
+      "title": "Knots — Bowline, Lashing, Prusik and More",
+      "section": "skills",
+      "sectionLabel": "Practical Skills",
+      "file": "skills.html",
+      "anchor": "",
+      "content": "knots bowline clove hitch trucker hitch sheet bend figure eight prusik constrictor square lashing shear lashing rope making cordage",
+      "tags": [
+        "knots",
+        "bowline",
+        "clove hitch",
+        "trucker hitch",
+        "prusik",
+        "lashing",
+        "rope making",
+        "cordage"
+      ]
+    },
+    {
+      "id": "skills-firstaid",
+      "title": "First Aid Skills — Bleeding, CPR, Fractures",
+      "section": "skills",
+      "sectionLabel": "Practical Skills",
+      "file": "skills.html",
+      "anchor": "",
+      "content": "first aid bleeding control direct pressure wound packing tourniquet CPR choking recovery position fracture splinting wound closure steri-strip",
+      "tags": [
+        "first aid",
+        "CPR",
+        "tourniquet",
+        "bleeding",
+        "fracture",
+        "wound closure",
+        "choking",
+        "recovery position"
+      ]
+    },
+    {
+      "id": "skills-navigation",
+      "title": "Navigation Skills — Compass, Stars, Shadow Stick",
+      "section": "skills",
+      "sectionLabel": "Practical Skills",
+      "file": "skills.html",
+      "anchor": "",
+      "content": "navigation compass bearing triangulation topographic map contour lines shadow stick stars polaris plough natural navigation signs",
+      "tags": [
+        "navigation",
+        "compass",
+        "bearing",
+        "triangulation",
+        "topo map",
+        "shadow stick",
+        "stars",
+        "polaris",
+        "natural navigation"
+      ]
+    }
   ]
 }
