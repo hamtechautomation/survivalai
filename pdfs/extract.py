@@ -79,6 +79,14 @@ PDFS = {
     'sturtevant-edible-plants.pdf':  "Sturtevant's Edible Plants of the World",
     'henleys-formulas.pdf':          "Henley's Formulas, Recipes & Processes",
     'bowditch-navigator.pdf':        'American Practical Navigator (Bowditch)',
+    'sf-medical-handbook.pdf':       'Special Forces Medical Handbook ST 31-91B',
+    'ships-medicine-chest.pdf':      "Ship's Medicine Chest & Medical Aid at Sea",
+    'knots-splices-ropework.pdf':    'Knots, Splices & Rope Work (Verrill)',
+    'farm-household-cyclopedia.pdf': 'The Farm & Household Cyclopaedia',
+    'shakespeare-complete.pdf':      'Complete Works of Shakespeare',
+    'kjv-bible.pdf':                 'King James Bible (KJV)',
+    'meditations-marcus-aurelius.pdf':'Meditations (Marcus Aurelius)',
+    'aesops-fables.pdf':             "Aesop's Fables (Townsend)",
 }
 
 # ── Text cleaning ─────────────────────────────────────────────────────────────
