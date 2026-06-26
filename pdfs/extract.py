@@ -73,6 +73,12 @@ PDFS = {
     'ranger-handbook.pdf':           'US Army Ranger Handbook SH 21-76',
     'fm-6-02-signal-ops.pdf':        'US Army Signal Operations FM 6-02',
     'art-of-war-sun-tzu.pdf':        'The Art of War (Sun Tzu)',
+    'usda-home-canning.pdf':         'USDA Complete Guide to Home Canning',
+    'book-for-midwives.pdf':         'A Book for Midwives (Hesperian)',
+    'fm-5-426-carpentry.pdf':        'Carpentry FM 5-426',
+    'sturtevant-edible-plants.pdf':  "Sturtevant's Edible Plants of the World",
+    'henleys-formulas.pdf':          "Henley's Formulas, Recipes & Processes",
+    'bowditch-navigator.pdf':        'American Practical Navigator (Bowditch)',
 }
 
 # ── Text cleaning ─────────────────────────────────────────────────────────────
