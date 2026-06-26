@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Keeping livestock healthy without a vet — vital signs, recognising sickness, common diseases by species, parasites, wounds and hoof care, birthing complications, biosecurity, and humane culling.">
+  <title>Veterinary Care — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Veterinary Care</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>Veterinary Care Without a Vet</h1>
+    <p class="section-desc">Livestock are food, labour, fibre, and wealth — and the difference between losing one animal and losing the herd is often a single early decision. This is health and disease: how to tell a sick animal from a well one, treat what you can, contain what you can't, and know when to cull. For raising and housing animals, see <a href="animal.html">Animal Husbandry</a>.</p>
+    <div class="section-meta">
+      <span class="meta-item">Updated: <span data-updated="2026-06"></span></span>
+      <span class="meta-item"><span id="reading-time"></span></span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#vitals">Daily Checks &amp; Normal Vital Signs</a></li>
+      <li><a href="#sick">Recognising a Sick Animal</a></li>
+      <li><a href="#diseases">Common Diseases by Species</a></li>
+      <li><a href="#parasites">Parasites — Internal &amp; External</a></li>
+      <li><a href="#wounds">Wounds, Abscesses &amp; Hoof Care</a></li>
+      <li><a href="#birthing">Birthing &amp; Complications</a></li>
+      <li><a href="#biosecurity">Biosecurity &amp; Quarantine</a></li>
+      <li><a href="#culling">When to Cull &amp; Humane Slaughter</a></li>
+    </ol>
+  </nav>
+
+  <section id="vitals">
+    <h2>1. Daily Checks &amp; Normal Vital Signs</h2>
+    <p>You cannot spot "abnormal" until you know "normal." Walk your animals daily and learn how each one looks, eats, moves, and droppings appear when healthy. Temperature is the single most useful number — a cheap thermometer (digital or mercury, taken rectally) is one of the highest-value items to stock.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Species</th><th>Temp °C (°F)</th><th>Heart rate (bpm)</th><th>Breaths/min</th></tr></thead>
+        <tbody>
+          <tr><td>Cattle</td><td>38.5 (101.5)</td><td>40–80</td><td>10–30</td></tr>
+          <tr><td>Goat / Sheep</td><td>39.0 (102.5)</td><td>70–90</td><td>12–25</td></tr>
+          <tr><td>Pig</td><td>39.0 (102.5)</td><td>70–120</td><td>8–18</td></tr>
+          <tr><td>Horse</td><td>38.0 (100.5)</td><td>28–44</td><td>8–16</td></tr>
+          <tr><td>Chicken</td><td>41–42 (106–107)</td><td>250–300</td><td>15–30</td></tr>
+          <tr><td>Rabbit</td><td>38.5–40 (101–104)</td><td>130–325</td><td>30–60</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Daily look-over: eyes bright and clear, nose clean, appetite normal, chewing cud (ruminants), droppings firm and normal-coloured, standing square, no limping, breathing easy, coat smooth. Record what's normal so a change jumps out.</p>
+  </section>
+
+  <section id="sick">
+    <h2>2. Recognising a Sick Animal</h2>
+    <p>Prey animals hide illness — by the time it's obvious, it's often advanced. Act on the first subtle signs.</p>
+    <ul>
+      <li><strong>Off feed / not chewing cud</strong> — the earliest and most reliable warning in ruminants.</li>
+      <li><strong>Separating from the group</strong>, head down, dull or sunken eyes, drooping ears.</li>
+      <li><strong>Changed droppings</strong> — scouring (diarrhoea), straining, blood, or none at all.</li>
+      <li><strong>Fever or subnormal temperature</strong> — both are danger signs; below-normal often means shock or imminent death.</li>
+      <li><strong>Laboured/rapid breathing, coughing, nasal discharge.</strong></li>
+      <li><strong>Lameness, swelling, a tucked-up belly, teeth-grinding</strong> (pain), or straining.</li>
+      <li><strong>Bloat</strong> — a swollen left flank in cattle/goats/sheep, distress — a fast-killing emergency (see below).</li>
+    </ul>
+    <div class="callout callout-warning">
+      <span class="callout-icon">🩺</span>
+      <div class="callout-content">
+        <strong>First moves for any sick animal</strong>
+        <p>1) Take its temperature. 2) Isolate it from the herd (protects the others and lets you monitor intake and droppings). 3) Ensure clean water and easy feed. 4) Note when symptoms began and what changed (new feed, new animal, weather). Most treatment is supportive: hydration, warmth, rest, and removing the cause.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="diseases">
+    <h2>3. Common Diseases by Species</h2>
+
+    <h3>Ruminants (Cattle, Goats, Sheep)</h3>
+    <ul>
+      <li><strong>Bloat:</strong> gas trapped in the rumen, swollen left flank. <em>Frothy bloat</em> (lush legume pasture) — drench with cooking/mineral oil (100–250 mL) to break the froth; keep the animal moving and standing. <em>Free-gas bloat</em> — pass a stomach tube to release gas. Last resort for a collapsing animal: a trocar (or a clean knife) into the high point of the left flank to release pressure — life-or-death only.</li>
+      <li><strong>Milk fever (hypocalcaemia):</strong> down, cold ears, around calving/kidding in high producers. Needs calcium; oral calcium drench if no IV.</li>
+      <li><strong>Mastitis:</strong> hot, hard, swollen udder; clots or blood in milk. Strip the quarter out frequently, apply warm compresses; needs antibiotics if systemic (fever, off feed).</li>
+      <li><strong>Pneumonia:</strong> fever, fast/laboured breathing, cough, nasal discharge — common in young, stressed, or crowded stock. Needs shelter, dryness, and antibiotics.</li>
+      <li><strong>Foot rot:</strong> lameness, swelling and foul smell between the claws — trim, clean, dry footing, topical/zinc treatment.</li>
+    </ul>
+
+    <h3>Pigs</h3>
+    <ul>
+      <li><strong>Scours (diarrhoea) in piglets:</strong> dehydration kills fast — give oral rehydration, keep warm and dry.</li>
+      <li><strong>Heat stress:</strong> pigs can't sweat — provide shade, water, and a wallow; overheating is rapidly fatal.</li>
+      <li><strong>Erysipelas:</strong> fever and diamond-shaped skin lesions — needs penicillin.</li>
+    </ul>
+
+    <h3>Poultry</h3>
+    <ul>
+      <li><strong>Respiratory disease:</strong> sneezing, rattling, swollen face — isolate; highly contagious through a flock.</li>
+      <li><strong>Coccidiosis:</strong> bloody droppings, hunched chicks — keep bedding dry; very common in young birds.</li>
+      <li><strong>Marek's / sudden death:</strong> manage by sourcing healthy stock and biosecurity; little field treatment.</li>
+      <li><strong>Egg binding:</strong> a hen straining, not laying — warm bath, lubricate the vent, calcium.</li>
+    </ul>
+
+    <h3>Rabbits</h3>
+    <ul>
+      <li><strong>GI stasis:</strong> not eating, no droppings — an emergency; encourage hay/water and gentle movement.</li>
+      <li><strong>Snuffles (respiratory):</strong> nasal discharge, sneezing — isolate; often chronic.</li>
+      <li><strong>Heat stress:</strong> rabbits die quickly above ~28 °C/85 °F — shade and cool water bottles.</li>
+    </ul>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Zoonoses — diseases that jump to humans</strong>
+        <p>Brucellosis, anthrax, rabies, Q fever, ringworm, and others pass from animals to people. Wear gloves handling sick animals, afterbirth, or carcasses; wash thoroughly; never drink unpasteurised milk from a sick animal; burn or deep-bury animals that died of unknown disease. A bloated carcass with bleeding from orifices that won't clot — <strong>do not open it</strong> (possible anthrax); burn or bury deep with lime.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="parasites">
+    <h2>4. Parasites — Internal &amp; External</h2>
+    <p>Worms are the quiet killer of small ruminants especially. Signs of heavy internal parasite load: weight loss despite eating, rough coat, pale gums/eyelids (anaemia from barber's pole worm), bottle jaw (fluid swelling under the jaw), scouring.</p>
+    <ul>
+      <li><strong>Pasture management is the real cure:</strong> rotate grazing, rest paddocks, don't overstock, and graze different species in sequence (what worms one rarely worms another). Young animals on the same ground year after year is the classic disaster.</li>
+      <li><strong>FAMACHA / eyelid check:</strong> pale lower-eyelid membranes signal anaemia and the need to deworm <em>that</em> animal — treat individuals, not the whole flock, to slow drug resistance.</li>
+      <li><strong>Chemical dewormers</strong> (if stocked) work, but rotate classes and don't under-dose. They will eventually run out — pasture rotation must be the backbone.</li>
+      <li><strong>External parasites</strong> (lice, mites/mange, ticks, fly strike): check skin and fleece; dust/dip treatments, keep bedding clean. <strong>Fly strike</strong> (maggots in soiled or wounded flesh) is an emergency — clip, clean, remove maggots, treat the wound.</li>
+    </ul>
+  </section>
+
+  <section id="wounds">
+    <h2>5. Wounds, Abscesses &amp; Hoof Care</h2>
+    <h3>Wounds</h3>
+    <ol class="steps">
+      <li>Restrain the animal safely (a panicked animal injures you and itself). Control heavy bleeding with direct pressure.</li>
+      <li>Clip hair around the wound; flush thoroughly with clean salt water (1 tsp salt per pint) or dilute iodine.</li>
+      <li>Leave most animal wounds <strong>open to drain</strong> — they heal well from the bottom up. Stitching is for clean, fresh, gaping wounds only.</li>
+      <li>Keep clean, watch for swelling/heat/pus, and protect from flies. Tetanus is a real risk for puncture wounds (especially horses, goats).</li>
+    </ol>
+    <h3>Abscesses</h3>
+    <p>A localised pocket of pus under the skin. Once soft and "pointing," lance the lowest point with a clean blade, drain fully, and flush daily until it heals from the inside. <strong>Caseous lymphadenitis</strong> (firm abscesses at the lymph nodes in sheep/goats) is contagious — isolate and drain away from other animals; the pus is infectious.</p>
+    <h3>Hoof &amp; foot care</h3>
+    <p>Overgrown hooves cause lameness and abscesses. Trim regularly to the natural shape, keep footing dry, and treat foot rot early (clean, trim, dry, zinc/copper sulphate). A lame animal can't forage or flee — lameness is always worth investigating.</p>
+  </section>
+
+  <section id="birthing">
+    <h2>6. Birthing &amp; Complications</h2>
+    <p>Most births need no help — interfere too early and you cause harm. Know normal so you recognise trouble.</p>
+    <p><strong>Normal:</strong> the animal separates, becomes restless, then active straining delivers the young within ~30–60 minutes once the water breaks (longer for cattle). Normal presentation is two front feet with the nose resting on them ("diving" position).</p>
+    <div class="callout callout-warning">
+      <span class="callout-icon">⏱️</span>
+      <div class="callout-content">
+        <strong>When to intervene (dystocia)</strong>
+        <p>Step in if: strong straining for 30–45 minutes with no progress; only a head and no feet (or feet and no head); the tail/hindquarters first (breech); or the mother exhausts and stops. Scrub and lubricate your hand and arm, gently feel the presentation, and reposition the young to the diving position, pulling <em>down and out</em> in time with her contractions — never against them.</p>
+      </div>
+    </div>
+    <p>After birth: ensure the newborn is breathing (clear the nose/mouth, rub vigorously), that it nurses within the first hours (colostrum is critical — it carries immunity), and that the afterbirth passes within a few hours. A retained placenta, a torn or prolapsed uterus, or a mother who rejects her young all need prompt attention. Dip the navel in iodine to prevent infection.</p>
+  </section>
+
+  <section id="biosecurity">
+    <h2>7. Biosecurity &amp; Quarantine</h2>
+    <p>The cheapest medicine is keeping disease out. One sick newcomer can wipe out a herd you spent years building.</p>
+    <ul>
+      <li><strong>Quarantine every new or returning animal</strong> 2–4 weeks, separated, before mixing with the herd. Watch for disease, deworm, and observe.</li>
+      <li><strong>Isolate the sick</strong> immediately, and tend healthy animals before sick ones (or change clothing/wash between).</li>
+      <li><strong>Clean water and feed troughs</strong> — faecal contamination spreads most livestock disease.</li>
+      <li><strong>Control rodents, wild birds, and visiting animals</strong> that carry disease in.</li>
+      <li><strong>Dispose of carcasses properly</strong> — burn or deep-bury with lime, away from water and pasture.</li>
+      <li><strong>Keep records</strong> — what came from where, what was treated, what died of what. Patterns reveal problems.</li>
+    </ul>
+  </section>
+
+  <section id="culling">
+    <h2>8. When to Cull &amp; Humane Slaughter</h2>
+    <p>Hard decisions keep the rest alive and fed. Cull an animal that is suffering with no realistic recovery, that is a chronic disease reservoir threatening the herd, or that you cannot feed through a hard season. Sentiment that costs you the herd helps no one.</p>
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Do not eat an animal that died of unknown disease</strong>
+        <p>Meat from an animal that died sick may carry pathogens that survive cooking or that you can't identify. When in doubt, burn or deep-bury — losing the meat is cheaper than losing people.</p>
+      </div>
+    </div>
+    <p>For humane slaughter, the goal is instant insensibility followed immediately by bleeding out. The reliable method is a firm blow or gunshot to the correct point on the skull (the cross-point from each eye to the opposite ear/horn base), delivered confidently, followed at once by cutting the throat to bleed the animal while unconscious. Hesitation causes suffering — be sure of your method and point before you start. Detailed field-dressing and butchery is covered in <a href="food.html#hunting">Food &amp; Water → Hunting &amp; field dressing</a>.</p>
+  </section>
+
+  <nav class="section-pagination no-print" aria-label="Section navigation">
+    <a href="animal.html" class="pagination-btn pagination-prev">← Animal Husbandry</a>
+    <a href="../index.html" class="pagination-btn pagination-home">Home</a>
+    <a href="maternal.html" class="pagination-btn pagination-next">Pregnancy &amp; Infant Care →</a>
+  </nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">🐾</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're reading Veterinary Care. Ask me about a sick animal's symptoms, normal vital signs, birthing trouble, parasite control, or when to cull.</p><p class="aria-note">⚠️ Requires Ollama or Claude API. <a href="../ai-setup.html">Setup →</a></p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/bunker-bot.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>
