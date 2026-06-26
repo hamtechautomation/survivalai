@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Practical build projects for self-reliance: evaporative cooling/aircon, air filtration, dams & hydro power, pumping water without power, toilets & sanitation, checking for radiation, building a grain mill, breeding herd animals & chickens, and long-term food storage.">
+  <title>Practical Projects — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Practical Projects</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>Practical Projects — Build, Cool, Pump, Power, Store</h1>
+    <p class="section-desc">Hands-on “how do I actually make this” projects for self-reliance. Each pairs with a deeper section elsewhere in the guide — this is the field shortcut to getting the thing built and working.</p>
+    <div class="section-meta">
+      <span class="meta-item">Updated: <span data-updated="2026-06"></span></span>
+      <span class="meta-item"><span id="reading-time"></span></span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#cooling">Evaporative Cooling &amp; DIY Air Conditioning</a></li>
+      <li><a href="#airfilter">Air Filtration &amp; Clean Air</a></li>
+      <li><a href="#dams">Dams &amp; Hydro Power</a></li>
+      <li><a href="#pumping">Pumping Water Without Mains Power</a></li>
+      <li><a href="#toilets">Toilets &amp; Sanitation Systems</a></li>
+      <li><a href="#radiation">Checking for Radiation</a></li>
+      <li><a href="#mill">Building a Grain Mill</a></li>
+      <li><a href="#breeding">Breeding Herd Animals &amp; Chickens</a></li>
+      <li><a href="#storage">Long-Term Food Storage</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1 COOLING -->
+  <section id="cooling">
+    <h2>1. Evaporative Cooling &amp; DIY Air Conditioning</h2>
+    <p>Evaporating water absorbs a lot of heat — that's the physics behind every cheap cooler. It works brilliantly in <strong>dry</strong> heat and poorly in humid heat (the air is already saturated).</p>
+    <h3>Evaporative (swamp) cooler</h3>
+    <ul>
+      <li><strong>Wet-sheet / hung cloth:</strong> hang a wet sheet in a breezy window or doorway; air passing through it cools as the water evaporates. Re-wet as it dries.</li>
+      <li><strong>Fan + wet pad:</strong> blow a fan through a wet pad, screen, or hung straw. A bucket dripping onto the pad keeps it wet. The classic “swamp cooler.”</li>
+      <li><strong>Zeer pot (pot-in-pot fridge):</strong> a smaller clay pot inside a larger one, the gap packed with wet sand, a damp cloth on top. As water evaporates from the sand it chills the inner pot — keeps vegetables days longer with no power. Keep it in shade with airflow.</li>
+    </ul>
+    <h3>Without evaporation (works in humidity)</h3>
+    <ul>
+      <li><strong>Ice/cold-water fan:</strong> a fan blowing over a tray of ice or a coil of tubing carrying cold (e.g. well or stream) water gives real cooling without adding humidity.</li>
+      <li><strong>Passive design beats machines:</strong> shade the building (especially windows), use thermal mass (stone/earth walls stay cool), ventilate hard at night and seal up during the day, and run a cool earth-tube (air drawn through a buried pipe) into the room.</li>
+    </ul>
+    <p>See <a href="shelter.html">Shelter &amp; Construction</a> for passive-cooling building design.</p>
+  </section>
+
+  <!-- 2 AIR FILTER -->
+  <section id="airfilter">
+    <h2>2. Air Filtration &amp; Clean Air</h2>
+    <p>Wildfire smoke, dust storms, mould, and fallout particles are all airborne particulates you can filter cheaply.</p>
+    <div class="callout callout-tip">
+      <span class="callout-icon">🧰</span>
+      <div class="callout-content">
+        <strong>Box-fan filter (the “Corsi-Rosenthal” cube)</strong>
+        <p>Tape a high-rated furnace filter (MERV-13 / HEPA-grade if you have it) to the back of a box fan so all air is pulled through it — or build a cube of four filters with the fan on top. It clears smoke and fine particulates from a room for the price of a fan and a filter. Arrows on the filter point in the airflow direction.</p>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Personal:</strong> a well-fitted N95/FFP2 mask, or a damp cloth folded several times, knocks down dust and smoke for short exposure. Damp cloth is a last resort, not protection against gases.</li>
+      <li><strong>Activated charcoal</strong> (made by heating wood without air — see <a href="chemistry.html">Chemistry</a>) adsorbs odours and many gases; layer it after a particulate pre-filter for a fuller filter.</li>
+      <li><strong>Shelter air:</strong> seal a single room, filter incoming air, and keep it slightly positively pressured so unfiltered air leaks <em>out</em>, not in. For chemical/biological/radiological threats see <a href="nbc.html">NBC / EMP</a>.</li>
+    </ul>
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Carbon monoxide kills silently.</strong> Any indoor flame, generator, or stove produces CO. Filtering does NOT remove it. Always ventilate combustion and never run an engine or fuel heater in a sealed space.
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 DAMS -->
+  <section id="dams">
+    <h2>3. Dams &amp; Hydro Power</h2>
+    <p>A small dam stores water, raises its level for irrigation, and creates the “head” (drop) that powers a water wheel or turbine. Power available ≈ <strong>head × flow</strong> — both a tall drop and a strong flow give more energy.</p>
+    <h3>Small check dams &amp; weirs</h3>
+    <ul>
+      <li>Build across a stream with earth, rock, or wire-cage <em>gabions</em> filled with stone. Key the dam firmly into both banks and the streambed so water can't cut around or under it.</li>
+      <li><strong>Always build a spillway</strong> — a lower overflow channel, lined with rock, that safely carries flood water around the dam. This is not optional.</li>
+    </ul>
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Dams fail catastrophically — and downstream.</strong> An undersized spillway is the classic killer: a flood overtops the dam, washes it out, and sends a wall of water onto anyone below. Size the spillway for the biggest flood you can imagine, build the dam wide and gentle-sloped, and never site homes directly below one.
+      </div>
+    </div>
+    <h3>Turning head into power</h3>
+    <ul>
+      <li><strong>High drop, low flow</strong> (a hillside stream): a <em>Pelton wheel</em> — jets of water hit cupped buckets on a wheel. Very efficient for tens of metres of head.</li>
+      <li><strong>Low drop, big flow</strong> (a river/mill race): an <em>overshot</em> or <em>undershot water wheel</em>, or a propeller turbine.</li>
+      <li>Pipe the water down a <em>penstock</em> to the wheel/turbine, spin a generator (or grind a mill directly). Full builds are in <a href="build-power.html">Power Generation</a>.</li>
+    </ul>
+  </section>
+
+  <!-- 4 PUMPING -->
+  <section id="pumping">
+    <h2>4. Pumping Water Without Mains Power</h2>
+    <p>Match the method to your situation: lifting from a well, moving water uphill, or irrigating a field.</p>
+    <ul>
+      <li><strong>Hydraulic ram pump:</strong> the standout — it uses the energy of <em>flowing</em> water to pump a fraction of it uphill, continuously, with <strong>no external power</strong> and only two moving valves. Needs a stream with a little fall above the pump. Can lift water tens of metres day and night, unattended.</li>
+      <li><strong>Rope-and-washer pump:</strong> a loop of rope with rubber washers runs up a pipe through a well; rubber washers drag water up as you turn the wheel. Cheap, DIY, and lifts from deep wells.</li>
+      <li><strong>Hand / lift pump:</strong> a piston in a cylinder with two valves — the classic village pump. Reliable and repairable.</li>
+      <li><strong>Treadle pump:</strong> foot-powered, moves lots of water for irrigation from a shallow source.</li>
+      <li><strong>Archimedes screw &amp; chain pump:</strong> lift large volumes a short height for fields and drainage.</li>
+      <li><strong>Shadoof:</strong> a counterweighted lever that swings a bucket up from a stream — ancient, simple, effective.</li>
+      <li><strong>No pump at all:</strong> a <em>siphon</em> moves water over a lip and downhill using gravity alone — start it once and it runs itself as long as the outlet is lower than the source.</li>
+    </ul>
+    <p>Also see <a href="build-water.html">Water Systems</a> for wells and gravity distribution.</p>
+  </section>
+
+  <!-- 5 TOILETS -->
+  <section id="toilets">
+    <h2>5. Toilets &amp; Sanitation Systems</h2>
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Sanitation is survival.</strong> Faecal-oral disease (cholera, dysentery, typhoid) kills more people after a disaster than the disaster itself. Separating human waste from hands, food, and water is one of the highest-impact things you can do.
+      </div>
+    </div>
+    <h3>Choose by water and time</h3>
+    <ul>
+      <li><strong>Sawdust / composting bucket (humanure):</strong> a bucket with a seat; cover each use with sawdust, leaves, or soil to kill smell and flies; empty into a dedicated, contained compost pile that heats up and is left a full year+ before use on non-food plants. No water needed. See the bundled <em>Humanure Handbook</em>.</li>
+      <li><strong>Pit latrine:</strong> a deep hole with a slab and a tight-fitting cover. A vent pipe painted black (a “VIP” latrine) draws flies up and out. When two-thirds full, cap it and dig a new one. Twin-pit and “arborloo” (plant a tree on the filled pit) systems rotate.</li>
+      <li><strong>Bucket toilet with cover material</strong> for short-term or indoor use, emptied to a latrine or compost.</li>
+    </ul>
+    <h3>Siting rules (non-negotiable)</h3>
+    <ul>
+      <li>At least <strong>30 m (100 ft) from any water source</strong>, and <strong>downhill</strong> of wells and springs.</li>
+      <li>Pit bottom well above the water table.</li>
+      <li>Downwind and away from the kitchen and eating areas.</li>
+    </ul>
+    <p><strong>Handwashing</strong> is half the benefit: rig a “tippy-tap” (a tip-to-pour water container worked by a foot lever) with soap or ash right beside every toilet. More in <a href="food.html#sanitation">Food &amp; Water → Sanitation</a>.</p>
+  </section>
+
+  <!-- 6 RADIATION -->
+  <section id="radiation">
+    <h2>6. Checking for Radiation</h2>
+    <p>You cannot see, smell, feel, or taste radiation — which is exactly why measuring it (or following the rules when you can't) matters.</p>
+    <h3>If you have instruments</h3>
+    <ul>
+      <li>A <strong>Geiger counter</strong> or <strong>dosimeter</strong> reads dose rate / accumulated dose directly. Survey food, water, surfaces, and yourself; track your accumulated dose over time.</li>
+    </ul>
+    <h3>If you don't — the improvised KFM</h3>
+    <p>The <strong>Kearny Fallout Meter</strong> is a build-it-yourself electroscope (two charged foil leaves that fall together as radiation discharges them) accurate enough to make life-or-death shelter decisions. Full plans are in the bundled <em>Nuclear War Survival Skills</em> and the <a href="nbc.html">NBC / EMP</a> section.</p>
+    <div class="callout callout-warning">
+      <span class="callout-icon">☢️</span>
+      <div class="callout-content">
+        <strong>When you can't measure, use Time, Distance, Shielding — and the 7/10 rule.</strong> Fallout decays fast: for every <strong>7-fold increase in time, dose rate drops about 10-fold</strong> (after 2 days it's ~1% of the 1-hour level). So the rule is simple: get behind mass (earth, concrete, water), put distance between you and fallout, and <strong>stay sheltered through the first 1–2 days</strong>, then minimise time outside.
+      </div>
+    </div>
+    <p><strong>Decontamination:</strong> fallout is dust — removing your outer clothing and shoes removes most contamination; washing skin and hair removes more. Filter and let water settle; food in sealed containers is safe (wipe the outside).</p>
+  </section>
+
+  <!-- 7 MILL -->
+  <section id="mill">
+    <h2>7. Building a Grain Mill</h2>
+    <p>Whole grain stores for years but you can't eat it until it's ground. A mill turns stored wheat, maize, or beans into flour and meal — a daily necessity once it's your staple.</p>
+    <h3>By hand</h3>
+    <ul>
+      <li><strong>Quern (saddle or rotary):</strong> two stones — grain is crushed between a fixed lower stone and a turned/rubbed upper stone. The rotary quern (one stone spinning on another, grain fed through a central hole) is the classic hand mill and is buildable from hard, dense stone.</li>
+      <li><strong>Metal burr / plate mill:</strong> a hand-cranked mill with two grooved discs — the best option if you can salvage or stockpile one. Mortar and pestle works for small amounts.</li>
+    </ul>
+    <h3>Powered</h3>
+    <ul>
+      <li>Couple a burr or stone mill to any rotary power: a <a href="#dams">water wheel</a> (the historic watermill), a windmill, a pedal drive, or an animal walking a circle (a horse mill). Milling is steady, low-speed work — ideal for water or animal power.</li>
+    </ul>
+    <p><strong>Tip:</strong> grind little and often — wholemeal flour with its oils goes rancid in weeks, but the whole grain keeps for years. Store grain, not flour. See <a href="build-power.html">Power Generation</a> to drive the mill.</p>
+  </section>
+
+  <!-- 8 BREEDING -->
+  <section id="breeding">
+    <h2>8. Breeding Herd Animals &amp; Chickens</h2>
+    <p>The goal is a flock or herd that renews itself indefinitely. That needs fertility management, sensible selection, and enough genetic diversity to avoid inbreeding decline.</p>
+    <h3>Chickens</h3>
+    <ul>
+      <li>You need a <strong>rooster</strong> for fertile eggs (~1 per 8–12 hens). Hatch with a <strong>broody hen</strong> (the natural way) or an incubator — about <strong>21 days</strong> at ~37.5 °C and controlled humidity. <em>Candle</em> eggs at ~day 7–10 to remove infertile ones.</li>
+      <li>Brood chicks warm (start ~35 °C, dropping ~3 °C/week), dry, with chick crumb and clean water. Keep the best pullets for laying; grow out or eat surplus cockerels.</li>
+      <li>Rotate or swap in an unrelated rooster every year or two to keep the line vigorous.</li>
+    </ul>
+    <h3>Goats, sheep, cattle, pigs</h3>
+    <ul>
+      <li>One male serves many females — so the scarce, valuable genetics are the <strong>males</strong>. Keep or trade for an <strong>unrelated</strong> buck/ram/bull and rotate him before he breeds his own daughters.</li>
+      <li>Gestation: goats &amp; sheep ~150 days, pigs ~115 days, cattle ~283 days. Time matings so births land in good weather with feed available.</li>
+      <li><strong>Select your keepers</strong> for hardiness, mothering, and productivity; eat or trade the rest. Keep simple records of who's related to whom.</li>
+    </ul>
+    <div class="callout callout-warning">
+      <span class="callout-icon">🧬</span>
+      <div class="callout-content">
+        <strong>Guard against inbreeding.</strong> A single bloodline declines within a few generations (fertility and vigour drop). Maintain at least a few unrelated lines, trade breeding stock with neighbours, and never keep breeding fathers over daughters. Birthing and animal health are in <a href="veterinary.html">Veterinary Care</a>; housing and feeding in <a href="animal.html">Animal Husbandry</a>.
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 STORAGE -->
+  <section id="storage">
+    <h2>9. Long-Term Food Storage</h2>
+    <p>Spoilage is microbes plus oxygen plus warmth plus pests. Remove any of those and food keeps; remove several and it keeps for years. (The chemistry behind this is in <a href="science.html#chemistry">First Principles</a>.)</p>
+    <h3>Dry staples — years to decades</h3>
+    <ul>
+      <li>Store grains, beans, rice, pasta, sugar, and salt <strong>dry, cool, dark, and airtight</strong>. Food-grade buckets or <strong>Mylar bags with oxygen absorbers</strong> (or flushed with CO₂ from a little dry ice) keep oxygen and moisture out — white rice and wheat then last <strong>decades</strong>.</li>
+      <li><strong>Longest keepers:</strong> white rice, wheat, dried maize, salt, sugar, and honey (effectively indefinite). <strong>Short keepers:</strong> brown rice, nuts, wholemeal flour, and anything oily — the fats go rancid in months. Store the whole grain, not the flour.</li>
+    </ul>
+    <h3>Other methods</h3>
+    <ul>
+      <li><strong>Root cellar:</strong> a cool, humid, dark space (a dug-in cellar, buried barrel, or north-side store) keeps potatoes, carrots, beets, cabbages, and apples for months.</li>
+      <li><strong>Preserve the rest:</strong> canning (the bundled <em>USDA Complete Guide to Home Canning</em> has tested times — botulism is the real risk, so follow it exactly), drying, salting, smoking, fermenting (sauerkraut, kimchi), and storing in fat (confit, pemmican).</li>
+    </ul>
+    <h3>Pests &amp; rotation</h3>
+    <ul>
+      <li>Beat weevils and moths with airtight containers, bay leaves, food-grade diatomaceous earth, or by <strong>freezing grain for a few days</strong> to kill eggs before sealing.</li>
+      <li>Label everything with the date and rotate <strong>first-in, first-out</strong>. Store more of the staples you actually eat. Full methods are in <a href="food.html#food-preservation">Food &amp; Water → Preservation</a>.</li>
+    </ul>
+  </section>
+
+  <nav class="section-pagination no-print" aria-label="Section navigation">
+    <a href="build-water.html" class="pagination-btn pagination-prev">← Water Systems</a>
+    <a href="../index.html" class="pagination-btn pagination-home">Home</a>
+    <a href="build-power.html" class="pagination-btn pagination-next">Power Generation →</a>
+  </nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">🛠️</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're reading Practical Projects. Ask me how to build a swamp cooler, a ram pump, a pit latrine, a grain mill, or how to store grain for decades.</p><p class="aria-note">⚠️ Requires Ollama or Claude API. <a href="../ai-setup.html">Setup →</a></p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/bunker-bot.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

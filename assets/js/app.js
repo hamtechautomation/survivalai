@@ -40,6 +40,7 @@
     wrench:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.77 3.77z"/></svg>`,
     books:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h4V4H4zM10 4v16h4V4h-4z"/><path d="M17 6l3.5 14M17 6l3 1"/></svg>`,
     cloud:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 17.5a4 4 0 00-1.3-7.78A6 6 0 005 9.5a4.5 4.5 0 00.5 8h11"/><path d="M12 12v6m0 0l-2.5-2.5M12 18l2.5-2.5"/></svg>`,
+    projects: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l5-5"/><path d="M14.5 5.5l4 4M12.8 7.2l4 4-7.3 7.3a1.5 1.5 0 01-.7.4l-3.3.8.8-3.3a1.5 1.5 0 01.4-.7z"/><path d="M14.5 5.5l1.8-1.8a2 2 0 012.8 0l1.2 1.2a2 2 0 010 2.8L18.5 9.5z"/></svg>`,
     atom:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/></svg>`,
     // UI
     print:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M9 18v4h6v-4H9z"/></svg>`,
@@ -98,6 +99,7 @@
     { id: 'build-structures', href: 'sections/build-structures.html',  icon: ICONS.building, label: 'Building & Structures' },
     { id: 'medicine-making',  href: 'sections/medicine-making.html',   icon: ICONS.mortar,   label: 'Medicine Making' },
     { id: 'build-water',      href: 'sections/build-water.html',       icon: ICONS.tap,      label: 'Water Systems' },
+    { id: 'projects',         href: 'sections/projects.html',          icon: ICONS.projects, label: 'Practical Projects' },
     { id: 'skills',           href: 'skills.html',                     icon: ICONS.target,   label: 'Practical Skills' },
     { id: 'tools',            href: 'tools.html',                      icon: ICONS.wrench,   label: 'Calculators & Tools' },
     { id: 'literature',       href: 'literature.html',                 icon: ICONS.books,    label: 'Reference Library' },

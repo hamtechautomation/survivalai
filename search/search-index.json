@@ -2187,6 +2187,165 @@
       ]
     },
     {
+      "id": "proj-overview",
+      "title": "Practical Projects",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "",
+      "content": "practical projects how to build make cooling aircon air filter dam hydro pump water toilet radiation mill breeding food storage self reliance",
+      "tags": [
+        "projects",
+        "build",
+        "how-to",
+        "diy"
+      ]
+    },
+    {
+      "id": "proj-cooling",
+      "title": "Evaporative Cooling & DIY Air Conditioning",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#cooling",
+      "content": "how to make air conditioning aircon evaporative cooling swamp cooler zeer pot fridge wet sheet fan ice passive cooling earth tube shade thermal mass",
+      "tags": [
+        "cooling",
+        "aircon",
+        "evaporative",
+        "zeer",
+        "swamp cooler"
+      ]
+    },
+    {
+      "id": "proj-airfilter",
+      "title": "Air Filtration & Clean Air",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#airfilter",
+      "content": "air filter filtration clean air box fan corsi rosenthal cube MERV HEPA smoke wildfire dust mask activated charcoal carbon monoxide shelter air",
+      "tags": [
+        "air filter",
+        "smoke",
+        "HEPA",
+        "box fan",
+        "clean air"
+      ]
+    },
+    {
+      "id": "proj-dams",
+      "title": "Dams & Hydro Power",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#dams",
+      "content": "how to build dam power dam hydro dam hydroelectric check dam weir gabion spillway head flow pelton wheel water wheel penstock micro hydro",
+      "tags": [
+        "dam",
+        "hydro",
+        "power dam",
+        "water wheel",
+        "pelton"
+      ]
+    },
+    {
+      "id": "proj-pumping",
+      "title": "Pumping Water Without Power",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#pumping",
+      "content": "how to pump water without power hydraulic ram pump rope washer pump hand pump treadle archimedes screw chain pump shadoof siphon well irrigation",
+      "tags": [
+        "pump water",
+        "ram pump",
+        "hand pump",
+        "siphon",
+        "irrigation"
+      ]
+    },
+    {
+      "id": "proj-toilets",
+      "title": "Toilets & Sanitation Systems",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#toilets",
+      "content": "how to build a toilet composting humanure sawdust bucket pit latrine VIP twin pit arborloo siting distance from water handwashing tippy tap sanitation",
+      "tags": [
+        "toilet",
+        "latrine",
+        "composting",
+        "sanitation",
+        "humanure"
+      ]
+    },
+    {
+      "id": "proj-radiation",
+      "title": "Checking for Radiation",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#radiation",
+      "content": "how to check for radiation geiger counter dosimeter kearny fallout meter KFM electroscope time distance shielding 7/10 rule decontamination fallout nuclear",
+      "tags": [
+        "radiation",
+        "geiger",
+        "dosimeter",
+        "KFM",
+        "fallout"
+      ]
+    },
+    {
+      "id": "proj-mill",
+      "title": "Building a Grain Mill",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#mill",
+      "content": "how to build a mill grain mill quern stone rotary saddle burr plate mill flour grinding water wheel windmill pedal animal horse mill wheat maize",
+      "tags": [
+        "mill",
+        "grain",
+        "quern",
+        "flour",
+        "grinding"
+      ]
+    },
+    {
+      "id": "proj-breeding",
+      "title": "Breeding Herd Animals & Chickens",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#breeding",
+      "content": "how to breed herd animals chickens rooster fertile eggs broody hen incubator 21 days candling chicks goats sheep cattle pigs gestation inbreeding bloodline selection",
+      "tags": [
+        "breeding",
+        "chickens",
+        "livestock",
+        "incubation",
+        "genetics"
+      ]
+    },
+    {
+      "id": "proj-storage",
+      "title": "Long-Term Food Storage",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#storage",
+      "content": "how to store food long term storage grains beans rice mylar bags oxygen absorbers food grade buckets root cellar canning drying salting fermenting pests weevils diatomaceous earth rotation",
+      "tags": [
+        "food storage",
+        "grain",
+        "mylar",
+        "root cellar",
+        "preservation"
+      ]
+    },
+    {
       "id": "maps",
       "title": "Offline Maps — In Your Browser",
       "section": "maps",
