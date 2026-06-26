@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Printable master index of The Last Light Survival Guide — every section, tool, and bundled reference book, so the whole archive is navigable on paper.">
+  <title>Master Index (Printable) — The Last Light Survival Guide</title>
+  <style>
+    :root { --ink:#111; --mut:#555; --line:#bbb; --accent:#7a5c12; }
+    * { box-sizing: border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--ink); background:#fff; max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; line-height: 1.45; }
+    h1 { font-size: 1.9rem; margin: 0 0 .15rem; }
+    .sub { color: var(--mut); margin: 0 0 1.25rem; font-style: italic; }
+    h2 { font-size: 1.15rem; border-bottom: 2px solid var(--accent); padding-bottom: .2rem; margin: 2rem 0 .75rem; color: var(--accent); }
+    h2:first-of-type { margin-top: 1rem; }
+    .lead { background: #f7f3e8; border: 1px solid #e0d6b8; border-radius: 6px; padding: .85rem 1rem; font-size: .92rem; margin-bottom: 1rem; }
+    .lead strong { color: var(--accent); }
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    td, th { text-align: left; vertical-align: top; padding: .3rem .5rem; border-bottom: 1px solid var(--line); }
+    th { font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--mut); }
+    td.n { width: 2.2rem; color: var(--mut); font-variant-numeric: tabular-nums; }
+    td.t { width: 34%; font-weight: 700; }
+    td.d { color: #333; }
+    .meta { color: var(--mut); font-size: .82rem; }
+    .toolbar { text-align:right; margin-bottom:1rem; }
+    .toolbar button { font: inherit; font-size:.85rem; padding:.4rem .9rem; border:1px solid var(--accent); background:var(--accent); color:#fff; border-radius:5px; cursor:pointer; }
+    .foot { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .82rem; color: var(--mut); }
+    a { color: var(--accent); }
+    @media print {
+      body { padding: 0; max-width: none; font-size: 11pt; }
+      .toolbar { display: none; }
+      h2 { page-break-after: avoid; }
+      tr { page-break-inside: avoid; }
+      a { color: var(--ink); text-decoration: none; }
+      .lead { background: none; border: 1px solid #999; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar"><button onclick="window.print()">⎙ Print this index</button></div>
+
+  <h1>The Last Light Survival Guide</h1>
+  <p class="sub">Master Index — v1.0 · the whole archive at a glance, for paper</p>
+
+  <div class="lead">
+    <strong>If the screens are dead and the power is gone:</strong> this folder still works. Open <strong>index.html</strong> in any web browser — no internet needed. The reference books live in the <strong>pdfs/</strong> folder. The offline AI (<strong>Bunker Bot</strong>) needs a local model — see <strong>ai-setup.html</strong>. Print this page and keep it with the drive so the catalogue survives even if nothing will switch on.
+  </div>
+
+  <h2>Knowledge Sections</h2>
+  <table><thead><tr><th class="n">#</th><th class="t">Section</th><th class="d">Scope</th></tr></thead>
+  <tbody id="sections"></tbody></table>
+
+  <h2>Interactive Tools &amp; Calculators <span class="meta">— tools.html</span></h2>
+  <table><thead><tr><th class="n">#</th><th class="t">Tool</th><th class="d">What it does</th></tr></thead>
+  <tbody id="tools"></tbody></table>
+
+  <h2>Practical Skills <span class="meta">— skills.html</span></h2>
+  <p class="meta" style="margin-top:0">36 step-by-step visual skill guides with practice tracking, across: Fire · Knots · Navigation · First Aid · Hunting &amp; Fishing · Plant ID · Construction.</p>
+
+  <h2>Bundled Reference Library <span class="meta">— pdfs/ · searchable by Bunker Bot</span></h2>
+  <table><thead><tr><th class="t">Title</th><th class="d">Author / origin</th></tr></thead>
+  <tbody id="pdfs"></tbody></table>
+
+  <h2>Emergency Quick Access</h2>
+  <table><tbody id="quick"></tbody></table>
+
+  <div class="foot" id="foot"></div>
+
+<script>
+const SECTIONS=[
+ ['Food &amp; Water','Sourcing, purification, storage, rainwater, preservation, foraging, hunting, passive fishing, sanitation, growing food, nutrition'],
+ ['Medical &amp; First Aid','Wounds, fractures, burns, temperature emergencies, childbirth, abdominal, dental, herbal, meds, triage, mental health, chest wounds, snakebite, stroke, seizures, diabetic, drowning, animal bites &amp; rabies, tetanus, anaphylaxis, eye injuries'],
+ ['Energy','Solar systems, hand/pedal generators, micro-hydro, wind, wood gas, batteries, EMP/Faraday, fuel storage, rocket stoves, solar cookers, biogas'],
+ ['Shelter &amp; Construction','Site selection, emergency shelters, long-term builds, insulation, passive solar, roofing, tools'],
+ ['Communications','Ham radio, Baofeng setup, Morse, visual signals, mesh/LoRa, NOAA weather, Faraday, dead drops'],
+ ['Navigation &amp; Maps','Topo maps, compass &amp; triangulation, celestial, natural navigation, map-making, urban, star charts'],
+ ['Security &amp; Defense','Community watch, perimeter, de-escalation, firearms basics, non-lethal, OPSEC, fortification, bug-out vs bug-in'],
+ ['Knowledge &amp; Literacy','Preserving books, reading lists, community library, teaching, digital archiving, records, teaching children'],
+ ['First Principles','Periodic table, constants &amp; conversions, key equations, physics &amp; chemistry first principles, field maths, the invention method'],
+ ['Agriculture','Soil, planting, crop rotation, seed saving, calendars'],
+ ['Animal Husbandry','Chickens, goats, cattle, rabbits, bees, veterinary basics'],
+ ['NBC / EMP Threats','Nuclear blast/fallout, KFM dosimeter, potassium iodide, radiation sickness, EMP, Faraday, biological &amp; chemical threats, decontamination'],
+ ['Disaster Playbooks','Earthquake, hurricane, wildfire, flood, pandemic, grid-down, nuclear, civil unrest, chemical spill, multi-threat'],
+ ['Climate &amp; Regional','Zone-by-zone survival, UK foraging calendar, wild edibles'],
+ ['Metallurgy','Forge, blacksmithing, smelting, casting, nail making'],
+ ['Governance','Community organization, conflict resolution, laws, trade'],
+ ['Psychology &amp; Morale','Stress response, tactical breathing, grief, PTSD, suicide intervention, decisions under stress, leadership, group dynamics, morale, children, addiction'],
+ ['Chemistry &amp; Materials','Soap, alcohol, charcoal, candles, tanning, lime/mortar, adhesives'],
+ ['Textiles &amp; Clothing','Spinning, weaving, sewing, leather, pattern cutting'],
+ ['Vehicles &amp; Transport','Bicycle, engines, wood gas, fuel stabilization, EMP hardening'],
+ ['Power Generation','Pedal generators, water wheels, wind, biogas, steam'],
+ ['Building &amp; Structures','Cob, earthbag, timber frame, defences, site selection'],
+ ['Medicine Making','Tinctures, ORS, antiseptics, medicinal plants'],
+ ['Water Systems','Rainwater harvesting, wells, gravity distribution, irrigation'],
+];
+const TOOLS=[
+ ['Food Needs Calculator','Daily calories/protein/fat for your whole group + duration'],
+ ['Daily Water Budget','People, livestock, garden + roof catchment & tank reserve'],
+ ['Off-Grid Power Calculator','Size panels, battery bank, controller, inverter from your loads'],
+ ['Supply Tracker','Days-remaining per item with red/amber/green status; CSV export'],
+ ['Group Skill Inventory','Track and score your community’s competencies'],
+ ['Planting Calendar','USDA-zone sow/harvest dates by month'],
+ ['Stay or Go?','Structured bug-out / shelter-in-place decision'],
+ ['Emergency Radio Frequencies','Pre-loaded NOAA, marine, CB, ham, FRS/GMRS'],
+ ['Field Pharmacology Guide','Adult dose reference + drug-interaction checker'],
+ ['Antibiotic Dosing Calculator','Weight-based pediatric/adult dosing, 8 antibiotics, tablets/mL per dose'],
+];
+const PDFS=[
+ ['US Army Survival FM 3-05.70','US Dept. of the Army'],
+ ['US Army Survival FM 21-76 (1957)','US Dept. of the Army'],
+ ['First Aid FM 4-25.11','US Army/Navy/USAF/USMC'],
+ ['Field Hygiene & Sanitation FM 21-10','US Army / USMC'],
+ ['US Army Ranger Handbook SH 21-76','US Army'],
+ ['US Army Signal Operations FM 6-02','US Dept. of the Army'],
+ ['Emergency War Surgery (5th Ed.)','US Army Borden Institute'],
+ ['Nuclear War Survival Skills','Cresson H. Kearny · ORNL'],
+ ['Where There Is No Doctor','David Werner et al. · Hesperian'],
+ ['Where There Is No Dentist','Murray Dickson · Hesperian'],
+ ['A Book for Midwives','Susan Klein et al. · Hesperian'],
+ ['The Humanure Handbook (3rd Ed.)','Joseph Jenkins'],
+ ['Aerie Wilderness Medicine (15th Ed.)','Aerie Backcountry Medicine'],
+ ['Special Forces Medical Handbook (ST 31-91B)','US Army'],
+ ['The Ship’s Medicine Chest & Medical Aid at Sea','US Public Health Service'],
+ ['USDA Complete Guide to Home Canning','USDA / NCHFP'],
+ ['The Farm & Household Cyclopaedia','Frank M. Lupton (1885)'],
+ ['Sturtevant’s Edible Plants of the World','E.L. Sturtevant (1919)'],
+ ['Henley’s Book of Formulas, Recipes & Processes','ed. G.D. Hiscox (1914)'],
+ ['Carpentry FM 5-426','US Dept. of the Army'],
+ ['Knots, Splices & Rope Work','A. Hyatt Verrill (1917)'],
+ ['American Practical Navigator (Bowditch) Vol.1','Nathaniel Bowditch · NGA'],
+ ['UK Emergency Preparedness Guide','UK Cabinet Office'],
+ ['The Art of War','Sun Tzu (trans. Giles)'],
+ ['King James Bible (KJV)','Authorized Version, 1611'],
+ ['The Complete Works of Shakespeare','William Shakespeare'],
+ ['Meditations','Marcus Aurelius'],
+ ['Aesop’s Fables','trans. G.F. Townsend'],
+];
+const QUICK=[
+ ['quick-reference.html','Emergency Card — the first 72 hours, formatted to print'],
+ ['cards.html','12 wallet cards — water purification, Morse, wound care, dosing…'],
+ ['gear.html','Gear checklist'],
+ ['ai-setup.html','Set up Bunker Bot (offline AI) with a local model'],
+];
+const $=id=>document.getElementById(id);
+$('sections').innerHTML=SECTIONS.map((s,i)=>`<tr><td class="n">${i+1}</td><td class="t">${s[0]}</td><td class="d">${s[1]}</td></tr>`).join('');
+$('tools').innerHTML=TOOLS.map((t,i)=>`<tr><td class="n">${i+1}</td><td class="t">${t[0]}</td><td class="d">${t[1]}</td></tr>`).join('');
+$('pdfs').innerHTML=PDFS.map(p=>`<tr><td class="t">${p[0]}</td><td class="d">${p[1]}</td></tr>`).join('');
+$('quick').innerHTML=QUICK.map(q=>`<tr><td class="t">${q[0]}</td><td class="d">${q[1]}</td></tr>`).join('');
+$('foot').innerHTML=`${SECTIONS.length} sections · ${TOOLS.length} tools · 36 practical skills · ${PDFS.length} bundled reference books &nbsp;·&nbsp; The Last Light Survival Guide v1.0 · printed master index. Distribute freely (CC BY-SA 4.0).`;
+</script>
+</body>
+</html>
