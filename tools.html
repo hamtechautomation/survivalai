@@ -409,6 +409,38 @@
   <div id="int-result" class="results-box" style="margin-top:.75rem;font-size:.9rem">Select two medications to check for interactions.</div>
 </section>
 
+<!-- ===== TOOL 10: ANTIBIOTIC DOSING CALCULATOR ===== -->
+<section id="tool-10" class="tool-section">
+  <h2>💉 Antibiotic Dosing Calculator</h2>
+  <p class="tool-subtitle">Weight-based oral antibiotic dosing for adults and children — the calculation the adult-dose table above can't do.</p>
+
+  <div class="alert-box danger" style="margin-bottom:1rem">
+    ⚠️ <strong>Emergency reference only — NOT a prescription.</strong> These are standard published estimates and may be wrong for your patient. Confirm against the package insert and a clinician whenever one is reachable. Dosing errors can kill — especially in children. <strong>Check for drug allergies first</strong>, never exceed the adult maximum, and finish the full course.
+  </div>
+
+  <div class="tool-row">
+    <div class="field"><label>Patient weight</label><input type="number" id="ab-weight" min="1" max="250" value="20" oninput="calcAntibiotic()"></div>
+    <div class="field"><label>Units</label>
+      <select id="ab-unit" onchange="calcAntibiotic()"><option value="kg" selected>kg</option><option value="lb">lb</option></select>
+    </div>
+    <div class="field" style="flex:2"><label>Antibiotic</label><select id="ab-drug" onchange="onAbDrugChange()"></select></div>
+    <div class="field" style="flex:2"><label>Indication</label><select id="ab-ind" onchange="calcAntibiotic()"></select></div>
+  </div>
+
+  <div class="results-box" id="ab-results" style="margin-top:1rem">
+    <div class="result-row"><span class="result-label">Dose per administration</span><span class="result-value" id="ab-perdose">—</span></div>
+    <div class="result-row"><span class="result-label">Frequency</span><span class="result-value" id="ab-freq">—</span></div>
+    <div class="result-row"><span class="result-label">Total per day</span><span class="result-value" id="ab-daily">—</span></div>
+    <div class="result-row"><span class="result-label">Duration</span><span class="result-value" id="ab-dur">—</span></div>
+    <div class="result-row"><span class="result-label">Adult reference dose</span><span class="result-value" id="ab-adult">—</span></div>
+  </div>
+
+  <h3 style="margin-top:1.25rem;color:var(--amber);font-size:1rem">How much of each formulation per dose</h3>
+  <table class="ref-table"><thead><tr><th>If you have…</th><th>Give per dose</th></tr></thead><tbody id="ab-forms"></tbody></table>
+
+  <div id="ab-warn" class="alert-box" style="margin-top:1rem"></div>
+</section>
+
 <script>
 /* ===== TOOL 6: PLANTING CALENDAR ===== */
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -666,6 +698,112 @@ function checkInteraction(){
   }
 }
 
+/* ===== TOOL 10: ANTIBIOTIC DOSING CALCULATOR =====
+   Oral dosing. mg/kg/day values are standard published references; every
+   weight-based dose is capped at the adult maximum. dose-by-component noted
+   where relevant (TMP-SMX dosed by trimethoprim). */
+const ANTIBIOTICS=[
+  {id:'amox',name:'Amoxicillin',
+   forms:[{label:'250 mg capsule',mg:250},{label:'500 mg capsule',mg:500},{label:'875 mg tablet',mg:875},{label:'250 mg/5 mL suspension',mg:250,ml:5},{label:'125 mg/5 mL suspension',mg:125,ml:5}],
+   warn:'Do NOT use if penicillin/amoxicillin allergy. Diarrhoea and rash are common.',
+   inds:[
+     {label:'Standard — ear, sinus, dental, skin',mgkgday:40,freqH:8,maxDose:500,maxDaily:1500,dur:'7–10 days',adult:'500 mg every 8 h'},
+     {label:'High-dose — pneumonia, acute otitis',mgkgday:90,freqH:12,maxDose:1000,maxDaily:2000,dur:'7–10 days',adult:'875–1000 mg every 12 h'}
+   ]},
+  {id:'augmentin',name:'Amoxicillin-Clavulanate (Augmentin)',
+   forms:[{label:'500 mg tablet (amox)',mg:500},{label:'875 mg tablet (amox)',mg:875},{label:'400 mg/5 mL suspension',mg:400,ml:5},{label:'200 mg/5 mL suspension',mg:200,ml:5}],
+   warn:'Penicillin allergy = contraindicated. Dose shown is the amoxicillin component. More diarrhoea than plain amoxicillin — take with food.',
+   inds:[
+     {label:'Standard — resistant ear/sinus, bites, dental',mgkgday:45,freqH:12,maxDose:875,maxDaily:1750,dur:'7–10 days',adult:'875 mg every 12 h'}
+   ]},
+  {id:'cephalexin',name:'Cephalexin (Keflex)',
+   forms:[{label:'250 mg capsule',mg:250},{label:'500 mg capsule',mg:500},{label:'250 mg/5 mL suspension',mg:250,ml:5}],
+   warn:'Caution if severe penicillin allergy (small cross-reaction risk). Good for skin and soft-tissue infections.',
+   inds:[
+     {label:'Skin, soft tissue, UTI',mgkgday:40,freqH:8,maxDose:1000,maxDaily:4000,dur:'7–10 days',adult:'500 mg every 6–8 h'}
+   ]},
+  {id:'azithro',name:'Azithromycin (Z-Pack)',
+   forms:[{label:'250 mg tablet',mg:250},{label:'200 mg/5 mL suspension',mg:200,ml:5},{label:'100 mg/5 mL suspension',mg:100,ml:5}],
+   warn:'Penicillin-allergy alternative. Prolongs the QT interval — avoid with other QT drugs (e.g. ondansetron).',
+   inds:[
+     {label:'Respiratory, ear, chest — once daily',mgkgday:10,freqH:24,maxDose:500,maxDaily:500,dur:'3–5 days',adult:'500 mg once daily ×3 days'}
+   ]},
+  {id:'doxy',name:'Doxycycline',
+   forms:[{label:'100 mg capsule',mg:100},{label:'50 mg capsule',mg:50}],
+   warn:'Avoid under age 8 and in pregnancy (stains teeth) EXCEPT for serious infections (tick-borne illness, anthrax) where benefit outweighs risk. Take with water, sitting up; avoid dairy/antacids within 2 h. Never use if degraded past expiry — becomes toxic.',
+   inds:[
+     {label:'Tick-borne illness, pneumonia, skin',mgkgday:4.4,freqH:12,maxDose:100,maxDaily:200,dur:'7–14 days',adult:'100 mg every 12 h'}
+   ]},
+  {id:'tmpsmx',name:'TMP-SMX / Co-trimoxazole (Bactrim)',
+   byComponent:'trimethoprim (TMP)',
+   forms:[{label:'Single-strength 80/400 tab (80 TMP)',mg:80},{label:'Double-strength 160/800 tab (160 TMP)',mg:160},{label:'40 mg TMP/5 mL suspension',mg:40,ml:5}],
+   warn:'Do NOT use if sulfa allergy, under 2 months old, late pregnancy, or known G6PD deficiency. Dose shown is the trimethoprim (TMP) component — match it to the TMP figure on the tablet. Drink plenty of water.',
+   inds:[
+     {label:'UTI, skin (MRSA), traveller’s diarrhoea',mgkgday:10,freqH:12,maxDose:160,maxDaily:320,dur:'7–10 days',adult:'1 double-strength tab every 12 h'}
+   ]},
+  {id:'metro',name:'Metronidazole (Flagyl)',
+   forms:[{label:'250 mg tablet',mg:250},{label:'500 mg tablet',mg:500}],
+   warn:'ABSOLUTELY NO ALCOHOL during and for 48 h after — causes severe vomiting/collapse. For anaerobic and parasitic infections (giardia, dental abscess, C. diff).',
+   inds:[
+     {label:'Giardia, dental abscess, anaerobic',mgkgday:30,freqH:8,maxDose:750,maxDaily:4000,dur:'7–10 days',adult:'500 mg every 8 h'}
+   ]},
+  {id:'cipro',name:'Ciprofloxacin (Cipro)',
+   forms:[{label:'250 mg tablet',mg:250},{label:'500 mg tablet',mg:500},{label:'750 mg tablet',mg:750}],
+   warn:'Reserve for serious infection. Risk of tendon rupture; avoid in children and pregnancy unless no alternative (e.g. anthrax). Avoid dairy/antacids within 2 h.',
+   inds:[
+     {label:'Serious UTI, GI infection, anthrax',mgkgday:30,freqH:12,maxDose:750,maxDaily:1500,dur:'5–14 days',adult:'500 mg every 12 h'}
+   ]}
+];
+
+function roundDose(mg){ return mg>=200 ? Math.round(mg/25)*25 : Math.round(mg/5)*5; }
+function fmtTabs(n){ return Math.round(n*2)/2; }
+
+function onAbDrugChange(){
+  const drug=ANTIBIOTICS.find(a=>a.id===document.getElementById('ab-drug').value);
+  const ind=document.getElementById('ab-ind');
+  ind.innerHTML=drug.inds.map((x,i)=>`<option value="${i}">${x.label}</option>`).join('');
+  calcAntibiotic();
+}
+
+function calcAntibiotic(){
+  const drug=ANTIBIOTICS.find(a=>a.id===document.getElementById('ab-drug').value);
+  if(!drug) return;
+  const ind=drug.inds[+document.getElementById('ab-ind').value||0];
+  const unit=document.getElementById('ab-unit').value;
+  let w=parseFloat(document.getElementById('ab-weight').value)||0;
+  let kg=unit==='lb'?w/2.2046:w;
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+
+  if(kg<=0){ ['ab-perdose','ab-freq','ab-daily','ab-dur','ab-adult'].forEach(i=>set(i,'—')); document.getElementById('ab-forms').innerHTML=''; document.getElementById('ab-warn').innerHTML=''; return; }
+
+  const dosesPerDay=24/ind.freqH;
+  let perDose=kg*ind.mgkgday/dosesPerDay;
+  const capped=perDose>ind.maxDose;
+  perDose=Math.min(perDose,ind.maxDose);
+  perDose=roundDose(perDose);
+  let daily=Math.min(perDose*dosesPerDay,ind.maxDaily);
+  const comp=drug.byComponent?` of ${drug.byComponent}`:'';
+
+  set('ab-perdose',`${perDose} mg${comp}`+(capped?'  (capped at adult max)':''));
+  set('ab-freq',`every ${ind.freqH} h  (${dosesPerDay}× per day)`);
+  set('ab-daily',`${Math.round(daily)} mg/day`);
+  set('ab-dur',ind.dur);
+  set('ab-adult',ind.adult);
+
+  document.getElementById('ab-forms').innerHTML=drug.forms.map(f=>{
+    let amt;
+    if(f.ml){ const ml=perDose/f.mg*f.ml; amt=`${Math.round(ml*10)/10} mL`; }
+    else { const t=fmtTabs(perDose/f.mg); amt=t<=0?'—':`${t} ${t===1?'tablet':'tablets'}`; }
+    return `<tr><td>${f.label}</td><td style="color:var(--amber);font-weight:600">${amt}</td></tr>`;
+  }).join('');
+
+  const warnBox=document.getElementById('ab-warn');
+  let notes=[drug.warn];
+  if(kg<5) notes.unshift('<strong>Infant under 5 kg — verify against neonatal/infant references before giving.</strong>');
+  if(capped) notes.push('This patient’s weight-based dose reached the adult ceiling; the adult maximum is being used.');
+  warnBox.innerHTML='⚠️ '+notes.join('<br>⚠️ ');
+}
+
 window.addEventListener('DOMContentLoaded',()=>{
   filterMeds();
   const makeOpts=()=>MEDS.map(m=>`<option value="${m.name}">${m.name}</option>`).join('');
@@ -673,6 +811,8 @@ window.addEventListener('DOMContentLoaded',()=>{
   const d2=document.getElementById('int-drug2');
   if(d1)d1.innerHTML=`<option value="">Select…</option>`+makeOpts();
   if(d2)d2.innerHTML=`<option value="">Select…</option>`+makeOpts();
+  const abd=document.getElementById('ab-drug');
+  if(abd){ abd.innerHTML=ANTIBIOTICS.map(a=>`<option value="${a.id}">${a.name}</option>`).join(''); onAbDrugChange(); }
 });
 </script>
 

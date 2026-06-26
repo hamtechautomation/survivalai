@@ -2151,6 +2151,23 @@
       ]
     },
     {
+      "id": "tools-antibiotic",
+      "title": "Antibiotic Dosing Calculator",
+      "section": "tools",
+      "sectionLabel": "Tools",
+      "file": "tools.html",
+      "anchor": "#tool-10",
+      "content": "antibiotic dosing calculator weight based mg per kg pediatric child adult amoxicillin augmentin cephalexin azithromycin doxycycline bactrim co-trimoxazole metronidazole ciprofloxacin dose per kg tablets suspension milligrams",
+      "tags": [
+        "antibiotic",
+        "dosing",
+        "calculator",
+        "weight based",
+        "pediatric",
+        "mg/kg"
+      ]
+    },
+    {
       "id": "lit-overview",
       "title": "Reference Library — 60 Books",
       "section": "literature",
