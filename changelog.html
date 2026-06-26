@@ -186,35 +186,72 @@
     <p class="section-desc">Version history and update notes for The Last Light Survival Guide. This guide is a living document — content will be expanded and refined as better techniques are identified.</p>
   </div>
 
+  <!-- v2.0 — current -->
+  <div class="cl-section current" id="v2.0">
+    <div class="cl-version">
+      <span class="cl-version-number">v2.0</span>
+      <span class="cl-version-date">June 2026 — Major Expansion</span>
+      <span class="cl-version-badge badge-current">Current</span>
+    </div>
+    <p style="font-size:.85rem;color:var(--text-secondary);margin:.5rem 0 1rem">A large expansion: more sections and tools, a far smarter offline AI, an interactive offline map, and one-click access to the rest of recorded knowledge.</p>
+
+    <div class="stat-row">
+      <div class="stat-chip"><strong>27</strong><span>Content Sections</span></div>
+      <div class="stat-chip"><strong>36</strong><span>Practical Skills</span></div>
+      <div class="stat-chip"><strong>14</strong><span>Interactive Tools</span></div>
+      <div class="stat-chip"><strong>28</strong><span>Bundled Books</span></div>
+    </div>
+    <hr class="cl-divider">
+
+    <div class="cl-group-title">New Sections &amp; Content</div>
+    <ul class="cl-list">
+      <li><span class="cl-tag tag-new">New</span>First Principles — periodic table, key equations, physics/chemistry, and a repeatable invention method</li>
+      <li><span class="cl-tag tag-new">New</span>Veterinary Care, and Pregnancy &amp; Infant Care sections</li>
+      <li><span class="cl-tag tag-new">New</span>Practical Projects — 9 build guides: cooling/aircon, air filters, dams &amp; hydro, water pumps, toilets, radiation checking, grain mills, breeding stock, food storage</li>
+      <li><span class="cl-tag tag-new">New</span>Medical: rabies, tetanus, anaphylaxis, eye injuries · Food: passive fishing · Skills: blade sharpening</li>
+    </ul>
+
+    <div class="cl-group-title">Tools &amp; AI</div>
+    <ul class="cl-list">
+      <li><span class="cl-tag tag-new">New</span>Five new tools: weight-based Antibiotic Dosing Calculator, Survival Timer, Celestial Latitude Finder, Firewood Estimator, Crop Spacing Planner</li>
+      <li><span class="cl-tag tag-improve">Improve</span>Bunker Bot now answers from the bundled library (BM25 search over ~14,000 PDF chunks) and cites sources inline — on every page, not just the library</li>
+      <li><span class="cl-tag tag-improve">Improve</span>Custom inline-SVG icon set replacing all emoji; two new dental + solar wallet cards (14 total)</li>
+    </ul>
+
+    <div class="cl-group-title">Expansion, Maps &amp; Distribution</div>
+    <ul class="cl-list">
+      <li><span class="cl-tag tag-new">New</span>Expansion Library — one-click links to download all of Wikipedia and Project Gutenberg (Kiwix/ZIM) for offline reading</li>
+      <li><span class="cl-tag tag-new">New</span>Interactive offline browser map (PMTiles) with a region picker and a "download a map of anywhere" extractor — runs on a minimal static server, no internet</li>
+      <li><span class="cl-tag tag-new">New</span>Printable master index of the whole archive</li>
+      <li><span class="cl-tag tag-new">New</span>Integrity manifest + verify.sh; torrent &amp; IPFS distribution helpers</li>
+    </ul>
+  </div>
+
   <!-- v1.1 — planned -->
   <div class="cl-section planned">
     <div class="cl-version">
-      <span class="cl-version-number">v1.1</span>
-      <span class="cl-version-date">Planned</span>
+      <span class="cl-version-number">Next</span>
+      <span class="cl-version-date">Under consideration</span>
       <span class="cl-version-badge badge-planned">Planned</span>
     </div>
-    <p style="font-size:.85rem;color:var(--text-muted);margin:.5rem 0 1rem">Potential improvements under consideration — not yet implemented.</p>
+    <p style="font-size:.85rem;color:var(--text-muted);margin:.5rem 0 1rem">Possible future additions — not yet implemented.</p>
     <hr class="cl-divider">
 
     <div class="cl-group-title">Under Consideration</div>
     <ul class="cl-list">
-      <li><span class="cl-tag tag-new">New</span>Section 9: Agriculture — soil prep, seed saving, crop rotation, companion planting, irrigation without infrastructure</li>
-      <li><span class="cl-tag tag-new">New</span>Section 10: Community Governance — law, dispute resolution, trade systems, community contracts post-collapse</li>
-      <li><span class="cl-tag tag-new">New</span>Printable section posters — key diagrams sized for A3/tabloid printing and lamination</li>
-      <li><span class="cl-tag tag-improve">Improve</span>Add Spanish and French translations of the Emergency Card</li>
-      <li><span class="cl-tag tag-improve">Improve</span>Service Worker / PWA manifest so the guide installs as an offline app on mobile</li>
-      <li><span class="cl-tag tag-improve">Improve</span>Interactive plant identification photo gallery (SVG illustrations, no external images)</li>
-      <li><span class="cl-tag tag-improve">Improve</span>Gear list export to plain text for printing outside this guide</li>
-      <li><span class="cl-tag tag-improve">Improve</span>Bunker Bot: multi-model switching UI within the panel (drop-down of available Ollama models)</li>
+      <li><span class="cl-tag tag-new">New</span>Bundle King's American Dispensatory (PD herbal) and a compact Gray's Anatomy</li>
+      <li><span class="cl-tag tag-new">New</span>Printable section posters — key diagrams sized for A3/tabloid printing</li>
+      <li><span class="cl-tag tag-improve">Improve</span>More pre-built map regions and an on-page region search</li>
+      <li><span class="cl-tag tag-improve">Improve</span>Bunker Bot: clickable citation chips that open the cited page in the PDF library</li>
     </ul>
   </div>
 
-  <!-- v1.0 — current -->
-  <div class="cl-section current" id="v1.0">
+  <!-- v1.0 — initial release -->
+  <div class="cl-section" id="v1.0">
     <div class="cl-version">
       <span class="cl-version-number">v1.0</span>
       <span class="cl-version-date">June 2025 — Initial Release</span>
-      <span class="cl-version-badge badge-current">Current</span>
+      <span class="cl-version-badge badge-planned">Superseded</span>
     </div>
     <p style="font-size:.85rem;color:var(--text-secondary);margin:.5rem 0 1rem">Complete initial build — all 8 content sections, AI integration, offline search, and full tooling.</p>
 
