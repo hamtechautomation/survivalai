@@ -86,6 +86,21 @@
     </div>
   </div>
 
+  <h2>Offline Maps &amp; Navigation</h2>
+  <div class="exp-lead">
+    <strong>Your phone's GPS works with no signal and no SIM.</strong> The GPS chip listens to satellites directly — once you've downloaded the maps while online, you can navigate offline, anywhere, forever, even in full grid-down. A whole-UK offline map is well under 2 GB. Download your region <em>now</em>.
+  </div>
+  <div class="zim-grid" id="maps"></div>
+  <table class="ref-table sizing-table" style="margin-top:.5rem">
+    <thead><tr><th>UK map, by detail</th><th>Approx size</th></tr></thead>
+    <tbody>
+      <tr><td>One region / county (e.g. your local area)</td><td>~100–400 MB</td></tr>
+      <tr><td>Whole UK — navigation (Organic Maps)</td><td>under 1 GB</td></tr>
+      <tr><td>Whole UK + topographic contour lines (OsmAnd)</td><td>~2–2.5 GB</td></tr>
+      <tr><td>Raw OSM data — Great Britain <code>.osm.pbf</code></td><td>~2.0 GB</td></tr>
+    </tbody>
+  </table>
+
   <h2>Scripted download (optional)</h2>
   <p style="font-size:.85rem;color:var(--text-2)">Prefer the command line? <code>get-knowledge.sh</code> in the repo downloads a chosen ZIM with <code>wget</code>/<code>curl</code> and resumes if interrupted — handy for the multi-gigabyte files. Edit the URL inside it to the file you want from the directories below.</p>
 
@@ -137,16 +152,26 @@ const TIER2=[
  {name:'Wikisource',size:'~5–15 GB',desc:'Original source texts and historical documents — laws, treaties, classics, primary records.',url:'https://download.kiwix.org/zim/wikisource/',file:'wikisource_en_all_maxi_*.zim'},
  {name:'Stack Exchange (tech Q&A)',size:'varies',desc:'Crowd-sourced answers — electronics, gardening, DIY, survival, programming and more.',url:'https://download.kiwix.org/zim/stack_exchange/',file:'(browse by topic)'},
 ];
+const MAPS=[
+ {name:'Organic Maps',size:'UK < 1 GB',desc:'Free, open, no-limit offline maps based on OpenStreetMap — streets, footpaths, trails, and hill contours. The best survival pick: install it, then download England / Scotland / Wales by region.',url:'https://organicmaps.app/',file:'Free app · iOS / Android / desktop',label:'Get Organic Maps →'},
+ {name:'OsmAnd',size:'UK ~2 GB + topo',desc:'Highly detailed offline maps and navigation. Add separate topographic contour & hillshade layers (+200–500 MB) for serious off-trail and terrain work.',url:'https://osmand.net/',file:'Free app (7-map limit) · iOS / Android',label:'Get OsmAnd →'},
+ {name:'Geofabrik OSM Extracts',size:'GB ~2.0 GB',desc:'Raw OpenStreetMap data by country/region (.osm.pbf) — for self-hosting a map server, processing into your own tiles, or feeding offline routing. England 1.6 GB · Great Britain 2.0 GB.',url:'https://download.geofabrik.de/europe/great-britain.html',file:'great-britain-latest.osm.pbf',label:'Download OSM data →'},
+ {name:'Protomaps / PMTiles',size:'region varies',desc:'A single-file map archive you can drop on the drive and view in a web browser fully offline (with MapLibre) — no server, matching this guide’s static-file approach. Build a UK basemap from OSM.',url:'https://protomaps.com/',file:'one .pmtiles file · browser-native',label:'Protomaps →'},
+ {name:'OpenTopoMap',size:'tiles vary',desc:'Topographic style (contours + hillshade) built from OSM + elevation data. Viewable online; tiles can be cached for offline use in OsmAnd/Locus.',url:'https://opentopomap.org/',file:'topographic raster tiles',label:'OpenTopoMap →'},
+ {name:'OS OpenData (UK)',size:'varies',desc:'Free UK government mapping: OS Terrain 50 (contours/elevation), OS OpenMap Local, boundaries and place names — official British terrain data.',url:'https://osdatahub.os.uk/downloads/open',file:'UK government open data',label:'OS OpenData →'},
+];
 function card(z){
+  const linkText = z.label || '⬇ Download from Kiwix →';
   return `<div class="zim-card">
     <div class="zim-top"><span class="zim-name">${z.name}</span><span class="zim-size">${z.size}</span></div>
     <div class="zim-desc">${z.desc}</div>
-    <div class="zim-file">file: ${z.file}</div>
-    <a class="dl" href="${z.url}" target="_blank" rel="noopener">⬇ Download from Kiwix →</a>
+    <div class="zim-file">${z.file.startsWith('Free')||z.file.includes('app')||z.file.includes('browser')||z.file.includes('government')||z.file.includes('raster')?z.file:'file: '+z.file}</div>
+    <a class="dl" href="${z.url}" target="_blank" rel="noopener">${linkText}</a>
   </div>`;
 }
 document.getElementById('tier1').innerHTML=TIER1.map(card).join('');
 document.getElementById('tier2').innerHTML=TIER2.map(card).join('');
+document.getElementById('maps').innerHTML=MAPS.map(card).join('');
 </script>
 <script src="assets/js/search.js"></script>
 <script src="assets/js/bunker-bot.js"></script>

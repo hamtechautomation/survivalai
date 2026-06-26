@@ -2188,12 +2188,12 @@
     },
     {
       "id": "expansion",
-      "title": "Expansion Library — Wikipedia & Gutenberg Offline",
+      "title": "Expansion Library — Wikipedia, Gutenberg & Offline Maps",
       "section": "expansion",
       "sectionLabel": "Expansion Library",
       "file": "expansion.html",
       "anchor": "",
-      "content": "expansion library kiwix zim wikipedia offline project gutenberg download all human knowledge medical wikipedia wikimed simple english wiktionary ifixit wikivoyage wikibooks wikisource encyclopedia pen drive offline reader",
+      "content": "expansion library kiwix zim wikipedia offline project gutenberg download all human knowledge medical wikipedia wikimed simple english wiktionary ifixit wikivoyage wikibooks wikisource encyclopedia pen drive offline reader maps offline map navigation GPS organic maps osmand geofabrik openstreetmap osm topographic contour UK England Great Britain protomaps pmtiles ordnance survey",
       "tags": [
         "kiwix",
         "zim",
@@ -2201,7 +2201,11 @@
         "gutenberg",
         "offline",
         "expansion",
-        "download"
+        "download",
+        "maps",
+        "navigation",
+        "GPS",
+        "osm"
       ]
     },
     {
