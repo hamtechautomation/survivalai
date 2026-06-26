@@ -161,6 +161,22 @@
       ]
     },
     {
+      "id": "food-fishing",
+      "title": "Passive Fishing",
+      "section": "food",
+      "sectionLabel": "Food & Water",
+      "file": "sections/food.html",
+      "anchor": "#fishing",
+      "content": "passive fishing trotline set line jug line limb line fish trap funnel basket weir gill net subsistence catch fish overnight",
+      "tags": [
+        "fishing",
+        "trotline",
+        "gill net",
+        "fish trap",
+        "weir"
+      ]
+    },
+    {
       "id": "med-overview",
       "title": "Medical & First Aid Overview",
       "section": "medical",
@@ -2488,6 +2504,66 @@
       ]
     },
     {
+      "id": "med-animal-bites",
+      "title": "Animal Bites & Rabies",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#animal-bites",
+      "content": "animal bite rabies dog cat bat wound washing soap post exposure observation 10 day pasteurella infection mammal",
+      "tags": [
+        "rabies",
+        "animal bite",
+        "wound",
+        "infection"
+      ]
+    },
+    {
+      "id": "med-tetanus",
+      "title": "Tetanus",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#tetanus",
+      "content": "tetanus clostridium lockjaw rusty nail puncture wound booster vaccine spasms muscle rigidity debride dirty wound",
+      "tags": [
+        "tetanus",
+        "lockjaw",
+        "vaccine",
+        "puncture"
+      ]
+    },
+    {
+      "id": "med-anaphylaxis",
+      "title": "Anaphylaxis & Severe Allergy",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#anaphylaxis",
+      "content": "anaphylaxis severe allergic reaction epinephrine epipen auto injector bee sting nut shellfish airway swelling hives biphasic antihistamine benadryl",
+      "tags": [
+        "anaphylaxis",
+        "allergy",
+        "epinephrine",
+        "epipen"
+      ]
+    },
+    {
+      "id": "med-eye-injuries",
+      "title": "Eye Injuries",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#eye-injuries",
+      "content": "eye injury chemical splash irrigation flush foreign body embedded object penetrating cover both eyes snow blindness flash burn arc welding hyphema",
+      "tags": [
+        "eye",
+        "irrigation",
+        "foreign body",
+        "snow blindness"
+      ]
+    },
+    {
       "id": "bwater-overview",
       "title": "Water Systems — Collection, Storage, Distribution",
       "section": "build-water",
@@ -2741,6 +2817,22 @@
         "stars",
         "polaris",
         "natural navigation"
+      ]
+    },
+    {
+      "id": "skills-sharpening",
+      "title": "Sharpening a Blade",
+      "section": "skills",
+      "sectionLabel": "Practical Skills",
+      "file": "skills.html",
+      "anchor": "",
+      "content": "sharpening blade knife axe whetstone stone grit angle burr strop hone edge dull tools maintenance",
+      "tags": [
+        "sharpening",
+        "knife",
+        "whetstone",
+        "tools",
+        "edge"
       ]
     }
   ]

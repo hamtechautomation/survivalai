@@ -974,4 +974,30 @@ const SKILLS = [
     competencyTest: 'Student correctly prepares and applies a 60 cm section of thatch at correct pitch with proper overlap and fixing.',
   },
 
+  {
+    id: '7.5', category: 'construction', icon: '🪓',
+    title: 'Sharpening a Blade',
+    difficulty: 'beginner',
+    learnTime: '30 min to grasp; a lifetime to master',
+    teachTime: '20 min demo + 30 min supervised',
+    desc: 'A dull blade is dangerous and useless — it slips, crushes instead of cutting, and forces you to push harder. Sharpening underpins every other tool skill: knives, axes, chisels, scythes, plane irons. The whole skill is one idea — grind a clean edge at a consistent angle, then remove the burr.',
+    materials: ['A whetstone (coarse + fine grit) — or any flat stone, ceramic mug base, or smooth river rock', 'Water or oil as lubricant', 'A leather strop or smooth belt (for finishing)', 'A marker pen (optional, to see your progress)'],
+    steps: [
+      { title: 'Understand the Edge', body: 'A sharp edge is simply two polished surfaces meeting at a fine line. Sharpening grinds metal away on each face until they meet cleanly. The key to the whole skill is holding a CONSISTENT angle — most knives want about 20° per side; axes a steeper 25–30°; razors a shallow 15°. Inconsistent angle is the number-one reason sharpening fails.', tip: 'Colour the edge bevel with a marker. As you grind, the ink rubs off exactly where the stone is touching — instant feedback on whether your angle is right.' },
+      { title: 'Set the Lubricant', body: 'Wet the stone with water (water stones) or a little oil (oil stones). Lubricant floats away the metal particles ("swarf") so they do not clog the stone and dull your progress. A dry stone glazes over and stops cutting.', warning: 'Never sharpen toward an exposed hand or fingers. Keep the cutting edge moving away from anything you are not willing to cut.' },
+      { title: 'Find the Angle', body: 'Lay the blade flat on the coarse side of the stone, then lift the spine until the bevel sits flush against the surface — that is your angle. A rough guide for a 20° angle: stack two coins under the spine of a thin knife. Hold this angle steady — it matters far more than speed or pressure.' },
+      { title: 'Grind the First Side', body: 'With light, even pressure, push the blade across the stone as if shaving a thin slice off its surface, edge-leading. Sweep from heel to tip so the whole edge is worked evenly. Repeat with smooth, consistent strokes — 10 to 20 passes — keeping that angle locked.', tip: 'Pressure on the push (cutting) stroke, lighten on the return. Let the stone do the work; forcing it rounds the edge.' },
+      { title: 'Feel for the Burr', body: 'After enough strokes, run a fingertip GENTLY off the edge (never along it) on the opposite side. You will feel a tiny rough lip — the burr — folded over the whole length. The burr means you have ground all the way to the edge. No burr = keep going; you have not reached the edge yet.', warning: 'Feel ACROSS the edge, dragging your finger off it — never slide a finger along the cutting edge.' },
+      { title: 'Grind the Second Side', body: 'Flip the blade and repeat at the same angle on the other face until you raise a burr on the first side. Match your stroke count roughly so both bevels are even. The edge is now formed — both faces meet in a clean line, with the burr now the only thing left to remove.' },
+      { title: 'Remove the Burr (Strop)', body: 'Move to the fine grit and make a few very light, alternating strokes each side to refine the edge. Then strop: drag the blade edge-TRAILING (spine-first) along leather or a smooth belt, alternating sides. This tears off the burr and polishes the edge to a shave-sharp finish.', tip: 'The back of a leather belt, a folded strip of cardboard, or even denim over a flat board works as a field strop.' },
+      { title: 'Test Safely', body: 'A sharp edge bites into a fingernail at light pressure instead of sliding, slices a hanging sheet of paper cleanly, or shaves a patch of arm hair. A dull edge reflects light along the very edge (you can see a bright line); a truly sharp edge is invisibly thin and reflects nothing.', warning: 'Test by slicing AWAY from yourself. Never test sharpness by running a finger along the edge.' },
+    ],
+    instructorNotes: {
+      mistake: 'Changing the angle mid-stroke — rolling the wrist rounds the edge into a useless curve. Lock the wrist and elbow; move from the shoulder. Consistency beats everything.',
+      fastTrack: 'Start on a cheap, very dull knife so progress is obvious and mistakes are cheap. Mastering the burr — feeling it form, then removing it — is 90% of the skill.',
+      adaptations: 'No whetstone? The unglazed ring on the base of a ceramic mug is a fine medium-grit sharpener. A flat sandstone or smooth river rock works as a coarse stone. Wet/dry sandpaper laid on a flat board (glass, tile) is an excellent improvised stone at any grit.',
+    },
+    competencyTest: 'Student takes a dull knife to a clean, paper-slicing edge: raises a burr on both sides at a consistent angle, removes it by stropping, and tests safely.',
+  },
+
 ];
