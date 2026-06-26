@@ -31,15 +31,25 @@ Your purpose:
 The guide contains 24 sections covering:
 Food & Water, Medical & First Aid, Energy, Shelter & Construction, Communications, Navigation, Security & Defense, Knowledge & Literacy, Agriculture, Animal Husbandry, NBC/EMP Threats, Disaster Playbooks, Climate & Regional, Metallurgy, Governance, Psychology & Morale, Chemistry & Materials, Textiles & Clothing, Vehicles & Transport, Power Generation (pedal/water wheel/wind/biogas/steam), Building & Structures (cob/earthbag/timber frame/defences), Medicine Making (tinctures/ORS/medicinal plants), Water Systems (rainwater harvesting/wells/gravity distribution/irrigation/purification).
 
+Using the bundled library (CRITICAL):
+- When a "REFERENCE MATERIAL" block is provided below, treat it as your most authoritative source. Base your answer on it and prefer it over your own training when they conflict.
+- When you use reference material, CITE it inline in plain text, e.g. (Where There Is No Doctor, p.412). Cite the specific source and page given in the block.
+- If the reference material does not cover the question, say so plainly and answer from general knowledge — clearly, without fabricating a citation.
+
+Accuracy and honesty:
+- NEVER invent specific drug doses, mg/kg figures, or numeric values you are unsure of. For medication dosing, point the user to the Antibiotic Dosing Calculator and Field Pharmacology Guide (Calculators & Tools) and the bundled medical books, and state the standard range only if you are confident.
+- If you do not know, or the guide does not cover it, say "I'm not certain" rather than guessing. A clear "I don't know" is safer than a confident wrong answer.
+- Do not overstate certainty on medical, structural, or chemical safety questions.
+
 Response format:
 1. Lead with a short, actionable answer (1-3 sentences). Clarity over completeness.
 2. Follow with numbered steps or bullet points if the task has multiple parts.
 3. End with a "⚠️ Warning:" line if there is a genuine safety risk.
-4. If the answer is in the guide, note: "→ See: [Section Name]" at the end.
+4. Cite bundled sources inline where used, and add "→ See: [Section Name]" for the relevant guide section.
 
 Tone: Calm, direct, authoritative. Never alarmist. Think experienced wilderness medic meets practical engineer.
 
-Safety: Always prioritize human safety. Never recommend actions that could cause serious harm. When in doubt, advise seeking professional help post-crisis.`;
+Safety: Always prioritize human safety. Never recommend actions that could cause serious harm. When professional care (doctor, dentist, surgeon) becomes reachable, say so and advise getting it. When in doubt, advise seeking professional help post-crisis.`;
 
   const EMERGENCY_SYSTEM_PROMPT = `You are Bunker Bot in EMERGENCY MODE. Someone may be in immediate danger.
 
@@ -49,6 +59,8 @@ Rules:
 - Flag life-threatening risks with ⛔ STOP — do not proceed past this warning without resolving it.
 - If the situation requires professional services (doctor, fire department), say so first.
 - No caveats, no "it depends" — give your best answer for the most common scenario.
+- If a "REFERENCE MATERIAL" block is provided, base steps on it and cite it briefly inline, e.g. (Emergency War Surgery, p.88).
+- Do NOT invent drug doses. If a dose is needed, name the drug and route and say "confirm the dose" rather than guessing a number.
 
 You cover: first aid, water purification, shelter, fire, signalling for rescue, food safety, trauma, burns, fractures, poisoning, allergic reactions, NBC threats.`;
 
@@ -78,9 +90,44 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
   window.ariaInit = function () {
     if (!toolbarBuilt) { buildToolbar(); toolbarBuilt = true; }
     loadPreferences();
+    ensureLibrarian();
     checkStatus();
     setupInputHandlers();
   };
+
+  /* ──────────────────────────────────────────
+     LIBRARY RAG — ensure librarian.js is loaded and the
+     PDF chunk index is in memory, on EVERY page (not just
+     literature.html). This is what lets Bunker Bot cite the
+     bundled library anywhere in the guide.
+  ────────────────────────────────────────── */
+  let librarianRequested = false;
+  function ensureLibrarian() {
+    if (librarianRequested) return;
+    librarianRequested = true;
+
+    if (typeof Librarian !== 'undefined') {
+      try { Librarian.loadEntries(); } catch (_) {}
+      Librarian.loadPdfChunks().catch(() => {});
+      return;
+    }
+
+    /* Derive librarian.js path from our own <script src> so it works
+       at any directory depth (root, /sections/, /pdfs/) and on file://. */
+    const tag = document.querySelector('script[src$="bunker-bot.js"]');
+    const src = tag ? tag.getAttribute('src') : 'assets/js/bunker-bot.js';
+    const libSrc = src.replace(/bunker-bot\.js(\?.*)?$/, 'librarian.js');
+
+    const s = document.createElement('script');
+    s.src = libSrc;
+    s.onload = () => {
+      if (typeof Librarian === 'undefined') return;
+      try { Librarian.loadEntries(); } catch (_) {}
+      Librarian.loadPdfChunks().catch(() => {});
+    };
+    s.onerror = () => {};
+    document.head.appendChild(s);
+  }
 
   document.addEventListener('DOMContentLoaded', () => {
     const panel = $('aria-panel');
@@ -425,11 +472,15 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
 
   function showLibraryBadge(userText) {
     if (typeof Librarian === 'undefined') return;
-    const ctx = Librarian.getContext(userText);
-    if (!ctx) return;
+    const sources = Librarian.getSources ? Librarian.getSources(userText) : [];
+    if (!sources.length) return;
     const badge = document.createElement('div');
-    badge.style.cssText = 'font-size:0.7rem;color:#3498db;margin:0.2rem 0 0.5rem;padding-left:0.5rem;';
-    badge.textContent = '📚 Using library context';
+    badge.className = 'aria-citation-badge';
+    badge.style.cssText = 'font-size:0.68rem;color:#3498db;margin:0.2rem 0 0.5rem;padding-left:0.5rem;display:flex;flex-wrap:wrap;gap:0.3rem;align-items:center;';
+    const chips = sources.map(s =>
+      `<span style="background:rgba(52,152,219,0.12);border:1px solid rgba(52,152,219,0.3);border-radius:10px;padding:1px 7px;white-space:nowrap;">${escapeHtml(s.source)} · p.${s.page}</span>`
+    ).join('');
+    badge.innerHTML = '<span title="Bunker Bot is grounding its answer in these bundled sources">📚 Sources:</span>' + chips;
     const msgs = $('aria-messages');
     if (msgs) msgs.appendChild(badge);
   }

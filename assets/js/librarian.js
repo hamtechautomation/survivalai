@@ -116,17 +116,47 @@ const Librarian = (() => {
     return (text || '').toLowerCase().match(/\b[a-z]{3,}\b/g) || [];
   }
 
-  // BM25-style: score chunks by query-term frequency
+  // ── BM25 index stats (built once, cached) ──
+  // Proper IDF weighting matters: with large literary texts (Bible,
+  // Shakespeare) in the same flat index, raw term-frequency lets common
+  // words drown out concentrated technical terms. IDF rewards rare,
+  // discriminative terms so a medical query surfaces the medical books.
+  let _idf = null, _avgdl = 1, _docTokens = null;
+  function buildStats() {
+    const N = pdfChunks.length;
+    const df = {};
+    _docTokens = new Array(N);
+    let total = 0;
+    for (let i = 0; i < N; i++) {
+      const words = tokenise(pdfChunks[i].t);
+      _docTokens[i] = words;
+      total += words.length;
+      for (const w of new Set(words)) df[w] = (df[w] || 0) + 1;
+    }
+    _avgdl = total / N || 1;
+    _idf = {};
+    for (const w in df) _idf[w] = Math.log(1 + (N - df[w] + 0.5) / (df[w] + 0.5));
+  }
+
+  // BM25 ranking over the chunk corpus
   function searchChunks(query, topK = 4) {
     if (!pdfLoaded || !pdfChunks.length) return [];
+    if (!_idf) buildStats();
     const qTerms = [...new Set(tokenise(query))];
     if (!qTerms.length) return [];
 
+    const k1 = 1.5, b = 0.75;
     const scored = pdfChunks.map((chunk, i) => {
-      const words = tokenise(chunk.t);
-      const freq  = {};
+      const words = _docTokens[i] || tokenise(chunk.t);
+      const dl = words.length || 1;
+      const freq = {};
       for (const w of words) freq[w] = (freq[w] || 0) + 1;
-      const score = qTerms.reduce((s, t) => s + (freq[t] || 0), 0);
+      let score = 0;
+      for (const t of qTerms) {
+        const f = freq[t]; if (!f) continue;
+        const idf = _idf[t] || 0;
+        score += idf * (f * (k1 + 1)) / (f + k1 * (1 - b + b * dl / _avgdl));
+      }
       return { i, score };
     });
 
@@ -168,6 +198,19 @@ const Librarian = (() => {
     return parts.join('\n\n===\n\n');
   }
 
+  // Distinct sources (with page) backing a query — for UI citation chips
+  function getSources(query, topK = 4) {
+    const seen = new Set();
+    const out = [];
+    for (const c of searchChunks(query, topK)) {
+      const key = c.s + '|' + c.p;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({ source: c.s, page: c.p });
+    }
+    return out;
+  }
+
   function isPdfIndexed() { return pdfLoaded && pdfChunks.length > 0; }
   function getPdfChunkCount() { return pdfChunks ? pdfChunks.length : 0; }
 
@@ -190,7 +233,7 @@ const Librarian = (() => {
     loadEntries, addEntry, updateEntry, removeEntry,
     exportLibrary, importLibrary,
     getNotes, saveNotes,
-    loadPdfChunks, getContext, isPdfIndexed, getPdfChunkCount,
+    loadPdfChunks, getContext, getSources, isPdfIndexed, getPdfChunkCount,
     downloadAll
   };
 })();
