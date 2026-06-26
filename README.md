@@ -282,6 +282,30 @@ On supported browsers (Chrome, Edge, Safari iOS), the guide can be installed as 
 
 ---
 
+## Verifying Your Copy
+
+After copying the folder to a USB drive or another machine, confirm nothing was
+corrupted or lost in transit:
+
+```bash
+sh verify.sh
+```
+
+This re-computes a SHA-256 for every catalogued file and checks it against
+`MANIFEST.sha256`. `✓ All N files present and unchanged.` means the copy is
+intact; anything else lists the files that are missing or altered.
+
+To regenerate the manifest after intentionally changing files:
+
+```bash
+find . -type f ! -path './.git/*' ! -path './.claude/*' ! -path './node_modules/*' \
+  ! -name '.DS_Store' ! -name 'MANIFEST.sha256' \
+  | sed 's|^\./||' | LC_ALL=C sort \
+  | while IFS= read -r f; do shasum -a 256 "$f"; done > MANIFEST.sha256
+```
+
+---
+
 ## Contributing
 
 No build system, no dependencies. To add a section:
