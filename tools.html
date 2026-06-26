@@ -441,6 +441,107 @@
   <div id="ab-warn" class="alert-box" style="margin-top:1rem"></div>
 </section>
 
+<!-- ===== TOOL 11: SURVIVAL TIMER & PRIORITIES ===== -->
+<section id="tool-11" class="tool-section">
+  <h2>⏱️ Survival Timer &amp; Priorities</h2>
+  <p class="tool-subtitle">The rule of 3s, plus countdown timers for time-critical survival tasks. Beeps when done — keep this tab open.</p>
+
+  <table class="ref-table" style="margin-bottom:1rem">
+    <thead><tr><th>You can survive roughly…</th><th>Without</th></tr></thead>
+    <tbody>
+      <tr><td>3 minutes</td><td>Air (or in icy water)</td></tr>
+      <tr><td>3 hours</td><td>Shelter in harsh weather</td></tr>
+      <tr><td>3 days</td><td>Water</td></tr>
+      <tr><td>3 weeks</td><td>Food</td></tr>
+    </tbody>
+  </table>
+
+  <div style="text-align:center;margin:1rem 0">
+    <div id="tmr-display" style="font-family:var(--mono,monospace);font-size:2.8rem;font-weight:700;color:var(--amber);letter-spacing:.05em">00:00</div>
+    <div id="tmr-label" style="font-size:.8rem;color:var(--text-2);min-height:1.2em"></div>
+  </div>
+  <div class="tool-row" style="justify-content:center;gap:.5rem;flex-wrap:wrap">
+    <button class="btn-add" onclick="tmrStartStop()" id="tmr-startbtn">▶ Start</button>
+    <button class="btn-add" onclick="tmrReset()" style="background:var(--bg-3)">⟲ Reset</button>
+  </div>
+  <div class="tool-row" style="flex-wrap:wrap;gap:.4rem;margin-top:1rem" id="tmr-presets"></div>
+  <div class="tool-row" style="margin-top:.5rem">
+    <div class="field"><label>Custom minutes</label><input type="number" id="tmr-custom" min="0" step="0.5" value="5"></div>
+    <div class="field" style="align-self:flex-end"><button class="btn-add" onclick="tmrSetCustom()">Set custom</button></div>
+  </div>
+</section>
+
+<!-- ===== TOOL 12: CELESTIAL LATITUDE FINDER ===== -->
+<section id="tool-12" class="tool-section">
+  <h2>🧭 Celestial Latitude Finder</h2>
+  <p class="tool-subtitle">Find your latitude with no GPS — from the North Star at night, or the sun at noon. Measure angles with a fist at arm's length (≈10°) or an improvised sextant.</p>
+
+  <h3 style="color:var(--amber);font-size:1rem">Method A — Polaris (Northern Hemisphere, at night)</h3>
+  <p style="font-size:.82rem;color:var(--text-2)">Your latitude ≈ the angle of Polaris (the North Star) above the northern horizon.</p>
+  <div class="tool-row">
+    <div class="field"><label>Polaris altitude (° above horizon)</label><input type="number" id="lat-polaris" min="0" max="90" step="0.5" value="45" oninput="calcLatPolaris()"></div>
+    <div class="results-box" style="flex:1"><div class="result-row"><span class="result-label">Your latitude</span><span class="result-value" id="lat-polaris-out">—</span></div></div>
+  </div>
+
+  <h3 style="color:var(--amber);font-size:1rem;margin-top:1.25rem">Method B — Noon Sun</h3>
+  <p style="font-size:.82rem;color:var(--text-2)">Measure the sun's maximum altitude (at local solar noon, its highest point). Enter the date so we can correct for the sun's tilt.</p>
+  <div class="tool-row">
+    <div class="field"><label>Noon sun altitude (°)</label><input type="number" id="lat-sun-alt" min="0" max="90" step="0.5" value="50" oninput="calcLatSun()"></div>
+    <div class="field"><label>Date</label><input type="date" id="lat-sun-date" oninput="calcLatSun()"></div>
+    <div class="field"><label>Sun was toward the…</label>
+      <select id="lat-sun-dir" onchange="calcLatSun()"><option value="S">South (you're in N hemisphere)</option><option value="N">North (you're in S hemisphere)</option></select>
+    </div>
+  </div>
+  <div class="results-box">
+    <div class="result-row"><span class="result-label">Sun declination (from date)</span><span class="result-value" id="lat-sun-dec">—</span></div>
+    <div class="result-row"><span class="result-label">Your latitude</span><span class="result-value" id="lat-sun-out">—</span></div>
+  </div>
+  <p style="font-size:.78rem;color:var(--text-3);margin-top:.5rem">→ See: Navigation &amp; Maps · bundled book: American Practical Navigator (Bowditch)</p>
+</section>
+
+<!-- ===== TOOL 13: FIREWOOD / HEATING ESTIMATOR ===== -->
+<section id="tool-13" class="tool-section">
+  <h2>🔥 Firewood &amp; Heating Estimator</h2>
+  <p class="tool-subtitle">Roughly how much firewood you need to heat a space. Planning estimate — real use varies with stove, wood, and draughts.</p>
+  <div class="tool-row">
+    <div class="field"><label>Area to heat (sq ft)</label><input type="number" id="fw-area" min="0" value="400" oninput="calcFirewood()"></div>
+    <div class="field"><label>Insulation</label>
+      <select id="fw-insul" onchange="calcFirewood()">
+        <option value="0.5">Poor (cabin, draughty)</option>
+        <option value="0.35" selected>Average</option>
+        <option value="0.2">Good (well-sealed)</option>
+      </select>
+    </div>
+    <div class="field"><label>Temperature difference inside vs out (°F)</label><input type="number" id="fw-dt" min="0" value="40" oninput="calcFirewood()"></div>
+    <div class="field"><label>Days</label><input type="number" id="fw-days" min="1" value="30" oninput="calcFirewood()"></div>
+  </div>
+  <div class="results-box">
+    <div class="result-row"><span class="result-label">Heat needed</span><span class="result-value" id="fw-btu">—</span></div>
+    <div class="result-row"><span class="result-label">Seasoned hardwood / day</span><span class="result-value" id="fw-perday">—</span></div>
+    <div class="result-row"><span class="result-label">Total for period</span><span class="result-value" id="fw-total">—</span></div>
+    <div class="result-row"><span class="result-label">Cords (approx)</span><span class="result-value" id="fw-cords">—</span></div>
+  </div>
+  <p style="font-size:.78rem;color:var(--text-3);margin-top:.5rem">Assumes seasoned hardwood (~7,000 BTU/lb usable) at ~60% stove efficiency · 1 cord ≈ 4,000 lb. Softwood: ~⅔ the heat per cord.</p>
+</section>
+
+<!-- ===== TOOL 14: CROP SPACING & SEED PLANNER ===== -->
+<section id="tool-14" class="tool-section">
+  <h2>🌱 Crop Spacing &amp; Seed Planner</h2>
+  <p class="tool-subtitle">How many plants fit a bed, and how many seeds to sow allowing for germination.</p>
+  <div class="tool-row">
+    <div class="field"><label>Bed length (ft)</label><input type="number" id="cs-len" min="0" value="8" oninput="calcCrop()"></div>
+    <div class="field"><label>Bed width (ft)</label><input type="number" id="cs-wid" min="0" value="4" oninput="calcCrop()"></div>
+    <div class="field" style="flex:2"><label>Crop</label><select id="cs-crop" onchange="calcCrop()"></select></div>
+  </div>
+  <div class="results-box">
+    <div class="result-row"><span class="result-label">Spacing</span><span class="result-value" id="cs-spacing">—</span></div>
+    <div class="result-row"><span class="result-label">Plants that fit</span><span class="result-value" id="cs-plants">—</span></div>
+    <div class="result-row"><span class="result-label">Seeds to sow (with germination margin)</span><span class="result-value" id="cs-seeds">—</span></div>
+    <div class="result-row"><span class="result-label">Approx. yield</span><span class="result-value" id="cs-yield">—</span></div>
+    <div class="result-row"><span class="result-label">Days to harvest</span><span class="result-value" id="cs-days">—</span></div>
+  </div>
+</section>
+
 <script>
 /* ===== TOOL 6: PLANTING CALENDAR ===== */
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -804,6 +905,43 @@ function calcAntibiotic(){
   warnBox.innerHTML='⚠️ '+notes.join('<br>⚠️ ');
 }
 
+/* ===== TOOL 11: SURVIVAL TIMER ===== */
+const TMR_PRESETS=[['Boil water (1:00)',60],['High-altitude boil (3:00)',180],['Bleach contact (30:00)',1800],['CPR cycle (2:00)',120],['Tourniquet reassess (15:00)',900],['ORS sip interval (5:00)',300]];
+let tmrRemaining=300, tmrTotal=300, tmrInterval=null, tmrRunning=false;
+function tmrFmt(s){const m=Math.floor(s/60),x=s%60;return `${String(m).padStart(2,'0')}:${String(x).padStart(2,'0')}`;}
+function tmrRender(){const d=document.getElementById('tmr-display');if(d)d.textContent=tmrFmt(tmrRemaining);}
+function tmrBeep(){try{const c=new (window.AudioContext||window.webkitAudioContext)();let n=0;const beep=()=>{if(n++>=4)return;const o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;o.start();g.gain.setValueAtTime(.3,c.currentTime);g.gain.exponentialRampToValueAtTime(.01,c.currentTime+.25);o.stop(c.currentTime+.25);setTimeout(beep,350);};beep();}catch(_){}}
+function tmrTick(){tmrRemaining--;tmrRender();if(tmrRemaining<=0){clearInterval(tmrInterval);tmrInterval=null;tmrRunning=false;document.getElementById('tmr-startbtn').textContent='▶ Start';document.getElementById('tmr-display').style.color='var(--green,#4b9e6a)';document.getElementById('tmr-label').textContent='✓ Done';tmrBeep();}}
+function tmrStartStop(){const btn=document.getElementById('tmr-startbtn');if(tmrRunning){clearInterval(tmrInterval);tmrInterval=null;tmrRunning=false;btn.textContent='▶ Resume';}else{if(tmrRemaining<=0)return;tmrRunning=true;btn.textContent='⏸ Pause';document.getElementById('tmr-display').style.color='var(--amber)';tmrInterval=setInterval(tmrTick,1000);}}
+function tmrReset(){clearInterval(tmrInterval);tmrInterval=null;tmrRunning=false;tmrRemaining=tmrTotal;tmrRender();document.getElementById('tmr-startbtn').textContent='▶ Start';document.getElementById('tmr-display').style.color='var(--amber)';}
+function tmrSet(sec,label){clearInterval(tmrInterval);tmrInterval=null;tmrRunning=false;tmrTotal=sec;tmrRemaining=sec;tmrRender();document.getElementById('tmr-startbtn').textContent='▶ Start';document.getElementById('tmr-display').style.color='var(--amber)';document.getElementById('tmr-label').textContent=label||'';}
+function tmrSetCustom(){const m=parseFloat(document.getElementById('tmr-custom').value)||0;tmrSet(Math.round(m*60),`Custom — ${m} min`);}
+
+/* ===== TOOL 12: CELESTIAL LATITUDE ===== */
+function calcLatPolaris(){const a=parseFloat(document.getElementById('lat-polaris').value);const o=document.getElementById('lat-polaris-out');if(isNaN(a)){o.textContent='—';return;}o.textContent=`${a.toFixed(1)}° N`;}
+function sunDeclination(date){const start=new Date(date.getFullYear(),0,0);const day=Math.floor((date-start)/86400000);return 23.44*Math.sin(2*Math.PI/365*(day-81));}
+function calcLatSun(){const alt=parseFloat(document.getElementById('lat-sun-alt').value);const dStr=document.getElementById('lat-sun-date').value;const dir=document.getElementById('lat-sun-dir').value;const decEl=document.getElementById('lat-sun-dec');const out=document.getElementById('lat-sun-out');if(isNaN(alt)||!dStr){decEl.textContent='—';out.textContent='—';return;}const dec=sunDeclination(new Date(dStr+'T12:00'));decEl.textContent=`${dec>=0?'+':''}${dec.toFixed(1)}°`;let lat;if(dir==='S'){lat=90-alt+dec;}else{lat=-(90-alt-dec);}out.textContent=`${Math.abs(lat).toFixed(1)}° ${lat>=0?'N':'S'}`;}
+
+/* ===== TOOL 13: FIREWOOD ===== */
+function calcFirewood(){const area=parseFloat(document.getElementById('fw-area').value)||0;const f=parseFloat(document.getElementById('fw-insul').value);const dt=parseFloat(document.getElementById('fw-dt').value)||0;const days=parseFloat(document.getElementById('fw-days').value)||0;const btuHr=area*dt*f;const btuDay=btuHr*24;const lbDay=btuDay/(7000*0.6);const totalLb=lbDay*days;const cords=totalLb/4000;const set=(id,v)=>document.getElementById(id).textContent=v;set('fw-btu',`${Math.round(btuHr).toLocaleString()} BTU/hr · ${(btuDay/1e6).toFixed(2)}M BTU/day`);set('fw-perday',`${Math.round(lbDay)} lb/day`);set('fw-total',`${Math.round(totalLb).toLocaleString()} lb`);set('fw-cords',`${cords.toFixed(2)} cord${cords>=1.5?'s':''}`);}
+
+/* ===== TOOL 14: CROP SPACING ===== */
+const BED_CROPS=[
+ {name:'Tomato',sp:24,germ:1.3,yield:'8–10 lb/plant',days:75},
+ {name:'Potato',sp:12,germ:1.1,yield:'2–3 lb/plant',days:90},
+ {name:'Bush bean',sp:4,germ:1.3,yield:'½ lb/plant',days:55},
+ {name:'Carrot',sp:3,germ:1.6,yield:'1 root/plant',days:70},
+ {name:'Lettuce',sp:8,germ:1.4,yield:'1 head/plant',days:50},
+ {name:'Onion',sp:4,germ:1.4,yield:'1 bulb/plant',days:100},
+ {name:'Cabbage',sp:18,germ:1.3,yield:'1 head (2–4 lb)',days:80},
+ {name:'Squash/Zucchini',sp:36,germ:1.4,yield:'5–10 lb/plant',days:55},
+ {name:'Corn',sp:12,germ:1.4,yield:'1–2 ears/plant',days:80},
+ {name:'Beetroot',sp:4,germ:1.5,yield:'1 root/plant',days:60},
+ {name:'Pea',sp:3,germ:1.4,yield:'¼ lb/plant',days:65},
+ {name:'Kale',sp:18,germ:1.3,yield:'cut-and-come',days:60},
+];
+function calcCrop(){const L=parseFloat(document.getElementById('cs-len').value)||0;const W=parseFloat(document.getElementById('cs-wid').value)||0;const c=BED_CROPS[+document.getElementById('cs-crop').value||0];const set=(id,v)=>document.getElementById(id).textContent=v;const areaIn=L*12*W*12;const perPlant=c.sp*c.sp;const plants=areaIn>0?Math.floor(areaIn/perPlant):0;set('cs-spacing',`${c.sp}" between plants`);set('cs-plants',`${plants.toLocaleString()} plants`);set('cs-seeds',`${Math.ceil(plants*c.germ).toLocaleString()} seeds`);set('cs-yield',`${plants?c.yield:'—'}`);set('cs-days',`~${c.days} days`);}
+
 window.addEventListener('DOMContentLoaded',()=>{
   filterMeds();
   const makeOpts=()=>MEDS.map(m=>`<option value="${m.name}">${m.name}</option>`).join('');
@@ -813,6 +951,15 @@ window.addEventListener('DOMContentLoaded',()=>{
   if(d2)d2.innerHTML=`<option value="">Select…</option>`+makeOpts();
   const abd=document.getElementById('ab-drug');
   if(abd){ abd.innerHTML=ANTIBIOTICS.map(a=>`<option value="${a.id}">${a.name}</option>`).join(''); onAbDrugChange(); }
+  /* Tool 11 presets */
+  const pe=document.getElementById('tmr-presets');
+  if(pe){pe.innerHTML=TMR_PRESETS.map(p=>`<button class="btn-add" style="font-size:.78rem;padding:.3rem .6rem" onclick="tmrSet(${p[1]},'${p[0].replace(/'/g,'')}')">${p[0]}</button>`).join('');tmrRender();}
+  /* Tool 12 default date */
+  const ld=document.getElementById('lat-sun-date');if(ld){ld.value=new Date().toISOString().slice(0,10);calcLatPolaris();calcLatSun();}
+  /* Tool 13 */
+  if(document.getElementById('fw-area'))calcFirewood();
+  /* Tool 14 crops */
+  const cc=document.getElementById('cs-crop');if(cc){cc.innerHTML=BED_CROPS.map((c,i)=>`<option value="${i}">${c.name}</option>`).join('');calcCrop();}
 });
 </script>
 
