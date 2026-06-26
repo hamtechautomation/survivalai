@@ -293,10 +293,11 @@
     <!-- Filters -->
     <div class="lib-filters">
       <span style="font-size:.75rem;color:var(--text-3);margin-right:.2rem">Filter:</span>
-      <button class="filter-btn active" data-filter="all"   onclick="setFilter('all')">All 14</button>
+      <button class="filter-btn active" data-filter="all"   onclick="setFilter('all')">All 28</button>
       <button class="filter-btn"       data-filter="cached" onclick="setFilter('cached')">💾 Saved offline</button>
       <button class="filter-btn"       data-filter="medical" onclick="setFilter('medical')">Medical</button>
       <button class="filter-btn"       data-filter="military" onclick="setFilter('military')">Military</button>
+      <button class="filter-btn"       data-filter="literature" onclick="setFilter('literature')">Literature</button>
       <button class="filter-btn"       data-filter="indexed" onclick="setFilter('indexed')">🔍 AI-searchable</button>
     </div>
 
@@ -653,6 +654,7 @@
       if (activeFilter === 'indexed') return p.indexed;
       if (activeFilter === 'medical') return p.tags.includes('medical');
       if (activeFilter === 'military')return p.tags.includes('military');
+      if (activeFilter === 'literature') return p.tags.includes('literature');
       return true;
     });
 
