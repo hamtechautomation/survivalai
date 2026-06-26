@@ -298,6 +298,7 @@
       <button class="filter-btn"       data-filter="medical" onclick="setFilter('medical')">Medical</button>
       <button class="filter-btn"       data-filter="military" onclick="setFilter('military')">Military</button>
       <button class="filter-btn"       data-filter="literature" onclick="setFilter('literature')">Literature</button>
+      <button class="filter-btn"       data-filter="reference" onclick="setFilter('reference')">Reference</button>
       <button class="filter-btn"       data-filter="indexed" onclick="setFilter('indexed')">🔍 AI-searchable</button>
     </div>
 
@@ -474,7 +475,7 @@
       size:    '17 MB',
       license: 'Public Domain', licenseClass: 'badge-pd',
       indexed: true,
-      tags:    ['food','survival'],
+      tags:    ['food','reference','survival'],
     },
     {
       file:    'book-for-midwives.pdf',
@@ -504,7 +505,7 @@
       size:    '1.7 MB',
       license: 'Public Domain', licenseClass: 'badge-pd',
       indexed: true,
-      tags:    ['food','plants','survival'],
+      tags:    ['food','plants','reference','survival'],
     },
     {
       file:    'henleys-formulas.pdf',
@@ -524,7 +525,7 @@
       size:    '37 MB',
       license: 'Public Domain', licenseClass: 'badge-pd',
       indexed: true,
-      tags:    ['navigation','survival'],
+      tags:    ['navigation','reference','survival'],
     },
     {
       file:    'sf-medical-handbook.pdf',
@@ -564,7 +565,7 @@
       size:    '35 MB',
       license: 'Public Domain', licenseClass: 'badge-pd',
       indexed: true,
-      tags:    ['food','survival'],
+      tags:    ['food','reference','survival'],
     },
     {
       file:    'kjv-bible.pdf',
@@ -574,7 +575,7 @@
       size:    '9.2 MB',
       license: 'Public Domain', licenseClass: 'badge-pd',
       indexed: true,
-      tags:    ['literature','reference'],
+      tags:    ['literature'],
     },
     {
       file:    'shakespeare-complete.pdf',
@@ -655,6 +656,7 @@
       if (activeFilter === 'medical') return p.tags.includes('medical');
       if (activeFilter === 'military')return p.tags.includes('military');
       if (activeFilter === 'literature') return p.tags.includes('literature');
+      if (activeFilter === 'reference') return p.tags.includes('reference');
       return true;
     });
 
