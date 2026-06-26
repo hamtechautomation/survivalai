@@ -306,6 +306,42 @@ find . -type f ! -path './.git/*' ! -path './.claude/*' ! -path './node_modules/
 
 ---
 
+## Sharing It Widely (Censorship-Resistant Distribution)
+
+This guide is meant to spread freely and survive takedowns. Two peer-to-peer
+methods let it propagate with no central server to block:
+
+### BitTorrent
+
+```bash
+sh make-torrent.sh
+```
+
+This builds a `.torrent` of the whole folder (needs `mktorrent` or
+Transmission's `transmission-create`). Open the resulting file in any
+BitTorrent client and **seed** it; then share the `.torrent` file or its
+magnet link anywhere. As long as one person seeds, the entire archive —
+including the PDF library — stays downloadable by anyone. Nothing is published
+until you choose to seed.
+
+### IPFS
+
+If you run [IPFS](https://ipfs.tech):
+
+```bash
+ipfs add -r --quieter .
+```
+
+The final hash it prints is a permanent content address. Anyone can fetch the
+whole guide with `ipfs get <hash>`, or view it through a public gateway at
+`https://ipfs.io/ipfs/<hash>`. The content is addressed by its hash, so it
+can't be silently altered, and it stays reachable as long as any node pins it.
+
+Both methods pair well with the `MANIFEST.sha256` check above: recipients can
+verify what they received is byte-for-byte the original.
+
+---
+
 ## Contributing
 
 No build system, no dependencies. To add a section:
