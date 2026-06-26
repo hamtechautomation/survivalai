@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Expand the guide with the entire offline knowledge of humanity — all of Wikipedia, all of Project Gutenberg, medical encyclopedias, repair guides and more, via Kiwix ZIM files. Download once, read forever offline.">
+  <title>Expansion Library — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☁</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .exp-lead { background: var(--bg-2); border: 1px solid var(--border); border-left: 4px solid var(--amber-dim); border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
+    .exp-lead strong { color: var(--amber-light); }
+    .step-row { display:grid; grid-template-columns: 2rem 1fr; gap:.6rem; margin:.5rem 0; align-items:start; }
+    .step-num { width:1.8rem;height:1.8rem;border-radius:50%;background:var(--amber-dim);color:var(--amber-light);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.85rem }
+    .zim-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:.85rem; margin:1rem 0; }
+    .zim-card { background:var(--bg-2); border:1px solid var(--border); border-radius:8px; padding:.9rem 1rem; display:flex; flex-direction:column; gap:.5rem; }
+    .zim-card:hover { border-color:var(--border-hi); }
+    .zim-top { display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; }
+    .zim-name { font-weight:700; color:var(--text-0); font-size:.95rem; }
+    .zim-size { font-family:var(--mono,monospace); font-size:.72rem; color:var(--amber); white-space:nowrap; border:1px solid var(--amber-dim); border-radius:10px; padding:1px 8px; }
+    .zim-desc { font-size:.8rem; color:var(--text-2); line-height:1.5; flex:1; }
+    .zim-card a.dl { display:inline-block; text-align:center; font-size:.8rem; font-weight:600; text-decoration:none; color:var(--amber); background:rgba(201,169,78,.1); border:1px solid var(--amber-dim); border-radius:5px; padding:.35rem .7rem; transition:background .15s; }
+    .zim-card a.dl:hover { background:rgba(201,169,78,.22); }
+    .zim-file { font-family:var(--mono,monospace); font-size:.68rem; color:var(--text-3); }
+    .tier-tag { font-size:.65rem; text-transform:uppercase; letter-spacing:.06em; font-weight:700; padding:1px 7px; border-radius:3px; }
+    .tier-pen { background:rgba(75,158,106,.15); color:#6ecca8; border:1px solid rgba(75,158,106,.3); }
+    .tier-big { background:rgba(200,122,64,.15); color:var(--orange,#c87a40); border:1px solid rgba(200,122,64,.3); }
+    .sizing-table td:first-child { font-weight:700; color:var(--text-0); white-space:nowrap; }
+  </style>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Expansion Library</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>Expansion Library — All of Human Knowledge, Offline</h1>
+    <p class="section-desc">This guide is the portable core — under 600 MB, fits any pen drive. When you have internet, you can pull down the rest of recorded knowledge to read <em>forever offline</em>: the whole of Wikipedia, all of Project Gutenberg, medical encyclopedias, repair manuals, dictionaries and more — using free, open <strong>ZIM</strong> files and the <strong>Kiwix</strong> reader.</p>
+  </div>
+
+  <div class="exp-lead">
+    <strong>The idea:</strong> keep the small, hand-curated survival guide on your drive always. Then, while the grid is up, download the giant reference archives below. Once they're on your drive, they work with no internet, forever — exactly like this guide. A 256 GB drive or a cheap external SSD can hold <em>all of Wikipedia with images and all of Project Gutenberg combined</em>.
+  </div>
+
+  <h2>How it works — 3 steps</h2>
+  <div class="step-row"><div class="step-num">1</div><div><strong>Install Kiwix</strong> — the free offline reader for ZIM files. <a href="https://kiwix.org/en/download/" target="_blank" rel="noopener">kiwix.org/download</a> — Windows, macOS, Linux, Android, iOS, or Kiwix-Serve to share over a local network. <em>Install it now, while you have internet.</em></div></div>
+  <div class="step-row"><div class="step-num">2</div><div><strong>Download the ZIM files</strong> you want from the cards below (each is one self-contained file). Save them to your drive alongside this guide.</div></div>
+  <div class="step-row"><div class="step-num">3</div><div><strong>Open them in Kiwix</strong> — point Kiwix at the .zim files and browse, search, and read offline. No account, no internet, no expiry.</div></div>
+
+  <h2>Build a Survival Drive — what fits</h2>
+  <table class="ref-table sizing-table">
+    <thead><tr><th>Drive</th><th>What you can carry</th></tr></thead>
+    <tbody>
+      <tr><td>This guide only</td><td>~0.6 GB — the curated survival core (any USB stick ever made)</td></tr>
+      <tr><td>32 GB stick</td><td>Guide + Medical Wikipedia + Simple Wikipedia + Wikivoyage + iFixit + a Gutenberg subset</td></tr>
+      <tr><td>128 GB stick</td><td>Add full Project Gutenberg (every public-domain book) + Wikipedia "nopic"</td></tr>
+      <tr><td>256 GB+ / SSD</td><td>Add full Wikipedia <em>with images</em> — essentially the whole library of humanity in your pocket</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Pen-Drive Essentials <span class="tier-tag tier-pen">small &amp; high-value</span></h2>
+  <p class="tool-subtitle">The highest survival-value archives that fit on a modest drive.</p>
+  <div class="zim-grid" id="tier1"></div>
+
+  <h2>The Big Archives <span class="tier-tag tier-big">needs a large drive / SSD</span></h2>
+  <p class="tool-subtitle">The complete sets. Sizes are approximate and grow over time — pick the flavour that fits your drive.</p>
+  <div class="zim-grid" id="tier2"></div>
+
+  <div class="callout callout-tip" style="margin-top:1.5rem">
+    <span class="callout-icon">💡</span>
+    <div class="callout-content">
+      <strong>Tip:</strong> Wikipedia comes in three sizes — <strong>maxi</strong> (full, with images), <strong>nopic</strong> (full text, no images — ~75% smaller), and <strong>mini</strong> (article intros only — ~95% smaller). Pick by how much room you have. The download links below open the official Kiwix directory where you choose the flavour and the latest date.
+    </div>
+  </div>
+
+  <h2>Scripted download (optional)</h2>
+  <p style="font-size:.85rem;color:var(--text-2)">Prefer the command line? <code>get-knowledge.sh</code> in the repo downloads a chosen ZIM with <code>wget</code>/<code>curl</code> and resumes if interrupted — handy for the multi-gigabyte files. Edit the URL inside it to the file you want from the directories below.</p>
+
+  <p style="font-size:.78rem;color:var(--text-3);margin-top:1.5rem">ZIM files and Kiwix are produced by the <a href="https://kiwix.org" target="_blank" rel="noopener">Kiwix</a> non-profit and are free to use and share. Wikipedia content is CC BY-SA; Project Gutenberg texts are public domain. Browse the full catalogue at <a href="https://library.kiwix.org" target="_blank" rel="noopener">library.kiwix.org</a>.</p>
+
+  <nav class="section-pagination no-print" aria-label="Section navigation">
+    <a href="literature.html" class="pagination-btn pagination-prev">← Reference Library</a>
+    <a href="index.html" class="pagination-btn pagination-home">Home</a>
+    <a href="pdfs/index.html" class="pagination-btn pagination-next">Bundled PDFs →</a>
+  </nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">☁</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're on the Expansion Library. Ask me which ZIM archives are worth downloading for your situation, how big they are, or how to set up Kiwix.</p><p class="aria-note">⚠️ Requires Ollama or Claude API. <a href="ai-setup.html">Setup →</a></p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+
+<script>
+/* Curated ZIM archives. Links point to the official Kiwix download directories
+   (durable — dated filenames inside change monthly; the directory always lists
+   the current one). file = the filename pattern to look for. */
+const TIER1=[
+ {name:'Medical Wikipedia (WikiMed)',size:'~1–2 GB',desc:'73,000+ medical & health articles from Wikipedia’s medicine project. The single most valuable offline reference for a survival setting.',url:'https://download.kiwix.org/zim/wikipedia/',file:'mdwiki_en_all_maxi_*.zim'},
+ {name:'Simple English Wikipedia',size:'~1 GB',desc:'The full encyclopedia written in plain, clear language — most of Wikipedia’s breadth at a fraction of the size. Great first pick.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_simple_all_maxi_*.zim'},
+ {name:'iFixit Repair Guides',size:'~1 GB',desc:'Step-by-step repair manuals for tools, electronics, appliances and vehicles — keep your gear running.',url:'https://download.kiwix.org/zim/ifixit/',file:'ifixit_en_all_*.zim'},
+ {name:'Wikivoyage',size:'~0.3 GB',desc:'Worldwide travel & regional guide — terrain, climate, getting around, local hazards by region.',url:'https://download.kiwix.org/zim/wikivoyage/',file:'wikivoyage_en_all_maxi_*.zim'},
+ {name:'Wikibooks',size:'~0.3–1 GB',desc:'Open textbooks and how-to manuals: cookbooks, first aid, crafts, science, languages.',url:'https://download.kiwix.org/zim/wikibooks/',file:'wikibooks_en_all_maxi_*.zim'},
+ {name:'Wiktionary (Dictionary)',size:'~1–3 GB',desc:'Comprehensive English dictionary and thesaurus — definitions, etymology, usage.',url:'https://download.kiwix.org/zim/wiktionary/',file:'wiktionary_en_all_maxi_*.zim'},
+ {name:'Energypedia / Appropriate Tech',size:'~0.2 GB',desc:'Practical off-grid energy, water and sanitation knowledge for low-resource settings.',url:'https://download.kiwix.org/zim/other/',file:'energypedia_en_all_maxi_*.zim'},
+ {name:'Khan Academy / Wikiversity',size:'varies',desc:'Education from scratch — maths, science, and skills for teaching children and rebuilding literacy.',url:'https://download.kiwix.org/zim/',file:'(browse: wikiversity / khanacademy)'},
+];
+const TIER2=[
+ {name:'Project Gutenberg — full',size:'~tens of GB',desc:'Every public-domain book in the Gutenberg library — 70,000+ complete works of literature, reference, history and science.',url:'https://download.kiwix.org/zim/gutenberg/',file:'gutenberg_en_all_*.zim'},
+ {name:'Wikipedia — full (maxi, with images)',size:'~100 GB',desc:'The entire English Wikipedia, ~6.8M articles with images. The whole encyclopedia, offline.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_all_maxi_*.zim'},
+ {name:'Wikipedia — full (nopic)',size:'~55 GB',desc:'Every Wikipedia article, full text, no images — ~75% smaller than maxi. Best size/coverage balance.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_all_nopic_*.zim'},
+ {name:'Wikipedia — mini (intros)',size:'~10 GB',desc:'The introduction of every article — a quick-lookup snapshot of all of Wikipedia in modest space.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_all_mini_*.zim'},
+ {name:'Wikisource',size:'~5–15 GB',desc:'Original source texts and historical documents — laws, treaties, classics, primary records.',url:'https://download.kiwix.org/zim/wikisource/',file:'wikisource_en_all_maxi_*.zim'},
+ {name:'Stack Exchange (tech Q&A)',size:'varies',desc:'Crowd-sourced answers — electronics, gardening, DIY, survival, programming and more.',url:'https://download.kiwix.org/zim/stack_exchange/',file:'(browse by topic)'},
+];
+function card(z){
+  return `<div class="zim-card">
+    <div class="zim-top"><span class="zim-name">${z.name}</span><span class="zim-size">${z.size}</span></div>
+    <div class="zim-desc">${z.desc}</div>
+    <div class="zim-file">file: ${z.file}</div>
+    <a class="dl" href="${z.url}" target="_blank" rel="noopener">⬇ Download from Kiwix →</a>
+  </div>`;
+}
+document.getElementById('tier1').innerHTML=TIER1.map(card).join('');
+document.getElementById('tier2').innerHTML=TIER2.map(card).join('');
+</script>
+<script src="assets/js/search.js"></script>
+<script src="assets/js/bunker-bot.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

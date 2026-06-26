@@ -2187,6 +2187,24 @@
       ]
     },
     {
+      "id": "expansion",
+      "title": "Expansion Library — Wikipedia & Gutenberg Offline",
+      "section": "expansion",
+      "sectionLabel": "Expansion Library",
+      "file": "expansion.html",
+      "anchor": "",
+      "content": "expansion library kiwix zim wikipedia offline project gutenberg download all human knowledge medical wikipedia wikimed simple english wiktionary ifixit wikivoyage wikibooks wikisource encyclopedia pen drive offline reader",
+      "tags": [
+        "kiwix",
+        "zim",
+        "wikipedia",
+        "gutenberg",
+        "offline",
+        "expansion",
+        "download"
+      ]
+    },
+    {
       "id": "disasters-overview",
       "title": "Disaster Playbooks Overview",
       "section": "disasters",
