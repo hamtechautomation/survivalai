@@ -44,6 +44,9 @@
   </div>
 
   <div class="map-controls">
+    <label style="font-size:.8rem;color:var(--text-2)">Region
+      <select id="region-select" class="btn btn-sm btn-outline" style="padding:.3rem .5rem"></select>
+    </label>
     <button class="btn btn-sm btn-primary" id="btn-locate">📍 Locate me (GPS)</button>
     <button class="btn btn-sm btn-outline" id="btn-home">Reset view</button>
     <select id="map-flavor" class="btn btn-sm btn-outline" style="padding:.3rem .5rem">
@@ -52,7 +55,33 @@
       <option value="grayscale">Grayscale</option>
       <option value="white">Minimal</option>
     </select>
+    <button class="btn btn-sm btn-ghost" id="btn-add-region">＋ Add any region</button>
     <span id="map-status">Loading map…</span>
+  </div>
+
+  <div id="add-region-panel" style="display:none; background:var(--bg-2); border:1px solid var(--border); border-radius:8px; padding:.85rem 1rem; margin-bottom:.75rem; font-size:.85rem">
+    <p style="margin:0 0 .6rem"><strong>Download a map of anywhere.</strong> Pan/zoom the map to the area you want (turn on “live world” to roam the planet online), then grab the ready-to-run command.</p>
+    <div class="map-controls" style="margin:.4rem 0">
+      <label style="font-size:.8rem;color:var(--text-2)"><input type="checkbox" id="live-world"> Browse the live world map (needs internet)</label>
+    </div>
+    <div class="map-controls" style="margin:.4rem 0; align-items:flex-end">
+      <label style="font-size:.78rem;color:var(--text-2)">Name<br><input id="ar-name" value="my-region" style="background:var(--bg-3);border:1px solid var(--border-hi);color:var(--text-0);border-radius:4px;padding:.3rem .5rem;width:9rem"></label>
+      <label style="font-size:.78rem;color:var(--text-2)">Detail<br>
+        <select id="ar-zoom" class="btn btn-sm btn-outline" style="padding:.3rem .5rem">
+          <option value="11">Towns (11)</option>
+          <option value="12" selected>Roads (12)</option>
+          <option value="13">Detailed (13)</option>
+          <option value="14">Streets (14)</option>
+          <option value="15">Buildings (15)</option>
+        </select>
+      </label>
+      <button class="btn btn-sm btn-primary" id="ar-use-view">Use current map view</button>
+    </div>
+    <p style="margin:.5rem 0 .3rem;color:var(--text-3);font-size:.78rem">Run this in the guide's folder, then reload — the region joins the picker above:</p>
+    <div style="display:flex; gap:.5rem; align-items:stretch">
+      <code id="ar-command" style="flex:1; background:var(--bg-0); border:1px solid var(--border-hi); border-radius:4px; padding:.45rem .6rem; font-size:.78rem; overflow-x:auto; white-space:nowrap">sh extract-map.sh my-region … (set the view, then “Use current map view”)</code>
+      <button class="btn btn-sm btn-outline" id="ar-copy">Copy</button>
+    </div>
   </div>
 
   <div class="map-wrap">
@@ -106,57 +135,121 @@
 <script>
 (function () {
   'use strict';
-  var PMTILES = 'maps/ne-england.pmtiles';
-  var HOME = [54.2, -1.6], HOMEZOOM = 7;
-  var statusEl = document.getElementById('map-status');
-  var missingEl = document.getElementById('map-missing');
+  var $ = function (id) { return document.getElementById(id); };
+  var statusEl = $('map-status'), missingEl = $('map-missing');
+  var DEFAULT_HOME = [54.2, -1.6], DEFAULT_ZOOM = 7;
+  var home = DEFAULT_HOME.slice(), homeZoom = DEFAULT_ZOOM;
 
-  // Leaflet default marker icons (vendored)
   if (window.L) L.Icon.Default.imagePath = 'assets/vendor/maps/images/';
-
-  var map = L.map('map', { zoomControl: true, attributionControl: true }).setView(HOME, HOMEZOOM);
+  var map = L.map('map', { zoomControl: true, attributionControl: true }).setView(home, homeZoom);
   map.attributionControl.setPrefix('');
 
-  var pmInstance = null;   // shared in-memory PMTiles archive
-  var layer = null;
-  function buildLayer(theme) {
+  var currentSource = null;   // a PMTiles instance (local, in-memory) OR a URL string (live world)
+  var layer = null, theme = 'light';
+  function buildLayer() {
+    if (!currentSource) return;
     if (layer) { map.removeLayer(layer); layer = null; }
     layer = protomapsL.leafletLayer({
-      url: pmInstance,     // a PMTiles instance, not a URL — served from memory
-      theme: theme || 'light',
+      url: currentSource,
+      theme: theme,
       lang: 'en',
       attribution: '© <a href="https://openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
     });
     layer.addTo(map);
   }
 
-  /* Load the WHOLE regional .pmtiles into memory with one plain GET, then read
-     tiles from the buffer. No HTTP range/byte-serving needed — so it works on
-     the most minimal static server (python -m http.server, a Raspberry Pi…). */
-  statusEl.textContent = 'Loading map data…';
-  fetch(PMTILES)
-    .then(function (r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.arrayBuffer();
-    })
-    .then(function (buf) {
-      var file = new File([buf], 'region.pmtiles');
-      pmInstance = new pmtiles.PMTiles(new pmtiles.FileSource(file));
-      buildLayer('light');
-      statusEl.textContent = 'Map ready (' + Math.round(buf.byteLength / 1048576) + ' MB loaded) — drag to pan, scroll to zoom.';
-    })
-    .catch(function () {
-      missingEl.classList.add('show');
-      statusEl.textContent = 'Map file not found — see the panel.';
+  /* Load a local region: one plain GET of the whole .pmtiles into memory, then
+     read tiles from the buffer — needs NO HTTP byte-serving, so it works on the
+     most minimal static server (python -m http.server, a Raspberry Pi…). */
+  function loadLocalRegion(region) {
+    missingEl.classList.remove('show');
+    statusEl.textContent = 'Loading ' + region.name + '…';
+    fetch('maps/' + region.file)
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.arrayBuffer(); })
+      .then(function (buf) {
+        currentSource = new pmtiles.PMTiles(new pmtiles.FileSource(new File([buf], region.file)));
+        buildLayer();
+        if (region.center) { home = region.center; homeZoom = region.zoom || 8; map.setView(home, homeZoom); }
+        statusEl.textContent = region.name + ' ready (' + Math.round(buf.byteLength / 1048576) + ' MB).';
+      })
+      .catch(function () {
+        missingEl.classList.add('show');
+        statusEl.textContent = 'Map file maps/' + region.file + ' not found — see the panel.';
+      });
+  }
+
+  /* ── Region picker (from maps/regions.json) ── */
+  var regions = [];
+  fetch('maps/regions.json')
+    .then(function (r) { return r.ok ? r.json() : { regions: [] }; })
+    .catch(function () { return { regions: [] }; })
+    .then(function (data) {
+      regions = (data && data.regions) || [];
+      if (!regions.length) regions = [{ name: 'Northern England & Yorkshire', file: 'ne-england.pmtiles', center: DEFAULT_HOME, zoom: DEFAULT_ZOOM }];
+      var sel = $('region-select');
+      sel.innerHTML = regions.map(function (rg, i) { return '<option value="' + i + '">' + rg.name + '</option>'; }).join('');
+      sel.addEventListener('change', function () {
+        $('live-world').checked = false;
+        loadLocalRegion(regions[+sel.value]);
+      });
+      loadLocalRegion(regions[0]);
     });
 
-  document.getElementById('map-flavor').addEventListener('change', function (e) {
-    if (layer && pmInstance) buildLayer(e.target.value);
+  /* ── Live world (online) — browse the global map to find any place ── */
+  function findLatestPlanet() {
+    var tries = [];
+    for (var i = 0; i <= 12; i++) {
+      var d = new Date(Date.now() - i * 86400000);
+      tries.push(d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2));
+    }
+    return tries.reduce(function (chain, ymd) {
+      return chain.then(function (found) {
+        if (found) return found;
+        var url = 'https://build.protomaps.com/' + ymd + '.pmtiles';
+        return fetch(url, { method: 'HEAD' }).then(function (r) { return r.ok ? url : null; }).catch(function () { return null; });
+      });
+    }, Promise.resolve(null));
+  }
+  $('live-world').addEventListener('change', function (e) {
+    if (!e.target.checked) { loadLocalRegion(regions[+$('region-select').value] || regions[0]); return; }
+    statusEl.textContent = 'Finding the global map (needs internet)…';
+    findLatestPlanet().then(function (url) {
+      if (!url) { statusEl.textContent = 'Could not reach the global map server (offline?).'; e.target.checked = false; return; }
+      currentSource = url;            // remote URL → range requests (online only)
+      missingEl.classList.remove('show');
+      buildLayer();
+      statusEl.textContent = 'Live world map — pan anywhere, then “Use current map view” to grab a region.';
+    });
   });
-  document.getElementById('btn-home').addEventListener('click', function () { map.setView(HOME, HOMEZOOM); });
+
+  /* ── Add-region panel: build the extract-map.sh command from the current view ── */
+  $('btn-add-region').addEventListener('click', function () {
+    var p = $('add-region-panel');
+    p.style.display = p.style.display === 'none' ? '' : 'none';
+  });
+  function refreshCommand() {
+    var b = map.getBounds();
+    var name = ($('ar-name').value || 'my-region').trim().replace(/[^a-z0-9_-]/gi, '-');
+    var z = $('ar-zoom').value;
+    var f = function (n) { return n.toFixed(4); };
+    $('ar-command').textContent = 'sh extract-map.sh ' + name + ' ' +
+      f(b.getWest()) + ' ' + f(b.getSouth()) + ' ' + f(b.getEast()) + ' ' + f(b.getNorth()) + ' ' + z;
+  }
+  $('ar-use-view').addEventListener('click', refreshCommand);
+  $('ar-name').addEventListener('input', function () { if ($('ar-command').textContent.indexOf('extract-map') === 0) refreshCommand(); });
+  $('ar-zoom').addEventListener('change', function () { if ($('ar-command').textContent.indexOf('extract-map') === 0) refreshCommand(); });
+  $('ar-copy').addEventListener('click', function () {
+    navigator.clipboard.writeText($('ar-command').textContent).then(function () {
+      var btn = $('ar-copy'); var t = btn.textContent; btn.textContent = '✓ Copied'; setTimeout(function () { btn.textContent = t; }, 1500);
+    }).catch(function () {});
+  });
+
+  /* ── Theme, reset, GPS ── */
+  $('map-flavor').addEventListener('change', function (e) { theme = e.target.value; buildLayer(); });
+  $('btn-home').addEventListener('click', function () { map.setView(home, homeZoom); });
 
   var youMarker = null;
-  document.getElementById('btn-locate').addEventListener('click', function () {
+  $('btn-locate').addEventListener('click', function () {
     if (!navigator.geolocation) { statusEl.textContent = 'No GPS available on this device.'; return; }
     statusEl.textContent = 'Getting GPS fix…';
     navigator.geolocation.getCurrentPosition(function (pos) {

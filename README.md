@@ -20,12 +20,13 @@ A comprehensive, dependency-free survival reference built for the grid-down scen
 Bunker Bot connects to [Ollama](https://ollama.ai) running on your local machine. It is completely optional — the guide is fully usable without it. When Ollama is running, click the **Bunker Bot** button on any page to open the chat panel.
 
 Bunker Bot features:
-- Model selector (switch between installed models)
-- Temperature slider (focused ↔ creative)
-- Token counter
+- **Grounded in the bundled library** — answers are retrieved from the 28 bundled
+  PDFs (BM25 search over ~14,000 text chunks) and cited inline with source +
+  page, shown as chips under each answer. Works on every page.
+- Local (Ollama) **or** cloud (Claude API) — toggle in the panel
+- Model selector, temperature slider, token counter
 - Emergency mode (direct, step-by-step answers with no hedging)
-- Copy last response / Export full chat
-- Streaming responses with stop button
+- Copy last response / Export full chat; streaming responses with a stop button
 
 ### macOS / Linux
 
@@ -93,20 +94,23 @@ To set `OLLAMA_ORIGINS` permanently: System Properties → Environment Variables
 
 ## Content Overview
 
-### 24 Content Sections
+### 27 Content Sections
 
 | Section | Key Topics |
 |---------|-----------|
-| Food & Water | Purification, preservation, foraging, sanitation |
-| Medical & First Aid | Trauma, wound care, medication reference, improvised splints |
+| Food & Water | Purification, preservation, foraging, passive fishing, sanitation |
+| Medical & First Aid | Trauma, wound care, meds, rabies, tetanus, anaphylaxis, eye injuries |
 | Energy | Solar sizing, battery banks, hand tools, fuel storage |
 | Shelter & Construction | Expedient shelter, insulation, earthworks, roofing |
 | Communications | Ham radio, Morse code, signal mirrors, frequency reference |
 | Navigation & Maps | Celestial navigation, star charts, map reading, dead reckoning |
 | Security & Defense | Physical hardening, bug-out decision tree, threat assessment |
 | Knowledge & Literacy | Education continuity, skill transfer, library curation |
+| First Principles | Periodic table, physics/chemistry, key equations, the invention method |
 | Agriculture | Seed saving, planting calendars, soil health, crop rotation |
-| Animal Husbandry | Chickens, goats, rabbits, bees, veterinary basics |
+| Animal Husbandry | Chickens, goats, rabbits, bees, housing and feeding |
+| Veterinary Care | Vital signs, diseases by species, parasites, birthing, biosecurity |
+| Pregnancy & Infant Care | Prenatal, labour, birth danger signs, newborn & infant care |
 | NBC / EMP Threats | Radiation exposure limits, decontamination, Faraday cages |
 | Disaster Playbooks | Hurricane, earthquake, wildfire, pandemic, nuclear event |
 | Climate & Regional | Zone-by-zone survival, UK foraging calendar, wild edibles |
@@ -120,7 +124,8 @@ To set `OLLAMA_ORIGINS` permanently: System Properties → Environment Variables
 | Building & Structures | Cob, earthbag, timber frame, defences, site selection |
 | Medicine Making | Tinctures, ORS, antiseptics, medicinal plants |
 | Water Systems | Rainwater harvesting, wells, gravity distribution, irrigation |
-| Practical Skills | 35 step-through visual skill guides across 7 categories |
+| Practical Projects | Cooling/aircon, air filters, dams & hydro, pumps, toilets, radiation checking, mills, breeding, food storage |
+| Practical Skills | 36 step-through visual skill guides across 7 categories |
 
 ### Practical Skills Section
 
@@ -134,11 +139,11 @@ To set `OLLAMA_ORIGINS` permanently: System Properties → Environment Variables
 - Instructor notes with common mistakes and fast-track tips
 - Printable step cards
 
-**Skill categories:** Fire (9) · Knots (11) · Navigation (5) · First Aid (4) · Hunting & Fishing (4) · Plant ID (3) · Construction (3)
+**Skill categories:** Fire (9) · Knots (11) · Navigation (5) · First Aid (4) · Hunting & Fishing (4) · Plant ID (3) · Construction (4, incl. blade sharpening)
 
 Progress is stored locally via `localStorage` and can be exported/imported as JSON for backup or sharing across devices.
 
-### Interactive Tools (all offline, no server required)
+### 14 Interactive Tools (all offline, no server required)
 
 | Tool | Function |
 |------|---------|
@@ -151,13 +156,21 @@ Progress is stored locally via `localStorage` and can be exported/imported as JS
 | Bug-Out Decision Tree | Structured stay/go decision with route assessment |
 | Radio Frequency Reference | Pre-loaded emergency frequencies by type |
 | Medication Reference | Dosing and storage guide for common emergency meds |
+| Antibiotic Dosing Calculator | Weight-based pediatric/adult dosing for 8 antibiotics, tablets/mL per dose |
+| Survival Timer & Priorities | Rule of 3s + countdown timers (boil/bleach/CPR/tourniquet) with beep |
+| Celestial Latitude Finder | Latitude from Polaris or the noon sun — no GPS |
+| Firewood & Heating Estimator | Wood needed to heat a space (lb/day, cords) |
+| Crop Spacing & Seed Planner | Plants per bed and seeds to sow, with germination margin |
 
 ### Other Pages
 
 - **`quick-reference.html`** — 2-page printable emergency card covering the first 72 hours
-- **`cards.html`** — 12 wallet-sized lamination cards (water purification, Morse, wound care, etc.)
+- **`cards.html`** — 14 wallet-sized lamination cards (water purification, Morse, wound care, dental, solar troubleshooting, etc.)
 - **`gear.html`** — Interactive gear checklist with localStorage persistence
 - **`ai-setup.html`** — Step-by-step Bunker Bot / Ollama setup with troubleshooting
+- **`expansion.html`** — Expansion Library: one-click links to download all of Wikipedia, Project Gutenberg, and offline maps (Kiwix/ZIM + OSM)
+- **`maps.html`** — Interactive offline browser map (PMTiles) with a region picker; works on a minimal static server, no internet
+- **`index-print.html`** — Printable master index of the whole archive (for paper)
 
 ---
 
@@ -166,55 +179,52 @@ Progress is stored locally via `localStorage` and can be exported/imported as JS
 ```
 last-light-survival-guide/
 ├── index.html                  ← Dashboard — start here
-├── skills.html                 ← Practical Skills — 35 interactive guides
+├── skills.html                 ← Practical Skills — 36 interactive guides
+├── tools.html                  ← 14 interactive calculators
 ├── quick-reference.html        ← 72-hour emergency card (print first)
-├── cards.html                  ← 12 wallet cards (laminate these)
+├── cards.html                  ← 14 wallet cards (laminate these)
 ├── gear.html                   ← Gear checklist (localStorage)
-├── tools.html                  ← 9 interactive calculators
 ├── literature.html             ← Reference library
+├── expansion.html              ← Expansion Library (Wikipedia/Gutenberg/maps)
+├── maps.html                   ← Offline browser map (PMTiles) + region picker
+├── index-print.html            ← Printable master index
 ├── ai-setup.html               ← Bunker Bot / Ollama setup guide
 ├── changelog.html              ← Version history
 ├── manifest.json               ← PWA manifest
 ├── sw.js                       ← Service worker (offline caching)
 ├── offline.html                ← Offline fallback page
-├── sections/                   ← 23 content section pages
-│   ├── food.html
-│   ├── medical.html
-│   ├── energy.html
-│   ├── shelter.html
-│   ├── communications.html
-│   ├── navigation.html
-│   ├── security.html
-│   ├── knowledge.html
-│   ├── agriculture.html
-│   ├── animal.html
-│   ├── nbc.html
-│   ├── disasters.html
-│   ├── climate.html
-│   ├── metallurgy.html
-│   ├── governance.html
-│   ├── psychology.html
-│   ├── chemistry.html
-│   ├── textiles.html
-│   ├── vehicles.html
-│   ├── build-power.html
-│   ├── build-structures.html
-│   ├── medicine-making.html
-│   └── build-water.html
-├── pdfs/                       ← Bundled reference PDFs
-│   └── index.html              ← PDF library browser
+├── verify.sh                   ← Check a copied archive is intact (SHA-256)
+├── MANIFEST.sha256             ← Checksums for verify.sh
+├── make-torrent.sh             ← Build a torrent for P2P distribution
+├── get-knowledge.sh            ← Download a Kiwix ZIM (Wikipedia/Gutenberg…)
+├── extract-map.sh              ← Carve any region of the world into a map file
+├── sections/                   ← 27 content section pages
+│   ├── food.html               medical.html        energy.html
+│   ├── shelter.html            communications.html navigation.html
+│   ├── security.html           knowledge.html      science.html (First Principles)
+│   ├── agriculture.html        animal.html         veterinary.html
+│   ├── maternal.html           nbc.html            disasters.html
+│   ├── climate.html            metallurgy.html     governance.html
+│   ├── psychology.html         chemistry.html      textiles.html
+│   ├── vehicles.html           build-power.html    build-structures.html
+│   ├── medicine-making.html    build-water.html    projects.html (Practical Projects)
+├── pdfs/                       ← 28 bundled reference PDFs (gitignored; on the USB)
+│   ├── index.html              ← PDF library browser
+│   └── extract.py              ← Rebuilds the PDF search index
+├── maps/                       ← Offline map data (.pmtiles, gitignored; on the USB)
 ├── search/
-│   ├── search-index.json       ← Client-side search index
-│   └── pdf-chunks.json         ← Full-text PDF search index (~5.7 MB)
+│   ├── search-index.json       ← Client-side page search index
+│   └── pdf-chunks.json         ← Full-text PDF search index for Bunker Bot (~29 MB)
 └── assets/
     ├── css/style.css           ← All styles (dark, hi-contrast, night vision)
     ├── icons/icon.svg          ← PWA app icon
+    ├── vendor/maps/            ← Leaflet + protomaps-leaflet + pmtiles (offline map renderer)
     └── js/
-        ├── app.js              ← Navigation, sidebar, icons, PWA setup
+        ├── app.js              ← Navigation, sidebar, SVG icons, PWA setup
         ├── search.js           ← Client-side full-text search
-        ├── bunker-bot.js       ← Bunker Bot panel and Ollama integration
+        ├── bunker-bot.js       ← Bunker Bot panel, Ollama/Claude, RAG + citations
+        ├── librarian.js        ← PDF library + BM25 retrieval for Bunker Bot
         ├── tools.js            ← Calculator functions
-        ├── librarian.js        ← PDF library search
         ├── shared-progress.js  ← localStorage progress tracking
         ├── skills-data.js      ← Skill definitions and SVG diagrams
         └── skills.js           ← Practical Skills UI engine
@@ -279,6 +289,42 @@ Special print pages:
 ### PWA / Install
 
 On supported browsers (Chrome, Edge, Safari iOS), the guide can be installed as a Progressive Web App. An install prompt appears on second visit on mobile. Once installed, it works fully offline with no browser chrome.
+
+---
+
+## Expanding the Library — Wikipedia, Gutenberg & Maps
+
+The guide's portable core is small (~30 MB without the bundled PDFs). When you
+have internet, the **Expansion Library** (`expansion.html`) turns it into a
+launchpad for the rest of recorded knowledge — all read **offline** afterwards:
+
+- **Wikipedia & Project Gutenberg** via [Kiwix](https://kiwix.org) ZIM files —
+  medical Wikipedia (~1–2 GB), Simple Wikipedia, full Wikipedia (maxi ~100 GB /
+  nopic ~55 GB / mini ~10 GB), all 70k+ Gutenberg books, iFixit, Wiktionary and
+  more. `get-knowledge.sh <zim-url>` downloads one (resumable).
+- **Offline maps.** `maps.html` renders OpenStreetMap data from a single
+  `.pmtiles` file directly in the browser — no map server, no per-view tile
+  downloads, no internet. It uses Leaflet + protomaps-leaflet (Canvas 2D, runs
+  on a Raspberry Pi) and loads the whole regional file into memory with one
+  plain GET, so it needs **no HTTP byte-serving** and works on `python -m
+  http.server`. A region picker switches between downloaded maps.
+
+**Download a map of anywhere:**
+
+```bash
+# carve any bounding box out of the global map (megabytes, not the 100 GB planet)
+sh extract-map.sh <name> <minLon> <minLat> <maxLon> <maxLat> [maxzoom]
+# example — Greater London at street detail:
+sh extract-map.sh london -0.55 51.25 0.30 51.70 14
+```
+
+The script auto-downloads the `pmtiles` tool and pulls only your box via HTTP
+range requests, then drops `maps/<name>.pmtiles` into the folder where the map
+page's region picker will find it. (`maps/*.pmtiles` and `pdfs/*.pdf` are
+gitignored — large data travels on the USB copy, not in git.)
+
+> Maps must be served over HTTP (even `python3 -m http.server` works) — browsers
+> block reading large local files from a raw `file://` path.
 
 ---
 
@@ -372,4 +418,4 @@ You are free to share and adapt this material for any purpose, even commercially
 ---
 
 *The Last Light Survival Guide — v1.0.0 — June 2026*  
-*Total size: ~2 MB core + 5.7 MB PDF index — fits on any USB drive made in the last 20 years*
+*Portable core ~30 MB · full bundle with 28 PDFs + a regional map ~600 MB · fits any pen drive — and expands to all of Wikipedia, Gutenberg and world maps on demand.*

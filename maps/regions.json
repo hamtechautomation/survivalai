@@ -1,0 +1,5 @@
+{
+  "regions": [
+    { "name": "Northern England & Yorkshire", "file": "ne-england.pmtiles", "center": [54.2, -1.6], "zoom": 7 }
+  ]
+}

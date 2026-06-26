@@ -59,5 +59,27 @@ echo "Extracting $NAME  (bbox $MINLON,$MINLAT,$MAXLON,$MAXLAT  maxzoom $MAXZOOM)
 
 echo ""
 echo "✓ Done: $OUT  ($(du -h "$OUT" | cut -f1))"
-echo "Open maps.html (served over HTTP) to view it. To make it the default map,"
-echo "either name it ne-england.pmtiles or edit the PMTILES path in maps.html."
+
+# Register the region so the map page's picker lists it
+if command -v python3 >/dev/null 2>&1; then
+  python3 - "$NAME" "$MINLON" "$MINLAT" "$MAXLON" "$MAXLAT" <<'PY'
+import json, os, sys
+name, mnl, mnt, mxl, mxt = sys.argv[1], *map(float, sys.argv[2:6])
+path = os.path.join('maps', 'regions.json')
+data = {'regions': []}
+if os.path.exists(path):
+    try: data = json.load(open(path))
+    except Exception: pass
+clat, clon = (mnt + mxt) / 2, (mnl + mxl) / 2
+span = max(mxl - mnl, mxt - mnt)
+zoom = 11 if span < 0.5 else 9 if span < 1.5 else 7 if span < 4 else 6 if span < 9 else 4
+entry = {'name': name, 'file': name + '.pmtiles', 'center': [round(clat, 3), round(clon, 3)], 'zoom': zoom}
+regs = [r for r in data.get('regions', []) if r.get('file') != entry['file']]
+regs.append(entry)
+data['regions'] = regs
+json.dump(data, open(path, 'w'), indent=2)
+print('Registered "%s" in maps/regions.json — reload maps.html and pick it from the Region menu.' % name)
+PY
+else
+  echo "Add it to maps/regions.json by hand to show it in the picker, or reload maps.html."
+fi
