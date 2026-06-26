@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Offline interactive map — renders OpenStreetMap vector data (PMTiles) right in your browser with no internet and no map server. Prototype region: Northern England & Yorkshire.">
+  <title>Offline Maps — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/vendor/maps/leaflet.css">
+  <style>
+    .map-wrap { position: relative; }
+    #map { width: 100%; height: 72vh; min-height: 420px; border: 1px solid var(--border); border-radius: 8px; background: #e8e6e0; }
+    .leaflet-container { font-family: var(--font); background:#dfe3e8; }
+    .map-controls { display:flex; gap:.5rem; flex-wrap:wrap; margin:.75rem 0; align-items:center; }
+    .map-controls .btn { cursor:pointer; }
+    #map-status { font-size:.8rem; color:var(--text-2); }
+    .map-missing { position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:.75rem; background:rgba(7,10,9,.92); border-radius:8px; padding:2rem; z-index:500; }
+    .map-missing.show { display:flex; }
+    .map-missing code { background:var(--bg-3); border:1px solid var(--border-hi); border-radius:4px; padding:.15rem .4rem; font-size:.85rem; }
+    .map-missing h3 { color:var(--amber-light); margin:0; }
+  </style>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Offline Maps</span>
+  </div>
+  <div class="header-actions">
+    <button id="aria-toggle" class="btn btn-sm btn-primary">Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>Offline Maps — In Your Browser, No Internet</h1>
+    <p class="section-desc">This renders real OpenStreetMap data from a single <strong>.pmtiles</strong> file, drawn live in your browser — no map server, no tiles to download per view, no internet. It runs on a Raspberry Pi or any minimal static host. <strong>Prototype region: Northern England &amp; Yorkshire</strong> (Liverpool, Manchester, Leeds, Sheffield, York, Hull, Newcastle, the Dales, Moors and Lake District).</p>
+  </div>
+
+  <div class="map-controls">
+    <button class="btn btn-sm btn-primary" id="btn-locate">📍 Locate me (GPS)</button>
+    <button class="btn btn-sm btn-outline" id="btn-home">Reset view</button>
+    <select id="map-flavor" class="btn btn-sm btn-outline" style="padding:.3rem .5rem">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+      <option value="grayscale">Grayscale</option>
+      <option value="white">Minimal</option>
+    </select>
+    <span id="map-status">Loading map…</span>
+  </div>
+
+  <div class="map-wrap">
+    <div id="map"></div>
+    <div class="map-missing" id="map-missing">
+      <h3>No map file loaded</h3>
+      <p style="max-width:460px;color:var(--text-1);font-size:.9rem">The map data file <code>maps/ne-england.pmtiles</code> wasn't found, or this page was opened directly from a file (maps need a server that supports range requests).</p>
+      <p style="max-width:460px;color:var(--text-2);font-size:.85rem">Serve the folder over HTTP — even the simplest works:<br><code>python3 -m http.server</code> then open <code>http://localhost:8000/maps.html</code>.<br>To add this or any other region, run <code>sh extract-map.sh</code> (see the <a href="expansion.html">Expansion Library</a>).</p>
+    </div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:1rem">
+    <span class="callout-icon">📡</span>
+    <div class="callout-content">
+      <strong>Your GPS works with no signal.</strong> Tap “Locate me” — the phone/tablet GPS chip fixes your position directly from satellites, even fully offline, and pins it on this map. Download more regions (any country, any city) from the <a href="expansion.html">Expansion Library → Offline Maps</a>; each is one self-contained <code>.pmtiles</code> file you drop in the <code>maps/</code> folder.
+    </div>
+  </div>
+
+  <h2>Add more regions</h2>
+  <p style="font-size:.85rem;color:var(--text-2)">Run <code>sh extract-map.sh "Region Name" minLon minLat maxLon maxLat [maxzoom]</code> to carve any area of the world out of the global map into its own small file. Example — Greater London:</p>
+  <pre style="font-size:.8rem"><code>sh extract-map.sh london -0.55 51.25 0.30 51.70 14</code></pre>
+  <p style="font-size:.78rem;color:var(--text-3)">Map data © OpenStreetMap contributors (ODbL). Rendered with Leaflet + protomaps-leaflet, both bundled — nothing is fetched from the internet.</p>
+
+  <nav class="section-pagination no-print" aria-label="Section navigation">
+    <a href="expansion.html" class="pagination-btn pagination-prev">← Expansion Library</a>
+    <a href="index.html" class="pagination-btn pagination-home">Home</a>
+    <a href="sections/navigation.html" class="pagination-btn pagination-next">Navigation &amp; Maps →</a>
+  </nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">🗺️</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're on Offline Maps. Ask me how to extract a new region, read a grid reference, or navigate without GPS.</p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+
+<script src="assets/vendor/maps/leaflet.js"></script>
+<script src="assets/vendor/maps/pmtiles.js"></script>
+<script src="assets/vendor/maps/protomaps-leaflet.js"></script>
+<script>
+(function () {
+  'use strict';
+  var PMTILES = 'maps/ne-england.pmtiles';
+  var HOME = [54.2, -1.6], HOMEZOOM = 7;
+  var statusEl = document.getElementById('map-status');
+  var missingEl = document.getElementById('map-missing');
+
+  // Leaflet default marker icons (vendored)
+  if (window.L) L.Icon.Default.imagePath = 'assets/vendor/maps/images/';
+
+  var map = L.map('map', { zoomControl: true, attributionControl: true }).setView(HOME, HOMEZOOM);
+  map.attributionControl.setPrefix('');
+
+  var pmInstance = null;   // shared in-memory PMTiles archive
+  var layer = null;
+  function buildLayer(theme) {
+    if (layer) { map.removeLayer(layer); layer = null; }
+    layer = protomapsL.leafletLayer({
+      url: pmInstance,     // a PMTiles instance, not a URL — served from memory
+      theme: theme || 'light',
+      lang: 'en',
+      attribution: '© <a href="https://openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+    });
+    layer.addTo(map);
+  }
+
+  /* Load the WHOLE regional .pmtiles into memory with one plain GET, then read
+     tiles from the buffer. No HTTP range/byte-serving needed — so it works on
+     the most minimal static server (python -m http.server, a Raspberry Pi…). */
+  statusEl.textContent = 'Loading map data…';
+  fetch(PMTILES)
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.arrayBuffer();
+    })
+    .then(function (buf) {
+      var file = new File([buf], 'region.pmtiles');
+      pmInstance = new pmtiles.PMTiles(new pmtiles.FileSource(file));
+      buildLayer('light');
+      statusEl.textContent = 'Map ready (' + Math.round(buf.byteLength / 1048576) + ' MB loaded) — drag to pan, scroll to zoom.';
+    })
+    .catch(function () {
+      missingEl.classList.add('show');
+      statusEl.textContent = 'Map file not found — see the panel.';
+    });
+
+  document.getElementById('map-flavor').addEventListener('change', function (e) {
+    if (layer && pmInstance) buildLayer(e.target.value);
+  });
+  document.getElementById('btn-home').addEventListener('click', function () { map.setView(HOME, HOMEZOOM); });
+
+  var youMarker = null;
+  document.getElementById('btn-locate').addEventListener('click', function () {
+    if (!navigator.geolocation) { statusEl.textContent = 'No GPS available on this device.'; return; }
+    statusEl.textContent = 'Getting GPS fix…';
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var ll = [pos.coords.latitude, pos.coords.longitude];
+      if (youMarker) map.removeLayer(youMarker);
+      youMarker = L.marker(ll).addTo(map).bindPopup('You are here<br>' + ll[0].toFixed(5) + ', ' + ll[1].toFixed(5)).openPopup();
+      map.setView(ll, 13);
+      statusEl.textContent = 'GPS fix: ' + ll[0].toFixed(5) + ', ' + ll[1].toFixed(5) + ' (±' + Math.round(pos.coords.accuracy) + ' m)';
+    }, function () { statusEl.textContent = 'GPS unavailable or denied.'; }, { enableHighAccuracy: true, timeout: 10000 });
+  });
+})();
+</script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

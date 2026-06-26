@@ -13,3 +13,7 @@ __pycache__/
 # Editor
 .vscode/
 .idea/
+
+# Offline map data — large, distributed on the USB/extracted locally (like PDFs)
+maps/*.pmtiles
+/pmtiles

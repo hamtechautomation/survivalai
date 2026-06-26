@@ -2187,6 +2187,23 @@
       ]
     },
     {
+      "id": "maps",
+      "title": "Offline Maps — In Your Browser",
+      "section": "maps",
+      "sectionLabel": "Offline Maps",
+      "file": "maps.html",
+      "anchor": "",
+      "content": "offline map browser pmtiles openstreetmap leaflet protomaps northern england yorkshire GPS locate navigation no internet vector tiles minimal server raspberry pi extract region",
+      "tags": [
+        "maps",
+        "offline",
+        "pmtiles",
+        "GPS",
+        "navigation",
+        "openstreetmap"
+      ]
+    },
+    {
       "id": "expansion",
       "title": "Expansion Library — Wikipedia, Gutenberg & Offline Maps",
       "section": "expansion",

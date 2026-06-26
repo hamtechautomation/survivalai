@@ -1,5 +1,5 @@
 /* The Last Light Survival Guide — Service Worker v4 */
-const CACHE = 'last-light-v18';
+const CACHE = 'last-light-v19';
 
 /* Pre-cache: all HTML, CSS, JS, icons, manifest.
    pdf-chunks.json (5.7MB) is intentionally excluded from pre-cache to avoid
@@ -12,6 +12,7 @@ const PRECACHE = [
   '/ai-setup.html',
   '/literature.html',
   '/expansion.html',
+  '/maps.html',
   '/changelog.html',
   '/cards.html',
   '/bunker-bot-prompt.html',
@@ -54,6 +55,10 @@ const PRECACHE = [
   '/assets/js/shared-progress.js',
   '/assets/js/skills-data.js',
   '/assets/js/skills.js',
+  '/assets/vendor/maps/leaflet.js',
+  '/assets/vendor/maps/leaflet.css',
+  '/assets/vendor/maps/pmtiles.js',
+  '/assets/vendor/maps/protomaps-leaflet.js',
   '/search/search-index.json',
   '/manifest.json',
   '/assets/icons/icon.svg',
@@ -84,6 +89,10 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
+
+  /* Map data (.pmtiles) uses HTTP range requests — let the browser handle them
+     directly so partial-content responses aren't mangled by cache logic. */
+  if (url.pathname.endsWith('.pmtiles')) return;
 
   /* PDF files — not pre-cached, but serve from cache if the user manually saved one offline */
   if (url.pathname.match(/\/pdfs\/.+\.pdf$/)) {
