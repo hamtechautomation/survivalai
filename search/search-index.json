@@ -659,6 +659,22 @@
       ]
     },
     {
+      "id": "comms-crystal",
+      "title": "No-Power Radio (Crystal Set)",
+      "section": "communications",
+      "sectionLabel": "Communications",
+      "file": "sections/communications.html",
+      "anchor": "#crystal-radio",
+      "content": "crystal radio foxhole radio no power no battery receiver AM broadcast antenna ground coil germanium diode 1N34A cat whisker razor blade piezo earpiece emergency broadcast",
+      "tags": [
+        "crystal radio",
+        "foxhole radio",
+        "no power",
+        "receiver",
+        "antenna"
+      ]
+    },
+    {
       "id": "nav-overview",
       "title": "Navigation & Maps Overview",
       "section": "navigation",
@@ -895,6 +911,22 @@
         "evacuation",
         "go bag",
         "decision tree"
+      ]
+    },
+    {
+      "id": "sec-caching",
+      "title": "Caching Supplies",
+      "section": "security",
+      "sectionLabel": "Security",
+      "file": "sections/security.html",
+      "anchor": "#caching",
+      "content": "cache caching supplies buried stash PVC pipe ammo can waterproof airtight desiccant distributed get-home cache fallback hidden reserve metal detector OPSEC secret location",
+      "tags": [
+        "cache",
+        "caching",
+        "buried supplies",
+        "PVC",
+        "OPSEC"
       ]
     },
     {
@@ -1942,6 +1974,22 @@
       ]
     },
     {
+      "id": "animal-dogs",
+      "title": "Working Dogs",
+      "section": "animal",
+      "sectionLabel": "Animal Husbandry",
+      "file": "sections/animal.html",
+      "anchor": "#working-dogs",
+      "content": "working dogs guard dog early warning livestock guardian herding hunting vermin rat terrier security barking feeding scraps raw bones training breeding watch",
+      "tags": [
+        "working dogs",
+        "guard dog",
+        "herding",
+        "security",
+        "hunting"
+      ]
+    },
+    {
       "id": "vet-overview",
       "title": "Veterinary Care Without a Vet",
       "section": "veterinary",
@@ -2489,6 +2537,22 @@
         "EMP",
         "power outage",
         "generator"
+      ]
+    },
+    {
+      "id": "disasters-phases",
+      "title": "Phases of Collapse — A Timeline",
+      "section": "disasters",
+      "sectionLabel": "Disasters",
+      "file": "sections/disasters.html",
+      "anchor": "#phases",
+      "content": "phases of collapse timeline stages impact realisation adaptation rebuilding continuity 72 hours weeks months years die-off long term what to prep two is one one is none redundancy",
+      "tags": [
+        "collapse",
+        "timeline",
+        "phases",
+        "long-term",
+        "strategy"
       ]
     },
     {
@@ -3166,6 +3230,22 @@
         "eye protection",
         "pinhole",
         "vitamin A"
+      ]
+    },
+    {
+      "id": "med-death",
+      "title": "Death, Bodies & Burial",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#death",
+      "content": "death dead bodies burial corpse disposal disease handling the dead grave depth lime cremation shroud confirming death grief ritual records",
+      "tags": [
+        "death",
+        "burial",
+        "bodies",
+        "disease",
+        "grief"
       ]
     },
     {
