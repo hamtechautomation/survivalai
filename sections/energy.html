@@ -46,6 +46,7 @@
       <li><a href="#gasification">Wood Gasification</a></li>
       <li><a href="#batteries">Battery Maintenance &amp; Improvised Batteries</a></li>
       <li><a href="#charging">Charging Phones, Laptops &amp; Power Banks</a></li>
+      <li><a href="#salvage-solar">Salvaging &amp; Re-mounting Solar Panels</a></li>
       <li><a href="#faraday">Faraday Cages &amp; EMP Protection</a></li>
       <li><a href="#fuel">Fuel Storage Safety</a></li>
       <li><a href="#rocket-stove">Rocket Stoves</a></li>
@@ -454,9 +455,65 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     <p><strong>Efficiency rule of thumb:</strong> a direct DC-DC path (12&nbsp;V→USB, or 12&nbsp;V→19&nbsp;V) wastes less than going DC→AC→DC through an inverter — use DC-DC where you can. Pair this section with <a href="#solar">Solar Power Systems</a> to make the power, and <a href="#batteries">Battery Maintenance</a> to store it. To size a system, use the <a href="../tools.html#tool-3">Off-Grid Power Calculator</a>.</p>
   </section>
 
+  <!-- =================== SALVAGE SOLAR =================== -->
+  <section id="salvage-solar">
+    <h2>8. Salvaging &amp; Re-mounting Solar Panels</h2>
+    <p>In a long-term grid-down world, the rooftops around you are a hardware store. A salvaged solar panel, its cabling, and its mounting rails can rebuild your power supply for free — but pulling a panel off a roof is the most dangerous job in this section. The reason is simple and it kills people every year: <strong>a solar panel cannot be switched off.</strong> In any daylight it is making electricity, and a full roof string can sit at 300–600&nbsp;V DC — more than enough to stop your heart. Everything below is built around that one fact.</p>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <p><strong>A panel in daylight is always live — there is no off switch.</strong> Before touching any wiring, <strong>cover the panel(s)</strong> with an opaque tarp, blanket, or cardboard. Shade is your off switch. Even then, treat every wire as live: a single panel still makes ~30–40&nbsp;V, and DC arcs don't self-extinguish like AC. Never let bare positive and negative ends touch — they arc and burn. It's also work at height: dry conditions, fall protection, two people, never alone.</p>
+      </div>
+    </div>
+
+    <h3>Step 1 — Kill the output</h3>
+    <ul>
+      <li><strong>Cover the panels</strong> with something opaque before you start. No light, no voltage.</li>
+      <li>If the system has a <strong>DC isolator / disconnect</strong> (near the inverter or charge controller), switch it off too.</li>
+    </ul>
+
+    <h3>Step 2 — Disconnect the wiring</h3>
+    <ul>
+      <li>Trace the cables down to the <strong>inverter, charge controller, or combiner box</strong> so you know what feeds what.</li>
+      <li>Panels join with <strong>MC4 connectors</strong> (a cheap MC4 unlock tool separates them) or screw terminals in a junction box.</li>
+      <li>Cut <strong>one wire at a time</strong>, leave long tails, and <strong>cap or tape each cut end immediately</strong>. Keep your free hand off metal.</li>
+    </ul>
+
+    <h3>Step 3 — Remove the panel (mechanical)</h3>
+    <p>Panels sit on aluminium <strong>rails</strong>, held down by <strong>mid-clamps and end-clamps</strong> (hex/Allen bolts). The rails bolt to <strong>roof feet</strong> screwed into the rafters and sealed with flashing.</p>
+    <ul>
+      <li>Undo the clamp bolts and lift the panel <strong>up and off</strong> — don't slide it down the roof.</li>
+      <li>They're big (~1.7&nbsp;×&nbsp;1&nbsp;m), 18–25&nbsp;kg, and the glass is <strong>fragile</strong>: don't flex it, don't step on it, hand it down rather than drop it.</li>
+      <li><strong>Salvage the hardware too</strong> — the rails, clamps, feet, and MC4 cabling are as useful as the panel. Grab the charge controller/inverter from inside while you're there.</li>
+    </ul>
+
+    <h3>Step 4 — Test what you took</h3>
+    <p>Set a multimeter to <strong>DC volts</strong>, put the probes on the two leads, and face the panel at the sun. The open-circuit voltage (Voc) should roughly match the label:</p>
+    <ul>
+      <li>A small "12&nbsp;V" panel → ~18–22&nbsp;V Voc.</li>
+      <li>A standard 60-cell ~250–300&nbsp;W panel → ~37–40&nbsp;V Voc.</li>
+      <li><strong>Cracked glass</strong> often still works but lets water in (it will degrade) — usable short-term. <strong>Burnt, brown, or delaminated</strong> patches = scrap.</li>
+    </ul>
+
+    <h3>Step 5 — Re-deploy it (don't put it back on a roof)</h3>
+    <ul>
+      <li>Far safer and easier: a <strong>ground-mounted A-frame</strong>, tilted to roughly your latitude and facing the equator (south in the northern hemisphere). Reuse the salvaged rails on a simple wooden frame.</li>
+      <li>Wire it <strong>panel → charge controller → battery → load</strong>. <strong>Never connect a panel straight to a battery.</strong> Match the panel's Voc to your controller's maximum input voltage — an MPPT controller is preferred.</li>
+      <li>Pair with <a href="#solar">Solar Power Systems</a> for wiring and sizing, <a href="#batteries">Battery Maintenance</a> for storage, and the <a href="../tools.html#tool-3">Off-Grid Power Calculator</a> to balance the system.</li>
+    </ul>
+
+    <div class="callout callout-amber">
+      <span class="callout-icon">⚖️</span>
+      <div class="callout-content">
+        <p><strong>Ethics &amp; legality.</strong> Stripping panels from an occupied or maintained home is theft and dangerous unlicensed electrical work — don't. The legitimate version of this skill is <strong>salvage from genuinely abandoned or derelict structures</strong> in a long-term collapse, where the gear would otherwise rot. Mark and document what you take.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- =================== FARADAY =================== -->
   <section id="faraday">
-    <h2>8. Faraday Cages &amp; EMP Protection</h2>
+    <h2>9. Faraday Cages &amp; EMP Protection</h2>
 
     <h3>What is an EMP?</h3>
     <p>An Electromagnetic Pulse (EMP) can come from: a nuclear detonation at high altitude (E1, E2, E3 pulses), a solar coronal mass ejection (CME/solar storm — primarily affects power grid infrastructure), or an EMP weapon. The threat depends on proximity, shielding, and whether electronics are connected to power lines (which act as antennas, amplifying damage dramatically).</p>
@@ -503,7 +560,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
   <!-- =================== FUEL =================== -->
   <section id="fuel">
-    <h2>9. Fuel Storage Safety</h2>
+    <h2>10. Fuel Storage Safety</h2>
 
     <h3>Gasoline</h3>
     <ul>
@@ -563,7 +620,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
   <!-- =================== ROCKET STOVE =================== -->
   <section id="rocket-stove">
-    <h2>10. Rocket Stoves</h2>
+    <h2>11. Rocket Stoves</h2>
 
     <p>A rocket stove burns small-diameter wood (pencil to wrist thickness) with 80–90% efficiency compared to 10–20% for an open campfire. It uses an L-shaped combustion chamber that creates a powerful natural draft, producing intense, clean heat with minimal smoke. After mastering the Faraday cage and solar panel, the rocket stove is the highest-impact energy build in a long-term survival scenario.</p>
 
@@ -626,7 +683,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
   <!-- =================== SOLAR COOKER =================== -->
   <section id="solar-cooker">
-    <h2>11. Solar Cookers</h2>
+    <h2>12. Solar Cookers</h2>
 
     <p>A solar cooker uses concentrated or reflected sunlight to cook food with zero fuel. A well-designed solar box cooker reaches 120–150°C (250–300°F) — sufficient to cook, boil water, bake bread, and pasteurize water. A parabolic solar cooker reaches 250–400°C (480–750°F) — frying and boiling in minutes. Both can be built from salvaged materials in a few hours.</p>
 
@@ -691,7 +748,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
   <!-- =================== BIOGAS =================== -->
   <section id="biogas">
-    <h2>12. Biogas from Organic Waste</h2>
+    <h2>13. Biogas from Organic Waste</h2>
 
     <p>Biogas (methane + CO₂) is produced by bacteria digesting organic matter in the absence of oxygen. Animal manure, kitchen scraps, and crop waste can power a cooking stove or lamp continuously when set up in a digester. A well-loaded household digester can supply 2–4 hours of cooking gas per day from the waste of 3–4 large animals or 8–10 people.</p>
 

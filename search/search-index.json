@@ -441,6 +441,24 @@
       ]
     },
     {
+      "id": "energy-salvage-solar",
+      "title": "Salvaging & Re-mounting Solar Panels",
+      "section": "energy",
+      "sectionLabel": "Energy",
+      "file": "sections/energy.html",
+      "anchor": "#salvage-solar",
+      "content": "salvage solar panel roof remove scavenge retrofit live DC voltage cover tarp MC4 connector rails clamps roof feet rafters multimeter Voc open circuit voltage cracked glass ground mount A-frame charge controller MPPT abandoned building",
+      "tags": [
+        "solar",
+        "salvage",
+        "panel",
+        "roof",
+        "scavenge",
+        "MC4",
+        "safety"
+      ]
+    },
+    {
       "id": "energy-faraday",
       "title": "Faraday Cages & EMP Protection",
       "section": "energy",
