@@ -2346,6 +2346,53 @@
       ]
     },
     {
+      "id": "proj-waterfilter",
+      "title": "DIY Gravity Bio-Water Filter",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#waterfilter",
+      "content": "how to build water filter gravity bio sand filter biosand charcoal gravel ceramic pot colloidal silver continuous no power filter murky water clean drinking",
+      "tags": [
+        "water filter",
+        "biosand",
+        "charcoal",
+        "ceramic",
+        "gravity filter"
+      ]
+    },
+    {
+      "id": "proj-salt",
+      "title": "Making Salt",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#salt",
+      "content": "how to make salt production seawater evaporation salt pan boiling brine salt spring lick rock salt halite electrolytes preservation curing",
+      "tags": [
+        "salt",
+        "salt production",
+        "evaporation",
+        "seawater",
+        "preservation"
+      ]
+    },
+    {
+      "id": "proj-firefighting",
+      "title": "Firefighting Without a Brigade",
+      "section": "projects",
+      "sectionLabel": "Practical Projects",
+      "file": "sections/projects.html",
+      "anchor": "#firefighting",
+      "content": "how to fight a fire firefighting without fire brigade smother water sand blanket grease oil fire electrical fire firebreak chimney creosote prevention escape plan",
+      "tags": [
+        "firefighting",
+        "fire safety",
+        "grease fire",
+        "firebreak"
+      ]
+    },
+    {
       "id": "maps",
       "title": "Offline Maps — In Your Browser",
       "section": "maps",
@@ -3087,6 +3134,38 @@
         "irrigation",
         "foreign body",
         "snow blindness"
+      ]
+    },
+    {
+      "id": "med-meds-out",
+      "title": "When the Medicines Run Out",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#meds-out",
+      "content": "medicines run out chronic medication insulin diabetes thyroid blood pressure beta blocker seizure asthma antidepressant taper do not stop suddenly stockpile shelf life expiry rationing lifestyle",
+      "tags": [
+        "medications",
+        "chronic",
+        "insulin",
+        "tapering",
+        "stockpile"
+      ]
+    },
+    {
+      "id": "med-vision",
+      "title": "Vision & Eye Protection",
+      "section": "medical",
+      "sectionLabel": "Medical",
+      "file": "sections/medical.html",
+      "anchor": "#vision",
+      "content": "vision eyesight spare glasses prescription pinhole glasses eye protection snow blindness sunglasses slit goggles vitamin A night blindness magnifying readers losing glasses",
+      "tags": [
+        "vision",
+        "glasses",
+        "eye protection",
+        "pinhole",
+        "vitamin A"
       ]
     },
     {
