@@ -45,6 +45,7 @@
       <li><a href="#wind">Wind Turbines</a></li>
       <li><a href="#gasification">Wood Gasification</a></li>
       <li><a href="#batteries">Battery Maintenance &amp; Improvised Batteries</a></li>
+      <li><a href="#charging">Charging Phones, Laptops &amp; Power Banks</a></li>
       <li><a href="#faraday">Faraday Cages &amp; EMP Protection</a></li>
       <li><a href="#fuel">Fuel Storage Safety</a></li>
       <li><a href="#rocket-stove">Rocket Stoves</a></li>
@@ -413,9 +414,49 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     </ul>
   </section>
 
+  <!-- =================== CHARGING DEVICES =================== -->
+  <section id="charging">
+    <h2>7. Charging Phones, Laptops &amp; Power Banks</h2>
+    <p>When the grid goes down, keeping a phone, radio, or laptop alive is often the first real problem — for light, information, navigation, and contact. The trick is matching the <strong>voltage</strong> your device wants to whatever power you can scavenge. Phones are easy (5&nbsp;V USB); laptops are demanding (≈20&nbsp;V or USB-C&nbsp;PD) and need a real buffer.</p>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">🔋</span>
+      <div class="callout-content">
+        <p><strong>Power banks are the single best prep here.</strong> Charge big USB power banks (20,000&nbsp;mAh+) whenever you have <em>any</em> power — sun, a car, a generator — and they'll keep phones and radios going for days or weeks. A couple of large banks plus a small solar panel covers most people's grid-down comms needs. Store them ~50% charged and top them up every few months.</p>
+      </div>
+    </div>
+
+    <h3>Charging phones &amp; USB devices (the easy 5&nbsp;V)</h3>
+    <ul>
+      <li><strong>Solar:</strong> a folding USB solar panel (10–25&nbsp;W) charges phones and power banks directly in sun. Charge a power bank in daylight, then charge your phone from it at night — the panel's output is steadier into a bank than into a phone.</li>
+      <li><strong>Your vehicle:</strong> a 12&nbsp;V socket (cigarette lighter) + a USB adapter charges phones and banks. A car battery holds <em>dozens</em> of phone charges; you don't even need the engine running for that. Run the engine occasionally (well ventilated) to top the car battery back up — or better, charge while you're already driving.</li>
+      <li><strong>Any 12&nbsp;V battery</strong> (car, leisure, solar bank) + a regulated 12&nbsp;V→USB adapter = a long-lived phone charger.</li>
+      <li><strong>Hand-crank &amp; dynamo:</strong> wind-up chargers, and bicycle dynamos (hub or bottle) feeding a rectifier + USB regulator, make charge from muscle. A bike + dynamo can put real USB power into a bank.</li>
+      <li><strong>Stove / fire (thermoelectric):</strong> stoves with a built-in USB output, or a Peltier (TEG) module clamped between a hot pot and a cool sink, trickle a small USB charge while you cook.</li>
+      <li><strong>AA fallback:</strong> a "4×AA → USB" emergency charger gives a phone a partial charge from cheap cells; pair with rechargeable AAs you top up off solar/car.</li>
+    </ul>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <p><strong>Never wire a phone straight to a raw 12&nbsp;V battery or an unregulated dynamo.</strong> Phones want a clean, regulated 5&nbsp;V — feed them 12&nbsp;V (or spiky dynamo output) and you'll destroy them instantly. Always go through a proper 12&nbsp;V→USB adapter or a regulated charge circuit. Same for lithium cells: don't overcharge, don't charge a frozen battery, and never charge a swollen or damaged one (fire risk).</p>
+      </div>
+    </div>
+
+    <h3>Charging laptops (the demanding ≈20&nbsp;V)</h3>
+    <p>Laptops draw far more, at higher voltage, so you need a <strong>battery buffer</strong> — don't try to run one straight off fluctuating solar.</p>
+    <ul>
+      <li><strong>Portable power station</strong> (200–500&nbsp;Wh): the realistic answer. It charges a laptop several times over via its AC outlet or USB-C, and itself recharges from solar, a car, or a generator. The cleanest off-grid laptop solution.</li>
+      <li><strong>USB-C Power Delivery (PD):</strong> most modern laptops charge over USB-C. A 65–100&nbsp;W USB-C&nbsp;PD source — a big PD power bank, a 12&nbsp;V→USB-C PD car adapter, or a PD-capable solar setup — charges them directly and efficiently. Check your laptop's wattage.</li>
+      <li><strong>From a car (12&nbsp;V):</strong> a DC-DC "car laptop charger" steps 12&nbsp;V up to the ~19&nbsp;V barrel your laptop needs (efficient), or a 12&nbsp;V→mains <strong>inverter</strong> runs the laptop's normal charger (simple but wastes ~15–20% converting DC→AC→DC).</li>
+      <li><strong>Solar:</strong> needs a meaningful panel (60–100&nbsp;W+) feeding a power station or PD controller — the battery in the middle smooths the supply so a passing cloud doesn't drop your laptop.</li>
+    </ul>
+    <p><strong>Efficiency rule of thumb:</strong> a direct DC-DC path (12&nbsp;V→USB, or 12&nbsp;V→19&nbsp;V) wastes less than going DC→AC→DC through an inverter — use DC-DC where you can. Pair this section with <a href="#solar">Solar Power Systems</a> to make the power, and <a href="#batteries">Battery Maintenance</a> to store it. To size a system, use the <a href="../tools.html#tool-3">Off-Grid Power Calculator</a>.</p>
+  </section>
+
   <!-- =================== FARADAY =================== -->
   <section id="faraday">
-    <h2>7. Faraday Cages &amp; EMP Protection</h2>
+    <h2>8. Faraday Cages &amp; EMP Protection</h2>
 
     <h3>What is an EMP?</h3>
     <p>An Electromagnetic Pulse (EMP) can come from: a nuclear detonation at high altitude (E1, E2, E3 pulses), a solar coronal mass ejection (CME/solar storm — primarily affects power grid infrastructure), or an EMP weapon. The threat depends on proximity, shielding, and whether electronics are connected to power lines (which act as antennas, amplifying damage dramatically).</p>
@@ -462,7 +503,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
   <!-- =================== FUEL =================== -->
   <section id="fuel">
-    <h2>8. Fuel Storage Safety</h2>
+    <h2>9. Fuel Storage Safety</h2>
 
     <h3>Gasoline</h3>
     <ul>
@@ -522,7 +563,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
   <!-- =================== ROCKET STOVE =================== -->
   <section id="rocket-stove">
-    <h2>9. Rocket Stoves</h2>
+    <h2>10. Rocket Stoves</h2>
 
     <p>A rocket stove burns small-diameter wood (pencil to wrist thickness) with 80–90% efficiency compared to 10–20% for an open campfire. It uses an L-shaped combustion chamber that creates a powerful natural draft, producing intense, clean heat with minimal smoke. After mastering the Faraday cage and solar panel, the rocket stove is the highest-impact energy build in a long-term survival scenario.</p>
 
@@ -585,7 +626,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
   <!-- =================== SOLAR COOKER =================== -->
   <section id="solar-cooker">
-    <h2>10. Solar Cookers</h2>
+    <h2>11. Solar Cookers</h2>
 
     <p>A solar cooker uses concentrated or reflected sunlight to cook food with zero fuel. A well-designed solar box cooker reaches 120–150°C (250–300°F) — sufficient to cook, boil water, bake bread, and pasteurize water. A parabolic solar cooker reaches 250–400°C (480–750°F) — frying and boiling in minutes. Both can be built from salvaged materials in a few hours.</p>
 
@@ -650,7 +691,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
   <!-- =================== BIOGAS =================== -->
   <section id="biogas">
-    <h2>11. Biogas from Organic Waste</h2>
+    <h2>12. Biogas from Organic Waste</h2>
 
     <p>Biogas (methane + CO₂) is produced by bacteria digesting organic matter in the absence of oxygen. Animal manure, kitchen scraps, and crop waste can power a cooking stove or lamp continuously when set up in a digester. A well-loaded household digester can supply 2–4 hours of cooking gas per day from the waste of 3–4 large animals or 8–10 people.</p>
 

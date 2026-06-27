@@ -423,6 +423,24 @@
       ]
     },
     {
+      "id": "energy-charging",
+      "title": "Charging Phones, Laptops & Power Banks",
+      "section": "energy",
+      "sectionLabel": "Energy",
+      "file": "sections/energy.html",
+      "anchor": "#charging",
+      "content": "charge phone laptop power bank off grid no power USB 5V solar charger vehicle 12V cigarette lighter hand crank dynamo thermoelectric TEG AA fallback USB-C PD power station DC-DC car charger laptop battery recharge",
+      "tags": [
+        "charging",
+        "phone",
+        "laptop",
+        "power bank",
+        "USB",
+        "solar",
+        "off grid"
+      ]
+    },
+    {
       "id": "energy-faraday",
       "title": "Faraday Cages & EMP Protection",
       "section": "energy",
