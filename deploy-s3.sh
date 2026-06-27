@@ -33,7 +33,8 @@ command -v aws >/dev/null 2>&1 || { echo "AWS CLI not found — install it and r
 
 EXCLUDES="--exclude .git/* --exclude .claude/* --exclude node_modules/* \
   --exclude .DS_Store --exclude */.DS_Store --exclude .gitignore \
-  --exclude .env* --exclude *.sh --exclude TESTING.md --exclude pmtiles"
+  --exclude .env* --exclude *.sh --exclude *.md --exclude docs/* \
+  --exclude infra/* --exclude pmtiles"
 
 echo "1/4  Syncing site to s3://$BUCKET (default 1-hour cache)…"
 # Most files: short cache so content updates show within an hour.

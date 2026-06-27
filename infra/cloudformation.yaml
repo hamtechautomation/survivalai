@@ -1,0 +1,114 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  The Last Light Survival Guide — private S3 bucket served over HTTPS via
+  CloudFront (Origin Access Control). One-click static hosting that can hold the
+  large PDFs and map files. Deploy this once, then upload the site with
+  deploy-s3.sh.
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: A globally-unique S3 bucket name (e.g. last-light-yourname-2026).
+  DomainName:
+    Type: String
+    Default: ''
+    Description: (Optional) custom domain, e.g. survivalguide.example.com — leave blank to use the CloudFront URL.
+  AcmCertificateArn:
+    Type: String
+    Default: ''
+    Description: >
+      (Optional) ACM certificate ARN for the custom domain. MUST be created in
+      us-east-1 (CloudFront requirement). Leave blank if no custom domain.
+
+Conditions:
+  HasDomain: !Not [!Equals [!Ref DomainName, '']]
+
+Resources:
+
+  SiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+      # Bucket stays fully private — only CloudFront can read it.
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+
+  OriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: !Sub '${BucketName}-oac'
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Comment: The Last Light Survival Guide
+        DefaultRootObject: index.html
+        HttpVersion: http2and3
+        PriceClass: PriceClass_100   # cheapest edge set (US/Canada/Europe)
+        Aliases: !If [HasDomain, [!Ref DomainName], !Ref 'AWS::NoValue']
+        ViewerCertificate: !If
+          - HasDomain
+          - AcmCertificateArn: !Ref AcmCertificateArn
+            SslSupportMethod: sni-only
+            MinimumProtocolVersion: TLSv1.2_2021
+          - CloudFrontDefaultCertificate: true
+        Origins:
+          - Id: S3Origin
+            DomainName: !GetAtt SiteBucket.RegionalDomainName
+            OriginAccessControlId: !GetAtt OriginAccessControl.Id
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+        DefaultCacheBehavior:
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: true
+          AllowedMethods: [GET, HEAD, OPTIONS]
+          CachedMethods: [GET, HEAD]
+          # Managed "CachingOptimized" — honours the Cache-Control headers that
+          # deploy-s3.sh sets (no-cache on sw.js, long cache on PDFs/maps).
+          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+
+  # Allow ONLY this CloudFront distribution to read the bucket.
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref SiteBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: AllowCloudFrontServicePrincipalRead
+            Effect: Allow
+            Principal:
+              Service: cloudfront.amazonaws.com
+            Action: s3:GetObject
+            Resource: !Sub '${SiteBucket.Arn}/*'
+            Condition:
+              StringEquals:
+                AWS:SourceArn: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${Distribution.Id}'
+
+Outputs:
+  BucketName:
+    Description: Put this in your .env.deploy as BUCKET
+    Value: !Ref SiteBucket
+  DistributionId:
+    Description: Put this in your .env.deploy as CF_DIST
+    Value: !Ref Distribution
+  CloudFrontURL:
+    Description: Your live site (until you point a custom domain at it)
+    Value: !Sub 'https://${Distribution.DomainName}'
+  CustomDomainNote:
+    Condition: HasDomain
+    Description: Create a DNS record pointing your domain at the CloudFront domain
+    Value: !Sub 'CNAME/ALIAS ${DomainName} -> ${Distribution.DomainName}'
