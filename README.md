@@ -198,6 +198,7 @@ last-light-survival-guide/
 ├── make-torrent.sh             ← Build a torrent for P2P distribution
 ├── get-knowledge.sh            ← Download a Kiwix ZIM (Wikipedia/Gutenberg…)
 ├── extract-map.sh              ← Carve any region of the world into a map file
+├── deploy-s3.sh                ← Publish to AWS S3 + CloudFront
 ├── sections/                   ← 27 content section pages
 │   ├── food.html               medical.html        energy.html
 │   ├── shelter.html            communications.html navigation.html
@@ -385,6 +386,50 @@ can't be silently altered, and it stays reachable as long as any node pins it.
 
 Both methods pair well with the `MANIFEST.sha256` check above: recipients can
 verify what they received is byte-for-byte the original.
+
+---
+
+## Hosting It Publicly (AWS S3 + CloudFront)
+
+S3 is a good fit because, unlike GitHub Pages, it has **no per-file size limit** —
+it holds the large PDFs and map files too. The guide is plain static files, so
+hosting is just an upload.
+
+> **Important: serve it over HTTPS.** The offline features (service worker, PWA
+> "install", offline-after-first-visit) and the map's "Locate me" GPS only work
+> over HTTPS or `localhost`. A raw S3 website endpoint is HTTP-only — so put
+> **CloudFront** in front of the bucket. Also host at the **domain root**, not a
+> sub-path (the service worker pre-cache list uses root-absolute paths).
+
+### One-time setup
+1. **Create an S3 bucket** (e.g. `my-survival-guide`). Keep it **private** (block
+   public access on) — CloudFront will read it via Origin Access Control.
+2. **Create a CloudFront distribution** with that bucket as the origin:
+   - Origin access: **Origin Access Control (OAC)**, and let it update the bucket
+     policy so only CloudFront can read.
+   - **Default root object:** `index.html`
+   - **Viewer protocol policy:** Redirect HTTP → HTTPS
+   - (Optional) attach your domain + an ACM certificate (in `us-east-1`).
+   - (Optional) Custom error response: 403/404 → `/offline.html` (200).
+3. **Configure the AWS CLI** locally: `aws configure` with write access to the bucket.
+
+### Deploy / update
+```bash
+BUCKET=my-survival-guide  CF_DIST=E1234ABCD  sh deploy-s3.sh
+```
+`deploy-s3.sh` syncs the whole folder (including the gitignored `pdfs/` and
+`maps/`, since they're on your disk), sets long cache for big assets, **no-cache
+for `sw.js`** so updates propagate, and invalidates CloudFront if `CF_DIST` is set.
+
+### Good to know
+- **Cost:** storage is trivial (~$0.02/GB·month). The spend is CloudFront egress —
+  the ~29 MB AI index loads when someone uses Bunker Bot, and a ~60 MB map loads
+  when someone opens `maps.html`. Fine for modest traffic; watch it if you go viral.
+- **Bunker Bot's local-AI mode won't work for remote visitors** (it calls *their*
+  `localhost` Ollama) — by design; it degrades gracefully and offers Claude mode.
+  The cited PDF retrieval still runs entirely in the visitor's browser.
+- Maps work either way — the viewer loads the whole `.pmtiles` with one GET, and
+  S3 also supports range requests if you later switch to streaming.
 
 ---
 
