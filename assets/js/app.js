@@ -408,10 +408,11 @@
 
   /* =================== SERVICE WORKER =================== */
   function setupServiceWorker() {
-    if ('serviceWorker' in navigator) {
-      const swPath = window.location.pathname.includes('/sections/') ? '../sw.js' : 'sw.js';
-      const scope = window.location.pathname.includes('/sections/') ? '../' : '/';
-      navigator.serviceWorker.register(swPath, { scope }).catch(() => {});
+    /* Only meaningful over http(s); the SW + its precache list live at the site
+       root, so register with a root-absolute path that works from any page
+       depth (/, /sections/, /pdfs/). Silently skipped on file://. */
+    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+      navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(() => {});
     }
   }
 
