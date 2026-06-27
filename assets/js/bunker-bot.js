@@ -11,11 +11,13 @@
      CONSTANTS
   ────────────────────────────────────────── */
   const OLLAMA_URL        = 'http://localhost:11434';
+  const LLAMAFILE_URL     = 'http://localhost:8080';   /* OpenAI-compatible server */
   const CLAUDE_API_URL    = 'https://api.anthropic.com/v1/messages';
   const ANTHROPIC_VERSION = '2023-06-01';
 
-  const PROVIDER_LOCAL  = 'local';
-  const PROVIDER_CLAUDE = 'claude';
+  const PROVIDER_LOCAL     = 'local';      /* Ollama */
+  const PROVIDER_LLAMAFILE = 'llamafile';  /* single-file local model */
+  const PROVIDER_CLAUDE    = 'claude';
 
   const CLAUDE_MODELS = [
     { id: 'claude-haiku-4-5-20251001', label: 'Haiku 4.5  — fast & cheap'   },
@@ -70,6 +72,7 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
   let conversationHistory = [];
   let currentProvider     = PROVIDER_LOCAL;
   let ollamaModel         = 'llama3';
+  let llamafileModel      = 'llamafile';
   let claudeModel         = CLAUDE_MODELS[0].id;
   let claudeApiKey        = '';
   let currentTemperature  = 0.7;
@@ -174,8 +177,9 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
         <div class="aria-toolbar-row aria-provider-row">
           <span class="aria-toolbar-label">Mode</span>
           <div class="aria-provider-toggle">
-            <button id="aria-provider-local"  class="aria-provider-btn active" title="Offline — uses your local Ollama model">🏠 Local</button>
-            <button id="aria-provider-claude" class="aria-provider-btn"        title="Online — uses Claude API (requires internet + API key)">☁️ Claude</button>
+            <button id="aria-provider-local"     class="aria-provider-btn active" title="Offline — uses your local Ollama model">🏠 Ollama</button>
+            <button id="aria-provider-llamafile" class="aria-provider-btn"        title="Offline — uses a llamafile (single-file model) on localhost:8080">🦙 Llamafile</button>
+            <button id="aria-provider-claude"    class="aria-provider-btn"        title="Online — uses Claude API (requires internet + API key)">☁️ Claude</button>
           </div>
         </div>
         <!-- Ollama model row (visible in Local mode) -->
@@ -220,8 +224,9 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
       });
 
       /* Wire provider toggle */
-      $('aria-provider-local') ?.addEventListener('click', () => switchProvider(PROVIDER_LOCAL));
-      $('aria-provider-claude')?.addEventListener('click', () => switchProvider(PROVIDER_CLAUDE));
+      $('aria-provider-local')    ?.addEventListener('click', () => switchProvider(PROVIDER_LOCAL));
+      $('aria-provider-llamafile')?.addEventListener('click', () => switchProvider(PROVIDER_LLAMAFILE));
+      $('aria-provider-claude')   ?.addEventListener('click', () => switchProvider(PROVIDER_CLAUDE));
 
       /* Wire Ollama model select */
       $('aria-model-select')?.addEventListener('change', e => {
@@ -286,14 +291,16 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
     currentProvider = provider;
     localStorage.setItem('aria-provider', provider);
 
-    const isLocal  = provider === PROVIDER_LOCAL;
-    const isCloud  = provider === PROVIDER_CLAUDE;
+    const isLocal     = provider === PROVIDER_LOCAL;
+    const isLlamafile = provider === PROVIDER_LLAMAFILE;
+    const isCloud     = provider === PROVIDER_CLAUDE;
 
     /* Toggle button states */
-    $('aria-provider-local') ?.classList.toggle('active', isLocal);
-    $('aria-provider-claude')?.classList.toggle('active', isCloud);
+    $('aria-provider-local')    ?.classList.toggle('active', isLocal);
+    $('aria-provider-llamafile')?.classList.toggle('active', isLlamafile);
+    $('aria-provider-claude')   ?.classList.toggle('active', isCloud);
 
-    /* Show/hide rows */
+    /* Show/hide rows (llamafile serves one model — no selectors needed) */
     const rowOllama  = $('aria-row-ollama-model');
     const rowClaude  = $('aria-row-claude-model');
     const rowApiKey  = $('aria-row-apikey');
@@ -346,8 +353,33 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
   async function checkStatus() {
     if (currentProvider === PROVIDER_LOCAL) {
       await checkOllamaStatus();
+    } else if (currentProvider === PROVIDER_LLAMAFILE) {
+      await checkLlamafileStatus();
     } else {
       checkClaudeStatus();
+    }
+  }
+
+  async function checkLlamafileStatus() {
+    const dot   = document.querySelector('.status-dot');
+    const label = document.querySelector('.aria-status-label');
+    if (!dot) return;
+    dot.className = 'status-dot checking';
+    if (label) label.textContent = 'Checking llamafile…';
+    try {
+      const res = await fetch(`${LLAMAFILE_URL}/v1/models`, { signal: AbortSignal.timeout(3000) });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      llamafileModel = (data.data && data.data[0] && data.data[0].id) || 'llamafile';
+      dot.className = 'status-dot online';
+      if (label) label.textContent = '🦙 Llamafile · ready';
+      updateModelBadge();
+    } catch (_) {
+      dot.className = 'status-dot offline';
+      if (label) label.textContent = '🦙 Llamafile · not running';
+      appendMessage('aria', `⚠️ No llamafile detected on <code>localhost:8080</code>. Download one and start it:<br>
+        <code>./your-model.llamafile --server --nobrowser</code><br><br>
+        Then reopen this panel. <a href="../download.html">Get a llamafile →</a>`, true);
     }
   }
 
@@ -435,6 +467,8 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
     if (!badge) return;
     if (currentProvider === PROVIDER_LOCAL) {
       badge.textContent = ollamaModel || '—';
+    } else if (currentProvider === PROVIDER_LLAMAFILE) {
+      badge.textContent = llamafileModel || 'llamafile';
     } else {
       badge.textContent = (CLAUDE_MODELS.find(m => m.id === claudeModel)?.label || claudeModel).split('—')[0].trim();
     }
@@ -505,6 +539,8 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
         return;
       }
       await streamClaude(text);
+    } else if (currentProvider === PROVIDER_LLAMAFILE) {
+      await streamLlamafile(text);
     } else {
       await streamOllama(text);
     }
@@ -568,6 +604,81 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
       thinkingEl?.remove();
       if (err.name !== 'AbortError') {
         appendMessage('aria', `⚠️ Ollama error: ${escapeHtml(err.message)}. <a href="../ai-setup.html">Setup guide →</a>`, true);
+      } else {
+        appendMessage('aria', '_[Response stopped]_', false);
+      }
+    } finally {
+      isStreaming = false;
+      setSendBtn('send');
+    }
+  }
+
+  /* ──────────────────────────────────────────
+     STREAM — LLAMAFILE (OpenAI-compatible SSE)
+  ────────────────────────────────────────── */
+  async function streamLlamafile(userText) {
+    isStreaming = true;
+    abortController = new AbortController();
+    setSendBtn('stop');
+
+    const thinkingEl = appendThinking();
+    try {
+      const payload = {
+        model: llamafileModel || 'local',
+        messages: [
+          { role: 'system', content: buildSystemPrompt(userText) },
+          ...conversationHistory.slice(-12)
+        ],
+        stream: true,
+        temperature: currentTemperature
+      };
+
+      const res = await fetch(`${LLAMAFILE_URL}/v1/chat/completions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: abortController.signal
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      thinkingEl.remove();
+      const msgEl     = appendMessage('aria', '');
+      const contentEl = msgEl?.querySelector('.aria-message-content');
+
+      const reader  = res.body.getReader();
+      const decoder = new TextDecoder();
+      let full   = '';
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop();           /* keep incomplete line */
+        for (const line of lines) {
+          if (!line.startsWith('data:')) continue;
+          const raw = line.slice(5).trim();
+          if (raw === '[DONE]' || !raw) continue;
+          try {
+            const ev = JSON.parse(raw);
+            const delta = ev.choices && ev.choices[0] && ev.choices[0].delta && ev.choices[0].delta.content;
+            if (delta) {
+              full += delta;
+              if (contentEl) contentEl.innerHTML = formatMarkdown(full);
+              scrollMessages();
+            }
+          } catch (_) {}
+        }
+      }
+
+      conversationHistory.push({ role: 'assistant', content: full });
+      addTokens(full.length);
+
+    } catch (err) {
+      thinkingEl?.remove();
+      if (err.name !== 'AbortError') {
+        appendMessage('aria', `⚠️ Llamafile error: ${escapeHtml(err.message)}. Is it running on <code>localhost:8080</code>? <a href="../download.html">Get one →</a>`, true);
       } else {
         appendMessage('aria', '_[Response stopped]_', false);
       }
@@ -833,7 +944,7 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
   function loadPreferences() {
     try {
       const provider = localStorage.getItem('aria-provider');
-      if (provider === PROVIDER_CLAUDE || provider === PROVIDER_LOCAL) {
+      if (provider === PROVIDER_CLAUDE || provider === PROVIDER_LOCAL || provider === PROVIDER_LLAMAFILE) {
         currentProvider = provider;
       }
 
@@ -856,8 +967,8 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
 
       /* Apply provider UI state */
       if (currentProvider === PROVIDER_CLAUDE) {
-        $('aria-provider-local') ?.classList.remove('active');
-        $('aria-provider-claude')?.classList.add('active');
+        $('aria-provider-local')    ?.classList.remove('active');
+        $('aria-provider-claude')   ?.classList.add('active');
         const rowO = $('aria-row-ollama-model');
         const rowC = $('aria-row-claude-model');
         const rowK = $('aria-row-apikey');
@@ -868,6 +979,11 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
           const inp = $('aria-claude-key');
           if (inp) inp.value = claudeApiKey;
         }
+      } else if (currentProvider === PROVIDER_LLAMAFILE) {
+        $('aria-provider-local')    ?.classList.remove('active');
+        $('aria-provider-llamafile')?.classList.add('active');
+        const rowO = $('aria-row-ollama-model');
+        if (rowO) rowO.style.display = 'none';
       }
 
       /* Restore Claude model selector */
