@@ -1,5 +1,5 @@
 /* The Last Light Survival Guide — Service Worker v4 */
-const CACHE = 'last-light-v28';
+const CACHE = 'last-light-v30';
 
 /* Pre-cache: all HTML, CSS, JS, icons, manifest.
    pdf-chunks.json (5.7MB) is intentionally excluded from pre-cache to avoid
@@ -67,11 +67,14 @@ const PRECACHE = [
   '/assets/icons/icon.svg',
 ];
 
-/* ── Install: pre-cache everything, activate immediately ── */
+/* ── Install: pre-cache everything, activate immediately ──
+   Fetch each file with cache:'reload' so a new worker version pulls FRESH copies
+   from the network, bypassing the long (1-year) browser HTTP cache. This is what
+   makes aggressive caching safe: bump CACHE here and every asset refreshes. */
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE)
-      .then(cache => cache.addAll(PRECACHE))
+      .then(cache => cache.addAll(PRECACHE.map(u => new Request(u, { cache: 'reload' }))))
       .then(() => self.skipWaiting())
   );
 });
@@ -115,8 +118,11 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  /* HTML pages — cache-first, with network update in background */
-  event.respondWith(staleWhileRevalidate(event.request));
+  /* HTML pages — cache-first. We intentionally do NOT revalidate in the
+     background: with long HTTP caching that fetch could pull a stale page from
+     the browser cache and re-pollute the SW cache. Updates arrive via a new SW
+     version (bump CACHE), which force-refreshes every file on install. */
+  event.respondWith(cacheFirst(event.request));
 });
 
 /* ── Cache strategies ── */
@@ -126,21 +132,6 @@ function cacheFirst(request) {
     if (cached) return cached;
     return fetchAndCache(request);
   });
-}
-
-function staleWhileRevalidate(request) {
-  return caches.open(CACHE).then(cache =>
-    cache.match(request).then(cached => {
-      const networkFetch = fetch(request).then(response => {
-        if (response && response.status === 200 && response.type === 'basic') {
-          cache.put(request, response.clone());
-        }
-        return response;
-      }).catch(() => null);
-
-      return cached || networkFetch.then(r => r || offlineFallback(request));
-    })
-  );
 }
 
 function networkFirstWithCache(request) {

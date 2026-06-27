@@ -36,36 +36,32 @@ EXCLUDES="--exclude .git/* --exclude .claude/* --exclude node_modules/* \
   --exclude .env* --exclude *.sh --exclude *.md --exclude docs/* \
   --exclude infra/* --exclude pmtiles"
 
-echo "1/4  Syncing site to s3://$BUCKET (default 1-hour cache)…"
-# Most files: short cache so content updates show within an hour.
+echo "1/3  Syncing site to s3://$BUCKET (1-year cache)…"
+# Long cache on everything — filenames are stable and you update rarely.
+# Safe because the SERVICE WORKER is the update channel (see step 2): when you
+# bump the cache version in sw.js, the new worker force-refreshes every file
+# from the network, so returning visitors get the update despite the long cache.
 # delete = remove files from the bucket that no longer exist locally.
 # shellcheck disable=SC2086
 aws s3 sync . "s3://$BUCKET" --delete $EXCLUDES \
-  --cache-control "public,max-age=3600"
+  --cache-control "public,max-age=31536000"
 
-echo "2/4  Long cache for big, rarely-changing assets (PDFs, maps, fonts)…"
-# shellcheck disable=SC2086
-aws s3 cp "s3://$BUCKET" "s3://$BUCKET" --recursive --metadata-directive REPLACE \
-  --exclude "*" --include "pdfs/*.pdf" --include "maps/*.pmtiles" \
-  --include "search/pdf-chunks.json" --include "assets/vendor/*" \
-  --cache-control "public,max-age=2592000" >/dev/null 2>&1 || true
-# .pmtiles content-type (loaded as a buffer, so octet-stream is correct)
-aws s3 cp "s3://$BUCKET/maps" "s3://$BUCKET/maps" --recursive \
-  --metadata-directive REPLACE --exclude "*" --include "*.pmtiles" \
-  --content-type "application/octet-stream" --cache-control "public,max-age=2592000" >/dev/null 2>&1 || true
-
-echo "3/4  No-cache for the service worker (so updates propagate)…"
-# sw.js MUST revalidate every load, or users get stuck on an old version.
+echo "2/3  No-cache for the service worker (the update trigger)…"
+# sw.js must always revalidate — it's how updates reach already-cached visitors.
 aws s3 cp sw.js "s3://$BUCKET/sw.js" \
   --content-type "application/javascript" --cache-control "no-cache" >/dev/null
 
-echo "4/4  CloudFront invalidation…"
+echo "3/3  CloudFront invalidation…"
 if [ -n "$CF_DIST" ]; then
   aws cloudfront create-invalidation --distribution-id "$CF_DIST" --paths "/*" >/dev/null
   echo "      invalidated /* on $CF_DIST"
 else
   echo "      (skipped — set CF_DIST=<id> to auto-invalidate; otherwise the CDN may serve old files for up to an hour)"
 fi
+
+echo ""
+echo "ℹ  Reminder: when you change site CONTENT, bump the CACHE version in sw.js"
+echo "   (e.g. last-light-v28 -> v29) before deploying, so returning visitors update."
 
 echo ""
 echo "✓ Deployed to s3://$BUCKET"

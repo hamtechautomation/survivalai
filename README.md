@@ -421,6 +421,19 @@ BUCKET=my-survival-guide  CF_DIST=E1234ABCD  sh deploy-s3.sh
 `maps/`, since they're on your disk), sets long cache for big assets, **no-cache
 for `sw.js`** so updates propagate, and invalidates CloudFront if `CF_DIST` is set.
 
+### Caching & how updates reach people
+Everything is cached for **1 year** (cheap, fast — `deploy-s3.sh` sets it).
+That's safe even though filenames aren't content-hashed, because the **service
+worker is the update channel**:
+
+- `sw.js` is served `no-cache`, so browsers always re-check it.
+- When you change site content, **bump the cache version in `sw.js`** (e.g.
+  `last-light-v30` → `v31`). The new worker installs with `cache:'reload'`,
+  which force-refreshes every file past the year-long browser cache, then takes
+  over. Returning visitors update on their next load.
+- `deploy-s3.sh` also invalidates CloudFront so the edge serves fresh copies
+  immediately. **The one rule: bump the version when you deploy a content change.**
+
 ### Good to know
 - **Cost:** storage is trivial (~$0.02/GB·month). The spend is CloudFront egress —
   the ~29 MB AI index loads when someone uses Bunker Bot, and a ~60 MB map loads
