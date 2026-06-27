@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Download The Last Light Survival Guide — a free offline copy you can keep on a USB drive forever. Pick a package, add the offline AI, and support the project if it's useful.">
+  <title>Download &amp; Support — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⬇</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .tier-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; margin:1.25rem 0; }
+    .tier { background:var(--bg-2); border:1px solid var(--border); border-radius:10px; padding:1.1rem 1.2rem; display:flex; flex-direction:column; }
+    .tier.featured { border-color:var(--amber-dim); }
+    .tier-top { display:flex; align-items:baseline; justify-content:space-between; gap:.5rem; }
+    .tier-name { font-weight:800; font-size:1.05rem; color:var(--text-0); }
+    .tier-size { font-family:var(--mono,monospace); font-size:.72rem; color:var(--amber); border:1px solid var(--amber-dim); border-radius:10px; padding:1px 8px; white-space:nowrap; }
+    .tier-tagline { font-size:.8rem; color:var(--text-3); margin:.15rem 0 .6rem; }
+    .tier ul { font-size:.82rem; color:var(--text-2); line-height:1.6; margin:0 0 1rem; padding-left:1.1rem; flex:1; }
+    .tier .btn-dl { display:block; text-align:center; text-decoration:none; font-weight:700; font-size:.9rem; padding:.55rem; border-radius:6px; background:var(--amber-dim); color:var(--amber-light); border:1px solid var(--amber-dim); }
+    .tier .btn-dl:hover { background:var(--amber); color:var(--bg-0); }
+    .tier.featured .btn-dl { background:var(--amber); color:var(--bg-0); }
+    .addon { background:var(--bg-2); border:1px solid var(--border); border-left:3px solid var(--amber-dim); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; }
+    .addon h3 { margin:0 0 .4rem; color:var(--amber-light); }
+    .step-row { display:grid; grid-template-columns:1.7rem 1fr; gap:.55rem; margin:.45rem 0; align-items:start; }
+    .step-n { width:1.5rem;height:1.5rem;border-radius:50%;background:var(--amber-dim);color:var(--amber-light);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.78rem }
+    .support { text-align:center; background:var(--bg-2); border:1px solid var(--amber-dim); border-radius:10px; padding:1.5rem 1.2rem; margin:1.5rem 0; }
+    .support a.donate { display:inline-block; text-decoration:none; font-weight:800; font-size:1rem; padding:.6rem 1.6rem; border-radius:8px; background:var(--amber); color:var(--bg-0); margin-top:.5rem; }
+    code.cmd { display:block; background:var(--bg-0); border:1px solid var(--border-hi); border-radius:4px; padding:.4rem .6rem; font-size:.8rem; margin:.3rem 0; overflow-x:auto; }
+  </style>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Download &amp; Support</span>
+  </div>
+  <div class="header-actions">
+    <button id="aria-toggle" class="btn btn-sm btn-primary">Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>Take It With You — Free Offline Copy</h1>
+    <p class="section-desc">This whole guide is yours to keep. Download a package, put it on a USB drive or your phone, and it works forever with no internet. Free to download, free to share. If it's useful and you can spare it, a donation keeps it online and growing — but it's never required.</p>
+  </div>
+
+  <h2>Choose a package</h2>
+  <div class="tier-grid">
+    <div class="tier">
+      <div class="tier-top"><span class="tier-name">Lite</span><span class="tier-size">~1 MB</span></div>
+      <div class="tier-tagline">The guide app only</div>
+      <ul>
+        <li>All 27 sections, 14 tools, 36 skills</li>
+        <li>Full offline search</li>
+        <li>Bunker Bot (add your own model)</li>
+        <li>No reference PDFs, maps, or AI index</li>
+      </ul>
+      <a class="btn-dl" href="downloads/last-light-survival-guide-lite.zip" download>⬇ Download Lite</a>
+    </div>
+    <div class="tier featured">
+      <div class="tier-top"><span class="tier-name">Standard</span><span class="tier-size">~560 MB</span></div>
+      <div class="tier-tagline">The full library on a pen drive</div>
+      <ul>
+        <li>Everything in Lite, plus:</li>
+        <li><strong>28 reference books</strong> (PDFs) — medical, military, homesteading, classics</li>
+        <li><strong>Bunker Bot cites the books</strong> (14,000-chunk AI search index)</li>
+        <li><strong>A regional offline map</strong> (Northern England demo — swap your own)</li>
+      </ul>
+      <a class="btn-dl" href="downloads/last-light-survival-guide-standard.zip" download>⬇ Download Standard</a>
+    </div>
+  </div>
+  <p style="font-size:.8rem;color:var(--text-3)">Both extract to a <code>last-light-survival-guide/</code> folder. Open <code>index.html</code> in any browser, or serve it with <code>python3 -m http.server</code> for the offline AI, maps, and PWA install. Verify your copy with <code>sh verify.sh</code>.</p>
+
+  <div class="addon">
+    <h3>＋ Add the offline AI (optional)</h3>
+    <p style="font-size:.85rem;color:var(--text-2);margin:.2rem 0 .7rem">Bunker Bot can run a real AI model fully offline. The easiest way is a <strong>llamafile</strong> — a single file that <em>is</em> the model and the server, no install, works on Windows/Mac/Linux. It's a separate download (1–3 GB) so the packages above stay small.</p>
+    <div class="step-row"><div class="step-n">1</div><div>Download a llamafile — start with <strong>Llama-3.2-3B-Instruct</strong> (~2.3 GB; or the 1B, ~0.9 GB, for older hardware) from <a href="https://github.com/Mozilla-Ocho/llamafile" target="_blank" rel="noopener">Mozilla's llamafile project</a> or Hugging Face.</div></div>
+    <div class="step-row"><div class="step-n">2</div><div>Make it runnable and start it:<code class="cmd">chmod +x *.llamafile &amp;&amp; ./your-model.llamafile --server --nobrowser</code></div></div>
+    <div class="step-row"><div class="step-n">3</div><div>Open the guide, click <strong>Bunker Bot</strong>, choose the <strong>Llamafile</strong> mode — it connects automatically. Ask away, fully offline.</div></div>
+    <p style="font-size:.78rem;color:var(--text-3);margin-top:.6rem">⚠️ Small models can be wrong, especially on medical questions — Bunker Bot leans on the bundled books to stay grounded, but always verify anything critical.</p>
+  </div>
+
+  <div class="addon">
+    <h3>＋ Add Wikipedia, Gutenberg &amp; world maps</h3>
+    <p style="font-size:.85rem;color:var(--text-2);margin:.2rem 0">Too big to bundle, but one click away: the <a href="expansion.html">Expansion Library</a> links every offline knowledge base — all of Wikipedia and Project Gutenberg via Kiwix, and offline maps of anywhere on Earth.</p>
+  </div>
+
+  <div class="support">
+    <div style="font-size:.95rem;color:var(--text-1);max-width:560px;margin:0 auto">This project is free and always will be. Hosting, maps, and the reference library cost a little to keep online — if it's helped you, chipping in keeps it alive and ad-free for the next person.</div>
+    <a class="donate" href="https://ko-fi.com/YOURHANDLE" target="_blank" rel="noopener">❤ Support this project</a>
+    <div style="font-size:.72rem;color:var(--text-3);margin-top:.6rem">100% optional. The guide is yours either way.</div>
+  </div>
+
+  <p style="font-size:.78rem;color:var(--text-3)">Want to mirror or re-share it? Please do — it's licensed Creative Commons (CC BY-SA 4.0). For censorship-resistant copies, see the torrent / IPFS options in the project README.</p>
+
+  <nav class="section-pagination no-print" aria-label="Section navigation">
+    <a href="expansion.html" class="pagination-btn pagination-prev">← Expansion Library</a>
+    <a href="index.html" class="pagination-btn pagination-home">Home</a>
+    <a href="ai-setup.html" class="pagination-btn pagination-next">Bunker Bot Setup →</a>
+  </nav>
+</div>
+</main>
+
+<aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+  <div class="aria-header">
+    <div class="aria-title"><div class="aria-avatar">⬇</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+    <button id="aria-close" class="btn-icon">✕</button>
+  </div>
+  <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span></div>
+  <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+    <div class="aria-message aria-welcome"><div class="aria-message-content"><p>Ask me which package to pick, how to set up the offline AI, or how to put this on a USB drive.</p></div></div>
+  </div>
+  <div class="aria-input-area">
+    <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2"></textarea>
+    <button id="aria-send" class="btn btn-primary">Send</button>
+  </div>
+</aside>
+<button id="back-to-top" class="back-to-top" title="Back to top">↑</button>
+<script src="assets/js/search.js"></script>
+<script src="assets/js/bunker-bot.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

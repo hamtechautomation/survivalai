@@ -17,3 +17,11 @@ __pycache__/
 # Offline map data — large, distributed on the USB/extracted locally (like PDFs)
 maps/*.pmtiles
 /pmtiles
+
+# Private hosting config (never commit personal infra)
+.env.deploy
+
+# Build output (generated ZIP packages)
+downloads/
+*.zip
+dist/

@@ -266,6 +266,9 @@
     /* OFFLINE MAPS */
     { id:'maps', title:'Offline Maps — In Your Browser', section:'maps', sectionLabel:'Offline Maps', file:'maps.html', anchor:'', content:'offline map browser pmtiles openstreetmap leaflet protomaps northern england yorkshire GPS locate navigation no internet vector tiles minimal server raspberry pi extract region', tags:['maps','offline','pmtiles','GPS','navigation','openstreetmap'] },
 
+    /* DOWNLOAD & SUPPORT */
+    { id:'download', title:'Download & Support', section:'download', sectionLabel:'Download', file:'download.html', anchor:'', content:'download offline copy USB drive zip package lite standard install llamafile offline AI model donate support donation ko-fi keep on pen drive get the guide', tags:['download','offline copy','zip','llamafile','donate','support'] },
+
     /* EXPANSION LIBRARY */
     { id:'expansion', title:'Expansion Library — Wikipedia, Gutenberg & Offline Maps', section:'expansion', sectionLabel:'Expansion Library', file:'expansion.html', anchor:'', content:'expansion library kiwix zim wikipedia offline project gutenberg download all human knowledge medical wikipedia wikimed simple english wiktionary ifixit wikivoyage wikibooks wikisource encyclopedia pen drive offline reader maps offline map navigation GPS organic maps osmand geofabrik openstreetmap osm topographic contour UK England Great Britain protomaps pmtiles ordnance survey', tags:['kiwix','zim','wikipedia','gutenberg','offline','expansion','download','maps','navigation','GPS','osm'] },
 

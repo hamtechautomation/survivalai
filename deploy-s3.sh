@@ -17,15 +17,23 @@
 set -e
 cd "$(dirname "$0")"
 
+# Load your private hosting config (bucket / distribution / domain) if present.
+# .env.deploy is gitignored, so your personal infra never lands in the repo.
+# Copy .env.deploy.example to .env.deploy and fill it in.
+if [ -f .env.deploy ]; then
+  . ./.env.deploy
+fi
+
 if [ -z "$BUCKET" ]; then
-  echo "Set BUCKET first, e.g.:  BUCKET=my-bucket sh deploy-s3.sh"
+  echo "No bucket set. Create .env.deploy (copy .env.deploy.example) or run:"
+  echo "  BUCKET=my-bucket CF_DIST=E123 sh deploy-s3.sh"
   exit 2
 fi
 command -v aws >/dev/null 2>&1 || { echo "AWS CLI not found — install it and run 'aws configure'."; exit 2; }
 
 EXCLUDES="--exclude .git/* --exclude .claude/* --exclude node_modules/* \
   --exclude .DS_Store --exclude */.DS_Store --exclude .gitignore \
-  --exclude *.sh --exclude TESTING.md"
+  --exclude .env* --exclude *.sh --exclude TESTING.md --exclude pmtiles"
 
 echo "1/4  Syncing site to s3://$BUCKET (default 1-hour cache)…"
 # Most files: short cache so content updates show within an hour.
