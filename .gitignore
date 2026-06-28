@@ -26,3 +26,6 @@ downloads/
 *.zip
 dist/
 .claude/
+
+# Private marketing/outreach material — never publish
+marketing/
