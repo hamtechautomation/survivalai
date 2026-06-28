@@ -1,0 +1,4 @@
+# Adds a "Sponsor" button to the repo. The custom link works immediately.
+# To also use GitHub's native Sponsors program later, apply at
+# https://github.com/sponsors and add:  github: [hamtechautomation]
+custom: ["https://buy.stripe.com/14A00lgJM72a1wNcES9Zm00"]
