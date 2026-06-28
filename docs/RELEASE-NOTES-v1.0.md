@@ -3,8 +3,8 @@
 **A complete, offline-first survival library you can keep on a USB stick forever.
 No internet, no accounts, no tracking, no ads. Free to download, free to share.**
 
-> Replace before publishing: the donation link. Live URL (bunkerbot.co.uk)
-> is set. Tag this release `v1.0` on GitHub.
+> Live URL (bunkerbot.co.uk), GitHub URL, and donation link are all set.
+> Tag this release `v1.0` on GitHub.
 
 ---
 
@@ -83,4 +83,4 @@ guides are non-commercial — keep them free.
 
 ## Support
 The project is free and always will be. If it's useful, a donation keeps it
-online and growing: **[donation link]**. 100% optional.
+online and growing: **[Support the project](https://buy.stripe.com/14A00lgJM72a1wNcES9Zm00)**. 100% optional.

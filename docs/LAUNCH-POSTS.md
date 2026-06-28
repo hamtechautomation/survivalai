@@ -1,6 +1,6 @@
 # Launch posts (ready to paste)
 
-> Replace the donation link before posting. (Live URL + GitHub URL are set.)
+> All placeholders set (live URL, GitHub URL, donation link). Ready to post.
 > Post the two communities a few days apart, not the same hour.
 
 ---
