@@ -1,7 +1,27 @@
 # The Last Light Survival Guide
-**Complete Offline Preparedness Knowledge Base — v1.0.0**
 
-A comprehensive, dependency-free survival reference built for the grid-down scenario. Zero internet required after download. Works from a USB drive, laptop, tablet, or phone. No accounts, no tracking, no ads.
+![The Last Light Survival Guide](assets/og-image.png)
+
+> **A complete, fully-offline survival library — 27 sections, 28 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
+
+[![Live site](https://img.shields.io/badge/live-bunkerbot.co.uk-c9a94e?style=flat-square)](https://bunkerbot.co.uk)
+[![Download](https://img.shields.io/badge/download-free-4b9e6a?style=flat-square)](https://bunkerbot.co.uk/download.html)
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/license-CC%20BY--SA%204.0-c9a94e?style=flat-square)](https://creativecommons.org/licenses/by-sa/4.0/)
+![No dependencies](https://img.shields.io/badge/dependencies-zero-4b9e6a?style=flat-square)
+![Offline-first PWA](https://img.shields.io/badge/offline-first-070a09?style=flat-square)
+
+A comprehensive, **dependency-free** survival reference built for the grid-down scenario. Zero internet required after download. Works from a USB drive, laptop, tablet, phone, or a Raspberry Pi. No accounts, no tracking, no ads.
+
+- 🌐 **Live:** https://bunkerbot.co.uk · **Download (free):** https://bunkerbot.co.uk/download.html
+- 🤖 **Offline AI** that runs locally (Ollama / llamafile) and **cites its sources** — it won't invent drug doses.
+- 📚 **28 bundled reference books** + browser-side full-text search, all offline.
+- 🗺️ **Offline maps** (PMTiles) and one-click **Kiwix** expansion for all of Wikipedia & Project Gutenberg.
+- 🔧 **Pure static HTML/CSS/JS** — no build step, no server, runs from `file://`.
+
+> ⭐ **If this is useful, star the repo** — it helps others find it. Mirrors and re-shares encouraged (CC BY-SA).
+
+## 🩺 Help wanted — expert review
+The content is broad and AI-assisted, and the **medical material has not yet been reviewed by a licensed clinician.** The inline citations exist so you can verify every claim. **If you're a doctor, paramedic, nurse, vet, midwife, ham, or experienced homesteader, please tear apart the relevant section** — open a [**medical/content correction**](https://github.com/hamtechautomation/survivalai/issues/new/choose) issue. That review is the single most valuable contribution right now.
 
 ---
 

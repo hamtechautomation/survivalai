@@ -1,0 +1,63 @@
+name: "🩺 Medical / clinical correction"
+description: "Flag a medical, first-aid, dosage, or veterinary claim that's wrong, unsafe, or out of date."
+title: "[Medical] <short description>"
+labels: ["medical-review", "needs-expert"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you — clinical review is the single most valuable contribution to this project.
+        You don't need to be perfect or exhaustive; even one corrected section helps.
+  - type: input
+    id: location
+    attributes:
+      label: Where is it?
+      description: Page/section and, if possible, the on-page citation or heading.
+      placeholder: "e.g. sections/medical.html → §7 Anaphylaxis, the epinephrine dose"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong?
+      description: Quote the current text and explain the issue (inaccurate, unsafe, outdated, missing caveat…).
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Suggested correction
+      description: What should it say instead?
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source / reference (optional but valued)
+      description: A guideline, textbook, or standard that supports the correction.
+    validations:
+      required: false
+  - type: dropdown
+    id: background
+    attributes:
+      label: Your background (optional)
+      description: Helps us triage. Entirely optional and unverified.
+      options:
+        - "Prefer not to say"
+        - "Physician"
+        - "Paramedic / EMT"
+        - "Nurse"
+        - "Pharmacist"
+        - "Veterinarian"
+        - "Midwife"
+        - "Dentist"
+        - "Other clinical / first-aid background"
+    validations:
+      required: false
+  - type: checkboxes
+    id: severity
+    attributes:
+      label: Safety
+      options:
+        - label: "This is a SAFETY-CRITICAL error (could cause harm if followed) — please prioritise."
+          required: false

@@ -1,0 +1,31 @@
+name: "📝 Content correction or improvement"
+description: "Fix or improve any non-medical content — energy, water, comms, navigation, agriculture, build projects, etc."
+title: "[Content] <short description>"
+labels: ["content"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Where is it?
+      description: Page/section and heading if you can.
+      placeholder: "e.g. sections/energy.html → §8 Salvaging Solar Panels"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong or missing?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested fix or addition
+    validations:
+      required: false
+  - type: textarea
+    id: source
+    attributes:
+      label: Source / reference (optional)
+    validations:
+      required: false

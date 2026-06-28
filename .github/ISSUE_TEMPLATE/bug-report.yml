@@ -1,0 +1,52 @@
+name: "🐛 Bug / something broken"
+description: "A page, search, the offline AI, maps, or a download isn't working."
+title: "[Bug] <short description>"
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What went wrong, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open …
+        2. Click …
+        3. See …
+    validations:
+      required: false
+  - type: dropdown
+    id: how
+    attributes:
+      label: How are you running it?
+      options:
+        - "Live site (bunkerbot.co.uk)"
+        - "Downloaded ZIP, opened from file://"
+        - "Downloaded ZIP, served locally (http.server / nginx / etc.)"
+        - "Raspberry Pi / other device"
+        - "Other"
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Browser / device / OS
+      placeholder: "e.g. Firefox 130 on Windows 11; Safari on iPhone"
+    validations:
+      required: false
+  - type: dropdown
+    id: ai
+    attributes:
+      label: If it's the offline AI — which provider?
+      options:
+        - "N/A"
+        - "Ollama"
+        - "llamafile"
+        - "Claude API"
+    validations:
+      required: false

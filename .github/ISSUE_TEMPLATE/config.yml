@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 Discussion / question / idea
+    url: https://github.com/hamtechautomation/survivalai/discussions
+    about: For questions, ideas, show-and-tell, or anything that isn't a specific correction or bug.
+  - name: 🌐 Live site
+    url: https://bunkerbot.co.uk
+    about: Browse or download the guide.
