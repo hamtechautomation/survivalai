@@ -1,6 +1,6 @@
 # Launch posts (ready to paste)
 
-> Replace `LIVE_URL`, `GITHUB_URL`, and the donation link before posting.
+> Replace `LIVE_URL` and the donation link before posting. (GitHub URL is set.)
 > Post the two communities a few days apart, not the same hour.
 
 ---
@@ -44,7 +44,7 @@ What's in it:
    cites the bundled books.
 
 Download (Lite ~1 MB, or the full ~560 MB library): **LIVE_URL/download.html**
-Source / mirror it yourself: **GITHUB_URL** (CC BY-SA, please share)
+Source / mirror it yourself: **https://github.com/hamtechautomation/survivalai** (CC BY-SA, please share)
 
 No ads, no signup, no upsell. There's an optional donation button if it helps
 you and you can spare it, but the whole thing is yours either way. I'd genuinely
@@ -91,7 +91,7 @@ material has *not* been reviewed by a clinician yet — the citations exist so y
 can check it. I'd value a hard technical look at the retrieval and the offline
 plumbing.
 
-Live: **LIVE_URL** · Source (CC BY-SA): **GITHUB_URL**
+Live: **LIVE_URL** · Source (CC BY-SA): **https://github.com/hamtechautomation/survivalai**
 
 ---
 

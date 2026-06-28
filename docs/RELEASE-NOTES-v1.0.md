@@ -1,10 +1,10 @@
-# The Last Light Survival Guide — v2.0
+# The Last Light Survival Guide — v1.0
 
 **A complete, offline-first survival library you can keep on a USB stick forever.
 No internet, no accounts, no tracking, no ads. Free to download, free to share.**
 
 > Replace before publishing: `LIVE_URL` (your CloudFront/domain) and the
-> donation link. Tag this release `v2.0` on GitHub.
+> donation link. Tag this release `v1.0` on GitHub.
 
 ---
 
@@ -17,7 +17,7 @@ sources**, a **library of 28 public-domain / open reference books**, **interacti
 calculators**, **offline maps**, and one-click access to **all of Wikipedia and
 Project Gutenberg**.
 
-## Highlights in v2.0
+## Highlights in v1.0
 
 **Knowledge**
 - **27 sections** — food & water, medical & first aid, energy, shelter, comms,
