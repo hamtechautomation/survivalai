@@ -3,8 +3,8 @@
 **A complete, offline-first survival library you can keep on a USB stick forever.
 No internet, no accounts, no tracking, no ads. Free to download, free to share.**
 
-> Replace before publishing: `LIVE_URL` (your CloudFront/domain) and the
-> donation link. Tag this release `v1.0` on GitHub.
+> Replace before publishing: the donation link. Live URL (bunkerbot.co.uk)
+> is set. Tag this release `v1.0` on GitHub.
 
 ---
 
@@ -57,7 +57,7 @@ Project Gutenberg**.
 | **Lite** | ~1 MB | The guide app + offline search (bring your own AI model) |
 | **Standard** | ~560 MB | Everything: 28 books, the AI search index, and a regional map |
 
-Download from **`LIVE_URL/download.html`**, or clone the repo. Both extract to a
+Download from **`https://bunkerbot.co.uk/download.html`**, or clone the repo. Both extract to a
 `last-light-survival-guide/` folder — open `index.html`.
 
 > Tip: serve it with `python3 -m http.server` to enable the offline AI, maps, and

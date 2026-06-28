@@ -57,7 +57,7 @@ Resources:
         DefaultRootObject: index.html
         HttpVersion: http2and3
         PriceClass: PriceClass_100   # cheapest edge set (US/Canada/Europe)
-        Aliases: !If [HasDomain, [!Ref DomainName], !Ref 'AWS::NoValue']
+        Aliases: !If [HasDomain, [!Ref DomainName, !Sub 'www.${DomainName}'], !Ref 'AWS::NoValue']
         ViewerCertificate: !If
           - HasDomain
           - AcmCertificateArn: !Ref AcmCertificateArn

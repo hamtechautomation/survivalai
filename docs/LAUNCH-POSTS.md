@@ -1,6 +1,6 @@
 # Launch posts (ready to paste)
 
-> Replace `LIVE_URL` and the donation link before posting. (GitHub URL is set.)
+> Replace the donation link before posting. (Live URL + GitHub URL are set.)
 > Post the two communities a few days apart, not the same hour.
 
 ---
@@ -43,7 +43,7 @@ What's in it:
 2. The offline AI is only as good as the small model you run — that's why it
    cites the bundled books.
 
-Download (Lite ~1 MB, or the full ~560 MB library): **LIVE_URL/download.html**
+Download (Lite ~1 MB, or the full ~560 MB library): **https://bunkerbot.co.uk/download.html**
 Source / mirror it yourself: **https://github.com/hamtechautomation/survivalai** (CC BY-SA, please share)
 
 No ads, no signup, no upsell. There's an optional donation button if it helps
@@ -91,7 +91,7 @@ material has *not* been reviewed by a clinician yet — the citations exist so y
 can check it. I'd value a hard technical look at the retrieval and the offline
 plumbing.
 
-Live: **LIVE_URL** · Source (CC BY-SA): **https://github.com/hamtechautomation/survivalai**
+Live: **https://bunkerbot.co.uk** · Source (CC BY-SA): **https://github.com/hamtechautomation/survivalai**
 
 ---
 
