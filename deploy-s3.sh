@@ -15,6 +15,11 @@
 # Needs the AWS CLI configured (`aws configure`) with write access to the bucket.
 
 set -e
+# -f (noglob): the $EXCLUDES patterns below (*.sh, *.md, .git/*) are passed
+# UNQUOTED so word-splitting separates them — but without noglob the shell also
+# pathname-expands them into real local filenames, which aws s3 sync then rejects
+# as unknown options. Disable globbing so the patterns reach aws literally.
+set -f
 cd "$(dirname "$0")"
 
 # Load your private hosting config (bucket / distribution / domain) if present.
