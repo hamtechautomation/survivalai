@@ -39,7 +39,7 @@ command -v aws >/dev/null 2>&1 || { echo "AWS CLI not found — install it and r
 EXCLUDES="--exclude .git/* --exclude .claude/* --exclude node_modules/* \
   --exclude .DS_Store --exclude */.DS_Store --exclude .gitignore \
   --exclude .env* --exclude *.sh --exclude *.md --exclude docs/* \
-  --exclude infra/* --exclude pmtiles"
+  --exclude infra/* --exclude marketing/* --exclude LICENSE* --exclude pmtiles"
 
 echo "1/3  Syncing site to s3://$BUCKET (1-year cache)…"
 # Long cache on everything — filenames are stable and you update rarely.
