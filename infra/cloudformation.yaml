@@ -39,6 +39,28 @@ Resources:
         Rules:
           - ObjectOwnership: BucketOwnerEnforced
 
+  # Private bucket for CloudFront access logs (privacy-friendly server-side
+  # analytics — no client-side tracking). ACLs are enabled (BucketOwnerPreferred)
+  # because CloudFront's legacy log delivery writes via an ACL grant. Logs
+  # auto-expire after 90 days.
+  LogBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub '${BucketName}-logs'
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerPreferred
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: expire-logs
+            Status: Enabled
+            ExpirationInDays: 90
+
   OriginAccessControl:
     Type: AWS::CloudFront::OriginAccessControl
     Properties:
@@ -56,6 +78,10 @@ Resources:
         Comment: The Last Light Survival Guide
         DefaultRootObject: index.html
         HttpVersion: http2and3
+        Logging:
+          Bucket: !GetAtt LogBucket.DomainName
+          Prefix: cf/
+          IncludeCookies: false
         PriceClass: PriceClass_100   # cheapest edge set (US/Canada/Europe)
         Aliases: !If [HasDomain, [!Ref DomainName, !Sub 'www.${DomainName}'], !Ref 'AWS::NoValue']
         ViewerCertificate: !If

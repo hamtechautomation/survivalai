@@ -481,9 +481,13 @@ All icons are inline SVG strings defined in `assets/js/app.js` (`window.ICONS`).
 
 ## License
 
-**Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)**
+**Dual-licensed** — see `LICENSE` and `LICENSE-CODE`:
 
-You are free to share and adapt this material for any purpose, even commercially, as long as you give attribution and distribute your contributions under the same license.
+- **Code** (HTML/CSS/JS, scripts, infra templates): **MIT** (`LICENSE-CODE`)
+- **Content** (the written survival/reference material): **Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)**
+- **Bundled books/data**: retain their own licenses (public domain or CC); the Hesperian guides are CC BY-SA non-commercial — keep them free.
+
+You are free to share and adapt the content for any purpose, even commercially, as long as you give attribution and distribute your contributions under the same license.
 
 **Public domain sources incorporated:**
 - FEMA wood gasifier plans
