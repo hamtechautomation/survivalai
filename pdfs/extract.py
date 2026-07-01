@@ -59,6 +59,7 @@ CHUNK_WORDS = 350   # target words per chunk
 MIN_CHUNK   = 60    # discard chunks shorter than this many words
 
 PDFS = {
+    'bunkerbot-compendium.pdf':      'Bunker Bot Compendium (Master Index & Quick-Reference)',
     'fm-3-05-70-survival.pdf':       'US Army Survival FM 3-05.70',
     'fm-4-25-11-first-aid.pdf':      'First Aid FM 4-25.11',
     'fm-21-10-field-hygiene.pdf':    'Field Hygiene FM 21-10',

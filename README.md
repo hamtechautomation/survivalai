@@ -2,7 +2,7 @@
 
 ![The Last Light Survival Guide](assets/og-image.png)
 
-> **A complete, fully-offline survival library — 27 sections, 28 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
+> **A complete, fully-offline survival library — 27 sections, 29 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
 
 [![Live site](https://img.shields.io/badge/live-bunkerbot.co.uk-c9a94e?style=flat-square)](https://bunkerbot.co.uk)
 [![Download](https://img.shields.io/badge/download-free-4b9e6a?style=flat-square)](https://bunkerbot.co.uk/download.html)
@@ -14,7 +14,7 @@ A comprehensive, **dependency-free** survival reference built for the grid-down 
 
 - 🌐 **Live:** https://bunkerbot.co.uk · **Download (free):** https://bunkerbot.co.uk/download.html
 - 🤖 **Offline AI** that runs locally (Ollama / llamafile) and **cites its sources** — it won't invent drug doses.
-- 📚 **28 bundled reference books** + browser-side full-text search, all offline.
+- 📚 **29 bundled reference books** + browser-side full-text search, all offline.
 - 🗺️ **Offline maps** (PMTiles) and one-click **Kiwix** expansion for all of Wikipedia & Project Gutenberg.
 - 🔧 **Pure static HTML/CSS/JS** — no build step, no server, runs from `file://`.
 
@@ -40,7 +40,7 @@ The content is broad and AI-assisted, and the **medical material has not yet bee
 Bunker Bot connects to [Ollama](https://ollama.ai) running on your local machine. It is completely optional — the guide is fully usable without it. When Ollama is running, click the **Bunker Bot** button on any page to open the chat panel.
 
 Bunker Bot features:
-- **Grounded in the bundled library** — answers are retrieved from the 28 bundled
+- **Grounded in the bundled library** — answers are retrieved from the 29 bundled
   PDFs (BM25 search over ~14,000 text chunks) and cited inline with source +
   page, shown as chips under each answer. Works on every page.
 - Local (Ollama) **or** cloud (Claude API) — toggle in the panel
@@ -229,7 +229,7 @@ last-light-survival-guide/
 │   ├── psychology.html         chemistry.html      textiles.html
 │   ├── vehicles.html           build-power.html    build-structures.html
 │   ├── medicine-making.html    build-water.html    projects.html (Practical Projects)
-├── pdfs/                       ← 28 bundled reference PDFs (gitignored; on the USB)
+├── pdfs/                       ← 29 bundled reference PDFs (gitignored; on the USB)
 │   ├── index.html              ← PDF library browser
 │   └── extract.py              ← Rebuilds the PDF search index
 ├── maps/                       ← Offline map data (.pmtiles, gitignored; on the USB)
@@ -500,4 +500,4 @@ You are free to share and adapt the content for any purpose, even commercially, 
 ---
 
 *The Last Light Survival Guide — v1.0.0 — June 2026*  
-*Portable core ~30 MB · full bundle with 28 PDFs + a regional map ~600 MB · fits any pen drive — and expands to all of Wikipedia, Gutenberg and world maps on demand.*
+*Portable core ~30 MB · full bundle with 29 PDFs + a regional map ~600 MB · fits any pen drive — and expands to all of Wikipedia, Gutenberg and world maps on demand.*
