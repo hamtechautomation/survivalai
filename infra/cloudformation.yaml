@@ -76,7 +76,7 @@ Resources:
       DistributionConfig:
         Enabled: true
         Comment: The Last Light Survival Guide
-        DefaultRootObject: index.html
+        DefaultRootObject: home.html
         HttpVersion: http2and3
         Logging:
           Bucket: !GetAtt LogBucket.DomainName

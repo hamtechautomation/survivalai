@@ -1,10 +1,12 @@
 /* The Last Light Survival Guide — Service Worker v4 */
-const CACHE = 'last-light-v40';
+const CACHE = 'last-light-v41';
 
 /* Pre-cache: all HTML, CSS, JS, icons, manifest.
    pdf-chunks.json (~30MB) is intentionally excluded from pre-cache to avoid
    iOS storage quota failures — it's cached on first access instead. */
 const PRECACHE = [
+  '/',
+  '/home.html',
   '/index.html',
   '/quick-reference.html',
   '/gear.html',

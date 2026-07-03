@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="The Last Light Survival Guide — a complete, fully-offline survival library. 27 sections, 29 reference books, an AI that cites its sources, and offline maps. Free. Runs off a USB stick, even a Raspberry Pi.">
+  <link rel="canonical" href="https://bunkerbot.co.uk/">
+  <meta name="theme-color" content="#070a09">
+  <meta property="og:title" content="The Last Light Survival Guide">
+  <meta property="og:description" content="A complete, fully-offline survival library — 29 books, an AI that cites them, and offline maps. Free. Runs off a USB stick.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bunkerbot.co.uk/">
+  <meta property="og:image" content="https://bunkerbot.co.uk/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://bunkerbot.co.uk/assets/og-image.png">
+  <title>The Last Light Survival Guide — Free Offline Survival Library</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <style>
+    :root{
+      --bg-0:#070a09; --bg-1:#0c110f; --bg-2:#121a16; --bg-3:#182019; --bg-4:#1e2820;
+      --text-0:#eceee0; --text-1:#c4cebc; --text-2:#8a9e86; --text-3:#4d6048;
+      --amber:#c9a94e; --amber-light:#e8c96e; --amber-dim:#7a6430;
+      --green:#4b9e6a; --red:#c84848; --orange:#c87a40; --blue:#4a80b5;
+      --border:#243028; --border-hi:#3a4838;
+      --font:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+      --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg-0);color:var(--text-1);font-family:var(--font);line-height:1.65;
+      -webkit-font-smoothing:antialiased;overflow-x:hidden}
+    a{color:var(--amber);text-decoration:none}
+    .wrap{max-width:1120px;margin:0 auto;padding:0 1.25rem}
+    section{padding:4.5rem 0}
+    h1,h2,h3{color:var(--text-0);line-height:1.15;letter-spacing:-.02em}
+    .eyebrow{color:var(--amber);font-size:.8rem;font-weight:700;letter-spacing:.14em;
+      text-transform:uppercase;margin-bottom:.7rem}
+    .muted{color:var(--text-2)}
+
+    /* ── top bar ── */
+    .topbar{position:sticky;top:0;z-index:40;background:rgba(7,10,9,.82);
+      backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+    .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+    .brand{display:flex;align-items:center;gap:.5rem;font-weight:800;color:var(--text-0);font-size:1.02rem}
+    .brand .bolt{color:var(--amber);filter:drop-shadow(0 0 8px rgba(201,169,78,.5))}
+    .topnav{display:flex;gap:1.3rem;align-items:center;font-size:.9rem}
+    .topnav a{color:var(--text-2)}.topnav a:hover{color:var(--amber)}
+    .topnav .btn-mini{background:var(--amber);color:var(--bg-0);padding:.4rem .9rem;border-radius:7px;font-weight:700}
+    @media(max-width:760px){.topnav a:not(.btn-mini){display:none}}
+
+    /* ── buttons ── */
+    .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:1rem;
+      padding:.8rem 1.6rem;border-radius:9px;border:1px solid transparent;cursor:pointer;transition:.18s}
+    .btn-primary{background:var(--amber);color:var(--bg-0);box-shadow:0 0 0 rgba(201,169,78,.5)}
+    .btn-primary:hover{background:var(--amber-light);box-shadow:0 6px 26px rgba(201,169,78,.28);transform:translateY(-1px)}
+    .btn-ghost{background:transparent;color:var(--text-0);border-color:var(--border-hi)}
+    .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+
+    /* ── hero ── */
+    .hero{position:relative;padding:3rem 0 3.5rem;overflow:hidden;border-bottom:1px solid var(--border)}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:2.5rem;align-items:center}
+    @media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:1.5rem}}
+    .hero h1{font-size:clamp(2.1rem,5.5vw,3.4rem);font-weight:800;margin-bottom:1rem}
+    .hero h1 .glow{color:var(--amber);text-shadow:0 0 22px rgba(201,169,78,.45)}
+    .hero-sub{font-size:clamp(1.02rem,2.2vw,1.2rem);color:var(--text-1);max-width:34ch;margin-bottom:1.5rem}
+    .hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}
+    .hero-trust{margin-top:1.1rem;font-size:.82rem;color:var(--text-3);display:flex;gap:1rem;flex-wrap:wrap}
+    .hero-trust span{display:inline-flex;align-items:center;gap:.35rem}
+
+    /* ── cinematic scene ── */
+    .scene{width:100%;aspect-ratio:16/11;background:linear-gradient(#0a1016,#0c0f0d 55%,#070a09);
+      border:1px solid var(--border);border-radius:14px;overflow:hidden;display:block}
+    .flash{animation:flash 7s ease-out infinite}
+    @keyframes flash{0%,12%,100%{opacity:0}13%{opacity:.9}15%{opacity:.15}16%{opacity:.7}18%{opacity:0}}
+    .bolt-strike{opacity:0;animation:bolt 7s ease-out infinite}
+    @keyframes bolt{0%,12.5%,20%,100%{opacity:0}13%{opacity:1}14%{opacity:.2}16%{opacity:.85}17.5%{opacity:0}}
+    .win{fill:var(--amber-light);animation:winflk 7s steps(1) infinite}
+    @keyframes winflk{0%,55%{opacity:.9}60%{opacity:.15}63%{opacity:.85}68%{opacity:0}100%{opacity:0}}
+    .rain line{stroke:#3a5064;stroke-width:1.4;opacity:.35;animation:rain 1s linear infinite}
+    @keyframes rain{from{transform:translateY(-16px)}to{transform:translateY(16px)}}
+    .lastlight{transform-origin:center;animation:breathe 3.4s ease-in-out infinite}
+    @keyframes breathe{0%,100%{opacity:.85;filter:drop-shadow(0 0 6px rgba(201,169,78,.6))}
+      50%{opacity:1;filter:drop-shadow(0 0 16px rgba(201,169,78,.95))}}
+    .halo{transform-origin:center;animation:halo 3.4s ease-in-out infinite}
+    @keyframes halo{0%,100%{opacity:.18;r:26px}50%{opacity:.32;r:34px}}
+
+    /* ── stats ── */
+    .stats{background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.2rem 0}
+    .stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;text-align:center}
+    @media(max-width:760px){.stats-row{grid-template-columns:repeat(2,1fr);gap:1.6rem}}
+    .stat b{display:block;font-size:clamp(1.6rem,4vw,2.3rem);color:var(--amber);font-weight:800;font-variant-numeric:tabular-nums}
+    .stat span{font-size:.78rem;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em}
+
+    /* ── generic grid cards ── */
+    .grid{display:grid;gap:1rem}
+    .g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+    @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+    @media(max-width:520px){.g3,.g4{grid-template-columns:1fr}}
+    .card{background:var(--bg-2);border:1px solid var(--border);border-radius:11px;padding:1.3rem;transition:.18s}
+    .card:hover{border-color:var(--amber-dim);transform:translateY(-2px)}
+    .card .ic{font-size:1.5rem;margin-bottom:.5rem;display:block}
+    .card h3{font-size:1.02rem;margin-bottom:.35rem}
+    .card p{font-size:.9rem;color:var(--text-2)}
+    .sec-head{max-width:60ch;margin-bottom:2rem}
+    .sec-head h2{font-size:clamp(1.5rem,3.5vw,2.1rem);margin-bottom:.6rem}
+    .sec-head p{color:var(--text-2)}
+
+    /* ── how to run (animated steps) ── */
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;position:relative}
+    @media(max-width:760px){.steps{grid-template-columns:1fr}}
+    .step{background:var(--bg-2);border:1px solid var(--border);border-radius:11px;padding:1.4rem;text-align:center;position:relative}
+    .step .n{width:2rem;height:2rem;border-radius:50%;background:var(--amber);color:var(--bg-0);
+      font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto .7rem}
+    .step .si{width:52px;height:52px;margin:.2rem auto .6rem;color:var(--amber);display:block}
+    .step h3{font-size:1rem;margin-bottom:.3rem}.step p{font-size:.86rem;color:var(--text-2)}
+    .dl-arrow{stroke:var(--amber);stroke-width:2.5;fill:none;stroke-linecap:round}
+    .a1{animation:dljig 1.8s ease-in-out infinite}
+    @keyframes dljig{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+    .a2 line{stroke-dasharray:6 6;animation:dash 1s linear infinite}
+    @keyframes dash{to{stroke-dashoffset:-12}}
+    .a3{transform-origin:center;animation:pop 2.4s ease-in-out infinite}
+    @keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+
+    /* ── terminal ── */
+    .term{background:#05080a;border:1px solid var(--border-hi);border-radius:11px;overflow:hidden;
+      font-family:var(--mono);font-size:.86rem;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+    .term-bar{background:var(--bg-3);padding:.5rem .8rem;display:flex;align-items:center;gap:.4rem;border-bottom:1px solid var(--border)}
+    .term-bar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+    .term-bar .t{margin-left:.6rem;color:var(--text-3);font-size:.76rem}
+    .term-body{padding:1.1rem;line-height:1.7;min-height:180px}
+    .term .p{color:var(--green)}.term .cmd{color:var(--text-0)}
+    .term .out{color:var(--text-2)}.term .src{color:var(--blue)}
+    .cursor{display:inline-block;width:8px;height:1.05em;background:var(--amber);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+
+    /* ── download tiers ── */
+    .tiers{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+    @media(max-width:680px){.tiers{grid-template-columns:1fr}}
+    .tier{background:var(--bg-2);border:1px solid var(--border);border-radius:13px;padding:1.5rem;display:flex;flex-direction:column}
+    .tier.feat{border-color:var(--amber-dim);background:linear-gradient(var(--bg-2),var(--bg-3))}
+    .tier .top{display:flex;justify-content:space-between;align-items:baseline}
+    .tier .nm{font-size:1.2rem;font-weight:800;color:var(--text-0)}
+    .tier .sz{font-family:var(--mono);font-size:.74rem;color:var(--amber);border:1px solid var(--amber-dim);border-radius:20px;padding:2px 10px}
+    .tier ul{list-style:none;margin:1rem 0 1.2rem;font-size:.9rem}
+    .tier li{padding:.28rem 0 .28rem 1.4rem;position:relative;color:var(--text-1)}
+    .tier li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700}
+    .tier .btn{justify-content:center;margin-top:auto}
+
+    /* ── donate ── */
+    .donate{background:linear-gradient(var(--bg-2),var(--bg-1));border:1px solid var(--amber-dim);
+      border-radius:14px;padding:2.2rem;text-align:center;max-width:640px;margin:0 auto}
+    .donate h2{font-size:1.5rem;margin-bottom:.6rem}
+    .donate .heart{display:inline-flex;align-items:center;gap:.5rem;background:var(--amber);color:var(--bg-0);
+      font-weight:800;padding:.7rem 1.8rem;border-radius:9px;margin-top:1rem;font-size:1.02rem;transition:.18s}
+    .donate .heart:hover{background:var(--amber-light);transform:translateY(-1px)}
+    .donate small{display:block;margin-top:.8rem;color:var(--text-3);font-size:.75rem}
+
+    /* ── faq ── */
+    .faq details{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;margin-bottom:.7rem;overflow:hidden}
+    .faq summary{padding:1rem 1.2rem;font-weight:700;color:var(--text-0);cursor:pointer;list-style:none;
+      display:flex;justify-content:space-between;align-items:center}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary::after{content:'+';color:var(--amber);font-size:1.3rem;transition:.2s}
+    .faq details[open] summary::after{transform:rotate(45deg)}
+    .faq details p{padding:0 1.2rem 1.1rem;color:var(--text-2);font-size:.92rem}
+
+    /* ── footer ── */
+    footer{border-top:1px solid var(--border);background:var(--bg-1);padding:2.5rem 0;font-size:.88rem}
+    .foot-grid{display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;align-items:center}
+    .foot-links{display:flex;gap:1.3rem;flex-wrap:wrap}
+    .foot-links a{color:var(--text-2)}.foot-links a:hover{color:var(--amber)}
+
+    /* reveal on scroll — gated on .js so no-JS users still see everything */
+    .reveal{transition:opacity .6s ease, transform .6s ease}
+    html.js .reveal{opacity:0;transform:translateY(18px)}
+    html.js .reveal.in{opacity:1;transform:none}
+
+    @media(prefers-reduced-motion:reduce){
+      *{animation:none!important;scroll-behavior:auto!important}
+      html.js .reveal{opacity:1;transform:none}
+    }
+  </style>
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- ══════════ TOP BAR ══════════ -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand"><span class="bolt">⚡</span> The Last Light</div>
+    <nav class="topnav">
+      <a href="#features">Features</a>
+      <a href="#run">How to run</a>
+      <a href="#download">Download</a>
+      <a href="index.html" class="btn-mini">Open the Guide →</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Free · Offline · Open Source</div>
+      <h1>When the grid goes dark,<br><span class="glow">the knowledge stays on.</span></h1>
+      <p class="hero-sub">A complete, fully-offline survival library — 29 reference books, an AI that <em>cites its sources</em>, and offline maps. Runs off a USB stick, even a Raspberry Pi. No internet, no account, no catch.</p>
+      <div class="hero-cta">
+        <a href="#download" class="btn btn-primary">⬇ Download — Free</a>
+        <a href="index.html" class="btn btn-ghost">Browse the Guide →</a>
+      </div>
+      <div class="hero-trust">
+        <span>✓ No account</span><span>✓ No tracking</span><span>✓ Works with zero signal</span><span>✓ CC BY-SA</span>
+      </div>
+    </div>
+
+    <!-- cinematic disaster → bunker scene -->
+    <svg class="scene" viewBox="0 0 400 275" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A city grid going dark in a storm while a bunker's last light stays glowing underground.">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#0b1420"/><stop offset="1" stop-color="#0a0f0d"/>
+        </linearGradient>
+        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#e8c96e" stop-opacity=".5"/><stop offset="1" stop-color="#e8c96e" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="400" height="275" fill="url(#sky)"/>
+      <!-- EMP / lightning flash overlay -->
+      <rect class="flash" width="400" height="180" fill="#dfeaff"/>
+      <!-- lightning bolt -->
+      <path class="bolt-strike" d="M300,10 L288,70 L305,70 L286,140 L330,60 L310,60 L322,10 Z" fill="#eaf2ff"/>
+      <!-- rain -->
+      <g class="rain">
+        <line x1="40" y1="0" x2="34" y2="16"/><line x1="90" y1="0" x2="84" y2="16"/>
+        <line x1="150" y1="0" x2="144" y2="16"/><line x1="210" y1="0" x2="204" y2="16"/>
+        <line x1="260" y1="0" x2="254" y2="16"/><line x1="330" y1="0" x2="324" y2="16"/>
+        <line x1="370" y1="0" x2="364" y2="16"/><line x1="120" y1="0" x2="114" y2="16"/>
+      </g>
+      <!-- city skyline -->
+      <g fill="#10171a" stroke="#1c2a2e" stroke-width="1">
+        <rect x="10" y="120" width="42" height="60"/><rect x="58" y="95" width="34" height="85"/>
+        <rect x="98" y="132" width="30" height="48"/><rect x="134" y="108" width="40" height="72"/>
+        <rect x="180" y="140" width="26" height="40"/><rect x="212" y="100" width="38" height="80"/>
+        <rect x="256" y="126" width="32" height="54"/><rect x="294" y="112" width="44" height="68"/>
+        <rect x="344" y="134" width="30" height="46"/>
+      </g>
+      <!-- windows (flicker out) -->
+      <g>
+        <rect class="win" x="64"  y="104" width="6" height="6" style="animation-delay:.2s"/>
+        <rect class="win" x="76"  y="104" width="6" height="6" style="animation-delay:.9s"/>
+        <rect class="win" x="64"  y="120" width="6" height="6" style="animation-delay:.5s"/>
+        <rect class="win" x="140" y="118" width="6" height="6" style="animation-delay:1.3s"/>
+        <rect class="win" x="152" y="118" width="6" height="6" style="animation-delay:.1s"/>
+        <rect class="win" x="140" y="134" width="6" height="6" style="animation-delay:1.7s"/>
+        <rect class="win" x="220" y="110" width="6" height="6" style="animation-delay:.7s"/>
+        <rect class="win" x="232" y="110" width="6" height="6" style="animation-delay:1.1s"/>
+        <rect class="win" x="220" y="126" width="6" height="6" style="animation-delay:.4s"/>
+        <rect class="win" x="302" y="122" width="6" height="6" style="animation-delay:1.5s"/>
+        <rect class="win" x="316" y="122" width="6" height="6" style="animation-delay:.3s"/>
+      </g>
+      <!-- ground line -->
+      <rect x="0" y="180" width="400" height="4" fill="#1a2420"/>
+      <rect x="0" y="184" width="400" height="91" fill="#0a0d0b"/>
+      <!-- bunker -->
+      <g>
+        <path d="M120,184 h160 v70 a10,10 0 0 1 -10,10 h-140 a10,10 0 0 1 -10,-10 Z" fill="#141b17" stroke="#26332b" stroke-width="2"/>
+        <!-- vent -->
+        <rect x="150" y="168" width="10" height="18" rx="3" fill="#1a231d" stroke="#26332b"/>
+        <!-- door -->
+        <rect x="186" y="210" width="28" height="54" rx="4" fill="#0d130f" stroke="#2c3a30" stroke-width="2"/>
+        <!-- the last light -->
+        <circle class="halo" cx="240" cy="224" r="26" fill="url(#glow)"/>
+        <circle class="lastlight" cx="240" cy="224" r="7" fill="#e8c96e"/>
+        <path class="lastlight" d="M240,214 l3,7 h-6 z" fill="#e8c96e" opacity=".9"/>
+      </g>
+      <text x="240" y="256" text-anchor="middle" font-size="7" fill="#4d6048" font-family="monospace">THE LAST LIGHT</text>
+    </svg>
+  </div>
+</header>
+
+<!-- ══════════ STATS ══════════ -->
+<div class="stats">
+  <div class="wrap stats-row">
+    <div class="stat"><b data-count="27">27</b><span>Sections</span></div>
+    <div class="stat"><b data-count="29">29</b><span>Reference Books</span></div>
+    <div class="stat"><b data-count="14771">14,771</b><span>Indexed Passages</span></div>
+    <div class="stat"><b data-count="36">36</b><span>Step-by-Step Skills</span></div>
+    <div class="stat"><b data-count="14">14</b><span>Calculators</span></div>
+  </div>
+</div>
+
+<!-- ══════════ FEATURES ══════════ -->
+<section id="features" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">What it is</div>
+      <h2>Everything you'd want to know, working when nothing else does</h2>
+      <p>One folder of plain HTML you open in any browser. It pairs a hand-written survival reference with an offline AI, a library of open reference books, calculators, and maps — all stored locally.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card"><span class="ic">📚</span><h3>27 sections + 29 books</h3><p>Water, medical, energy, shelter, comms, navigation, agriculture, veterinary, NBC/EMP, and more — plus bundled manuals like <em>Where There Is No Doctor</em> and Bowditch's <em>Navigator</em>.</p></div>
+      <div class="card"><span class="ic">🤖</span><h3>An AI that cites its sources</h3><p>"Bunker Bot" runs on your own machine (Ollama or a llamafile) and answers <em>from the bundled books</em>, citing source + page. It won't invent drug doses.</p></div>
+      <div class="card"><span class="ic">🗺️</span><h3>Offline maps + expansion</h3><p>Pan and zoom real maps with zero signal, and one-click links to put all of Wikipedia and Project Gutenberg on your drive via Kiwix.</p></div>
+      <div class="card"><span class="ic">🔌</span><h3>Runs on anything</h3><p>Pure static HTML, zero dependencies, no build step. Works from a USB stick, an old laptop, a phone, or a Raspberry Pi.</p></div>
+      <div class="card"><span class="ic">🛠️</span><h3>14 calculators + 36 skills</h3><p>Weight-based antibiotic dosing, off-grid power sizing, celestial navigation, crop planning — plus step-by-step visual skill guides.</p></div>
+      <div class="card"><span class="ic">🔒</span><h3>Private by design</h3><p>No accounts, no tracking, no ads, no external calls. Nothing phones home. Free forever, and licensed CC BY-SA — mirror it, fork it, keep it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ WHO IT'S FOR ══════════ -->
+<section class="reveal" style="background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Who it's for</div><h2>Built for anyone who wants knowledge that can't be switched off</h2></div>
+    <div class="grid g4">
+      <div class="card"><span class="ic">🏕️</span><h3>Preppers</h3><p>A complete grid-down reference that doesn't depend on the grid.</p></div>
+      <div class="card"><span class="ic">🌲</span><h3>Off-grid & homestead</h3><p>Power, water, food, animals and building — offline on a Pi at the property.</p></div>
+      <div class="card"><span class="ic">💾</span><h3>Data hoarders</h3><p>A self-contained, checksummed, torrentable archive that expands into Wikipedia.</p></div>
+      <div class="card"><span class="ic">👨‍👩‍👧</span><h3>Families & carers</h3><p>First aid, childbirth, and medical references you can reach with no signal.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ HOW TO RUN ══════════ -->
+<section id="run" class="reveal">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Dead simple</div><h2>Three steps and it's yours forever</h2>
+      <p>No install, no setup, no technical knowledge. Download once and it works offline for good.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <svg class="si a1" viewBox="0 0 24 24" fill="none"><path class="dl-arrow" d="M12 3v11m0 0l-4-4m4 4l4-4"/><path class="dl-arrow" d="M4 17v3h16v-3"/></svg>
+        <h3>Download</h3><p>Grab the free package below. One zip file — no account, no email.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <svg class="si a3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7l-8-4-8 4v10l8 4 8-4z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>
+        <h3>Unzip it</h3><p>Extract to a USB stick, your phone, or any folder. It's just files.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <svg class="si a3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/><path d="M8 9l3 2-3 2"/></svg>
+        <h3>Open <code style="font-family:var(--mono);color:var(--amber)">index.html</code></h3><p>Double-click it in any browser. That's it — the whole guide, fully offline.</p>
+      </div>
+    </div>
+    <p class="muted" style="text-align:center;margin-top:1.4rem;font-size:.88rem">Want the offline AI too? Point it at a free local model — <a href="ai-setup.html">2-minute setup guide →</a></p>
+  </div>
+</section>
+
+<!-- ══════════ TERMINAL / CLI ══════════ -->
+<section class="reveal" style="background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">No browser? No problem.</div>
+      <h2 style="font-size:clamp(1.5rem,3.5vw,2.1rem);margin-bottom:.6rem">The AI guide in one command</h2>
+      <p class="muted" style="margin-bottom:1rem">Prefer the terminal, or running headless on a Raspberry Pi over SSH? <code style="font-family:var(--mono);color:var(--amber)">bunkerbot.py</code> is the whole assistant in a single zero-dependency Python file — same book-cited answers, no browser.</p>
+      <ul style="list-style:none;font-size:.92rem">
+        <li style="padding:.25rem 0 .25rem 1.4rem;position:relative"><span style="position:absolute;left:0;color:var(--green)">✓</span> One command — interactive or one-shot</li>
+        <li style="padding:.25rem 0 .25rem 1.4rem;position:relative"><span style="position:absolute;left:0;color:var(--green)">✓</span> Auto-detects Ollama or a llamafile</li>
+        <li style="padding:.25rem 0 .25rem 1.4rem;position:relative"><span style="position:absolute;left:0;color:var(--green)">✓</span> No model? Falls back to a citing search tool</li>
+        <li style="padding:.25rem 0 .25rem 1.4rem;position:relative"><span style="position:absolute;left:0;color:var(--green)">✓</span> Python standard library only — nothing to install</li>
+      </ul>
+    </div>
+    <div class="term" aria-hidden="true">
+      <div class="term-bar"><i style="background:#e05a55"></i><i style="background:#e0b64e"></i><i style="background:#4b9e6a"></i><span class="t">bunkerbot — pi@bunker: ~</span></div>
+      <div class="term-body">
+        <div><span class="p">$</span> <span class="cmd" id="typed"></span><span class="cursor" id="cur"></span></div>
+        <div id="termout" style="margin-top:.6rem"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DOWNLOAD ══════════ -->
+<section id="download" class="reveal">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Take it with you</div><h2>Download — free, yours to keep forever</h2>
+      <p>Both extract to a folder; open <code style="font-family:var(--mono);color:var(--amber)">index.html</code> in any browser. Free to download, free to share.</p></div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="top"><span class="nm">Lite</span><span class="sz">~1 MB</span></div>
+        <p class="muted" style="font-size:.86rem;margin:.3rem 0 0">The guide app only</p>
+        <ul><li>All 27 sections, 14 tools, 36 skills</li><li>Full offline search</li><li>Bunker Bot (bring your own model)</li><li>No reference PDFs or maps</li></ul>
+        <a class="btn btn-ghost" href="downloads/last-light-survival-guide-lite.zip" download>⬇ Download Lite</a>
+      </div>
+      <div class="tier feat">
+        <div class="top"><span class="nm">Standard</span><span class="sz">~560 MB</span></div>
+        <p class="muted" style="font-size:.86rem;margin:.3rem 0 0">The full library on a pen drive</p>
+        <ul><li>Everything in Lite, plus:</li><li><strong>29 reference books</strong> (PDFs)</li><li><strong>AI cites the books</strong> (search index)</li><li><strong>A regional offline map</strong> + terminal CLI</li></ul>
+        <a class="btn btn-primary" href="downloads/last-light-survival-guide-standard.zip" download>⬇ Download Standard</a>
+      </div>
+    </div>
+    <p class="muted" style="text-align:center;margin-top:1.2rem;font-size:.88rem">Add Wikipedia, Gutenberg &amp; world maps, or the offline AI model — see <a href="download.html">all download options →</a>. Verify your copy with <code style="font-family:var(--mono);color:var(--amber)">sh verify.sh</code>.</p>
+  </div>
+</section>
+
+<!-- ══════════ DONATE ══════════ -->
+<section style="background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)" class="reveal">
+  <div class="wrap">
+    <div class="donate">
+      <div class="eyebrow" style="justify-content:center">Keep the light on</div>
+      <h2>Free, and always will be</h2>
+      <p class="muted">Hosting, maps, and the reference library cost a little to keep online. If it's helped you and you can spare it, a donation keeps it alive and ad-free for the next person — but it's never required.</p>
+      <a class="heart" href="https://buy.stripe.com/14A00lgJM72a1wNcES9Zm00" target="_blank" rel="noopener">❤ Support this project</a>
+      <small>100% optional. Secure checkout via Stripe — appears as TRADETRACKHQ on your statement.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FAQ ══════════ -->
+<section class="reveal">
+  <div class="wrap" style="max-width:760px">
+    <div class="sec-head"><div class="eyebrow">Questions</div><h2>Good to know</h2></div>
+    <div class="faq">
+      <details><summary>Is it really free?</summary><p>Yes — completely free to download, use, and share, forever. It's open source under CC BY-SA. There are no accounts, no ads, and no upsells. A donation button exists if you want to help with hosting costs, but it's entirely optional.</p></details>
+      <details><summary>Does it actually work with no internet?</summary><p>Yes. It's a folder of plain HTML that runs entirely offline — from a USB stick, an old laptop, a phone, or a Raspberry Pi. The optional AI runs on your own machine too. Nothing needs a connection once you've downloaded it.</p></details>
+      <details><summary>Do I need to be technical?</summary><p>No. Download, unzip, and double-click <code style="font-family:var(--mono)">index.html</code> — it opens in any browser like a normal website. The offline AI is optional and has a 2-minute setup if you want it.</p></details>
+      <details><summary>Is the medical content safe to rely on?</summary><p>It's a reference, not a substitute for professional care. The content is broad and AI-assisted, and the medical material has not yet been reviewed by a licensed clinician — so verify anything critical and seek qualified help whenever it's available. The AI cites its sources so you can check every claim.</p></details>
+      <details><summary>What's the difference between Lite and Standard?</summary><p>Lite (~1 MB) is the guide app and offline search — bring your own AI model. Standard (~560 MB) adds all 29 reference books, the AI search index so Bunker Bot can cite them, a regional offline map, and the terminal CLI.</p></details>
+      <details><summary>Can I mirror or re-host it?</summary><p>Please do — it's CC BY-SA. The full source is on <a href="https://github.com/hamtechautomation/survivalai" target="_blank" rel="noopener">GitHub</a>, and there are torrent / IPFS options for censorship-resistant copies.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand" style="margin-bottom:.4rem"><span class="bolt">⚡</span> The Last Light Survival Guide</div>
+      <div class="muted" style="font-size:.82rem">Free offline survival library · v1.0 · CC BY-SA 4.0</div>
+    </div>
+    <nav class="foot-links">
+      <a href="index.html">Open the Guide</a>
+      <a href="#download">Download</a>
+      <a href="ai-setup.html">Bunker Bot Setup</a>
+      <a href="https://github.com/hamtechautomation/survivalai" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://buy.stripe.com/14A00lgJM72a1wNcES9Zm00" target="_blank" rel="noopener">Donate</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  /* animated stat counters */
+  (function(){
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function countUp(el){
+      var target = +el.dataset.count, dur = 1500, t0 = performance.now();
+      if(reduce){ el.textContent = target.toLocaleString(); return; }
+      function tick(now){
+        var p = Math.min((now - t0)/dur, 1);
+        var e = 1 - Math.pow(1 - p, 3);           // ease-out cubic
+        el.textContent = Math.floor(e * target).toLocaleString();
+        if(p < 1) requestAnimationFrame(tick); else el.textContent = target.toLocaleString();
+      }
+      requestAnimationFrame(tick);
+    }
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ countUp(e.target); io.unobserve(e.target); } });
+    }, { threshold: .5 });
+    document.querySelectorAll('[data-count]').forEach(function(el){
+      if(!reduce) el.textContent = '0';   // reset for the count-up; no-JS keeps the real value
+      io.observe(el);
+    });
+
+    /* reveal on scroll */
+    var ro = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(function(el){ ro.observe(el); });
+
+    /* terminal typewriter (loops) */
+    var typed = document.getElementById('typed'),
+        out = document.getElementById('termout'), cur = document.getElementById('cur');
+    var CMD = 'bunkerbot "how do I stop heavy bleeding?"';
+    var OUT = '<div class="out">Apply firm direct pressure; if it doesn\'t stop, pack the<br>'
+            + 'wound and, on a limb, apply a tourniquet high and tight.</div>'
+            + '<div class="src" style="margin-top:.4rem">📚 First Aid FM 4-25.11 · p.104   ·   Where There Is No Doctor · p.312</div>';
+    function runTerm(){
+      if(reduce){ typed.textContent = CMD; out.innerHTML = OUT; cur.style.display='none'; return; }
+      typed.textContent=''; out.innerHTML=''; var i=0;
+      (function type(){
+        if(i <= CMD.length){ typed.textContent = CMD.slice(0,i++); setTimeout(type, 45); }
+        else { setTimeout(function(){ out.innerHTML = OUT; }, 350); }
+      })();
+    }
+    var tio = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ runTerm(); tio.unobserve(e.target); } });
+    }, { threshold: .5 });
+    if(typed) tio.observe(typed.closest('.term'));
+  })();
+</script>
+</body>
+</html>
