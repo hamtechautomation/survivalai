@@ -48,6 +48,7 @@
       <li><a href="#charging">Charging Phones, Laptops &amp; Power Banks</a></li>
       <li><a href="#salvage-solar">Salvaging &amp; Re-mounting Solar Panels</a></li>
       <li><a href="#faraday">Faraday Cages &amp; EMP Protection</a></li>
+      <li><a href="#electronics-repair">Repairing &amp; Salvaging Electronics</a></li>
       <li><a href="#fuel">Fuel Storage Safety</a></li>
       <li><a href="#rocket-stove">Rocket Stoves</a></li>
       <li><a href="#solar-cooker">Solar Cookers</a></li>
@@ -558,9 +559,52 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     </div>
   </section>
 
+  <!-- =================== ELECTRONICS REPAIR & SALVAGE =================== -->
+  <section id="electronics-repair">
+    <h2>10. Repairing &amp; Salvaging Electronics</h2>
+    <p>When no new electronics are being manufactured, the ones around you become a finite, irreplaceable resource — and most "dead" devices have a single cheap failed part. The ability to diagnose, harvest, and repair puts radios, chargers, lights, and controllers back in service long after the shops are empty. Your two most valuable tools are a <strong>multimeter</strong> and a <strong>soldering iron</strong> (a 12&nbsp;V or USB iron runs off the same off-grid power as everything else here).</p>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <p><strong>Discharge before you touch.</strong> Mains capacitors — especially in power supplies, microwaves, and CRTs — hold a <em>lethal</em> charge for a long time after unplugging. A microwave oven capacitor can kill. Unplug, wait, and bleed capacitors through a resistor before working. Never work on anything mains-powered while it's plugged in.</p>
+      </div>
+    </div>
+
+    <h3>Diagnose with a multimeter</h3>
+    <ul>
+      <li><strong>Continuity/beep test:</strong> the fastest win. Check fuses, cables, switches, and connections — a silent (open) fuse or a broken wire is the most common fault, and both are trivial to fix.</li>
+      <li><strong>Voltage:</strong> follow the power through the board — is voltage arriving at each stage? Where it disappears is where the fault is.</li>
+      <li><strong>Look and smell first:</strong> bulging or leaking capacitors (domed tops, crusty residue), scorch marks, cracked solder joints, and burnt smells point straight to the failed part before you even measure.</li>
+    </ul>
+
+    <h3>The usual suspects (in order)</h3>
+    <ol style="margin:.3rem 0 0;padding-left:1.3rem">
+      <li><strong>Fuses</strong> — check first, cheapest fix. Never bypass with foil permanently; a fuse blows for a reason.</li>
+      <li><strong>Electrolytic capacitors</strong> — the #1 board-level failure. Bulged/leaking caps in power supplies cause dead or flaky devices. Replace with the same (or higher) voltage rating and same µF, observing polarity.</li>
+      <li><strong>Dry / cracked solder joints</strong> — reflow with the iron; common on connectors and things that get hot or vibrate.</li>
+      <li><strong>Switches, jacks, connectors</strong> — clean corrosion (vinegar then dry, or fine abrasive); re-solder loose ones.</li>
+      <li><strong>Batteries</strong> — a dead device is often just a dead cell (see <a href="#batteries">Battery Maintenance</a>).</li>
+    </ol>
+
+    <h3>Salvage — build a parts library before you need it</h3>
+    <ul>
+      <li><strong>Harvest components</strong> from dead electronics: heat the joints and pull parts free (a hot-air source or a wide iron tip lifts multi-pin parts). Salvage resistors, capacitors, LEDs, diodes, transistors, voltage regulators, wire, connectors, heatsinks, and — most valuable — <strong>motors, magnets, and power MOSFETs</strong>.</li>
+      <li><strong>Gold-mines:</strong> old phone/laptop chargers (regulators, caps), PC power supplies (huge parts source + usable 12/5/3.3&nbsp;V rails), printers and optical drives (motors, gears, rods, steppers), and dead appliances (switches, relays, cords).</li>
+      <li><strong>Store sorted and dry</strong> with silica gel. Label salvaged cables by voltage/polarity. Keep a stock of common fuses and capacitor values — they fix 80% of faults.</li>
+    </ul>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">🔌</span>
+      <div class="callout-content">
+        <p><strong>Improvise consumables:</strong> pine resin (rosin) works as soldering flux; solder can be reclaimed from old boards; a wide copper wire or a coin makes a heatsink for delicate parts. A car battery + a nichrome wire makes a hot-wire tool. Pair this with <a href="#charging">Charging</a> and <a href="#solar">Solar</a> to keep the iron and meter powered.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- =================== FUEL =================== -->
   <section id="fuel">
-    <h2>10. Fuel Storage Safety</h2>
+    <h2>11. Fuel Storage Safety</h2>
 
     <h3>Gasoline</h3>
     <ul>
@@ -620,7 +664,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
   <!-- =================== ROCKET STOVE =================== -->
   <section id="rocket-stove">
-    <h2>11. Rocket Stoves</h2>
+    <h2>12. Rocket Stoves</h2>
 
     <p>A rocket stove burns small-diameter wood (pencil to wrist thickness) with 80–90% efficiency compared to 10–20% for an open campfire. It uses an L-shaped combustion chamber that creates a powerful natural draft, producing intense, clean heat with minimal smoke. After mastering the Faraday cage and solar panel, the rocket stove is the highest-impact energy build in a long-term survival scenario.</p>
 
@@ -683,7 +727,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
   <!-- =================== SOLAR COOKER =================== -->
   <section id="solar-cooker">
-    <h2>12. Solar Cookers</h2>
+    <h2>13. Solar Cookers</h2>
 
     <p>A solar cooker uses concentrated or reflected sunlight to cook food with zero fuel. A well-designed solar box cooker reaches 120–150°C (250–300°F) — sufficient to cook, boil water, bake bread, and pasteurize water. A parabolic solar cooker reaches 250–400°C (480–750°F) — frying and boiling in minutes. Both can be built from salvaged materials in a few hours.</p>
 
@@ -748,7 +792,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
   <!-- =================== BIOGAS =================== -->
   <section id="biogas">
-    <h2>13. Biogas from Organic Waste</h2>
+    <h2>14. Biogas from Organic Waste</h2>
 
     <p>Biogas (methane + CO₂) is produced by bacteria digesting organic matter in the absence of oxygen. Animal manure, kitchen scraps, and crop waste can power a cooking stove or lamp continuously when set up in a digester. A well-loaded household digester can supply 2–4 hours of cooking gas per day from the waste of 3–4 large animals or 8–10 people.</p>
 
