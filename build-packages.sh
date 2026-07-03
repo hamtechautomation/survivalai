@@ -25,6 +25,7 @@ rsync -a \
   --exclude '.git' --exclude '.claude' --exclude 'node_modules' \
   --exclude '.DS_Store' --exclude '.env*' --exclude 'downloads' \
   --exclude 'dist' --exclude 'pmtiles' --exclude '*.zip' \
+  --exclude 'marketing' \
   --exclude 'TESTING.md' \
   ./ "$STAGE"/
 
