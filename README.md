@@ -112,6 +112,27 @@ To set `OLLAMA_ORIGINS` permanently: System Properties → Environment Variables
 
 ---
 
+## Terminal Mode — Bunker Bot with No Browser
+
+Prefer the command line, or on a headless box (a Pi, a server, SSH)? `bunkerbot.py`
+is the whole assistant in one zero-dependency Python file — the same BM25 retrieval
+over the bundled books, the same source citations, no browser required.
+
+```bash
+python3 bunkerbot.py                       # interactive guide
+python3 bunkerbot.py "how do I stop heavy bleeding"   # one-shot answer
+chmod +x bunkerbot.py && ./bunkerbot.py    # then just ./bunkerbot.py
+```
+
+It auto-detects a provider: **Ollama** (`localhost:11434`), a **llamafile**
+(`localhost:8080`), or **Claude** (set `ANTHROPIC_API_KEY`). With no model running
+it drops to **search-only mode** — still a fast, citing lookup tool over the library.
+
+- `/emergency` — terse, critical-action-first mode · `/help` · `/quit`
+- Env: `BUNKERBOT_MODEL`, `BUNKERBOT_TEMP`, `NO_COLOR`
+
+Python 3 standard library only — nothing to install. Runs on a Raspberry Pi.
+
 ## Content Overview
 
 ### 27 Content Sections
