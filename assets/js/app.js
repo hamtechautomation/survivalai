@@ -190,7 +190,18 @@
     const isSection = window.location.pathname.includes('/sections/');
     const base = isSection ? '../' : '';
 
+    // On the public site only, a small link back to the marketing landing page.
+    // (The landing isn't bundled in the offline download, so we hide it there
+    //  to avoid a dead link.)
+    const onLive = /(^|\.)bunkerbot\.co\.uk$/.test(location.hostname);
+    const homeLinkHTML = onLive
+      ? `<a href="/" class="sidebar-toplink" title="Back to the front page"
+           style="display:flex;align-items:center;gap:.4rem;padding:.45rem .9rem;font-size:.76rem;color:var(--text-3);text-decoration:none;border-bottom:1px solid var(--border);transition:color .15s"
+           onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--text-3)'">← Home</a>`
+      : '';
+
     const headerHTML = `
+      ${homeLinkHTML}
       <div class="sidebar-header">
         <a href="${base}index.html" class="logo-link">
           <span class="logo-icon">${ICONS.energy}</span>
