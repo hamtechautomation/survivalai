@@ -30,7 +30,11 @@ rsync -a \
   ./ "$STAGE"/
 
 # ── Standard: the full library (everything staged) ──
+# Remove any existing archive first — `zip` UPDATES an existing file (adds/replaces
+# entries but never removes stale ones), so rebuilding must start from a clean file
+# or deleted/excluded files (e.g. marketing/) would linger from a previous build.
 echo "Building standard ZIP (this includes the PDFs + map — may take a moment)…"
+rm -f "$OUT/$NAME-standard.zip"
 ( cd "$STAGE/.." && zip -r -q -9 "$OUT/$NAME-standard.zip" "$NAME" )
 echo "  → downloads/$NAME-standard.zip  ($(du -h "$OUT/$NAME-standard.zip" | cut -f1))"
 
@@ -39,6 +43,7 @@ echo "Building lite ZIP (app only)…"
 rm -f "$STAGE"/pdfs/*.pdf 2>/dev/null || true
 rm -f "$STAGE"/maps/*.pmtiles 2>/dev/null || true
 rm -f "$STAGE"/search/pdf-chunks.json 2>/dev/null || true
+rm -f "$OUT/$NAME-lite.zip"
 ( cd "$STAGE/.." && zip -r -q -9 "$OUT/$NAME-lite.zip" "$NAME" )
 echo "  → downloads/$NAME-lite.zip  ($(du -h "$OUT/$NAME-lite.zip" | cut -f1))"
 
