@@ -22,6 +22,7 @@
   @keyframes llg-shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-3px,2px)}40%{transform:translate(3px,-2px)}
     60%{transform:translate(-2px,-1px)}80%{transform:translate(2px,1px)}}
   @keyframes llg-pulse{0%,100%{opacity:.85;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.25)}}
+  @keyframes llg-flicker{0%{opacity:0}8%{opacity:.9}12%{opacity:.08}20%{opacity:1}26%{opacity:.12}34%{opacity:.85}42%{opacity:.25}52%{opacity:1}64%{opacity:.5}100%{opacity:1}}
   @media(prefers-reduced-motion:reduce){.llg *{animation:none!important}}
   `;
   var injected = false;
@@ -35,8 +36,9 @@
     if (!el) return;
     inject();
     var base = opts.base || 'assets/globe/';
-    var N = 48, K = opts.impactFrame != null ? opts.impactFrame : 0;   // frame where the UK faces us
-    var lx = opts.lastLight ? opts.lastLight[0] : 0.489, ly = opts.lastLight ? opts.lastLight[1] : 0.309;  // the UK
+    var N = 48, K = opts.impactFrame != null ? opts.impactFrame : 0;   // frame facing the strike hemisphere
+    var lx = opts.lastLight ? opts.lastLight[0] : 0.489, ly = opts.lastLight ? opts.lastLight[1] : 0.309;  // the UK — the surviving light
+    var ix = opts.impact ? opts.impact[0] : 0.75, iy = opts.impact ? opts.impact[1] : 0.43;                // Middle East — where the nuke strikes
     var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     el.classList.add('llg');
@@ -46,25 +48,34 @@
 
     el.innerHTML =
       '<img class="llg-lit" src="' + srcs[0] + '" alt="Night-time Earth with real city lights on the continents">' +
+      '<img class="llg-lit2" src="' + srcs[1] + '" alt="" style="opacity:0">' +
       '<img class="llg-dark" src="' + darkSrc + '" alt="">' +
       '<img class="llg-relit" src="' + srcs[K] + '" alt="">' +
       '<div class="llg-flash"></div><div class="llg-shock"></div><div class="llg-missile"></div>' +
       '<div class="llg-last"></div>' + (opts.caption ? '<div class="llg-cap">' + opts.caption + '</div>' : '');
-    var lit = el.querySelector('.llg-lit'), dark = el.querySelector('.llg-dark'),
+    var litA = el.querySelector('.llg-lit'), litB = el.querySelector('.llg-lit2'), dark = el.querySelector('.llg-dark'),
         relit = el.querySelector('.llg-relit'), flash = el.querySelector('.llg-flash'),
         shock = el.querySelector('.llg-shock'), missile = el.querySelector('.llg-missile'),
         last = el.querySelector('.llg-last'), cap = el.querySelector('.llg-cap');
 
-    function px() { var w = el.clientWidth || 320, h = el.clientHeight || w; return { w: w, h: h, x: lx * w, y: ly * h }; }
-    function placePoint() { var p = px(); [flash].forEach(function () {}); shock.style.left = p.x + 'px'; shock.style.top = p.y + 'px';
-      last.style.left = p.x + 'px'; last.style.top = p.y + 'px';
-      flash.style.background = 'radial-gradient(circle at ' + (lx*100) + '% ' + (ly*100) + '%, #ffffff 0%, #dfe9ff 22%, rgba(200,220,255,0) 55%)';
-      relit.style.clipPath = 'circle(0px at ' + p.x + 'px ' + p.y + 'px)'; }
+    function pt(fx, fy) { var w = el.clientWidth || 320, h = el.clientHeight || w; return { w: w, h: h, x: fx * w, y: fy * h }; }
+    function ipt() { return pt(ix, iy); }   // impact — Middle East
+    function lpt() { return pt(lx, ly); }   // last light — UK
+    function placePoint() {
+      var ip = ipt(), lp = lpt();
+      shock.style.left = ip.x + 'px'; shock.style.top = ip.y + 'px';                 // shockwave centred on the strike
+      last.style.left = lp.x + 'px'; last.style.top = lp.y + 'px';                    // the surviving light over the UK
+      flash.style.background = 'radial-gradient(circle at ' + (ix*100) + '% ' + (iy*100) + '%, #ffffff 0%, #dfe9ff 22%, rgba(200,220,255,0) 55%)';
+      relit.style.clipPath = 'circle(0px at ' + lp.x + 'px ' + lp.y + 'px)'; }        // recovery ripples out from the UK
     placePoint(); window.addEventListener('resize', placePoint);
 
     // ── frame spinner ──
-    var idx = 0, curImg = 0;
-    function show(i) { i = ((Math.round(i) % N) + N) % N; if (i !== curImg) { curImg = i; lit.src = srcs[i]; } }
+    // fractional frame with a cross-fade between the two nearest frames → continuous, non-stepping rotation
+    var ia = -1, ib = -1;
+    function show(p) { var f = ((p % N) + N) % N, i0 = Math.floor(f), frac = f - i0, i1 = (i0 + 1) % N;
+      if (i0 !== ia) { litA.src = srcs[i0]; ia = i0; }
+      if (i1 !== ib) { litB.src = srcs[i1]; ib = i1; }
+      litB.style.opacity = frac; }
     var spinning = false, vel = 6, lastT = performance.now(), pos = 0;
     function raf(t) { var dt = Math.min(.05, (t - lastT) / 1000); lastT = t;
       if (spinning && !reduce) { pos += vel * dt; show(pos); } requestAnimationFrame(raf); }
@@ -78,7 +89,7 @@
     }); }
 
     // ── the cinematic ──
-    function resetOverlays() { dark.style.transition = 'none'; dark.style.opacity = 0;
+    function resetOverlays() { dark.style.transition = 'none'; dark.style.opacity = 0; dark.style.clipPath = 'none';
       relit.style.transition = 'none'; relit.style.opacity = 0; placePoint();
       last.style.transition = 'none'; last.style.opacity = 0; last.style.animation = 'none';
       flash.style.opacity = 0; shock.style.opacity = 0; shock.style.transform = 'translate(-50%,-50%) scale(0)';
@@ -89,35 +100,42 @@
       spinning = true; pos = 0; show(0);
       await sleep(3000);
       spinning = false; await easeTo(K, 800);                       // ease onto the impact face
-      // incoming missile
-      var p = px();
+      // incoming missile → the Middle East strike point
+      var ip = ipt();
       missile.style.transition = 'none';
-      missile.style.left = (p.x + 70) + 'px'; missile.style.top = (p.y - 150) + 'px';
+      missile.style.left = (ip.x + 70) + 'px'; missile.style.top = (ip.y - 150) + 'px';
       missile.style.transform = 'rotate(28deg)'; missile.style.opacity = 1; await sleep(30);
       missile.style.transition = 'left .55s cubic-bezier(.5,0,1,1), top .55s cubic-bezier(.5,0,1,1)';
-      missile.style.left = p.x + 'px'; missile.style.top = p.y + 'px'; await sleep(560);
+      missile.style.left = ip.x + 'px'; missile.style.top = ip.y + 'px'; await sleep(560);
       missile.style.opacity = 0;
-      // IMPACT
+      // IMPACT — the flash, and darkness races outward from ground zero
       flash.style.transition = 'opacity .12s'; flash.style.opacity = 1; el.classList.add('shake');
-      shock.style.transition = 'transform .7s ease-out, opacity .7s ease-out';
-      shock.style.opacity = .9; shock.style.transform = 'translate(-50%,-50%) scale(5.5)';
-      await sleep(140); flash.style.transition = 'opacity .5s'; flash.style.opacity = 0;
-      await sleep(400); el.classList.remove('shake');
-      // BLACKOUT — city lights ripple out
-      dark.style.transition = 'opacity 1s ease-in'; dark.style.opacity = 1;
-      await sleep(1000); shock.style.opacity = 0;
-      await sleep(900);                                             // silence in the dark
-      // THE LAST LIGHT
-      last.style.transition = 'opacity .8s'; last.style.opacity = 1; await sleep(800);
-      last.style.animation = 'llg-pulse 2.4s ease-in-out infinite';
+      var rad = Math.max(ip.w, ip.h) * 1.75;
+      shock.style.transition = 'transform .85s ease-out, opacity .85s ease-out';
+      shock.style.opacity = .9; shock.style.transform = 'translate(-50%,-50%) scale(6)';
+      // blackout tracks the blast: instant black at the detonation, spreading out to kill every light
+      dark.style.transition = 'none'; dark.style.opacity = 1;
+      dark.style.clipPath = 'circle(0px at ' + ip.x + 'px ' + ip.y + 'px)';
+      void dark.offsetWidth;                                        // commit the zero-radius start
+      dark.style.transition = 'clip-path .85s ease-out';
+      dark.style.clipPath = 'circle(' + rad + 'px at ' + ip.x + 'px ' + ip.y + 'px)';
+      await sleep(160); flash.style.transition = 'opacity .5s'; flash.style.opacity = 0;
+      await sleep(700); el.classList.remove('shake'); shock.style.opacity = 0;
+      // DARKNESS — a beat of total black once the wave has passed
+      await sleep(550);
+      // THE LAST LIGHT — flickers on over the UK
+      last.style.transition = 'none'; last.style.animation = 'llg-flicker .9s ease-out forwards';
+      await sleep(950);
+      last.style.opacity = 1; last.style.animation = 'llg-pulse 2.4s ease-in-out infinite';
       if (cap) cap.style.opacity = 1;
-      await sleep(1700);
-      // RECOVERY — lights ripple back out from the last light
+      await sleep(1500);
+      // RECOVERY — the other lights slowly come back, rippling out from the UK
+      var lp = lpt();
       relit.style.opacity = 1;
-      relit.style.transition = 'clip-path 2.2s ease-in-out';
-      var r = Math.max(p.w, p.h) * 1.6;
-      relit.style.clipPath = 'circle(' + r + 'px at ' + p.x + 'px ' + p.y + 'px)';
-      await sleep(2200);
+      relit.style.transition = 'clip-path 2.6s ease-in-out';
+      var r = Math.max(lp.w, lp.h) * 1.6;
+      relit.style.clipPath = 'circle(' + r + 'px at ' + lp.x + 'px ' + lp.y + 'px)';
+      await sleep(2600);
       last.style.transition = 'opacity .8s'; last.style.opacity = 0; last.style.animation = 'none';
       await sleep(1100);
     }
@@ -128,12 +146,13 @@
       var PXPF = 9, dragging = false, lastX = 0, lt = 0;
       function gx(e) { return e.clientX != null ? e.clientX : ((e.touches && e.touches[0]) ? e.touches[0].clientX : 0); }
       // momentum handled by the same raf via vel decay
+      // momentum always decays toward a gentle FORWARD spin — the globe never coasts or idles backward
       var decay = function (t) { var dt = Math.min(.05,(t-lastT)/1000);
-        if (!dragging && !reduce) { if (vel>6) vel=Math.max(6,vel-26*dt); else if (vel<-6) vel=Math.min(-6,vel+26*dt); else vel+=(6-vel)*Math.min(1,dt*2.5);} requestAnimationFrame(decay); };
+        if (!dragging && !reduce) { if (vel>6) vel=Math.max(6,vel-26*dt); else vel+=(6-vel)*Math.min(1,dt*2.5); if (vel<0) vel=0; } requestAnimationFrame(decay); };
       requestAnimationFrame(decay);
       el.addEventListener('pointerdown', function (e) { dragging = true; spinning = false; el.classList.add('dragging'); lastX = gx(e); lt = performance.now(); try { el.setPointerCapture(e.pointerId); } catch (_) {} });
       window.addEventListener('pointermove', function (e) { if (!dragging) return; var nx = gx(e), now = performance.now(), dx = nx - lastX, dt = (now - lt) / 1000 || .016; pos += dx / PXPF; vel = (dx / PXPF) / dt; show(pos); lastX = nx; lt = now; });
-      window.addEventListener('pointerup', function () { if (!dragging) return; dragging = false; el.classList.remove('dragging'); spinning = true; });
+      window.addEventListener('pointerup', function () { if (!dragging) return; dragging = false; el.classList.remove('dragging'); vel = Math.max(6, vel); spinning = true; });
     }
 
     if (reduce) { show(K); if (cap) cap.style.opacity = 1; if (opts.mode === 'intro-drag') enableDrag(); return; }
