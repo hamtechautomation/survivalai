@@ -4,6 +4,12 @@
 
 > **A complete, fully-offline survival library — 27 sections, 29 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
 
+### See it in action
+
+![Web walkthrough — landing, guide, and Bunker Bot answering with cited sources](docs/demo-walkthrough.gif)
+
+*Recorded in a real browser against a local model: open the guide, ask Bunker Bot, and it answers from the bundled books with inline source citations — fully offline.*
+
 [![Live site](https://img.shields.io/badge/live-bunkerbot.co.uk-c9a94e?style=flat-square)](https://bunkerbot.co.uk)
 [![Download](https://img.shields.io/badge/download-free-4b9e6a?style=flat-square)](https://bunkerbot.co.uk/download.html)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/license-CC%20BY--SA%204.0-c9a94e?style=flat-square)](https://creativecommons.org/licenses/by-sa/4.0/)
@@ -117,6 +123,8 @@ To set `OLLAMA_ORIGINS` permanently: System Properties → Environment Variables
 Prefer the command line, or on a headless box (a Pi, a server, SSH)? `bunkerbot.py`
 is the whole assistant in one zero-dependency Python file — the same BM25 retrieval
 over the bundled books, the same source citations, no browser required.
+
+![Bunker Bot in the terminal — a cited answer streamed from a local model](docs/demo-terminal.gif)
 
 ```bash
 python3 bunkerbot.py                       # interactive guide
