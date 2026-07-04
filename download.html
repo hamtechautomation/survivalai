@@ -39,6 +39,44 @@
     .support { text-align:center; background:var(--bg-2); border:1px solid var(--amber-dim); border-radius:10px; padding:1.5rem 1.2rem; margin:1.5rem 0; }
     .support a.donate { display:inline-block; text-decoration:none; font-weight:800; font-size:1rem; padding:.6rem 1.6rem; border-radius:8px; background:var(--amber); color:var(--bg-0); margin-top:.5rem; }
     code.cmd { display:block; background:var(--bg-0); border:1px solid var(--border-hi); border-radius:4px; padding:.4rem .6rem; font-size:.8rem; margin:.3rem 0; overflow-x:auto; }
+    /* install / put-on-device section */
+    .install-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+    @media(max-width:720px){.install-grid{grid-template-columns:1fr}}
+    .install-card{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.3rem}
+    .install-card > h3{margin:0 0 .7rem;color:var(--text-0);font-size:1.06rem}
+    .install-steps{margin:0;padding:0;list-style:none;counter-reset:s}
+    .install-steps li{position:relative;padding:.5rem 0 .5rem 2.2rem;font-size:.9rem;color:var(--text-1);border-top:1px solid var(--border)}
+    .install-steps li:first-child{border-top:0}
+    .install-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:.5rem;width:1.6rem;height:1.6rem;background:var(--amber-dim);color:var(--amber-light);border-radius:50%;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+    .install-card code{font-family:var(--mono,monospace);background:var(--bg-0);border:1px solid var(--border-hi);border-radius:4px;padding:1px 5px;font-size:.82em;color:var(--amber-light);white-space:nowrap}
+    .install-tip{font-size:.8rem;color:var(--text-2);margin-top:.9rem;background:var(--bg-1);border-left:2px solid var(--amber-dim);padding:.55rem .75rem;border-radius:4px}
+    .phone-os{margin-top:.8rem;background:var(--bg-1);border:1px solid var(--border);border-radius:8px;padding:.75rem .9rem}
+    .phone-os > strong{color:var(--amber-light);display:block;margin-bottom:.35rem;font-size:.92rem}
+    .phone-os ol{margin:0;padding-left:1.25rem;font-size:.86rem;color:var(--text-1);line-height:1.65}
+    .advanced-label{margin:2.2rem 0 .5rem;font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-3);border-top:1px solid var(--border);padding-top:1.2rem}
+    /* ── animated install scenes (marketing-style) ── */
+    .scene-box{width:100%;height:150px;display:block;margin:-.2rem 0 1rem;border-radius:8px;
+      background:radial-gradient(circle at 50% 38%, #0f1a15, #0a0f0d);border:1px solid var(--border)}
+    .usb-stick{animation:usb-in 4.8s ease-in-out infinite}
+    @keyframes usb-in{0%,100%{transform:translateX(52px)}40%,82%{transform:translateX(0)}}
+    .usb-led{animation:usb-led 4.8s steps(1) infinite}
+    @keyframes usb-led{0%,39%{fill:#3a4838}44%,100%{fill:#4b9e6a}}
+    .usb-pkt{opacity:0;animation:usb-pkt 4.8s ease-in-out infinite}
+    @keyframes usb-pkt{0%,47%{opacity:0;transform:translateX(0)}55%{opacity:1}74%{opacity:1;transform:translateX(60px)}82%,100%{opacity:0;transform:translateX(60px)}}
+    .ph-pop{opacity:0;transform-box:fill-box;transform-origin:center;animation:ph-pop 4.8s ease-in-out infinite}
+    @keyframes ph-pop{0%,52%{opacity:0;transform:scale(.15)}68%{opacity:1;transform:scale(1.18)}76%,100%{opacity:1;transform:scale(1)}}
+    .ph-tap{transform-box:fill-box;transform-origin:center;animation:ph-tap 4.8s ease-in-out infinite}
+    @keyframes ph-tap{0%,26%,50%,100%{opacity:.4}34%{opacity:1}}
+    .store-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.2rem 0}
+    @media(max-width:620px){.store-strip{grid-template-columns:1fr}}
+    .store-item{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:1.1rem;text-align:center;transition:.18s}
+    .store-item:hover{border-color:var(--amber-dim);transform:translateY(-3px)}
+    .store-item .si{font-size:1.8rem;display:block;margin-bottom:.35rem}
+    .store-item b{display:block;color:var(--text-0);font-size:.96rem;margin-bottom:.25rem}
+    .store-item span{font-size:.82rem;color:var(--text-2)}
+    .install-card{position:relative;overflow:hidden}
+    .install-card:hover{border-color:var(--amber-dim)}
+    @media(prefers-reduced-motion:reduce){.scene-box *{animation:none!important}}
   </style>
 </head>
 <body>
@@ -88,7 +126,102 @@
       <a class="btn-dl" href="downloads/last-light-survival-guide-standard.zip" download>⬇ Download Standard</a>
     </div>
   </div>
-  <p style="font-size:.8rem;color:var(--text-3)">Both extract to a <code>last-light-survival-guide/</code> folder. Open <code>index.html</code> in any browser, or serve it with <code>python3 -m http.server</code> for the offline AI, maps, and PWA install. Verify your copy with <code>sh verify.sh</code>.</p>
+  <h2 style="margin-top:2rem">Put it on your device</h2>
+  <p class="section-desc" style="margin-bottom:.5rem">Pick whichever suits you. Both work with no internet afterwards — no account, no app store.</p>
+  <div class="install-grid">
+
+    <!-- USB / computer -->
+    <div class="install-card">
+      <svg class="scene-box" viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A USB stick sliding into a computer while the guide folder copies onto it.">
+        <rect x="16" y="28" width="150" height="94" rx="8" fill="#101815" stroke="#26332b" stroke-width="2"/>
+        <rect x="28" y="40" width="126" height="62" rx="4" fill="#0a1310"/>
+        <path d="M64,56 h12 l4,4 h20 v22 h-36 z" fill="#1e2820" stroke="#c9a94e" stroke-width="1.5"/>
+        <text x="91" y="112" text-anchor="middle" font-size="8" fill="#8a9e86" font-family="monospace">your guide</text>
+        <rect x="84" y="122" width="14" height="9" fill="#1a231d"/>
+        <rect x="166" y="64" width="9" height="18" rx="2" fill="#05080a" stroke="#26332b"/>
+        <g class="usb-pkt"><path d="M118,64 h9 l3,3 h14 v14 h-26 z" fill="#c9a94e"/></g>
+        <g class="usb-stick">
+          <rect x="176" y="62" width="74" height="22" rx="4" fill="#141b17" stroke="#3a4838" stroke-width="2"/>
+          <rect x="168" y="67" width="9" height="12" rx="1" fill="#c9b064"/>
+          <circle class="usb-led" cx="240" cy="73" r="3.2" fill="#3a4838"/>
+          <text x="210" y="77" text-anchor="middle" font-size="7.5" fill="#8a9e86" font-family="monospace">USB</text>
+        </g>
+      </svg>
+      <h3>💻 On a computer or USB stick</h3>
+      <ol class="install-steps">
+        <li><strong>Plug in a USB stick.</strong> Any will do — Lite needs ~1&nbsp;MB, Standard about 600&nbsp;MB of space.</li>
+        <li><strong>Download</strong> a package above. It saves as a single <code>.zip</code> file (check your Downloads folder).</li>
+        <li><strong>Unzip it.</strong> Double-click the <code>.zip</code> — Windows and Mac open it for you. You get a <code>last-light-survival-guide</code> folder.</li>
+        <li><strong>Drag that whole folder onto your USB stick.</strong> Wait for it to finish copying — that's it, it's saved.</li>
+        <li><strong>Open it anywhere.</strong> Plug the stick into any computer, open the folder, and double-click <code>index.html</code>. It opens in the browser and works fully offline, forever.</li>
+      </ol>
+      <p class="install-tip">💡 Keep a copy on the stick <em>and</em> your computer. To give it to someone, just copy the folder across — no installing anything.</p>
+    </div>
+
+    <!-- phone / tablet -->
+    <div class="install-card">
+      <svg class="scene-box" viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An app icon popping onto a phone home screen after choosing Add to Home Screen.">
+        <rect x="38" y="18" width="82" height="114" rx="13" fill="#101815" stroke="#3a4838" stroke-width="2"/>
+        <rect x="46" y="32" width="66" height="78" rx="3" fill="#0a1310"/>
+        <rect x="52" y="38" width="42" height="6" rx="2" fill="#c9a94e"/>
+        <rect x="52" y="50" width="54" height="3.5" rx="1" fill="#2a3a30"/>
+        <rect x="52" y="58" width="48" height="3.5" rx="1" fill="#2a3a30"/>
+        <rect x="52" y="66" width="54" height="3.5" rx="1" fill="#2a3a30"/>
+        <rect x="52" y="74" width="40" height="3.5" rx="1" fill="#2a3a30"/>
+        <rect x="70" y="122" width="18" height="3" rx="1.5" fill="#2a3a30"/>
+        <g class="ph-tap" transform="translate(79,116)">
+          <circle r="9" fill="#1e2820" stroke="#c9a94e" stroke-width="1.3"/>
+          <path d="M0,-4.5 v7 M-3,-1.5 l3,-3 l3,3" stroke="#c9a94e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <text x="238" y="30" text-anchor="middle" font-size="8" fill="#8a9e86" font-family="monospace">home screen</text>
+        <g opacity=".45">
+          <rect x="196" y="40" width="26" height="26" rx="7" fill="#182019"/>
+          <rect x="230" y="40" width="26" height="26" rx="7" fill="#182019"/>
+          <rect x="264" y="40" width="26" height="26" rx="7" fill="#182019"/>
+          <rect x="196" y="74" width="26" height="26" rx="7" fill="#182019"/>
+        </g>
+        <g class="ph-pop">
+          <rect x="230" y="74" width="26" height="26" rx="7" fill="#1a1206" stroke="#c9a94e" stroke-width="1.3"/>
+          <text x="243" y="93" text-anchor="middle" font-size="15">⚡</text>
+        </g>
+        <text x="243" y="112" text-anchor="middle" font-size="7" fill="#8a9e86" font-family="monospace">Last Light</text>
+      </svg>
+      <h3>📱 On your phone or tablet (like an app)</h3>
+      <p style="font-size:.9rem;color:var(--text-2);margin:.1rem 0 .2rem">Save the guide to your home screen so it opens like an app and works offline. This gives you the full written guide, all 27 sections, tools, skills and search — no internet needed.</p>
+      <div class="phone-os">
+        <strong>📱 iPhone / iPad — Safari</strong>
+        <ol>
+          <li>Open <strong>bunkerbot.co.uk</strong> in Safari (you may be here now).</li>
+          <li>Tap the <strong>Share</strong> button (the square with an ↑).</li>
+          <li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>
+          <li>Tap <strong>Add</strong> — an app icon appears. Open it anytime, offline.</li>
+        </ol>
+      </div>
+      <div class="phone-os">
+        <strong>🤖 Android — Chrome</strong>
+        <ol>
+          <li>Open <strong>bunkerbot.co.uk</strong> in Chrome.</li>
+          <li>Tap the <strong>⋮</strong> menu (top-right).</li>
+          <li>Tap <strong>Add to Home screen</strong> (or <strong>Install app</strong>).</li>
+          <li>Confirm — the icon appears on your home screen and works offline.</li>
+        </ol>
+      </div>
+      <p class="install-tip">The offline <strong>AI assistant</strong> and the <strong>bundled PDF books</strong> need a computer to run — the phone install gives you the written guide and search offline, which is the core of it.</p>
+    </div>
+  </div>
+
+  <h3 style="margin:1.8rem 0 .3rem;color:var(--text-0)">Where to keep it</h3>
+  <p class="section-desc" style="margin-bottom:.3rem">Knowledge only helps if you can reach it. Keep <strong>at least two copies</strong> in different places, so a lost phone or a dead laptop never loses the guide.</p>
+  <div class="store-strip">
+    <div class="store-item"><span class="si">💻</span><b>Your computer</b><span>The working copy you use day to day.</span></div>
+    <div class="store-item"><span class="si">🔌</span><b>A USB stick</b><span>Your grab-and-go backup — keep it with your kit or bug-out bag.</span></div>
+    <div class="store-item"><span class="si">📱</span><b>Your phone</b><span>Installed to the home screen — always in your pocket, offline.</span></div>
+  </div>
+  <p class="install-tip" style="max-width:none">🛡️ For real resilience, add a copy on a second USB kept somewhere separate — a car, a relative's house, a waterproof tin. It's just files; copy it as many times as you like.</p>
+
+  <p style="font-size:.78rem;color:var(--text-3);margin-top:.9rem">Tip for the computer version: to also enable the offline AI, maps, and "install as an app", serve the folder with <code style="font-family:var(--mono,monospace)">python3 -m http.server</code> instead of opening the file directly. Verify your download with <code style="font-family:var(--mono,monospace)">sh verify.sh</code>.</p>
+
+  <div class="advanced-label">Optional extras (advanced)</div>
 
   <div class="addon">
     <h3>＋ Add the offline AI (optional)</h3>

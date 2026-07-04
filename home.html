@@ -172,6 +172,17 @@
     .foot-links{display:flex;gap:1.3rem;flex-wrap:wrap}
     .foot-links a{color:var(--text-2)}.foot-links a:hover{color:var(--amber)}
 
+    /* small phones (<430px): stop the hero headline/CTAs from crowding */
+    @media(max-width:430px){
+      .hero h1{font-size:1.7rem}
+      .hero-br{display:none}
+      .hero-cta{flex-direction:column;align-items:stretch}
+      .hero-cta .btn{justify-content:center;width:100%}
+      .topnav .btn-mini{padding:.35rem .7rem;font-size:.82rem}
+      section{padding:3.2rem 0}
+      .wrap{padding:0 1rem}
+    }
+
     /* reveal on scroll — gated on .js so no-JS users still see everything */
     .reveal{transition:opacity .6s ease, transform .6s ease}
     html.js .reveal{opacity:0;transform:translateY(18px)}
@@ -204,7 +215,7 @@
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow">Free · Offline · Open Source</div>
-      <h1>When the grid goes dark,<br><span class="glow">the knowledge stays on.</span></h1>
+      <h1>When the grid goes dark,<br class="hero-br"> <span class="glow">the knowledge stays on.</span></h1>
       <p class="hero-sub">A complete, fully-offline survival library — 29 reference books, an AI that <em>cites its sources</em>, and offline maps. Runs off a USB stick, even a Raspberry Pi. No internet, no account, no catch.</p>
       <div class="hero-cta">
         <a href="#download" class="btn btn-primary">⬇ Download — Free</a>
@@ -458,10 +469,7 @@
     var io = new IntersectionObserver(function(es){
       es.forEach(function(e){ if(e.isIntersecting){ countUp(e.target); io.unobserve(e.target); } });
     }, { threshold: .5 });
-    document.querySelectorAll('[data-count]').forEach(function(el){
-      if(!reduce) el.textContent = '0';   // reset for the count-up; no-JS keeps the real value
-      io.observe(el);
-    });
+    document.querySelectorAll('[data-count]').forEach(function(el){ io.observe(el); });
 
     /* reveal on scroll */
     var ro = new IntersectionObserver(function(es){
