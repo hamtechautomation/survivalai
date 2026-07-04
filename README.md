@@ -240,7 +240,7 @@ Progress is stored locally via `localStorage` and can be exported/imported as JS
 ### Other Pages
 
 - **`quick-reference.html`** — 2-page printable emergency card covering the first 72 hours
-- **`cards.html`** — 14 wallet-sized lamination cards (water purification, Morse, wound care, dental, solar troubleshooting, etc.)
+- **`cards.html`** — 16 wallet-sized lamination cards (water purification, Morse, wound care, dental, solar troubleshooting, etc.)
 - **`gear.html`** — Interactive gear checklist with localStorage persistence
 - **`ai-setup.html`** — Step-by-step Bunker Bot / Ollama setup with troubleshooting
 - **`expansion.html`** — Expansion Library: one-click links to download all of Wikipedia, Project Gutenberg, and offline maps (Kiwix/ZIM + OSM)
@@ -254,10 +254,12 @@ Progress is stored locally via `localStorage` and can be exported/imported as JS
 ```
 last-light-survival-guide/
 ├── index.html                  ← Dashboard — start here
+├── about.html                  ← About the project (ethos, credits, get involved)
+├── download.html               ← Download packages + install guides
 ├── skills.html                 ← Practical Skills — 36 interactive guides
 ├── tools.html                  ← 14 interactive calculators
 ├── quick-reference.html        ← 72-hour emergency card (print first)
-├── cards.html                  ← 14 wallet cards (laminate these)
+├── cards.html                  ← 16 wallet cards (laminate these)
 ├── gear.html                   ← Gear checklist (localStorage)
 ├── literature.html             ← Reference library
 ├── expansion.html              ← Expansion Library (Wikipedia/Gutenberg/maps)
@@ -269,11 +271,16 @@ last-light-survival-guide/
 ├── sw.js                       ← Service worker (offline caching)
 ├── offline.html                ← Offline fallback page
 ├── verify.sh                   ← Check a copied archive is intact (SHA-256)
+├── make-usb.sh                 ← One-command verified USB copy
+├── pi-setup.sh                 ← Raspberry Pi one-line server bootstrap
+├── bunkerbot.py                ← Terminal Bunker Bot (zero-dependency CLI)
 ├── MANIFEST.sha256             ← Checksums for verify.sh
 ├── make-torrent.sh             ← Build a torrent for P2P distribution
 ├── get-knowledge.sh            ← Download a Kiwix ZIM (Wikipedia/Gutenberg…)
 ├── extract-map.sh              ← Carve any region of the world into a map file
 ├── deploy-s3.sh                ← Publish to AWS S3 + CloudFront
+├── build-packages.sh           ← Build the downloadable ZIPs
+├── rebuild-index.sh            ← Rebuild the PDF search index after adding books
 ├── sections/                   ← 27 content section pages
 │   ├── food.html               medical.html        energy.html
 │   ├── shelter.html            communications.html navigation.html

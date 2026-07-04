@@ -1,25 +1,33 @@
 {
-  "version": "1.0.0",
-  "lastUpdated": "2026-06-19",
+  "version": "1.1.0",
+  "lastUpdated": "2026-07-04",
   "sections": [
     {
-      "version": "1.0.0",
-      "date": "2026-06-19",
-      "title": "Initial Release",
+      "version": "1.1.0",
+      "date": "2026-07-04",
+      "title": "Post-launch expansion",
       "changes": [
-        "19 complete content sections covering all core survival domains",
-        "9 interactive tools: calorie calculator, water budget, solar sizing, supply tracker, skill inventory, planting calendar, bug-out decision tree, radio frequencies, medication reference",
-        "ARIA AI assistant via Ollama — fully offline capable",
-        "60-book reference library with free PDF links and acquisition tracker",
-        "Complete gear checklist with localStorage persistence",
-        "Emergency quick-reference card (printable)",
-        "12 printable wallet-sized emergency reference cards",
-        "Service worker for full offline caching",
-        "High contrast and night vision display modes",
-        "Font size accessibility controls (Normal / Large / XL)",
-        "Client-side search across all content",
-        "Inline SVG diagrams throughout — no external images required",
-        "Zero CDN dependencies — works from USB drive on any browser"
+        "Bunker Bot retrieval upgrade: survival-domain query expansion + domain routing (browser and CLI)",
+        "Terminal Bunker Bot (bunkerbot.py) \u2014 zero-dependency CLI with the same citations",
+        "29th bundled book: Bunker Bot Compendium (master index & quick-reference)",
+        "New sections: Power Systems, Structures, Water Systems, Medicine-Making builds",
+        "Medical additions: choking, spinal injury; weather prediction; electronics repair & solar salvage",
+        "Public landing page with animated three-act hero; interactive night-Earth globe on Maps",
+        "About page; full PWA (install prompt, offline fallback, iOS)",
+        "make-usb.sh verified USB copies; pi-setup.sh Raspberry Pi server bootstrap",
+        "Fix: download packages ship a matching manifest so verify.sh passes"
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-06-21",
+      "title": "Initial public release",
+      "changes": [
+        "27 content sections, 36 practical skills, 14 offline calculators, 16 wallet cards",
+        "28 bundled reference books with browsable PDF library",
+        "Bunker Bot: local AI (Ollama/llamafile/Claude) answering from the books with inline citations",
+        "Offline maps (PMTiles), Expansion Library (Kiwix), integrity manifest + verify.sh",
+        "Live at bunkerbot.co.uk; open source (CC BY-SA content, MIT code)"
       ]
     }
   ]

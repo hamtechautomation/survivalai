@@ -186,59 +186,63 @@
     <p class="section-desc">Version history and update notes for The Last Light Survival Guide. This guide is a living document — content will be expanded and refined as better techniques are identified.</p>
   </div>
 
-  <!-- v2.0 — current -->
-  <div class="cl-section current" id="v2.0">
+  <!-- v1.1 — current -->
+  <div class="cl-section current" id="v1.1">
     <div class="cl-version">
-      <span class="cl-version-number">v2.0</span>
-      <span class="cl-version-date">June 2026 — Major Expansion</span>
+      <span class="cl-version-number">v1.1</span>
+      <span class="cl-version-date">July 2026 — Post-launch expansion</span>
       <span class="cl-version-badge badge-current">Current</span>
     </div>
-    <p style="font-size:.85rem;color:var(--text-secondary);margin:.5rem 0 1rem">A large expansion: more sections and tools, a far smarter offline AI, an interactive offline map, and one-click access to the rest of recorded knowledge.</p>
+    <p style="font-size:.85rem;color:var(--text-secondary);margin:.5rem 0 1rem">Everything shipped since going live at bunkerbot.co.uk: a cinematic front door, a smarter Bunker Bot, a terminal client, and tools that make your copy verifiable and spreadable.</p>
 
     <div class="stat-row">
       <div class="stat-chip"><strong>27</strong><span>Content Sections</span></div>
       <div class="stat-chip"><strong>36</strong><span>Practical Skills</span></div>
       <div class="stat-chip"><strong>14</strong><span>Interactive Tools</span></div>
-      <div class="stat-chip"><strong>28</strong><span>Bundled Books</span></div>
+      <div class="stat-chip"><strong>29</strong><span>Bundled Books</span></div>
     </div>
     <hr class="cl-divider">
 
-    <div class="cl-group-title">New Sections &amp; Content</div>
+    <div class="cl-group-title">Bunker Bot &amp; Retrieval</div>
     <ul class="cl-list">
-      <li><span class="cl-tag tag-new">New</span>First Principles — periodic table, key equations, physics/chemistry, and a repeatable invention method</li>
-      <li><span class="cl-tag tag-new">New</span>Veterinary Care, and Pregnancy &amp; Infant Care sections</li>
-      <li><span class="cl-tag tag-new">New</span>Practical Projects — 9 build guides: cooling/aircon, air filters, dams &amp; hydro, water pumps, toilets, radiation checking, grain mills, breeding stock, food storage</li>
-      <li><span class="cl-tag tag-new">New</span>Medical: rabies, tetanus, anaphylaxis, eye injuries · Food: passive fishing · Skills: blade sharpening</li>
+      <li><span class="cl-tag tag-improve">Improve</span>Retrieval understands intent, not just words — survival-domain query expansion plus domain routing (trauma / obstetric / dental / water / navigation / radio), so "stop heavy bleeding" now cites the trauma manuals, not the childbirth chapter</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Terminal Bunker Bot</strong> (<code>bunkerbot.py</code>) — the whole assistant in one zero-dependency Python file: same retrieval, same citations, works over SSH and on a Pi; falls back to a citing search tool with no model running</li>
+      <li><span class="cl-tag tag-new">New</span><strong>Bunker Bot Compendium</strong> — a 29th bundled book: master index &amp; quick-reference tables, fully indexed for citations</li>
     </ul>
 
-    <div class="cl-group-title">Tools &amp; AI</div>
+    <div class="cl-group-title">Content</div>
     <ul class="cl-list">
-      <li><span class="cl-tag tag-new">New</span>Five new tools: weight-based Antibiotic Dosing Calculator, Survival Timer, Celestial Latitude Finder, Firewood Estimator, Crop Spacing Planner</li>
-      <li><span class="cl-tag tag-improve">Improve</span>Bunker Bot now answers from the bundled library (BM25 search over ~14,000 PDF chunks) and cites sources inline — on every page, not just the library</li>
-      <li><span class="cl-tag tag-improve">Improve</span>Custom inline-SVG icon set replacing all emoji; two new dental + solar wallet cards (14 total)</li>
+      <li><span class="cl-tag tag-new">New</span>Practical build sections: Power Systems, Structures, Water Systems, and Medicine-Making</li>
+      <li><span class="cl-tag tag-new">New</span>Medical: choking (adult/child/infant), spinal injury &amp; moving a casualty · Climate: predicting weather without instruments · Energy: charging devices, salvaging solar panels, repairing electronics</li>
+      <li><span class="cl-tag tag-new">New</span><strong>About page</strong> — the project's ethos, honest limitations, and how to help</li>
     </ul>
 
-    <div class="cl-group-title">Expansion, Maps &amp; Distribution</div>
+    <div class="cl-group-title">Site, App &amp; Cinematics</div>
     <ul class="cl-list">
-      <li><span class="cl-tag tag-new">New</span>Expansion Library — one-click links to download all of Wikipedia and Project Gutenberg (Kiwix/ZIM) for offline reading</li>
-      <li><span class="cl-tag tag-new">New</span>Interactive offline browser map (PMTiles) with a region picker and a "download a map of anywhere" extractor — runs on a minimal static server, no internet</li>
-      <li><span class="cl-tag tag-new">New</span>Printable master index of the whole archive</li>
-      <li><span class="cl-tag tag-new">New</span>Integrity manifest + verify.sh; torrent &amp; IPFS distribution helpers</li>
+      <li><span class="cl-tag tag-new">New</span>Public landing page at bunkerbot.co.uk with an animated three-act hero (storm → meteorite → the horde — the bunker light always comes back on)</li>
+      <li><span class="cl-tag tag-new">New</span>Interactive photo-real night-Earth globe on the Maps page (NASA city-lights imagery, drag to spin) with a "last light" cinematic</li>
+      <li><span class="cl-tag tag-improve">Improve</span>Full PWA: install prompt, offline fallback page, iOS support; animated scenes across Download, AI-setup, Maps, Expansion and Disasters pages</li>
+    </ul>
+
+    <div class="cl-group-title">Distribution &amp; Integrity</div>
+    <ul class="cl-list">
+      <li><span class="cl-tag tag-new">New</span><code>make-usb.sh</code> — one command copies the guide to a USB stick and re-reads every byte against SHA-256 hashes</li>
+      <li><span class="cl-tag tag-new">New</span><code>pi-setup.sh</code> — one line turns a Raspberry Pi into a survival AI server: guide + Ollama + a RAM-sized model, serving your network on boot</li>
+      <li><span class="cl-tag tag-fix">Fix</span>Download packages now ship a manifest matching their contents, so <code>verify.sh</code> passes in an extracted download</li>
     </ul>
   </div>
 
-  <!-- v1.1 — planned -->
+  <!-- Next — planned -->
   <div class="cl-section planned">
     <div class="cl-version">
       <span class="cl-version-number">Next</span>
       <span class="cl-version-date">Under consideration</span>
       <span class="cl-version-badge badge-planned">Planned</span>
     </div>
-    <p style="font-size:.85rem;color:var(--text-muted);margin:.5rem 0 1rem">Possible future additions — not yet implemented.</p>
-    <hr class="cl-divider">
 
     <div class="cl-group-title">Under Consideration</div>
     <ul class="cl-list">
+      <li><span class="cl-tag tag-improve">Improve</span>Clinician review of the medical sections — <a href="https://github.com/hamtechautomation/survivalai/issues/new/choose" target="_blank" rel="noopener">volunteer here</a></li>
       <li><span class="cl-tag tag-new">New</span>Bundle King's American Dispensatory (PD herbal) and a compact Gray's Anatomy</li>
       <li><span class="cl-tag tag-new">New</span>Printable section posters — key diagrams sized for A3/tabloid printing</li>
       <li><span class="cl-tag tag-improve">Improve</span>More pre-built map regions and an on-page region search</li>
@@ -246,86 +250,40 @@
     </ul>
   </div>
 
-  <!-- v1.0 — initial release -->
+  <!-- v1.0 — initial public release -->
   <div class="cl-section" id="v1.0">
     <div class="cl-version">
       <span class="cl-version-number">v1.0</span>
-      <span class="cl-version-date">June 2025 — Initial Release</span>
+      <span class="cl-version-date">June 2026 — Initial public release</span>
       <span class="cl-version-badge badge-planned">Superseded</span>
     </div>
-    <p style="font-size:.85rem;color:var(--text-secondary);margin:.5rem 0 1rem">Complete initial build — all 8 content sections, AI integration, offline search, and full tooling.</p>
+    <p style="font-size:.85rem;color:var(--text-secondary);margin:.5rem 0 1rem">The launch build: the complete offline library, an AI that cites its sources, offline maps, and full distribution tooling — live at bunkerbot.co.uk and free to download.</p>
 
     <div class="stat-row">
-      <div class="stat-chip"><strong>20</strong><span>HTML Files</span></div>
-      <div class="stat-chip"><strong>8</strong><span>Content Sections</span></div>
-      <div class="stat-chip"><strong>122</strong><span>Gear Items</span></div>
-      <div class="stat-chip"><strong>~496KB</strong><span>Total Size</span></div>
-      <div class="stat-chip"><strong>0</strong><span>CDN Calls</span></div>
+      <div class="stat-chip"><strong>27</strong><span>Content Sections</span></div>
+      <div class="stat-chip"><strong>36</strong><span>Practical Skills</span></div>
+      <div class="stat-chip"><strong>14</strong><span>Interactive Tools</span></div>
+      <div class="stat-chip"><strong>28</strong><span>Bundled Books</span></div>
+      <div class="stat-chip"><strong>0</strong><span>Dependencies</span></div>
       <div class="stat-chip"><strong>100%</strong><span>Offline</span></div>
     </div>
-
     <hr class="cl-divider">
 
-    <div class="cl-group-title">New — Content Sections</div>
+    <div class="cl-group-title">The Library &amp; the AI</div>
     <ul class="cl-list">
-      <li><span class="cl-tag tag-new">New</span><strong>Section 1: Food, Water &amp; Sanitation</strong> — Water purification (boiling, bleach, SODIS, filter, distillation), rainwater catchment, food preservation (canning, fermentation, smoking, dehydration), foraging guide, hunting &amp; trapping, latrine construction, ORS recipe</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Section 2: Medical &amp; First Aid</strong> — Tourniquet, hemostatic gauze, wound closure, suturing, fractures, burns (Rule of Nines), hypothermia, heat stroke, emergency childbirth, appendicitis, dental emergencies, herbal medicine, medications table, START triage flowchart, mental health</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Section 3: Energy Creation &amp; Management</strong> — Solar system sizing formulas, battery bank calculation, micro-hydro (Pelton wheel), wood gasification (Imbert downdraft), battery maintenance, Faraday cage construction, fuel storage safety</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Section 4: Shelter &amp; Construction</strong> — Site selection, debris hut, lean-to, tarp configurations, timber framing &amp; joinery, earthbag, cob, passive solar design formula, insulation R-values, hand tools priority table</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Section 5: Communications &amp; Signals</strong> — Ham radio licensing, Baofeng UV-5R setup, CHIRP programming, emergency frequencies, complete Morse code reference, mirror signaling, ground-to-air signals, Meshtastic/LoRa mesh, NOAA weather radio, dead drop techniques</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Section 6: Navigation &amp; Maps</strong> — Topographic map reading, UTM grid system, compass &amp; declination, triangulation, Polaris finding, Southern Cross, shadow stick, watch method, natural navigation; inline SVG compass rose and Northern Hemisphere star chart</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Section 7: Security &amp; Defense</strong> — Community governance &amp; watch schedules, layered perimeter defense, trip-wire construction, conflict de-escalation protocol, firearms &amp; caliber guide, non-lethal options, OPSEC principles, building fortification, bug-out vs. bug-in decision framework, 72-hour go-bag table</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Section 8: Knowledge &amp; Preservation</strong> — Book preservation, essential reading list (5 categories), community library system, apprenticeship teaching model, iron gall ink recipe, double-entry ledger, digital storage comparison, Kiwix/offline libraries, Raspberry Pi archive server, skills by age table</li>
+      <li><span class="cl-tag tag-new">New</span>27 content sections — food &amp; water, medical, energy, shelter, comms, navigation, security, agriculture, animal husbandry, veterinary, pregnancy &amp; infant care, NBC/EMP, disasters, First Principles, Practical Projects, and more</li>
+      <li><span class="cl-tag tag-new">New</span>28 bundled reference books (US Army field manuals, the Hesperian guides, Bowditch's <em>Navigator</em>, Henley's <em>Formulas</em>, KJV, Shakespeare…) with a browsable PDF library</li>
+      <li><span class="cl-tag tag-new">New</span>Bunker Bot answers from the bundled books — BM25 over ~14,000 chunks — and cites source + page inline; runs on Ollama, a llamafile, or the Claude API</li>
+      <li><span class="cl-tag tag-new">New</span>36 practical skills with progress tracking, 14 offline calculators, 16 printable wallet cards, printable master index</li>
     </ul>
 
-    <hr class="cl-divider">
-
-    <div class="cl-group-title">New — Tools &amp; Utility Pages</div>
+    <div class="cl-group-title">Maps, Expansion &amp; Distribution</div>
     <ul class="cl-list">
-      <li><span class="cl-tag tag-new">New</span><strong>Emergency Quick Reference Card</strong> (<code>quick-reference.html</code>) — Single-page printable card with Rule of Threes, bleeding control, water purification, ORS recipe, Morse code, START triage, radio frequencies, distress signals, and navigation</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Bunker Bot Setup Guide</strong> (<code>ai-setup.html</code>) — OS-tabbed setup instructions for macOS, Windows, and Linux; model recommendations by RAM tier; portable USB install instructions; CORS workaround</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Master Gear List</strong> (<code>gear.html</code>) — 122 items across 12 categories with Critical / Important / Nice-to-Have priority tiers; checkbox persistence via localStorage; live progress bar for Critical items; Print All and Print Shopping List modes</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Bunker Bot System Prompt</strong> (<code>bunker-bot-prompt.html</code>) — Full Bunker Bot system prompt with copy-to-clipboard; step-by-step instructions for ChatGPT, Claude.ai, Ollama, and Gemini; complete Ollama Modelfile; prompt customization guide</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Changelog</strong> (<code>changelog.html</code>) — This page</li>
+      <li><span class="cl-tag tag-new">New</span>Offline browser maps (PMTiles + Leaflet, Canvas renderer) with a region picker and "download a map of anywhere" extractor</li>
+      <li><span class="cl-tag tag-new">New</span>Expansion Library — one-click Kiwix links to all of Wikipedia and Project Gutenberg</li>
+      <li><span class="cl-tag tag-new">New</span>Integrity manifest + <code>verify.sh</code>; torrent &amp; IPFS helpers; Lite (~2 MB) and Standard (~560 MB) download packages</li>
+      <li><span class="cl-tag tag-new">New</span>Live at <strong>bunkerbot.co.uk</strong> (S3 + CloudFront), open-sourced on GitHub (CC BY-SA content, MIT code)</li>
     </ul>
-
-    <hr class="cl-divider">
-
-    <div class="cl-group-title">New — Infrastructure &amp; Features</div>
-    <ul class="cl-list">
-      <li><span class="cl-tag tag-new">New</span><strong>Bunker Bot offline AI assistant</strong> — Streams responses from Ollama at localhost:11434; auto-detects installed models; preference order llama3 → gemma3 → phi3 → mistral; AbortController stop-streaming; conversation history (last 6 exchanges); localStorage model preference</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Client-side full-text search</strong> — Pre-built index with TF-IDF-style scoring; title exact (+15), title prefix (+10), tag match (+8), content (+2/match), all-token bonus (+20); keyboard navigation (↑/↓/Enter); 180ms debounce; base-path aware for section pages</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Dark high-contrast theme</strong> — Amber #c9a94e on near-black #070a09; readable by flashlight; system font stack only (zero CDN); CSS custom properties throughout; amber/green/red semantic colours</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Responsive sidebar navigation</strong> — Dynamically built by app.js; auto base-path resolution for root vs. section pages; hamburger toggle at 900px; keyboard: <kbd>/</kbd> = search, <kbd>Esc</kbd> = close</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Print stylesheets</strong> — Every page hides nav/sidebar/Bunker Bot and switches to black-on-white; gear.html shopping list mode hides checked items; quick-reference card fits one letter-size page</li>
-      <li><span class="cl-tag tag-new">New</span><strong>Inline SVG graphics</strong> — Compass rose (300×300) and Northern Hemisphere star chart (340×340) in navigation.html; no external images anywhere in the guide</li>
-      <li><span class="cl-tag tag-new">New</span><strong>ASCII diagrams</strong> — Improvised water filter, distillation setup, snare, latrine, debris hut, lean-to, mortise-tenon joint, timber raising sequence, layered defense perimeter, START triage flowchart — all in monospace pre blocks</li>
-    </ul>
-
-    <hr class="cl-divider">
-
-    <div class="cl-group-title">Files Included in v1.0</div>
-    <div class="file-list">
-      <span class="file-chip">index.html</span>
-      <span class="file-chip">quick-reference.html</span>
-      <span class="file-chip">ai-setup.html</span>
-      <span class="file-chip">gear.html</span>
-      <span class="file-chip">bunker-bot-prompt.html</span>
-      <span class="file-chip">changelog.html</span>
-      <span class="file-chip">sections/food.html</span>
-      <span class="file-chip">sections/medical.html</span>
-      <span class="file-chip">sections/energy.html</span>
-      <span class="file-chip">sections/shelter.html</span>
-      <span class="file-chip">sections/communications.html</span>
-      <span class="file-chip">sections/navigation.html</span>
-      <span class="file-chip">sections/security.html</span>
-      <span class="file-chip">sections/knowledge.html</span>
-      <span class="file-chip">assets/css/style.css</span>
-      <span class="file-chip">assets/js/app.js</span>
-      <span class="file-chip">assets/js/search.js</span>
-      <span class="file-chip">assets/js/bunker-bot.js</span>
-      <span class="file-chip">README.md</span>
-    </div>
   </div>
 
   <div class="callout callout-info">

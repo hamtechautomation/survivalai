@@ -36,7 +36,7 @@ Project Gutenberg**.
   chunks — and **cited inline with source + page**. It won't invent drug doses.
 
 **The library & the world**
-- **28 bundled reference books** (US Army field manuals, *Where There Is No
+- **29 bundled reference books** (US Army field manuals, *Where There Is No
   Doctor/Dentist*, *A Book for Midwives*, Bowditch's *Navigator*, the KJV Bible,
   Shakespeare, and more).
 - **Offline maps** rendered in the browser from a single file — pan/zoom with no

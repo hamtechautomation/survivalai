@@ -40,7 +40,7 @@
   <div class="toolbar"><button onclick="window.print()">⎙ Print this index</button></div>
 
   <h1>The Last Light Survival Guide</h1>
-  <p class="sub">Master Index — v1.0 · the whole archive at a glance, for paper</p>
+  <p class="sub">Master Index — v1.1 · the whole archive at a glance, for paper</p>
 
   <div class="lead">
     <strong>If the screens are dead and the power is gone:</strong> this folder still works. Open <strong>index.html</strong> in any web browser — no internet needed. The reference books live in the <strong>pdfs/</strong> folder. The offline AI (<strong>Bunker Bot</strong>) needs a local model — see <strong>ai-setup.html</strong>. Print this page and keep it with the drive so the catalogue survives even if nothing will switch on.
@@ -153,7 +153,7 @@ $('sections').innerHTML=SECTIONS.map((s,i)=>`<tr><td class="n">${i+1}</td><td cl
 $('tools').innerHTML=TOOLS.map((t,i)=>`<tr><td class="n">${i+1}</td><td class="t">${t[0]}</td><td class="d">${t[1]}</td></tr>`).join('');
 $('pdfs').innerHTML=PDFS.map(p=>`<tr><td class="t">${p[0]}</td><td class="d">${p[1]}</td></tr>`).join('');
 $('quick').innerHTML=QUICK.map(q=>`<tr><td class="t">${q[0]}</td><td class="d">${q[1]}</td></tr>`).join('');
-$('foot').innerHTML=`${SECTIONS.length} sections · ${TOOLS.length} tools · 36 practical skills · ${PDFS.length} bundled reference books &nbsp;·&nbsp; The Last Light Survival Guide v1.0 · printed master index. Distribute freely (CC BY-SA 4.0).`;
+$('foot').innerHTML=`${SECTIONS.length} sections · ${TOOLS.length} tools · 36 practical skills · ${PDFS.length} bundled reference books &nbsp;·&nbsp; The Last Light Survival Guide v1.1 · printed master index. Distribute freely (CC BY-SA 4.0).`;
 </script>
 </body>
 </html>
