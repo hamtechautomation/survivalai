@@ -80,9 +80,121 @@ Rules:
 - If a "REFERENCE MATERIAL" block is provided, base steps on it and cite it briefly, e.g. (Emergency War Surgery, p.88).
 - Do NOT invent drug doses. Name the drug and route and say "confirm the dose" rather than guessing a number."""
 
-# ── retrieval (mirrors librarian.js BM25 exactly) ──────────────────────────────
+# ── retrieval (mirrors librarian.js BM25 exactly — keep the two in sync) ───────
 def tokenise(text):
     return re.findall(r'\b[a-z]{3,}\b', (text or '').lower())
+
+# Survival-domain query expansion. BM25 alone matches words, not intent:
+# "stop heavy bleeding" used to surface postpartum chapters because they say
+# "bleeding" most often. Expanding the query with domain synonyms (at reduced
+# weight, so the user's own words still dominate) pulls in the chunks that say
+# "tourniquet" and "direct pressure" instead.
+SYNONYMS = {
+    'bleeding': ['hemorrhage', 'haemorrhage', 'tourniquet', 'wound', 'pressure', 'dressing'],
+    'bleed':    ['hemorrhage', 'tourniquet', 'wound', 'pressure'],
+    'blood':    ['bleeding', 'hemorrhage'],
+    'broken':   ['fracture', 'splint', 'bone'],
+    'fracture': ['splint', 'bone', 'broken'],
+    'sprain':   ['splint', 'swelling', 'ligament'],
+    'burn':     ['scald', 'blister', 'dressing'],
+    'choking':  ['airway', 'heimlich', 'obstruction'],
+    'poison':   ['poisoning', 'toxin', 'antidote', 'venom'],
+    'snakebite':['venom', 'snake', 'bite', 'antivenom'],
+    'infection':['antibiotic', 'sepsis', 'pus', 'infected'],
+    'infected': ['antibiotic', 'infection', 'pus'],
+    'fever':    ['temperature', 'infection'],
+    'purify':   ['purification', 'disinfect', 'boil', 'chlorine', 'iodine', 'filter', 'potable'],
+    'filter':   ['filtration', 'purify', 'sand', 'charcoal'],
+    'diarrhea': ['diarrhoea', 'dehydration', 'rehydration', 'dysentery'],
+    'diarrhoea':['diarrhea', 'dehydration', 'rehydration', 'dysentery'],
+    'dehydration': ['rehydration', 'fluids', 'salts'],
+    'hypothermia': ['cold', 'exposure', 'shivering', 'warming'],
+    'frostbite':['freezing', 'thaw', 'extremities'],
+    'heatstroke': ['hyperthermia', 'cooling', 'dehydration'],
+    'stitches': ['suture', 'laceration', 'closure'],
+    'suture':   ['stitches', 'laceration', 'wound'],
+    'birth':    ['labor', 'labour', 'delivery', 'childbirth'],
+    'pregnant': ['pregnancy', 'labor', 'birth'],
+    'baby':     ['infant', 'newborn'],
+    'tooth':    ['dental', 'toothache', 'teeth'],
+    'toothache':['dental', 'tooth', 'cavity'],
+    'fire':     ['tinder', 'kindling', 'ignite', 'ember'],
+    'navigation': ['compass', 'bearing', 'chart', 'position'],
+    'latitude': ['celestial', 'sextant', 'polaris', 'altitude'],
+    'antenna':  ['dipole', 'wavelength', 'wire', 'aerial'],
+    'radio':    ['transmitter', 'receiver', 'frequency', 'antenna'],
+    'signal':   ['mirror', 'flare', 'rescue', 'distress'],
+    'shelter':  ['insulation', 'lean', 'tarp'],
+    'forage':   ['edible', 'plants', 'wild'],
+    'edible':   ['forage', 'plants', 'poisonous'],
+    'trap':     ['snare', 'deadfall', 'bait'],
+    'knot':     ['rope', 'lashing', 'hitch', 'bend'],
+    'solar':    ['panel', 'photovoltaic', 'battery', 'charge'],
+    'radiation':['fallout', 'nuclear', 'iodide', 'shielding'],
+    'compost':  ['humanure', 'manure', 'soil'],
+}
+SYN_WEIGHT  = 0.55   # expanded terms count roughly half the user's own words
+STEM_WEIGHT = 0.7    # naive singular/plural variants
+
+# Domain routing: when a query is clearly about X, gently boost the books that
+# are authorities on X (and cool obviously-wrong ones). Multipliers are mild —
+# BM25 relevance still decides within a domain. Sources match by substring.
+DOMAIN_RULES = [
+    {'name': 'obstetric', 'triggers': ['pregnan', 'birth', 'labor', 'labour', 'postpartum', 'midwif', 'uterus', 'breastfeed', 'infant', 'newborn', 'childbirth'],
+     'boost': {'Midwives': 1.4}},
+    {'name': 'dental', 'triggers': ['tooth', 'teeth', 'dental', 'gum', 'cavit', 'denture', 'toothache'],
+     'boost': {'Dentist': 1.5}},
+    {'name': 'trauma', 'triggers': ['bleed', 'hemorrhag', 'haemorrhag', 'wound', 'fractur', 'tourniquet', 'gunshot', 'lacerat', 'splint', 'sprain', 'burn', 'suture', 'stitch'],
+     'boost': {'War Surgery': 1.3, 'Special Forces': 1.3, 'Wilderness Medicine': 1.3, 'First Aid': 1.3, 'No Doctor': 1.15},
+     'demote': {'Midwives': ('obstetric', 0.7), 'Dentist': ('dental', 0.7)}},
+    {'name': 'water', 'triggers': ['purif', 'disinfect', 'potable', 'chlorin', 'iodin', 'filtrat'],
+     'boost': {'Hygiene': 1.4, 'Survival FM': 1.2, 'No Doctor': 1.1}},
+    {'name': 'navigation', 'triggers': ['navigat', 'latitude', 'longitude', 'sextant', 'celestial', 'bearing', 'compass', 'chart', 'polaris'],
+     'boost': {'Navigator': 1.35}},
+    {'name': 'radio', 'triggers': ['radio', 'antenna', 'frequenc', 'transmit', 'receiver', 'morse', 'dipole', 'shortwave', 'aerial'],
+     'boost': {'Signal': 1.4}},
+    {'name': 'nbc', 'triggers': ['radiat', 'fallout', 'nuclear', 'iodide'],
+     'boost': {'Nuclear War': 1.5, 'Survival FM': 1.15}},
+]
+# Literary/scripture sources are ~40% of the corpus and pure noise for how-to
+# queries; cool them whenever any practical domain rule fires. Queries ABOUT
+# these works fire no rule, so they stay fully searchable.
+LITERARY = ['Shakespeare', 'Bible', 'Aesop', 'Meditations', 'Art of War']
+LITERARY_DEMOTE = 0.5
+
+def expand_query(query):
+    """tokens → [(term, weight)] with synonyms + naive plural variants."""
+    base = list(dict.fromkeys(tokenise(query)))
+    weights = {t: 1.0 for t in base}
+    for t in base:
+        for s in SYNONYMS.get(t, []):
+            if weights.get(s, 0) < SYN_WEIGHT:
+                weights[s] = SYN_WEIGHT
+        v = t[:-1] if t.endswith('s') else t + 's'
+        if len(v) >= 3 and weights.get(v, 0) < STEM_WEIGHT:
+            weights[v] = STEM_WEIGHT
+    return list(weights.items())
+
+def source_multipliers(terms):
+    """Which domain rules fire for these (expanded) terms → per-source factor."""
+    fired = set()
+    for rule in DOMAIN_RULES:
+        if any(t.startswith(trig) for t, _ in terms for trig in rule['triggers']):
+            fired.add(rule['name'])
+    mult = {}
+    if not fired:
+        return mult
+    for rule in DOMAIN_RULES:
+        if rule['name'] not in fired:
+            continue
+        for src, f in rule.get('boost', {}).items():
+            mult[src] = mult.get(src, 1.0) * f
+        for src, (unless, f) in rule.get('demote', {}).items():
+            if unless not in fired:
+                mult[src] = mult.get(src, 1.0) * f
+    for src in LITERARY:
+        mult[src] = mult.get(src, 1.0) * LITERARY_DEMOTE
+    return mult
 
 class Library:
     def __init__(self, chunks):
@@ -99,9 +211,10 @@ class Library:
         self.idf = {w: math.log(1 + (N - dfw + 0.5) / (dfw + 0.5)) for w, dfw in df.items()}
 
     def search(self, query, topk=TOPK):
-        q = list(dict.fromkeys(tokenise(query)))
+        q = expand_query(query)
         if not q:
             return []
+        mult = source_multipliers(q)
         k1, b = 1.5, 0.75
         scored = []
         for i, toks in enumerate(self.doc_tokens):
@@ -110,12 +223,16 @@ class Library:
             for w in toks:
                 freq[w] = freq.get(w, 0) + 1
             score = 0.0
-            for t in q:
+            for t, wgt in q:
                 f = freq.get(t)
                 if not f:
                     continue
-                score += self.idf.get(t, 0) * (f * (k1 + 1)) / (f + k1 * (1 - b + b * dl / self.avgdl))
+                score += wgt * self.idf.get(t, 0) * (f * (k1 + 1)) / (f + k1 * (1 - b + b * dl / self.avgdl))
             if score > 0:
+                src = self.chunks[i]['s']
+                for key, factor in mult.items():
+                    if key in src:
+                        score *= factor
                 scored.append((score, i))
         scored.sort(reverse=True)
         return [self.chunks[i] for _, i in scored[:topk]]

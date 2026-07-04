@@ -39,6 +39,32 @@ The content is broad and AI-assisted, and the **medical material has not yet bee
 
 > **Do this now:** Print `quick-reference.html` and `cards.html` before an emergency. Laminate the wallet cards.
 
+### Make a verified USB stick (one command)
+
+```bash
+sh make-usb.sh /Volumes/MYUSB           # macOS
+sh make-usb.sh /media/$USER/MYUSB       # Linux
+sh make-usb.sh /Volumes/MYUSB --lite    # app only, ~4 MB (no PDFs/maps/AI index)
+```
+
+It copies the guide, then **re-reads every byte on the stick** against fresh
+SHA-256 hashes — so a flaky drive or bad copy is caught now, not the day you
+need it.
+
+### Raspberry Pi — one-line survival server
+
+Turn any Pi (or Debian-ish box) into a self-contained survival AI appliance —
+guide + books + maps + a local model, served to your whole network on boot:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hamtechautomation/survivalai/main/pi-setup.sh | sh
+```
+
+Then open `http://<pi-address>:8080` from any phone or laptop on the network.
+It downloads the full guide, installs Ollama, pulls a model sized to the Pi's
+RAM, and installs a systemd service. Re-running is safe; each step skips
+what's already done.
+
 ---
 
 ## Setting Up Bunker Bot (Offline AI Assistant)
