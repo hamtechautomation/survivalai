@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="About The Last Light Survival Guide — a complete, fully-offline survival library built to keep working when the grid doesn't. Offline-first, zero dependencies, private, and free.">
+  <title>About — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .about-lead{font-size:1.05rem;color:var(--text-1);max-width:60ch;line-height:1.7;margin-bottom:1.5rem}
+    .ethos{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+    @media(max-width:720px){.ethos{grid-template-columns:1fr}}
+    .ethos .card{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.2rem}
+    .ethos .card h3{color:var(--text-0);font-size:1.02rem;margin:0 0 .35rem;display:flex;align-items:center;gap:.5rem}
+    .ethos .card p{font-size:.9rem;color:var(--text-2);margin:0}
+    .about-links{display:flex;gap:.7rem;flex-wrap:wrap;margin:1rem 0}
+    /* ── animations ── */
+    @keyframes ab-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+    @keyframes ab-pulse{0%,100%{opacity:.8;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+    @keyframes ab-halo{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.7;transform:scale(1.4)}}
+    .about-lead{animation:ab-rise .7s ease both}
+    .ethos .card{opacity:0;animation:ab-rise .6s ease forwards;transition:border-color .18s, transform .18s}
+    .ethos .card:hover{border-color:var(--amber-dim);transform:translateY(-3px)}
+    .ethos .card:nth-child(1){animation-delay:.05s}.ethos .card:nth-child(2){animation-delay:.12s}
+    .ethos .card:nth-child(3){animation-delay:.19s}.ethos .card:nth-child(4){animation-delay:.26s}
+    .ethos .card:nth-child(5){animation-delay:.33s}.ethos .card:nth-child(6){animation-delay:.40s}
+    .ethos .card h3{transition:transform .18s}.ethos .card:hover h3{transform:translateX(2px)}
+    .about-links,.callout-amber{animation:ab-rise .7s ease .15s both}
+    /* the "last light" spark by the title */
+    .ll-spark{position:relative;display:inline-block;width:13px;height:13px;vertical-align:middle;margin-left:.5rem}
+    .ll-spark::before{content:'';position:absolute;inset:-9px;border-radius:50%;
+      background:radial-gradient(circle,rgba(255,220,140,.5),rgba(255,220,140,0) 70%);animation:ab-halo 3.2s ease-in-out infinite}
+    .ll-spark::after{content:'';position:absolute;inset:0;border-radius:50%;
+      background:radial-gradient(circle,#fff 0%,#ffe6a0 45%,rgba(255,220,140,0) 74%);
+      box-shadow:0 0 8px 2px rgba(255,220,140,.6);animation:ab-pulse 3.2s ease-in-out infinite}
+    @media(prefers-reduced-motion:reduce){.about-lead,.ethos .card,.about-links,.callout-amber{animation:none!important;opacity:1!important}.ll-spark::before,.ll-spark::after{animation:none!important}}
+  </style>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">About</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>About The Last Light<span class="ll-spark" aria-hidden="true"></span></h1>
+    <p class="section-desc">A complete, fully-offline survival library — built for the moment the grid isn't there.</p>
+  </div>
+
+  <p class="about-lead">The Last Light Survival Guide exists on one principle: <strong>knowledge should keep working when everything else stops.</strong> No internet, no accounts, no company that can switch it off. Just a folder of plain files you can keep on a USB stick, a phone, or a bunker's laptop — and reach when you need it most.</p>
+
+  <h2>How it's built</h2>
+  <p class="muted" style="max-width:60ch">The whole thing is shaped by one question: <em>will this still work when the infrastructure is gone?</em></p>
+
+  <div class="ethos">
+    <div class="card"><h3>🔌 Offline-first, by design</h3><p>Pure static HTML, CSS and JavaScript — no build step, no framework, no server. It opens straight from a folder and runs with zero internet on anything from a phone to a 15-year-old laptop to a Raspberry Pi.</p></div>
+    <div class="card"><h3>📦 Zero dependencies</h3><p>Nothing to install, nothing to update, nothing that can rot. The guide is plain files you can read, copy, and keep — the same way you'd keep a paper book.</p></div>
+    <div class="card"><h3>🔒 Private by default</h3><p>No accounts, no ads, no tracking, no analytics that phone home. What you read is nobody's business. Nothing leaves your device.</p></div>
+    <div class="card"><h3>🤖 The AI runs on your machine</h3><p>Bunker Bot talks to a local model (Ollama or a single-file llamafile) and answers <em>from the bundled books</em>, citing source and page — so you can verify it, fully offline.</p></div>
+    <div class="card"><h3>🛡️ Resilient</h3><p>A SHA-256 manifest lets you verify your copy hasn't been tampered with, and torrent / IPFS options mean it survives takedowns. Copy it as many times as you like.</p></div>
+    <div class="card"><h3>❤ Free and open</h3><p>Free to download, free to share, and licensed <strong>CC BY-SA</strong> — mirror it, fork it, rehost it. It belongs to everyone who keeps a copy.</p></div>
+  </div>
+
+  <div class="callout callout-amber">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-content">
+      <strong>An honest note</strong>
+      <p>The content is broad and AI-assisted, and the medical material has not yet been reviewed by a licensed clinician. It's a reference, not professional advice — verify anything critical, and seek qualified help whenever it's available. The inline citations are there so you can check every claim.</p>
+    </div>
+  </div>
+
+  <h2>Get involved</h2>
+  <p class="muted" style="max-width:60ch">This is a community resource. The most valuable help right now is <strong>expert review</strong> — if you're a clinician, ham, vet, engineer or experienced homesteader and can correct a section, please do. And mirror it, share it, keep it alive.</p>
+  <div class="about-links">
+    <a class="btn btn-outline" href="https://github.com/hamtechautomation/survivalai" target="_blank" rel="noopener">Source on GitHub</a>
+    <a class="btn btn-ghost" href="https://github.com/hamtechautomation/survivalai/issues/new/choose" target="_blank" rel="noopener">Report a correction</a>
+    <a class="btn btn-ghost" href="https://github.com/hamtechautomation/survivalai/discussions" target="_blank" rel="noopener">Discussions</a>
+    <a class="btn btn-primary" href="https://buy.stripe.com/14A00lgJM72a1wNcES9Zm00" target="_blank" rel="noopener">❤ Support the project</a>
+  </div>
+  <p style="font-size:.78rem;color:var(--text-3);max-width:60ch;margin-top:.6rem">Credits: bundled reference works are public-domain or Creative Commons (US Army manuals, the Hesperian guides, Bowditch's <em>Navigator</em>, and more); the offline globe uses NASA's public-domain Earth imagery; maps use OpenStreetMap via PMTiles, and the Expansion Library uses Kiwix. Donations appear as <strong>TRADETRACKHQ</strong> on your statement.</p>
+
+  <nav class="section-pagination no-print" aria-label="Section navigation">
+    <a href="index.html" class="pagination-btn pagination-home">Home</a>
+    <a href="download.html" class="pagination-btn pagination-next">Download →</a>
+  </nav>
+</div>
+</main>
+
+<script src="assets/js/shared-progress.js"></script>
+<script src="assets/js/search.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/bunker-bot.js"></script>
+</body>
+</html>

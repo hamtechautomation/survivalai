@@ -233,6 +233,7 @@
         <a href="${base}gear.html" class="btn btn-outline btn-full">${ICONS.clipboard} Gear Checklist</a>
         <a href="${base}maps.html" class="btn btn-ghost btn-full">${ICONS.globe} Offline Maps</a>
         <a href="${base}ai-setup.html" class="btn btn-ghost btn-full">${ICONS.robot} Bunker Bot</a>
+        <a href="${base}about.html" class="btn btn-ghost btn-full" style="opacity:.7;font-size:.78rem">ⓘ About</a>
         <a href="${base}changelog.html" class="btn btn-ghost btn-full" style="opacity:.6;font-size:.75rem">${ICONS.changelog} Changelog</a>
         <div class="sidebar-live-indicator">
           <span class="sidebar-live-dot"></span>
