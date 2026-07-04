@@ -1,5 +1,5 @@
 /* The Last Light Survival Guide — Service Worker v4 */
-const CACHE = 'last-light-v48';
+const CACHE = 'last-light-v49';
 
 /* Pre-cache: all HTML, CSS, JS, icons, manifest.
    pdf-chunks.json (~30MB) is intentionally excluded from pre-cache to avoid
@@ -115,7 +115,7 @@ self.addEventListener('fetch', event => {
   }
 
   /* Static assets (CSS, JS, icons, fonts) — cache-first for speed */
-  if (url.pathname.match(/\.(css|js|svg|png|ico|woff2?|json)$/)) {
+  if (url.pathname.match(/\.(css|js|svg|png|jpe?g|ico|woff2?|json)$/)) {
     event.respondWith(cacheFirst(event.request));
     return;
   }

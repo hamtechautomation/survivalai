@@ -20,19 +20,12 @@
     .map-missing code { background:var(--bg-3); border:1px solid var(--border-hi); border-radius:4px; padding:.15rem .4rem; font-size:.85rem; }
     .map-missing h3 { color:var(--amber-light); margin:0; }
     /* animated globe scene */
-    .globe-scene{width:100%;max-width:560px;aspect-ratio:2/1;height:auto;display:block;margin:.2rem auto 1.3rem;border-radius:12px;
-      background:radial-gradient(circle at 50% 46%, #0b141b 0%, #060a08 72%);border:1px solid var(--border)}
-    .gl-spin{animation:gl-spin 18s linear infinite}
-    @keyframes gl-spin{from{transform:translateX(0)}to{transform:translateX(-124px)}}
-    .gl-flash{opacity:0;animation:gl-flash 11s ease-out infinite}
-    @keyframes gl-flash{0%,8%{opacity:0}11%{opacity:.9}18%{opacity:0}100%{opacity:0}}
-    .gl-mush{opacity:0;transform-box:fill-box;transform-origin:bottom center;animation:gl-mush 11s ease-out infinite}
-    @keyframes gl-mush{0%,6%{opacity:0;transform:scale(.3,.08)}11%{opacity:.95;transform:scale(.55,.5)}19%{opacity:.9;transform:scale(1,1)}28%{opacity:.5}34%{opacity:0;transform:scale(1.15,1.2)}100%{opacity:0}}
-    .gl-night{opacity:0;animation:gl-night 11s ease-in-out infinite}
-    @keyframes gl-night{0%,16%{opacity:0}28%{opacity:.9}86%{opacity:.9}95%,100%{opacity:0}}
-    .gl-city{opacity:0;animation:gl-city 11s ease-in-out infinite}
-    @keyframes gl-city{0%,32%{opacity:0}37%{opacity:.35}41%{opacity:1}44%{opacity:.5}48%{opacity:1}86%{opacity:1}95%,100%{opacity:0}}
-    @media(prefers-reduced-motion:reduce){.globe-scene *{animation:none!important}.gl-night,.gl-mush,.gl-flash,.gl-city{opacity:0!important}}
+    .globe-photo{position:relative;width:100%;max-width:320px;aspect-ratio:1/1;margin:.5rem auto .4rem;
+      cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+    .globe-photo.dragging{cursor:grabbing}
+    .globe-photo img{width:100%;height:100%;display:block;-webkit-user-drag:none;pointer-events:none}
+    .globe-cap{text-align:center;font-family:var(--mono,monospace);font-size:.76rem;color:var(--text-3);margin:0 0 1.4rem}
+    .globe-cap .hint{color:var(--amber-dim)}
   </style>
 </head>
 <body>
@@ -57,70 +50,37 @@
     <p class="section-desc">This renders real OpenStreetMap data from a single <strong>.pmtiles</strong> file, drawn live in your browser — no map server, no tiles to download per view, no internet. It runs on a Raspberry Pi or any minimal static host. <strong>Prototype region: Northern England &amp; Yorkshire</strong> (Liverpool, Manchester, Leeds, Sheffield, York, Hull, Newcastle, the Dales, Moors and Lake District).</p>
   </div>
 
-  <svg class="globe-scene" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A slowly spinning Earth. A distant nuclear blast darkens the globe, then warm city lights flicker back on across the continents as it keeps turning.">
-    <defs>
-      <clipPath id="gl-clip"><circle cx="200" cy="118" r="62"/></clipPath>
-      <radialGradient id="gl-ocean" cx="40%" cy="33%" r="80%">
-        <stop offset="0" stop-color="#1d5a6c"/><stop offset="55%" stop-color="#103a4b"/><stop offset="100%" stop-color="#081d29"/>
-      </radialGradient>
-      <radialGradient id="gl-atmo" cx="50%" cy="50%" r="50%">
-        <stop offset="70%" stop-color="#5ab0cf" stop-opacity="0"/><stop offset="88%" stop-color="#5ab0cf" stop-opacity=".22"/><stop offset="100%" stop-color="#5ab0cf" stop-opacity="0"/>
-      </radialGradient>
-      <radialGradient id="gl-shade" cx="36%" cy="27%" r="84%">
-        <stop offset="0" stop-color="#ffffff" stop-opacity=".15"/><stop offset="42%" stop-color="#ffffff" stop-opacity="0"/><stop offset="100%" stop-color="#000000" stop-opacity=".5"/>
-      </radialGradient>
-      <radialGradient id="gl-cityglow" cx="50%" cy="50%" r="50%">
-        <stop offset="0" stop-color="#ffe0a0" stop-opacity=".8"/><stop offset="100%" stop-color="#ffe0a0" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-    <circle cx="200" cy="118" r="71" fill="url(#gl-atmo)"/>
-    <circle cx="200" cy="118" r="62" fill="url(#gl-ocean)"/>
-    <g clip-path="url(#gl-clip)">
-      <!-- continents (spinning) -->
-      <g class="gl-spin" fill="#2c6a48">
-        <path d="M150,94 C153,86 165,83 176,88 C187,91 191,99 188,107 C185,117 176,123 166,122 C156,121 149,115 148,107 C147,101 147,98 150,94 Z"/>
-        <path d="M198,132 C204,126 217,126 225,133 C233,140 231,151 223,156 C214,161 203,159 197,152 C191,146 192,137 198,132 Z"/>
-        <path d="M237,98 C241,92 251,92 255,99 C258,105 254,113 245,113 C237,113 232,105 237,98 Z"/>
-        <path d="M274,94 C277,86 289,83 300,88 C311,91 315,99 312,107 C309,117 300,123 290,122 C280,121 273,115 272,107 C271,101 271,98 274,94 Z"/>
-        <path d="M322,132 C328,126 341,126 349,133 C357,140 355,151 347,156 C338,161 327,159 321,152 C315,146 316,137 322,132 Z"/>
-        <path d="M361,98 C365,92 375,92 379,99 C382,105 378,113 369,113 C361,113 356,105 361,98 Z"/>
-      </g>
-      <!-- night side -->
-      <rect class="gl-night" x="138" y="56" width="124" height="124" fill="#04090f"/>
-      <!-- city lights, ON the continents, spinning in sync -->
-      <g class="gl-spin">
-        <g class="gl-city" fill="url(#gl-cityglow)">
-          <circle cx="167" cy="103" r="11"/><circle cx="210" cy="144" r="11"/><circle cx="245" cy="104" r="7"/>
-          <circle cx="291" cy="103" r="11"/><circle cx="334" cy="144" r="11"/><circle cx="369" cy="104" r="7"/>
-        </g>
-        <g class="gl-city" fill="#ffe6a8">
-          <circle cx="160" cy="98" r="1.4"/><circle cx="169" cy="94" r="1.4"/><circle cx="176" cy="101" r="1.4"/><circle cx="166" cy="108" r="1.4"/><circle cx="154" cy="104" r="1.2"/><circle cx="180" cy="108" r="1.2"/>
-          <circle cx="206" cy="140" r="1.4"/><circle cx="214" cy="137" r="1.4"/><circle cx="210" cy="148" r="1.4"/><circle cx="220" cy="146" r="1.2"/><circle cx="201" cy="149" r="1.2"/>
-          <circle cx="243" cy="100" r="1.4"/><circle cx="249" cy="104" r="1.2"/><circle cx="240" cy="107" r="1.2"/>
-          <circle cx="284" cy="98" r="1.4"/><circle cx="293" cy="94" r="1.4"/><circle cx="300" cy="101" r="1.4"/><circle cx="290" cy="108" r="1.4"/><circle cx="278" cy="104" r="1.2"/><circle cx="304" cy="108" r="1.2"/>
-          <circle cx="330" cy="140" r="1.4"/><circle cx="338" cy="137" r="1.4"/><circle cx="334" cy="148" r="1.4"/><circle cx="344" cy="146" r="1.2"/><circle cx="325" cy="149" r="1.2"/>
-          <circle cx="367" cy="100" r="1.4"/><circle cx="373" cy="104" r="1.2"/><circle cx="364" cy="107" r="1.2"/>
-        </g>
-      </g>
-    </g>
-    <!-- lat/long grid -->
-    <g fill="none" stroke="#8fc0d0" stroke-width=".5" opacity=".2" clip-path="url(#gl-clip)">
-      <ellipse cx="200" cy="118" rx="21" ry="62"/><ellipse cx="200" cy="118" rx="42" ry="62"/>
-      <line x1="138" y1="118" x2="262" y2="118"/>
-      <ellipse cx="200" cy="118" rx="62" ry="26"/><ellipse cx="200" cy="118" rx="62" ry="48"/>
-    </g>
-    <!-- sphere shading + rim -->
-    <circle cx="200" cy="118" r="62" fill="url(#gl-shade)" clip-path="url(#gl-clip)"/>
-    <circle cx="200" cy="118" r="62" fill="none" stroke="#9fd8e8" stroke-width=".8" opacity=".38"/>
-    <!-- blast -->
-    <circle class="gl-flash" cx="200" cy="74" r="140" fill="#eef6ff"/>
-    <g class="gl-mush">
-      <rect x="195" y="44" width="10" height="22" rx="4" fill="#5a4e34"/>
-      <ellipse cx="200" cy="44" rx="24" ry="12" fill="#7a6640"/>
-      <ellipse cx="200" cy="38" rx="15" ry="8" fill="#9a8250"/>
-    </g>
-    <text x="200" y="192" text-anchor="middle" font-size="8" fill="#8a9e86" font-family="monospace">download a map of anywhere — the lights come back on</text>
-  </svg>
+  <div class="globe-photo" id="globe" role="img" aria-label="A rotating night-time Earth showing real city lights on the continents — drag to spin it.">
+    <img id="globe-img" src="assets/globe/f00.jpg" alt="Earth at night — real city lights on the continents" width="340" height="340">
+  </div>
+  <p class="globe-cap">🌍 The world at night — <span class="hint">drag to spin</span>. Then download a map of anywhere on it.</p>
+  <script>
+  (function(){
+    var N=48, box=document.getElementById('globe'), img=document.getElementById('globe-img');
+    if(!box||!img) return;
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var srcs=[]; for(var i=0;i<N;i++){var p='assets/globe/f'+(i<10?'0'+i:i)+'.jpg';srcs.push(p);var im=new Image();im.src=p;}
+    var AUTO=6, PXPF=9, pos=0, vel=reduce?0:AUTO, dragging=false, lastX=0, lastT=0, cur=-1, last=performance.now();
+    function render(){var idx=((Math.round(pos)%N)+N)%N; if(idx!==cur){cur=idx; img.src=srcs[idx];}}
+    function loop(t){
+      var dt=Math.min(.05,(t-last)/1000); last=t;
+      if(!dragging){
+        pos+=vel*dt;
+        if(!reduce){
+          if(vel>AUTO) vel=Math.max(AUTO, vel-26*dt);
+          else if(vel<-AUTO) vel=Math.min(-AUTO, vel+26*dt);
+          else vel += (AUTO-vel)*Math.min(1,dt*2.5);
+        } else vel=0;
+      }
+      render(); requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+    function gx(e){return e.clientX!=null?e.clientX:((e.touches&&e.touches[0])?e.touches[0].clientX:0);}
+    box.addEventListener('pointerdown',function(e){dragging=true;box.classList.add('dragging');lastX=gx(e);lastT=performance.now();try{box.setPointerCapture(e.pointerId);}catch(_){}});
+    window.addEventListener('pointermove',function(e){if(!dragging)return;var nx=gx(e),now=performance.now(),dx=nx-lastX,dt=(now-lastT)/1000||.016;pos+=dx/PXPF;vel=(dx/PXPF)/dt;lastX=nx;lastT=now;render();});
+    window.addEventListener('pointerup',function(){if(!dragging)return;dragging=false;box.classList.remove('dragging');});
+  })();
+  </script>
 
   <div class="map-controls">
     <label style="font-size:.8rem;color:var(--text-2)">Region
