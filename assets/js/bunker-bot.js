@@ -400,6 +400,9 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
       dot.className = 'status-dot online';
       if (label) label.textContent = `🏠 Local · ${models.length} model${models.length !== 1 ? 's' : ''}`;
 
+      /* Connected — the greeting's "Requires Ollama" note no longer applies */
+      document.querySelectorAll('.aria-note').forEach(n => { n.style.display = 'none'; });
+
       populateOllamaModels(models);
 
       /* Pick best available model */
