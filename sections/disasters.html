@@ -7,6 +7,39 @@
   <title>Disaster Playbooks — The Last Light Survival Guide</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* ── looping natural-disaster hero: storm → quake → fire → flood ── */
+    .dis-scene{width:100%;max-width:660px;height:200px;display:block;margin:.4rem auto .4rem;border-radius:12px;
+      background:radial-gradient(circle at 50% 30%, #141a22, #0a0d10);border:1px solid var(--border)}
+    .dis-phase{opacity:0;animation:dis-win 16s linear infinite}
+    .dis-phase.p1{animation-delay:0s}.dis-phase.p2{animation-delay:4s}
+    .dis-phase.p3{animation-delay:8s}.dis-phase.p4{animation-delay:12s}
+    @keyframes dis-win{0%{opacity:0}3%{opacity:1}22%{opacity:1}25%{opacity:0}100%{opacity:0}}
+    /* storm */
+    .dis-rain{stroke:#6f9bd0;stroke-width:1.4;stroke-linecap:round;opacity:.7;animation:dis-rain .55s linear infinite}
+    @keyframes dis-rain{0%{transform:translateY(-16px)}100%{transform:translateY(20px)}}
+    .dis-bolt{opacity:0;animation:dis-flash 2.6s ease-in-out infinite}
+    @keyframes dis-flash{0%,10%,14%,100%{opacity:0}11%{opacity:1}12%{opacity:.2}13%{opacity:.95}}
+    /* quake */
+    .dis-shake{animation:dis-shake .12s linear infinite}
+    @keyframes dis-shake{0%{transform:translate(0,0)}25%{transform:translate(1.4px,-1px)}50%{transform:translate(-1.2px,1px)}75%{transform:translate(1px,1.2px)}100%{transform:translate(-1px,-.6px)}}
+    .dis-debris{animation:dis-debris 1.4s ease-in infinite}
+    @keyframes dis-debris{0%{transform:translateY(-6px);opacity:0}20%{opacity:1}100%{transform:translateY(46px);opacity:0}}
+    /* fire */
+    .dis-flame{transform-origin:bottom center;transform-box:fill-box;animation:dis-flame .5s ease-in-out infinite alternate}
+    @keyframes dis-flame{0%{transform:scaleY(.86) scaleX(1.04)}100%{transform:scaleY(1.08) scaleX(.94)}}
+    .dis-ember{animation:dis-ember 2.2s ease-in infinite}
+    @keyframes dis-ember{0%{transform:translate(0,0);opacity:0}15%{opacity:1}100%{transform:translate(-8px,-56px);opacity:0}}
+    /* flood */
+    .dis-water{animation:dis-rise 5s ease-in-out infinite alternate}
+    @keyframes dis-rise{0%{transform:translateY(14px)}100%{transform:translateY(-2px)}}
+    .dis-surf{animation:dis-surf 2.4s ease-in-out infinite alternate}
+    @keyframes dis-surf{0%{transform:translateX(-8px)}100%{transform:translateX(0)}}
+    .dis-cap{fill:#8a9e9e;font-family:monospace;font-size:9px;opacity:0}
+    .dis-cap.p1{animation:dis-win 16s linear infinite 0s}.dis-cap.p2{animation:dis-win 16s linear infinite 4s}
+    .dis-cap.p3{animation:dis-win 16s linear infinite 8s}.dis-cap.p4{animation:dis-win 16s linear infinite 12s}
+    @media(prefers-reduced-motion:reduce){.dis-scene *{animation:none!important}.dis-phase.p1{opacity:1}.dis-cap.p1{opacity:1}}
+  </style>
 </head>
 <body>
 <div id="overlay" class="overlay"></div>
@@ -38,6 +71,81 @@
       </span>
     </div>
   </div>
+
+  <svg class="dis-scene" viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Looping illustration of four disaster types the guide covers: severe storm, earthquake, wildfire, and flood.">
+    <!-- shared horizon -->
+    <rect x="0" y="150" width="480" height="50" fill="#0d1114"/>
+    <line x1="0" y1="150" x2="480" y2="150" stroke="#26332b" stroke-width="1.2"/>
+
+    <!-- ── PHASE 1 · STORM ── -->
+    <g class="dis-phase p1">
+      <path d="M120,58 q-16,-2 -18,14 q-22,0 -20,18 q-4,14 14,15 l150,0 q22,-1 20,-18 q16,-4 8,-20 q-2,-16 -20,-12 q-10,-14 -28,-8 q-14,-8 -24,3 q-10,-2 -14,7 z" fill="#28313a"/>
+      <path d="M300,72 q-12,-2 -14,11 q-18,0 -15,15 q-3,11 12,12 l110,0 q17,-1 15,-15 q12,-4 6,-15 q-2,-12 -16,-9 q-8,-11 -22,-6 z" fill="#222a32"/>
+      <g class="dis-rain">
+        <line x1="120" y1="98" x2="114" y2="118"/><line x1="160" y1="94" x2="154" y2="114"/>
+        <line x1="205" y1="100" x2="199" y2="120"/><line x1="250" y1="96" x2="244" y2="116"/>
+        <line x1="300" y1="102" x2="294" y2="122"/><line x1="345" y1="98" x2="339" y2="118"/>
+        <line x1="140" y1="118" x2="134" y2="138"/><line x1="230" y1="120" x2="224" y2="140"/>
+        <line x1="320" y1="118" x2="314" y2="138"/><line x1="375" y1="112" x2="369" y2="132"/>
+      </g>
+      <path class="dis-bolt" d="M245,80 l-14,34 l12,0 l-8,26 l24,-38 l-12,0 l10,-22 z" fill="#e8e06e" stroke="#fff" stroke-width=".6"/>
+      <!-- house -->
+      <path d="M180,150 l0,-28 l30,-22 l30,22 l0,28 z" fill="#1a2129"/>
+      <path d="M176,124 l34,-26 l34,26" fill="none" stroke="#3a4652" stroke-width="2" stroke-linejoin="round"/>
+      <rect x="200" y="132" width="12" height="18" fill="#0d1114"/>
+    </g>
+    <text class="dis-cap p1" x="240" y="176" text-anchor="middle">severe storm — shelter, secure, wait it out</text>
+
+    <!-- ── PHASE 2 · EARTHQUAKE ── -->
+    <g class="dis-phase p2">
+      <g class="dis-shake">
+        <path d="M210,150 l0,-30 l32,-24 l32,24 l0,30 z" fill="#1a2129"/>
+        <path d="M206,120 l36,-27 l36,27" fill="none" stroke="#3a4652" stroke-width="2" stroke-linejoin="round"/>
+        <rect x="234" y="130" width="14" height="20" fill="#0d1114"/>
+        <circle class="dis-debris" cx="224" cy="118" r="2.4" fill="#5a6672"/>
+        <circle class="dis-debris" cx="262" cy="112" r="2" fill="#5a6672" style="animation-delay:.5s"/>
+        <circle class="dis-debris" cx="246" cy="106" r="1.8" fill="#5a6672" style="animation-delay:.9s"/>
+      </g>
+      <!-- ground crack -->
+      <path d="M60,150 l40,0 l14,24 l-8,26 l14,0 l-6,-30 l10,-20 l260,0 l16,26 l-8,24 l16,0" fill="none" stroke="#c9752e" stroke-width="2.4" stroke-linejoin="round" opacity=".9"/>
+      <path d="M114,150 l6,50 M366,150 l8,50" stroke="#7a3d18" stroke-width="1.4" opacity=".7"/>
+    </g>
+    <text class="dis-cap p2" x="240" y="176" text-anchor="middle">earthquake — drop, cover, hold on</text>
+
+    <!-- ── PHASE 3 · WILDFIRE ── -->
+    <g class="dis-phase p3">
+      <path d="M150,150 l0,-24 l28,-20 l28,20 l0,24 z" fill="#1a1a1e"/>
+      <g class="dis-flame">
+        <path d="M240,150 q-14,-22 4,-40 q-2,16 10,18 q10,-14 2,-32 q22,16 16,42 q-2,10 -12,12 z" fill="#e8894e"/>
+        <path d="M244,150 q-8,-16 4,-28 q0,12 8,12 q6,-12 0,-24 q14,14 8,32 z" fill="#e8c96e"/>
+      </g>
+      <g class="dis-flame" style="animation-delay:.2s">
+        <path d="M300,150 q-12,-18 3,-33 q-1,13 8,15 q8,-11 2,-26 q18,13 13,34 q-2,8 -10,10 z" fill="#d4703a"/>
+        <path d="M304,150 q-6,-13 3,-22 q0,9 6,10 q5,-9 0,-19 q11,11 6,25 z" fill="#e8c96e"/>
+      </g>
+      <path d="M180,150 q-10,-14 3,-26 q-1,10 6,12 q6,-9 1,-20 q14,11 10,27 z" fill="#c9752e" class="dis-flame" style="animation-delay:.35s"/>
+      <circle class="dis-ember" cx="250" cy="120" r="1.8" fill="#e8c96e"/>
+      <circle class="dis-ember" cx="290" cy="126" r="1.4" fill="#e8894e" style="animation-delay:.7s"/>
+      <circle class="dis-ember" cx="200" cy="124" r="1.6" fill="#e8c96e" style="animation-delay:1.2s"/>
+      <circle class="dis-ember" cx="320" cy="118" r="1.3" fill="#e8894e" style="animation-delay:1.6s"/>
+    </g>
+    <text class="dis-cap p3" x="240" y="176" text-anchor="middle">wildfire — go early, two ways out, stay low</text>
+
+    <!-- ── PHASE 4 · FLOOD ── -->
+    <g class="dis-phase p4">
+      <path d="M200,150 l0,-30 l32,-24 l32,24 l0,30 z" fill="#1a2129"/>
+      <path d="M196,120 l36,-27 l36,27" fill="none" stroke="#3a4652" stroke-width="2" stroke-linejoin="round"/>
+      <rect x="224" y="130" width="14" height="20" fill="#0d1114"/>
+      <g class="dis-water">
+        <g class="dis-surf">
+          <path d="M-10,138 q30,-8 60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 l0,72 l-500,0 z" fill="#2b5a86" opacity=".82"/>
+          <path d="M-10,146 q30,-7 60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0 t60,0" fill="none" stroke="#6f9bd0" stroke-width="1.4" opacity=".6"/>
+        </g>
+      </g>
+    </g>
+    <text class="dis-cap p4" x="240" y="176" text-anchor="middle">flood — get to high ground, never drive through</text>
+  </svg>
+  <p style="text-align:center;font-size:.82rem;color:var(--text-3);margin:-.1rem 0 1.4rem">Every disaster type has one optimal response — the playbooks below give you the first minutes, hours, and days for each.</p>
 
   <nav class="toc" aria-label="Page contents">
     <div class="toc-title">Contents</div>
