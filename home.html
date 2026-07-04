@@ -72,19 +72,74 @@
     /* ── cinematic scene ── */
     .scene{width:100%;aspect-ratio:16/11;background:linear-gradient(#0a1016,#0c0f0d 55%,#070a09);
       border:1px solid var(--border);border-radius:14px;overflow:hidden;display:block}
-    .flash{animation:flash 7s ease-out infinite}
-    @keyframes flash{0%,12%,100%{opacity:0}13%{opacity:.9}15%{opacity:.15}16%{opacity:.7}18%{opacity:0}}
-    .bolt-strike{opacity:0;animation:bolt 7s ease-out infinite}
-    @keyframes bolt{0%,12.5%,20%,100%{opacity:0}13%{opacity:1}14%{opacity:.2}16%{opacity:.85}17.5%{opacity:0}}
-    .win{fill:var(--amber-light);animation:winflk 7s steps(1) infinite}
-    @keyframes winflk{0%,55%{opacity:.9}60%{opacity:.15}63%{opacity:.85}68%{opacity:0}100%{opacity:0}}
+    /* one coordinated 8s loop: city lit → strike → buildings go dark → bunker powers on → hold → loop */
+    .flash{opacity:0;animation:flash 8s ease-out infinite}
+    @keyframes flash{0%,24%,100%{opacity:0}26%{opacity:.9}28%{opacity:.15}29.5%{opacity:.7}32%{opacity:0}}
+    .bolt-strike{opacity:0;animation:bolt 8s ease-out infinite}
+    @keyframes bolt{0%,25%,33%,100%{opacity:0}26%{opacity:1}27%{opacity:.2}29%{opacity:.85}31%{opacity:0}}
+    .win{fill:var(--amber-light);animation:winflk 8s steps(1) infinite}
+    @keyframes winflk{0%,25%{opacity:.9}30%{opacity:.15}33%{opacity:.7}40%{opacity:0}92%{opacity:0}95%,100%{opacity:.9}}
+    /* white rim on the struck building */
+    .bldg-rim{opacity:0;animation:brim 8s ease-out infinite}
+    @keyframes brim{0%,25.5%,32%,100%{opacity:0}26.5%{opacity:.9}28%{opacity:.25}29.5%{opacity:.7}}
     .rain line{stroke:#3a5064;stroke-width:1.4;opacity:.35;animation:rain 1s linear infinite}
     @keyframes rain{from{transform:translateY(-16px)}to{transform:translateY(16px)}}
+    /* the bunker only lights up AFTER the buildings go dark — a faint "ghost" of the room is always there, then it blooms */
+    .bunker-power{opacity:.07;animation:power 8s ease-in-out infinite}
+    @keyframes power{0%,46%{opacity:.07}48%{opacity:.85}50%{opacity:.2}52%{opacity:1}54%{opacity:.45}57%{opacity:1}90%{opacity:1}96%,100%{opacity:.07}}
     .lastlight{transform-origin:center;animation:breathe 3.4s ease-in-out infinite}
     @keyframes breathe{0%,100%{opacity:.85;filter:drop-shadow(0 0 6px rgba(201,169,78,.6))}
       50%{opacity:1;filter:drop-shadow(0 0 16px rgba(201,169,78,.95))}}
-    .halo{transform-origin:center;animation:halo 3.4s ease-in-out infinite}
+    .halo{transform-origin:center;opacity:.22;animation:halo 3.4s ease-in-out infinite}
     @keyframes halo{0%,100%{opacity:.18;r:26px}50%{opacity:.32;r:34px}}
+    /* ── enhanced bunker (hero) ── */
+    .bnk-sig{fill:none;stroke:#6fb0e0;stroke-width:2;opacity:0}
+    .bnk-sig.a{animation:bnksig 3s ease-out infinite}
+    .bnk-sig.b{animation:bnksig 3s ease-out infinite 1s}
+    .bnk-sig.c{animation:bnksig 3s ease-out infinite 2s}
+    @keyframes bnksig{0%{opacity:.7;r:3px}70%{opacity:0}100%{opacity:0;r:26px}}
+    .bnk-led{animation:bnkled 2s steps(1) infinite}
+    @keyframes bnkled{0%,55%{fill:#4b9e6a}58%,100%{fill:#17251b}}
+    .bnk-glowbook{animation:bnkbook 3.4s ease-in-out infinite}
+    @keyframes bnkbook{0%,100%{opacity:.45}50%{opacity:.95}}
+    .bnk-warm{animation:bnkwarm 3.4s ease-in-out infinite}
+    @keyframes bnkwarm{0%,100%{opacity:.32}50%{opacity:.6}}
+    .bnk-dust{animation:bnkdust 7s linear infinite;opacity:0}
+    @keyframes bnkdust{0%{opacity:0;transform:translateY(-4px)}25%{opacity:.5}100%{opacity:0;transform:translateY(26px)}}
+    /* ── disaster phases on a 24s master loop: storm (0–8s) → meteor (8–16s) → horde (16–24s) ──
+       the 8s window/bunker cycle repeats inside every phase: lights die → bunker powers on */
+    .dz{opacity:0;animation:dzwin 24s linear infinite}
+    .dz.z2{animation-delay:8s}
+    .dz.z3{animation-delay:16s}
+    @keyframes dzwin{0%,1.2%{opacity:0}3.5%{opacity:1}31%{opacity:1}33.34%,100%{opacity:0}}
+    /* precursor shooting stars before the big one */
+    .pre-star{opacity:0;animation:prestar 8s linear infinite}
+    @keyframes prestar{0%,4%{opacity:0;transform:translate(0,0)}5.5%{opacity:.8}8.5%{opacity:0;transform:translate(-44px,30px)}100%{opacity:0}}
+    .meteor{opacity:0;animation:meteor 8s cubic-bezier(.55,0,1,1) infinite}
+    @keyframes meteor{0%,22%{transform:translate(0,0);opacity:0}23.5%{opacity:1}30%{transform:translate(-270px,195px);opacity:1}30.5%,100%{opacity:0}}
+    .mflash{opacity:0;animation:mflash 8s ease-out infinite}
+    @keyframes mflash{0%,29.5%{opacity:0}31%{opacity:.8}33%{opacity:.2}35%{opacity:.5}40%,100%{opacity:0}}
+    .mglow{opacity:0;animation:mglow 8s ease-out infinite}
+    @keyframes mglow{0%,29.5%{opacity:0}31%{opacity:.9}45%{opacity:.25}55%,100%{opacity:0}}
+    .horde{animation:horde 8s linear infinite}
+    @keyframes horde{from{transform:translateX(-10px)}to{transform:translateX(130px)}}
+    .zmb{transform-origin:bottom center;transform-box:fill-box;animation:zbob 1s ease-in-out infinite alternate}
+    @keyframes zbob{from{transform:translateY(0) rotate(-2.5deg)}to{transform:translateY(1.6px) rotate(2.5deg)}}
+    /* meteor damage: appears at impact (~43% of the 24s master), stays wrecked through the horde, resets for the storm */
+    .dmg{opacity:0;animation:dmgwin 24s linear infinite}
+    @keyframes dmgwin{0%,43%{opacity:0}44.5%{opacity:1}98%{opacity:1}99.5%,100%{opacity:0}}
+    .dmg-smoke{opacity:0;transform-box:fill-box;transform-origin:center;animation:dsmk 3.5s linear infinite}
+    @keyframes dsmk{0%{opacity:0;transform:translateY(0) scale(.55)}20%{opacity:.45}100%{opacity:0;transform:translateY(-26px) scale(1.9)}}
+    .dmg-ember{animation:demb 1.6s ease-in-out infinite alternate}
+    @keyframes demb{from{opacity:.75}to{opacity:.15}}
+    /* fires burning in the ruined top (also masks the covered windows) */
+    .dmg-fire{animation:dfire .9s ease-in-out infinite alternate}
+    @keyframes dfire{from{fill:#6a2c14}to{fill:#e08a3e}}
+    /* the survivor turns a page every few seconds */
+    .fig-arm{transform-box:fill-box;transform-origin:100% 100%;animation:page 5s ease-in-out infinite}
+    @keyframes page{0%,84%,100%{transform:rotate(0deg)}90%{transform:rotate(-9deg)}96%{transform:rotate(0deg)}}
+    @media(prefers-reduced-motion:reduce){.scene *{animation:none!important}.bunker-power{opacity:1}.flash{opacity:0}
+      .dz{opacity:0!important}.dz.z1{opacity:1!important}.dmg{opacity:0!important}}
 
     /* ── stats ── */
     .stats{background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.2rem 0}
@@ -233,8 +288,189 @@
       </div>
     </div>
 
-    <!-- cinematic disaster → bunker scene -->
-    <div id="ll-globe" style="width:100%;max-width:360px;margin:0 auto"></div>
+    <!-- cinematic bunker scene: the surface goes dark, the last light stays on underground -->
+    <div style="width:100%;max-width:380px;margin:0 auto">
+    <svg class="scene" style="aspect-ratio:4/3" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A looping scene: a storm, a meteorite, and a shambling horde each knock the city's lights out — and each time, safe underground, the bunker's last light comes on: a wall of books, a lantern, a figure reading, and a radio broadcasting up an antenna.">
+      <defs>
+        <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1420"/><stop offset="1" stop-color="#0a0f0d"/></linearGradient>
+        <linearGradient id="earth2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#171009"/><stop offset="1" stop-color="#0a0806"/></linearGradient>
+        <radialGradient id="glow2" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#e8c96e" stop-opacity=".55"/><stop offset="1" stop-color="#e8c96e" stop-opacity="0"/></radialGradient>
+        <radialGradient id="warm2" cx="50%" cy="60%" r="60%"><stop offset="0" stop-color="#c98a3a" stop-opacity=".5"/><stop offset="1" stop-color="#c98a3a" stop-opacity="0"/></radialGradient>
+        <radialGradient id="moonhalo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#b9c6d6" stop-opacity=".22"/><stop offset="1" stop-color="#b9c6d6" stop-opacity="0"/></radialGradient>
+        <linearGradient id="mtrail" x1="390" y1="-20" x2="438" y2="-68" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#ffb45e" stop-opacity=".95"/><stop offset="1" stop-color="#ffb45e" stop-opacity="0"/>
+        </linearGradient>
+        <radialGradient id="mimp" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffd9a0" stop-opacity=".95"/><stop offset=".5" stop-color="#ff9a3e" stop-opacity=".5"/><stop offset="1" stop-color="#ff9a3e" stop-opacity="0"/></radialGradient>
+      </defs>
+
+      <!-- surface: night sky, moon, city -->
+      <rect width="400" height="184" fill="url(#sky2)"/>
+      <g fill="#7f93ad" opacity=".5"><circle cx="40" cy="30" r="1"/><circle cx="360" cy="24" r="1"/><circle cx="120" cy="18" r=".8"/><circle cx="300" cy="46" r=".8"/><circle cx="205" cy="34" r=".7"/><circle cx="88" cy="52" r=".6"/></g>
+      <circle cx="338" cy="38" r="17" fill="url(#moonhalo)"/>
+      <circle cx="338" cy="38" r="9" fill="#b9c6d6" opacity=".9"/>
+      <circle cx="335" cy="36" r="2.2" fill="#93a2b4" opacity=".55"/><circle cx="341" cy="42" r="1.5" fill="#93a2b4" opacity=".5"/>
+      <!-- far skyline (depth) -->
+      <g fill="#0a1013">
+        <rect x="26" y="140" width="22" height="44"/><rect x="74" y="128" width="20" height="56"/>
+        <rect x="112" y="146" width="18" height="38"/><rect x="168" y="136" width="24" height="48"/>
+        <rect x="282" y="142" width="20" height="42"/><rect x="336" y="138" width="22" height="46"/>
+      </g>
+
+      <!-- ── PHASE 1 · STORM ── -->
+      <g class="dz z1">
+        <rect class="flash" width="400" height="184" fill="#dfeaff"/>
+        <path class="bolt-strike" d="M330,4 L316,52 L330,52 L312,106 L346,48 L328,48 L340,4 Z" fill="#eaf2ff"/>
+        <rect class="bldg-rim" x="300" y="108" width="42" height="76" fill="none" stroke="#dfeaff" stroke-width="1.5"/>
+        <g class="rain">
+          <line x1="40" y1="0" x2="34" y2="16"/><line x1="90" y1="0" x2="84" y2="16"/>
+          <line x1="150" y1="0" x2="144" y2="16"/><line x1="210" y1="0" x2="204" y2="16"/>
+          <line x1="260" y1="0" x2="254" y2="16"/><line x1="330" y1="0" x2="324" y2="16"/>
+          <line x1="370" y1="0" x2="364" y2="16"/><line x1="120" y1="0" x2="114" y2="16"/>
+        </g>
+      </g>
+
+      <!-- ── PHASE 2 · METEORITE ── -->
+      <g class="dz z2">
+        <line class="pre-star" x1="140" y1="26" x2="152" y2="18" stroke="#9fb3c8" stroke-width="1.3" stroke-linecap="round"/>
+        <line class="pre-star" x1="320" y1="48" x2="332" y2="40" stroke="#9fb3c8" stroke-width="1.1" stroke-linecap="round" style="animation-delay:.7s"/>
+        <rect class="mflash" width="400" height="184" fill="#ffb45e"/>
+        <g class="meteor">
+          <path d="M390,-20 L438,-68" stroke="url(#mtrail)" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="390" cy="-20" r="9" fill="#ff9a3e" opacity=".35"/>
+          <circle cx="390" cy="-20" r="5" fill="#ffd9a0"/>
+        </g>
+        <ellipse class="mglow" cx="120" cy="180" rx="36" ry="10" fill="url(#mimp)"/>
+      </g>
+
+      <!-- near skyline -->
+      <g fill="#0e1417" stroke="#1a262a" stroke-width="1">
+        <rect x="6" y="120" width="40" height="64"/><rect x="52" y="92" width="32" height="92"/>
+        <rect x="90" y="130" width="28" height="54"/><rect x="124" y="104" width="38" height="80"/>
+        <rect x="300" y="108" width="42" height="76"/><rect x="348" y="128" width="30" height="56"/>
+      </g>
+      <!-- rooftop details -->
+      <g stroke="#1a262a" stroke-width="1.4" fill="none">
+        <line x1="68" y1="92" x2="68" y2="82"/><line x1="66" y1="84" x2="70" y2="84"/>
+        <line x1="143" y1="104" x2="143" y2="96"/>
+      </g>
+      <g fill="#101a1e" stroke="#1a262a" stroke-width="1"><rect x="310" y="98" width="10" height="10" rx="1"/><path d="M312,98 v-4 h6 v4"/></g>
+
+      <!-- ── PHASE 3 · THE HORDE (street level, in front of the skyline) ── -->
+      <g class="dz z3">
+        <g transform="translate(140,0)">
+        <g class="horde">
+          <g class="zmb">
+            <circle cx="14" cy="156" r="4.5" fill="#26332c" stroke="#4a5c50" stroke-width=".8"/>
+            <path d="M10,182 l1.5,-14 q-1,-9 6,-10 q6,.5 5,9 l1.5,15 h-3.5 l-1.5,-10 -2,10 z" fill="#26332c" stroke="#4a5c50" stroke-width=".8"/>
+            <path d="M13,164 l9,2 M13,168 l8,4" stroke="#26332c" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="16.4" cy="155" r="1" fill="#e04a34"/>
+          </g>
+          <g transform="translate(30,1) scale(.92)"><g class="zmb" style="animation-delay:.35s">
+            <circle cx="14" cy="156" r="4.5" fill="#26332c" stroke="#4a5c50" stroke-width=".8"/>
+            <path d="M10,182 l1.5,-14 q-1,-9 6,-10 q6,.5 5,9 l1.5,15 h-3.5 l-1.5,-10 -2,10 z" fill="#26332c" stroke="#4a5c50" stroke-width=".8"/>
+            <path d="M13,164 l9,2 M13,168 l8,4" stroke="#26332c" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="16.4" cy="155" r="1" fill="#e04a34"/>
+          </g></g>
+          <g transform="translate(58,-1) scale(1.06)"><g class="zmb" style="animation-delay:.7s">
+            <circle cx="14" cy="156" r="4.5" fill="#26332c" stroke="#4a5c50" stroke-width=".8"/>
+            <path d="M10,182 l1.5,-14 q-1,-9 6,-10 q6,.5 5,9 l1.5,15 h-3.5 l-1.5,-10 -2,10 z" fill="#26332c" stroke="#4a5c50" stroke-width=".8"/>
+            <path d="M13,164 l9,2 M13,168 l8,4" stroke="#26332c" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="16.4" cy="155" r="1" fill="#e04a34"/>
+          </g></g>
+        </g>
+        </g>
+      </g>
+      <g>
+        <rect class="win" x="58" y="100" width="6" height="6" style="animation-delay:0s"/>
+        <rect class="win" x="70" y="100" width="6" height="6" style="animation-delay:.18s"/>
+        <rect class="win" x="58" y="116" width="6" height="6" style="animation-delay:.06s"/>
+        <rect class="win" x="130" y="112" width="6" height="6" style="animation-delay:.28s"/>
+        <rect class="win" x="142" y="112" width="6" height="6" style="animation-delay:.1s"/>
+        <rect class="win" x="130" y="128" width="6" height="6" style="animation-delay:.34s"/>
+        <rect class="win" x="308" y="118" width="6" height="6" style="animation-delay:.14s"/>
+        <rect class="win" x="320" y="118" width="6" height="6" style="animation-delay:.24s"/>
+        <rect class="win" x="308" y="134" width="6" height="6" style="animation-delay:.08s"/>
+      </g>
+
+      <!-- meteor damage: blown-off rooftop, cracks, rubble and smoke — persists until the loop resets -->
+      <g class="dmg">
+        <polygon points="121,94 165,94 165,116 157,109 150,121 143,108 135,119 128,110 121,117" fill="#0b1219"/>
+        <path d="M165,116 l-8,-7 -7,12 -7,-13 -8,11 -7,-9 -7,7" fill="none" stroke="#060a0c" stroke-width="1.2"/>
+        <path d="M138,124 l-4,10 4,9 M148,122 l3,13 M132,130 l-3,8" stroke="#0a0f11" stroke-width="1.2" fill="none"/>
+        <rect x="124" y="116" width="38" height="66" fill="#000" opacity=".22"/>
+        <rect class="dmg-fire" x="130" y="112" width="6" height="6" fill="#6a2c14"/>
+        <rect class="dmg-fire" x="142" y="112" width="6" height="6" fill="#6a2c14" style="animation-delay:.45s"/>
+        <path d="M116,182 q6,-8 13,-3 q5,-6 12,-1 q7,-6 12,2 q4,-3 8,2 z" fill="#0f1618" stroke="#1a262a" stroke-width="1"/>
+        <circle class="dmg-ember" cx="128" cy="179" r="1.2" fill="#ff9a3e"/>
+        <circle class="dmg-ember" cx="148" cy="180" r="1" fill="#e07b2e" style="animation-delay:.7s"/>
+        <g fill="#39434b">
+          <circle class="dmg-smoke" cx="138" cy="112" r="4" style="animation-delay:0s"/>
+          <circle class="dmg-smoke" cx="146" cy="114" r="3" style="animation-delay:1.2s"/>
+          <circle class="dmg-smoke" cx="132" cy="115" r="2.6" style="animation-delay:2.3s"/>
+        </g>
+      </g>
+
+      <!-- antenna: broadcasting from below -->
+      <line x1="250" y1="150" x2="250" y2="260" stroke="#3a4a40" stroke-width="2"/>
+      <path d="M250,150 l-6,-10 M250,150 l6,-10" stroke="#3a4a40" stroke-width="2" fill="none"/>
+      <g class="bunker-power"><circle class="bnk-sig a" cx="250" cy="150" r="3"/><circle class="bnk-sig b" cx="250" cy="150" r="3"/><circle class="bnk-sig c" cx="250" cy="150" r="3"/></g>
+
+      <!-- ground -->
+      <rect x="0" y="182" width="400" height="5" fill="#1a2420"/>
+      <rect x="0" y="187" width="400" height="113" fill="url(#earth2)"/>
+      <g stroke="#241a10" stroke-width="1.4" fill="none" opacity=".7">
+        <path d="M60,187 q6,14 -4,26 q-8,8 2,20"/><path d="M340,187 q-8,12 2,24"/><path d="M30,187 q4,10 12,16"/>
+      </g>
+
+      <!-- bunker interior (cutaway) -->
+      <rect x="104" y="196" width="192" height="92" rx="8" fill="#0f0b07" stroke="#2c3a30" stroke-width="2"/>
+      <!-- everything the light reveals — hidden until the bunker powers on -->
+      <g class="bunker-power">
+      <ellipse class="bnk-warm" cx="205" cy="262" rx="96" ry="40" fill="url(#warm2)"/>
+      <!-- bookshelf (the library) -->
+      <rect x="116" y="210" width="40" height="66" fill="#0b0805" stroke="#2a2018" stroke-width="1.5"/>
+      <line x1="116" y1="232" x2="156" y2="232" stroke="#2a2018" stroke-width="1.2"/>
+      <line x1="116" y1="254" x2="156" y2="254" stroke="#2a2018" stroke-width="1.2"/>
+      <g>
+        <rect x="120" y="214" width="5" height="16" fill="#7a5a2e"/><rect x="126" y="214" width="5" height="16" fill="#4b6a4b"/>
+        <rect x="132" y="214" width="5" height="16" class="bnk-glowbook" fill="#e8c96e"/><rect x="138" y="214" width="5" height="16" fill="#6a4b3a"/><rect x="144" y="214" width="6" height="16" fill="#3a5064"/>
+        <rect x="120" y="236" width="5" height="16" fill="#4b6a4b"/><rect x="126" y="236" width="6" height="16" fill="#7a5a2e"/><rect x="133" y="236" width="5" height="16" fill="#6a4b3a"/><rect x="139" y="236" width="5" height="16" fill="#3a5064"/><rect x="145" y="236" width="5" height="16" fill="#5a4a6a"/>
+        <rect x="120" y="258" width="6" height="16" fill="#6a4b3a"/><rect x="127" y="258" width="5" height="16" fill="#3a5064"/><rect x="133" y="258" width="5" height="16" fill="#7a5a2e"/><rect x="139" y="258" width="6" height="16" fill="#4b6a4b"/>
+      </g>
+      <!-- figure reading by the light -->
+      <g fill="#080a08"><circle cx="186" cy="250" r="7"/><path d="M176,276 q0,-22 10,-22 q10,0 10,22 Z"/></g>
+      <path class="fig-arm" d="M196,254 q-2,-8 -10,-10" stroke="#c98a3a" stroke-width="1.4" fill="none" opacity=".6"/>
+      <!-- radio, cabled up to the surface antenna -->
+      <g>
+        <line x1="250" y1="196" x2="250" y2="260" stroke="#3a4a40" stroke-width="1.4" stroke-dasharray="3 2.5"/>
+        <circle cx="250" cy="197" r="1.6" fill="#3a4a40"/>
+        <rect x="236" y="260" width="30" height="16" rx="2" fill="#141b17" stroke="#2c3a30"/>
+        <circle class="bnk-led" cx="242" cy="268" r="2"/>
+        <rect x="248" y="264" width="14" height="3" rx="1" fill="#2a3a30"/><rect x="248" y="270" width="10" height="2.5" rx="1" fill="#2a3a30"/>
+      </g>
+      <!-- the last light — a lantern -->
+      <circle class="halo" cx="218" cy="244" r="26" fill="url(#glow2)"/>
+      <g class="lastlight">
+        <rect x="213" y="240" width="10" height="14" rx="2" fill="#2a2016" stroke="#c9a94e" stroke-width="1"/>
+        <rect x="215" y="243" width="6" height="9" fill="#ffe6a0"/>
+        <line x1="218" y1="236" x2="218" y2="240" stroke="#c9a94e" stroke-width="1.4"/>
+      </g>
+      </g><!-- /bunker-power -->
+      <!-- hatch / ladder to the surface -->
+      <rect x="276" y="196" width="14" height="92" fill="#0a0806" stroke="#2c3a30" stroke-width="1.5"/>
+      <g stroke="#2c3a30" stroke-width="1.4">
+        <line x1="279" y1="206" x2="287" y2="206"/><line x1="279" y1="222" x2="287" y2="222"/>
+        <line x1="279" y1="238" x2="287" y2="238"/><line x1="279" y1="254" x2="287" y2="254"/><line x1="279" y1="270" x2="287" y2="270"/>
+      </g>
+      <!-- dust motes in the warm light -->
+      <g fill="#c98a3a" class="bunker-power">
+        <circle class="bnk-dust" cx="210" cy="238" r="1" style="animation-delay:0s"/>
+        <circle class="bnk-dust" cx="228" cy="244" r="1" style="animation-delay:2.5s"/>
+        <circle class="bnk-dust" cx="196" cy="240" r=".8" style="animation-delay:4.5s"/>
+      </g>
+      <text x="200" y="296" text-anchor="middle" font-size="8" fill="#6a5a3a" font-family="monospace" letter-spacing="1">THE LAST LIGHT</text>
+    </svg>
+    </div>
   </div>
 </header>
 
@@ -469,7 +705,5 @@
     if(typed) tio.observe(typed.closest('.term'));
   })();
 </script>
-<script src="assets/js/globe.js"></script>
-<script>LastLightGlobe('#ll-globe',{mode:'loop'});</script>
 </body>
 </html>
