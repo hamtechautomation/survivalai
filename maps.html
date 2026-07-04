@@ -19,13 +19,6 @@
     .map-missing.show { display:flex; }
     .map-missing code { background:var(--bg-3); border:1px solid var(--border-hi); border-radius:4px; padding:.15rem .4rem; font-size:.85rem; }
     .map-missing h3 { color:var(--amber-light); margin:0; }
-    /* animated globe scene */
-    .globe-photo{position:relative;width:100%;max-width:320px;aspect-ratio:1/1;margin:.5rem auto .4rem;
-      cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-    .globe-photo.dragging{cursor:grabbing}
-    .globe-photo img{width:100%;height:100%;display:block;-webkit-user-drag:none;pointer-events:none}
-    .globe-cap{text-align:center;font-family:var(--mono,monospace);font-size:.76rem;color:var(--text-3);margin:0 0 1.4rem}
-    .globe-cap .hint{color:var(--amber-dim)}
   </style>
 </head>
 <body>
@@ -50,37 +43,9 @@
     <p class="section-desc">This renders real OpenStreetMap data from a single <strong>.pmtiles</strong> file, drawn live in your browser — no map server, no tiles to download per view, no internet. It runs on a Raspberry Pi or any minimal static host. <strong>Prototype region: Northern England &amp; Yorkshire</strong> (Liverpool, Manchester, Leeds, Sheffield, York, Hull, Newcastle, the Dales, Moors and Lake District).</p>
   </div>
 
-  <div class="globe-photo" id="globe" role="img" aria-label="A rotating night-time Earth showing real city lights on the continents — drag to spin it.">
-    <img id="globe-img" src="assets/globe/f00.jpg" alt="Earth at night — real city lights on the continents" width="340" height="340">
-  </div>
-  <p class="globe-cap">🌍 The world at night — <span class="hint">drag to spin</span>. Then download a map of anywhere on it.</p>
-  <script>
-  (function(){
-    var N=48, box=document.getElementById('globe'), img=document.getElementById('globe-img');
-    if(!box||!img) return;
-    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var srcs=[]; for(var i=0;i<N;i++){var p='assets/globe/f'+(i<10?'0'+i:i)+'.jpg';srcs.push(p);var im=new Image();im.src=p;}
-    var AUTO=6, PXPF=9, pos=0, vel=reduce?0:AUTO, dragging=false, lastX=0, lastT=0, cur=-1, last=performance.now();
-    function render(){var idx=((Math.round(pos)%N)+N)%N; if(idx!==cur){cur=idx; img.src=srcs[idx];}}
-    function loop(t){
-      var dt=Math.min(.05,(t-last)/1000); last=t;
-      if(!dragging){
-        pos+=vel*dt;
-        if(!reduce){
-          if(vel>AUTO) vel=Math.max(AUTO, vel-26*dt);
-          else if(vel<-AUTO) vel=Math.min(-AUTO, vel+26*dt);
-          else vel += (AUTO-vel)*Math.min(1,dt*2.5);
-        } else vel=0;
-      }
-      render(); requestAnimationFrame(loop);
-    }
-    requestAnimationFrame(loop);
-    function gx(e){return e.clientX!=null?e.clientX:((e.touches&&e.touches[0])?e.touches[0].clientX:0);}
-    box.addEventListener('pointerdown',function(e){dragging=true;box.classList.add('dragging');lastX=gx(e);lastT=performance.now();try{box.setPointerCapture(e.pointerId);}catch(_){}});
-    window.addEventListener('pointermove',function(e){if(!dragging)return;var nx=gx(e),now=performance.now(),dx=nx-lastX,dt=(now-lastT)/1000||.016;pos+=dx/PXPF;vel=(dx/PXPF)/dt;lastX=nx;lastT=now;render();});
-    window.addEventListener('pointerup',function(){if(!dragging)return;dragging=false;box.classList.remove('dragging');});
-  })();
-  </script>
+  <div id="ll-globe" style="margin:.5rem auto 1.7rem"></div>
+  <script src="assets/js/globe.js"></script>
+  <script>LastLightGlobe('#ll-globe',{mode:'intro-drag', caption:'drag to spin — then download a map of anywhere on it'});</script>
 
   <div class="map-controls">
     <label style="font-size:.8rem;color:var(--text-2)">Region

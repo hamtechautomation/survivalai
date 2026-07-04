@@ -54,8 +54,8 @@ Project Gutenberg**.
 
 | Package | Size | Contents |
 |---|---|---|
-| **Lite** | ~1 MB | The guide app + offline search (bring your own AI model) |
-| **Standard** | ~560 MB | Everything: 28 books, the AI search index, and a regional map |
+| **Lite** | ~2 MB | The guide app + offline search (bring your own AI model) |
+| **Standard** | ~560 MB | Everything: 29 books, the AI search index, and a regional map |
 
 Download from **`https://bunkerbot.co.uk/download.html`**, or clone the repo. Both extract to a
 `last-light-survival-guide/` folder — open `index.html`.
