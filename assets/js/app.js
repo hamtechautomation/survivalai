@@ -101,6 +101,7 @@
     { id: 'medicine-making',  href: 'sections/medicine-making.html',   icon: ICONS.mortar,   label: 'Medicine Making' },
     { id: 'build-water',      href: 'sections/build-water.html',       icon: ICONS.tap,      label: 'Water Systems' },
     { id: 'projects',         href: 'sections/projects.html',          icon: ICONS.projects, label: 'Practical Projects' },
+    { id: 'maps',             href: 'maps.html',                       icon: ICONS.globe,    label: 'Offline Maps', section: 'Tools & Maps' },
     { id: 'skills',           href: 'skills.html',                     icon: ICONS.target,   label: 'Practical Skills' },
     { id: 'tools',            href: 'tools.html',                      icon: ICONS.wrench,   label: 'Calculators & Tools' },
     { id: 'literature',       href: 'literature.html',                 icon: ICONS.books,    label: 'Reference Library' },
@@ -219,6 +220,7 @@
 
     let navHTML = '<ul class="nav-list"><li class="nav-section-label">Navigation</li>';
     NAV_PAGES.forEach(p => {
+      if (p.section) navHTML += `<li class="nav-section-label">${p.section}</li>`;
       const href = base + p.href;
       navHTML += `<li><a href="${href}" class="nav-item" data-page="${p.id}">
         <span class="nav-icon">${p.icon}</span>${p.label}</a></li>`;
@@ -229,6 +231,7 @@
       <div class="sidebar-footer">
         <a href="${base}quick-reference.html" class="btn btn-danger btn-full">${ICONS.alert} Emergency Card</a>
         <a href="${base}gear.html" class="btn btn-outline btn-full">${ICONS.clipboard} Gear Checklist</a>
+        <a href="${base}maps.html" class="btn btn-ghost btn-full">${ICONS.globe} Offline Maps</a>
         <a href="${base}ai-setup.html" class="btn btn-ghost btn-full">${ICONS.robot} Bunker Bot</a>
         <a href="${base}changelog.html" class="btn btn-ghost btn-full" style="opacity:.6;font-size:.75rem">${ICONS.changelog} Changelog</a>
         <div class="sidebar-live-indicator">
