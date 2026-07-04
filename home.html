@@ -113,15 +113,22 @@
     .step{background:var(--bg-2);border:1px solid var(--border);border-radius:11px;padding:1.4rem;text-align:center;position:relative}
     .step .n{width:2rem;height:2rem;border-radius:50%;background:var(--amber);color:var(--bg-0);
       font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto .7rem}
-    .step .si{width:52px;height:52px;margin:.2rem auto .6rem;color:var(--amber);display:block}
     .step h3{font-size:1rem;margin-bottom:.3rem}.step p{font-size:.86rem;color:var(--text-2)}
-    .dl-arrow{stroke:var(--amber);stroke-width:2.5;fill:none;stroke-linecap:round}
-    .a1{animation:dljig 1.8s ease-in-out infinite}
-    @keyframes dljig{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
-    .a2 line{stroke-dasharray:6 6;animation:dash 1s linear infinite}
-    @keyframes dash{to{stroke-dashoffset:-12}}
-    .a3{transform-origin:center;animation:pop 2.4s ease-in-out infinite}
-    @keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+    /* animated mini-scene per step */
+    .step-scene{width:100%;height:96px;display:block;margin:0 auto .8rem;border-radius:8px;
+      background:radial-gradient(circle at 50% 40%, #0f1a15, #0a0f0d);border:1px solid var(--border)}
+    .d-pkg{transform-box:fill-box;animation:d-pkg 2.8s ease-in-out infinite}
+    @keyframes d-pkg{0%{transform:translateY(-26px);opacity:0}22%{opacity:1}64%{transform:translateY(0)}
+      72%{transform:translateY(-3px)}80%,100%{transform:translateY(0);opacity:1}}
+    .d-bar{transform-box:fill-box;transform-origin:left;animation:d-bar 2.8s ease-in-out infinite}
+    @keyframes d-bar{0%,16%{transform:scaleX(0)}62%,100%{transform:scaleX(1)}}
+    .z-file{opacity:0;transform-box:fill-box;transform-origin:center;animation:z-file 3s ease-in-out infinite}
+    @keyframes z-file{0%,42%{opacity:0;transform:scale(.4)}56%{opacity:1;transform:scale(1.12)}64%,100%{opacity:1;transform:scale(1)}}
+    .o-win{transform-box:fill-box;transform-origin:center;animation:o-win 3.2s ease-in-out infinite}
+    @keyframes o-win{0%{transform:scale(.2);opacity:0}22%,100%{transform:scale(1);opacity:1}}
+    .o-bolt{opacity:0;transform-box:fill-box;transform-origin:center;animation:o-bolt 3.2s ease-in-out infinite}
+    @keyframes o-bolt{0%,40%{opacity:0;transform:scale(.3)}55%{opacity:1;transform:scale(1.15)}64%,100%{opacity:1;transform:scale(1)}}
+    @media(prefers-reduced-motion:reduce){.step-scene *{animation:none!important;opacity:1!important;transform:none!important}}
 
     /* ── terminal ── */
     .term{background:#05080a;border:1px solid var(--border-hi);border-radius:11px;overflow:hidden;
@@ -341,17 +348,39 @@
     <div class="steps">
       <div class="step">
         <div class="n">1</div>
-        <svg class="si a1" viewBox="0 0 24 24" fill="none"><path class="dl-arrow" d="M12 3v11m0 0l-4-4m4 4l4-4"/><path class="dl-arrow" d="M4 17v3h16v-3"/></svg>
+        <svg class="step-scene" viewBox="0 0 130 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A package downloading into a folder with a progress bar.">
+          <path d="M60,16 l5,5 l5,-5 M60,26 l5,5 l5,-5" fill="none" stroke="#2a3a30" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M38,64 h16 l4,4 h34 v20 h-54 z" fill="#1e2820" stroke="#c9a94e" stroke-width="1.5"/>
+          <g class="d-pkg"><rect x="55" y="40" width="20" height="18" rx="2" fill="#c9a94e"/><path d="M55,49 h20 M65,40 v18" stroke="#0a0f0d" stroke-width="1.1"/></g>
+          <rect x="40" y="90" width="50" height="3" rx="1.5" fill="#243028"/>
+          <rect class="d-bar" x="40" y="90" width="50" height="3" rx="1.5" fill="#4b9e6a"/>
+        </svg>
         <h3>Download</h3><p>Grab the free package below. One zip file — no account, no email.</p>
       </div>
       <div class="step">
         <div class="n">2</div>
-        <svg class="si a3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7l-8-4-8 4v10l8 4 8-4z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>
+        <svg class="step-scene" viewBox="0 0 130 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A zip file opening and files coming out.">
+          <path d="M48,42 h14 l3,3 h17 v34 h-51 z" fill="#182019" stroke="#c9a94e" stroke-width="1.5"/>
+          <line x1="65" y1="48" x2="65" y2="78" stroke="#c9a94e" stroke-width="1" stroke-dasharray="2 2"/>
+          <text x="65" y="91" text-anchor="middle" font-size="7" fill="#8a9e86" font-family="monospace">.zip</text>
+          <g class="z-file" style="animation-delay:0s"><rect x="22" y="20" width="16" height="20" rx="2" fill="#1e2820" stroke="#4b9e6a"/><rect x="25" y="25" width="10" height="2" fill="#4b9e6a"/></g>
+          <g class="z-file" style="animation-delay:.18s"><rect x="57" y="12" width="16" height="20" rx="2" fill="#1e2820" stroke="#c9a94e"/><rect x="60" y="17" width="10" height="2" fill="#c9a94e"/></g>
+          <g class="z-file" style="animation-delay:.36s"><rect x="92" y="20" width="16" height="20" rx="2" fill="#1e2820" stroke="#4a80b5"/><rect x="95" y="25" width="10" height="2" fill="#4a80b5"/></g>
+        </svg>
         <h3>Unzip it</h3><p>Extract to a USB stick, your phone, or any folder. It's just files.</p>
       </div>
       <div class="step">
         <div class="n">3</div>
-        <svg class="si a3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/><path d="M8 9l3 2-3 2"/></svg>
+        <svg class="step-scene" viewBox="0 0 130 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A browser window opening the guide.">
+          <g class="o-win">
+            <rect x="30" y="22" width="70" height="52" rx="5" fill="#101815" stroke="#3a4838" stroke-width="1.6"/>
+            <path d="M30,27 a5,5 0 0 1 5,-5 h60 a5,5 0 0 1 5,5 v7 h-70 z" fill="#182019"/>
+            <circle cx="38" cy="28" r="2" fill="#c84848"/><circle cx="46" cy="28" r="2" fill="#c87a40"/><circle cx="54" cy="28" r="2" fill="#4b9e6a"/>
+            <rect x="38" y="58" width="40" height="3" rx="1" fill="#2a3a30"/>
+            <rect x="38" y="65" width="52" height="3" rx="1" fill="#2a3a30"/>
+          </g>
+          <g class="o-bolt"><text x="65" y="53" text-anchor="middle" font-size="18">⚡</text></g>
+        </svg>
         <h3>Open <code style="font-family:var(--mono);color:var(--amber)">index.html</code></h3><p>Double-click it in any browser. That's it — the whole guide, fully offline.</p>
       </div>
     </div>
