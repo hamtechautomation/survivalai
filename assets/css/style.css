@@ -320,8 +320,10 @@ body {
 
 .header-breadcrumb {
   flex: 1;
+  min-width: 0;                 /* allow the breadcrumb to shrink so the title can truncate */
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .header-breadcrumb .crumb-parent {
   font-size: 0.7rem;
@@ -329,18 +331,25 @@ body {
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: .08em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .header-breadcrumb .crumb-parent:hover { color: var(--amber); }
 .header-breadcrumb .page-title {
   font-size: 1rem;
   font-weight: 700;
   color: var(--text-0);
+  white-space: nowrap;          /* never wrap onto a second line (was overhanging the header) */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
   gap: var(--sp-sm);
+  flex-shrink: 0;               /* keep the action buttons from being squeezed */
 }
 
 /* =============================================
@@ -1222,7 +1231,12 @@ td:first-child { color: var(--text-0); font-weight: 600; }
   }
   .site-header {
     left: 0;
+    padding: 0 var(--sp-md);
+    gap: var(--sp-sm);
   }
+  .header-breadcrumb .page-title { font-size: 0.9rem; }
+  .header-actions { gap: 6px; }
+  .header-actions .btn { padding: 0.32rem 0.6rem; font-size: 0.8rem; }
   #menu-toggle {
     display: flex;
   }
