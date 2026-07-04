@@ -19,6 +19,20 @@
     .map-missing.show { display:flex; }
     .map-missing code { background:var(--bg-3); border:1px solid var(--border-hi); border-radius:4px; padding:.15rem .4rem; font-size:.85rem; }
     .map-missing h3 { color:var(--amber-light); margin:0; }
+    /* animated globe scene */
+    .globe-scene{width:100%;max-width:560px;aspect-ratio:2/1;height:auto;display:block;margin:.2rem auto 1.3rem;border-radius:12px;
+      background:radial-gradient(circle at 50% 44%, #0d1a20, #070a09);border:1px solid var(--border)}
+    .gl-spin{animation:gl-spin 9s linear infinite}
+    @keyframes gl-spin{from{transform:translateX(0)}to{transform:translateX(-124px)}}
+    .gl-mush{opacity:0;transform-box:fill-box;transform-origin:bottom center;animation:gl-mush 9s ease-out infinite}
+    @keyframes gl-mush{0%,7%{opacity:0;transform:scale(.35,.1)}12%{opacity:1;transform:scale(.6,.5)}20%{opacity:1;transform:scale(1,1)}30%{opacity:.75}38%{opacity:0;transform:scale(1.1,1.15)}100%{opacity:0}}
+    .gl-flash{opacity:0;animation:gl-flash 9s ease-out infinite}
+    @keyframes gl-flash{0%,9%{opacity:0}12%{opacity:.85}19%{opacity:0}100%{opacity:0}}
+    .gl-dark{opacity:0;animation:gl-dark 9s ease-in-out infinite}
+    @keyframes gl-dark{0%,18%{opacity:0}30%{opacity:.85}82%{opacity:.85}92%,100%{opacity:0}}
+    .gl-light{opacity:0;animation:gl-light 9s ease-in-out infinite}
+    @keyframes gl-light{0%,38%{opacity:0}47%{opacity:1}50%{opacity:.5}53%{opacity:1}82%{opacity:1}90%,100%{opacity:0}}
+    @media(prefers-reduced-motion:reduce){.globe-scene *{animation:none!important}.gl-dark,.gl-mush,.gl-flash{opacity:0!important}.gl-light{opacity:1!important}}
   </style>
 </head>
 <body>
@@ -42,6 +56,48 @@
     <h1>Offline Maps — In Your Browser, No Internet</h1>
     <p class="section-desc">This renders real OpenStreetMap data from a single <strong>.pmtiles</strong> file, drawn live in your browser — no map server, no tiles to download per view, no internet. It runs on a Raspberry Pi or any minimal static host. <strong>Prototype region: Northern England &amp; Yorkshire</strong> (Liverpool, Manchester, Leeds, Sheffield, York, Hull, Newcastle, the Dales, Moors and Lake District).</p>
   </div>
+
+  <svg class="globe-scene" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A spinning globe: a nuclear blast darkens it, then points of light flicker back on as it keeps turning.">
+    <defs>
+      <clipPath id="gl-clip"><circle cx="200" cy="118" r="62"/></clipPath>
+      <radialGradient id="gl-ocean" cx="42%" cy="38%" r="72%">
+        <stop offset="0" stop-color="#16323f"/><stop offset="1" stop-color="#0a1a22"/>
+      </radialGradient>
+    </defs>
+    <circle cx="200" cy="118" r="62" fill="url(#gl-ocean)" stroke="#3a4838" stroke-width="1.5"/>
+    <g clip-path="url(#gl-clip)">
+      <g class="gl-spin" fill="#2f5a3c">
+        <ellipse cx="168" cy="98"  rx="20" ry="12"/><ellipse cx="150" cy="110" rx="10" ry="8"/>
+        <ellipse cx="210" cy="134" rx="18" ry="11"/><ellipse cx="236" cy="102" rx="9"  ry="7"/>
+        <ellipse cx="292" cy="98"  rx="20" ry="12"/><ellipse cx="274" cy="110" rx="10" ry="8"/>
+        <ellipse cx="334" cy="134" rx="18" ry="11"/><ellipse cx="360" cy="102" rx="9"  ry="7"/>
+      </g>
+      <rect class="gl-dark" x="138" y="56" width="124" height="124" fill="#05080a"/>
+      <g fill="#e8c96e">
+        <circle class="gl-light" cx="180" cy="100" r="2" style="animation-delay:0s"/>
+        <circle class="gl-light" cx="210" cy="96"  r="2" style="animation-delay:.15s"/>
+        <circle class="gl-light" cx="196" cy="118" r="2" style="animation-delay:.3s"/>
+        <circle class="gl-light" cx="224" cy="126" r="2" style="animation-delay:.45s"/>
+        <circle class="gl-light" cx="172" cy="132" r="2" style="animation-delay:.6s"/>
+        <circle class="gl-light" cx="206" cy="142" r="2" style="animation-delay:.75s"/>
+        <circle class="gl-light" cx="234" cy="108" r="2" style="animation-delay:.9s"/>
+        <circle class="gl-light" cx="186" cy="150" r="2" style="animation-delay:1.05s"/>
+      </g>
+    </g>
+    <g fill="none" stroke="#3a4838" stroke-width=".6" opacity=".4" clip-path="url(#gl-clip)">
+      <ellipse cx="200" cy="118" rx="20" ry="62"/><ellipse cx="200" cy="118" rx="42" ry="62"/>
+      <line x1="138" y1="118" x2="262" y2="118"/>
+      <ellipse cx="200" cy="118" rx="62" ry="24"/><ellipse cx="200" cy="118" rx="62" ry="46"/>
+    </g>
+    <circle cx="200" cy="118" r="62" fill="none" stroke="#c9a94e" stroke-width="1" opacity=".55"/>
+    <circle class="gl-flash" cx="200" cy="72" r="130" fill="#eaf2ff"/>
+    <g class="gl-mush">
+      <rect x="194" y="42" width="12" height="24" rx="4" fill="#6a5a3a"/>
+      <ellipse cx="200" cy="42" rx="26" ry="13" fill="#8a7448"/>
+      <ellipse cx="200" cy="36" rx="16" ry="9" fill="#a68a52"/>
+    </g>
+    <text x="200" y="192" text-anchor="middle" font-size="8" fill="#8a9e86" font-family="monospace">download a map of anywhere — the lights come back on</text>
+  </svg>
 
   <div class="map-controls">
     <label style="font-size:.8rem;color:var(--text-2)">Region

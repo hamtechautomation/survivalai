@@ -26,6 +26,18 @@
     .tier-pen { background:rgba(75,158,106,.15); color:#6ecca8; border:1px solid rgba(75,158,106,.3); }
     .tier-big { background:rgba(200,122,64,.15); color:var(--orange,#c87a40); border:1px solid rgba(200,122,64,.3); }
     .sizing-table td:first-child { font-weight:700; color:var(--text-0); white-space:nowrap; }
+    /* animated brain → library scene */
+    .exp-scene{width:100%;max-width:600px;aspect-ratio:40/19;height:auto;display:block;margin:.2rem auto 1.4rem;border-radius:12px;
+      background:radial-gradient(circle at 30% 40%, #0f1a15, #0a0f0d);border:1px solid var(--border)}
+    .eb-bulb{transform-box:fill-box;transform-origin:center;animation:eb-bulb 5s ease-in-out infinite}
+    @keyframes eb-bulb{0%,6%{opacity:.18}9%{opacity:1}12%{opacity:.25}15%{opacity:1}19%{opacity:.35}24%{opacity:1}30%,100%{opacity:1}}
+    .eb-ray{opacity:0;animation:eb-ray 5s ease-in-out infinite}
+    @keyframes eb-ray{0%,25%{opacity:0}31%{opacity:.9}60%{opacity:.55}100%{opacity:.55}}
+    .eb-brain{animation:eb-brain 5s ease-in-out infinite}
+    @keyframes eb-brain{0%,25%{stroke:#3a4838}34%,100%{stroke:#c9a94e}}
+    .eb-book{opacity:0;transform-box:fill-box;transform-origin:bottom;animation:eb-book 5s ease-in-out infinite}
+    @keyframes eb-book{0%,36%{opacity:0;transform:scaleY(.15)}47%{opacity:1;transform:scaleY(1.06)}54%,92%{opacity:1;transform:scaleY(1)}99%,100%{opacity:0;transform:scaleY(.15)}}
+    @media(prefers-reduced-motion:reduce){.exp-scene *{animation:none!important;opacity:1!important}.eb-book{opacity:1!important;transform:none!important}}
   </style>
 </head>
 <body>
@@ -50,6 +62,57 @@
     <h1>Expansion Library — All of Human Knowledge, Offline</h1>
     <p class="section-desc">This guide is the portable core — under 600 MB, fits any pen drive. When you have internet, you can pull down the rest of recorded knowledge to read <em>forever offline</em>: the whole of Wikipedia, all of Project Gutenberg, medical encyclopedias, repair manuals, dictionaries and more — using free, open <strong>ZIM</strong> files and the <strong>Kiwix</strong> reader.</p>
   </div>
+
+  <svg class="exp-scene" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An idea sparks in a brain, then a whole library of books fills the shelves — knowledge stored offline.">
+    <g class="eb-ray" stroke="#e8c96e" stroke-width="1.6" stroke-linecap="round">
+      <line x1="88" y1="16" x2="88" y2="8"/><line x1="68" y1="26" x2="62" y2="20"/><line x1="108" y1="26" x2="114" y2="20"/>
+      <line x1="60" y1="46" x2="52" y2="46"/><line x1="116" y1="46" x2="124" y2="46"/>
+    </g>
+    <g class="eb-bulb">
+      <circle cx="88" cy="46" r="14" fill="#3a2f14" stroke="#c9a94e" stroke-width="1.5"/>
+      <circle cx="88" cy="44" r="8" fill="#e8c96e"/>
+      <rect x="82" y="58" width="12" height="7" rx="2" fill="#6a5a3a"/>
+      <line x1="84" y1="61" x2="92" y2="61" stroke="#0a0f0d" stroke-width="1"/>
+    </g>
+    <g class="eb-brain" fill="none" stroke="#3a4838" stroke-width="2" stroke-linejoin="round">
+      <path d="M66,116 q-12,-22 8,-28 q6,-13 24,-9 q17,-4 24,9 q19,6 8,28 q6,15 -12,19 q-15,10 -30,0 q-16,4 -30,-19 z"/>
+      <path d="M90,90 v46" stroke-width="1.3"/>
+      <path d="M78,100 q10,6 0,14 M102,100 q-10,6 0,14" stroke-width="1.3"/>
+    </g>
+    <text x="90" y="160" text-anchor="middle" font-size="8" fill="#8a9e86" font-family="monospace">an idea…</text>
+    <path d="M150,104 h30 M172,96 l10,8 l-10,8" fill="none" stroke="#3a4838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="168" y="130" text-anchor="middle" font-size="7" fill="#8a9e86" font-family="monospace">stored offline</text>
+    <rect x="204" y="34" width="180" height="128" rx="5" fill="#101815" stroke="#3a4838" stroke-width="1.5"/>
+    <line x1="204" y1="100" x2="384" y2="100" stroke="#3a4838" stroke-width="1.5"/>
+    <g>
+      <rect class="eb-book" style="animation-delay:0s"    x="214" y="48" width="12" height="48" rx="1" fill="#4b9e6a"/>
+      <rect class="eb-book" style="animation-delay:.08s"  x="228" y="48" width="10" height="48" rx="1" fill="#c9a94e"/>
+      <rect class="eb-book" style="animation-delay:.16s"  x="240" y="52" width="14" height="44" rx="1" fill="#4a80b5"/>
+      <rect class="eb-book" style="animation-delay:.24s"  x="256" y="48" width="11" height="48" rx="1" fill="#c87a40"/>
+      <rect class="eb-book" style="animation-delay:.32s"  x="269" y="50" width="13" height="46" rx="1" fill="#8a6ab5"/>
+      <rect class="eb-book" style="animation-delay:.40s"  x="284" y="48" width="10" height="48" rx="1" fill="#4b9e6a"/>
+      <rect class="eb-book" style="animation-delay:.48s"  x="296" y="52" width="14" height="44" rx="1" fill="#c9a94e"/>
+      <rect class="eb-book" style="animation-delay:.56s"  x="312" y="48" width="11" height="48" rx="1" fill="#4a80b5"/>
+      <rect class="eb-book" style="animation-delay:.64s"  x="325" y="50" width="13" height="46" rx="1" fill="#c87a40"/>
+      <rect class="eb-book" style="animation-delay:.72s"  x="340" y="48" width="10" height="48" rx="1" fill="#8a6ab5"/>
+      <rect class="eb-book" style="animation-delay:.80s"  x="352" y="52" width="14" height="44" rx="1" fill="#4b9e6a"/>
+      <rect class="eb-book" style="animation-delay:.88s"  x="368" y="48" width="10" height="48" rx="1" fill="#c9a94e"/>
+    </g>
+    <g>
+      <rect class="eb-book" style="animation-delay:.5s"   x="214" y="112" width="13" height="46" rx="1" fill="#c87a40"/>
+      <rect class="eb-book" style="animation-delay:.58s"  x="229" y="114" width="11" height="44" rx="1" fill="#4a80b5"/>
+      <rect class="eb-book" style="animation-delay:.66s"  x="242" y="112" width="14" height="46" rx="1" fill="#4b9e6a"/>
+      <rect class="eb-book" style="animation-delay:.74s"  x="258" y="114" width="10" height="44" rx="1" fill="#c9a94e"/>
+      <rect class="eb-book" style="animation-delay:.82s"  x="270" y="112" width="13" height="46" rx="1" fill="#8a6ab5"/>
+      <rect class="eb-book" style="animation-delay:.90s"  x="285" y="114" width="11" height="44" rx="1" fill="#c87a40"/>
+      <rect class="eb-book" style="animation-delay:.98s"  x="298" y="112" width="14" height="46" rx="1" fill="#4b9e6a"/>
+      <rect class="eb-book" style="animation-delay:1.06s" x="314" y="114" width="10" height="44" rx="1" fill="#4a80b5"/>
+      <rect class="eb-book" style="animation-delay:1.14s" x="326" y="112" width="13" height="46" rx="1" fill="#c9a94e"/>
+      <rect class="eb-book" style="animation-delay:1.22s" x="341" y="114" width="11" height="44" rx="1" fill="#c87a40"/>
+      <rect class="eb-book" style="animation-delay:1.30s" x="354" y="112" width="14" height="46" rx="1" fill="#8a6ab5"/>
+      <rect class="eb-book" style="animation-delay:1.38s" x="370" y="114" width="10" height="44" rx="1" fill="#4b9e6a"/>
+    </g>
+  </svg>
 
   <div class="exp-lead">
     <strong>The idea:</strong> keep the small, hand-curated survival guide on your drive always. Then, while the grid is up, download the giant reference archives below. Once they're on your drive, they work with no internet, forever — exactly like this guide. A 256 GB drive or a cheap external SSD can hold <em>all of Wikipedia with images and all of Project Gutenberg combined</em>.
