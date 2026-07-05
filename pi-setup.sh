@@ -4,7 +4,7 @@
 #   curl -fsSL https://raw.githubusercontent.com/hamtechautomation/survivalai/main/pi-setup.sh | sh
 #
 # What it does (Raspberry Pi OS / any Debian-ish 64-bit Linux):
-#   1. Downloads the full guide (~560 MB) to ~/last-light
+#   1. Downloads the full guide (~580 MB) to ~/last-light
 #   2. Installs Ollama and pulls a model sized to your RAM
 #   3. Sets OLLAMA_ORIGINS so the browser app can talk to it
 #   4. Installs a systemd service that serves the guide on boot, port 8080
@@ -31,7 +31,7 @@ command -v unzip >/dev/null 2>&1 || { echo "unzip not found — install it first
 if [ -f "$GUIDE_DIR/index.html" ]; then
   echo "1/4  Guide already at $GUIDE_DIR — skipping download."
 else
-  echo "1/4  Downloading the guide (~560 MB — go make a brew)…"
+  echo "1/4  Downloading the guide (~580 MB — go make a brew)…"
   TMPZIP=$(mktemp /tmp/lastlight.XXXXXX.zip)
   curl -fL --progress-bar -o "$TMPZIP" "$ZIP_URL"
   mkdir -p "$GUIDE_DIR"

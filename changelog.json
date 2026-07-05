@@ -7,6 +7,8 @@
       "date": "2026-07-04",
       "title": "Post-launch expansion",
       "changes": [
+        "New section: Salvage, Rebuild & Fuel \u2014 parts salvage, generator maintenance/rebuild, battery salvage (lead-acid + 18650), biodiesel/SVO/ethanol/wood gas",
+        "Four new bundled books (33 total): TM 5-685 Generators, FEMA Wood Gas plans, NREL Biodiesel Guide, Fuel from Farms",
         "Bunker Bot retrieval upgrade: survival-domain query expansion + domain routing (browser and CLI)",
         "Terminal Bunker Bot (bunkerbot.py) \u2014 zero-dependency CLI with the same citations",
         "29th bundled book: Bunker Bot Compendium (master index & quick-reference)",

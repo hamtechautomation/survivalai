@@ -5,7 +5,7 @@
 #
 # Produces, in downloads/ (gitignored, uploaded by deploy-s3.sh):
 #   last-light-survival-guide-lite.zip      ~2 MB    — the app only (no PDFs/maps/AI index)
-#   last-light-survival-guide-standard.zip  ~560 MB  — app + 29 PDFs + AI index + a regional map
+#   last-light-survival-guide-standard.zip  ~580 MB  — app + 29 PDFs + AI index + a regional map
 #
 # Both extract to a folder named last-light-survival-guide/.
 

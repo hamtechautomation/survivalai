@@ -96,6 +96,7 @@
     { id: 'chemistry',        href: 'sections/chemistry.html',         icon: ICONS.flask,    label: 'Chemistry & Materials' },
     { id: 'textiles',         href: 'sections/textiles.html',          icon: ICONS.scissors, label: 'Textiles & Clothing' },
     { id: 'vehicles',         href: 'sections/vehicles.html',          icon: ICONS.wheel,    label: 'Vehicles & Transport' },
+    { id: 'salvage',          href: 'sections/salvage.html',           icon: ICONS.wrench,   label: 'Salvage & Fuel' },
     { id: 'build-power',      href: 'sections/build-power.html',       icon: ICONS.gear,     label: 'Power Generation' },
     { id: 'build-structures', href: 'sections/build-structures.html',  icon: ICONS.building, label: 'Building & Structures' },
     { id: 'medicine-making',  href: 'sections/medicine-making.html',   icon: ICONS.mortar,   label: 'Medicine Making' },

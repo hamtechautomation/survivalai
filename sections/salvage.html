@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Salvage, rebuild and fuel-making — where to find parts when there are no shops, how to strip machines safely, maintain and rebuild generators, salvage and rebuild batteries, and make biodiesel, ethanol and wood gas.">
+  <title>Salvage, Rebuild &amp; Fuel — The Last Light Survival Guide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+<header class="site-header">
+  <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+  <div class="header-breadcrumb">
+    <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+    <span class="page-title">Salvage, Rebuild &amp; Fuel</span>
+  </div>
+  <div class="header-actions">
+    <button onclick="window.print()" class="btn btn-sm btn-outline">🖨️ Print</button>
+    <button id="aria-toggle" class="btn btn-sm btn-primary">🤖 Bunker Bot</button>
+  </div>
+</header>
+
+<main class="main-content" id="main-content">
+<div class="content-wrapper">
+
+  <div class="section-header">
+    <h1>🔧 Salvage, Rebuild &amp; Fuel</h1>
+    <p class="section-desc">When there are no shops, the world around you becomes the parts catalogue. This section covers finding and stripping machines safely, keeping generators alive, rescuing batteries, and making the fuels you can actually make — and being honest about the ones you can't.</p>
+    <div class="section-meta">
+      <span class="meta-item">📅 Updated: <span data-updated="2026-07"></span></span>
+      <span class="meta-item">⏱️ <span id="reading-time"></span></span>
+      <span class="meta-item">
+        <span class="badge badge-warning">Intermediate–Advanced</span>
+        <span class="badge badge-info" style="margin-left:.3rem">All Zones</span>
+      </span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Page contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#mindset">The Salvage Mindset &amp; Priorities</a></li>
+      <li><a href="#where">Where to Find What — A Salvage Map</a></li>
+      <li><a href="#safety">Safe Stripping — What Can Kill You</a></li>
+      <li><a href="#toolkit">The Salvage Toolkit</a></li>
+      <li><a href="#yields">What Every Machine Yields</a></li>
+      <li><a href="#gen-maintenance">Generator Maintenance</a></li>
+      <li><a href="#gen-rebuild">Generator Troubleshooting &amp; Rebuild</a></li>
+      <li><a href="#alternator">Building a Generator from a Car Alternator</a></li>
+      <li><a href="#batteries">Salvaging &amp; Rebuilding Batteries</a></li>
+      <li><a href="#fuel-overview">Making Fuel — The Honest Overview</a></li>
+      <li><a href="#biodiesel">Biodiesel from Waste Vegetable Oil</a></li>
+      <li><a href="#svo">Running Diesels on Straight Vegetable Oil</a></li>
+      <li><a href="#ethanol">Alcohol Fuel (Ethanol)</a></li>
+      <li><a href="#woodgas">Wood Gas for Engines</a></li>
+      <li><a href="#storage">Fuel Storage, Stabilising &amp; Rotation</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout callout-info">
+    <span class="callout-icon">📚</span>
+    <div class="callout-content">
+      <strong>Bundled references for this section</strong>
+      <p>Four books in the <a href="../pdfs/index.html">PDF library</a> back this section and are indexed for Bunker Bot: <em>TM 5-685 Auxiliary Generators</em> (operation, maintenance and repair), the FEMA <em>Simplified Wood Gas Generator</em> plans, the NREL <em>Biodiesel Handling &amp; Use Guide</em>, and <em>Fuel from Farms</em> (small-scale ethanol, DOE).</p>
+    </div>
+  </div>
+
+  <h2 id="mindset">1. The Salvage Mindset &amp; Priorities</h2>
+  <p>Salvage is not looting — in a genuine long-term collapse it is recycling with a purpose, and in anything short of that it is theft. The legal and ethical line matters: salvage from what is truly abandoned, your own property, or with permission. That said, the skill of <em>seeing machines as organs</em> — motors, bearings, wire, switches, tanks — is worth building now.</p>
+  <p>Priorities change with time. In the first weeks, consumables matter most; after a year, it's rotating machinery and copper.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Phase</th><th>Take first</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Early (weeks)</td><td>Fuel, batteries, wire, hand tools, fasteners, oils &amp; lubricants, filters</td><td>Consumables disappear fastest and degrade in place</td></tr>
+        <tr><td>Middle (months)</td><td>Motors, alternators, pumps, bearings, belts, switches, breakers, tanks</td><td>The building blocks of every rebuilt system</td></tr>
+        <tr><td>Late (years)</td><td>Structural steel, glass, roofing, piping, transformer cores, magnet wire</td><td>Fabrication feedstock once machines are gone</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Rules that keep salvage useful: <strong>take the whole assembly</strong> when you can (a motor with its mount, capacitor and wiring beats a bare motor); <strong>label everything</strong> at the point of removal (masking tape + pencil); <strong>photograph or sketch before disconnecting</strong>; and <strong>store like with like</strong> — a box of mixed fasteners is a box of nothing.</p>
+
+  <h2 id="where">2. Where to Find What — A Salvage Map</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Source</th><th>The good stuff</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cars &amp; trucks</strong></td><td>Battery, alternator, starter (winch motor), wiring loom, fuses/relays, radiator (heat exchanger), fuel pump, belts, hoses, glass, seat fabric, jack, mirrors (signalling)</td><td>The single richest salvage unit in the modern world. Diesel trucks add heavy-duty alternators and tanks.</td></tr>
+        <tr><td><strong>Washing machines</strong></td><td>Universal or induction motor (strong), drum (rocket-stove body, smoker), counterweights, pump, door glass, water valves, belt</td><td>Front-loader motors make good wind/pedal generator cores.</td></tr>
+        <tr><td><strong>Fridges &amp; freezers</strong></td><td>Compressor (vacuum pump / air compressor), condenser coils (heat exchanger, still coil), insulation panels, door seals, shelving</td><td>Vent refrigerant outdoors away from flame — it forms toxic gas in fire. Cabinet = insulated cold box forever.</td></tr>
+        <tr><td><strong>Microwaves</strong></td><td>Transformer (rewind for spot-welder), high-voltage capacitor (DANGER — see §3), fan motor, switches, timer, magnets in magnetron</td><td>The transformer rewound with heavy cable makes a battery-tab spot welder — see §9.</td></tr>
+        <tr><td><strong>Water heaters</strong></td><td>Pressure-rated steel tank (water storage, pressure vessel, char retort), heating elements, thermostat, anode rod (zinc/magnesium — sacrificial anodes, fire-starting)</td><td>Tanks are the classic wood-gas generator and biochar retort body.</td></tr>
+        <tr><td><strong>Lawn &amp; garden gear</strong></td><td>Small engines (mowers, tillers), fuel tanks, cables, wheels, blades (steel stock)</td><td>A working mower engine + car alternator = a battery charger (§8).</td></tr>
+        <tr><td><strong>UPS units &amp; e-bikes</strong></td><td>Sealed lead-acid or lithium packs, inverter boards, chargers, DC motors</td><td>Dead UPS almost always = dead battery, working inverter.</td></tr>
+        <tr><td><strong>Power tools (cordless)</strong></td><td>18650/21700 lithium cells (§9), DC motors, chargers, switches</td><td>Tool packs use high-drain cells — the best salvage cells there are.</td></tr>
+        <tr><td><strong>Office buildings</strong></td><td>Emergency-light batteries, exit-sign LEDs, fire-hose, copper pipe, suspended ceiling wire, server-room UPS banks, water coolers</td><td>Plant rooms hold pumps, motors and control gear.</td></tr>
+        <tr><td><strong>Industrial / farm sites</strong></td><td>Three-phase motors (rewire as generators), V-belts, bearings, hydraulic rams, welding rod, steel stock, diesel tanks</td><td>Farm workshops are pre-collapse hardware stores.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="safety">3. Safe Stripping — What Can Kill You</h2>
+  <div class="callout callout-danger">
+    <span class="callout-icon">☠️</span>
+    <div class="callout-content">
+      <strong>The five classic salvage killers</strong>
+      <p><strong>1. Charged capacitors</strong> — microwave HV caps and motor-start caps hold lethal charge for days after unplugging. Discharge through an insulated-handle screwdriver across the terminals (expect a loud snap), or better, a 10kΩ resistor on leads. Then short the terminals with wire while you work.<br>
+      <strong>2. Airbags &amp; seat-belt pretensioners</strong> — pyrotechnic charges. Never cut, drill or heat a steering-wheel hub or B-pillar module. Disconnect the car battery and wait 15 minutes before touching any airbag wiring (usually yellow looms).<br>
+      <strong>3. Fuel tanks &amp; drums</strong> — empty tanks are the dangerous ones: vapour + spark = bomb. Never cut, grind or weld a tank that ever held fuel until it has been washed out and filled with water or purged. See <a href="metallurgy.html">Metallurgy</a> before hot work.<br>
+      <strong>4. Refrigerant &amp; pressurised systems</strong> — AC lines, fridge circuits and hydraulic accumulators are under pressure. Crack fittings slowly, wear eye protection, keep refrigerant away from flame (phosgene-like decomposition products).<br>
+      <strong>5. Stored spring energy</strong> — garage-door springs, gas struts, and clutch assemblies release violently. If you don't know how it's tensioned, don't unbolt it.</p>
+    </div>
+  </div>
+  <p>Slower killers to respect: <strong>asbestos</strong> (pre-1990 buildings — lagging, ceiling tiles, brake pads: wet it, don't grind it, mask up), <strong>lead</strong> (paint dust, battery paste — wash hands, no food nearby), <strong>CRT televisions</strong> (implosion hazard + charged anode), and <strong>mains feed-back</strong> — treat every wire in a building as live until you have personally proven it dead at the point of work (see the electrical safety rules in <a href="energy.html#repairing-salvaging-electronics">Energy §10</a>).</p>
+
+  <h2 id="toolkit">4. The Salvage Toolkit</h2>
+  <p>A dedicated grab-bag makes the difference between stripping a site in an hour and giving up. Build it now, keep it packed:</p>
+  <ul>
+    <li><strong>Drivers &amp; sockets:</strong> multi-bit driver (incl. Torx &amp; security bits — appliances love them), 8–19&nbsp;mm sockets + ratchet, adjustable wrench, mole grips/vice-grips.</li>
+    <li><strong>Cutting:</strong> hacksaw + spare blades, side cutters, cable shears, utility knife, small pry bar, cold chisel, bolt croppers if you can carry them.</li>
+    <li><strong>Electrical:</strong> multimeter (the single most valuable salvage tool), insulated screwdriver, electrical tape, a 10kΩ bleed resistor on leads, wire strippers.</li>
+    <li><strong>Handling:</strong> heavy gloves + thin mechanic's gloves, safety glasses, headtorch, masking tape + pencil (labelling), zip-lock bags for fasteners, a magnet on a string (finds steel, sorts metals).</li>
+    <li><strong>Fluids:</strong> penetrating oil, siphon hose, drain pan, sealable jugs — the oils and fuels you drain are salvage too.</li>
+  </ul>
+
+  <h2 id="yields">5. What Every Machine Yields</h2>
+  <p>Learn to read a dead machine as a parts list. The highest-value components, in rough order of universal usefulness:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Component</th><th>Found in</th><th>Reuse as</th></tr></thead>
+      <tbody>
+        <tr><td>DC motors</td><td>Tools, toys, car fans, treadmills</td><td>Motors <em>and</em> generators — spin one, get volts. Treadmill motors are superb wind/pedal generator cores</td></tr>
+        <tr><td>Induction motors</td><td>Washers, pumps, compressors</td><td>Machine tools, fans, pumps; can self-excite as generators with capacitors (advanced)</td></tr>
+        <tr><td>Bearings</td><td>Everything that spins</td><td>Wind turbines, carts, grinders — clean in solvent, repack with grease</td></tr>
+        <tr><td>Copper wire</td><td>Motor windings, house wiring, transformers</td><td>Rewinding, antennas (<a href="communications.html">Comms</a>), electrical repair. Magnet wire from windings is irreplaceable — don't scrap it</td></tr>
+        <tr><td>Switches, relays, breakers, fuses</td><td>Appliances, cars, panels</td><td>Every circuit you'll ever build needs them</td></tr>
+        <tr><td>Belts &amp; pulleys</td><td>Washers, cars, mowers</td><td>Power transmission for anything you build; note sizes when salvaging</td></tr>
+        <tr><td>Pumps</td><td>Washers, dishwashers, cars, ponds</td><td>Water transfer, fuel transfer, irrigation (<a href="build-water.html">Water Systems</a>)</td></tr>
+        <tr><td>Heating elements</td><td>Kettles, heaters, ovens</td><td>Resistive loads, water heating from excess solar/wind power (dump loads)</td></tr>
+        <tr><td>Sheet steel &amp; angle</td><td>Appliance shells, bed frames, shelving</td><td>Fabrication stock — see <a href="metallurgy.html">Metallurgy</a> for working it</td></tr>
+        <tr><td>Glass &amp; mirrors</td><td>Doors, ovens, cars</td><td>Solar cookers, cold frames, signalling</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="gen-maintenance">6. Generator Maintenance</h2>
+  <p>A portable generator dies from neglect far more often than from wear. The engine is a lawnmower engine; the electrical end is nearly maintenance-free. Keep the engine alive and the set lives for decades. (Deep reference: <em>TM 5-685</em>, bundled.)</p>
+  <h3>The maintenance schedule that matters</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Interval</th><th>Task</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Every run</td><td>Check oil, check air filter, look for leaks</td><td>Small engines burn oil quietly; low oil kills them in minutes</td></tr>
+        <tr><td>First 20–25&nbsp;h (new/rebuilt)</td><td>First oil change</td><td>Flushes break-in metal</td></tr>
+        <tr><td>Every 50–100&nbsp;h</td><td>Oil change (SAE 30 warm climate; 10W-30 variable)</td><td>Drain hot. If no new oil: settle used oil weeks, decant the top — worse than new, better than none</td></tr>
+        <tr><td>Every 100&nbsp;h</td><td>Air filter service; spark plug check (gap ≈ 0.7–0.8&nbsp;mm / 0.028–0.031&quot;)</td><td>Foam pre-filters wash in soapy water, dry, re-oil lightly</td></tr>
+        <tr><td>Every 300&nbsp;h / yearly</td><td>Valve clearance check, fuel filter/sediment bowl clean, cooling fins brushed clean</td><td>Clogged fins overheat and warp heads on air-cooled engines</td></tr>
+        <tr><td>Monthly (stored)</td><td>Run 20–30 min <em>under load</em> (~50%)</td><td>No-load running glazes cylinders and wets plugs; load exercise keeps everything sealed</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Storage that doesn't wreck it</h3>
+  <div class="process-steps">
+    <div class="process-step"><strong>Fuel off, carb dry:</strong> Turn the fuel valve off and run the carburettor dry, or drain the float bowl. Gummed carburettors are the #1 cause of "generator won't start."</div>
+    <div class="process-step"><strong>Stabilise the tank:</strong> If storing with fuel, add stabiliser and run 5 minutes to get treated fuel through the carb (see §15).</div>
+    <div class="process-step"><strong>Fog the cylinder:</strong> Pull the plug, pour in a teaspoon of engine oil, pull the cord slowly twice, refit the plug. Stops bore rust.</div>
+    <div class="process-step"><strong>Store dry and covered</strong>, cord in a relaxed position, battery (electric start) disconnected and topped up quarterly.</div>
+  </div>
+  <div class="callout callout-warning">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-content">
+      <strong>Generator placement kills more people than generator failure</strong>
+      <p>Never run one in a garage, shed, or near windows/vents — carbon monoxide is odourless and lethal. Outside only, exhaust pointed away, 6&nbsp;m from openings. Refuel only when off and cool.</p>
+    </div>
+  </div>
+
+  <h2 id="gen-rebuild">7. Generator Troubleshooting &amp; Rebuild</h2>
+  <p>Split every problem in two: <strong>engine side</strong> (won't start / runs badly) and <strong>electrical side</strong> (runs fine, no power out). Engine diagnosis is the spark–fuel–air–compression drill covered in <a href="vehicles.html#engine-basics">Vehicles §3</a> — it applies unchanged.</p>
+  <h3>Engine runs, no output — in order of likelihood</h3>
+  <div class="process-steps">
+    <div class="process-step"><strong>1. Tripped breaker / dead outlet:</strong> Check the set's own breakers and test at multiple outlets with a meter. Obvious, and still the most common.</div>
+    <div class="process-step"><strong>2. Lost residual magnetism ("needs flashing"):</strong> A generator bootstraps from a whisper of leftover magnetism in the rotor. Long storage, or running with no load until fuel-out, loses it. Symptom: engine fine, 0–2&nbsp;V output. <strong>Fix — field flashing:</strong> with the set running, touch a 12&nbsp;V battery across the brush leads (AVR disconnected; correct polarity: + to +) for 1–2 seconds through a fused lead — output should snap up immediately. On brushless sets, an electric drill spun <em>backwards</em> into an outlet while running can re-excite it (its motor acts as a magnetised generator feeding the windings).</div>
+    <div class="process-step"><strong>3. AVR failure:</strong> The automatic voltage regulator is the most-failed electrical part. Symptoms: no output, half voltage, or wild swings. Test by substitution if you have a spare (they're small and cheap — stock two), or bypass briefly with a 12&nbsp;V battery on the field to prove the windings are good.</div>
+    <div class="process-step"><strong>4. Worn brushes / dirty slip rings:</strong> Brushes shorter than ~6&nbsp;mm, or rings blackened — pull the end cover, clean the rings with fine abrasive (never file), replace or extend brushes. Brush sets from other machines can often be sanded to fit.</div>
+    <div class="process-step"><strong>5. Capacitor (brushless sets):</strong> Condenser-excited brushless generators use a run capacitor — if output is dead or ~half voltage, swap the capacitor (match µF; borrow from a motor of similar size).</div>
+    <div class="process-step"><strong>6. Windings:</strong> Meter the stator: continuity on each winding, no continuity to the frame. Open or grounded windings mean a rewind — magnet wire from microwave transformers and motor stators can rebuild small rotors, but it is patient work. That's a last resort.</div>
+  </div>
+  <h3>Diesel generator specifics</h3>
+  <ul>
+    <li><strong>Air in the fuel = no start.</strong> After any filter change or run-dry: crack the injector line nuts, crank until fuel weeps out clean, retighten. Most small diesels have a hand-primer pump on the filter housing — pump until firm.</li>
+    <li><strong>Glow plugs:</strong> hard cold-starting → test each plug for continuity; they fail one at a time.</li>
+    <li><strong>Water and "diesel bug":</strong> drain the water separator regularly; microbial growth in stored diesel clogs filters — treat stored fuel with biocide and keep tanks full to limit condensation (§15).</li>
+    <li><strong>Injectors:</strong> white smoke + knock on one cylinder → crack each injector line in turn while running; the line that makes no difference feeds the dead injector. Clean tips in solvent; replacement beats rebuilding without a pop tester.</li>
+    <li><strong>Diesels last.</strong> A cared-for small diesel outlives its owner: clean fuel, clean air, clean oil is 90% of it.</li>
+  </ul>
+
+  <h2 id="alternator">8. Building a Generator from a Car Alternator</h2>
+  <p>Every dead car donates a 12–14&nbsp;V, 40–120&nbsp;A generator. Spin it fast enough and excite its field, and you have a battery charger for any 12&nbsp;V bank — which through an inverter is household power.</p>
+  <div class="process-steps">
+    <div class="process-step"><strong>1. Choose the drive:</strong> Any small engine (mower, tiller) of 2&nbsp;hp+, a bicycle on a stand for light charging, or a water wheel (<a href="build-power.html">Power Generation</a>). Alternators want 2,000–6,000&nbsp;RPM at the pulley.</div>
+    <div class="process-step"><strong>2. Gear it up:</strong> Small engines run ~3,600&nbsp;RPM. Use a drive pulley 2–3× the alternator pulley diameter to reach ~7,000+ alternator RPM at full output — or accept lower output at 1:1. V-belts from the same donor car work.</div>
+    <div class="process-step"><strong>3. Excite the field:</strong> Most alternators need the field fed to start charging. Simplest wiring: battery + → dash-lamp wire (the small terminal, via a 3–5&nbsp;W bulb) → alternator; the bulb lights when not charging and dies when charging — a free status light. Self-exciting (one-wire) alternators skip this but need a rev blip to wake up.</div>
+        <div class="process-step"><strong>4. Wire the output:</strong> Big output stud → battery + through a fuse (size to alternator rating); frame → battery −. Charge <em>into a battery</em>, never into electronics directly — the battery smooths the output.</div>
+    <div class="process-step"><strong>5. Mount it stiff:</strong> Belt tension needs a solid base — hardwood plank or angle-iron frame, engine and alternator bolted, tension by sliding the alternator in slots (exactly as the car did it).</div>
+  </div>
+  <p>Realistic expectations: 400–700&nbsp;W continuous from a mower-engine rig — enough to charge a battery bank a few hours a day, run lights, radios and charging (see the load table in <a href="energy.html">Energy</a>). For 230/120&nbsp;V AC, add an inverter sized to your loads.</p>
+
+  <h2 id="batteries">9. Salvaging &amp; Rebuilding Batteries</h2>
+  <p>Batteries are the scarcest link in any post-grid power system — and the most salvageable. Two families matter: <strong>lead-acid</strong> (cars, trucks, UPS, solar banks) and <strong>lithium</strong> (laptops, power tools, e-bikes).</p>
+
+  <h3>Lead-acid: triage first</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Resting voltage (12&nbsp;V battery, 12+ h off charge)</th><th>State</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td>12.6–12.9&nbsp;V</td><td>Full, healthy</td><td>Use it</td></tr>
+        <tr><td>12.0–12.4&nbsp;V</td><td>Part-discharged</td><td>Charge and load-test</td></tr>
+        <tr><td>10.5–11.9&nbsp;V</td><td>Deeply discharged / sulfating</td><td>Recovery candidate — slow charge + desulfation</td></tr>
+        <tr><td>&lt;10.5&nbsp;V, or exactly ~10.6&nbsp;V that won't rise</td><td>Likely dead cell (shorted plate)</td><td>Scrap — one dead cell can't be fixed from outside</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Recovery routine:</strong> top up any low cells with <em>distilled/rain water only</em> (never acid — the acid never left), then charge long and slow (C/20 — e.g. 2–3&nbsp;A for a car battery) for 24–48&nbsp;h. If a hydrometer reads all cells within 0.030 specific gravity of each other (healthy full ≈ 1.265), it lives. A deliberate <strong>equalisation charge</strong> — controlled overcharge at ~15.5&nbsp;V for 2–4&nbsp;h on flooded batteries only, caps off, well ventilated — stirs stratified acid and knocks light sulfation off plates. <strong>Pulse desulfators</strong> genuinely help mildly sulfated batteries over weeks; the epsom-salt and EDTA folk remedies mostly move the problem around — try them only on batteries already destined for scrap.</p>
+  <div class="callout callout-warning">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-content">
+      <strong>Lead-acid hazards</strong>
+      <p>Charging makes <strong>hydrogen</strong> — ventilate, no sparks near the top of a charging battery (connect/disconnect at the charger end). Electrolyte is sulfuric acid: eyes and skin — water, lots, immediately. The paste is lead: gloves, no food, wash up. Never fully discharge and leave flat — sulfation sets like concrete within weeks.</p>
+    </div>
+  </div>
+
+  <h3>Lithium: harvesting 18650s</h3>
+  <p>Dead laptop packs, tool packs and e-bike batteries are mostly <em>not</em> dead cells — usually one bad cell group or a tripped BMS kills the pack. Inside are 18650 (or 21700) cells, the best energy storage you can salvage.</p>
+  <div class="process-steps">
+    <div class="process-step"><strong>1. Open carefully:</strong> Plastic shells pry apart; never puncture a cell. If any cell is dented, rusty at the terminals, leaking, or smells sweet/solvent-like — quarantine it outside, don't charge it.</div>
+    <div class="process-step"><strong>2. Triage by voltage:</strong> Per cell — <strong>&gt;2.5&nbsp;V:</strong> recover with a slow charge. <strong>2.0–2.5&nbsp;V:</strong> risky; recover at very low current (50&nbsp;mA) with supervision, watch for heat. <strong>&lt;2.0&nbsp;V or 0&nbsp;V:</strong> discard — copper has dissolved internally and charging can create internal shorts (fire).</div>
+    <div class="process-step"><strong>3. Test capacity:</strong> Charge to 4.20&nbsp;V, rest a day (self-dischargers reveal themselves — discard any that drop below 4.10&nbsp;V), then discharge through a known load timing the run, or use a cheap capacity tester. Keep cells ≥70% of label capacity.</div>
+    <div class="process-step"><strong>4. Match and build:</strong> Group cells of similar measured capacity into parallel groups; <strong>always use a BMS</strong> sized to the pack (it balances cells and cuts off over/under-voltage). Use spot-welded nickel strip or spring holders — <em>soldering directly to cells cooks them</em>; if you must solder, pre-tinned tips, big iron, seconds of contact. A rewound microwave transformer (§2) makes a serviceable tab spot-welder.</div>
+    <div class="process-step"><strong>5. Charge discipline:</strong> Li-ion: 4.2&nbsp;V max, stop at 3.0&nbsp;V, store half-charged (3.6–3.8&nbsp;V) and cool. LiFePO₄ (many tool and solar packs): 3.65&nbsp;V max per cell, far more forgiving and the safest lithium chemistry for a home-built bank.</div>
+  </div>
+  <div class="callout callout-danger">
+    <span class="callout-icon">🔥</span>
+    <div class="callout-content">
+      <strong>Lithium thermal runaway is not a normal fire</strong>
+      <p>A shorted or abused lithium cell can vent flame at 700°C+, ignite its neighbours, and <em>water will not reliably stop it</em>. Charge salvaged cells in a metal box or on a ceramic/brick surface, away from bedrooms, never unattended, with a bucket of dry sand as the extinguisher of choice. Never carry loose cells against keys or coins — a pocket short is a burn injury.</p>
+    </div>
+  </div>
+  <p><strong>NiMH/NiCd</strong> (older tools, emergency lights): tolerant, simple to charge (C/10 for 14&nbsp;h), often revivable from 0&nbsp;V — worth salvaging for low-power radios and lights where lithium risk isn't wanted.</p>
+
+  <h2 id="fuel-overview">10. Making Fuel — The Honest Overview</h2>
+  <p>Start with the truth: <strong>you cannot make petrol or diesel.</strong> They come from distilling crude oil (or industrial synthesis plants). What you <em>can</em> do is make substitutes for specific engines, and stretch what remains:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fuel you can make</th><th>Replaces</th><th>Works in</th><th>Effort</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Biodiesel</strong> (§11)</td><td>Diesel</td><td>Any diesel; blend in winter</td><td>Moderate — chemistry, methanol + lye needed</td></tr>
+        <tr><td><strong>Straight veg oil</strong> (§12)</td><td>Diesel</td><td>Older mechanical-injection diesels, converted</td><td>Low chemistry, moderate plumbing</td></tr>
+        <tr><td><strong>Ethanol</strong> (§13)</td><td>Petrol (blend or high-%)</td><td>Petrol engines with jetting/line changes</td><td>High — ferment + distil at scale, legal permits</td></tr>
+        <tr><td><strong>Wood gas</strong> (§14)</td><td>Petrol (100%), diesel (dual-fuel)</td><td>Stationary engines, adapted vehicles</td><td>High build effort, then fuel is free wood</td></tr>
+        <tr><td><strong>Biogas</strong> (<a href="build-power.html">digester</a>)</td><td>Propane/natural gas</td><td>Spark engines, burners</td><td>Low tech, low energy density</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Stretching what's left: petrol keeps 6–12 months stabilised (§15); diesel keeps years if kept dry and treated. In a pinch, <strong>kerosene/heating oil/jet fuel run in most diesels</strong> with 2-stroke oil added (~1:200) for pump lubrication. <strong>Waste motor oil is not a diesel fuel</strong> for anything you care about — heavily filtered and blended it has been run in old, simple, indirect-injection engines, but it kills modern injection systems; treat it as a heating fuel instead.</p>
+
+  <h2 id="biodiesel">11. Biodiesel from Waste Vegetable Oil</h2>
+  <p>Transesterification turns used cooking oil into a genuine diesel substitute: methanol + lye split the glycerine off the oil molecules, leaving thin methyl-ester fuel. The bundled <em>NREL Biodiesel Handling &amp; Use Guide</em> covers properties and engine use in depth.</p>
+  <div class="callout callout-danger">
+    <span class="callout-icon">☠️</span>
+    <div class="callout-content">
+      <strong>Methoxide is the most dangerous liquid in this guide</strong>
+      <p>Methanol + lye (sodium methoxide) is absorbed through skin, attacks the optic nerve, and gives no strong warning smell. Mix and pour <strong>outdoors</strong>, in HDPE containers (never glass for mixing — a dropped jar is a disaster), with gloves, goggles and no ignition sources. Methanol burns with a near-invisible flame. Keep water nearby for skin contact, and children nowhere near any of it.</p>
+    </div>
+  </div>
+  <div class="process-steps">
+    <div class="process-step"><strong>1. Collect &amp; clean the oil:</strong> Settle waste oil for days, then filter (100&nbsp;µm → finer). <strong>De-water:</strong> heat to ~60°C and hold; water makes soap instead of fuel. A crackle-free test spoonful over flame = dry enough.</div>
+    <div class="process-step"><strong>2. Titrate:</strong> Dissolve 1&nbsp;g lye in 1&nbsp;L distilled water. Mix 1&nbsp;mL oil in 10&nbsp;mL isopropyl alcohol with 2 drops phenolphthalein. Add lye solution drop-by-drop (counting mL) until it holds pink for 10&nbsp;s. mL used = <em>extra</em> grams of lye needed per litre of oil.</div>
+    <div class="process-step"><strong>3. Dose:</strong> Base charge 3.5&nbsp;g NaOH (or 4.9&nbsp;g KOH) per litre of oil + the titration extra. Methanol: 20% of oil volume (200&nbsp;mL/L).</div>
+    <div class="process-step"><strong>4. Make methoxide &amp; react:</strong> Dissolve the lye fully into the methanol (swirl, patience — outdoors). Add to oil at 55–60°C and mix/pump-circulate for 1–2&nbsp;h, keeping temperature.</div>
+    <div class="process-step"><strong>5. Settle &amp; separate:</strong> Glycerine (dark) sinks over 8–24&nbsp;h; drain it off (it's a useful degreaser/soap feedstock — see <a href="chemistry.html">Chemistry</a>).</div>
+    <div class="process-step"><strong>6. Wash &amp; dry:</strong> Gently mist or bubble water through the fuel to pull out soap and methanol residue, repeating until wash water runs clear; then warm to drive off water until the fuel is bright and clear, not hazy.</div>
+    <div class="process-step"><strong>7. Quality-check (27/3 test):</strong> Shake 3&nbsp;mL of fuel into 27&nbsp;mL methanol — a complete reaction dissolves fully with no oil dropping out. Cloudy fallout = re-react.</div>
+  </div>
+  <p><strong>Using it:</strong> Any diesel runs B100 in warm weather. Biodiesel gels sooner than diesel in cold — blend (B50 → B20) or park warm in winter, and expect it to <em>clean</em> old fuel systems into an early filter change. It also softens old natural-rubber fuel lines (pre-~1994 vehicles) — replace with modern hose.</p>
+
+  <h2 id="svo">12. Running Diesels on Straight Vegetable Oil</h2>
+  <p>Skip the chemistry: older diesels with mechanical <em>indirect</em> injection (classic Mercedes 240D/300D, older tractors, listers) will burn plain vegetable oil <strong>if it's hot and thin</strong>. Cold veg oil is too thick — it coke's injectors and rings.</p>
+  <ul>
+    <li><strong>Two-tank conversion (the right way):</strong> Start and shut down on diesel/biodiesel from the main tank; a second, heated tank (coolant loop through it) supplies veg oil once the engine is warm; purge back to diesel 5 minutes before shutdown so cold starts are on diesel.</li>
+    <li><strong>Oil prep:</strong> settle, filter to 10&nbsp;µm or better, bone dry — same as biodiesel step 1.</li>
+    <li><strong>Which engines:</strong> mechanical inline/rotary-pump IDI engines tolerate it; common-rail and modern direct-injection engines do not — don't try.</li>
+    <li><strong>Blending shortcut in hot climates:</strong> 10–30% clean veg oil into diesel is usually tolerated by old IDI engines even single-tank — watch smoke and power.</li>
+  </ul>
+
+  <h2 id="ethanol">13. Alcohol Fuel (Ethanol)</h2>
+  <p>Ethanol is a petrol-engine fuel you can genuinely farm. The bundled DOE guide <em>Fuel from Farms</em> is a complete plant-scale walkthrough: feedstocks, mash, fermentation, distillation, engine use.</p>
+  <div class="callout callout-amber">
+    <span class="callout-icon">⚖️</span>
+    <div class="callout-content">
+      <strong>Legal note (today, pre-collapse)</strong>
+      <p>Distilling alcohol without a licence is illegal in most countries even for fuel — in the US a free federal TTB fuel-alcohol permit exists; the UK needs an HMRC licence. Know your local law before you build a still.</p>
+    </div>
+  </div>
+  <ul>
+    <li><strong>The chain:</strong> starch/sugar feedstock (spoiled grain, potatoes, fruit, sugar beet) → cook &amp; convert starches (malt or enzymes) → ferment with yeast to a ~10% "beer" → distil to 90%+ (the practical still limit is the 95.6% azeotrope) → dry further with 3A molecular sieve or parched corn if you need near-anhydrous for blending.</li>
+    <li><strong>Engines:</strong> Petrol engines run E10–E20 with no changes. High-percentage ethanol needs richer jetting (~30–40% larger main jet area), ethanol-proof fuel lines/seals, and a cold-start aid below ~15°C (petrol priming). Ethanol's ~30% lower energy density means more fuel per hour, but octane is excellent.</li>
+    <li><strong>Small-still reality:</strong> a 50&nbsp;L wash at 10% yields roughly 4–5&nbsp;L of usable high-proof fuel per run — meaningful for chainsaws, mowers, and generators, not for daily driving. Scale is the whole game (see the book).</li>
+    <li><strong>Safety:</strong> stills concentrate flammable vapour — outdoors, flame-free heat source (or well-managed), and never run one unattended. Methanol is not a by-product of clean ethanol fermentation in dangerous amounts, but the first ~50&nbsp;mL "foreshots" per run taste and burn wrong — burn them as camp fuel, don't drink any of this.</li>
+  </ul>
+
+  <h2 id="woodgas">14. Wood Gas for Engines</h2>
+  <p>Gasifiers turn wood into engine fuel — over a million vehicles ran on wood during WWII. The full build is covered in <a href="energy.html#wood-gasification">Energy §5</a>, and the bundled <strong>FEMA <em>Simplified Wood Gas Generator</em></strong> plans give complete drawings for a unit built from a garbage can, a drum and plumbing fittings.</p>
+  <ul>
+    <li><strong>Petrol engines</strong> run on 100% wood gas with a simple mixing valve at the intake — expect ~30–40% power loss and re-tuned timing.</li>
+    <li><strong>Diesels</strong> can't ignite wood gas alone — they dual-fuel: ~70% wood gas + ~30% diesel pilot injection, no carburettor changes.</li>
+    <li><strong>The catch</strong> is gas cleaning: tar and ash must be filtered (cyclone + cooler + filter) or they wreck valves — the FEMA design's filter train is the part to build carefully. And wood gas is rich in <strong>carbon monoxide</strong>: outdoor plumbing, no leaks near people.</li>
+  </ul>
+
+  <h2 id="storage">15. Fuel Storage, Stabilising &amp; Rotation</h2>
+  <p>Core storage safety (containers, siting, quantities) is in <a href="energy.html#fuel-storage">Energy §11</a>. The keeping-it-usable rules:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fuel</th><th>Untreated life</th><th>Treated</th><th>Keys</th></tr></thead>
+      <tbody>
+        <tr><td>Petrol (E10)</td><td>3–6 months</td><td>12–24 months stabilised</td><td>Full sealed metal cans, cool; ethanol pulls in water — E0 stores best</td></tr>
+        <tr><td>Diesel</td><td>1–2 years</td><td>5+ years</td><td>Biocide against diesel bug, keep tanks full (less condensation), drain water bottoms</td></tr>
+        <tr><td>Biodiesel</td><td>6–12 months</td><td>—</td><td>Oxidises and absorbs water faster than diesel; make it fresh, rotate fast</td></tr>
+        <tr><td>Ethanol (high-proof)</td><td>Indefinite sealed</td><td>—</td><td>Hygroscopic — truly sealed containers or it dilutes itself below fuel grade</td></tr>
+        <tr><td>Kerosene</td><td>5+ years</td><td>—</td><td>The best-keeping liquid fuel; also lamps, heaters, diesel-stretcher</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Reviving old petrol:</strong> smell (varnish = bad), look (dark/cloudy = bad). Slightly stale petrol runs blended 1:4 with fresh in tolerant engines (mowers first, never your only generator). Gummed carburettors from stale fuel are cleaned with solvent and patience — another reason to drain carbs before storage (§6).</p>
+
+  <div class="callout callout-tip">
+    <span class="callout-icon">🔗</span>
+    <div class="callout-content">
+      <strong>Related sections</strong>
+      <p><a href="energy.html">Energy</a> (gasifier build, solar salvage, electronics repair, fuel storage) · <a href="vehicles.html">Vehicles</a> (engine diagnosis, fuel alternatives) · <a href="build-power.html">Power Generation builds</a> · <a href="metallurgy.html">Metallurgy</a> (cutting/welding salvage safely) · <a href="chemistry.html">Chemistry</a> (lye, glycerine, solvents) · <a href="../pdfs/index.html">PDF Library</a> (TM 5-685, FEMA gasifier, NREL biodiesel, Fuel from Farms).</p>
+    </div>
+  </div>
+
+  <nav class="section-pagination no-print" aria-label="Section navigation">
+    <a href="vehicles.html" class="pagination-btn pagination-prev">← Vehicles &amp; Transport</a>
+    <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
+    <a href="build-power.html" class="pagination-btn pagination-next">Power Generation →</a>
+  </nav>
+</div>
+</main>
+
+<script src="../assets/js/shared-progress.js"></script>
+<script src="../assets/js/search.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="../assets/js/bunker-bot.js"></script>
+</body>
+</html>

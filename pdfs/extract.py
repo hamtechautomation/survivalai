@@ -88,6 +88,10 @@ PDFS = {
     'kjv-bible.pdf':                 'King James Bible (KJV)',
     'meditations-marcus-aurelius.pdf':'Meditations (Marcus Aurelius)',
     'aesops-fables.pdf':             "Aesop's Fables (Townsend)",
+    'tm5-685-generators.pdf':        'Auxiliary Generators TM 5-685 (Army/Navy)',
+    'fema-wood-gas-generator.pdf':   'FEMA Simplified Wood Gas Generator',
+    'nrel-biodiesel-guide.pdf':      'NREL Biodiesel Handling & Use Guide',
+    'fuel-from-farms-ethanol.pdf':   'Fuel from Farms — Small-Scale Ethanol (DOE)',
 }
 
 # ── Text cleaning ─────────────────────────────────────────────────────────────

@@ -32,11 +32,11 @@ Project Gutenberg**.
 **The offline AI — "Bunker Bot"**
 - Runs locally via **Ollama** or a single-file **llamafile** (no install), or
   online via the Claude API.
-- **Answers are grounded in the bundled books** — BM25 search over ~14,000 text
+- **Answers are grounded in the bundled books** — BM25 search over ~15,000 text
   chunks — and **cited inline with source + page**. It won't invent drug doses.
 
 **The library & the world**
-- **29 bundled reference books** (US Army field manuals, *Where There Is No
+- **33 bundled reference books** (US Army field manuals, *Where There Is No
   Doctor/Dentist*, *A Book for Midwives*, Bowditch's *Navigator*, the KJV Bible,
   Shakespeare, and more).
 - **Offline maps** rendered in the browser from a single file — pan/zoom with no
@@ -55,7 +55,7 @@ Project Gutenberg**.
 | Package | Size | Contents |
 |---|---|---|
 | **Lite** | ~2 MB | The guide app + offline search (bring your own AI model) |
-| **Standard** | ~560 MB | Everything: 29 books, the AI search index, and a regional map |
+| **Standard** | ~580 MB | Everything: 33 books, the AI search index, and a regional map |
 
 Download from **`https://bunkerbot.co.uk/download.html`**, or clone the repo. Both extract to a
 `last-light-survival-guide/` folder — open `index.html`.

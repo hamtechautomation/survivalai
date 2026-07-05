@@ -186,6 +186,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://bunkerbot.co.uk/sections/salvage.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://bunkerbot.co.uk/sections/vehicles.html</loc>
     <lastmod>2026-06-29</lastmod>
     <priority>0.7</priority>

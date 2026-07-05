@@ -49,7 +49,7 @@ Your site is live at the `CloudFrontURL` from the Outputs.
 - The bucket is **fully private**; nothing is publicly readable except through
   CloudFront over HTTPS — which the offline/PWA features require.
 - `PriceClass_100` keeps CloudFront on the cheapest edge locations. The cost that
-  matters is data-out (a ~560 MB Standard download ≈ $0.05); the donation button
+  matters is data-out (a ~580 MB Standard download ≈ $0.05); the donation button
   offsets it.
 - Prefer **Terraform**? The same three resources map 1:1 — an `aws_s3_bucket`
   (+ `aws_s3_bucket_public_access_block`), an `aws_cloudfront_origin_access_control`,

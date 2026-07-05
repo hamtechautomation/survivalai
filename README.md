@@ -2,7 +2,7 @@
 
 ![The Last Light Survival Guide](assets/og-image.png)
 
-> **A complete, fully-offline survival library — 27 sections, 29 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
+> **A complete, fully-offline survival library — 27 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
 
 ### See it in action
 
@@ -20,7 +20,7 @@ A comprehensive, **dependency-free** survival reference built for the grid-down 
 
 - 🌐 **Live:** https://bunkerbot.co.uk · **Download (free):** https://bunkerbot.co.uk/download.html
 - 🤖 **Offline AI** that runs locally (Ollama / llamafile) and **cites its sources** — it won't invent drug doses.
-- 📚 **29 bundled reference books** + browser-side full-text search, all offline.
+- 📚 **33 bundled reference books** + browser-side full-text search, all offline.
 - 🗺️ **Offline maps** (PMTiles) and one-click **Kiwix** expansion for all of Wikipedia & Project Gutenberg.
 - 🔧 **Pure static HTML/CSS/JS** — no build step, no server, runs from `file://`.
 
@@ -72,8 +72,8 @@ what's already done.
 Bunker Bot connects to [Ollama](https://ollama.ai) running on your local machine. It is completely optional — the guide is fully usable without it. When Ollama is running, click the **Bunker Bot** button on any page to open the chat panel.
 
 Bunker Bot features:
-- **Grounded in the bundled library** — answers are retrieved from the 29 bundled
-  PDFs (BM25 search over ~14,000 text chunks) and cited inline with source +
+- **Grounded in the bundled library** — answers are retrieved from the 33 bundled
+  PDFs (BM25 search over ~15,000 text chunks) and cited inline with source +
   page, shown as chips under each answer. Works on every page.
 - Local (Ollama) **or** cloud (Claude API) — toggle in the panel
 - Model selector, temperature slider, token counter
@@ -169,7 +169,7 @@ Python 3 standard library only — nothing to install. Runs on a Raspberry Pi.
 
 ## Content Overview
 
-### 27 Content Sections
+### 28 Content Sections
 
 | Section | Key Topics |
 |---------|-----------|
@@ -195,6 +195,7 @@ Python 3 standard library only — nothing to install. Runs on a Raspberry Pi.
 | Chemistry & Materials | Soap making, bleach production, fermentation chemistry |
 | Textiles & Clothing | Spinning, weaving, leather tanning, pattern cutting |
 | Vehicles & Transport | Fuel stabilization, EMP hardening, bicycle maintenance |
+| Salvage, Rebuild & Fuel | Parts salvage & safe stripping, generator maintenance/rebuild, battery salvage (lead-acid, 18650), biodiesel, SVO, ethanol, wood gas |
 | Power Generation | Pedal generators, water wheels, wind, biogas, steam |
 | Building & Structures | Cob, earthbag, timber frame, defences, site selection |
 | Medicine Making | Tinctures, ORS, antiseptics, medicinal plants |
@@ -281,7 +282,7 @@ last-light-survival-guide/
 ├── deploy-s3.sh                ← Publish to AWS S3 + CloudFront
 ├── build-packages.sh           ← Build the downloadable ZIPs
 ├── rebuild-index.sh            ← Rebuild the PDF search index after adding books
-├── sections/                   ← 27 content section pages
+├── sections/                   ← 28 content section pages
 │   ├── food.html               medical.html        energy.html
 │   ├── shelter.html            communications.html navigation.html
 │   ├── security.html           knowledge.html      science.html (First Principles)
@@ -289,9 +290,9 @@ last-light-survival-guide/
 │   ├── maternal.html           nbc.html            disasters.html
 │   ├── climate.html            metallurgy.html     governance.html
 │   ├── psychology.html         chemistry.html      textiles.html
-│   ├── vehicles.html           build-power.html    build-structures.html
+│   ├── vehicles.html           salvage.html           build-power.html    build-structures.html
 │   ├── medicine-making.html    build-water.html    projects.html (Practical Projects)
-├── pdfs/                       ← 29 bundled reference PDFs (gitignored; on the USB)
+├── pdfs/                       ← 33 bundled reference PDFs (gitignored; on the USB)
 │   ├── index.html              ← PDF library browser
 │   └── extract.py              ← Rebuilds the PDF search index
 ├── maps/                       ← Offline map data (.pmtiles, gitignored; on the USB)
@@ -562,4 +563,4 @@ You are free to share and adapt the content for any purpose, even commercially, 
 ---
 
 *The Last Light Survival Guide — v1.0.0 — June 2026*  
-*Lite app ~2 MB · full bundle (29 PDFs + AI index + a regional map) ~560 MB · fits any pen drive — and expands to all of Wikipedia, Gutenberg and world maps on demand.*
+*Lite app ~2 MB · full bundle (33 PDFs + AI index + a regional map) ~580 MB · fits any pen drive — and expands to all of Wikipedia, Gutenberg and world maps on demand.*
