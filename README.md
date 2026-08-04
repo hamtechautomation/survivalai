@@ -82,6 +82,18 @@ Bunker Bot features:
 
 ### macOS / Linux
 
+**One command** (installs Ollama, detects your RAM/chip — down to old/low-RAM
+hardware — picks a model, pulls it, and proves it answers, before it does
+anything else):
+```bash
+curl -fsSL https://raw.githubusercontent.com/hamtechautomation/survivalai/main/mac-setup.sh | sh -s -- --ai-only   # macOS
+curl -fsSL https://raw.githubusercontent.com/hamtechautomation/survivalai/main/pi-setup.sh | sh                     # Linux / Raspberry Pi
+```
+`mac-setup.sh` (no `--ai-only`) also downloads full Wikipedia + Gutenberg into
+`./zim` afterwards — see [Expanding the Library](#expanding-the-library--wikipedia-gutenberg--maps) below.
+On Windows: `irm https://raw.githubusercontent.com/hamtechautomation/survivalai/main/windows-setup.ps1 | iex`.
+
+Or manually:
 ```bash
 # Install Ollama
 curl -fsSL https://ollama.ai/install.sh | sh
@@ -273,7 +285,9 @@ last-light-survival-guide/
 ├── offline.html                ← Offline fallback page
 ├── verify.sh                   ← Check a copied archive is intact (SHA-256)
 ├── make-usb.sh                 ← One-command verified USB copy
-├── pi-setup.sh                 ← Raspberry Pi one-line server bootstrap
+├── pi-setup.sh                  ← Raspberry Pi / Linux one-line server bootstrap
+├── mac-setup.sh                 ← macOS one-line Ollama + model setup (+ optional ZIM downloads)
+├── windows-setup.ps1            ← Windows one-line Ollama + model setup
 ├── bunkerbot.py                ← Terminal Bunker Bot (zero-dependency CLI)
 ├── MANIFEST.sha256             ← Checksums for verify.sh
 ├── make-torrent.sh             ← Build a torrent for P2P distribution

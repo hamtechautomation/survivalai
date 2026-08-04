@@ -169,6 +169,16 @@
     <div id="os-mac" class="os-panel active setup-step">
       <span class="setup-step-num">01</span>
       <h3>macOS (Apple Silicon &amp; Intel)</h3>
+      <div class="callout callout-tip">
+        <span class="callout-icon">⚡</span>
+        <div class="callout-content">
+          <strong>Fast path — one command</strong>
+          <p>Installs Ollama, detects your Mac's chip and RAM, picks the right model, pulls it, and proves it actually answers a prompt — nothing manual below needed.</p>
+          <pre><code>curl -fsSL https://raw.githubusercontent.com/hamtechautomation/survivalai/main/mac-setup.sh | sh -s -- --ai-only</code></pre>
+          <p style="font-size:.78rem;color:var(--text-3)">Hardware limits it picks by: Apple Silicon (M1–M4) 16GB+ → <code>llama3:8b</code>, 8GB+ → <code>phi3:mini</code>, 4GB+ → <code>qwen2.5:0.5b</code>, less → <code>smollm2:135m</code>. Intel Macs: 8GB+ → <code>phi3:mini</code>, 4GB+ → <code>llama3.2:1b</code>, 2GB+ → <code>qwen2.5:0.5b</code>, less → <code>smollm2:135m</code> — even a 2009-era Mac mini gets a working local model. Override with <code>--model NAME</code>. Also sets it up as a login service, so it's running again after a reboot.</p>
+        </div>
+      </div>
+      <p style="margin-top:1rem">Or step by step:</p>
       <ol class="steps">
         <li>Download the macOS installer from <strong>ollama.com/download</strong> — look for the macOS package (<code>Ollama-darwin.zip</code>).</li>
         <li>Unzip the downloaded file. Move <code>Ollama.app</code> to your <code>/Applications</code> folder.</li>
@@ -181,7 +191,7 @@
         <span class="callout-icon">💡</span>
         <div class="callout-content">
           <strong>Apple Silicon (M1/M2/M3/M4)</strong>
-          <p>Ollama natively uses Apple Silicon's Neural Engine and unified memory for dramatically faster inference than CPU-only. A 7B model runs comfortably on a base M1 MacBook Air with 8GB unified memory.</p>
+          <p>Ollama natively uses Apple Silicon's Neural Engine and unified memory for dramatically faster inference than CPU-only. A 7B model runs comfortably on a base M1 MacBook Air with 8GB unified memory. Older Intel Macs (Core i5/i7, no dedicated GPU) still work fine on CPU — just a few tokens/second instead of near-instant.</p>
         </div>
       </div>
     </div>
@@ -189,6 +199,16 @@
     <div id="os-windows" class="os-panel setup-step" style="display:none">
       <span class="setup-step-num">01</span>
       <h3>Windows 10/11</h3>
+      <div class="callout callout-tip">
+        <span class="callout-icon">⚡</span>
+        <div class="callout-content">
+          <strong>Fast path — one command (PowerShell)</strong>
+          <p>Installs Ollama via winget, detects your RAM and GPU, picks the right model, pulls it, and proves it actually answers a prompt.</p>
+          <pre><code>irm https://raw.githubusercontent.com/hamtechautomation/survivalai/main/windows-setup.ps1 | iex</code></pre>
+          <p style="font-size:.78rem;color:var(--text-3)">Hardware limits it picks by: NVIDIA GPU + 16GB+ RAM → <code>llama3:8b</code>; 8GB+ (no GPU) → <code>phi3:mini</code>; 4GB+ → <code>llama3.2:1b</code>; 2GB+ → <code>qwen2.5:0.5b</code>; less → <code>smollm2:135m</code>. Needs 64-bit Windows 10/11 — checks and explains clearly if your PC is older/32-bit rather than failing partway through. Run from a clone of this repo with <code>-Model NAME</code> to override.</p>
+        </div>
+      </div>
+      <p style="margin-top:1rem">Or step by step:</p>
       <ol class="steps">
         <li>Download <code>OllamaSetup.exe</code> from <strong>ollama.com/download</strong>.</li>
         <li>Run the installer. Accept any Windows security prompts. Ollama installs automatically and starts as a background service.</li>
@@ -207,7 +227,17 @@
 
     <div id="os-linux" class="os-panel setup-step" style="display:none">
       <span class="setup-step-num">01</span>
-      <h3>Linux (Ubuntu, Debian, Fedora, and others)</h3>
+      <h3>Linux (Ubuntu, Debian, Fedora, and others — including Raspberry Pi)</h3>
+      <div class="callout callout-tip">
+        <span class="callout-icon">⚡</span>
+        <div class="callout-content">
+          <strong>Fast path — one command</strong>
+          <p>Installs Ollama as a systemd service, detects your RAM, picks the right model, pulls it — <em>and</em> downloads this whole guide and serves it on your network on boot (port 8080). Built for turning a Raspberry Pi or spare Linux box into a standalone survival server; safe to re-run.</p>
+          <pre><code>curl -fsSL https://raw.githubusercontent.com/hamtechautomation/survivalai/main/pi-setup.sh | sh</code></pre>
+          <p style="font-size:.78rem;color:var(--text-3)">Hardware limits it picks by: 7GB+ RAM → <code>phi3:mini</code>; 3.5GB+ → <code>llama3.2:1b</code>; 1.2GB+ → <code>qwen2.5:0.5b</code>; 450MB+ → <code>smollm2:135m</code>. Also checks the CPU is 64-bit (Ollama needs it) — on a 32-bit install or under ~450MB RAM it skips AI with a clear explanation and still sets up the guide + Bunker Bot's search-only mode (cited answers, no model). Just want Ollama, no web server? Use the manual steps below instead.</p>
+        </div>
+      </div>
+      <p style="margin-top:1rem">Or just Ollama, step by step:</p>
       <p>The official one-line install script:</p>
       <pre><code>curl -fsSL https://ollama.com/install.sh | sh</code></pre>
       <p>This downloads and installs Ollama as a <code>systemd</code> service that starts automatically.</p>
@@ -344,6 +374,8 @@ start "" "C:\Users\%USERNAME%\AppData\Local\Programs\Ollama\ollama.exe" serve</c
         <tbody class="tier-low">
           <tr><td>Low (laptop, Raspberry Pi 5)</td><td>4–8GB</td><td>phi3:mini</td><td>2.3GB</td><td>Good for simple Q&amp;A</td></tr>
           <tr><td>Low</td><td>4–8GB</td><td>gemma:2b</td><td>1.4GB</td><td>Minimal, fast</td></tr>
+          <tr><td>Very low (old Mac mini/laptop, Pi 3/Zero 2)</td><td>1–2GB</td><td>qwen2.5:0.5b</td><td>0.4GB</td><td>Basic — short, simple answers</td></tr>
+          <tr><td>Old/tiny hardware — the floor</td><td>~450MB+</td><td>smollm2:135m</td><td>0.3GB</td><td>Minimal but real; below this, use Bunker Bot's search-only mode (no model, still cites the books)</td></tr>
         </tbody>
         <tbody class="tier-mid">
           <tr><td>Mid (modern laptop, Apple M1/M2)</td><td>8–16GB</td><td>llama3:8b</td><td>4.7GB</td><td>Very good — default recommendation</td></tr>
