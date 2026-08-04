@@ -63,7 +63,27 @@ curl -fsSL https://raw.githubusercontent.com/hamtechautomation/survivalai/main/p
 Then open `http://<pi-address>:8080` from any phone or laptop on the network.
 It downloads the full guide, installs Ollama, pulls a model sized to the Pi's
 RAM, and installs a systemd service. Re-running is safe; each step skips
-what's already done.
+what's already done. Works on tiny/old boards too — the model tier goes
+down to `smollm2:135m` (~450MB RAM), and on unsupported hardware (32-bit
+CPUs) it skips the AI step with a clear explanation rather than failing,
+while still serving the guide + Bunker Bot's search-only mode.
+
+### macOS — turn an old Mac into a backup server
+
+Same idea, for a spare Mac (including old Intel ones):
+```bash
+cd last-light-survival-guide   # inside an unzipped download or git clone
+sh verify.sh                   # confirm the download is intact
+sh mac-setup.sh                # Ollama + model, serve to your network, optional ZIM downloads
+```
+Installs Ollama as a login service (LaunchAgent, restarts on crash/reboot),
+picks a model sized to the Mac's real RAM/chip, and — if run from inside an
+actual guide folder — serves the whole guide on `:8080` to every device on
+your network the same way `pi-setup.sh` does, via another LaunchAgent. Then
+offers to download the two biggest Expansion Library archives (Gutenberg +
+full Wikipedia, ~300+ GB combined) with a size/disk-space check first.
+`sh mac-setup.sh --ai-only` skips the serving + ZIM steps; `--no-serve` skips
+just serving; `--yes` skips the download confirmation for unattended runs.
 
 ---
 

@@ -3,13 +3,19 @@
 #   1. Installs & starts Ollama (as a persistent background service — survives
 #      reboots), picks a model sized to THIS machine's real RAM/CPU, pulls it,
 #      and proves it actually answers a prompt before moving on.
-#   2. Downloads the full Project Gutenberg library and full Wikipedia (maxi,
+#   2. If run from inside an actual guide checkout (this file sitting next to
+#      index.html — true for a git clone or the unzipped download package),
+#      serves the whole guide to your network on boot, port 8080 — the macOS
+#      equivalent of pi-setup.sh's systemd service. Turns an old Mac mini into
+#      a backup server other devices on your network can reach.
+#   3. Downloads the full Project Gutenberg library and full Wikipedia (maxi,
 #      with images) into ./zim — the two biggest Expansion Library archives —
 #      using get-knowledge.sh's checkpointed/resumable/verified downloader.
 #
 #   sh mac-setup.sh            # asks to confirm before the ~300+ GB ZIM phase
 #   sh mac-setup.sh --yes      # unattended: no prompts (e.g. running overnight)
-#   sh mac-setup.sh --ai-only  # steps 1 only — skip Gutenberg/Wikipedia
+#   sh mac-setup.sh --ai-only  # step 1 only — skip serving and Gutenberg/Wikipedia
+#   sh mac-setup.sh --no-serve # skip step 2 (serving), still do 1 and 3
 #
 # Old Intel Macs (i5/i7, no GPU) run Ollama fine on CPU — just slower than
 # Apple Silicon. This script picks a small, fast model on Intel regardless of
@@ -25,14 +31,16 @@ cd "$(dirname "$0")" || exit 2
 
 YES=0
 AI_ONLY=0
+NO_SERVE=0
 MODEL_OVERRIDE=""
 while [ $# -gt 0 ]; do
   case "$1" in
     -y|--yes) YES=1 ;;
     --ai-only) AI_ONLY=1 ;;
+    --no-serve) NO_SERVE=1 ;;
     --model) shift; MODEL_OVERRIDE="$1" ;;
     -h|--help)
-      echo "Usage: sh mac-setup.sh [--yes] [--ai-only] [--model NAME]"
+      echo "Usage: sh mac-setup.sh [--yes] [--ai-only] [--no-serve] [--model NAME]"
       exit 0 ;;
     *) echo "Unknown option: $1"; exit 2 ;;
   esac
@@ -200,10 +208,67 @@ if [ "$AI_ONLY" -eq 1 ]; then
 fi
 
 # ---------------------------------------------------------------------------
-# Step 2 — the two big Expansion Library archives
+# Step 2 — serve the guide to your network (the "backup server" part)
 # ---------------------------------------------------------------------------
 echo "══════════════════════════════════════════════════════════"
-echo "  Step 2 — Project Gutenberg (full) + Wikipedia (maxi)"
+echo "  Step 2 — Serve the guide to your network"
+echo "══════════════════════════════════════════════════════════"
+SERVE_PORT=8080
+if [ "$NO_SERVE" -eq 1 ]; then
+  echo "--no-serve requested — skipping."
+elif [ ! -f "index.html" ] || [ ! -f "sw.js" ]; then
+  echo "Not running from inside a guide checkout (no index.html here) — skipping."
+  echo "Run this script from inside the unzipped guide folder to enable serving."
+else
+  GUIDE_DIR=$(pwd)
+  PORT_OWNER=$(lsof -nP -iTCP:"$SERVE_PORT" -sTCP:LISTEN 2>/dev/null | awk 'NR==2{print $1, $2}')
+  SERVE_PLIST="$HOME/Library/LaunchAgents/uk.co.bunkerbot.guide.plist"
+  ALREADY_OURS=0
+  [ -f "$SERVE_PLIST" ] && grep -q "$GUIDE_DIR" "$SERVE_PLIST" 2>/dev/null && ALREADY_OURS=1
+
+  if [ -n "$PORT_OWNER" ] && [ "$ALREADY_OURS" -ne 1 ]; then
+    echo "⚠ Port $SERVE_PORT is already in use by: $PORT_OWNER"
+    echo "  Skipping — free the port or edit SERVE_PORT in this script and re-run."
+  else
+    PY3=$(command -v python3)
+    if [ -z "$PY3" ]; then
+      echo "✗ python3 not found — needed to serve the guide. Skipping."
+    else
+      mkdir -p "$HOME/Library/LaunchAgents" "$HOME/Library/Logs"
+      cat > "$SERVE_PLIST" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>uk.co.bunkerbot.guide</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>$PY3</string><string>-m</string><string>http.server</string><string>$SERVE_PORT</string>
+    <string>--directory</string><string>$GUIDE_DIR</string>
+  </array>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>StandardOutPath</key><string>$HOME/Library/Logs/bunkerbot-guide.log</string>
+  <key>StandardErrorPath</key><string>$HOME/Library/Logs/bunkerbot-guide.err.log</string>
+</dict>
+</plist>
+EOF
+      launchctl unload "$SERVE_PLIST" >/dev/null 2>&1
+      launchctl load -w "$SERVE_PLIST" 2>&1 | grep -v '^$'
+      LAN_IP=$(ifconfig 2>/dev/null | awk '/inet /{print $2}' | grep -v '^127\.' | head -1)
+      echo "✓ Serving $GUIDE_DIR on boot (uk.co.bunkerbot.guide), restarts if it crashes."
+      echo "  On this Mac:         http://localhost:$SERVE_PORT"
+      [ -n "$LAN_IP" ] && echo "  From other devices:   http://$LAN_IP:$SERVE_PORT"
+    fi
+  fi
+fi
+echo ""
+
+# ---------------------------------------------------------------------------
+# Step 3 — the two big Expansion Library archives
+# ---------------------------------------------------------------------------
+echo "══════════════════════════════════════════════════════════"
+echo "  Step 3 — Project Gutenberg (full) + Wikipedia (maxi)"
 echo "══════════════════════════════════════════════════════════"
 echo "Checking current sizes on download.kiwix.org (live — no download yet) …"
 LIST_OUT=$(sh get-knowledge.sh list 2>/dev/null)
@@ -228,6 +293,7 @@ echo "════════════════════════�
 echo "  Done"
 echo "══════════════════════════════════════════════════════════"
 echo "AI:  $MODEL, running as a login service, reachable at http://localhost:11434"
+[ -n "$LAN_IP" ] && echo "Guide: serving at http://localhost:$SERVE_PORT and http://$LAN_IP:$SERVE_PORT"
 echo "Zim: see ./zim — 'sh get-knowledge.sh --recheck' re-verifies anytime"
 echo "Open index.html or expansion.html in a browser and try Bunker Bot."
 exit $result

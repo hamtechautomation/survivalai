@@ -225,7 +225,20 @@
   <div class="advanced-label">Optional extras (advanced)</div>
 
   <div class="addon">
-    <h3>＋ Add the offline AI (optional)</h3>
+    <h3>⚡ Set it up with one command (recommended)</h3>
+    <p style="font-size:.85rem;color:var(--text-2);margin:.2rem 0 .7rem">Installs the offline AI, auto-picks the right model for your machine (down to old/low-RAM hardware — no need to read a table), and can serve the whole guide to every device on your network. Run these from inside the unzipped folder, in order:</p>
+    <div class="step-row"><div class="step-n">1</div><div>Check the download is intact: <code class="cmd">sh verify.sh</code></div></div>
+    <div class="step-row"><div class="step-n">2</div><div>Run the script for your OS:
+      <div style="margin-top:.4rem"><strong>macOS</strong> — also serves the guide to your network on boot<code class="cmd">sh mac-setup.sh</code></div>
+      <div><strong>Linux / Raspberry Pi</strong> — same, plus fetches the guide itself<code class="cmd">sh pi-setup.sh</code></div>
+      <div><strong>Windows</strong><code class="cmd">powershell -ExecutionPolicy Bypass -File windows-setup.ps1</code></div>
+    </div></div>
+    <div class="step-row"><div class="step-n">3</div><div>Open <code>index.html</code>, click <strong>Bunker Bot</strong> — it should already be answering.</div></div>
+    <p style="font-size:.78rem;color:var(--text-3);margin-top:.6rem">Safe to re-run any time — every step skips what's already done. Prefer to do it by hand, or want a llamafile instead of Ollama? See below.</p>
+  </div>
+
+  <div class="addon">
+    <h3>＋ Add the offline AI manually (optional)</h3>
     <p style="font-size:.85rem;color:var(--text-2);margin:.2rem 0 .7rem">Bunker Bot can run a real AI model fully offline. The easiest way is a <strong>llamafile</strong> — a single file that <em>is</em> the model and the server, no install, works on Windows/Mac/Linux. It's a separate download (1–3 GB) so the packages above stay small.</p>
     <div class="step-row"><div class="step-n">1</div><div>Download a llamafile — start with <strong>Llama-3.2-3B-Instruct</strong> (~2.3 GB; or the 1B, ~0.9 GB, for older hardware) from <a href="https://github.com/Mozilla-Ocho/llamafile" target="_blank" rel="noopener">Mozilla's llamafile project</a> or Hugging Face.</div></div>
     <div class="step-row"><div class="step-n">2</div><div>Make it runnable and start it:<code class="cmd">chmod +x *.llamafile &amp;&amp; ./your-model.llamafile --server --nobrowser</code></div></div>
@@ -242,7 +255,7 @@
 
   <div class="addon">
     <h3>＋ Add Wikipedia, Gutenberg &amp; world maps</h3>
-    <p style="font-size:.85rem;color:var(--text-2);margin:.2rem 0">Too big to bundle, but one click away: the <a href="expansion.html">Expansion Library</a> links every offline knowledge base — all of Wikipedia and Project Gutenberg via Kiwix, and offline maps of anywhere on Earth.</p>
+    <p style="font-size:.85rem;color:var(--text-2);margin:.2rem 0">Too big to bundle, but one click away: the <a href="expansion.html">Expansion Library</a> links every offline knowledge base — all of Wikipedia and Project Gutenberg via Kiwix, and offline maps of anywhere on Earth. <code>mac-setup.sh</code>/<code>pi-setup.sh</code> above already offer to download the two biggest ones (Gutenberg + full Wikipedia) automatically — this page is for picking specific smaller archives instead.</p>
   </div>
 
   <div class="support">
