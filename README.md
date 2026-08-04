@@ -277,7 +277,8 @@ last-light-survival-guide/
 ├── bunkerbot.py                ← Terminal Bunker Bot (zero-dependency CLI)
 ├── MANIFEST.sha256             ← Checksums for verify.sh
 ├── make-torrent.sh             ← Build a torrent for P2P distribution
-├── get-knowledge.sh            ← Download a Kiwix ZIM (Wikipedia/Gutenberg…)
+├── get-knowledge.sh            ← Download one Kiwix ZIM archive (resumable, checkpointed, verified)
+├── get-library.sh              ← Download a whole curated set of ZIM archives in one run
 ├── extract-map.sh              ← Carve any region of the world into a map file
 ├── deploy-s3.sh                ← Publish to AWS S3 + CloudFront
 ├── build-packages.sh           ← Build the downloadable ZIPs
@@ -383,9 +384,27 @@ have internet, the **Expansion Library** (`expansion.html`) turns it into a
 launchpad for the rest of recorded knowledge — all read **offline** afterwards:
 
 - **Wikipedia & Project Gutenberg** via [Kiwix](https://kiwix.org) ZIM files —
-  medical Wikipedia (~1–2 GB), Simple Wikipedia, full Wikipedia (maxi ~100 GB /
-  nopic ~55 GB / mini ~10 GB), all 70k+ Gutenberg books, iFixit, Wiktionary and
-  more. `get-knowledge.sh <zim-url>` downloads one (resumable).
+  medical Wikipedia (~2 GB), Simple Wikipedia, full Wikipedia (maxi ~115 GB /
+  nopic ~50 GB / mini ~12 GB), all 70k+ Gutenberg books (~200 GB with cover
+  art), iFixit, Wiktionary, Wikisource, Wikibooks, Wikivoyage, and four
+  small on-theme survival archives (post-disaster guide, low-resource
+  medicine, water/sanitation, knots). Sizes grow over time — run
+  `sh get-knowledge.sh list` for live figures.
+
+  Two scripts handle the download, built for files that take hours or days
+  on a home connection: they checkpoint progress to disk, resume exactly
+  where they left off after a crash or reboot, retry network failures with
+  backoff, and verify the finished file against the SHA-256 Kiwix publishes
+  for it (not just its size).
+  ```bash
+  sh get-knowledge.sh wikipedia-maxi   # one archive by name -> ./zim/
+  sh get-knowledge.sh list             # see every preset + live size
+  sh get-knowledge.sh --recheck        # verify what's already on disk
+  sh get-library.sh core               # a whole curated bundle in one run
+  ```
+  If [kiwix-tools](https://kiwix.org) is installed, both scripts also build
+  `zim/library.xml` so `kiwix-serve --library zim/library.xml` serves every
+  downloaded archive from one page with search across all of them.
 - **Offline maps.** `maps.html` renders OpenStreetMap data from a single
   `.pmtiles` file directly in the browser — no map server, no per-view tile
   downloads, no internet. It uses Leaflet + protomaps-leaflet (Canvas 2D, runs

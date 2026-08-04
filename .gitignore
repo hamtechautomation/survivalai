@@ -18,6 +18,10 @@ __pycache__/
 maps/*.pmtiles
 /pmtiles
 
+# Kiwix ZIM knowledge archives (Wikipedia/Gutenberg/etc, up to 100s of GB) —
+# downloaded locally by get-knowledge.sh / get-library.sh, never committed
+/zim/
+
 # Private hosting config (never commit personal infra)
 .env.deploy
 

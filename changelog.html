@@ -230,6 +230,8 @@
     <ul class="cl-list">
       <li><span class="cl-tag tag-new">New</span><code>make-usb.sh</code> — one command copies the guide to a USB stick and re-reads every byte against SHA-256 hashes</li>
       <li><span class="cl-tag tag-new">New</span><code>pi-setup.sh</code> — one line turns a Raspberry Pi into a survival AI server: guide + Ollama + a RAM-sized model, serving your network on boot</li>
+      <li><span class="cl-tag tag-improve">Improve</span><code>get-knowledge.sh</code> rebuilt as a one-button ZIM downloader — <code>sh get-knowledge.sh wikipedia-maxi</code> resolves the current file, checkpoints and resumes across crashes/reboots on multi-day downloads, and verifies the finished file against Kiwix's published SHA-256; new <code>get-library.sh</code> fetches a whole curated bundle (or the entire catalogue) in one run and builds a combined <code>kiwix-serve</code> index</li>
+      <li><span class="cl-tag tag-new">New</span>Four small on-theme Expansion Library archives: a dedicated post-disaster guide, low-resource medicine, water/sanitation, and knots — each under 1 GB</li>
       <li><span class="cl-tag tag-fix">Fix</span>Download packages now ship a manifest matching their contents, so <code>verify.sh</code> passes in an extracted download</li>
     </ul>
   </div>

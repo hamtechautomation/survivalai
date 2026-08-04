@@ -165,8 +165,24 @@
     </tbody>
   </table>
 
-  <h2>Scripted download (optional)</h2>
-  <p style="font-size:.85rem;color:var(--text-2)">Prefer the command line? <code>get-knowledge.sh</code> in the repo downloads a chosen ZIM with <code>wget</code>/<code>curl</code> and resumes if interrupted — handy for the multi-gigabyte files. Edit the URL inside it to the file you want from the directories below.</p>
+  <h2>Scripted download (optional, recommended for the big files)</h2>
+  <p style="font-size:.85rem;color:var(--text-2)">Prefer the command line? <code>get-knowledge.sh</code> in the repo is a one-button downloader for these archives — no need to hunt for the exact dated filename yourself. Built for connections that will drop mid-transfer over a multi-hour or multi-day download: it checkpoints progress, resumes exactly where it stopped, retries with backoff, and verifies the finished file against the SHA-256 Kiwix publishes for it (not just its size).</p>
+  <pre style="font-size:.8rem;background:var(--bg-2);border:1px solid var(--border);border-radius:6px;padding:.7rem 1rem;overflow-x:auto"><code># the one-button case: full Wikipedia, with images (~115 GB) -> ./zim/
+sh get-knowledge.sh wikipedia-maxi
+
+# any other archive on this page — see the exact names:
+sh get-knowledge.sh list
+
+# check a download already on disk is intact and readable, no re-download:
+sh get-knowledge.sh --recheck
+
+# grab a whole curated bundle in one run (skips what's already verified if
+# it's interrupted and re-run): medical + travel + textbooks + repair +
+# dictionary + primary texts + the four survival-specific archives above
+sh get-library.sh core
+
+# or hand-pick several: sh get-library.sh wikimed gutenberg wikibooks</code></pre>
+  <p style="font-size:.85rem;color:var(--text-2)">Every archive lands in <code>./zim/</code>. If <a href="https://kiwix.org" target="_blank" rel="noopener">kiwix-tools</a> is installed (<code>brew install kiwix-tools</code> on macOS, <code>apt install kiwix-tools</code> on Debian/Raspberry Pi), the scripts also build <code>zim/library.xml</code> automatically — a combined catalogue so <code>kiwix-serve --library zim/library.xml</code> serves every downloaded archive from one page with search across all of them, instead of opening each .zim individually in the Kiwix desktop app.</p>
 
   <p style="font-size:.78rem;color:var(--text-3);margin-top:1.5rem">ZIM files and Kiwix are produced by the <a href="https://kiwix.org" target="_blank" rel="noopener">Kiwix</a> non-profit and are free to use and share. Wikipedia content is CC BY-SA; Project Gutenberg texts are public domain. Browse the full catalogue at <a href="https://library.kiwix.org" target="_blank" rel="noopener">library.kiwix.org</a>.</p>
 
@@ -199,21 +215,25 @@
    (durable — dated filenames inside change monthly; the directory always lists
    the current one). file = the filename pattern to look for. */
 const TIER1=[
- {name:'Medical Wikipedia (WikiMed)',size:'~1–2 GB',desc:'73,000+ medical & health articles from Wikipedia’s medicine project. The single most valuable offline reference for a survival setting.',url:'https://download.kiwix.org/zim/wikipedia/',file:'mdwiki_en_all_maxi_*.zim'},
- {name:'Simple English Wikipedia',size:'~1 GB',desc:'The full encyclopedia written in plain, clear language — most of Wikipedia’s breadth at a fraction of the size. Great first pick.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_simple_all_maxi_*.zim'},
- {name:'iFixit Repair Guides',size:'~1 GB',desc:'Step-by-step repair manuals for tools, electronics, appliances and vehicles — keep your gear running.',url:'https://download.kiwix.org/zim/ifixit/',file:'ifixit_en_all_*.zim'},
- {name:'Wikivoyage',size:'~0.3 GB',desc:'Worldwide travel & regional guide — terrain, climate, getting around, local hazards by region.',url:'https://download.kiwix.org/zim/wikivoyage/',file:'wikivoyage_en_all_maxi_*.zim'},
- {name:'Wikibooks',size:'~0.3–1 GB',desc:'Open textbooks and how-to manuals: cookbooks, first aid, crafts, science, languages.',url:'https://download.kiwix.org/zim/wikibooks/',file:'wikibooks_en_all_maxi_*.zim'},
- {name:'Wiktionary (Dictionary)',size:'~1–3 GB',desc:'Comprehensive English dictionary and thesaurus — definitions, etymology, usage.',url:'https://download.kiwix.org/zim/wiktionary/',file:'wiktionary_en_all_maxi_*.zim'},
+ {name:'Medical Wikipedia (WikiMed)',size:'~2 GB',desc:'73,000+ medical & health articles from Wikipedia’s medicine project. The single most valuable offline reference for a survival setting.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_medicine_maxi_*.zim'},
+ {name:'Simple English Wikipedia',size:'~3 GB',desc:'The full encyclopedia written in plain, clear language — most of Wikipedia’s breadth at a fraction of the size. Great first pick.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_simple_all_maxi_*.zim'},
+ {name:'iFixit Repair Guides',size:'~3 GB',desc:'Step-by-step repair manuals for tools, electronics, appliances and vehicles — keep your gear running.',url:'https://download.kiwix.org/zim/ifixit/',file:'ifixit_en_all_*.zim'},
+ {name:'Wikivoyage',size:'~1 GB',desc:'Worldwide travel & regional guide — terrain, climate, getting around, local hazards by region.',url:'https://download.kiwix.org/zim/wikivoyage/',file:'wikivoyage_en_all_maxi_*.zim'},
+ {name:'Wikibooks',size:'~6 GB',desc:'Open textbooks and how-to manuals: cookbooks, first aid, crafts, science, languages.',url:'https://download.kiwix.org/zim/wikibooks/',file:'wikibooks_en_all_maxi_*.zim'},
+ {name:'Wiktionary (Dictionary)',size:'~8–9 GB',desc:'Comprehensive English dictionary and thesaurus — definitions, etymology, usage.',url:'https://download.kiwix.org/zim/wiktionary/',file:'wiktionary_en_all_nopic_*.zim'},
+ {name:'Post-Disaster Guide',size:'~0.6 GB',desc:'A dedicated Zimgit archive built specifically for grid-down and disaster scenarios — practical, on-theme, and small enough for any drive.',url:'https://download.kiwix.org/zim/other/',file:'zimgit-post-disaster_en_*.zim'},
+ {name:'Where There Is No Doctor et al.',size:'~70 MB',desc:'The Zimgit medicine archive — Hesperian-style low-resource medical guides, browsable/searchable in Kiwix.',url:'https://download.kiwix.org/zim/other/',file:'zimgit-medicine_en_*.zim'},
+ {name:'Water & Sanitation Guide',size:'~20 MB',desc:'Zimgit archive on safe water and sanitation for low-resource / off-grid settings.',url:'https://download.kiwix.org/zim/other/',file:'zimgit-water_en_*.zim'},
+ {name:'Knots Reference',size:'~27 MB',desc:'Zimgit archive of knots and ropework — a tiny download, easy to grab alongside everything else.',url:'https://download.kiwix.org/zim/other/',file:'zimgit-knots_en_*.zim'},
  {name:'Energypedia / Appropriate Tech',size:'~0.2 GB',desc:'Practical off-grid energy, water and sanitation knowledge for low-resource settings.',url:'https://download.kiwix.org/zim/other/',file:'energypedia_en_all_maxi_*.zim'},
  {name:'Khan Academy / Wikiversity',size:'varies',desc:'Education from scratch — maths, science, and skills for teaching children and rebuilding literacy.',url:'https://download.kiwix.org/zim/',file:'(browse: wikiversity / khanacademy)'},
 ];
 const TIER2=[
- {name:'Project Gutenberg — full',size:'~tens of GB',desc:'Every public-domain book in the Gutenberg library — 70,000+ complete works of literature, reference, history and science.',url:'https://download.kiwix.org/zim/gutenberg/',file:'gutenberg_en_all_*.zim'},
- {name:'Wikipedia — full (maxi, with images)',size:'~100 GB',desc:'The entire English Wikipedia, ~6.8M articles with images. The whole encyclopedia, offline.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_all_maxi_*.zim'},
- {name:'Wikipedia — full (nopic)',size:'~55 GB',desc:'Every Wikipedia article, full text, no images — ~75% smaller than maxi. Best size/coverage balance.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_all_nopic_*.zim'},
- {name:'Wikipedia — mini (intros)',size:'~10 GB',desc:'The introduction of every article — a quick-lookup snapshot of all of Wikipedia in modest space.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_all_mini_*.zim'},
- {name:'Wikisource',size:'~5–15 GB',desc:'Original source texts and historical documents — laws, treaties, classics, primary records.',url:'https://download.kiwix.org/zim/wikisource/',file:'wikisource_en_all_maxi_*.zim'},
+ {name:'Project Gutenberg — full',size:'~200 GB',desc:'Every public-domain book in the Gutenberg library — 70,000+ complete works of literature, reference, history and science, with cover art.',url:'https://download.kiwix.org/zim/gutenberg/',file:'gutenberg_en_all_*.zim'},
+ {name:'Wikipedia — full (maxi, with images)',size:'~115 GB',desc:'The entire English Wikipedia, ~6.8M articles with images. The whole encyclopedia, offline.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_all_maxi_*.zim'},
+ {name:'Wikipedia — full (nopic)',size:'~50 GB',desc:'Every Wikipedia article, full text, no images — well under half the size of maxi. Best size/coverage balance.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_all_nopic_*.zim'},
+ {name:'Wikipedia — mini (intros)',size:'~12 GB',desc:'The introduction of every article — a quick-lookup snapshot of all of Wikipedia in modest space.',url:'https://download.kiwix.org/zim/wikipedia/',file:'wikipedia_en_all_mini_*.zim'},
+ {name:'Wikisource',size:'~18 GB',desc:'Original source texts and historical documents — laws, treaties, classics, primary records.',url:'https://download.kiwix.org/zim/wikisource/',file:'wikisource_en_all_maxi_*.zim'},
  {name:'Stack Exchange (tech Q&A)',size:'varies',desc:'Crowd-sourced answers — electronics, gardening, DIY, survival, programming and more.',url:'https://download.kiwix.org/zim/stack_exchange/',file:'(browse by topic)'},
 ];
 const MAPS=[
