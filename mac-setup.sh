@@ -104,6 +104,17 @@ fi
 
 OLLAMA_BIN=$(command -v ollama)
 
+# If Ollama was installed via `brew install ollama`, Homebrew registers its own
+# launchd service (homebrew.mxcl.ollama) with RunAtLoad+KeepAlive and no CORS
+# env var. Our own service below binds the same port (11434) — left running,
+# Homebrew's copy wins the race on every boot/crash-restart and silently
+# re-blocks the browser (Bunker Bot looks "broken" with no error explaining
+# why). Stop and disable it first so only our CORS-enabled copy owns the port.
+if command -v brew >/dev/null 2>&1 && brew services list 2>/dev/null | grep -q "^ollama "; then
+  echo "Stopping Homebrew's own Ollama service (replacing with a CORS-enabled one)…"
+  brew services stop ollama >/dev/null 2>&1
+fi
+
 # Persistent background service (survives reboots), CORS open so the browser
 # guide can reach it — the LaunchAgent equivalent of pi-setup.sh's systemd unit.
 PLIST="$HOME/Library/LaunchAgents/uk.co.bunkerbot.ollama.plist"

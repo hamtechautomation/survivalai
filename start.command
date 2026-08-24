@@ -10,8 +10,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 PORT=8080
-WE_STARTED_OLLAMA=false
 SERVER_PID=""
+OLLAMA_PID=""
 
 # ── Terminal colours ──────────────────────────────────────────
 GREEN='\033[0;32m'
@@ -28,12 +28,17 @@ echo -e "  ───────────────────────
 echo ""
 
 # ── Cleanup on Ctrl-C ────────────────────────────────────────
+# Only stop things WE started (the web server, and a fallback Ollama we
+# launched ourselves). Never touch a pre-existing Ollama service (Homebrew,
+# the menu-bar app, or bunkerbot's own login service) — killing it by
+# pattern-matching "ollama serve" would stop it for the whole system, not
+# just this guide, and it may not come back once this script exits.
 cleanup() {
   echo ""
   echo -e "${AMBER}  Shutting down...${NC}"
   [ -n "$SERVER_PID" ] && kill "$SERVER_PID" 2>/dev/null
-  if [ "$WE_STARTED_OLLAMA" = true ]; then
-    pkill -f "ollama serve" 2>/dev/null || true
+  if [ -n "$OLLAMA_PID" ]; then
+    kill "$OLLAMA_PID" 2>/dev/null
     echo -e "  Ollama stopped."
   fi
   echo -e "${GREEN}  Done. Goodbye.${NC}"
@@ -51,42 +56,16 @@ if ! command -v ollama &>/dev/null; then
   echo -e "     Install from: https://ollama.com"
   echo ""
 else
-  # Is it running?
-  OLLAMA_RUNNING=false
+  # Is it running? (Ollama already allows any http://localhost:* origin by
+  # default — the only case that needs OLLAMA_ORIGINS is opening index.html
+  # directly via file://, which mac-setup.sh's login service handles
+  # permanently. Serving over http://, as this script does, just works.)
   if curl -sf --max-time 2 http://localhost:11434/api/tags >/dev/null 2>&1; then
-    OLLAMA_RUNNING=true
-  fi
-
-  if [ "$OLLAMA_RUNNING" = true ]; then
-    # Check if CORS is open (browser from file:// sends Origin: null → 403 if blocked)
-    CORS_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 2 \
-      -H "Origin: null" http://localhost:11434/api/tags 2>/dev/null)
-
-    if [ "$CORS_STATUS" = "200" ]; then
-      echo -e "${GREEN}  ✓  Ollama already running with CORS enabled.${NC}"
-    else
-      echo -e "${AMBER}  →  Ollama is running but blocking the browser (403).${NC}"
-      echo -e "     Restarting with CORS open..."
-      # Quit macOS menu bar app gracefully first
-      osascript -e 'quit app "Ollama"' 2>/dev/null || true
-      pkill -f "ollama serve"          2>/dev/null || true
-      sleep 2
-
-      export OLLAMA_ORIGINS="*"
-      ollama serve >/tmp/last-light-ollama.log 2>&1 &
-      WE_STARTED_OLLAMA=true
-      sleep 3
-      echo -e "${GREEN}  ✓  Ollama restarted with CORS enabled.${NC}"
-    fi
+    echo -e "${GREEN}  ✓  Ollama already running.${NC}"
   else
     echo -e "     Ollama not running — starting..."
-    # Quit any stale menu bar app first
-    osascript -e 'quit app "Ollama"' 2>/dev/null || true
-    sleep 1
-
-    export OLLAMA_ORIGINS="*"
     ollama serve >/tmp/last-light-ollama.log 2>&1 &
-    WE_STARTED_OLLAMA=true
+    OLLAMA_PID=$!
 
     # Wait for it to be ready (up to 10s)
     TRIES=0
@@ -97,9 +76,10 @@ else
     done
 
     if curl -sf --max-time 1 http://localhost:11434/api/tags >/dev/null 2>&1; then
-      echo -e "${GREEN}  ✓  Ollama started with CORS enabled.${NC}"
+      echo -e "${GREEN}  ✓  Ollama started.${NC}"
     else
       echo -e "${RED}  ✗  Ollama failed to start — check /tmp/last-light-ollama.log${NC}"
+      OLLAMA_PID=""
     fi
   fi
 

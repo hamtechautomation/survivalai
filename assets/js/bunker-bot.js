@@ -431,10 +431,26 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
     } catch (_) {
       dot.className = 'status-dot offline';
       if (label) label.textContent = '🏠 Local · Ollama not running';
-      appendMessage('aria', `⚠️ Ollama is not running. Start it with:<br>
-        <code>./start.command</code>  (or double-click it in Finder)<br><br>
-        Or switch to <strong>☁️ Claude</strong> mode above if you have an API key.<br>
-        <a href="../ai-setup.html">→ Setup guide</a>`, true);
+      if (location.protocol === 'file:') {
+        /* Ollama is very likely actually running — the browser sends
+           Origin: null for file:// pages, and Ollama's default CORS policy
+           (and a not-yet-updated Ollama service) rejects that origin with a
+           403, which fetch() reports identically to a connection failure. */
+        appendMessage('aria', `⚠️ Can't reach Ollama from a page opened directly as a file (<code>file://…</code>).<br><br>
+          This is usually a CORS block, not Ollama being off — Ollama only allows
+          browser requests from <code>http://localhost</code> by default.<br><br>
+          Fix: run <code>./start.command</code> (or double-click it in Finder) to serve
+          the guide over <code>http://localhost:8080</code> instead of opening the file directly.<br>
+          For a permanent fix so <code>file://</code> works too, run <code>mac-setup.sh</code>
+          (macOS) — it registers Ollama as a login service with CORS enabled.<br><br>
+          Or switch to <strong>☁️ Claude</strong> mode above if you have an API key.<br>
+          <a href="../ai-setup.html">→ Setup guide</a>`, true);
+      } else {
+        appendMessage('aria', `⚠️ Ollama is not running. Start it with:<br>
+          <code>./start.command</code>  (or double-click it in Finder)<br><br>
+          Or switch to <strong>☁️ Claude</strong> mode above if you have an API key.<br>
+          <a href="../ai-setup.html">→ Setup guide</a>`, true);
+      }
     }
   }
 
