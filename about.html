@@ -8,13 +8,14 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
-    .about-lead{font-size:1.05rem;color:var(--text-1);max-width:60ch;line-height:1.7;margin-bottom:1.5rem}
+    .about-lead{font-size:var(--fs-md);color:var(--text-1);max-width:60ch;line-height:1.7;margin-bottom:1.5rem}
     .ethos{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
     @media(max-width:720px){.ethos{grid-template-columns:1fr}}
     .ethos .card{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.2rem}
-    .ethos .card h3{color:var(--text-0);font-size:1.02rem;margin:0 0 .35rem;display:flex;align-items:center;gap:.5rem}
-    .ethos .card p{font-size:.9rem;color:var(--text-2);margin:0}
+    .ethos .card h3{color:var(--text-0);font-size:var(--fs-md);margin:0 0 .35rem;display:flex;align-items:center;gap:.5rem}
+    .ethos .card p{font-size:var(--fs-base);color:var(--text-2);margin:0}
     .about-links{display:flex;gap:.7rem;flex-wrap:wrap;margin:1rem 0}
+    .ethos .card h3 svg{width:1.1em;height:1.1em;flex-shrink:0;vertical-align:-2px;margin-right:.4em;color:var(--amber)}
     /* ── animations ── */
     @keyframes ab-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
     @keyframes ab-pulse{0%,100%{opacity:.8;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
@@ -66,12 +67,12 @@
   <p class="muted" style="max-width:60ch">The whole thing is shaped by one question: <em>will this still work when the infrastructure is gone?</em></p>
 
   <div class="ethos">
-    <div class="card"><h3>🔌 Offline-first, by design</h3><p>Pure static HTML, CSS and JavaScript — no build step, no framework, no server. It opens straight from a folder and runs with zero internet on anything from a phone to a 15-year-old laptop to a Raspberry Pi.</p></div>
-    <div class="card"><h3>📦 Zero dependencies</h3><p>Nothing to install, nothing to update, nothing that can rot. The guide is plain files you can read, copy, and keep — the same way you'd keep a paper book.</p></div>
-    <div class="card"><h3>🔒 Private by default</h3><p>No accounts, no ads, no tracking, no analytics that phone home. What you read is nobody's business. Nothing leaves your device.</p></div>
-    <div class="card"><h3>🤖 The AI runs on your machine</h3><p>Bunker Bot's AI runs on your own computer, not in the cloud — no internet needed. It answers <em>using the books bundled in this guide</em>, and always shows exactly which book and page it got the answer from, so you can check it yourself.</p></div>
-    <div class="card"><h3>🛡️ Resilient</h3><p>A SHA-256 manifest lets you verify your copy hasn't been tampered with, and torrent / IPFS options mean it survives takedowns. Copy it as many times as you like.</p></div>
-    <div class="card"><h3>❤ Free and open</h3><p>Free to download, free to share, and licensed <strong>CC BY-SA</strong> — mirror it, fork it, rehost it. It belongs to everyone who keeps a copy.</p></div>
+    <div class="card"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="2" x2="9" y2="8"/><line x1="15" y1="2" x2="15" y2="8"/><rect x="6" y="8" width="12" height="9" rx="4"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Offline-first, by design</h3><p>Pure static HTML, CSS and JavaScript — no build step, no framework, no server. It opens straight from a folder and runs with zero internet on anything from a phone to a 15-year-old laptop to a Raspberry Pi.</p></div>
+    <div class="card"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>Zero dependencies</h3><p>Nothing to install, nothing to update, nothing that can rot. The guide is plain files you can read, copy, and keep — the same way you'd keep a paper book.</p></div>
+    <div class="card"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>Private by default</h3><p>No accounts, no ads, no tracking, no analytics that phone home. What you read is nobody's business. Nothing leaves your device.</p></div>
+    <div class="card"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M8 10V8a4 4 0 018 0v2"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><path d="M9 19h6"/><line x1="12" y1="3" x2="12" y2="5"/></svg>The AI runs on your machine</h3><p>Bunker Bot's AI runs on your own computer, not in the cloud — no internet needed. It answers <em>using the books bundled in this guide</em>, and always shows exactly which book and page it got the answer from, so you can check it yourself.</p></div>
+    <div class="card"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L19 6 V12 C19 17 15.5 20.5 12 21 C8.5 20.5 5 17 5 12 V6 Z"/></svg>Resilient</h3><p>A SHA-256 manifest lets you verify your copy hasn't been tampered with, and torrent / IPFS options mean it survives takedowns. Copy it as many times as you like.</p></div>
+    <div class="card"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 14.5 4 9a4.5 4.5 0 0 1 8-3 4.5 4.5 0 0 1 8 3c0 5.5-8 12-8 12z"/></svg>Free and open</h3><p>Free to download, free to share, and licensed <strong>CC BY-SA</strong> — mirror it, fork it, rehost it. It belongs to everyone who keeps a copy.</p></div>
   </div>
 
   <div class="callout callout-amber">
@@ -90,7 +91,7 @@
     <a class="btn btn-ghost" href="https://github.com/hamtechautomation/survivalai/discussions" target="_blank" rel="noopener">Discussions</a>
     <a class="btn btn-primary" href="https://buy.stripe.com/14A00lgJM72a1wNcES9Zm00" target="_blank" rel="noopener">❤ Support the project</a>
   </div>
-  <p style="font-size:.78rem;color:var(--text-3);max-width:60ch;margin-top:.6rem">Credits: bundled reference works are public-domain or Creative Commons (US Army manuals, the Hesperian guides, Bowditch's <em>Navigator</em>, and more); the offline globe uses NASA's public-domain Earth imagery; maps use OpenStreetMap via PMTiles, and the Expansion Library uses Kiwix. Donations appear as <strong>TRADETRACKHQ</strong> on your statement.</p>
+  <p style="font-size:var(--fs-sm);color:var(--text-3);max-width:60ch;margin-top:.6rem">Credits: bundled reference works are public-domain or Creative Commons (US Army manuals, the Hesperian guides, Bowditch's <em>Navigator</em>, and more); the offline globe uses NASA's public-domain Earth imagery; maps use OpenStreetMap via PMTiles, and the Expansion Library uses Kiwix. Donations appear as <strong>TRADETRACKHQ</strong> on your statement.</p>
 
   <nav class="section-pagination no-print" aria-label="Section navigation">
     <a href="index.html" class="pagination-btn pagination-home">Home</a>
