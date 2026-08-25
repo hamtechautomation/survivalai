@@ -20,7 +20,7 @@
   --text-0: #eceee0;    /* warm white — readable by flashlight */
   --text-1: #c4cebc;
   --text-2: #8a9e86;
-  --text-3: #4d6048;
+  --text-3: #74906c;  /* was #4d6048 — failed WCAG AA (2.6:1); this passes at ~5:1 on bg-1/bg-2 */
 
   /* Accent — amber/gold primary (best flashlight contrast) */
   --amber:       #c9a94e;
@@ -177,7 +177,7 @@ body {
   transition: border-color var(--ease);
 }
 .search-input::placeholder { color: var(--text-3); }
-.search-input:focus { border-color: var(--amber-dim); }
+.search-input:focus { border-color: var(--amber-dim); outline: 2px solid var(--amber-light); outline-offset: 1px; }
 
 .search-results {
   position: absolute;
@@ -721,7 +721,7 @@ td:first-child { color: var(--text-0); font-weight: 600; }
 .btn:hover { text-decoration: none; }
 
 .btn-primary {
-  background: var(--amber-dim);
+  background: #554622;  /* darker than --amber-dim — the shared token's own value failed WCAG AA (3.5:1) against --amber-light text; this passes at ~5.7:1 without changing --amber-dim's border/heading usages elsewhere */
   color: var(--amber-light);
   border-color: var(--amber-dim);
 }
@@ -937,7 +937,7 @@ td:first-child { color: var(--text-0); font-weight: 600; }
   line-height: 1.5;
 }
 #aria-input::placeholder { color: var(--text-3); }
-#aria-input:focus { border-color: var(--amber-dim); }
+#aria-input:focus { border-color: var(--amber-dim); outline: 2px solid var(--amber-light); outline-offset: 1px; }
 
 /* =============================================
    BACK TO TOP
@@ -1628,7 +1628,7 @@ body.font-xl { font-size: 22px; }
   padding: 0.2rem 0.4rem;
   cursor: pointer;
 }
-.aria-select:focus { border-color: var(--amber); outline: none; }
+.aria-select:focus { border-color: var(--amber); outline: 2px solid var(--amber-light); outline-offset: 1px; }
 .aria-slider {
   flex: 1;
   accent-color: var(--amber);
@@ -1688,7 +1688,8 @@ body.font-xl { font-size: 22px; }
 }
 .aria-apikey-input:focus {
   border-color: var(--amber);
-  outline: none;
+  outline: 2px solid var(--amber-light);
+  outline-offset: 1px;
 }
 .aria-apikey-input::placeholder {
   color: var(--text-3);
