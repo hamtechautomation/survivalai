@@ -922,17 +922,18 @@ NESTED METHOD (critical items):
     </nav>
   </main>
 
-  <aside id="aria-panel">
+  <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
     <div class="aria-header">
-      <span class="status-dot"></span>
-      <span class="aria-status-label">Bunker Bot</span>
-      <span id="aria-model-badge">offline</span>
-      <button id="aria-close">✕</button>
+      <div class="aria-title"><div class="aria-avatar">🤖</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+      <button id="aria-close" class="btn-icon">✕</button>
     </div>
-    <div id="aria-messages"></div>
-    <div class="aria-input-row">
-      <input type="text" id="aria-input" placeholder="Ask ARIA..." aria-label="Message Bunker Bot">
-      <button id="aria-send">Send</button>
+    <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+    <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+      <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're reading NBC Threats. Ask me about radiation shielding, fallout timelines, decontamination, gas masks and filters, or chemical/biological exposure symptoms.<p class="aria-note">⚠️ Requires Ollama. <a href="../ai-setup.html">Setup →</a></p></div></div>
+    </div>
+    <div class="aria-input-area">
+      <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2" aria-label="Message Bunker Bot"></textarea>
+      <button id="aria-send" class="btn btn-primary">Send</button>
     </div>
   </aside>
 

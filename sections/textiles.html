@@ -1196,21 +1196,20 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
       </div><!-- /content-wrapper -->
     </div><!-- /main-content -->
 
-    <aside id="aria-panel" class="aria-panel">
-      <div class="aria-header">
-        <div class="aria-status">
-          <span class="status-dot"></span>
-          <span class="aria-status-label">Bunker Bot</span>
-          <span id="aria-model-badge" class="model-badge"></span>
-        </div>
-        <button id="aria-close" class="btn-icon">✕</button>
-      </div>
-      <div id="aria-messages" class="aria-messages"></div>
-      <div class="aria-input-row">
-        <input type="text" id="aria-input" placeholder="Ask Bunker Bot…" autocomplete="off" aria-label="Message Bunker Bot">
-        <button id="aria-send" class="btn btn-sm btn-amber">Send</button>
-      </div>
-    </aside>
+    <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+    <div class="aria-header">
+      <div class="aria-title"><div class="aria-avatar">🤖</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+      <button id="aria-close" class="btn-icon">✕</button>
+    </div>
+    <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking…</span>&nbsp;·&nbsp;<span id="aria-model-badge" style="color:var(--amber-dim);font-size:.7rem">—</span></div>
+    <div id="aria-messages" class="aria-messages" role="log" aria-live="polite">
+      <div class="aria-message aria-welcome"><div class="aria-message-content"><p>You're reading Textiles &amp; Clothing. Ask me about spinning fiber, weaving, repairing clothing, tanning leather, or making cordage and rope from natural materials.<p class="aria-note">⚠️ Requires Ollama. <a href="../ai-setup.html">Setup →</a></p></div></div>
+    </div>
+    <div class="aria-input-area">
+      <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2" aria-label="Message Bunker Bot"></textarea>
+      <button id="aria-send" class="btn btn-primary">Send</button>
+    </div>
+  </aside>
   </div><!-- /app-shell -->
 
   <button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>

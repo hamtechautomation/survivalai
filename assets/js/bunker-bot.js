@@ -280,7 +280,9 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
       $('aria-emergency')?.addEventListener('click', toggleEmergencyMode);
       $('aria-copy-last')?.addEventListener('click', copyLastResponse);
       $('aria-export')   ?.addEventListener('click', exportChat);
-      $('aria-clear-btn')?.addEventListener('click', () => ariaClear());
+      $('aria-clear-btn')?.addEventListener('click', () => {
+        if (!conversationHistory.length || confirm('Clear this conversation? This can\'t be undone.')) ariaClear();
+      });
     }
   }
 
@@ -288,6 +290,23 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
      PROVIDER SWITCHING
   ────────────────────────────────────────── */
   function switchProvider(provider) {
+    const previousProvider = currentProvider;
+    const isSwitchingToCloud = provider === PROVIDER_CLAUDE && previousProvider !== PROVIDER_CLAUDE;
+
+    /* Switching providers mid-conversation would otherwise silently forward
+       the whole chat history as context to the new provider — including
+       sending prior offline-only conversation to Claude's cloud API, which
+       contradicts this guide's own "nothing leaves your device" promise.
+       Clear it and say so, rather than carrying it over unannounced. */
+    if (provider !== previousProvider && conversationHistory.length) {
+      ariaClear();
+      if (isSwitchingToCloud) {
+        appendMessage('aria', '⚠️ Conversation cleared — switching to Claude sends new messages to Anthropic’s servers, so your prior offline conversation wasn’t carried over.', true);
+      } else {
+        appendMessage('aria', 'Conversation cleared when switching modes.', true);
+      }
+    }
+
     currentProvider = provider;
     localStorage.setItem('aria-provider', provider);
 
@@ -327,11 +346,23 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
     const key = inp.value.trim();
     if (!key) return;
 
+    const btn = $('aria-key-save');
+    /* Anthropic keys always start with sk-ant- — catches an obvious typo/paste
+       error before it silently "succeeds" and only fails on the first real
+       request, with no hint why. */
+    if (!key.startsWith('sk-ant-')) {
+      if (btn) {
+        btn.textContent = '⚠ Invalid';
+        btn.style.background = 'var(--red,#c0392b)';
+        setTimeout(() => { btn.textContent = 'Save'; btn.style.background = ''; }, 2500);
+      }
+      return;
+    }
+
     claudeApiKey = key;
     /* Store obfuscated — just base64, not real security but avoids casual reading */
     try { localStorage.setItem('aria-claude-key', btoa(key)); } catch (_) {}
 
-    const btn = $('aria-key-save');
     if (btn) {
       btn.textContent = '✓ Saved';
       btn.style.background = 'var(--green,#2a8a2a)';
@@ -568,12 +599,28 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
   /* ──────────────────────────────────────────
      STREAM — OLLAMA
   ────────────────────────────────────────── */
+  /* Only the initial "is it running" ping had a timeout — the actual chat
+     request never did, so a hung backend just left the thinking animation
+     spinning forever with no feedback. This doesn't abort anything (the
+     request may still complete); it just tells the user something's off
+     and that Stop is available, once no content has arrived after 45s. */
+  function startStallHint(thinkingEl) {
+    return setTimeout(() => {
+      if (thinkingEl && thinkingEl.isConnected) {
+        thinkingEl.insertAdjacentHTML('afterend',
+          '<div class="aria-message from-aria"><div class="aria-message-content">⏳ Still waiting — this is taking longer than usual. You can hit <strong>Stop</strong> and try again.</div></div>');
+        scrollMessages();
+      }
+    }, 45000);
+  }
+
   async function streamOllama(userText) {
     isStreaming = true;
     abortController = new AbortController();
     setSendBtn('stop');
 
     const thinkingEl = appendThinking();
+    const stallTimer = startStallHint(thinkingEl);
     try {
       const payload = {
         model: ollamaModel,
@@ -627,6 +674,7 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
         appendMessage('aria', '_[Response stopped]_', false);
       }
     } finally {
+      clearTimeout(stallTimer);
       isStreaming = false;
       setSendBtn('send');
     }
@@ -641,6 +689,7 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
     setSendBtn('stop');
 
     const thinkingEl = appendThinking();
+    const stallTimer = startStallHint(thinkingEl);
     try {
       const payload = {
         model: llamafileModel || 'local',
@@ -702,6 +751,7 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
         appendMessage('aria', '_[Response stopped]_', false);
       }
     } finally {
+      clearTimeout(stallTimer);
       isStreaming = false;
       setSendBtn('send');
     }
@@ -716,6 +766,7 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
     setSendBtn('stop');
 
     const thinkingEl = appendThinking();
+    const stallTimer = startStallHint(thinkingEl);
     try {
       /* Claude API takes system separately, and messages must alternate user/assistant */
       const messages = conversationHistory.slice(-12).map(m => ({
@@ -800,6 +851,7 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
         appendMessage('aria', '_[Response stopped]_', false);
       }
     } finally {
+      clearTimeout(stallTimer);
       isStreaming = false;
       setSendBtn('send');
     }

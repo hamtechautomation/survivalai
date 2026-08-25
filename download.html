@@ -119,7 +119,7 @@
     </div>
     <div class="tier featured">
       <div class="tier-top"><span class="tier-name">Standard</span><span class="tier-size">~580 MB</span></div>
-      <div class="tier-tagline">The full library on a pen drive</div>
+      <div class="tier-tagline">The full library on a pen drive · ~5–10 min on average broadband</div>
       <ul>
         <li>Everything in Lite, plus:</li>
         <li><strong>33 reference books</strong> (PDFs) — medical, military, homesteading, classics</li>
@@ -225,11 +225,12 @@
 
   <p style="font-size:var(--fs-sm);color:var(--text-3);margin-top:.9rem">💡 Want the offline AI, maps, and "install as an app" too? Double-clicking <code style="font-family:var(--mono,monospace)">index.html</code> gives you the written guide, but browsers block those three features when a page is opened as a plain file. One click fixes it: run <code style="font-family:var(--mono,monospace)">start.command</code> (or double-click it in Finder) — it starts everything and opens the guide in your browser, unlocked. Verify your download first with <code style="font-family:var(--mono,monospace)">sh verify.sh</code>.</p>
 
-  <div class="advanced-label">Optional extras (advanced)</div>
+  <div class="advanced-label">Optional extras</div>
 
   <div class="addon">
     <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Set it up with one command (recommended)</h3>
     <p style="font-size:var(--fs-base);color:var(--text-2);margin:.2rem 0 .7rem">Installs the offline AI, auto-picks the right model for your machine (down to old/low-RAM hardware — no need to read a table), and can serve the whole guide to every device on your network. Run these from inside the unzipped folder, in order:</p>
+    <p style="font-size:var(--fs-sm);color:var(--text-3);margin:0 0 .7rem">Skip this and Bunker Bot still works — it searches the bundled books and shows you the right page, it just won't generate a written answer.</p>
     <div class="step-row"><div class="step-n">1</div><div>Check the download is intact: <code class="cmd">sh verify.sh</code></div></div>
     <div class="step-row"><div class="step-n">2</div><div>Run the script for your OS:
       <div style="margin-top:.4rem"><strong>macOS</strong> — also serves the guide to your network on boot<code class="cmd">sh mac-setup.sh</code></div>
@@ -261,7 +262,7 @@
     <p style="font-size:var(--fs-base);color:var(--text-2);margin:.2rem 0">Too big to bundle, but one click away: the <a href="expansion.html">Expansion Library</a> links every offline knowledge base — all of Wikipedia and Project Gutenberg via Kiwix, and offline maps of anywhere on Earth. <code>mac-setup.sh</code>/<code>pi-setup.sh</code> above already offer to download the two biggest ones (Gutenberg + full Wikipedia) automatically — this page is for picking specific smaller archives instead.</p>
   </div>
 
-  <div class="support">
+  <div class="support" id="support">
     <div style="font-size:var(--fs-base);color:var(--text-1);max-width:560px;margin:0 auto">This project is free and always will be. Hosting, maps, and the reference library cost a little to keep online — if it's helped you, chipping in keeps it alive and ad-free for the next person.</div>
     <a class="donate" href="https://buy.stripe.com/14A00lgJM72a1wNcES9Zm00" target="_blank" rel="noopener">❤ Support this project</a>
     <div style="font-size:var(--fs-xs);color:var(--text-3);margin-top:.6rem">100% optional. The guide is yours either way. <br>Secure checkout via Stripe — appears as <strong>TRADETRACKHQ</strong> on your statement.</div>
