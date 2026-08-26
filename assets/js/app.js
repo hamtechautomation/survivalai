@@ -72,37 +72,49 @@
   window.ICONS = ICONS;
 
   /* =================== CONSTANTS =================== */
+  /* Grouped by real category (was: one flat list plus a single stray
+     "Tools & Maps" label that only ever applied to one item). Related
+     pairs that used to sit 20+ items apart — Shelter/Building &
+     Structures, Energy/Power Generation, Food & Water/Water Systems,
+     Medical/Medicine Making — are now adjacent within Core Survival. */
   const NAV_PAGES = [
     { id: 'home',             href: 'index.html',                      icon: ICONS.home,     label: 'Home' },
-    { id: 'food',             href: 'sections/food.html',              icon: ICONS.water,    label: 'Food & Water' },
+
+    { id: 'food',             href: 'sections/food.html',              icon: ICONS.water,    label: 'Food & Water', section: 'Core Survival' },
+    { id: 'build-water',      href: 'sections/build-water.html',       icon: ICONS.tap,      label: 'Water Systems' },
     { id: 'medical',          href: 'sections/medical.html',           icon: ICONS.medical,  label: 'Medical & First Aid' },
+    { id: 'medicine-making',  href: 'sections/medicine-making.html',   icon: ICONS.mortar,   label: 'Medicine Making' },
     { id: 'energy',           href: 'sections/energy.html',            icon: ICONS.energy,   label: 'Energy' },
+    { id: 'build-power',      href: 'sections/build-power.html',       icon: ICONS.gear,     label: 'Power Generation' },
     { id: 'shelter',          href: 'sections/shelter.html',           icon: ICONS.shelter,  label: 'Shelter & Construction' },
+    { id: 'build-structures', href: 'sections/build-structures.html',  icon: ICONS.building, label: 'Building & Structures' },
     { id: 'communications',   href: 'sections/communications.html',    icon: ICONS.comms,    label: 'Communications' },
     { id: 'navigation',       href: 'sections/navigation.html',        icon: ICONS.compass,  label: 'Navigation & Maps' },
     { id: 'security',         href: 'sections/security.html',          icon: ICONS.shield,   label: 'Security & Defense' },
-    { id: 'knowledge',        href: 'sections/knowledge.html',         icon: ICONS.book,     label: 'Knowledge & Literacy' },
+
+    { id: 'knowledge',        href: 'sections/knowledge.html',         icon: ICONS.book,     label: 'Knowledge & Literacy', section: 'Knowledge & Skills' },
     { id: 'science',          href: 'sections/science.html',           icon: ICONS.atom,     label: 'First Principles' },
-    { id: 'agriculture',      href: 'sections/agriculture.html',       icon: ICONS.leaf,     label: 'Agriculture' },
+
+    { id: 'agriculture',      href: 'sections/agriculture.html',       icon: ICONS.leaf,     label: 'Agriculture', section: 'Homesteading & Animals' },
     { id: 'animal',           href: 'sections/animal.html',            icon: ICONS.paw,      label: 'Animal Husbandry' },
     { id: 'veterinary',       href: 'sections/veterinary.html',        icon: ICONS.vet,      label: 'Veterinary Care' },
     { id: 'maternal',         href: 'sections/maternal.html',          icon: ICONS.baby,     label: 'Pregnancy & Infant Care' },
-    { id: 'nbc',              href: 'sections/nbc.html',               icon: ICONS.nbc,      label: 'NBC / EMP Threats' },
+
+    { id: 'nbc',              href: 'sections/nbc.html',               icon: ICONS.nbc,      label: 'NBC / EMP Threats', section: 'Threats & Disasters' },
     { id: 'disasters',        href: 'sections/disasters.html',         icon: ICONS.tornado,  label: 'Disaster Playbooks' },
     { id: 'climate',          href: 'sections/climate.html',           icon: ICONS.globe,    label: 'Climate & Regional' },
-    { id: 'metallurgy',       href: 'sections/metallurgy.html',        icon: ICONS.hammer,   label: 'Metallurgy' },
-    { id: 'governance',       href: 'sections/governance.html',        icon: ICONS.columns,  label: 'Governance' },
-    { id: 'psychology',       href: 'sections/psychology.html',        icon: ICONS.brain,    label: 'Psychology & Morale' },
+
+    { id: 'metallurgy',       href: 'sections/metallurgy.html',        icon: ICONS.hammer,   label: 'Metallurgy', section: 'Trades & Materials' },
     { id: 'chemistry',        href: 'sections/chemistry.html',         icon: ICONS.flask,    label: 'Chemistry & Materials' },
     { id: 'textiles',         href: 'sections/textiles.html',          icon: ICONS.scissors, label: 'Textiles & Clothing' },
     { id: 'vehicles',         href: 'sections/vehicles.html',          icon: ICONS.wheel,    label: 'Vehicles & Transport' },
     { id: 'salvage',          href: 'sections/salvage.html',           icon: ICONS.wrench,   label: 'Salvage & Fuel' },
-    { id: 'build-power',      href: 'sections/build-power.html',       icon: ICONS.gear,     label: 'Power Generation' },
-    { id: 'build-structures', href: 'sections/build-structures.html',  icon: ICONS.building, label: 'Building & Structures' },
-    { id: 'medicine-making',  href: 'sections/medicine-making.html',   icon: ICONS.mortar,   label: 'Medicine Making' },
-    { id: 'build-water',      href: 'sections/build-water.html',       icon: ICONS.tap,      label: 'Water Systems' },
     { id: 'projects',         href: 'sections/projects.html',          icon: ICONS.projects, label: 'Practical Projects' },
-    { id: 'maps',             href: 'maps.html',                       icon: ICONS.globe,    label: 'Offline Maps', section: 'Tools & Maps' },
+
+    { id: 'governance',       href: 'sections/governance.html',        icon: ICONS.columns,  label: 'Governance', section: 'Community & Mind' },
+    { id: 'psychology',       href: 'sections/psychology.html',        icon: ICONS.brain,    label: 'Psychology & Morale' },
+
+    { id: 'maps',             href: 'maps.html',                       icon: ICONS.globe,    label: 'Offline Maps', section: 'Tools & Library' },
     { id: 'skills',           href: 'skills.html',                     icon: ICONS.target,   label: 'Practical Skills' },
     { id: 'tools',            href: 'tools.html',                      icon: ICONS.wrench,   label: 'Calculators & Tools' },
     { id: 'literature',       href: 'literature.html',                 icon: ICONS.books,    label: 'Reference Library' },
@@ -234,6 +246,7 @@
         <a href="${base}gear.html" class="btn btn-outline btn-full">${ICONS.clipboard} Gear Checklist</a>
         <a href="${base}maps.html" class="btn btn-ghost btn-full">${ICONS.globe} Offline Maps</a>
         <a href="${base}ai-setup.html" class="btn btn-ghost btn-full">${ICONS.robot} Bunker Bot</a>
+        <a href="${base}download.html" class="btn btn-ghost btn-full">${ICONS.download} Download / Support</a>
         <a href="${base}about.html" class="btn btn-ghost btn-full" style="opacity:.7;font-size:.78rem">ⓘ About</a>
         <a href="${base}changelog.html" class="btn btn-ghost btn-full" style="opacity:.6;font-size:.75rem">${ICONS.changelog} Changelog</a>
         <div class="sidebar-live-indicator">
@@ -250,13 +263,22 @@
     const path = window.location.pathname;
     const filename = path.split('/').pop() || 'index.html';
     const items = document.querySelectorAll('.nav-item');
+    let activeItem = null;
     items.forEach(item => {
       const page = item.dataset.page;
+      /* Exact match against the link's own href, not a prefix match against
+         the page id — startsWith() would false-positive if a future page id
+         happened to be a prefix of another page's filename. */
+      const itemFilename = (item.getAttribute('href') || '').split('/').pop();
       const match =
         (page === 'home' && (filename === 'index.html' || filename === '')) ||
-        (page !== 'home' && filename.startsWith(page));
-      if (match) item.classList.add('active');
+        (page !== 'home' && filename === itemFilename);
+      if (match) { item.classList.add('active'); activeItem = item; }
     });
+    /* Opening the sidebar deep in a 35-item list used to always drop you
+       at the top, with no clue where "you are" until you scrolled to find
+       the highlighted item. */
+    if (activeItem) activeItem.scrollIntoView({ block: 'center' });
   }
 
   /* =================== SIDEBAR TOGGLE =================== */
