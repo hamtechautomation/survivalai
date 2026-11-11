@@ -2932,3 +2932,38 @@ svg text[data-hl]:focus-visible { fill: var(--amber-light); text-decoration: und
 .dg-rope { fill: none; stroke: #c9b48a; stroke-width: 2.4; stroke-linejoin: round; }
 .dg-logs { fill: none; stroke: #7a5a32; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
 @media print { .dg-logs, .dg-stick-l { stroke: #000 !important; } .dg-grass { fill: #fff !important; } }
+
+/* =============================================
+   SMALL POLISH: animated checkboxes, card press
+   ============================================= */
+input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none; flex-shrink: 0;
+  width: 1.15rem; height: 1.15rem; margin: 0; vertical-align: -0.2em;
+  border: 2px solid var(--border-hi); border-radius: 5px; background: var(--bg-1);
+  display: inline-grid; place-content: center; cursor: pointer;
+  transition: background .18s, border-color .18s, box-shadow .18s;
+}
+input[type="checkbox"]::before {
+  content: ""; width: 0.72rem; height: 0.72rem; background: var(--bg-0);
+  clip-path: polygon(14% 52%, 0 66%, 38% 100%, 100% 22%, 86% 8%, 38% 72%);
+  transform: scale(0); transition: transform .18s cubic-bezier(.3,1.6,.6,1);
+}
+input[type="checkbox"]:hover { border-color: var(--amber); }
+input[type="checkbox"]:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+input[type="checkbox"]:checked { background: var(--amber); border-color: var(--amber); animation: cb-pop .3s ease; }
+input[type="checkbox"]:checked::before { transform: scale(1); }
+@keyframes cb-pop { 40% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--amber) 30%, transparent); } 100% { box-shadow: 0 0 0 0 transparent; } }
+.cpr-sound input[type="checkbox"]:checked { background: #e06060; border-color: #e06060; }
+.shelf-pop-check input[type="checkbox"]:checked { background: var(--green); border-color: var(--green); }
+.gear-item-label { transition: color .25s, opacity .25s; }
+.card:active, .section-card:active, .pdf-card:active, .zim-card:active, .install-card:active { transform: scale(.985); transition-duration: .08s; }
+@media (prefers-reduced-motion: reduce) {
+  input[type="checkbox"], input[type="checkbox"]::before { transition: none; }
+  input[type="checkbox"]:checked { animation: none; }
+  .card:active, .section-card:active, .pdf-card:active, .zim-card:active, .install-card:active { transform: none; }
+}
+body.mode-hc input[type="checkbox"] { border-color: #fff; }
+@media print {
+  input[type="checkbox"] { border-color: #000 !important; background: #fff !important; }
+  input[type="checkbox"]:checked::before { background: #000 !important; }
+}
