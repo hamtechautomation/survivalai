@@ -149,8 +149,13 @@
     buildNav();
     setActiveNav();
     setupPagination();
+    setupBreadcrumb();
+    recordRecent();
+    ensureSearch();
     iconifyChrome();
     wrapTables();
+    setupOnThisPage();
+    setupPalette();
     iconifyEmoji(document.body);
     setupSidebar();
     setupARIAToggle();
@@ -244,6 +249,255 @@
     const bot = document.getElementById('aria-toggle');
     if (bot) set(bot, 'robot', 'Bunker Bot');
     document.querySelectorAll('.aria-avatar').forEach(a => { if (!a.querySelector('svg')) set(a, 'robot', ''); });
+  }
+
+  /* =================== BREADCRUMB =================== */
+  /* "Core Survival › Medical & First Aid" instead of always "Last Light
+     Guide". Tapping the group opens it in the sidebar. */
+  function setupBreadcrumb() {
+    const cur = currentNavPage();
+    const crumb = document.querySelector('.header-breadcrumb .crumb-parent');
+    if (!cur || !cur.group || !crumb) return;
+    crumb.textContent = cur.group;
+    crumb.setAttribute('href', '#');
+    crumb.setAttribute('role', 'button');
+    crumb.title = 'Show ' + cur.group + ' in the menu';
+    crumb.addEventListener('click', e => {
+      e.preventDefault();
+      const li = document.querySelector(`.nav-group[data-group="${navGroups().find(g => g.name === cur.group).slug}"]`);
+      if (!li) return;
+      const btn = li.querySelector('.nav-group-toggle');
+      if (btn.getAttribute('aria-expanded') !== 'true') btn.click();
+      const sidebar = document.getElementById('sidebar');
+      if (window.innerWidth < 900 && sidebar && !sidebar.classList.contains('open')) {
+        const t = document.getElementById('menu-toggle'); if (t) t.click();
+      }
+      const list = document.querySelector('.nav-list');
+      if (list) list.scrollTop += li.getBoundingClientRect().top - list.getBoundingClientRect().top - 8;
+      li.classList.remove('flash'); void li.offsetWidth; li.classList.add('flash');
+      btn.focus({ preventScroll: true });
+    });
+  }
+
+  /* =================== RECENT PAGES =================== */
+  function rootPath() {
+    const parts = location.pathname.split('/');
+    const file = parts.pop() || 'index.html';
+    return (location.pathname.includes('/sections/') ? 'sections/' : '') + file;
+  }
+  function recordRecent() {
+    const cur = currentNavPage();
+    const title = cur ? cur.label : (document.querySelector('.page-title, h1') || {}).textContent || document.title.split(' — ')[0];
+    if (!title || /^home\.html$/.test(rootPath())) return;
+    try {
+      const list = JSON.parse(localStorage.getItem('ll-recent') || '[]').filter(r => r.href !== rootPath());
+      list.unshift({ href: rootPath(), title: title.trim(), group: cur ? cur.group : '' });
+      localStorage.setItem('ll-recent', JSON.stringify(list.slice(0, 8)));
+    } catch (e) {}
+  }
+
+  /* search.js used to be missing on 7 pages, leaving their search box dead. */
+  function ensureSearch() {
+    if (window.guideSearch || document.querySelector('script[src$="search.js"]')) return;
+    const sc = document.createElement('script');
+    sc.src = (location.pathname.includes('/sections/') ? '../' : '') + 'assets/js/search.js';
+    document.body.appendChild(sc);
+  }
+
+  /* =================== ON THIS PAGE =================== */
+  /* Built from the page's own <h2>s, so every long page gets one. Wide
+     screens: a sticky panel beside the text that follows your position.
+     Narrower screens: a sticky "On this page" bar that opens a list. */
+  function setupOnThisPage() {
+    const cur = currentNavPage();
+    if (cur && cur.id === 'home') return;
+    const wrap = document.querySelector('.content-wrapper');
+    if (!wrap) return;
+    const heads = [...wrap.querySelectorAll('h2')].filter(h =>
+      h.offsetParent !== null && !h.closest('.toc, .callout, .aria-panel, .modal, dialog, [hidden], .shelf-pop'));
+    if (heads.length < 3) return;
+    const slug = t => t.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+    const used = new Set();
+    const items = heads.map(h => {
+      let id = h.id;
+      if (!id && h.parentElement.tagName === 'SECTION' && h.parentElement.id && h.parentElement.firstElementChild === h) id = h.parentElement.id;
+      if (!id) { id = slug(h.textContent) || 'part'; while (document.getElementById(id) || used.has(id)) id += '-2'; h.id = id; }
+      used.add(id);
+      return { id, el: h, text: h.textContent.replace(/\s+/g, ' ').trim() };
+    });
+    const linkList = cls => `<ol class="${cls}">` + items.map(it =>
+      `<li><a href="#${it.id}" data-otp="${it.id}">${it.text.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</a></li>`).join('') + '</ol>';
+
+    // Wide screens: side panel
+    const panel = document.createElement('nav');
+    panel.className = 'otp-panel no-print';
+    panel.setAttribute('aria-label', 'On this page');
+    panel.innerHTML = `<div class="otp-title">On this page</div>` + linkList('otp-list');
+    document.body.appendChild(panel);
+    document.querySelector('.main-content') && document.querySelector('.main-content').classList.add('has-otp');
+
+    // Narrow screens: sticky jump bar after the page intro
+    const bar = document.createElement('div');
+    bar.className = 'otp-bar no-print';
+    bar.innerHTML = `<button type="button" class="otp-toggle" aria-expanded="false" aria-controls="otp-drop">
+        <span class="otp-k">On this page</span><span class="otp-cur">${items[0].text}</span><span class="nav-group-chev" aria-hidden="true"></span>
+      </button><div class="otp-drop" id="otp-drop" hidden>${linkList('otp-list')}</div>`;
+    // Sticky only works within its parent, so place the bar as a direct
+    // child of the content column, right after the block holding the intro.
+    let anchor = wrap.querySelector('.section-meta') || wrap.querySelector('.section-header, header');
+    while (anchor && anchor.parentElement !== wrap) anchor = anchor.parentElement;
+    if (anchor) anchor.insertAdjacentElement('afterend', bar);
+    else { let h = items[0].el; while (h.parentElement !== wrap) h = h.parentElement; wrap.insertBefore(bar, h); }
+    const tog = bar.querySelector('.otp-toggle'), drop = bar.querySelector('.otp-drop');
+    const closeDrop = () => { drop.hidden = true; tog.setAttribute('aria-expanded', 'false'); };
+    tog.addEventListener('click', e => { e.stopPropagation(); drop.hidden = !drop.hidden; tog.setAttribute('aria-expanded', String(!drop.hidden)); });
+    drop.addEventListener('click', e => { if (e.target.closest('a')) closeDrop(); });
+    document.addEventListener('click', e => { if (!bar.contains(e.target)) closeDrop(); });
+
+    // Follow the reader's position
+    let ticking = false, last = null;
+    const spy = () => {
+      ticking = false;
+      const line = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 62) + 90;
+      let active = items[0];
+      for (const it of items) { if (it.el.getBoundingClientRect().top - line <= 0) active = it; else break; }
+      if (active === last) return; last = active;
+      document.querySelectorAll('[data-otp]').forEach(a => {
+        const on = a.dataset.otp === active.id;
+        a.classList.toggle('active', on);
+        if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+      });
+      bar.querySelector('.otp-cur').textContent = active.text;
+      const a = panel.querySelector('a.active');
+      if (a) { const pr = panel.getBoundingClientRect(), ar = a.getBoundingClientRect(); if (ar.top < pr.top || ar.bottom > pr.bottom) panel.scrollTop += ar.top - pr.top - pr.height / 3; }
+    };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
+    spy();
+  }
+
+  /* =================== SEARCH PALETTE =================== */
+  /* A header Search button (also Ctrl/Cmd-K or "/") that works on every
+     screen size — the sidebar box was hidden on phones. Empty box shows
+     your recent pages. */
+  function setupPalette() {
+    const base = location.pathname.includes('/sections/') ? '../' : '';
+    const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+
+    // Header button
+    const anchor = document.querySelector('.header-actions') ||
+                   (document.getElementById('aria-toggle') && document.getElementById('aria-toggle').parentNode) ||
+                   document.querySelector('.top-bar');
+    if (anchor) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'btn btn-sm btn-outline search-btn no-print';
+      btn.setAttribute('aria-label', 'Search the guide');
+      btn.appendChild(iconSpan('search', false));
+      const l = document.createElement('span'); l.className = 'btn-label'; l.textContent = 'Search'; btn.appendChild(l);
+      const k = document.createElement('kbd'); k.className = 'search-kbd'; k.textContent = mac ? '⌘K' : 'Ctrl K'; btn.appendChild(k);
+      btn.addEventListener('click', () => open());
+      anchor.insertBefore(btn, anchor.firstChild);
+    }
+
+    const pal = document.createElement('div');
+    pal.className = 'palette no-print';
+    pal.hidden = true;
+    pal.innerHTML = `<div class="palette-backdrop"></div>
+      <div class="palette-box" role="dialog" aria-modal="true" aria-label="Search the guide">
+        <div class="palette-field">${ICONS.search}
+          <input type="search" class="palette-input" placeholder="Search — e.g. bleeding, water filter, fire" aria-label="Search the guide"
+                 autocomplete="off" role="combobox" aria-expanded="true" aria-controls="palette-results" aria-autocomplete="list">
+          <button type="button" class="palette-close" aria-label="Close">Esc</button>
+        </div>
+        <div class="palette-results" id="palette-results" role="listbox"></div>
+        <div class="palette-foot"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>Enter</kbd> open</span><span><kbd>Esc</kbd> close</span></div>
+      </div>`;
+    document.body.appendChild(pal);
+    const input = pal.querySelector('.palette-input'), out = pal.querySelector('.palette-results');
+    let idx = 0, lastFocus = null;
+
+    const EXTRA = [
+      { href: 'quick-reference.html', label: 'Emergency Card', group: 'Quick access' },
+      { href: 'ai-setup.html', label: 'Bunker Bot setup', group: 'Help' },
+      { href: 'about.html', label: 'About', group: 'Help' },
+      { href: 'changelog.html', label: 'Changelog', group: 'Help' },
+    ];
+    const pages = () => navPagesWithGroups().map(p => ({ href: p.href, label: p.label, group: p.group || '' })).concat(EXTRA);
+    const row = (href, title, sub, icon) =>
+      `<a class="palette-item" role="option" href="${base}${href}">${icon ? `<span class="palette-ico">${icon}</span>` : ''}
+         <span class="palette-text"><span class="palette-t">${title}</span>${sub ? `<span class="palette-s">${esc(sub)}</span>` : ''}</span></a>`;
+    const hl = (t, q) => { let h = esc(t); q.split(/\s+/).filter(w => w.length > 1).forEach(w => { h = h.replace(new RegExp('(' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'), '<mark>$1</mark>'); }); return h; };
+
+    function render() {
+      const q = input.value.trim();
+      let html = '';
+      if (!q) {
+        let recent = [];
+        try { recent = JSON.parse(localStorage.getItem('ll-recent') || '[]').filter(r => r.href !== rootPath()); } catch (e) {}
+        if (recent.length) {
+          html += '<div class="palette-group">Recent</div>' + recent.slice(0, 6).map(r => row(r.href, esc(r.title), r.group, ICONS.clock)).join('');
+        }
+        html += '<div class="palette-group">Quick access</div>' +
+          [['quick-reference.html', 'Emergency Card', 'Fast reference for a crisis in progress', ICONS.alert],
+           ['sections/medical.html', 'Medical & First Aid', 'Core Survival', ICONS.medical],
+           ['sections/food.html', 'Food & Water', 'Core Survival', ICONS.water]]
+          .map(x => row(x[0], esc(x[1]), x[2], x[3])).join('');
+      } else {
+        const ql = q.toLowerCase();
+        const pm = pages().filter(p => p.label.toLowerCase().includes(ql) || (p.group && p.group.toLowerCase().includes(ql))).slice(0, 5);
+        if (pm.length) html += '<div class="palette-group">Pages</div>' + pm.map(p => row(p.href, hl(p.label, q), p.group, ICONS.file)).join('');
+        const res = (q.length >= 2 && window.guideSearch) ? window.guideSearch(q) : [];
+        const seen = new Set(pm.map(p => p.href));
+        const topics = res.filter(r => !(seen.has(r.file) && !r.anchor)).slice(0, 10);
+        if (topics.length) html += '<div class="palette-group">Topics</div>' + topics.map(r => row(r.file + (r.anchor || ''), hl(r.title, q), r.sectionLabel, ICONS.book)).join('');
+        if (!html) html = `<div class="palette-empty">No matches for “${esc(q)}”. Try a simpler word — e.g. “burn”, “water”, “radio”.</div>`;
+      }
+      out.innerHTML = html;
+      idx = 0; mark();
+    }
+    function items() { return [...out.querySelectorAll('.palette-item')]; }
+    function mark() {
+      items().forEach((a, i) => { a.classList.toggle('focused', i === idx); a.setAttribute('aria-selected', String(i === idx)); a.id = 'pal-opt-' + i; });
+      const cur = items()[idx];
+      if (cur) { input.setAttribute('aria-activedescendant', cur.id); cur.scrollIntoView({ block: 'nearest' }); }
+    }
+    function open() {
+      lastFocus = document.activeElement;
+      pal.hidden = false;
+      document.documentElement.classList.add('palette-open');
+      const sb = document.getElementById('sidebar');
+      if (sb && sb.classList.contains('open')) { const ov = document.getElementById('overlay'); if (ov) ov.click(); }
+      input.value = '';
+      render();
+      setTimeout(() => input.focus(), 0);
+    }
+    function close() {
+      pal.hidden = true;
+      document.documentElement.classList.remove('palette-open');
+      if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    }
+    let t;
+    input.addEventListener('input', () => { clearTimeout(t); t = setTimeout(render, 90); });
+    pal.addEventListener('keydown', e => {
+      const n = items().length;
+      if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); }
+      else if (e.key === 'ArrowDown' && n) { e.preventDefault(); idx = (idx + 1) % n; mark(); }
+      else if (e.key === 'ArrowUp' && n) { e.preventDefault(); idx = (idx - 1 + n) % n; mark(); }
+      else if (e.key === 'Enter' && n && document.activeElement === input) { e.preventDefault(); items()[idx].click(); }
+      else if (e.key === 'Tab') { // keep focus inside the dialog
+        const f = [input, ...items(), pal.querySelector('.palette-close')];
+        const i = f.indexOf(document.activeElement);
+        if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); input.focus(); }
+      }
+    });
+    out.addEventListener('mousemove', e => { const a = e.target.closest('.palette-item'); if (a) { const i = items().indexOf(a); if (i !== idx) { idx = i; mark(); } } });
+    out.addEventListener('click', e => { if (e.target.closest('.palette-item')) close(); });
+    pal.querySelector('.palette-backdrop').addEventListener('click', close);
+    pal.querySelector('.palette-close').addEventListener('click', close);
+    window.LastLight = window.LastLight || {};
+    window.LastLight.openSearch = open;
   }
 
   /* =================== WIDE TABLES =================== */
@@ -649,12 +903,9 @@
   function setupKeyboard() {
     document.addEventListener('keydown', e => {
       /* / → focus search */
-      if (e.key === '/' && !e.ctrlKey && !e.metaKey) {
-        const searchInput = document.getElementById('search-input');
-        if (document.activeElement !== searchInput && searchInput) {
-          e.preventDefault();
-          searchInput.focus();
-        }
+      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '') || (document.activeElement && document.activeElement.isContentEditable);
+      if ((e.key === '/' && !e.ctrlKey && !e.metaKey && !typing) || ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K'))) {
+        if (window.LastLight && window.LastLight.openSearch) { e.preventDefault(); window.LastLight.openSearch(); }
       }
       /* Escape → close overlay/sidebar/aria */
       if (e.key === 'Escape') {

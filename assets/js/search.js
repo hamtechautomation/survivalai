@@ -446,9 +446,11 @@
   }
 
   /* =================== INIT =================== */
-  document.addEventListener('DOMContentLoaded', function () {
-    setupSearch();
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setupSearch(); });
+  } else {
+    setupSearch();   // loaded on demand by app.js after the page was ready
+  }
 
   /* Re-run when sidebar is dynamically built by app.js */
   document.addEventListener('click', function () {
@@ -510,14 +512,7 @@
       }
     });
 
-    /* Cmd+K / Ctrl+K to focus search from anywhere on the page */
-    document.addEventListener('keydown', e => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        input.focus();
-        input.select();
-      }
-    });
+    /* Cmd/Ctrl+K and "/" open the search palette — handled in app.js. */
   }
 
   function updateFocus(items, idx) {

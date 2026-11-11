@@ -39,9 +39,23 @@
   </style>
 </head>
 <body>
-  <nav id="sidebar"><div id="nav-logo"><span>&#9762;</span> Last Light</div><div id="nav-links"></div></nav>
-  <main id="main-content">
-    <div id="breadcrumb"><a href="../index.html">Home</a> › Chemistry &amp; Materials</div>
+  <nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+  <div id="overlay" class="overlay"></div>
+
+  <header class="site-header">
+    <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+    <div class="header-breadcrumb">
+      <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+      <span class="page-title">Chemistry &amp; Materials</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-sm btn-outline" data-print>Print</button>
+      <button id="aria-toggle" class="btn btn-sm btn-primary">Bunker Bot</button>
+    </div>
+  </header>
+
+  <main class="main-content" id="main-content">
+  <div class="content-wrapper">
 
     <header class="section-header">
       <div class="section-badges">
@@ -861,6 +875,7 @@ WICK CHANNEL: Punch small hole in lid or use
       <a href="../index.html" class="pagination-btn pagination-home">⚡ Home</a>
       <a href="textiles.html" class="pagination-btn pagination-next">Textiles →</a>
     </nav>
+  </div><!-- /content-wrapper -->
   </main>
 
   <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
