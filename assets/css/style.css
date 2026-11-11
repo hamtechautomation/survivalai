@@ -2158,3 +2158,107 @@ main svg[viewBox][width], .main-content svg[viewBox][width] { max-width: 100%; h
    phones (e.g. the globe on maps.html). `clip` doesn't create a scroll box,
    so position: sticky inside still works. */
 @media (max-width: 600px) { .content-wrapper { overflow-x: clip; } }
+
+/* =============================================
+   SIDEBAR — quick access, collapsible groups
+   ============================================= */
+.sidebar-quick {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 0.6rem var(--sp-lg) 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.quick-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.55rem 0.2rem 0.45rem;
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text-1);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: background var(--ease), border-color var(--ease), color var(--ease);
+}
+.quick-tile svg { width: 18px; height: 18px; color: var(--amber); }
+.quick-tile:hover { background: var(--bg-4); border-color: var(--border-hi); color: var(--text-0); }
+.quick-tile.active { border-color: var(--amber-dim); color: var(--amber-light); background: var(--bg-3); }
+.quick-tile:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.quick-emergency { background: rgba(200,72,72,0.14); border-color: rgba(200,72,72,0.45); color: #f1b1a9; }
+.quick-emergency svg { color: var(--red); }
+.quick-emergency:hover { background: rgba(200,72,72,0.24); border-color: var(--red); color: #fff; }
+body.mode-nv .quick-emergency { color: var(--text-0); }
+
+.nav-group { margin-top: 2px; }
+.nav-group-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem var(--sp-lg);
+  font: inherit;
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+}
+.nav-group-toggle:hover { color: var(--text-0); background: var(--bg-2); }
+.nav-group-toggle:focus-visible { outline: 2px solid var(--amber); outline-offset: -2px; }
+.nav-group-name { flex: 1; }
+.nav-group-count {
+  font-size: var(--fs-2xs);
+  letter-spacing: 0;
+  font-weight: 600;
+  color: var(--text-3);
+  background: var(--bg-3);
+  border-radius: 999px;
+  padding: 0 0.45rem;
+}
+.nav-group-chev {
+  width: 7px; height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform var(--ease);
+  margin-right: 2px;
+}
+.nav-group.open > .nav-group-toggle { color: var(--text-1); }
+.nav-group.open > .nav-group-toggle .nav-group-chev { transform: rotate(45deg); }
+.nav-group:has(.nav-item.active) > .nav-group-toggle { color: var(--amber); }
+.nav-sub { list-style: none; padding: 0 0 0.3rem; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-list li::marker { content: none; }
+.nav-sub[hidden] { display: none; }
+.nav-sub .nav-item { padding-left: var(--sp-lg); }
+
+/* Generated Prev / Next */
+.section-pagination .pagination-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 48%;
+  white-space: normal;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  padding: 0.7rem 1rem;
+}
+.section-pagination .pagination-next { align-items: flex-end; text-align: right; margin-left: auto; }
+.section-pagination .pagination-btn small { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
+.section-pagination .pagination-btn span { font-weight: 600; color: var(--text-0); }
+.section-pagination .pagination-btn:hover span { color: var(--amber-light); }
+.pagination-spacer { flex: 1 1 0; }
+@media (max-width: 600px) {
+  .section-pagination { flex-wrap: nowrap; }
+  .section-pagination .pagination-btn { padding: 0.6rem 0.75rem; }
+}

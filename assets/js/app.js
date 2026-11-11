@@ -134,6 +134,7 @@
     { id: 'maps',             href: 'maps.html',                       icon: ICONS.globe,    label: 'Offline Maps', section: 'Tools & Library' },
     { id: 'skills',           href: 'skills.html',                     icon: ICONS.target,   label: 'Practical Skills' },
     { id: 'tools',            href: 'tools.html',                      icon: ICONS.wrench,   label: 'Calculators & Tools' },
+    { id: 'gear',             href: 'gear.html',                       icon: ICONS.clipboard, label: 'Gear Checklist' },
     { id: 'literature',       href: 'literature.html',                 icon: ICONS.books,    label: 'Reference Library' },
     { id: 'expansion',        href: 'expansion.html',                  icon: ICONS.cloud,    label: 'Expansion Library' },
     { id: 'download',         href: 'download.html',                   icon: ICONS.download, label: 'Download / Support' },
@@ -147,6 +148,7 @@
     injectManifest();
     buildNav();
     setActiveNav();
+    setupPagination();
     iconifyChrome();
     wrapTables();
     iconifyEmoji(document.body);
@@ -312,6 +314,82 @@
     document.body.insertBefore(skip, document.body.firstChild);
   }
 
+  /* =================== NAV MODEL ===================
+     NAV_PAGES is the single source of truth for order and grouping: the
+     sidebar, Prev/Next links and "Section X of Y" are all derived from it. */
+  function navGroups() {
+    const groups = [{ name: '', slug: 'top', pages: [] }];
+    NAV_PAGES.forEach(p => {
+      if (p.section) groups.push({ name: p.section, slug: p.section.toLowerCase().replace(/[^a-z]+/g, '-'), pages: [] });
+      groups[groups.length - 1].pages.push(p);
+    });
+    return groups.filter(g => g.pages.length);
+  }
+  function navPagesWithGroups() {
+    const out = [];
+    navGroups().forEach(g => g.pages.forEach(p => out.push(Object.assign({ group: g.name }, p))));
+    return out;
+  }
+  function currentNavPage() {
+    const path = window.location.pathname;
+    const file = path.split('/').pop() || 'index.html';
+    const inSections = path.includes('/sections/');
+    return navPagesWithGroups().find(p => {
+      const parts = p.href.split('/');
+      return parts.pop() === file && (parts[0] === 'sections') === inSections;
+    }) || null;
+  }
+  function readNavState() {
+    try { return JSON.parse(localStorage.getItem('nav-groups') || '{}') || {}; } catch (e) { return {}; }
+  }
+
+  /* =================== PREV / NEXT + SECTION COUNTER =================== */
+  function setupPagination() {
+    const cur = currentNavPage();
+    if (!cur || cur.id === 'home') return;
+    const base = window.location.pathname.includes('/sections/') ? '../' : '';
+    const pages = navPagesWithGroups();
+    const i = pages.findIndex(p => p.id === cur.id);
+    const prev = pages[i - 1], next = pages[i + 1];
+
+    // "Section X of Y · Group" — counted over the section pages only.
+    const sectionPages = pages.filter(p => p.href.startsWith('sections/'));
+    const si = sectionPages.findIndex(p => p.id === cur.id);
+    if (si >= 0) {
+      const label = `Section ${si + 1} of ${sectionPages.length} · ${cur.group}`;
+      const existing = [...document.querySelectorAll('.meta-item')].find(m => /Section\s+\d+\s+of\s+\d+|Supplemental Section/.test(m.textContent));
+      if (existing) existing.textContent = '📖 ' + label;
+      else {
+        const m = document.createElement('span'); m.className = 'meta-item'; m.textContent = '📖 ' + label;
+        let meta = document.querySelector('.section-meta');
+        if (!meta) {
+          // Older page headers have no meta row: add one under the intro.
+          const h1 = document.querySelector('main h1, .content-wrapper h1');
+          const intro = h1 && h1.parentElement.querySelector('.section-subtitle, .section-desc');
+          const after = intro || h1;
+          if (after) { meta = document.createElement('div'); meta.className = 'section-meta'; after.insertAdjacentElement('afterend', meta); }
+        }
+        if (meta) meta.appendChild(m);
+      }
+    }
+
+    // Replace the hand-written prev/next blocks with ones built from the nav order.
+    const old = [...document.querySelectorAll('.section-pagination, .nav-buttons')]
+      .filter(n => n.querySelector('a'));
+    const host = document.querySelector('.content-wrapper') || document.querySelector('main');
+    if (!host && !old.length) return;
+    const link = (p, dir) => !p ? '<span class="pagination-spacer"></span>' :
+      `<a href="${base + p.href}" class="pagination-btn pagination-${dir}" rel="${dir}">
+        <small>${dir === 'prev' ? 'Previous' : 'Next'}${p.group && p.group !== cur.group ? ' · ' + p.group : ''}</small>
+        <span>${dir === 'prev' ? '← ' : ''}${p.label}${dir === 'next' ? ' →' : ''}</span></a>`;
+    const nav = document.createElement('nav');
+    nav.className = 'section-pagination no-print';
+    nav.setAttribute('aria-label', 'Previous and next page');
+    nav.innerHTML = link(prev || { href: 'index.html', label: 'Home', group: '' }, 'prev') + link(next, 'next');
+    if (old.length) { old[0].replaceWith(nav); old.slice(1).forEach(n => n.remove()); }
+    else host.appendChild(nav);
+  }
+
   /* =================== NAV BUILD =================== */
   function buildNav() {
     const sidebar = document.getElementById('sidebar');
@@ -346,24 +424,45 @@
       <div class="sidebar-search">
         <input type="text" id="search-input" placeholder="⌕  Search guide…" class="search-input" aria-label="Search guide" autocomplete="off">
         <div id="search-results" class="search-results" role="listbox"></div>
-      </div>`;
+      </div>
+      <nav class="sidebar-quick" aria-label="Quick access">
+        <a href="${base}quick-reference.html" class="quick-tile quick-emergency" data-page="quick-reference">${ICONS.alert}<span>Emergency</span></a>
+        <a href="${base}sections/medical.html" class="quick-tile" data-page="medical">${ICONS.medical}<span>Medical</span></a>
+        <a href="${base}sections/food.html" class="quick-tile" data-page="food">${ICONS.water}<span>Food &amp; Water</span></a>
+        <a href="${base}ai-setup.html" class="quick-tile quick-bot" data-page="ai-setup">${ICONS.robot}<span>Bunker Bot</span></a>
+      </nav>`;
 
+    /* Groups collapse so the whole structure fits on a phone screen (35+
+       links in one open list meant most of the guide was out of sight).
+       The group holding the current page always starts open; others
+       remember whether the reader left them open. */
+    const openState = readNavState();
+    const current = currentNavPage();
     let navHTML = '<ul class="nav-list">';
-    NAV_PAGES.forEach(p => {
-      if (p.section) navHTML += `<li class="nav-section-label">${p.section}</li>`;
-      const href = base + p.href;
-      navHTML += `<li><a href="${href}" class="nav-item" data-page="${p.id}">
-        <span class="nav-icon">${p.icon}</span>${p.label}</a></li>`;
+    navGroups().forEach(g => {
+      const itemHTML = g.pages.map(p => `<li><a href="${base + p.href}" class="nav-item" data-page="${p.id}">
+        <span class="nav-icon">${p.icon}</span><span class="nav-label">${p.label}</span></a></li>`).join('');
+      if (!g.name) { navHTML += itemHTML; return; }
+      const open = (current && current.group === g.name) || openState[g.slug] === true;
+      navHTML += `<li class="nav-group${open ? ' open' : ''}" data-group="${g.slug}">
+        <button type="button" class="nav-group-toggle" aria-expanded="${open}" aria-controls="navg-${g.slug}">
+          <span class="nav-group-name">${g.name}</span>
+          <span class="nav-group-count">${g.pages.length}</span>
+          <span class="nav-group-chev" aria-hidden="true"></span>
+        </button>
+        <ul class="nav-sub" id="navg-${g.slug}"${open ? '' : ' hidden'}>${itemHTML}</ul>
+      </li>`;
     });
     navHTML += '</ul>';
 
     /* Footer: the two "grab it now" actions, then small secondary links.
        (Offline Maps and Download used to be repeated here as well as in the
        Tools & Library list above.) */
+    /* Footer: one compact block. The Emergency Card lives in the quick row
+       above and the Gear Checklist in Tools & Library, so the list gets the
+       height back on phones. */
     const footerHTML = `
       <div class="sidebar-footer">
-        <a href="${base}quick-reference.html" class="btn btn-danger btn-full">${ICONS.alert} Emergency Card</a>
-        <a href="${base}gear.html" class="btn btn-outline btn-full">${ICONS.clipboard} Gear Checklist</a>
         <div class="sidebar-minor">
           <a href="${base}ai-setup.html">${ICONS.robot} Bunker Bot setup</a>
           <a href="${base}about.html">${ICONS.info} About</a>
@@ -376,6 +475,28 @@
       </div>`;
 
     sidebar.innerHTML = headerHTML + navHTML + footerHTML;
+
+    sidebar.querySelectorAll('.nav-group-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const li = btn.parentElement, sub = li.querySelector('.nav-sub');
+        const open = btn.getAttribute('aria-expanded') !== 'true';
+        btn.setAttribute('aria-expanded', String(open));
+        li.classList.toggle('open', open);
+        sub.hidden = !open;
+        const st = readNavState(); st[li.dataset.group] = open;
+        try { localStorage.setItem('nav-groups', JSON.stringify(st)); } catch (e) {}
+      });
+    });
+    // "Bunker Bot" quick tile opens the panel when this page has one.
+    const botTile = sidebar.querySelector('.quick-bot');
+    const botToggle = document.getElementById('aria-toggle');
+    if (botTile && botToggle) {
+      botTile.addEventListener('click', e => {
+        e.preventDefault();
+        if (window.innerWidth < 900) { const ov = document.getElementById('overlay'); if (ov) ov.click(); }
+        botToggle.click();
+      });
+    }
   }
 
   /* =================== ACTIVE NAV =================== */
@@ -393,12 +514,20 @@
       const match =
         (page === 'home' && (filename === 'index.html' || filename === '')) ||
         (page !== 'home' && filename === itemFilename);
-      if (match) { item.classList.add('active'); activeItem = item; }
+      if (match) { item.classList.add('active'); item.setAttribute('aria-current', 'page'); activeItem = item; }
     });
-    /* Opening the sidebar deep in a 35-item list used to always drop you
-       at the top, with no clue where "you are" until you scrolled to find
-       the highlighted item. */
-    if (activeItem) activeItem.scrollIntoView({ block: 'center' });
+    const cur = currentNavPage();
+    const curId = cur ? cur.id : filename.replace(/\.html$/, '');
+    document.querySelectorAll('.quick-tile').forEach(t => {
+      if (t.dataset.page === curId) { t.classList.add('active'); t.setAttribute('aria-current', 'page'); }
+    });
+    /* Bring the current item into view inside the sidebar list only
+       (scrollIntoView could also scroll the page itself). */
+    const list = document.querySelector('.nav-list');
+    if (activeItem && list) {
+      const r = activeItem.getBoundingClientRect(), lr = list.getBoundingClientRect();
+      list.scrollTop += (r.top - lr.top) - (lr.height / 2 - r.height / 2);
+    }
   }
 
   /* =================== SIDEBAR TOGGLE =================== */
