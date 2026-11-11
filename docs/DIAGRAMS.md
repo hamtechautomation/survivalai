@@ -53,6 +53,35 @@ specialist's eye would add the most. Please open a content-correction issue.
 
 ---
 
+## Emergency-card diagrams (`assets/js/emergency-figs.js`)
+
+Shown in Emergency mode and on the printed cards (`print-essentials.html`). Each one
+repeats the card's own steps, so the drawing and the text can't disagree.
+
+| Card | Figure key | What it shows | Checked against |
+|---|---|---|---|
+| Not breathing | `cpr` | Hands on the centre of the chest, beat at 110/min | Resuscitation Council UK / AHA 2020 |
+| Heavy bleeding | `tourniquet` | Tourniquet 5–7 cm above the wound, not on a joint, time written | TCCC / Stop the Bleed |
+| Seizure | `recovery` | Recovery position | St John Ambulance / Red Cross |
+| Choking | `choking` | Adult: back blows between the shoulder blades, fist just above the navel, pull in and up. Baby: face-down on the forearm, head lower, 5 back blows then 5 two-finger chest thrusts | Resuscitation Council UK 2021; NHS |
+| Severe allergy | `epipen` | Auto-injector into the outer thigh, halfway between hip and knee, through clothing, hold 3 s, second dose after 5 min | Resuscitation Council UK anaphylaxis 2021; MHRA |
+| Burn | `burn` | Cool running water 10–20 min, cool not icy, then cling film | NHS; British Burn Association |
+| Too cold | `cold` | Warm packs at neck, armpits and groin only; hands and feet not first | Wilderness Medical Society hypothermia guideline 2019 |
+| Too hot | `heat` | Ice/cold packs at neck, armpits and groin; immersion best, else soak and fan | WMS heat illness guideline 2019 |
+| Stroke | `stroke` | FAST panels | NHS / Stroke Association |
+| Low blood sugar | `sugar` | ~15 g fast sugar (4 tablets / small juice / 1 tbsp honey), wait 15 min, repeat | ADA "15-15 rule"; NHS |
+| Broken bone | `fracture` | Splint covering the joint above and below, ties off the break, check pulse/feeling/movement before and after | St John Ambulance; Red Cross |
+| Snakebite | `snake` | Pen line and time at the swelling edge, repeated; limb still; no cut/suck/tourniquet/ice | WHO snakebite guidelines 2016 |
+| Poisoning | `poison` | By route: swallowed (rinse, don't induce vomiting), fumes (fresh air), skin and eyes (rinse 15–20 min); CO warning | NHS; US Poison Control |
+| Head injury | `head` | The eight danger signs from the card | NICE CG176 |
+| Diarrhoea & dehydration | `ors` | 1 L water + 6 level tsp sugar + ½ level tsp salt | WHO home ORS recipe |
+
+⚑ **needs expert review:** limb position after snakebite. The card says "below heart
+level"; some guidelines say "at heart level" or simply "immobilised". The figure
+follows the card. Change both together if a reviewer advises it.
+
+---
+
 ## Corrections made while checking
 
 | Where | Was | Now | Why |

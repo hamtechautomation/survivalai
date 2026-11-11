@@ -2701,6 +2701,11 @@ body.mode-hc .sec-art { --art: #fff; }
 .ef-wound ellipse { fill: rgba(200,72,72,0.55); stroke: #ff6b6b; stroke-width: 1.5; }
 .ef-wound path { stroke: #ff6b6b; stroke-width: 1.5; }
 .ef-label { fill: var(--text-1); font: 600 9.5px var(--font); }
+.ef-sm { font-size: 8.5px; }
+.ef-water { fill: color-mix(in srgb, var(--blue) 45%, transparent); stroke: var(--blue); stroke-width: 1.2; }
+.ef-panel { fill: var(--bg-2); stroke: var(--border-hi); stroke-width: 1; }
+.ef-cross { fill: none; stroke: #ff6b6b; stroke-width: 2.4; stroke-linecap: round; }
+.ef-redfill { fill: #ff6b6b; }
 .ef-strong { fill: var(--amber-light); font-weight: 800; }
 .ef-pulse { transform-box: fill-box; transform-origin: center; animation: ef-press 0.545s ease-in-out infinite; }  /* 110 per minute */
 @keyframes ef-press { 0%, 100% { transform: scale(1); } 40% { transform: scale(0.9); } }
@@ -2710,6 +2715,10 @@ body.mode-hc .sec-art { --art: #fff; }
   .ef svg { max-width: 100%; max-height: 3.4cm; }
   .ef-body, .ef-lead, .ef-keyline, .ef-key-line { stroke: #000 !important; }
   .ef-ground, .ef-guide { stroke: #777 !important; }
+  .ef-water { fill: #eee !important; stroke: #000 !important; }
+  .ef-panel { fill: #fff !important; stroke: #000 !important; }
+  .ef-cross { stroke: #000 !important; }
+  .ef-redfill { fill: #000 !important; }
   .ef-key, .ef-key2 { fill: #ddd !important; stroke: #000 !important; }
   .ef-label, .ef-strong { fill: #000 !important; }
   .ef-pulse { animation: none !important; }

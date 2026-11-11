@@ -42,7 +42,7 @@
       watch: 'Drowning, and children: give 5 rescue breaths first, then 30:2. Child: one hand, press a third of the chest depth. Baby: two fingers, about 4 cm. Very cold casualty: “not dead until warm and dead” — keep going.'
     },
     {
-      id: 'choking', title: 'Choking', tile: 'Can’t breathe, cough or speak', icon: 'alert', tone: 'red',
+      id: 'choking', title: 'Choking', tile: 'Can’t breathe, cough or speak', icon: 'alert', tone: 'red', fig: 'choking',
       more: 'sections/medical.html#choking', moreLabel: 'Choking & airway obstruction',
       steps: [
         ['Can they cough or speak?', 'Then the airway is only partly blocked. Tell them to keep coughing hard and stay with them. Act only if the cough goes silent.'],
@@ -55,7 +55,7 @@
       watch: 'Anyone given abdominal thrusts should be checked afterwards for internal injury.'
     },
     {
-      id: 'allergy', title: 'Severe allergy', tile: 'Swelling, can’t breathe after a sting or food', icon: 'alert', tone: 'red',
+      id: 'allergy', title: 'Severe allergy', tile: 'Swelling, can’t breathe after a sting or food', icon: 'alert', tone: 'red', fig: 'epipen',
       more: 'sections/medical.html#anaphylaxis', moreLabel: 'Anaphylaxis & severe allergy',
       steps: [
         ['Use their adrenaline (epinephrine) auto-injector now.', 'Into the outer thigh — through clothing is fine. Hold it there for 3 seconds. This is the only treatment that works.'],
@@ -68,7 +68,7 @@
       watch: 'Signs: swelling of lips/tongue/throat, hoarse voice, wheeze, faintness, pale clammy skin — usually two body systems at once.'
     },
     {
-      id: 'burn', title: 'Burn', tile: 'Fire, hot liquid, chemical', icon: 'fire', tone: 'orange',
+      id: 'burn', title: 'Burn', tile: 'Fire, hot liquid, chemical', icon: 'fire', tone: 'orange', fig: 'burn',
       more: 'sections/medical.html#burns', moreLabel: 'Burns',
       steps: [
         ['Cool it under cool running water for 10–20 minutes.', 'Cool, not cold — no ice. Start as soon as possible; it helps most within 30 minutes.'],
@@ -80,7 +80,7 @@
       watch: 'Urgent if: larger than their hand, on the face, hands, feet or groin, white/charred skin, or signs of an airway burn (singed nose hair, hoarse voice) — keep them upright.'
     },
     {
-      id: 'cold', title: 'Too cold', tile: 'Hypothermia — shivering, confused', icon: 'snow', tone: 'blue',
+      id: 'cold', title: 'Too cold', tile: 'Hypothermia — shivering, confused', icon: 'snow', tone: 'blue', fig: 'cold',
       more: 'sections/medical.html#temperature', moreLabel: 'Hypothermia & heat emergencies',
       steps: [
         ['Get them out of the wind, wet and cold.', 'Take off wet clothes. Insulate them from the ground as well as above.'],
@@ -93,7 +93,7 @@
       watch: 'Shivering stopped, very drowsy, or unconscious = severe. If not breathing, start CPR — “not dead until warm and dead”.'
     },
     {
-      id: 'heat', title: 'Too hot', tile: 'Heat stroke — hot, confused', icon: 'solar', tone: 'orange',
+      id: 'heat', title: 'Too hot', tile: 'Heat stroke — hot, confused', icon: 'solar', tone: 'orange', fig: 'heat',
       more: 'sections/medical.html#temperature', moreLabel: 'Hypothermia & heat emergencies',
       steps: [
         ['Hot skin and confused or collapsed = heat stroke. It’s an emergency.', 'Pale, sweaty and weak but thinking clearly is heat exhaustion: shade, rest, fluids, legs up.'],
@@ -117,7 +117,7 @@
       watch: 'Emergency if: it lasts over 5 minutes, another starts before they recover, it’s their first ever, they’re injured, or they’re pregnant.'
     },
     {
-      id: 'stroke', title: 'Stroke', tile: 'Face drooping, weak arm, slurred speech', icon: 'brain', tone: 'amber',
+      id: 'stroke', title: 'Stroke', tile: 'Face drooping, weak arm, slurred speech', icon: 'brain', tone: 'amber', fig: 'stroke',
       more: 'sections/medical.html#stroke', moreLabel: 'Stroke recognition',
       steps: [
         ['Check FAST.', 'Face — ask them to smile: does one side droop? Arms — raise both: does one drift down? Speech — slurred or strange? Time — any one sign: act now.'],
@@ -129,7 +129,7 @@
       watch: 'If they’re diabetic, low blood sugar can look like a stroke — check sugar if you can.'
     },
     {
-      id: 'sugar', title: 'Low blood sugar', tile: 'Diabetic — shaky, sweaty, confused', icon: 'food', tone: 'amber',
+      id: 'sugar', title: 'Low blood sugar', tile: 'Diabetic — shaky, sweaty, confused', icon: 'food', tone: 'amber', fig: 'sugar',
       more: 'sections/medical.html#diabetic', moreLabel: 'Diabetic emergencies',
       steps: [
         ['Awake and can swallow? Give sugar now.', '4 glucose tablets, a small glass of fruit juice, or a tablespoon of honey or sugar in water.'],
@@ -141,7 +141,7 @@
       watch: 'If in doubt, give sugar — too much for a short while is far less dangerous than too little.'
     },
     {
-      id: 'fracture', title: 'Broken bone', tile: 'Deformed, very painful limb', icon: 'firstaid', tone: 'amber',
+      id: 'fracture', title: 'Broken bone', tile: 'Deformed, very painful limb', icon: 'firstaid', tone: 'amber', fig: 'fracture',
       more: 'sections/medical.html#fractures', moreLabel: 'Fractures & splinting',
       steps: [
         ['Stop any bleeding first.', 'Bone through the skin? Cover it with a clean damp cloth — don’t push it back.'],
@@ -153,7 +153,7 @@
       watch: 'A broken thigh bone can bleed heavily inside — watch for shock.'
     },
     {
-      id: 'snake', title: 'Snakebite', tile: 'Bitten by a snake', icon: 'alert', tone: 'amber',
+      id: 'snake', title: 'Snakebite', tile: 'Bitten by a snake', icon: 'alert', tone: 'amber', fig: 'snake',
       more: 'sections/medical.html#snakebite', moreLabel: 'Snakebite & envenomation',
       steps: [
         ['Move away from the snake.', 'Don’t try to catch or kill it.'],
@@ -166,7 +166,7 @@
       watch: 'Pressure-bandaging the whole limb is only for cobra/mamba/coral/Australian snakes — never for vipers or rattlesnakes. See the full section.'
     },
     {
-      id: 'poison', title: 'Poisoning', tile: 'Swallowed, breathed in, overdose', icon: 'flask', tone: 'red',
+      id: 'poison', title: 'Poisoning', tile: 'Swallowed, breathed in, overdose', icon: 'flask', tone: 'red', fig: 'poison',
       more: 'sections/medical.html#poisoning', moreLabel: 'Poisoning & overdose',
       steps: [
         ['Keep yourself safe first.', 'Fumes or gas? Open up or get them into fresh air. Chemicals on skin? Wear gloves.'],
@@ -179,7 +179,7 @@
       watch: 'Headache, dizziness or sickness in several people at once = carbon monoxide: everyone into fresh air, generators and stoves outside. Paracetamol overdose can look fine for a day and still kill — get treatment.'
     },
     {
-      id: 'head', title: 'Head injury', tile: 'Knocked out, fall, blow to the head', icon: 'brain', tone: 'amber',
+      id: 'head', title: 'Head injury', tile: 'Knocked out, fall, blow to the head', icon: 'brain', tone: 'amber', fig: 'head',
       more: 'sections/medical.html#head-injury', moreLabel: 'Head injury & concussion',
       steps: [
         ['Knocked out, fell from height, or neck pain? Keep the head and neck still.', 'Don’t move them unless you must to keep them breathing.'],
@@ -192,7 +192,7 @@
       watch: 'Danger signs: was knocked out, getting drowsier, worse headache, repeated vomiting, a seizure, unequal pupils, weakness or slurred speech, clear fluid from nose or ears. Get them to medical care.'
     },
     {
-      id: 'dehydration', title: 'Diarrhoea & dehydration', tile: 'Can’t keep fluids in', icon: 'water', tone: 'blue',
+      id: 'dehydration', title: 'Diarrhoea & dehydration', tile: 'Can’t keep fluids in', icon: 'water', tone: 'blue', fig: 'ors',
       more: 'quick-reference.html', moreLabel: 'Emergency Card (rehydration recipe)',
       steps: [
         ['Make rehydration solution.', '1 litre of clean (boiled) water + 6 level teaspoons sugar + ½ level teaspoon salt. Stir until dissolved.'],
