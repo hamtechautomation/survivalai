@@ -101,6 +101,24 @@ but the caption says not to eat any white umbellifer without expert confirmation
 
 ---
 
+## How diagrams behave on the page (`setupDiagrams` in `assets/js/app.js`)
+
+Applies automatically to every inline `<svg viewBox>` in a page's content that is at least 150 units
+wide (icons, banners and buttons are skipped).
+
+- **Enlarge:** an Enlarge button sits in the corner, and tapping the diagram also opens it. It opens
+  full screen with pinch, wheel, +/− and double-tap zoom, and drag to pan. Esc, ✕ or the phone's
+  Back button closes it.
+- **Draw-in:** the first time a diagram scrolls into view, its outlines draw themselves and the fills
+  and labels fade in. This is skipped for "reduce motion" and when printing. The extra attributes are
+  removed afterwards. To exclude a part, give it the class `no-anim`.
+- **Highlight:** give a drawn part (or a `<g>` around several parts) and its label the same
+  `data-hl="key"`. Hovering, tapping or focusing either one lights both up and dims the rest. A
+  "Tap a feature" hint is added to the caption automatically. Used in the lookalike comparisons,
+  and ready for any other diagram.
+
+---
+
 ## Corrections made while checking
 
 | Where | Was | Now | Why |

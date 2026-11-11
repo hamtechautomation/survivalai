@@ -2820,3 +2820,53 @@ body.mode-hc .dg-t, body.mode-hc .dg-ts { fill: #fff; }
   .dg-ridge, .dg-gill, .dg-wood-s { stroke: #000 !important; }
   .dg figcaption, .dg figcaption strong { color: #000 !important; }
 }
+
+/* =============================================
+   DIAGRAMS: enlarge, draw-in, highlight (app.js setupDiagrams)
+   ============================================= */
+.dg-zoomable { cursor: zoom-in; }
+.dg-enlarge { position: absolute; top: 8px; right: 8px; z-index: 2; display: inline-flex; align-items: center; gap: 4px; padding: 4px 9px 4px 7px; font: 600 0.72rem var(--font); color: var(--text-1); background: color-mix(in srgb, var(--bg-0) 82%, transparent); border: 1px solid var(--border-hi); border-radius: 999px; cursor: pointer; opacity: 0.55; transition: opacity .2s, border-color .2s, color .2s, transform .2s; backdrop-filter: blur(4px); }
+.dg-enlarge svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.dg-enlarge span { display: none; }
+*:hover > .dg-enlarge, .dg-enlarge:focus-visible { opacity: 1; border-color: var(--amber); color: var(--amber-light); }
+*:hover > .dg-enlarge span, .dg-enlarge:focus-visible span { display: inline; }
+@media (hover: none) { .dg-enlarge { opacity: 0.9; } }
+.dg-enlarge:active { transform: scale(0.94); }
+
+.dg-lb { position: fixed; inset: 0; z-index: 9000; display: none; flex-direction: column; background: var(--bg-0); }
+.dg-lb.open { display: flex; animation: dg-lb-in .18s ease-out; }
+@keyframes dg-lb-in { from { transform: scale(.98); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .dg-lb.open { animation: none; } }
+html.dg-lb-open, html.dg-lb-open body { overflow: hidden; }
+.dg-lb-bar { display: flex; align-items: center; gap: 6px; padding: max(10px, env(safe-area-inset-top)) 12px 10px; border-bottom: 1px solid var(--border); background: var(--bg-1); }
+.dg-lb-title { flex: 1; min-width: 0; margin: 0; font: 600 0.85rem var(--font); color: var(--text-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dg-lb-btn { min-width: 40px; height: 40px; padding: 0 10px; font: 700 1rem var(--font); color: var(--text-0); background: var(--bg-3); border: 1px solid var(--border-hi); border-radius: 10px; cursor: pointer; }
+.dg-lb-btn:hover, .dg-lb-btn:focus-visible { border-color: var(--amber); color: var(--amber-light); }
+.dg-lb-btn[data-z="0"] { font-size: 0.8rem; }
+.dg-lb-stage { flex: 1; position: relative; overflow: hidden; touch-action: none; cursor: grab; }
+.dg-lb-stage:active { cursor: grabbing; }
+.dg-lb-pan { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; transform-origin: 0 0; will-change: transform; }
+.dg-lb-pan svg { width: 100%; height: 100%; max-width: none; max-height: none; overflow: visible; }
+.dg-lb-help { margin: 0; padding: 8px 12px max(8px, env(safe-area-inset-bottom)); font-size: 0.75rem; color: var(--text-3); text-align: center; }
+
+/* draw-in */
+svg.dg-anim .dgd { stroke-dasharray: 1 1.02; stroke-dashoffset: 1.01; stroke-opacity: 0; }
+svg.dg-anim .dgf { fill-opacity: 0; }
+svg.dg-anim .dgo { opacity: 0; }
+svg.dg-anim.dg-go .dgd { stroke-dashoffset: 0; stroke-opacity: 1; transition: stroke-dashoffset 0.9s cubic-bezier(.45,.05,.3,1) var(--dg-d, 0ms), stroke-opacity 0s var(--dg-d, 0ms); }
+svg.dg-anim.dg-go .dgf { fill-opacity: var(--dg-fo, 1); transition: fill-opacity 0.5s ease calc(var(--dg-d, 0ms) + 500ms); }
+svg.dg-anim.dg-go .dgo { opacity: var(--dg-op, 1); transition: opacity 0.5s ease var(--dg-d, 0ms); }
+@media print { svg.dg-anim .dgd, svg.dg-anim .dgf, svg.dg-anim .dgo { stroke-dasharray: none !important; stroke-opacity: 1 !important; fill-opacity: 1 !important; opacity: 1 !important; } }
+
+/* highlight */
+svg [data-hl] { cursor: pointer; }
+svg [data-hl] *, svg :is(path, line, circle, ellipse, rect, text, polygon) { transition: opacity .2s; }
+svg.hl-on :is(path, line, circle, ellipse, rect, text, polygon):not(.hl):not(.hl *):not(.dg-panel):not(.dg-okbg):not(.dg-badbg) { opacity: 0.2; }
+svg.hl-on .dg-ok, svg.hl-on .dg-bad, svg.hl-on .dg-tb, svg.hl-on .dg-it { opacity: 1 !important; }
+svg .hl { filter: drop-shadow(0 0 2px var(--amber)) drop-shadow(0 0 5px color-mix(in srgb, var(--amber) 60%, transparent)); }
+svg text.hl { fill: var(--amber-light) !important; filter: none; }
+svg text[data-hl]:focus { outline: none; }
+svg text[data-hl]:focus-visible { fill: var(--amber-light); text-decoration: underline; }
+.dg-hint { color: var(--amber-light); font-weight: 600; }
+.dg-hint::before { content: "☝ "; }
+@media print { svg.hl-on * { opacity: 1 !important; filter: none !important; } }

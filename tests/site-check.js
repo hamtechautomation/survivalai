@@ -171,6 +171,25 @@ async function browserChecks() {
   const top = await desk.evaluate(() => window.guideSearch ? (window.guideSearch('bleeding')[0] || {}).id : null);
   if (top !== 'sos-bleeding') fail('search', `"bleeding" top result is ${top}, expected the urgent bleeding entry`);
 
+  // Diagrams: Enlarge opens a full-screen copy, Esc closes it; tapping a
+  // tagged feature highlights its matching part; draw-in cleans up after itself.
+  await desk.goto(BASE_URL + 'sections/climate.html');
+  await desk.waitForTimeout(300);
+  if (!(await desk.$('#fig-look-garlic .dg-enlarge'))) fail('diagrams', 'climate.html: no Enlarge button on the lookalike diagram');
+  else {
+    await desk.click('#fig-look-garlic .dg-enlarge');
+    const open = await desk.$eval('.dg-lb', l => l.classList.contains('open') && !!l.querySelector('svg')).catch(() => false);
+    if (!open) fail('diagrams', 'Enlarge did not open the full-screen view');
+    await desk.keyboard.press('Escape');
+    if (await desk.$eval('.dg-lb', l => l.classList.contains('open')).catch(() => false)) fail('diagrams', 'Esc did not close the full-screen view');
+    await desk.$eval('#fig-look-garlic', f => f.scrollIntoView({ block: 'center' }));
+    await desk.waitForTimeout(3200);
+    if (await desk.$('#fig-look-garlic svg.dg-anim, #fig-look-garlic [data-dg-pl]')) fail('diagrams', 'draw-in animation never finished / cleaned up');
+    await desk.click('#fig-look-garlic text[data-hl="c1-spots"]');
+    const n = await desk.$$eval('#fig-look-garlic .hl', a => a.length);
+    if (n < 2) fail('diagrams', `tapping "Often dark spots" highlighted ${n} element(s), expected label + spots`);
+  }
+
   await browser.close();
 }
 

@@ -164,6 +164,7 @@
     setupSectionArt();
     setupOnThisPage();
     setupReveal();
+    setupDiagrams();
     setupPalette();
     setupEmergency();
     iconifyEmoji(document.body);
@@ -663,6 +664,241 @@
     if (n) document.documentElement.classList.add('rv-on');
     // Safety: never leave anything hidden (e.g. jumping to an anchor, find-in-page).
     window.addEventListener('beforeprint', () => document.querySelectorAll('.rv').forEach(el => el.classList.add('rv-in')));
+  }
+
+  /* =================== DIAGRAMS =================== */
+  /* Every hand-drawn diagram gets three things:
+     1. Tap (or the Enlarge button) opens it full screen; pinch, wheel or the
+        +/- buttons zoom, drag pans. Back button or Esc closes.
+     2. Lines draw themselves in the first time it scrolls into view.
+        Off for "reduce motion" and when printing.
+     3. Parts tagged data-hl="key" light up together with their label when
+        you hover, tap or focus either one. */
+  const DG_SKIP = 'h1, h2, h3, a, button, .sec-art, .sos, .palette, .otp-bar, .dg-lb, [class*="icon"], .hero-stat';
+  function isDiagram(svg) {
+    if (svg.closest(DG_SKIP)) return false;
+    const vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
+    return vb.length === 4 && vb[2] >= 150 && vb[3] >= 60;
+  }
+  function diagramTitle(svg) {
+    const fig = svg.closest('figure');
+    const cap = fig && fig.querySelector('figcaption');
+    let t = '';
+    if (cap) { const c = cap.cloneNode(true); c.querySelectorAll('.dg-hint').forEach(h => h.remove()); t = c.textContent.trim(); }
+    return t || svg.getAttribute('aria-label') || 'Diagram';
+  }
+
+  function setupDiagrams() {
+    const wrap = document.querySelector('.content-wrapper') || document.querySelector('main');
+    if (!wrap) return;
+    const svgs = [...wrap.querySelectorAll('svg[viewBox]')].filter(isDiagram);
+    if (!svgs.length) return;
+
+    // ── 1. enlarge ──
+    svgs.forEach(svg => {
+      svg.classList.add('dg-zoomable');
+      const host = svg.parentElement;
+      if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'dg-enlarge no-print';
+      b.setAttribute('aria-label', 'Enlarge diagram');
+      b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Enlarge</span>';
+      b.addEventListener('click', e => { e.stopPropagation(); openLightbox(svg, b); });
+      host.appendChild(b);
+      svg.addEventListener('click', e => {
+        if (e.target.closest('[data-hl]')) return;          // tapping a feature highlights instead
+        if (window.getSelection && String(window.getSelection())) return;
+        openLightbox(svg, b);
+      });
+      if (svg.querySelector('[data-hl]')) {
+        const fig = svg.closest('figure');
+        const cap = fig && fig.querySelector('figcaption');
+        if (cap && !cap.querySelector('.dg-hint')) cap.insertAdjacentHTML('afterbegin', '<span class="dg-hint no-print">Tap a feature to see where it is. </span>');
+      }
+    });
+
+    // ── 3. highlight (delegated, so it works in the enlarged copy too) ──
+    let sticky = null;
+    const setHl = (svg, key) => {
+      svg.querySelectorAll('.hl').forEach(el => el.classList.remove('hl'));
+      svg.classList.toggle('hl-on', !!key);
+      if (key) svg.querySelectorAll('[data-hl="' + CSS.escape(key) + '"]').forEach(el => el.classList.add('hl'));
+    };
+    const hlTarget = e => { const t = e.target.closest && e.target.closest('[data-hl]'); return t && t.closest('svg') ? t : null; };
+    document.addEventListener('pointerover', e => {
+      if (e.pointerType !== 'mouse') return;
+      const t = hlTarget(e); if (t) setHl(t.closest('svg'), t.dataset.hl);
+    });
+    document.addEventListener('pointerout', e => {
+      if (e.pointerType !== 'mouse') return;
+      const t = hlTarget(e); if (!t) return;
+      const svg = t.closest('svg');
+      if (e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-hl="' + CSS.escape(t.dataset.hl) + '"]')) return;
+      if (sticky && sticky.svg === svg) setHl(svg, sticky.key); else setHl(svg, null);
+    });
+    document.addEventListener('click', e => {
+      const t = hlTarget(e);
+      if (t) {
+        const svg = t.closest('svg'), key = t.dataset.hl;
+        if (sticky && sticky.svg === svg && sticky.key === key) { sticky = null; setHl(svg, null); }
+        else { if (sticky && sticky.svg !== svg) setHl(sticky.svg, null); sticky = { svg, key }; setHl(svg, key); }
+      } else if (sticky && !e.target.closest('.dg-lb-bar')) { setHl(sticky.svg, null); sticky = null; }
+    });
+    svgs.forEach(svg => svg.querySelectorAll('text[data-hl]').forEach(t => {
+      t.setAttribute('tabindex', '0');
+      t.addEventListener('focus', () => setHl(svg, t.dataset.hl));
+      t.addEventListener('blur', () => setHl(svg, sticky && sticky.svg === svg ? sticky.key : null));
+      t.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.dispatchEvent(new MouseEvent('click', { bubbles: true })); } });
+    }));
+
+    // ── 2. draw-in ──
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const vh = window.innerHeight;
+    const pending = svgs.filter(svg => {
+      const r = svg.getBoundingClientRect();
+      return r.width > 0 && r.top >= vh && !svg.closest('.no-js-only');
+    });
+    const finish = svg => {
+      svg.classList.remove('dg-anim', 'dg-go');
+      svg.querySelectorAll('.dgd, .dgf, .dgo').forEach(el => {
+        el.classList.remove('dgd', 'dgf', 'dgo');
+        if (el.dataset.dgPl) { el.removeAttribute('pathLength'); delete el.dataset.dgPl; }
+        el.style.removeProperty('--dg-d'); el.style.removeProperty('--dg-fo'); el.style.removeProperty('--dg-op');
+      });
+    };
+    const prepare = svg => {
+      let i = 0;
+      svg.querySelectorAll('path, line, polyline, polygon, circle, ellipse, rect, text').forEach(el => {
+        if (el.closest('defs, marker, .sec-art, .no-anim') || el.classList.contains('dg-panel')) return;
+        const cs = getComputedStyle(el);
+        if (el.tagName === 'text' || cs.stroke === 'none' || cs.strokeWidth === '0px' || cs.strokeDasharray !== 'none') {
+          el.classList.add('dgo');                                   // fade in
+          el.style.setProperty('--dg-op', cs.opacity);
+          el.style.setProperty('--dg-d', (el.tagName === 'text' ? 650 : 250) + Math.min(i, 40) * 10 + 'ms');
+        } else {
+          if (!el.hasAttribute('pathLength')) { el.setAttribute('pathLength', '1'); el.dataset.dgPl = '1'; }
+          el.classList.add('dgd');                                   // draw stroke
+          el.style.setProperty('--dg-d', Math.min(i, 60) * 12 + 'ms');
+          if (cs.fill !== 'none' && cs.fillOpacity !== '0') { el.classList.add('dgf'); el.style.setProperty('--dg-fo', cs.fillOpacity); }
+        }
+        i++;
+      });
+      svg.classList.add('dg-anim');
+    };
+    const go = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const svg = e.target; go.unobserve(svg);
+      requestAnimationFrame(() => { svg.classList.add('dg-go'); setTimeout(() => finish(svg), 2600); });
+    }), { threshold: 0.25 });
+    const near = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      near.unobserve(e.target); prepare(e.target); go.observe(e.target);
+    }), { rootMargin: '0px 0px 400px 0px' });
+    pending.forEach(svg => near.observe(svg));
+    window.addEventListener('beforeprint', () => document.querySelectorAll('svg.dg-anim').forEach(finish));
+  }
+
+  let lb = null;
+  function openLightbox(svg, returnFocus) {
+    if (!lb) {
+      lb = document.createElement('div');
+      lb.className = 'dg-lb';
+      lb.setAttribute('role', 'dialog');
+      lb.setAttribute('aria-modal', 'true');
+      lb.innerHTML =
+        '<div class="dg-lb-bar"><p class="dg-lb-title"></p>' +
+        '<button type="button" class="dg-lb-btn" data-z="-1" aria-label="Zoom out">−</button>' +
+        '<button type="button" class="dg-lb-btn" data-z="0" aria-label="Fit to screen">Fit</button>' +
+        '<button type="button" class="dg-lb-btn" data-z="1" aria-label="Zoom in">+</button>' +
+        '<button type="button" class="dg-lb-btn dg-lb-x" aria-label="Close">✕</button></div>' +
+        '<div class="dg-lb-stage"><div class="dg-lb-pan"></div></div>' +
+        '<p class="dg-lb-help">Pinch or + / − to zoom · drag to move · ✕ or Back to close</p>';
+      document.body.appendChild(lb);
+    }
+    const stage = lb.querySelector('.dg-lb-stage'), pan = lb.querySelector('.dg-lb-pan');
+    const clone = svg.cloneNode(true);
+    clone.classList.remove('dg-anim', 'dg-go', 'hl-on', 'dg-zoomable');
+    clone.querySelectorAll('.hl').forEach(el => el.classList.remove('hl'));
+    clone.querySelectorAll('[tabindex]').forEach(el => el.setAttribute('tabindex', '0'));
+    clone.removeAttribute('style');
+    // sizing: the figure's own colour context (emergency tone etc.) can't follow, so copy the variable
+    const sosc = getComputedStyle(svg).getPropertyValue('--sos-c'); if (sosc) clone.style.setProperty('--sos-c', sosc);
+    pan.replaceChildren(clone);
+    const title = diagramTitle(svg);
+    lb.querySelector('.dg-lb-title').textContent = title;
+    lb.setAttribute('aria-label', title.slice(0, 120));
+
+    let s = 1, x = 0, y = 0;
+    const apply = () => { pan.style.transform = `translate(${x}px, ${y}px) scale(${s})`; };
+    const zoomAt = (ns, cx, cy) => {
+      ns = Math.max(1, Math.min(6, ns));
+      const r = stage.getBoundingClientRect();
+      const px = (cx === undefined ? r.width / 2 : cx - r.left), py = (cy === undefined ? r.height / 2 : cy - r.top);
+      x = px - (px - x) * ns / s; y = py - (py - y) * ns / s; s = ns;
+      if (s === 1) { x = 0; y = 0; }
+      apply();
+    };
+    apply();
+
+    const pts = new Map(); let last = null, lastTap = 0;
+    const onDown = e => {
+      if (e.target.closest('[data-hl]')) return;
+      stage.setPointerCapture(e.pointerId); pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pts.size === 1) {
+        const now = Date.now();
+        if (now - lastTap < 300) zoomAt(s > 1 ? 1 : 2.5, e.clientX, e.clientY);
+        lastTap = now;
+      }
+      last = null;
+    };
+    const onMove = e => {
+      if (!pts.has(e.pointerId)) return;
+      const prev = pts.get(e.pointerId); pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pts.size === 2) {
+        const [a, b] = [...pts.values()];
+        const d = Math.hypot(a.x - b.x, a.y - b.y), mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+        if (last) zoomAt(s * d / last, mx, my);
+        last = d;
+      } else if (pts.size === 1 && s > 1) { x += e.clientX - prev.x; y += e.clientY - prev.y; apply(); }
+    };
+    const onUp = e => { pts.delete(e.pointerId); if (pts.size < 2) last = null; };
+    const onWheel = e => { e.preventDefault(); zoomAt(s * (e.deltaY < 0 ? 1.15 : 1 / 1.15), e.clientX, e.clientY); };
+    const onBtn = e => {
+      const b = e.target.closest('.dg-lb-btn'); if (!b) return;
+      if (b.classList.contains('dg-lb-x')) return close();
+      const z = +b.dataset.z; zoomAt(z === 0 ? 1 : s * (z > 0 ? 1.4 : 1 / 1.4));
+    };
+    const onKey = e => {
+      if (e.key === 'Escape') { e.preventDefault(); close(); }
+      else if (e.key === '+' || e.key === '=') zoomAt(s * 1.4);
+      else if (e.key === '-') zoomAt(s / 1.4);
+      else if (e.key === 'Tab') {                                     // keep focus inside
+        const f = [...lb.querySelectorAll('button, [tabindex="0"]')];
+        const i = f.indexOf(document.activeElement);
+        if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+      }
+    };
+    const onPop = () => close(true);
+    function close(fromHistory) {
+      stage.removeEventListener('pointerdown', onDown); stage.removeEventListener('pointermove', onMove);
+      stage.removeEventListener('pointerup', onUp); stage.removeEventListener('pointercancel', onUp);
+      stage.removeEventListener('wheel', onWheel); lb.removeEventListener('click', onBtn);
+      document.removeEventListener('keydown', onKey); window.removeEventListener('popstate', onPop);
+      lb.classList.remove('open'); document.documentElement.classList.remove('dg-lb-open');
+      pan.replaceChildren();
+      if (fromHistory !== true && history.state && history.state.dgLb) history.back();
+      if (returnFocus && returnFocus.focus) returnFocus.focus({ preventScroll: true });
+    }
+    stage.addEventListener('pointerdown', onDown); stage.addEventListener('pointermove', onMove);
+    stage.addEventListener('pointerup', onUp); stage.addEventListener('pointercancel', onUp);
+    stage.addEventListener('wheel', onWheel, { passive: false }); lb.addEventListener('click', onBtn);
+    document.addEventListener('keydown', onKey);
+    try { history.pushState({ dgLb: 1 }, ''); window.addEventListener('popstate', onPop); } catch (e) {}
+    document.documentElement.classList.add('dg-lb-open');
+    lb.classList.add('open');
+    lb.querySelector('.dg-lb-x').focus({ preventScroll: true });
   }
 
   /* =================== WIDE TABLES =================== */
