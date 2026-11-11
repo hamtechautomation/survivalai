@@ -1,5 +1,5 @@
 /* The Last Light Survival Guide — Service Worker v4 */
-const CACHE = 'last-light-v68';
+const CACHE = 'last-light-v69';
 
 /* Pre-cache: all HTML, CSS, JS, icons, manifest.
    pdf-chunks.json (~30MB) is intentionally excluded from pre-cache to avoid
@@ -52,6 +52,24 @@ const PRECACHE = [
   '/sections/build-water.html',
   '/sections/projects.html',
   '/assets/css/style.css',
+  '/assets/fonts/bitter-latin-wght-normal.woff2',
+  '/assets/fonts/inter-latin-wght-normal.woff2',
+  '/assets/fonts/jetbrains-mono-latin-wght-normal.woff2',
+  '/assets/covers/aerie-backcountry-medicine.jpg',
+  '/assets/covers/art-of-war-sun-tzu.jpg',
+  '/assets/covers/bunkerbot-compendium.jpg',
+  '/assets/covers/emergency-war-surgery.jpg',
+  '/assets/covers/fm-21-10-field-hygiene.jpg',
+  '/assets/covers/fm-21-76-survival-1957.jpg',
+  '/assets/covers/fm-3-05-70-survival.jpg',
+  '/assets/covers/fm-4-25-11-first-aid.jpg',
+  '/assets/covers/fm-6-02-signal-ops.jpg',
+  '/assets/covers/humanure-handbook.jpg',
+  '/assets/covers/nuclear-war-survival.jpg',
+  '/assets/covers/ranger-handbook.jpg',
+  '/assets/covers/uk-emergency-preparedness.jpg',
+  '/assets/covers/where-there-is-no-dentist.jpg',
+  '/assets/covers/where-there-is-no-doctor.jpg',
   '/skills.html',
   '/assets/js/app.js',
   '/assets/js/search.js',

@@ -1,24 +1,15 @@
 FONTS
 =====
-This guide uses system fonts only:
-  -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif
-  'Courier New', Courier, monospace (for code/diagrams)
+Self-hosted so the guide looks the same everywhere, works offline and from file://.
+All three are licensed under the SIL Open Font License 1.1 (see OFL-*.txt here).
 
-No external font files required. These fonts are built into every operating system.
+  inter-latin-wght-normal.woff2          Inter — body/UI text (variable weight)
+  bitter-latin-wght-normal.woff2         Bitter — headings (variable-weight slab serif)
+  jetbrains-mono-latin-wght-normal.woff2 JetBrains Mono — code, numbers, diagrams
 
-TO EMBED A CUSTOM FONT (optional, for consistent cross-platform rendering):
-1. Download .woff2 file from a licensed source (e.g. Google Fonts downloaded locally)
-2. Convert to base64: base64 font.woff2 | tr -d '\n'
-3. Add to assets/css/style.css at the top:
+Source: the Fontsource npm packages (@fontsource-variable/inter, /bitter,
+/jetbrains-mono, v5.1.0), Latin subset only (~120 KB total). Characters outside
+the subset fall back to the system font automatically.
 
-   @font-face {
-     font-family: 'YourFont';
-     src: url('data:font/woff2;base64,AAAA...') format('woff2');
-     font-display: swap;
-   }
-
-   Then update --font variable: --font: 'YourFont', system-ui, sans-serif;
-
-RECOMMENDED FREE FONTS (download before grid-down):
-- Inter (UI text): fonts.google.com/specimen/Inter
-- Fira Code (monospace): fonts.google.com/specimen/Fira+Code
+They are wired up with @font-face at the top of assets/css/style.css; change the
+--font / --font-display / --mono variables there to swap them.

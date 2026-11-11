@@ -12,6 +12,7 @@
    where each item is:
      {
        title, author, desc,            // strings (plain text)
+       cover,                          // optional cover image URL for the blurb
        note,                           // optional extra line (plain text)
        tags:   [{ text, tone }],       // tone: critical|important|nice|info|muted|ok
        actions:[{ text, href, download, primary }],
@@ -105,7 +106,12 @@
     h.id = 'shelf-pop-title';
     titles.appendChild(h);
     if (item.author) titles.appendChild(el('div', 'shelf-pop-author', item.author));
-    head.appendChild(swatch);
+    if (item.cover) {
+      var img = el('img', 'shelf-pop-cover');
+      img.src = item.cover; img.alt = '';
+      img.onerror = function () { img.replaceWith(swatch); };
+      head.appendChild(img);
+    } else head.appendChild(swatch);
     head.appendChild(titles);
     popInner.appendChild(head);
     pop.setAttribute('aria-labelledby', 'shelf-pop-title');

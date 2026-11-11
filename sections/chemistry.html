@@ -9,9 +9,9 @@
     .chem-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
     .chem-nav a { background: var(--bg-1); border: 1px solid #5c4a1e; color: var(--amber); padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-size: 0.85em; }
     .chem-nav a:hover { background: var(--amber); color: var(--bg-0); }
-    .callout-danger { background: #1a0505; border: 1px solid #8b0000; border-left: 4px solid #c0392b; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.75rem 0; }
-    .callout-danger strong { color: #e74c3c; }
-    .callout-danger::before { content: "⚠ SAFETY: "; color: #e74c3c; font-weight: 700; }
+    .callout-danger { background: #1a0505; border: 1px solid #8b0000; border-left: 4px solid var(--red); border-radius: 4px; padding: 0.85rem 1rem; margin: 0.75rem 0; }
+    .callout-danger strong { color: var(--red); }
+    .callout-danger::before { content: "⚠ SAFETY: "; color: var(--red); font-weight: 700; }
     .sap-table td:last-child { color: var(--amber); font-weight: 600; }
     .cuts-row-foreshots { background: #1a0505; }
     .cuts-row-heads { background: #1a1205; }
@@ -19,20 +19,20 @@
     .cuts-row-tails { background: #0a0a14; }
     .compat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; margin: 1rem 0; }
     .compat-card { background: #1a0505; border: 1px solid #5a1a1a; border-radius: 4px; padding: 0.6rem 0.75rem; font-size: 0.82em; }
-    .compat-card .mix-a { color: #e74c3c; font-weight: 600; }
-    .compat-card .mix-b { color: #e67e22; font-weight: 600; }
-    .compat-card .result { color: #888; font-style: italic; font-size: 0.9em; margin-top: 0.25rem; }
-    .process-step { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.75rem 1rem; margin: 0.5rem 0; counter-increment: step; position: relative; padding-left: 3rem; }
+    .compat-card .mix-a { color: var(--red); font-weight: 600; }
+    .compat-card .mix-b { color: var(--orange); font-weight: 600; }
+    .compat-card .result { color: var(--text-2); font-style: italic; font-size: 0.9em; margin-top: 0.25rem; }
+    .process-step { background: var(--bg-1); border: 1px solid var(--border); border-radius: 4px; padding: 0.75rem 1rem; margin: 0.5rem 0; counter-increment: step; position: relative; padding-left: 3rem; }
     .process-step::before { content: counter(step); position: absolute; left: 0.85rem; top: 0.75rem; color: var(--amber); font-weight: 700; font-size: 1.1em; }
     .process-steps { counter-reset: step; }
-    .material-card { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 6px; padding: 0.85rem; margin: 0.5rem 0; }
+    .material-card { background: var(--bg-1); border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem; margin: 0.5rem 0; }
     .material-card h4 { color: var(--amber); margin: 0 0 0.4rem; font-size: 0.95em; }
     .tag-use { background: #0a1a2a; color: #4494cc; border: 1px solid #1a3a50; font-size: 0.75em; padding: 0.1rem 0.4rem; border-radius: 3px; margin: 0.15rem; display: inline-block; }
     .recipe-box { background: #050a05; border: 1px solid #2a4a2a; border-radius: 6px; padding: 1rem; margin: 0.75rem 0; }
     .recipe-box h4 { color: #4a9a4a; margin: 0 0 0.5rem; }
     .caloric-bar { display: flex; align-items: center; gap: 0.75rem; margin: 0.4rem 0; }
-    .cal-fill { height: 14px; background: linear-gradient(90deg, #e67e22, #5c3010); border-radius: 2px; }
-    .cal-label { font-size: 0.82em; color: #bbb; }
+    .cal-fill { height: 14px; background: linear-gradient(90deg, var(--orange), #5c3010); border-radius: 2px; }
+    .cal-label { font-size: 0.82em; color: var(--text-1); }
     .cal-val { font-size: 0.82em; color: var(--amber); font-weight: 600; min-width: 70px; }
     .gun-box { background: #0a0a14; border: 1px solid #4444aa; border-left: 4px solid #6666cc; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.75rem 0; }
     .gun-box::before { content: "⚑ HISTORICAL/SAFETY CONTEXT ONLY: "; color: #8888cc; font-weight: 700; font-size: 0.85em; display: block; margin-bottom: 0.4rem; }
@@ -131,13 +131,13 @@
     <h3>Cold Process Recipe — Basic (1 kg batch)</h3>
     <div class="recipe-box">
       <h4>Simple Tallow/Lard Soap</h4>
-      <ul style="font-size:0.9em;color:#bbb;">
+      <ul style="font-size:0.9em;color:var(--text-1);">
         <li>700g lard or tallow (or mixed)</li>
         <li>300g coconut oil (if available; otherwise use all lard)</li>
         <li>140g sodium hydroxide (NaOH) for hard bar soap — or equivalent KOH for soft soap</li>
         <li>330ml water (distilled or rainwater ideal)</li>
       </ul>
-      <ol style="font-size:0.88em;color:#bbb;padding-left:1.2rem;">
+      <ol style="font-size:0.88em;color:var(--text-1);padding-left:1.2rem;">
         <li>Dissolve lye in water (not reverse) — solution heats to 80°C+. Set aside to cool to ~40°C.</li>
         <li>Melt fats to ~40°C. Both lye solution and fats should be similar temperature.</li>
         <li>Slowly pour lye solution into fats while stirring. Never stop stirring.</li>
@@ -193,22 +193,22 @@
     <h3>Wash Recipes</h3>
     <div class="recipe-box">
       <h4>Sugar Wash (Fastest, Simplest)</h4>
-      <p style="font-size:0.88em;color:#bbb;">20L water + 5kg white sugar + 1 packet bread yeast + 1 tsp yeast nutrient (or crushed vitamin B tablet). Ferments in 5–7 days at 20–25°C. Produces a clean, neutral alcohol wash. Starting specific gravity (SG) ~1.090; finished ~1.000.</p>
+      <p style="font-size:0.88em;color:var(--text-1);">20L water + 5kg white sugar + 1 packet bread yeast + 1 tsp yeast nutrient (or crushed vitamin B tablet). Ferments in 5–7 days at 20–25°C. Produces a clean, neutral alcohol wash. Starting specific gravity (SG) ~1.090; finished ~1.000.</p>
     </div>
 
     <div class="recipe-box">
       <h4>Corn Mash (Bourbon-Style)</h4>
-      <p style="font-size:0.88em;color:#bbb;">5kg cracked corn + 20L water. Heat to 70°C, add 1 cup malted barley (or amylase enzyme), hold 60°C for 60 min (converts starch to sugar). Cool to 30°C. Add yeast. Ferments 7–14 days. More complex flavor; lower ABV wash than sugar.</p>
+      <p style="font-size:0.88em;color:var(--text-1);">5kg cracked corn + 20L water. Heat to 70°C, add 1 cup malted barley (or amylase enzyme), hold 60°C for 60 min (converts starch to sugar). Cool to 30°C. Add yeast. Ferments 7–14 days. More complex flavor; lower ABV wash than sugar.</p>
     </div>
 
     <div class="recipe-box">
       <h4>Fruit Wine</h4>
-      <p style="font-size:0.88em;color:#bbb;">Crush ripe fruit (apples, grapes, pears, berries). Add water to desired consistency. Test brix (sugar level) — ideally 20–25 brix for 10–12% ABV. Add yeast (wild from fruit skins or cultured). Ferment 7–21 days until bubbling stops. Rack off sediment; age if possible.</p>
+      <p style="font-size:0.88em;color:var(--text-1);">Crush ripe fruit (apples, grapes, pears, berries). Add water to desired consistency. Test brix (sugar level) — ideally 20–25 brix for 10–12% ABV. Add yeast (wild from fruit skins or cultured). Ferment 7–21 days until bubbling stops. Rack off sediment; age if possible.</p>
     </div>
 
     <div class="recipe-box">
       <h4>Grain Beer (Simple)</h4>
-      <p style="font-size:0.88em;color:#bbb;">Malt any grain (allow to germinate 3–4 days, then dry and crack). Steep in hot water at 65°C for 60 min (mash). Drain sweet wort. Boil 60 min; add hops if available (or yarrow, juniper). Cool to 20°C. Add yeast. Ferments in 1–2 weeks. Lower ABV (~4–6%) but nutritious and safer to drink than untreated water when properly fermented.</p>
+      <p style="font-size:0.88em;color:var(--text-1);">Malt any grain (allow to germinate 3–4 days, then dry and crack). Steep in hot water at 65°C for 60 min (mash). Drain sweet wort. Boil 60 min; add hops if available (or yarrow, juniper). Cool to 20°C. Add yeast. Ferments in 1–2 weeks. Lower ABV (~4–6%) but nutritious and safer to drink than untreated water when properly fermented.</p>
     </div>
 
     <h3>Pot Still Construction</h3>
@@ -267,10 +267,10 @@ SEALING: Rye flour + water paste seals joints temporarily.
       <tbody>
         <tr class="cuts-row-foreshots">
           <td><strong>Foreshots</strong></td>
-          <td style="color:#e74c3c">First 50–100ml</td>
+          <td style="color:var(--red)">First 50–100ml</td>
           <td>~65–72°C</td>
           <td>Methanol, acetone, acetaldehyde — toxic compounds that concentrate first</td>
-          <td style="color:#e74c3c;font-weight:600">DISCARD. No exceptions. Store separately to avoid accidental use.</td>
+          <td style="color:var(--red);font-weight:600">DISCARD. No exceptions. Store separately to avoid accidental use.</td>
         </tr>
         <tr class="cuts-row-heads">
           <td><strong>Heads</strong></td>
@@ -439,29 +439,29 @@ SIGNS OF COMPLETION:
       <div class="material-card">
         <h4>Water Filtration</h4>
         <span class="tag-use">Adsorbs organics</span><span class="tag-use">Removes taste/odor</span>
-        <p style="font-size:0.82em;color:#bbb;margin:0.4rem 0 0">Crush to 1–3mm granules. Layer in filter column (sand → gravel → charcoal → gravel → sand). Does NOT remove bacteria/viruses alone — must follow with boiling or UV.</p>
+        <p style="font-size:0.82em;color:var(--text-1);margin:0.4rem 0 0">Crush to 1–3mm granules. Layer in filter column (sand → gravel → charcoal → gravel → sand). Does NOT remove bacteria/viruses alone — must follow with boiling or UV.</p>
       </div>
       <div class="material-card">
         <h4>Poisoning Treatment</h4>
         <span class="tag-use">Adsorbs toxins</span><span class="tag-use">Emergency use</span>
-        <p style="font-size:0.82em;color:#bbb;margin:0.4rem 0 0">50–100g activated charcoal in 8oz water, taken within 1 hour of ingestion. Adsorbs many poisons before absorption. Does NOT work for: cyanide, heavy metals, alcohols, caustics. Call poison control if available.</p>
+        <p style="font-size:0.82em;color:var(--text-1);margin:0.4rem 0 0">50–100g activated charcoal in 8oz water, taken within 1 hour of ingestion. Adsorbs many poisons before absorption. Does NOT work for: cyanide, heavy metals, alcohols, caustics. Call poison control if available.</p>
       </div>
       <div class="material-card">
         <h4>Wound Deodorizing</h4>
         <span class="tag-use">Infected wounds</span>
-        <p style="font-size:0.82em;color:#bbb;margin:0.4rem 0 0">Activated charcoal poultice on infected wounds reduces odor and may adsorb some toxins. Not a substitute for debridement and antibiotics but useful adjunct in austere conditions.</p>
+        <p style="font-size:0.82em;color:var(--text-1);margin:0.4rem 0 0">Activated charcoal poultice on infected wounds reduces odor and may adsorb some toxins. Not a substitute for debridement and antibiotics but useful adjunct in austere conditions.</p>
       </div>
       <div class="material-card">
         <h4>Blacksmithing Fuel</h4>
         <span class="tag-use">Forge fuel</span>
         <span class="tag-use">Charcoal preferred</span>
-        <p style="font-size:0.82em;color:#bbb;margin:0.4rem 0 0">Charcoal was the original blacksmithing fuel before coal. Burns hot and clean. Requires 2–3x more charcoal by weight than coal for equivalent heat, but can be produced anywhere wood is available.</p>
+        <p style="font-size:0.82em;color:var(--text-1);margin:0.4rem 0 0">Charcoal was the original blacksmithing fuel before coal. Burns hot and clean. Requires 2–3x more charcoal by weight than coal for equivalent heat, but can be produced anywhere wood is available.</p>
       </div>
       <div class="material-card">
         <h4>Biochar (Soil Amendment)</h4>
         <span class="tag-use">Agriculture</span>
         <span class="tag-use">Long-term fertility</span>
-        <p style="font-size:0.82em;color:#bbb;margin:0.4rem 0 0">Crushed charcoal added to soil creates habitat for beneficial microorganisms, improves drainage and water retention, and locks carbon for centuries. Charge with compost before adding (raw biochar can temporarily decrease fertility by adsorbing nutrients).</p>
+        <p style="font-size:0.82em;color:var(--text-1);margin:0.4rem 0 0">Crushed charcoal added to soil creates habitat for beneficial microorganisms, improves drainage and water retention, and locks carbon for centuries. Charge with compost before adding (raw biochar can temporarily decrease fertility by adsorbing nutrients).</p>
       </div>
     </div>
 
@@ -473,7 +473,7 @@ SIGNS OF COMPLETION:
     </div>
 
     <h3>Caloric Cost Comparison</h3>
-    <p style="font-size:0.85em;color:#888;">Approximate calories burned per hour of light (equivalent light output)</p>
+    <p style="font-size:0.85em;color:var(--text-2);">Approximate calories burned per hour of light (equivalent light output)</p>
     <div style="max-width:420px;margin:0.75rem 0">
       <div class="caloric-bar">
         <div class="cal-val">Oil lamp</div>
@@ -496,7 +496,7 @@ SIGNS OF COMPLETION:
         <div class="cal-label">~80+ kcal/hr (very inefficient but free)</div>
       </div>
     </div>
-    <p style="font-size:0.82em;color:#888;">Oil lamps are the most calorie-efficient light source. Use them over candles when possible for long-term scenarios. Prioritize natural light — schedule tasks in daylight.</p>
+    <p style="font-size:0.82em;color:var(--text-2);">Oil lamps are the most calorie-efficient light source. Use them over candles when possible for long-term scenarios. Prioritize natural light — schedule tasks in daylight.</p>
 
     <h3>Tallow Candles</h3>
     <ol>
@@ -683,7 +683,7 @@ WICK CHANNEL: Punch small hole in lid or use
 
       <h4>Saltpeter Sourcing — Nitre Beds</h4>
       <p>Potassium nitrate occurs naturally where organic matter decomposes under specific conditions. Traditional nitre beds were constructed by:</p>
-      <ol style="font-size:0.88em;color:#bbb;">
+      <ol style="font-size:0.88em;color:var(--text-1);">
         <li>Building a covered shed over a mixture of: stable manure (high nitrogen), old mortar/limestone rubble (calcium), straw, and soil.</li>
         <li>Keeping moist but not waterlogged. Urine accelerates the process (adds nitrogen).</li>
         <li>Turning the pile regularly to aerate — the nitrification bacteria are aerobic.</li>
@@ -693,7 +693,7 @@ WICK CHANNEL: Punch small hole in lid or use
       </ol>
 
       <h4>Safety and Handling</h4>
-      <ul style="font-size:0.88em;color:#bbb;">
+      <ul style="font-size:0.88em;color:var(--text-1);">
         <li>Sensitive to heat, friction, and static electricity. A spark or static discharge from clothing can ignite unconfined powder.</li>
         <li>Mix only small amounts (less than 50g at a time for testing). Never use metal tools — use wood, bone, or plastic.</li>
         <li>Store dry in non-metallic, sealed container. Small quantities only. Never store large quantities.</li>

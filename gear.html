@@ -120,7 +120,7 @@
 
     .filter-btn:hover { border-color: var(--amber); color: var(--amber); }
     .filter-btn.active { background: var(--amber); color: var(--bg-0); border-color: var(--amber); font-weight: 600; }
-    .filter-btn.f-critical.active { background: #c0392b; border-color: #c0392b; color: #fff; }
+    .filter-btn.f-critical.active { background: var(--red); border-color: var(--red); color: #fff; }
     .filter-btn.f-important.active { background: #d68910; border-color: #d68910; color: var(--bg-0); }
     .filter-btn.f-nice.active { background: #2980b9; border-color: #2980b9; color: #fff; }
 
@@ -241,8 +241,8 @@
       margin-top: 2px;
     }
 
-    .priority-critical { background: rgba(192, 57, 43, .15); color: #e74c3c; border: 1px solid rgba(192, 57, 43, .3); }
-    .priority-important { background: rgba(214, 137, 16, .15); color: #e67e22; border: 1px solid rgba(214, 137, 16, .3); }
+    .priority-critical { background: rgba(192, 57, 43, .15); color: var(--red); border: 1px solid rgba(192, 57, 43, .3); }
+    .priority-important { background: rgba(214, 137, 16, .15); color: var(--orange); border: 1px solid rgba(214, 137, 16, .3); }
     .priority-nice { background: rgba(41, 128, 185, .12); color: #3498db; border: 1px solid rgba(41, 128, 185, .25); }
 
     /* Hidden by filter */
@@ -259,7 +259,7 @@
       .gear-stat { background: none !important; border: 1px solid #ccc !important; }
       .gear-stat-number { color: #000 !important; }
       .progress-bar-track { background: #eee !important; border-color: #ccc !important; }
-      .progress-bar-fill { background: #333 !important; }
+      .progress-bar-fill { background: var(--bg-5) !important; }
       .gear-category-header { background: #f5f5f5 !important; border-color: #ccc !important; border-bottom: 2px solid #000 !important; }
       .gear-item { border-color: #eee !important; }
       .gear-item:hover { background: none !important; }
@@ -393,8 +393,8 @@
     <span class="callout-icon">ℹ️</span>
     <div class="callout-content">
       <strong>Priority Key</strong>
-      <p><strong style="color:#e74c3c">Critical</strong> — must-have before any emergency. Without these, survival is severely compromised. Acquire first.<br>
-      <strong style="color:#e67e22">Important</strong> — significantly improves outcomes and resilience. Acquire after Critical items are covered.<br>
+      <p><strong style="color:var(--red)">Critical</strong> — must-have before any emergency. Without these, survival is severely compromised. Acquire first.<br>
+      <strong style="color:var(--orange)">Important</strong> — significantly improves outcomes and resilience. Acquire after Critical items are covered.<br>
       <strong style="color:#3498db">Nice to Have</strong> — valuable enhancements once the essentials are secured.</p>
     </div>
   </div>

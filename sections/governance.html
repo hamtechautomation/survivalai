@@ -10,20 +10,21 @@
     .gov-nav a { background: var(--bg-1); border: 1px solid #5c4a1e; color: var(--amber); padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-size: 0.85em; }
     .gov-nav a:hover { background: var(--amber); color: var(--bg-0); }
     .role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
-    .role-card { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 6px; padding: 0.85rem; }
+    .role-card { background: var(--bg-1); border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem; }
     .role-card h4 { color: var(--amber); margin: 0 0 0.4rem; font-size: 0.9em; }
-    .role-card p { font-size: 0.82em; color: #bbb; margin: 0; }
-    .model-card { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 6px; padding: 1rem; margin: 0.75rem 0; }
+    .role-card p { font-size: 0.82em; color: var(--text-1); margin: 0; }
+    .model-card { background: var(--bg-1); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; margin: 0.75rem 0; }
     .model-card h4 { color: var(--amber); margin: 0 0 0.5rem; }
-    .template-box { background: #050805; border: 1px solid #c9a94e; border-radius: 6px; padding: 1.2rem; margin: 1rem 0; }
+    .template-box { background: #050805; border: 1px solid var(--amber); border-radius: 6px; padding: 1.2rem; margin: 1rem 0; }
     .template-box h3 { color: var(--amber); margin: 0 0 0.75rem; font-size: 1em; }
-    .template-line { border-bottom: 1px solid #2a2a2a; padding: 0.35rem 0; font-size: 0.85em; color: #888; }
-    .template-line span { color: #aaa; }
+    .template-line { border-bottom: 1px solid var(--border); padding: 0.35rem 0; font-size: 0.85em; color: var(--text-2); }
+    .template-line span { color: var(--text-2); }
     .warning-sign { border-left: 3px solid #ff4444; padding: 0.4rem 0.8rem; background: #1a0a0a; margin: 0.4rem 0; font-size: 0.88em; }
     .good-sign { border-left: 3px solid #4a9; padding: 0.4rem 0.8rem; background: #0a1a10; margin: 0.4rem 0; font-size: 0.88em; }
     .dunbar-bar { display: flex; align-items: center; gap: 0.75rem; margin: 0.5rem 0; }
     .dunbar-fill { height: 18px; background: linear-gradient(90deg, var(--amber) 0%, #5c4a1e 100%); border-radius: 3px; min-width: 4px; }
-    .dunbar-label { font-size: 0.85em; color: #bbb; white-space: nowrap; }
+    .dunbar-label { font-size: 0.85em; color: var(--text-1); white-space: nowrap; }
+    @media (max-width: 600px) { .dunbar-label { white-space: normal; } }
     .dunbar-num { font-size: 0.85em; color: var(--amber); font-weight: 600; min-width: 40px; }
     @media print {
       #sidebar, #aria-panel, .nav-buttons, .gov-nav { display: none !important; }
@@ -543,7 +544,7 @@
 
     <!-- ═══ TEMPLATES ═══ -->
     <h2 id="templates">11. Printable Templates</h2>
-    <p style="font-size:0.85em;color:#888;">Print this page or save offline. Templates designed for paper reproduction.</p>
+    <p style="font-size:0.85em;color:var(--text-2);">Print this page or save offline. Templates designed for paper reproduction.</p>
 
     <!-- COMMUNITY CHARTER -->
     <div class="template-box">
@@ -577,7 +578,7 @@
       <div class="template-line"><span>Membership process:</span> Arrive → _____ hour observe hold → probation ___ days → full council vote</div>
       <div class="template-line"><span>Amendments:</span> Require _____ / _____ council vote + _____ days notice to all members before vote.</div>
       <br>
-      <div class="template-line" style="color:#aaa;font-style:italic;font-size:0.8em;">All signing members affirm they have read, understood, and agree to abide by this charter and to hold all members including themselves to its terms.</div>
+      <div class="template-line" style="color:var(--text-2);font-style:italic;font-size:0.8em;">All signing members affirm they have read, understood, and agree to abide by this charter and to hold all members including themselves to its terms.</div>
     </div>
 
     <!-- SKILL INVENTORY -->
@@ -716,8 +717,8 @@
           <tr><td style="height:24px"></td><td></td><td></td><td></td><td></td><td></td></tr>
         </tbody>
       </table>
-      <div class="template-line" style="margin-top:0.5rem;font-size:0.78em;color:#666">Status codes: C=Complete | P=Pending | D=Disputed | V=Voided</div>
-      <div class="template-line" style="font-size:0.78em;color:#666">Witness required for trades above ______ units. Record keeper initials: ______</div>
+      <div class="template-line" style="margin-top:0.5rem;font-size:0.78em;color:var(--text-3)">Status codes: C=Complete | P=Pending | D=Disputed | V=Voided</div>
+      <div class="template-line" style="font-size:0.78em;color:var(--text-3)">Witness required for trades above ______ units. Record keeper initials: ______</div>
     </div>
 
     <!-- MEMBERSHIP AGREEMENT -->

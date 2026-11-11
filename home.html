@@ -18,13 +18,16 @@
   <title>The Last Light Survival Guide — Free Offline Survival Library</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
   <style>
+    @font-face{font-family:'Inter';font-display:swap;font-weight:100 900;src:url('assets/fonts/inter-latin-wght-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+    @font-face{font-family:'Bitter';font-display:swap;font-weight:100 900;src:url('assets/fonts/bitter-latin-wght-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
     :root{
       --bg-0:#070a09; --bg-1:#0c110f; --bg-2:#121a16; --bg-3:#182019; --bg-4:#1e2820;
       --text-0:#eceee0; --text-1:#c4cebc; --text-2:#8a9e86; --text-3:#4d6048;
       --amber:#c9a94e; --amber-light:#e8c96e; --amber-dim:#7a6430;
       --green:#4b9e6a; --red:#c84848; --orange:#c87a40; --blue:#4a80b5;
       --border:#243028; --border-hi:#3a4838;
-      --font:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+      --font:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+      --font-display:'Bitter',Georgia,serif;
       --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
     }
     *{box-sizing:border-box;margin:0;padding:0}
@@ -34,7 +37,7 @@
     a{color:var(--amber);text-decoration:none}
     .wrap{max-width:1120px;margin:0 auto;padding:0 1.25rem}
     section{padding:4.5rem 0}
-    h1,h2,h3{color:var(--text-0);line-height:1.15;letter-spacing:-.02em}
+    h1,h2,h3{font-family:var(--font-display);color:var(--text-0);line-height:1.15;letter-spacing:-.02em}
     .eyebrow{color:var(--amber);font-size:.8rem;font-weight:700;letter-spacing:.14em;
       text-transform:uppercase;margin-bottom:.7rem}
     .muted{color:var(--text-2)}

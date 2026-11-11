@@ -9,23 +9,23 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
     .rank-grid { display: grid; gap: 0.75rem; margin: 1.25rem 0; }
-    .rank-card { display: flex; gap: 1rem; align-items: flex-start; background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 6px; padding: 0.85rem 1rem; }
+    .rank-card { display: flex; gap: 1rem; align-items: flex-start; background: var(--bg-1); border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem 1rem; }
     .rank-card.top { border-left: 4px solid var(--amber); }
     .rank-num { font-size: 1.5rem; font-weight: 800; color: var(--amber); min-width: 2rem; line-height: 1; }
     .rank-body h4 { color: var(--text-0); margin: 0 0 0.25rem; font-size: 0.95rem; }
     .rank-body p { color: var(--text-2); font-size: 0.84rem; margin: 0; }
     .parts-table td:nth-child(2) { color: var(--amber); text-align: center; }
-    .spec-note { background: #050f08; border: 1px solid #1a3a22; border-left: 4px solid #2a6a3a; border-radius: 4px; padding: 0.7rem 1rem; font-size: 0.85rem; color: #bbb; margin: 0.75rem 0; }
+    .spec-note { background: #050f08; border: 1px solid #1a3a22; border-left: 4px solid #2a6a3a; border-radius: 4px; padding: 0.7rem 1rem; font-size: 0.85rem; color: var(--text-1); margin: 0.75rem 0; }
     .spec-note strong { color: #4aaa6a; }
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1rem 0; }
     .process-steps { counter-reset: vstep; }
-    .process-step { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.7rem 1rem 0.7rem 3rem; margin: 0.5rem 0; counter-increment: vstep; position: relative; }
+    .process-step { background: var(--bg-1); border: 1px solid var(--border); border-radius: 4px; padding: 0.7rem 1rem 0.7rem 3rem; margin: 0.5rem 0; counter-increment: vstep; position: relative; }
     .process-step::before { content: counter(vstep); position: absolute; left: 0.85rem; top: 0.7rem; color: var(--amber); font-weight: 700; font-size: 1.05em; }
-    .svg-label { font-family: system-ui, sans-serif; fill: #c9a94e; font-size: 11px; }
-    .svg-dim { fill: #888; font-family: system-ui, sans-serif; font-size: 10px; }
+    .svg-label { font-family: system-ui, sans-serif; fill: var(--amber); font-size: 11px; }
+    .svg-dim { fill: var(--text-2); font-family: system-ui, sans-serif; font-size: 10px; }
     .svg-title { font-family: system-ui, sans-serif; fill: #e0d0b0; font-size: 12px; font-weight: 700; }
     .diagram-wrap { background: #050a07; border: 1px solid #1a2a1a; border-radius: 8px; padding: 1rem; margin: 1.25rem 0; overflow-x: auto; }
-    .diagram-wrap figcaption { color: #888; font-size: 0.8rem; text-align: center; margin-top: 0.5rem; }
+    .diagram-wrap figcaption { color: var(--text-2); font-size: 0.8rem; text-align: center; margin-top: 0.5rem; }
     .mule-win { color: #4aaa6a; font-weight: 600; }
     @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
   </style>

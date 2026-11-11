@@ -182,9 +182,9 @@
       line-height: 1.1;
       margin-bottom: 4px;
     }
-    .rc-value.rc-val-green { color: #4b9e6a; }
-    .rc-value.rc-val-amber { color: #c9a94e; }
-    .rc-value.rc-val-red   { color: #c84848; }
+    .rc-value.rc-val-green { color: var(--green); }
+    .rc-value.rc-val-amber { color: var(--amber); }
+    .rc-value.rc-val-red   { color: var(--red); }
     .rc-value.rc-val-gray  { color: var(--text-3); font-size: var(--fs-md); font-weight: 500; }
     .rc-sub {
       font-size: var(--fs-sm);
@@ -261,7 +261,7 @@
     }
     .qa-link {
       font-size: var(--fs-sm);
-      color: #c9a94e;
+      color: var(--amber);
       text-decoration: none;
       font-weight: 600;
       transition: color var(--ease);
@@ -270,7 +270,7 @@
     .qa-btn {
       display: inline-block;
       font-size: var(--fs-sm);
-      color: #c9a94e;
+      color: var(--amber);
       background: rgba(201,169,78,0.1);
       border: 1px solid var(--amber-dim);
       border-radius: 6px;
@@ -317,7 +317,7 @@
       border-color: var(--amber-dim);
     }
     .sg-card.start-here:hover {
-      border-color: #c9a94e;
+      border-color: var(--amber);
     }
     .sg-card.start-here::after {
       content: 'START HERE';
@@ -326,7 +326,7 @@
       font-size: 0.58rem;
       font-weight: 800;
       letter-spacing: 0.1em;
-      color: #c9a94e;
+      color: var(--amber);
       background: rgba(201,169,78,0.1);
       border: 1px solid var(--amber-dim);
       border-radius: 4px;
@@ -353,7 +353,7 @@
       align-self: center;
       transition: color var(--ease);
     }
-    .sg-card:hover .sg-arrow { color: #c9a94e; }
+    .sg-card:hover .sg-arrow { color: var(--amber); }
 
     /* === TOOLS ROW === */
     .tools-row {

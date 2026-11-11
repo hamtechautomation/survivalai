@@ -18,35 +18,35 @@
     .breath-box.active { box-shadow: 0 0 24px rgba(201,169,78,0.45); }
     .breath-phase-label { font-size: 1.1em; font-weight: 700; color: var(--amber); }
     .breath-countdown { font-size: 2.4em; font-weight: 700; color: #fff; line-height: 1; margin-top: 0.2rem; }
-    .breath-instruction { font-size: 0.82em; color: #aaa; margin-top: 0.5rem; }
-    .breath-progress { width: 160px; height: 4px; background: #222; border-radius: 2px; margin: 0.5rem auto 0; overflow: hidden; }
+    .breath-instruction { font-size: 0.82em; color: var(--text-2); margin-top: 0.5rem; }
+    .breath-progress { width: 160px; height: 4px; background: var(--bg-4); border-radius: 2px; margin: 0.5rem auto 0; overflow: hidden; }
     .breath-progress-fill { height: 100%; background: var(--amber); width: 0%; transition: width 1s linear; }
     .breath-controls { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem; }
-    .breath-cycle-count { font-size: 0.82em; color: #888; margin-top: 0.5rem; }
+    .breath-cycle-count { font-size: 0.82em; color: var(--text-2); margin-top: 0.5rem; }
 
     /* Stress self-assessment */
     .assessment-widget { background: var(--bg-1); border: 1px solid #3a3a1a; border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0; }
     .assessment-question { display: flex; align-items: flex-start; gap: 0.75rem; margin: 0.6rem 0; padding: 0.5rem 0.75rem; background: #0c1110; border-radius: 4px; }
-    .assessment-question label { font-size: 0.88em; color: #ccc; flex: 1; cursor: pointer; }
+    .assessment-question label { font-size: 0.88em; color: var(--text-1); flex: 1; cursor: pointer; }
     .assessment-question input[type="checkbox"] { accent-color: var(--amber); width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; cursor: pointer; }
     .assessment-result { margin-top: 1rem; padding: 0.85rem 1rem; border-radius: 6px; display: none; font-size: 0.9em; }
     .assessment-result.show { display: block; }
     .result-manageable { background: #071a07; border: 1px solid #2a6a2a; color: #7acc7a; }
     .result-elevated { background: #1a1207; border: 1px solid #7a5a10; color: #d4a840; }
     .result-crisis { background: #1a0707; border: 1px solid #8b0000; color: #e07070; }
-    .assessment-score-bar { height: 8px; background: #222; border-radius: 4px; margin: 0.6rem 0; overflow: hidden; }
+    .assessment-score-bar { height: 8px; background: var(--bg-4); border-radius: 4px; margin: 0.6rem 0; overflow: hidden; }
     .assessment-score-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
 
     /* Decision log */
     .decision-log-widget { background: var(--bg-1); border: 1px solid #2a3a2a; border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0; }
     .decision-log-table { width: 100%; border-collapse: collapse; font-size: 0.82em; margin-top: 0.75rem; }
     .decision-log-table th { background: #0f1a0f; color: var(--amber); padding: 0.4rem 0.5rem; text-align: left; border: 1px solid #2a3a2a; }
-    .decision-log-table td { padding: 0.35rem 0.5rem; border: 1px solid #1a2a1a; color: #ccc; vertical-align: top; }
+    .decision-log-table td { padding: 0.35rem 0.5rem; border: 1px solid #1a2a1a; color: var(--text-1); vertical-align: top; }
     .decision-log-table tr:nth-child(even) { background: #0a130a; }
     .log-controls { display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
     .log-input-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 0.4rem; margin-top: 0.6rem; }
-    .log-input-row input { background: #0a130a; border: 1px solid #2a3a2a; color: #ccc; padding: 0.3rem 0.5rem; border-radius: 3px; font-size: 0.82em; width: 100%; }
-    .log-input-row input::placeholder { color: #555; }
+    .log-input-row input { background: #0a130a; border: 1px solid #2a3a2a; color: var(--text-1); padding: 0.3rem 0.5rem; border-radius: 3px; font-size: 0.82em; width: 100%; }
+    .log-input-row input::placeholder { color: var(--text-3); }
     @media (max-width: 700px) {
       .log-input-row { grid-template-columns: 1fr 1fr; }
     }
@@ -59,8 +59,8 @@
     .wd-serious { background: #1a0d05; }
     .wd-moderate { background: #14140a; }
     .wd-mild { background: #0a0f0a; }
-    .wd-tag-fatal { color: #e74c3c; font-weight: 700; }
-    .wd-tag-serious { color: #e67e22; font-weight: 700; }
+    .wd-tag-fatal { color: var(--red); font-weight: 700; }
+    .wd-tag-serious { color: var(--orange); font-weight: 700; }
     .wd-tag-moderate { color: #d4a840; font-weight: 600; }
     .wd-tag-mild { color: #7acc7a; }
 
@@ -68,24 +68,24 @@
     .dark-triad-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
     .dark-triad-card { background: #14080a; border: 1px solid #5a1a2a; border-left: 3px solid #8b2a3a; border-radius: 4px; padding: 0.75rem; }
     .dark-triad-card h4 { color: #cc6677; margin: 0 0 0.4rem; font-size: 0.9em; }
-    .dark-triad-card ul { margin: 0; padding-left: 1rem; font-size: 0.82em; color: #bbb; }
+    .dark-triad-card ul { margin: 0; padding-left: 1rem; font-size: 0.82em; color: var(--text-1); }
 
     /* Grief dev stage cards */
     .grief-stage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
     .grief-stage-card { background: var(--bg-1); border: 1px solid #2a3a4a; border-left: 3px solid #4a7aaa; border-radius: 4px; padding: 0.75rem; }
     .grief-stage-card h4 { color: #6a9acc; margin: 0 0 0.4rem; font-size: 0.9em; }
-    .grief-stage-card ul { margin: 0; padding-left: 1rem; font-size: 0.82em; color: #bbb; }
+    .grief-stage-card ul { margin: 0; padding-left: 1rem; font-size: 0.82em; color: var(--text-1); }
 
     /* 5-step safety plan */
     .safety-plan { counter-reset: safety-step; }
-    .safety-step { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.75rem 1rem 0.75rem 3rem; margin: 0.5rem 0; position: relative; counter-increment: safety-step; }
+    .safety-step { background: var(--bg-1); border: 1px solid var(--border); border-radius: 4px; padding: 0.75rem 1rem 0.75rem 3rem; margin: 0.5rem 0; position: relative; counter-increment: safety-step; }
     .safety-step::before { content: counter(safety-step); position: absolute; left: 0.85rem; top: 0.75rem; color: var(--amber); font-weight: 700; font-size: 1.1em; }
 
     /* Burnout stages */
     .burnout-table td:first-child { font-weight: 600; }
     .burnout-early { color: #d4a840; }
-    .burnout-middle { color: #e67e22; }
-    .burnout-late { color: #e74c3c; }
+    .burnout-middle { color: var(--orange); }
+    .burnout-late { color: var(--red); }
 
     /* Phase timeline bar */
     .timeline-bar { display: flex; gap: 2px; margin: 0.75rem 0; border-radius: 4px; overflow: hidden; }
@@ -110,7 +110,7 @@
     .ptsd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
     .ptsd-cluster { background: var(--bg-1); border: 1px solid #3a2a1a; border-top: 3px solid var(--amber); border-radius: 4px; padding: 0.75rem; }
     .ptsd-cluster h4 { color: var(--amber); margin: 0 0 0.4rem; font-size: 0.88em; text-transform: uppercase; letter-spacing: 0.05em; }
-    .ptsd-cluster ul { margin: 0; padding-left: 1rem; font-size: 0.82em; color: #bbb; }
+    .ptsd-cluster ul { margin: 0; padding-left: 1rem; font-size: 0.82em; color: var(--text-1); }
 
     /* Print styles */
     @media print {
@@ -365,7 +365,7 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
 
         <!-- BOX BREATHING WIDGET -->
         <div class="breath-widget no-print" id="breath-widget">
-          <p style="font-size:0.88em;color:#aaa;margin:0 0 1rem;">Used by military, first responders, and surgeons to rapidly reduce acute stress response. Equalizing all four phases creates controlled CO₂ tolerance and vagal stimulation.</p>
+          <p style="font-size:0.88em;color:var(--text-2);margin:0 0 1rem;">Used by military, first responders, and surgeons to rapidly reduce acute stress response. Equalizing all four phases creates controlled CO₂ tolerance and vagal stimulation.</p>
           <div class="breath-box-container">
             <div class="breath-box" id="breath-box">
               <div class="breath-phase-label" id="breath-phase-label">Ready</div>
@@ -404,7 +404,7 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
             <li>Exhale completely through mouth for <strong>8 counts</strong></li>
             <li>Repeat 3–4 cycles maximum</li>
           </ol>
-          <p style="font-size:0.85em;color:#aaa;margin:0.5rem 0 0;"><strong>Effect:</strong> The 8-count exhale extends vagal stimulation significantly longer than box breathing. Effective for pre-sleep anxiety and severe acute panic. Do not use if physically exerting — the breath-hold during high CO₂ demand can cause lightheadedness or fainting.</p>
+          <p style="font-size:0.85em;color:var(--text-2);margin:0.5rem 0 0;"><strong>Effect:</strong> The 8-count exhale extends vagal stimulation significantly longer than box breathing. Effective for pre-sleep anxiety and severe acute panic. Do not use if physically exerting — the breath-hold during high CO₂ demand can cause lightheadedness or fainting.</p>
         </div>
 
         <h3>When to Use Each Technique</h3>
@@ -538,11 +538,11 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
         <div class="two-col">
           <div class="card" style="border-left-color:#d4a840;">
             <h4 style="color:#d4a840;">Acute Stress Reaction (ASR) — Normal</h4>
-            <p style="font-size:0.85em;color:#bbb;">Within first 4 weeks of traumatic event. Symptoms include flashbacks, nightmares, hypervigilance, emotional numbing, and avoidance. These are <strong>normal physiological responses</strong> to abnormal events. Most people recover naturally within 4 weeks with social support and safety.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">Within first 4 weeks of traumatic event. Symptoms include flashbacks, nightmares, hypervigilance, emotional numbing, and avoidance. These are <strong>normal physiological responses</strong> to abnormal events. Most people recover naturally within 4 weeks with social support and safety.</p>
           </div>
-          <div class="card" style="border-left-color:#e74c3c;">
-            <h4 style="color:#e74c3c;">PTSD — When Intervention Is Needed</h4>
-            <p style="font-size:0.85em;color:#bbb;">Symptoms persist beyond 4 weeks AND cause significant functional impairment. Not everyone exposed to trauma develops PTSD — approximately 20–30% after severe trauma. Risk factors: pre-existing mental health conditions, lack of social support, prior trauma, severity of event.</p>
+          <div class="card" style="border-left-color:var(--red);">
+            <h4 style="color:var(--red);">PTSD — When Intervention Is Needed</h4>
+            <p style="font-size:0.85em;color:var(--text-1);">Symptoms persist beyond 4 weeks AND cause significant functional impairment. Not everyone exposed to trauma develops PTSD — approximately 20–30% after severe trauma. Risk factors: pre-existing mental health conditions, lack of social support, prior trauma, severity of event.</p>
           </div>
         </div>
 
@@ -599,7 +599,7 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
             <li><strong>2 things you can SMELL</strong> — lean in if necessary; even subtle smells count.</li>
             <li><strong>1 thing you can TASTE</strong> — run tongue along teeth; notice any residual taste.</li>
           </ol>
-          <p style="font-size:0.85em;color:#aaa;margin:0.5rem 0 0;">Repeat the cycle if needed. For children, adapt to "point to 5 blue things." For severe dissociation, physical intervention first: hold something cold (ice, cold metal), stomp feet, or clap hands hard.</p>
+          <p style="font-size:0.85em;color:var(--text-2);margin:0.5rem 0 0;">Repeat the cycle if needed. For children, adapt to "point to 5 blue things." For severe dissociation, physical intervention first: hold something cold (ice, cold metal), stomp feet, or clap hands hard.</p>
         </div>
 
         <h3>Peer Support: What to Say / What NOT to Say</h3>
@@ -622,27 +622,27 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
         <div class="info-grid">
           <div class="card">
             <h4>Predictability</h4>
-            <p style="font-size:0.85em;color:#bbb;">Trauma dysregulates the nervous system's ability to anticipate. Consistent schedules, announced changes, and reliable leaders directly counteract this.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">Trauma dysregulates the nervous system's ability to anticipate. Consistent schedules, announced changes, and reliable leaders directly counteract this.</p>
           </div>
           <div class="card">
             <h4>Choice</h4>
-            <p style="font-size:0.85em;color:#bbb;">Trauma removes agency. Offering meaningful choices — even small ones — restores the sense of control that is central to recovery.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">Trauma removes agency. Offering meaningful choices — even small ones — restores the sense of control that is central to recovery.</p>
           </div>
           <div class="card">
             <h4>Collaboration</h4>
-            <p style="font-size:0.85em;color:#bbb;">Decisions made with people rather than for people build trust and reduce the re-traumatization of powerlessness.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">Decisions made with people rather than for people build trust and reduce the re-traumatization of powerlessness.</p>
           </div>
           <div class="card">
             <h4>Trustworthiness</h4>
-            <p style="font-size:0.85em;color:#bbb;">Follow through on every commitment. Say what you mean. Acknowledge what you don't know. Never lie about the situation — trauma survivors detect deception acutely.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">Follow through on every commitment. Say what you mean. Acknowledge what you don't know. Never lie about the situation — trauma survivors detect deception acutely.</p>
           </div>
           <div class="card">
             <h4>Empowerment</h4>
-            <p style="font-size:0.85em;color:#bbb;">Identify and amplify individual strengths. Assign meaningful roles. Celebrate demonstrated competence.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">Identify and amplify individual strengths. Assign meaningful roles. Celebrate demonstrated competence.</p>
           </div>
           <div class="card">
             <h4>Cultural Humility</h4>
-            <p style="font-size:0.85em;color:#bbb;">Grief and trauma expression are culturally specific. What looks like pathology may be normal cultural mourning. Ask before interpreting.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">Grief and trauma expression are culturally specific. What looks like pathology may be normal cultural mourning. Ask before interpreting.</p>
           </div>
         </div>
 
@@ -664,17 +664,17 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
             <tr>
               <td><strong>Direct Statements</strong></td>
               <td>"I wish I were dead," "everyone would be better off without me," "I can't keep going," "I just want it to stop"</td>
-              <td style="color:#e74c3c;"><strong>Immediate</strong></td>
+              <td style="color:var(--red);"><strong>Immediate</strong></td>
             </tr>
             <tr>
               <td><strong>Behavioral</strong></td>
               <td>Giving away prized possessions, saying final goodbyes, sudden calm after prolonged depression, researching methods, putting affairs in order</td>
-              <td style="color:#e74c3c;"><strong>Immediate</strong></td>
+              <td style="color:var(--red);"><strong>Immediate</strong></td>
             </tr>
             <tr>
               <td><strong>Change Pattern</strong></td>
               <td>Sudden withdrawal from group, sleeping excessively or not at all, giving up on tasks and planning, loss of interest in survival activities</td>
-              <td style="color:#e67e22;"><strong>High</strong></td>
+              <td style="color:var(--orange);"><strong>High</strong></td>
             </tr>
             <tr>
               <td><strong>Contextual Risk Factors</strong></td>
@@ -687,13 +687,13 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
         <h3>How to Ask Directly</h3>
         <div class="card">
           <h4>Safe Messaging Script</h4>
-          <p style="font-size:0.88em;color:#ccc;">Find a private moment. Sit at the same level. Use calm eye contact. Say:</p>
-          <blockquote style="border-left:3px solid var(--amber);margin:0.75rem 0;padding:0.5rem 1rem;background:#0a0f0a;color:#ddd;font-size:0.9em;">
+          <p style="font-size:0.88em;color:var(--text-1);">Find a private moment. Sit at the same level. Use calm eye contact. Say:</p>
+          <blockquote style="border-left:3px solid var(--amber);margin:0.75rem 0;padding:0.5rem 1rem;background:#0a0f0a;color:var(--text-1);font-size:0.9em;">
             "I've noticed you seem really low lately, and I care about you. I want to ask you directly — are you thinking about ending your life?"
           </blockquote>
-          <p style="font-size:0.85em;color:#aaa;">If yes: "Thank you for trusting me with that. I'm not going anywhere. Let's talk about what's happening."</p>
-          <p style="font-size:0.85em;color:#aaa;">If no: "Okay. I'm still here if things change or you want to talk. I meant what I said."</p>
-          <p style="font-size:0.85em;color:#888;margin-top:0.5rem;"><strong>What NOT to do:</strong> Do not promise secrecy. Do not argue about whether they should feel this way. Do not minimize ("you have so much to live for"). Do not leave someone in acute crisis alone.</p>
+          <p style="font-size:0.85em;color:var(--text-2);">If yes: "Thank you for trusting me with that. I'm not going anywhere. Let's talk about what's happening."</p>
+          <p style="font-size:0.85em;color:var(--text-2);">If no: "Okay. I'm still here if things change or you want to talk. I meant what I said."</p>
+          <p style="font-size:0.85em;color:var(--text-2);margin-top:0.5rem;"><strong>What NOT to do:</strong> Do not promise secrecy. Do not argue about whether they should feel this way. Do not minimize ("you have so much to live for"). Do not leave someone in acute crisis alone.</p>
         </div>
 
         <h3>Safety Planning — 5 Steps Without a Professional</h3>
@@ -737,22 +737,22 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
           <div class="card">
             <h4 style="font-size:1.4em;color:var(--amber);">S</h4>
             <h4>Stop</h4>
-            <p style="font-size:0.85em;color:#bbb;">Physically stop all action. Movement creates urgency creates panic. Stopping interrupts the momentum toward bad decisions.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">Physically stop all action. Movement creates urgency creates panic. Stopping interrupts the momentum toward bad decisions.</p>
           </div>
           <div class="card">
             <h4 style="font-size:1.4em;color:var(--amber);">T</h4>
             <h4>Think</h4>
-            <p style="font-size:0.85em;color:#bbb;">What do I actually know? What am I assuming? What are my options? This 30-second pause activates prefrontal cortex function.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">What do I actually know? What am I assuming? What are my options? This 30-second pause activates prefrontal cortex function.</p>
           </div>
           <div class="card">
             <h4 style="font-size:1.4em;color:var(--amber);">O</h4>
             <h4>Observe</h4>
-            <p style="font-size:0.85em;color:#bbb;">Gather information before acting. Look around. Check all four directions. Assess group status. Check resources.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">Gather information before acting. Look around. Check all four directions. Assess group status. Check resources.</p>
           </div>
           <div class="card">
             <h4 style="font-size:1.4em;color:var(--amber);">P</h4>
             <h4>Plan</h4>
-            <p style="font-size:0.85em;color:#bbb;">Select a course of action. Communicate it. Set a time to re-assess. The plan can be simple — the value is in the process, not the perfection.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">Select a course of action. Communicate it. Set a time to re-assess. The plan can be simple — the value is in the process, not the perfection.</p>
           </div>
         </div>
 
@@ -807,8 +807,8 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
         <h3>Group Decision Making</h3>
         <div class="card">
           <h4>When Consensus Fails</h4>
-          <p style="font-size:0.88em;color:#bbb;">Groups under stress cannot achieve consensus on every decision — attempting to do so consumes resources and creates resentment. Establish in advance:</p>
-          <ul style="font-size:0.88em;color:#bbb;">
+          <p style="font-size:0.88em;color:var(--text-1);">Groups under stress cannot achieve consensus on every decision — attempting to do so consumes resources and creates resentment. Establish in advance:</p>
+          <ul style="font-size:0.88em;color:var(--text-1);">
             <li><strong>Decision type classification:</strong> Routine (SOP handles it), tactical (designated lead decides), strategic (group input required), emergency (fastest competent person decides alone)</li>
             <li><strong>Final authority:</strong> Who has final say when consensus cannot be reached? Establish this before the crisis. Legitimacy requires prior agreement, not just assertion.</li>
             <li><strong>Veto rights:</strong> Are there decisions any individual can block? (Health and safety decisions are candidates.) Clarify scope.</li>
@@ -819,7 +819,7 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
         <!-- DECISION LOG WIDGET -->
         <h3 id="decision-log">Decision Log Template</h3>
         <div class="decision-log-widget no-print" id="decision-log-widget">
-          <p style="font-size:0.85em;color:#aaa;margin:0 0 0.75rem;">Track decisions to counter hindsight bias, distribute accountability, and enable post-crisis learning. Data is saved in your browser.</p>
+          <p style="font-size:0.85em;color:var(--text-2);margin:0 0 0.75rem;">Track decisions to counter hindsight bias, distribute accountability, and enable post-crisis learning. Data is saved in your browser.</p>
           <div class="log-input-row">
             <input type="text" id="log-who" placeholder="Who decided">
             <input type="text" id="log-what" placeholder="Decision made">
@@ -853,11 +853,11 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
         <div class="two-col">
           <div class="card" style="border-left-color:#cc6677;">
             <h4 style="color:#cc6677;">Compassion Fatigue</h4>
-            <p style="font-size:0.85em;color:#bbb;">Secondary traumatic stress from absorbing others' trauma. Develops rapidly (weeks). Key symptom: emotional numbing, inability to feel empathy, intrusive images of others' trauma. Specific to caregiving roles. Recovery: distance from caregiving, processing own emotional response, peer supervision.</p>
+            <p style="font-size:0.85em;color:var(--text-1);">Secondary traumatic stress from absorbing others' trauma. Develops rapidly (weeks). Key symptom: emotional numbing, inability to feel empathy, intrusive images of others' trauma. Specific to caregiving roles. Recovery: distance from caregiving, processing own emotional response, peer supervision.</p>
           </div>
-          <div class="card" style="border-left-color:#e67e22;">
-            <h4 style="color:#e67e22;">Burnout</h4>
-            <p style="font-size:0.85em;color:#bbb;">Chronic exhaustion from sustained overwork without adequate recovery. Develops over months. Key symptom: cynicism, depersonalization, reduced efficacy, physical illness. Not specific to emotional content — a logistics manager burns out too. Recovery: sustained workload reduction, rest, restored sense of competence.</p>
+          <div class="card" style="border-left-color:var(--orange);">
+            <h4 style="color:var(--orange);">Burnout</h4>
+            <p style="font-size:0.85em;color:var(--text-1);">Chronic exhaustion from sustained overwork without adequate recovery. Develops over months. Key symptom: cynicism, depersonalization, reduced efficacy, physical illness. Not specific to emotional content — a logistics manager burns out too. Recovery: sustained workload reduction, rest, restored sense of competence.</p>
           </div>
         </div>
 
@@ -1010,8 +1010,8 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
         <h3>Rumor Control Protocol</h3>
         <div class="card">
           <h4>Information Vacuum Law</h4>
-          <p style="font-size:0.85em;color:#bbb;">Information vacuums fill with rumors — always. People under stress will generate explanations for uncertainty; those explanations trend toward worst-case scenarios. The only defense is filling the vacuum with verified information faster than rumors can form.</p>
-          <ol style="font-size:0.85em;color:#bbb;">
+          <p style="font-size:0.85em;color:var(--text-1);">Information vacuums fill with rumors — always. People under stress will generate explanations for uncertainty; those explanations trend toward worst-case scenarios. The only defense is filling the vacuum with verified information faster than rumors can form.</p>
+          <ol style="font-size:0.85em;color:var(--text-1);">
             <li><strong>Designated information officer</strong> — single source of official updates, identified by name to the group</li>
             <li><strong>Regular briefings</strong> — scheduled, not crisis-triggered. Daily or twice-daily. Even "no new information" is information.</li>
             <li><strong>Anonymous question mechanism</strong> — physical box or private note system allows questions without social risk</li>
@@ -1030,27 +1030,27 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
           <div class="conflict-stage cs-1">
             <strong>Stage 1</strong>
             Disagreement
-            <div style="font-size:0.85em;color:#aaa;margin-top:0.3rem;">Issue-focused, rational, solvable</div>
+            <div style="font-size:0.85em;color:var(--text-2);margin-top:0.3rem;">Issue-focused, rational, solvable</div>
           </div>
           <div class="conflict-stage cs-2">
             <strong>Stage 2</strong>
             Tension
-            <div style="font-size:0.85em;color:#aaa;margin-top:0.3rem;">Personal, parties harden, other grievances recruited</div>
+            <div style="font-size:0.85em;color:var(--text-2);margin-top:0.3rem;">Personal, parties harden, other grievances recruited</div>
           </div>
           <div class="conflict-stage cs-3">
             <strong>Stage 3</strong>
             Crisis
-            <div style="font-size:0.85em;color:#aaa;margin-top:0.3rem;">Emotional flooding, coalitions form, public confrontations</div>
+            <div style="font-size:0.85em;color:var(--text-2);margin-top:0.3rem;">Emotional flooding, coalitions form, public confrontations</div>
           </div>
           <div class="conflict-stage cs-4">
             <strong>Stage 4</strong>
             Freeze / Fight
-            <div style="font-size:0.85em;color:#aaa;margin-top:0.3rem;">Communication breakdown, threat of violence, all-or-nothing framing</div>
+            <div style="font-size:0.85em;color:var(--text-2);margin-top:0.3rem;">Communication breakdown, threat of violence, all-or-nothing framing</div>
           </div>
           <div class="conflict-stage cs-5">
             <strong>Stage 5</strong>
             Resolution or Collapse
-            <div style="font-size:0.85em;color:#aaa;margin-top:0.3rem;">Mediated solution — or group fracture / expulsion</div>
+            <div style="font-size:0.85em;color:var(--text-2);margin-top:0.3rem;">Mediated solution — or group fracture / expulsion</div>
           </div>
         </div>
 
@@ -1178,8 +1178,8 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
               <li>Can be stopped when someone signals discomfort</li>
             </ul>
           </div>
-          <div class="card" style="border-left-color:#e74c3c;">
-            <h4 style="color:#e74c3c;">When It Becomes Dehumanization</h4>
+          <div class="card" style="border-left-color:var(--red);">
+            <h4 style="color:var(--red);">When It Becomes Dehumanization</h4>
             <ul>
               <li>Targets a person's identity, not the situation</li>
               <li>Serves to exclude or humiliate a group member</li>
@@ -1201,7 +1201,7 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
             <li><strong>What we receive from the world:</strong> Love, beauty, truth — actively noticing what remains good</li>
             <li><strong>The stance we take toward suffering:</strong> We cannot always choose our circumstances; we can always choose our response to them</li>
           </ol>
-          <p style="font-size:0.85em;color:#aaa;margin:0.5rem 0 0;">In practice: assign meaningful roles, celebrate contribution explicitly, create space for beauty (art, music, natural observation), acknowledge suffering directly rather than minimizing it, and connect individual effort to group survival.</p>
+          <p style="font-size:0.85em;color:var(--text-2);margin:0.5rem 0 0;">In practice: assign meaningful roles, celebrate contribution explicitly, create space for beauty (art, music, natural observation), acknowledge suffering directly rather than minimizing it, and connect individual effort to group survival.</p>
         </div>
 
         <!-- ═══ SECTION 10: CHILDREN ═══ -->
@@ -1316,21 +1316,21 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
               <td>Taper if any alcohol remains. Monitor every 4–6 hr. Thiamine (B1) if available. Benzodiazepines (diazepam, lorazepam) are ideal if available. Phenobarbital if not. Keep cool, hydrated. Seizure precautions.</td>
             </tr>
             <tr class="wd-fatal">
-              <td><strong>Benzodiazepines</strong><br><span style="font-size:0.8em;color:#888;">Valium, Xanax, Klonopin, Ativan</span></td>
+              <td><strong>Benzodiazepines</strong><br><span style="font-size:0.8em;color:var(--text-2);">Valium, Xanax, Klonopin, Ativan</span></td>
               <td>Onset 1–4 days (long-acting) or 12–24 hr (short-acting); symptoms can persist 1–2 weeks</td>
               <td class="wd-tag-fatal">POTENTIALLY FATAL</td>
               <td>Identical to alcohol withdrawal — seizures, psychosis, hyperthermia, cardiovascular instability</td>
               <td>Switch to longest-acting equivalent (diazepam) and taper 5–10% per 1–2 weeks. Never abrupt discontinuation after &gt;3 months daily use. Phenobarbital alternative if no benzos available.</td>
             </tr>
             <tr class="wd-serious">
-              <td><strong>Opioids</strong><br><span style="font-size:0.8em;color:#888;">Heroin, oxycodone, morphine, fentanyl</span></td>
+              <td><strong>Opioids</strong><br><span style="font-size:0.8em;color:var(--text-2);">Heroin, oxycodone, morphine, fentanyl</span></td>
               <td>Short-acting: onset 8–24 hr, peak 36–72 hr, resolves 5–7 days. Long-acting: delayed 36–48 hr, protracted weeks</td>
               <td class="wd-tag-serious">Rarely fatal — severely unpleasant</td>
               <td>Severe pain, vomiting, diarrhea, muscle cramps, insomnia, anxiety, gooseflesh, tachycardia. Dehydration is the main danger, especially in compromised patients.</td>
               <td>Clonidine (BP medication) reduces autonomic symptoms significantly. Loperamide (Imodium) for diarrhea. IV or oral rehydration critical. NSAIDs for muscle pain. Keep warm. Methadone/buprenorphine if available.</td>
             </tr>
             <tr class="wd-moderate">
-              <td><strong>SSRIs / SNRIs</strong><br><span style="font-size:0.8em;color:#888;">Prozac, Zoloft, Effexor, Paxil</span></td>
+              <td><strong>SSRIs / SNRIs</strong><br><span style="font-size:0.8em;color:var(--text-2);">Prozac, Zoloft, Effexor, Paxil</span></td>
               <td>Onset 1–4 days after stopping; can last 1–4 weeks. Paroxetine (Paxil) worst. Fluoxetine (Prozac) milder due to long half-life.</td>
               <td class="wd-tag-moderate">Not dangerous — disabling</td>
               <td>"Brain zaps" (electrical shock sensations), dizziness, nausea, vivid dreams, irritability, flu-like symptoms</td>
@@ -1355,17 +1355,17 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
 
         <details style="margin:1rem 0;">
           <summary style="cursor:pointer;color:var(--amber);font-weight:600;">Alcohol Withdrawal Severity Scale (CIWA) — Field Reference</summary>
-          <div style="padding:0.75rem;background:var(--bg-1);border:1px solid #2a2a2a;border-radius:0 0 4px 4px;">
-            <p style="font-size:0.85em;color:#bbb;">Monitor every 4–6 hours during acute withdrawal. Total score guides intervention urgency.</p>
+          <div style="padding:0.75rem;background:var(--bg-1);border:1px solid var(--border);border-radius:0 0 4px 4px;">
+            <p style="font-size:0.85em;color:var(--text-1);">Monitor every 4–6 hours during acute withdrawal. Total score guides intervention urgency.</p>
             <table class="data-table" style="font-size:0.82em;">
               <thead><tr><th>CIWA Score</th><th>Severity</th><th>Action</th></tr></thead>
               <tbody>
                 <tr><td>0–9</td><td style="color:#7acc7a;">Mild</td><td>Oral hydration, thiamine B1, monitor. Medications not required unless worsening.</td></tr>
                 <tr><td>10–19</td><td style="color:#d4a840;">Moderate</td><td>Benzodiazepine or phenobarbital per protocol. Close monitoring q4h. IV access ideal.</td></tr>
-                <tr><td>20+</td><td style="color:#e74c3c;">Severe / DTs</td><td>Medical emergency. Aggressive benzodiazepine dosing, IV fluids, cooling measures, seizure management. Death risk is real.</td></tr>
+                <tr><td>20+</td><td style="color:var(--red);">Severe / DTs</td><td>Medical emergency. Aggressive benzodiazepine dosing, IV fluids, cooling measures, seizure management. Death risk is real.</td></tr>
               </tbody>
             </table>
-            <p style="font-size:0.82em;color:#888;margin:0.5rem 0 0;">CIWA domains: nausea/vomiting, tremor, paroxysmal sweats, anxiety, agitation, perceptual disturbances, headache, orientation. Each scored 0–7 (some 0–4). Total = sum of all scores.</p>
+            <p style="font-size:0.82em;color:var(--text-2);margin:0.5rem 0 0;">CIWA domains: nausea/vomiting, tremor, paroxysmal sweats, anxiety, agitation, perceptual disturbances, headache, orientation. Each scored 0–7 (some 0–4). Total = sum of all scores.</p>
           </div>
         </details>
 
@@ -1375,7 +1375,7 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
         <!-- STRESS SELF-ASSESSMENT -->
         <h3>Stress Self-Assessment (10-Question Checklist)</h3>
         <div class="assessment-widget no-print" id="stress-assessment">
-          <p style="font-size:0.85em;color:#aaa;margin:0 0 0.75rem;">Answer honestly about the past 48 hours. Results are not diagnostic but provide a functional snapshot. Not saved or transmitted.</p>
+          <p style="font-size:0.85em;color:var(--text-2);margin:0 0 0.75rem;">Answer honestly about the past 48 hours. Results are not diagnostic but provide a functional snapshot. Not saved or transmitted.</p>
 
           <div class="assessment-question">
             <input type="checkbox" id="q1" class="assess-q">
@@ -1611,7 +1611,7 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
       // Q9 specific flag
       var q9 = document.getElementById('q9');
       if (q9 && q9.checked) {
-        assessResult.innerHTML += '<br><br><strong style="color:#e74c3c;">Question 9 was checked. Follow the suicide risk protocol in Section 5 immediately. Do not leave this person alone.</strong>';
+        assessResult.innerHTML += '<br><br><strong style="color:var(--red);">Question 9 was checked. Follow the suicide risk protocol in Section 5 immediately. Do not leave this person alone.</strong>';
       }
     }
 
@@ -1644,7 +1644,7 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
       var entries = loadLog();
       tbody.innerHTML = '';
       if (entries.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#555;font-style:italic;">No entries yet</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-3);font-style:italic;">No entries yet</td></tr>';
         return;
       }
       entries.forEach(function (e, i) {

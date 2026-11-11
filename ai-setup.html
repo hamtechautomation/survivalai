@@ -22,11 +22,11 @@
     .ai-beam{opacity:0;animation:ai-beam 5s ease-in-out infinite}
     @keyframes ai-beam{0%{opacity:0;transform:translateX(0)}6%{opacity:.9}34%{opacity:.9;transform:translateX(96px)}40%{opacity:0;transform:translateX(96px)}100%{opacity:0}}
     /* every spine dims as the beam passes; the matching one lights up and holds */
-    .ai-book{fill:#1e2820;animation:ai-book 5s ease-in-out infinite}
-    @keyframes ai-book{0%,100%{fill:#1e2820}}
+    .ai-book{fill:var(--bg-4);animation:ai-book 5s ease-in-out infinite}
+    @keyframes ai-book{0%,100%{fill:var(--bg-4)}}
     .ai-match{animation:ai-match 5s ease-in-out infinite}
-    @keyframes ai-match{0%,30%{fill:#1e2820;filter:none}38%{fill:#c9a94e;filter:drop-shadow(0 0 7px rgba(201,169,78,.9))}
-      88%{fill:#c9a94e;filter:drop-shadow(0 0 5px rgba(201,169,78,.7))}96%,100%{fill:#1e2820;filter:none}}
+    @keyframes ai-match{0%,30%{fill:var(--bg-4);filter:none}38%{fill:var(--amber);filter:drop-shadow(0 0 7px rgba(201,169,78,.9))}
+      88%{fill:var(--amber);filter:drop-shadow(0 0 5px rgba(201,169,78,.7))}96%,100%{fill:var(--bg-4);filter:none}}
     /* retrieval particle flows from the matched book to the answer */
     .ai-flow{opacity:0;animation:ai-flow 5s ease-in-out infinite}
     @keyframes ai-flow{0%,40%{opacity:0;transform:translateX(0)}46%{opacity:1}58%{opacity:1;transform:translateX(96px)}64%,100%{opacity:0;transform:translateX(96px)}}
@@ -38,7 +38,7 @@
     @keyframes ai-cite{0%,74%{opacity:0;transform:scale(.3)}84%{opacity:1;transform:scale(1.12)}92%,100%{opacity:1;transform:scale(1)}}
     .ai-q{transform-origin:center;transform-box:fill-box;animation:ai-glow 3s ease-in-out infinite}
     @keyframes ai-glow{0%,100%{filter:drop-shadow(0 0 2px rgba(201,169,78,.4))}50%{filter:drop-shadow(0 0 9px rgba(201,169,78,.8))}}
-    @media(prefers-reduced-motion:reduce){.ai-scene *{animation:none!important}.ai-ans,.ai-cite{opacity:1}.ai-match{fill:#c9a94e}}
+    @media(prefers-reduced-motion:reduce){.ai-scene *{animation:none!important}.ai-ans,.ai-cite{opacity:1}.ai-match{fill:var(--amber)}}
   </style>
 </head>
 <body>

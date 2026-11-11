@@ -11,18 +11,18 @@
     .tex-nav a:hover { background: var(--amber); color: var(--bg-0); }
 
     .process-steps { counter-reset: step; }
-    .process-step { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.75rem 1rem; margin: 0.5rem 0; counter-increment: step; position: relative; padding-left: 3rem; }
+    .process-step { background: var(--bg-1); border: 1px solid var(--border); border-radius: 4px; padding: 0.75rem 1rem; margin: 0.5rem 0; counter-increment: step; position: relative; padding-left: 3rem; }
     .process-step::before { content: counter(step); position: absolute; left: 0.85rem; top: 0.75rem; color: var(--amber); font-weight: 700; font-size: 1.1em; }
 
-    .fiber-card { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 6px; padding: 0.85rem 1rem; margin: 0.5rem 0; }
+    .fiber-card { background: var(--bg-1); border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem 1rem; margin: 0.5rem 0; }
     .fiber-card h4 { color: var(--amber); margin: 0 0 0.4rem; font-size: 0.95em; }
-    .fiber-card p { margin: 0.25rem 0; font-size: 0.88em; color: #ccc; }
+    .fiber-card p { margin: 0.25rem 0; font-size: 0.88em; color: var(--text-1); }
 
     .stitch-demo { font-family: monospace; font-size: 0.82em; background: #050a05; border: 1px solid #2a4a2a; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.5rem 0; color: #aad4aa; }
     .stitch-demo .stitch-name { color: var(--amber); font-weight: 700; font-size: 1em; display: block; margin-bottom: 0.4rem; }
 
     .priority-list { list-style: none; padding: 0; margin: 0.75rem 0; counter-reset: priority; }
-    .priority-list li { counter-increment: priority; background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.6rem 0.9rem 0.6rem 3rem; margin: 0.4rem 0; position: relative; font-size: 0.9em; }
+    .priority-list li { counter-increment: priority; background: var(--bg-1); border: 1px solid var(--border); border-radius: 4px; padding: 0.6rem 0.9rem 0.6rem 3rem; margin: 0.4rem 0; position: relative; font-size: 0.9em; }
     .priority-list li::before { content: "#" counter(priority); position: absolute; left: 0.75rem; top: 0.6rem; color: var(--amber); font-weight: 700; font-size: 0.85em; }
 
     .callout-warn { background: #1a1000; border: 1px solid #8b6000; border-left: 4px solid #c09a00; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.75rem 0; font-size: 0.9em; }
@@ -35,21 +35,21 @@
     .callout-critical strong { color: #e05050; }
 
     .svg-figure { margin: 1.5rem 0; text-align: center; }
-    .svg-figure figcaption { font-size: 0.82em; color: #888; margin-top: 0.5rem; font-style: italic; }
+    .svg-figure figcaption { font-size: 0.82em; color: var(--text-2); margin-top: 0.5rem; font-style: italic; }
 
     .wpi-bar { display: flex; align-items: center; gap: 0.75rem; margin: 0.35rem 0; }
     .wpi-fill { height: 12px; background: linear-gradient(90deg, var(--amber), #5c3a0e); border-radius: 2px; }
-    .wpi-label { font-size: 0.82em; color: #bbb; min-width: 90px; }
+    .wpi-label { font-size: 0.82em; color: var(--text-1); min-width: 90px; }
     .wpi-val { font-size: 0.82em; color: var(--amber); font-weight: 600; min-width: 60px; }
 
     .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.6rem; margin: 0.75rem 0; }
-    .tool-item { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.6rem 0.8rem; font-size: 0.88em; }
+    .tool-item { background: var(--bg-1); border: 1px solid var(--border); border-radius: 4px; padding: 0.6rem 0.8rem; font-size: 0.88em; }
     .tool-item strong { color: var(--amber); display: block; margin-bottom: 0.2rem; font-size: 0.9em; }
 
     .repair-math { background: #050a14; border: 1px solid #1a2a5c; border-radius: 6px; padding: 1rem; margin: 0.75rem 0; }
     .repair-math .math-line { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; border-bottom: 1px solid #1a2a3a; font-size: 0.9em; }
     .repair-math .math-line:last-child { border-bottom: none; color: var(--amber); font-weight: 700; }
-    .repair-math .math-label { color: #bbb; }
+    .repair-math .math-label { color: var(--text-1); }
     .repair-math .math-val { color: #7aaccc; font-weight: 600; }
 
     details { margin: 0.5rem 0; }
@@ -244,7 +244,7 @@
         <div class="two-col">
           <div>
             <h4>Park and Draft (Beginners)</h4>
-            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+            <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
               <li>Spin spindle, then "park" it under your arm or between knees</li>
               <li>With both hands free, draft (pull out) a length of fiber</li>
               <li>Release spindle — twist runs up into drafted fiber</li>
@@ -254,7 +254,7 @@
           </div>
           <div>
             <h4>Long Draw (Speed)</h4>
-            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+            <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
               <li>Set spindle spinning with one hand</li>
               <li>Back-draft fiber quickly with other hand over 12–18"</li>
               <li>Let twist chase into drafted zone</li>
@@ -281,7 +281,7 @@
         <div class="wpi-bar"><span class="wpi-label">Worsted</span><div class="wpi-fill" style="width:70px"></div><span class="wpi-val">9–12 wpi</span></div>
         <div class="wpi-bar"><span class="wpi-label">Bulky</span><div class="wpi-fill" style="width:40px"></div><span class="wpi-val">5–8 wpi</span></div>
         <div class="wpi-bar"><span class="wpi-label">Super bulky</span><div class="wpi-fill" style="width:20px"></div><span class="wpi-val">under 5 wpi</span></div>
-        <p style="font-size:0.82em;color:#888;margin-top:0.4rem;">Measure WPI: wrap yarn around a ruler for 1 inch, count wraps. Wrap snugly but not stretched.</p>
+        <p style="font-size:0.82em;color:var(--text-2);margin-top:0.4rem;">Measure WPI: wrap yarn around a ruler for 1 inch, count wraps. Wrap snugly but not stretched.</p>
 
         <div class="callout-tip">
           <strong>Yield:</strong> 1 lb (450g) raw wool → ~¾ lb (340g) clean scoured fiber → approximately one adult sweater worth of yarn at worsted weight. Plan fiber gathering accordingly.
@@ -290,20 +290,20 @@
         <details>
           <summary>Supported Spindle (for short fibers: cotton, angora, cashmere)</summary>
           <div style="padding:0.5rem 0 0 1rem;">
-            <p style="font-size:0.9em;color:#ccc;">Short-staple fibers break under the tension of a hanging drop spindle. A supported spindle rests in a bowl or ceramic plate — removes downward tension while spinning.</p>
-            <p style="font-size:0.9em;color:#ccc;"><strong>Tahkli:</strong> Tiny brass or wooden spindle spun in a small bowl. Traditional for cotton in India. Very fast once mastered.</p>
-            <p style="font-size:0.9em;color:#ccc;"><strong>Akha:</strong> Longer supported spindle on a flat plate. Common in Southeast Asia for short fiber work.</p>
-            <p style="font-size:0.9em;color:#ccc;">For improvised cotton spinning: any smooth-tipped spindle resting in a smooth bowl works. Spin between palms while drafting with the other hand.</p>
+            <p style="font-size:0.9em;color:var(--text-1);">Short-staple fibers break under the tension of a hanging drop spindle. A supported spindle rests in a bowl or ceramic plate — removes downward tension while spinning.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Tahkli:</strong> Tiny brass or wooden spindle spun in a small bowl. Traditional for cotton in India. Very fast once mastered.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Akha:</strong> Longer supported spindle on a flat plate. Common in Southeast Asia for short fiber work.</p>
+            <p style="font-size:0.9em;color:var(--text-1);">For improvised cotton spinning: any smooth-tipped spindle resting in a smooth bowl works. Spin between palms while drafting with the other hand.</p>
           </div>
         </details>
 
         <details>
           <summary>Spinning Wheel Notes (if you have or can build one)</summary>
           <div style="padding:0.5rem 0 0 1rem;">
-            <p style="font-size:0.9em;color:#ccc;"><strong>Saxony wheel (treadle):</strong> Most common traditional European style. Horizontal, large drive wheel connected by drive band to flyer assembly. Good all-purpose wheel.</p>
-            <p style="font-size:0.9em;color:#ccc;"><strong>Castle wheel:</strong> Vertical arrangement — compact footprint. Same mechanics, smaller space.</p>
-            <p style="font-size:0.9em;color:#ccc;"><strong>Great wheel / walking wheel:</strong> No treadle — spinner walks back while drafting. Fastest output for woolen yarns. Simplest construction; good first build.</p>
-            <p style="font-size:0.9em;color:#ccc;"><strong>Maintenance:</strong> Drive band (leather strip or twisted cord) stretches and needs periodic replacement. Oil all moving parts with linseed oil or mineral oil. Clean fiber debris from orifice and flyer hooks. Drive ratio determines twist speed — higher ratio = finer yarn.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Saxony wheel (treadle):</strong> Most common traditional European style. Horizontal, large drive wheel connected by drive band to flyer assembly. Good all-purpose wheel.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Castle wheel:</strong> Vertical arrangement — compact footprint. Same mechanics, smaller space.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Great wheel / walking wheel:</strong> No treadle — spinner walks back while drafting. Fastest output for woolen yarns. Simplest construction; good first build.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Maintenance:</strong> Drive band (leather strip or twisted cord) stretches and needs periodic replacement. Oil all moving parts with linseed oil or mineral oil. Clean fiber debris from orifice and flyer hooks. Drive ratio determines twist speed — higher ratio = finer yarn.</p>
           </div>
         </details>
 
@@ -372,7 +372,7 @@
         <div class="two-col">
           <div>
             <h4>Construction</h4>
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li>4 pieces 2×2 (or 1×3) lumber, screwed or nailed at corners</li>
               <li>Notches or nails every ½" along top and bottom bars</li>
               <li>Learning size: 12"×18"; fabric-width: 24"×36"</li>
@@ -382,7 +382,7 @@
           </div>
           <div>
             <h4>Sett (Warp Density)</h4>
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li><strong>Bulky yarn:</strong> 4–6 epi</li>
               <li><strong>Worsted:</strong> 8–10 epi</li>
               <li><strong>DK:</strong> 10–12 epi</li>
@@ -458,9 +458,9 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
         <div class="two-col">
           <div>
             <h4>Long-Tail Cast-On (Fastest, Most Stable)</h4>
-            <p style="font-size:0.88em;color:#ccc;">Make a slip knot leaving a long tail (about 1" per stitch needed). Loop tail over thumb, working yarn over index finger. Insert needle under thumb loop, catch working yarn, pull through loop on thumb. Adjust tension. Repeat. Creates a firm, elastic edge.</p>
+            <p style="font-size:0.88em;color:var(--text-1);">Make a slip knot leaving a long tail (about 1" per stitch needed). Loop tail over thumb, working yarn over index finger. Insert needle under thumb loop, catch working yarn, pull through loop on thumb. Adjust tension. Repeat. Creates a firm, elastic edge.</p>
             <h4>The Two Core Stitches</h4>
-            <ul style="font-size:0.88em;color:#ccc;">
+            <ul style="font-size:0.88em;color:var(--text-1);">
               <li><strong>Knit (k):</strong> Needle enters stitch from left to right; pull loop through front</li>
               <li><strong>Purl (p):</strong> Needle enters stitch from right to left from front; pull loop through back</li>
               <li>All knitting is combinations of these two</li>
@@ -468,7 +468,7 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
           </div>
           <div>
             <h4>Fabric Types by Stitch Pattern</h4>
-            <ul style="font-size:0.88em;color:#ccc;">
+            <ul style="font-size:0.88em;color:var(--text-1);">
               <li><strong>Stockinette</strong> (k RS, p WS): Smooth, stretchy, most common. Curls at edges.</li>
               <li><strong>Garter</strong> (k every row): Flat, textured, reversible. Good for borders and scarves.</li>
               <li><strong>Rib</strong> (k1p1 or k2p2): Very elastic. Essential for cuffs, hat brims, sock tops.</li>
@@ -500,7 +500,7 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
         </div>
 
         <h3>Priority Crochet Items</h3>
-        <ul style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+        <ul style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
           <li><strong>Net bags / market bags:</strong> Chain stitch grid, no pattern needed. Strong, stretchy, minimal yarn. Essential for foraging and storage.</li>
           <li><strong>Baskets:</strong> Work in the round with bulky yarn or multiple strands, over a core of rope or twine. Structural without pattern.</li>
           <li><strong>Dishcloths and pot holders:</strong> Quick, practical, high turnover. 20–30 minutes each. Use cotton or linen fiber.</li>
@@ -642,7 +642,7 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
               </svg>
               <figcaption>Medieval tunic layout — 2 body rectangles + 2 tapered sleeves + 2 underarm gussets. All straight cuts. Only curved cut is the neck opening.</figcaption>
             </figure>
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li><strong>Body:</strong> Two rectangles (front/back). Width = shoulder-to-shoulder + 4" ease. Length = desired hem from shoulder.</li>
               <li><strong>Sleeves:</strong> Two rectangles, tapered from armhole width to wrist width. Sew into tube; attach to body.</li>
               <li><strong>Gussets:</strong> Two small squares (~4"×4") inserted at each armpit. Critical for arm mobility without tearing the seam.</li>
@@ -655,7 +655,7 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
         <details>
           <summary>Norse Trousers — Four Rectangles + Two Gussets</summary>
           <div style="padding:0.75rem 0 0 0;">
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li><strong>Four leg panels:</strong> Two per leg. Width = thigh circumference ÷ 2 + 2" ease. Length = waist to ankle + 2" hem allowance.</li>
               <li><strong>Crotch gusset:</strong> Two triangles or diamonds sewn between front and back panels at crotch. Provides mobility without fitted shaping.</li>
               <li><strong>Waist:</strong> Fold top edge, sew channel, thread drawstring (cord or leather strip). Fits any waist size.</li>
@@ -667,7 +667,7 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
         <details>
           <summary>Drawstring Smock — Zero Fitting Required</summary>
           <div style="padding:0.75rem 0 0 0;">
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li><strong>Single large rectangle:</strong> Width = 2× desired shoulder-to-shoulder. Length = shoulder to hip or knee.</li>
               <li><strong>Neck channel:</strong> Fold top edge 2–3" and sew, leaving gaps on each side for drawstring. Insert cord and cinch to neck size.</li>
               <li>Works as pullover for any body size. Add rectangle sleeves for cold weather.</li>
@@ -755,7 +755,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
 
         <h3>Making a Last (Foot Form)</h3>
         <p>A last is the foot-shaped form shoes are built on. Without one, shoes won't fit correctly and will cause blisters and injury.</p>
-        <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+        <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
           <li>Trace foot on paper. Transfer to wood. Cut foot silhouette from 1" thick board.</li>
           <li>Laminate boards or carve scrap wood to approximate foot depth — roughly 3–4" at ball, 2" at heel.</li>
           <li>Shape with knife and rasp. Must be slightly LARGER than foot (~3/8" at toe, ¼" at sides) to allow wearing.</li>
@@ -816,7 +816,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         </div>
 
         <h3>Tire Sandal — Indestructible Emergency Footwear</h3>
-        <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+        <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
           <li>Use flat tread section of old tire — avoid curved sidewall area.</li>
           <li>Trace foot outline on tread. Cut with sharp knife using hard sawing pressure. Score deeply first; don't try to cut through in one stroke.</li>
           <li>Punch 4–6 holes around perimeter with nail and hammer.</li>
@@ -886,7 +886,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
               </svg>
               <figcaption>Welt construction boot: upper wraps over last, stitched to insole via welt strip. Outsole stitched to welt. When sole wears out, replace it without destroying the upper.</figcaption>
             </figure>
-            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+            <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
               <li><strong>Last:</strong> Build or acquire a foot form. Stuff inside with paper to maintain shape while building.</li>
               <li><strong>Insole:</strong> Cut medium-weight leather to foot shape; attach to bottom of last temporarily.</li>
               <li><strong>Upper:</strong> Cut from lighter leather. Wet; stretch over last; tack around bottom edge to insole. Let dry in shape.</li>
@@ -927,7 +927,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         <div class="two-col">
           <div>
             <h4>Tools Needed</h4>
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li>Darning mushroom or dome — supports fabric over hole (lightbulb, smooth stone, rounded bottle all work)</li>
               <li>Yarn or thread matching original fabric weight</li>
               <li>Needle with eye large enough for yarn</li>
@@ -936,7 +936,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </div>
           <div>
             <h4>Technique</h4>
-            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+            <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
               <li>Stretch fabric over dome, hole centered</li>
               <li>Run parallel threads across hole (warp) — extend ¼" past hole edges into sound fabric each side</li>
               <li>Turn work 90°; weave perpendicular thread over-under through warp threads and existing fabric</li>
@@ -1048,7 +1048,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         <div class="two-col">
           <div>
             <h4>Methods</h4>
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li><strong>Washboard:</strong> Wooden board with ridges or corrugated bark. Soap and scrub. Effective for heavy soil.</li>
               <li><strong>Plunger bucket:</strong> 5-gallon bucket + standard plunger. Surprisingly effective agitation. Better than hand-squeezing alone.</li>
               <li><strong>Stream rock:</strong> Beat soapy wet clothing against flat rocks at stream edge. Traditional worldwide.</li>
@@ -1057,7 +1057,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </div>
           <div>
             <h4>Rules by Fiber</h4>
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li><strong>Wool:</strong> Cold water ONLY. Hot water + agitation = felting (irreversible). Squeeze gently; never wring. Rinse at same temperature. Dry flat — never hang (stretches). No direct sun.</li>
               <li><strong>Cotton/linen:</strong> Tolerates hot water and scrubbing. Can boil. Wringing is fine. Sun bleaches and disinfects.</li>
               <li><strong>Leather:</strong> Do not wash in water. Wipe clean with damp cloth; re-oil immediately after.</li>
@@ -1134,7 +1134,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         <div class="info-grid">
           <div class="card">
             <h3>First Things to Make (Priority Order)</h3>
-            <ol style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+            <ol style="font-size:0.88em;color:var(--text-1);padding-left:1.2rem;margin:0;">
               <li>Drop spindle (30 min, any scrap wood)</li>
               <li>Frame loom (4–6 hours, scrap lumber)</li>
               <li>Repair existing clothing before making new</li>
@@ -1146,7 +1146,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </div>
           <div class="card">
             <h3>Cache Before Collapse</h3>
-            <ul style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+            <ul style="font-size:0.88em;color:var(--text-1);padding-left:1.2rem;margin:0;">
               <li>Dental floss (1 lb+ per person — extraordinary thread)</li>
               <li>Needles (sewing, darning, tapestry sizes)</li>
               <li>Beeswax blocks (waterproofing + thread wax)</li>
@@ -1158,7 +1158,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </div>
           <div class="card">
             <h3>Rules That Matter Most</h3>
-            <ul style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+            <ul style="font-size:0.88em;color:var(--text-1);padding-left:1.2rem;margin:0;">
               <li>Repair at first sign of wear — not after failure</li>
               <li>No cotton base layers in cold or wet</li>
               <li>Wool warm when wet; cotton is a hazard</li>
@@ -1170,7 +1170,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </div>
           <div class="card">
             <h3>Time Estimates</h3>
-            <ul style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+            <ul style="font-size:0.88em;color:var(--text-1);padding-left:1.2rem;margin:0;">
               <li>Drop spindle: 30 min to build</li>
               <li>Frame loom: 4–6 hours to build</li>
               <li>Darning a sock hole: 20 min</li>

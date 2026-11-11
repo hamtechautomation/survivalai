@@ -60,7 +60,7 @@
     .usb-stick{animation:usb-in 4.8s ease-in-out infinite}
     @keyframes usb-in{0%,100%{transform:translateX(52px)}40%,82%{transform:translateX(0)}}
     .usb-led{animation:usb-led 4.8s steps(1) infinite}
-    @keyframes usb-led{0%,39%{fill:#3a4838}44%,100%{fill:#4b9e6a}}
+    @keyframes usb-led{0%,39%{fill:var(--border-hi)}44%,100%{fill:var(--green)}}
     .usb-pkt{opacity:0;animation:usb-pkt 4.8s ease-in-out infinite}
     @keyframes usb-pkt{0%,47%{opacity:0;transform:translateX(0)}55%{opacity:1}74%{opacity:1;transform:translateX(60px)}82%,100%{opacity:0;transform:translateX(60px)}}
     .ph-pop{opacity:0;transform-box:fill-box;transform-origin:center;animation:ph-pop 4.8s ease-in-out infinite}

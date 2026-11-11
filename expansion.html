@@ -24,7 +24,7 @@
     .zim-file { font-family:var(--mono,monospace); font-size:.68rem; color:var(--text-3); }
     .tier-tag { font-size:.65rem; text-transform:uppercase; letter-spacing:.06em; font-weight:700; padding:1px 7px; border-radius:3px; }
     .tier-pen { background:rgba(75,158,106,.15); color:#6ecca8; border:1px solid rgba(75,158,106,.3); }
-    .tier-big { background:rgba(200,122,64,.15); color:var(--orange,#c87a40); border:1px solid rgba(200,122,64,.3); }
+    .tier-big { background:rgba(200,122,64,.15); color:var(--orange,var(--orange)); border:1px solid rgba(200,122,64,.3); }
     .sizing-table td:first-child { font-weight:700; color:var(--text-0); white-space:nowrap; }
     /* animated brain → library scene */
     .exp-scene{width:100%;max-width:600px;aspect-ratio:40/19;height:auto;display:block;margin:.2rem auto 1.4rem;border-radius:12px;
@@ -34,7 +34,7 @@
     .eb-ray{opacity:0;animation:eb-ray 5s ease-in-out infinite}
     @keyframes eb-ray{0%,25%{opacity:0}31%{opacity:.9}60%{opacity:.55}100%{opacity:.55}}
     .eb-brain{animation:eb-brain 5s ease-in-out infinite}
-    @keyframes eb-brain{0%,25%{stroke:#3a4838}34%,100%{stroke:#c9a94e}}
+    @keyframes eb-brain{0%,25%{stroke:var(--border-hi)}34%,100%{stroke:var(--amber)}}
     .eb-book{opacity:0;transform-box:fill-box;transform-origin:bottom;animation:eb-book 5s ease-in-out infinite}
     @keyframes eb-book{0%,36%{opacity:0;transform:scaleY(.15)}47%{opacity:1;transform:scaleY(1.06)}54%,92%{opacity:1;transform:scaleY(1)}99%,100%{opacity:0;transform:scaleY(.15)}}
     @media(prefers-reduced-motion:reduce){.exp-scene *{animation:none!important;opacity:1!important}.eb-book{opacity:1!important;transform:none!important}}

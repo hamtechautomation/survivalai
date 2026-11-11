@@ -68,6 +68,23 @@
     car:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V9a2 2 0 012-2h1l2-4h10l2 4h1a2 2 0 012 2v6a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>`,
     radio:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="12" rx="2"/><path d="M2 15h20M7 12h.01M17 13h2M17 17h2M4 9L12 3l8 6"/></svg>`,
     calendar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+    // Added for emoji → icon replacement
+    bulb:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 00-3.6 10.8c.6.5 1 1.2 1.1 2V17h5v-1.2c.1-.8.5-1.5 1.1-2A6 6 0 0012 3z"/></svg>`,
+    check:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg>`,
+    stop:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg>`,
+    clock:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M10 2h4"/></svg>`,
+    link:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l3-3a5 5 0 00-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 00-7.07 0l-3 3a5 5 0 007.07 7.07l1.5-1.5"/></svg>`,
+    user:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>`,
+    users:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><path d="M16 4.5a3.5 3.5 0 010 7M18 14a6.5 6.5 0 013.5 6"/></svg>`,
+    lock:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>`,
+    heart:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.3-9.2C1.5 7.6 3.6 4 7 4c2 0 3.4 1.1 5 3 1.6-1.9 3-3 5-3 3.4 0 5.5 3.6 4.3 6.8C19.5 15.4 12 20 12 20z"/></svg>`,
+    menu:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`,
+    x:        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>`,
+    info:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>`,
+    search:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>`,
+    map:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>`,
+    tent:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20L12 4l9 16z"/><path d="M12 4v16M9 20l3-5 3 5"/></svg>`,
+    display:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18z" fill="currentColor"/></svg>`,
   };
   window.ICONS = ICONS;
 
@@ -130,6 +147,9 @@
     injectManifest();
     buildNav();
     setActiveNav();
+    iconifyChrome();
+    wrapTables();
+    iconifyEmoji(document.body);
     setupSidebar();
     setupARIAToggle();
     setupBackToTop();
@@ -142,6 +162,103 @@
     setupServiceWorker();
     setupInstallPrompt();
     markStandalone();
+  }
+
+  /* =================== EMOJI → LINE ICONS ===================
+     Emoji render differently on every OS, ignore night-vision / high-contrast
+     colours, and read as dated next to the line icons in the sidebar. Swap an
+     emoji that *starts* a label (callout icon, heading, button, list item…)
+     for the matching line icon, which inherits the text colour. Emoji in the
+     middle of a sentence, ★ ratings and ✓ marks are left alone. */
+  const EMOJI_ICON = {
+    '⚠': 'alert', '🚨': 'alert', '☠': 'alert', '☢': 'nbc', '☣': 'nbc', '💡': 'bulb', '✅': 'check', '✔': 'check',
+    '⛔': 'stop', '🚫': 'stop', '❌': 'stop', '⏱': 'clock', '⏰': 'clock', '⌛': 'clock', '📅': 'calendar', '🗓': 'calendar',
+    '🔗': 'link', '🔥': 'fire', '💧': 'water', '🚰': 'tap', '📖': 'book', '📕': 'book', '📗': 'book', '📘': 'book', '📚': 'books',
+    '🪢': 'knot', '🧭': 'compass', '🩺': 'medical', '🏥': 'medical', '⚕': 'medical', '🩹': 'firstaid', '💉': 'pill', '💊': 'pill',
+    '📋': 'clipboard', '📝': 'clipboard', '📻': 'radio', '📡': 'comms', '📶': 'comms', '☁': 'cloud', '🌧': 'cloud', '🌿': 'leaf', '🌱': 'leaf',
+    '🌲': 'leaf', '🌾': 'leaf', '🍃': 'leaf', '🦙': 'robot', '🌍': 'globe', '🌎': 'globe', '🌏': 'globe', '🗺': 'map', '👤': 'user', '👥': 'users',
+    '🎣': 'hunting', '🏹': 'hunting', '🎯': 'target', '🪓': 'axe', '🏕': 'tent', '⛺': 'tent', '🛡': 'shield', '🏠': 'home', '🏡': 'home',
+    '🛠': 'wrench', '🔧': 'wrench', '🔨': 'hammer', '⚒': 'hammer', '⚙': 'gear', '🔒': 'lock', '🔐': 'lock', '❤': 'heart', '🧠': 'brain',
+    '👶': 'baby', '🤰': 'baby', '☀': 'solar', '🌞': 'solar', '⚖': 'columns', '🏛': 'columns', '🔌': 'energy', '⚡': 'energy', '🔋': 'energy',
+    '💾': 'save', '📥': 'download', '⬇': 'download', '🖨': 'print', '🤖': 'robot', '📄': 'file', '📃': 'file', '📦': 'box', '🎒': 'bag',
+    '🍲': 'food', '🥫': 'food', '🍞': 'food', '🚗': 'car', '🚙': 'car', '🧪': 'flask', '⚗': 'flask', '✂': 'scissors', '🧵': 'scissors',
+    '🐾': 'paw', '🐄': 'paw', '🐔': 'paw', '🐕': 'paw', '🔍': 'search', '🔎': 'search', 'ℹ': 'info', '🏗': 'building', '🧱': 'building',
+    '🗂': 'clipboard', '📊': 'grid4', '💰': 'wallet', '💷': 'wallet', '💵': 'wallet'
+  };
+  const SKIP_TAGS = /^(SCRIPT|STYLE|TEXTAREA|INPUT|SELECT|OPTION|CODE|PRE|SVG|TITLE)$/;
+  // Leading emoji (+ optional variation selector / keycap) and the space after it.
+  const LEAD_EMOJI = /^(\s*)([ℹ☀-➿⬆⬇⌛⏰-⏺]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDEFF])️?\s?/;
+
+  function iconSpan(name, solo) {
+    const s = document.createElement('span');
+    s.className = 'ui-icon' + (solo ? ' ui-icon-solo' : '');
+    s.setAttribute('aria-hidden', 'true');
+    s.innerHTML = ICONS[name];
+    return s;
+  }
+
+  function iconifyEmoji(root) {
+    if (!root) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(n) {
+        for (let p = n.parentNode; p && p !== root; p = p.parentNode) {
+          if (SKIP_TAGS.test(p.nodeName.toUpperCase()) || (p.classList && p.classList.contains('no-iconify'))) return NodeFilter.FILTER_REJECT;
+        }
+        return LEAD_EMOJI.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+      }
+    });
+    const hits = [];
+    while (walker.nextNode()) hits.push(walker.currentNode);
+    hits.forEach(node => {
+      // Only when the emoji starts its element's text (a label), not mid-sentence.
+      const prev = node.previousSibling;
+      if (prev && !(prev.nodeType === 3 && !prev.nodeValue.trim()) && prev.nodeName !== 'BR') return;
+      const m = LEAD_EMOJI.exec(node.nodeValue);
+      const name = EMOJI_ICON[m[2]];
+      if (!name || !ICONS[name]) return;
+      const rest = node.nodeValue.slice(m[0].length);
+      const solo = !rest.trim() && !node.nextSibling;
+      node.parentNode.insertBefore(iconSpan(name, solo), node);
+      node.nodeValue = (m[1] ? ' ' : '') + rest;
+      if (!node.nodeValue) node.remove();
+    });
+  }
+  window.iconifyEmoji = iconifyEmoji;
+
+  /* Header / panel controls: same icons everywhere, whatever the page markup says. */
+  function iconifyChrome() {
+    const set = (el, icon, label) => {
+      if (!el) return;
+      const text = label != null ? label : el.textContent.replace(LEAD_EMOJI, '').trim();
+      el.textContent = '';
+      el.appendChild(iconSpan(icon, !text));
+      if (text) { const l = document.createElement('span'); l.className = 'btn-label'; l.textContent = text; el.appendChild(l); }
+    };
+    set(document.getElementById('menu-toggle'), 'menu', '');
+    set(document.getElementById('sidebar-close'), 'x', '');
+    set(document.getElementById('aria-close'), 'x', '');
+    document.querySelectorAll('.header-actions [data-print], .header-actions [onclick*="print"]').forEach(b => set(b, 'print', 'Print'));
+    const bot = document.getElementById('aria-toggle');
+    if (bot) set(bot, 'robot', 'Bunker Bot');
+    document.querySelectorAll('.aria-avatar').forEach(a => { if (!a.querySelector('svg')) set(a, 'robot', ''); });
+  }
+
+  /* =================== WIDE TABLES =================== */
+  /* Give every table its own horizontal scroller so a wide table scrolls
+     inside itself on a phone instead of making the whole page wider. */
+  function wrapTables() {
+    document.querySelectorAll('main table, .main-content table, .content-wrapper table').forEach(t => {
+      const p = t.parentElement;
+      if (!p || p.classList.contains('table-wrap') || p.classList.contains('table-scroll')) return;
+      const w = document.createElement('div');
+      w.className = 'table-scroll';
+      w.tabIndex = 0;                         // keyboard users can scroll it too
+      w.setAttribute('role', 'region');
+      const cap = t.querySelector('caption, th');
+      w.setAttribute('aria-label', cap ? 'Table: ' + cap.textContent.trim().slice(0, 60) : 'Table');
+      p.insertBefore(w, t);
+      w.appendChild(t);
+    });
   }
 
   /* =================== PWA MANIFEST + IOS META =================== */
@@ -231,7 +348,7 @@
         <div id="search-results" class="search-results" role="listbox"></div>
       </div>`;
 
-    let navHTML = '<ul class="nav-list"><li class="nav-section-label">Navigation</li>';
+    let navHTML = '<ul class="nav-list">';
     NAV_PAGES.forEach(p => {
       if (p.section) navHTML += `<li class="nav-section-label">${p.section}</li>`;
       const href = base + p.href;
@@ -240,15 +357,18 @@
     });
     navHTML += '</ul>';
 
+    /* Footer: the two "grab it now" actions, then small secondary links.
+       (Offline Maps and Download used to be repeated here as well as in the
+       Tools & Library list above.) */
     const footerHTML = `
       <div class="sidebar-footer">
         <a href="${base}quick-reference.html" class="btn btn-danger btn-full">${ICONS.alert} Emergency Card</a>
         <a href="${base}gear.html" class="btn btn-outline btn-full">${ICONS.clipboard} Gear Checklist</a>
-        <a href="${base}maps.html" class="btn btn-ghost btn-full">${ICONS.globe} Offline Maps</a>
-        <a href="${base}ai-setup.html" class="btn btn-ghost btn-full">${ICONS.robot} Bunker Bot</a>
-        <a href="${base}download.html" class="btn btn-ghost btn-full">${ICONS.download} Download / Support</a>
-        <a href="${base}about.html" class="btn btn-ghost btn-full" style="opacity:.7;font-size:.78rem">ⓘ About</a>
-        <a href="${base}changelog.html" class="btn btn-ghost btn-full" style="opacity:.6;font-size:.75rem">${ICONS.changelog} Changelog</a>
+        <div class="sidebar-minor">
+          <a href="${base}ai-setup.html">${ICONS.robot} Bunker Bot setup</a>
+          <a href="${base}about.html">${ICONS.info} About</a>
+          <a href="${base}changelog.html">${ICONS.changelog} Changelog</a>
+        </div>
         <div class="sidebar-live-indicator">
           <span class="sidebar-live-dot"></span>
           <span class="sidebar-live-label">Guide loaded · offline ready</span>
@@ -454,45 +574,97 @@
     }
   }
 
-  /* =================== MODE BAR =================== */
+  /* =================== DISPLAY MODES =================== */
+  /* Colour mode (normal / high-contrast / night-vision red) and text size.
+     Lives behind a "Display" button in the page header instead of a bar that
+     floated over the content; pages without a header keep the floating bar. */
   function setupModeBar() {
-    const bar = document.createElement('div');
-    bar.className = 'mode-bar no-print';
-    bar.innerHTML = `
-      <button data-mode="" title="Normal mode">Normal</button>
-      <button data-mode="mode-hc" title="High contrast">Hi-C</button>
-      <button data-mode="mode-nv" title="Night vision (red)">NV</button>
-      <span style="color:var(--border-hi);margin:0 0.25rem">|</span>
-      <button data-font="" title="Normal font size">A</button>
-      <button data-font="font-lg" title="Large font">A+</button>
-      <button data-font="font-xl" title="Extra large font">A++</button>
-    `;
-    document.body.appendChild(bar);
-
     const savedMode = localStorage.getItem('display-mode') || '';
     const savedFont = localStorage.getItem('font-size') || '';
     if (savedMode) document.body.classList.add(savedMode);
     if (savedFont) document.body.classList.add(savedFont);
 
-    bar.querySelectorAll('[data-mode]').forEach(btn => {
-      if (btn.dataset.mode === savedMode) btn.classList.add('active');
-      btn.addEventListener('click', () => {
-        bar.querySelectorAll('[data-mode]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.body.classList.remove('mode-hc', 'mode-nv');
-        if (btn.dataset.mode) document.body.classList.add(btn.dataset.mode);
-        localStorage.setItem('display-mode', btn.dataset.mode);
+    const controls = `
+      <div class="display-group" role="group" aria-label="Colour mode">
+        <span class="display-label">Colours</span>
+        <div class="seg">
+          <button type="button" data-mode="" title="Normal colours">Normal</button>
+          <button type="button" data-mode="mode-hc" title="High contrast">High contrast</button>
+          <button type="button" data-mode="mode-nv" title="Night vision (red) — keeps your eyes dark-adapted">Night</button>
+        </div>
+      </div>
+      <div class="display-group" role="group" aria-label="Text size">
+        <span class="display-label">Text size</span>
+        <div class="seg">
+          <button type="button" data-font="" title="Normal text" aria-label="Normal text">A</button>
+          <button type="button" data-font="font-lg" title="Large text" aria-label="Large text" style="font-size:1.1em">A</button>
+          <button type="button" data-font="font-xl" title="Extra large text" aria-label="Extra large text" style="font-size:1.25em">A</button>
+        </div>
+      </div>`;
+
+    const anchor = document.querySelector('.header-actions') ||
+                   (document.getElementById('aria-toggle') && document.getElementById('aria-toggle').parentNode) ||
+                   document.querySelector('.top-bar');
+    let root;
+    if (anchor) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'btn btn-sm btn-outline display-btn no-print';
+      btn.setAttribute('aria-haspopup', 'true');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.title = 'Display: colours & text size';
+      btn.appendChild(iconSpan('display', false));
+      const lab = document.createElement('span'); lab.className = 'btn-label'; lab.textContent = 'Display';
+      btn.appendChild(lab);
+      const bot = document.getElementById('aria-toggle');
+      if (bot && bot.parentNode === anchor) anchor.insertBefore(btn, bot); else anchor.appendChild(btn);
+
+      root = document.createElement('div');
+      root.className = 'display-panel no-print';
+      root.hidden = true;
+      root.innerHTML = controls;
+      document.body.appendChild(root);
+
+      const place = () => {
+        const r = btn.getBoundingClientRect();
+        root.style.top = Math.round(r.bottom + 8) + 'px';
+        root.style.right = Math.max(8, Math.round(document.documentElement.clientWidth - r.right)) + 'px';
+      };
+      const close = () => { root.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        if (root.hidden) { place(); root.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
+        else close();
       });
+      document.addEventListener('click', e => { if (!root.hidden && !root.contains(e.target)) close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && !root.hidden) { close(); btn.focus(); } });
+      window.addEventListener('resize', () => { if (!root.hidden) place(); });
+    } else {
+      root = document.createElement('div');
+      root.className = 'mode-bar no-print';
+      root.innerHTML = controls;
+      document.body.appendChild(root);
+    }
+
+    const pick = (attr, cls, key, val) => {
+      root.querySelectorAll(`[${attr}]`).forEach(b => {
+        const on = b.getAttribute(attr) === val;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+      document.body.classList.remove(...cls);
+      if (val) document.body.classList.add(val);
+      try { localStorage.setItem(key, val); } catch (e) {}
+    };
+    root.querySelectorAll('[data-mode]').forEach(b => {
+      const on = b.dataset.mode === savedMode;
+      b.classList.toggle('active', on); b.setAttribute('aria-pressed', String(on));
+      b.addEventListener('click', () => pick('data-mode', ['mode-hc', 'mode-nv'], 'display-mode', b.dataset.mode));
     });
-    bar.querySelectorAll('[data-font]').forEach(btn => {
-      if (btn.dataset.font === savedFont) btn.classList.add('active');
-      btn.addEventListener('click', () => {
-        bar.querySelectorAll('[data-font]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.body.classList.remove('font-lg', 'font-xl');
-        if (btn.dataset.font) document.body.classList.add(btn.dataset.font);
-        localStorage.setItem('font-size', btn.dataset.font);
-      });
+    root.querySelectorAll('[data-font]').forEach(b => {
+      const on = b.dataset.font === savedFont;
+      b.classList.toggle('active', on); b.setAttribute('aria-pressed', String(on));
+      b.addEventListener('click', () => pick('data-font', ['font-lg', 'font-xl'], 'font-size', b.dataset.font));
     });
   }
 

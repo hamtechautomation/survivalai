@@ -28,23 +28,23 @@
     .btn-add:hover { border-color: var(--amber); color: var(--amber); }
     .person-list, .item-list { display: flex; flex-direction: column; gap: .5rem; margin: .75rem 0; }
     .person-card, .item-card { background: var(--bg-3); border: 1px solid var(--border); border-radius: 6px; padding: .6rem .8rem; display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
-    .person-card input, .person-card select, .item-card input, .item-card select { background: var(--bg-4, #1e2820); border: 1px solid var(--border); color: var(--text-0); padding: .3rem .5rem; border-radius: 4px; font-size: .82rem; }
+    .person-card input, .person-card select, .item-card input, .item-card select { background: var(--bg-4, var(--bg-4)); border: 1px solid var(--border); color: var(--text-0); padding: .3rem .5rem; border-radius: 4px; font-size: .82rem; }
     .btn-remove { background: none; border: none; color: var(--red); cursor: pointer; font-size: 1.1rem; padding: 0 .25rem; flex-shrink: 0; }
-    .duration-row { display: flex; gap: .5rem; }
+    .duration-row { display: flex; flex-wrap: wrap; gap: .5rem; }
     .duration-row label { display: flex; align-items: center; gap: .4rem; font-size: .85rem; cursor: pointer; }
     .ref-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: 1rem; }
     .ref-table th { background: var(--bg-3); color: var(--amber); text-align: left; padding: .4rem .6rem; font-size: .75rem; text-transform: uppercase; }
     .ref-table td { padding: .35rem .6rem; border-bottom: 1px solid var(--border); }
     .ref-table tr:hover td { background: var(--bg-3); }
     .green { color: var(--green); } .red { color: var(--red); } .orange { color: var(--orange); } .amber { color: var(--amber); }
-    .tag-green { background: var(--green-dim, #2a5a3c); color: var(--green); padding: .15rem .4rem; border-radius: 3px; font-size: .75rem; }
+    .tag-green { background: var(--green-dim, var(--green-dim)); color: var(--green); padding: .15rem .4rem; border-radius: 3px; font-size: .75rem; }
     .tag-amber { background: var(--amber-dim); color: var(--amber); padding: .15rem .4rem; border-radius: 3px; font-size: .75rem; }
     .tag-orange { background: var(--orange-dim, #6e4020); color: var(--orange); padding: .15rem .4rem; border-radius: 3px; font-size: .75rem; }
     .tag-red { background: var(--red-dim); color: var(--red); padding: .15rem .4rem; border-radius: 3px; font-size: .75rem; }
     .appliance-list { display: grid; gap: .4rem; }
     .appliance-row { display: grid; grid-template-columns: auto 1fr 70px 70px auto; gap: .5rem; align-items: center; background: var(--bg-3); padding: .4rem .6rem; border-radius: 4px; font-size: .83rem; }
     .appliance-row input[type=checkbox] { width: 16px; height: 16px; cursor: pointer; }
-    .appliance-row input[type=number] { background: var(--bg-4, #1e2820); border: 1px solid var(--border); color: var(--text-0); padding: .25rem .4rem; border-radius: 3px; width: 100%; }
+    .appliance-row input[type=number] { background: var(--bg-4, var(--bg-4)); border: 1px solid var(--border); color: var(--text-0); padding: .25rem .4rem; border-radius: 3px; width: 100%; }
     .indicator { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
     .indicator.ok { background: var(--green); }
     .indicator.warn { background: var(--red); }

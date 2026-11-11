@@ -4,6 +4,14 @@
    Zero external dependencies. Works offline.
    ========================================= */
 
+/* === FONTS ===
+   Self-hosted (assets/fonts/, SIL OFL 1.1) so they work offline and from
+   file://. Latin subset, variable weight. Anything outside the subset
+   (symbols, other scripts) falls back to the system font automatically. */
+@font-face { font-family: 'Inter'; font-style: normal; font-display: swap; font-weight: 100 900; src: url('../fonts/inter-latin-wght-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'Bitter'; font-style: normal; font-display: swap; font-weight: 100 900; src: url('../fonts/bitter-latin-wght-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-display: swap; font-weight: 100 800; src: url('../fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+
 /* === RESET & ROOT === */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -67,8 +75,9 @@
   --content-max: 920px;
 
   /* Type */
-  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --mono: 'Courier New', Courier, monospace;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Bitter', Georgia, 'Times New Roman', serif;   /* headings */
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   /* Transitions */
   --ease: 0.2s ease;
@@ -144,6 +153,7 @@ body {
 }
 .logo-icon svg { width: 22px; height: 22px; display: block; }
 .logo-text {
+  font-family: var(--font-display);
   font-size: var(--fs-md);
   font-weight: 700;
   letter-spacing: .03em;
@@ -404,6 +414,7 @@ body {
 /* =============================================
    TYPOGRAPHY
    ============================================= */
+h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.01em; }
 h1 { font-size: var(--fs-2xl); font-weight: 800; color: var(--amber-light); line-height: 1.2; margin-bottom: var(--sp-md); }
 h2 { font-size: var(--fs-xl); font-weight: 700; color: var(--text-0); margin: var(--sp-2xl) 0 var(--sp-md); padding-bottom: var(--sp-sm); border-bottom: 2px solid var(--amber-dim); }
 h3 { font-size: var(--fs-lg); font-weight: 700; color: var(--amber); margin: var(--sp-xl) 0 var(--sp-sm); }
@@ -493,10 +504,13 @@ ul li::marker { content: "▸ "; }
 }
 .steps > li {
   counter-increment: steps;
-  display: flex;
-  gap: var(--sp-md);
+  /* block, not flex: as a flex row every <strong>/<code> inside a step became
+     its own squeezed column, and long ones pushed the page wider on phones */
+  display: block;
+  position: relative;
+  min-height: calc(1.8rem + var(--sp-md) * 2);
   margin-bottom: var(--sp-md);
-  padding: var(--sp-md);
+  padding: var(--sp-md) var(--sp-md) var(--sp-md) calc(var(--sp-md) * 2 + 1.8rem);
   background: var(--bg-3);
   border-radius: 8px;
   border: 1px solid var(--border);
@@ -513,8 +527,9 @@ ul li::marker { content: "▸ "; }
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
+  position: absolute;
+  left: var(--sp-md);
+  top: calc(var(--sp-md) + 1px);
 }
 
 /* =============================================
@@ -529,7 +544,13 @@ ul li::marker { content: "▸ "; }
   flex-wrap: wrap;              /* inline links in a callout must wrap, not push the page wider on phones */
   gap: var(--sp-md);
 }
-.callout-icon { font-size: var(--fs-lg); flex-shrink: 0; margin-top: 2px; }
+.callout-icon { font-size: var(--fs-lg); flex-shrink: 0; margin-top: 2px; line-height: 1; }
+.callout-icon .ui-icon { width: 1.35rem; height: 1.35rem; margin: 0; vertical-align: top; }
+.callout-danger .callout-icon  { color: var(--red); }
+.callout-warning .callout-icon { color: var(--orange); }
+.callout-info .callout-icon    { color: var(--blue); }
+.callout-tip .callout-icon     { color: var(--green); }
+.callout-amber .callout-icon   { color: var(--amber); }
 .callout-content { flex: 1; min-width: 0; }
 .callout-content p { margin-bottom: var(--sp-xs); }
 .callout-content p:last-child { margin-bottom: 0; }
@@ -1988,8 +2009,9 @@ body.font-xl { font-size: 22px; }
 }
 .shelf-pop-close:hover { color: var(--text-0); background: var(--bg-4); }
 .shelf-pop-head { display: flex; gap: 0.75rem; align-items: flex-start; padding-right: 1.75rem; }
+.shelf-pop-cover { flex: 0 0 auto; width: 64px; height: 86px; object-fit: cover; object-position: top; border-radius: 3px; box-shadow: 0 3px 10px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08); }
 .shelf-pop-swatch { flex: 0 0 auto; width: 10px; align-self: stretch; min-height: 2.6rem; border-radius: 2px; }
-.shelf-pop-title { margin: 0; font-size: var(--fs-md); line-height: 1.3; color: var(--amber-light); }
+.shelf-pop-title { font-family: var(--font-display); margin: 0; font-size: var(--fs-md); line-height: 1.3; color: var(--amber-light); }
 .shelf-pop-author { margin-top: 0.15rem; font-size: var(--fs-sm); color: var(--text-2); }
 .shelf-pop-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.7rem 0 0.1rem; }
 .shelf-tag { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.12rem 0.5rem; border-radius: 999px; border: 1px solid var(--border-hi); color: var(--text-2); }
@@ -2032,3 +2054,107 @@ body.mode-nv .shelf-book { --c0: #2a0000 !important; --c1: #440000 !important; c
 body.mode-hc .shelf-book { color: #fff; box-shadow: inset 0 0 0 1px #fff; }
 body.mode-hc .shelf-book-title { font-size: 0.75rem; }
 @media print { .shelf, .shelf-heading, .view-toggle, .shelf-pop { display: none !important; } }
+
+/* =============================================
+   LINE ICONS (replacing emoji — see iconifyEmoji in app.js)
+   ============================================= */
+.ui-icon {
+  display: inline-block;
+  width: 1.05em;
+  height: 1.05em;
+  margin-right: 0.4em;
+  vertical-align: -0.17em;
+  flex-shrink: 0;
+}
+.ui-icon svg { width: 100%; height: 100%; display: block; }
+.ui-icon-solo { margin-right: 0; }
+.btn .ui-icon { width: 15px; height: 15px; margin-right: 0; vertical-align: middle; }
+.btn .ui-icon svg { width: 15px; height: 15px; }
+.btn-icon .ui-icon { width: 20px; height: 20px; margin: 0; }
+.btn-icon .ui-icon svg { width: 20px; height: 20px; }
+.aria-avatar .ui-icon { width: 60%; height: 60%; }
+
+/* =============================================
+   SIDEBAR — secondary links
+   ============================================= */
+.sidebar-minor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.9rem;
+  padding: 0.35rem 0.1rem 0;
+}
+.sidebar-minor a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--fs-xs);
+  color: var(--text-2);
+  text-decoration: none;
+  padding: 0.2rem 0;
+}
+.sidebar-minor a:hover { color: var(--amber); }
+.sidebar-minor svg { width: 13px; height: 13px; }
+
+/* =============================================
+   DISPLAY CONTROL (header button + panel)
+   ============================================= */
+.display-panel {
+  position: fixed;
+  z-index: 960;
+  width: min(300px, calc(100vw - 16px));
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.8rem;
+  background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
+  border: 1px solid var(--border-hi);
+  border-radius: 12px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+}
+.display-panel[hidden] { display: none; }
+.display-group { display: grid; gap: 0.35rem; }
+.display-label { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-2); }
+.seg { display: flex; padding: 3px; gap: 2px; background: var(--bg-0); border: 1px solid var(--border); border-radius: 8px; }
+.seg button {
+  flex: 1;
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-2);
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  padding: 0.45rem 0.4rem;
+  cursor: pointer;
+}
+.seg button:hover { color: var(--text-0); }
+.seg button.active { background: var(--bg-4); color: var(--amber-light); box-shadow: inset 0 0 0 1px var(--border-hi); }
+.seg button:focus-visible { outline: 2px solid var(--amber); outline-offset: 1px; }
+/* Fallback floating bar (pages without a header) reuses the same controls */
+.mode-bar { gap: 1rem; padding: 0.5rem 0.8rem; border-radius: 12px; opacity: 0.85; }
+.mode-bar .display-label { display: none; }
+.mode-bar .seg button { padding: 0.25rem 0.55rem; font-size: var(--fs-xs); }
+
+/* Phones: header buttons go icon-only, except Bunker Bot */
+@media (max-width: 600px) {
+  .header-actions .btn-label { display: none; }
+  .header-actions #aria-toggle .btn-label,
+  .top-bar #aria-toggle .btn-label { display: inline; }
+  .header-actions .btn .ui-icon { width: 17px; height: 17px; }
+  .header-actions .btn .ui-icon svg { width: 17px; height: 17px; }
+}
+
+/* Wide tables scroll inside their own box (wrapTables in app.js) */
+.table-scroll { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-scroll:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.table-scroll > table { margin-top: 0; }
+@media print { .table-scroll { overflow: visible; } }
+
+/* Keep long content inside the column on phones */
+:not(pre) > code { overflow-wrap: anywhere; }
+pre { max-width: 100%; overflow-x: auto; }
+main svg[viewBox][width], .main-content svg[viewBox][width] { max-width: 100%; height: auto; }
+/* Safety net for decorative glows/flashes that bleed past the column edge on
+   phones (e.g. the globe on maps.html). `clip` doesn't create a scroll box,
+   so position: sticky inside still works. */
+@media (max-width: 600px) { .content-wrapper { overflow-x: clip; } }

@@ -89,10 +89,9 @@
     }
 
     .cl-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: .65rem;
-      padding: .3rem 0;
+      display: block;
+      position: relative;
+      padding: .3rem 0 .3rem 5.4rem;
       font-size: .88rem;
       color: var(--text-secondary);
       border-bottom: 1px solid var(--border);
@@ -109,10 +108,15 @@
       text-transform: uppercase;
       letter-spacing: .04em;
       margin-top: 2px;
+      position: absolute;
+      left: 0;
+      top: .4rem;
+      width: 4.7rem;
+      text-align: center;
     }
 
     .tag-new { background: rgba(39,174,96,.15); color: #58d68d; border: 1px solid rgba(39,174,96,.25); }
-    .tag-fix { background: rgba(231,76,60,.12); color: #e74c3c; border: 1px solid rgba(231,76,60,.25); }
+    .tag-fix { background: rgba(231,76,60,.12); color: var(--red); border: 1px solid rgba(231,76,60,.25); }
     .tag-improve { background: rgba(41,128,185,.12); color: #5dade2; border: 1px solid rgba(41,128,185,.25); }
     .tag-content { background: rgba(155,89,182,.12); color: #af7ac5; border: 1px solid rgba(155,89,182,.25); }
 
