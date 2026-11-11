@@ -541,11 +541,11 @@ Build time: 1–2 hours. Cost: near zero.
         <text x="50" y="68" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">room</text>
         <text x="50" y="80" fill="#4d6048" font-size="8" font-family="monospace" text-anchor="middle">temp</text>
 
-        <!-- 2: Black red ~400°F/200°C -->
+        <!-- 2: Faint red ~900–1000°F/480–540°C (visible only in shade) -->
         <rect x="82" y="35" width="60" height="55" fill="#3a0808" rx="3"/>
-        <text x="112" y="56" fill="#c84848" font-size="9" font-family="monospace" text-anchor="middle">Black</text>
+        <text x="112" y="56" fill="#c84848" font-size="9" font-family="monospace" text-anchor="middle">Faint</text>
         <text x="112" y="68" fill="#c84848" font-size="8" font-family="monospace" text-anchor="middle">Red</text>
-        <text x="112" y="80" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">400°F</text>
+        <text x="112" y="80" fill="#8a9e86" font-size="8" font-family="monospace" text-anchor="middle">~950°F</text>
 
         <!-- 3: Dark cherry ~1200°F/650°C -->
         <rect x="144" y="35" width="60" height="55" fill="#6a0808" rx="3"/>
@@ -603,7 +603,7 @@ Build time: 1–2 hours. Cost: near zero.
         <line x1="20" y1="145" x2="540" y2="145" stroke="#243028" stroke-width="1"/>
         <text x="20" y="158" fill="#4d6048" font-size="9" font-family="monospace">68°F</text>
         <text x="200" y="158" fill="#4d6048" font-size="9" font-family="monospace">1400°F / 760°C</text>
-        <text x="380" y="158" fill="#c9a94e" font-size="9" font-family="monospace">1800°F / 980°C</text>
+        <text x="330" y="158" fill="#c9a94e" font-size="9" font-family="monospace">1800°F / 980°C</text>
         <text x="445" y="158" fill="#c9a94e" font-size="9" font-family="monospace">2000°F</text>
 
         <text x="280" y="185" fill="#4d6048" font-size="10" font-family="monospace" text-anchor="middle">Work in subdued light — sunlight washes out heat colors below orange</text>
@@ -618,7 +618,7 @@ Build time: 1–2 hours. Cost: near zero.
         </thead>
         <tbody>
           <tr><td><span class="heat-swatch" style="background:var(--bg-3);"></span>Black heat</td><td>Room temp</td><td>20°C</td><td>Cold work only (filing, drilling, grinding)</td></tr>
-          <tr><td><span class="heat-swatch" style="background:#3a0808;"></span>Black red</td><td>400°F</td><td>200°C</td><td>Too cool to forge; stress can crack tool steel</td></tr>
+          <tr><td><span class="heat-swatch" style="background:#3a0808;"></span>Faint red (only visible in shade)</td><td>~900–1,000°F</td><td>~480–540°C</td><td>Too cool to forge; hammering now can crack tool steel. (Below this steel shows no glow at all — 200–300°C is the tempering-colour range, not a heat colour.)</td></tr>
           <tr><td><span class="heat-swatch" style="background:#6a0808;"></span>Dark cherry</td><td>1,200°F</td><td>650°C</td><td>Too cool for most forging; mild steel bending only</td></tr>
           <tr><td><span class="heat-swatch" style="background:#aa1a1a;"></span>Cherry red</td><td>1,400°F</td><td>760°C</td><td>Light forging on mild steel; bends and curves</td></tr>
           <tr><td><span class="heat-swatch" style="background:#cc3a00;"></span>Bright cherry</td><td>1,600°F</td><td>870°C</td><td>General forging — optimal working range for most steel</td></tr>
@@ -664,6 +664,11 @@ Build time: 1–2 hours. Cost: near zero.
         </tbody>
       </table>
     </div>
+
+    <figure class="dg" id="fig-anvil">
+      <svg viewBox="0 0 530 236" role="img" aria-label="Anvil parts: horn, step, face, hardy hole, pritchel hole and heel"><defs><marker id="ah-anvil" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><path class="dg-line" d="M30 70 Q90 76 120 82 L120 98 L150 98 L150 74 L380 74 L392 80 L392 112 Q330 118 300 140 L300 190 L340 196 L340 206 L150 206 L150 196 L190 190 L190 140 Q160 118 120 108 Q80 96 30 74 Z"/><line class="dg-key-s" x1="150" y1="74" x2="392" y2="74"/><rect class="dg-keyf" x="338" y="70" width="12" height="6"/><circle class="dg-keyf" cx="370" cy="73" r="3"/><path class="dg-guide" d="M60 72 L50 22"/><text class="dg-tb" x="20" y="20">HORN</text><text class="dg-ts" x="20" y="33">bending, rings, scrolls</text><path class="dg-guide" d="M240 74 L210 22"/><text class="dg-tb" x="180" y="20">FACE</text><text class="dg-ts" x="180" y="33">hardened: main forging surface</text><path class="dg-guide" d="M135 98 L50 146"/><text class="dg-tb" x="20" y="144">STEP</text><text class="dg-ts" x="20" y="157">soft: cut here with a chisel</text><path class="dg-guide" d="M344 72 L408 26"/><text class="dg-tb" x="412" y="24">HARDY HOLE</text><text class="dg-ts" x="412" y="37">square: bottom tools</text><path class="dg-guide" d="M370 74 L408 72"/><text class="dg-tb" x="412" y="70">PRITCHEL HOLE</text><text class="dg-ts" x="412" y="83">round: punch through</text><path class="dg-guide" d="M392 100 L408 118"/><text class="dg-tb" x="412" y="116">HEEL</text><text class="dg-ts" x="412" y="129">far end of the face</text><text class="dg-ts dg-mid" x="260" y="228">Keep the hammer face flat to the anvil face — angled blows mark the work and the anvil.</text></svg>
+      <figcaption>Only strike on the <strong>face</strong> and horn. Cut on the soft step (or a cutting plate), never on the hardened face — a chisel through the work will chip it.</figcaption>
+    </figure>
 
     <h3>Hammer Technique</h3>
     <p>Strike with your whole arm, not just the wrist. Let the hammer rebound — fighting the rebound wastes energy and tires you faster than the work itself. Keep the hammer face parallel to the anvil face on every blow. Angled blows move metal sideways and create surface defects. Work quickly: every blow should be intentional. Indecision in front of the anvil wastes heat.</p>

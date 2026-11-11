@@ -2735,3 +2735,52 @@ body.mode-hc .sec-art { --art: #fff; }
 .cpr-sound input { width: 1.1rem; height: 1.1rem; accent-color: #e06060; }
 @media (prefers-reduced-motion: reduce) { .cpr-dial.hit, .cpr-dial.hit .cpr-ring { animation: none; } }
 body.mode-nv .cpr-count { color: #ff6666; }
+
+/* =============================================
+   SECTION DIAGRAMS (.dg) — line drawings inside guide sections.
+   Colours are tokens so Night / High-contrast / print all work.
+   ============================================= */
+.dg { margin: 1.25rem 0 1.5rem; padding: 0.9rem 1rem 0.75rem; background: var(--bg-1); border: 1px solid var(--border-hi); border-radius: 12px; }
+.dg svg { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; overflow: visible; }
+.dg figcaption { margin-top: 0.5rem; font-size: var(--fs-sm); color: var(--text-2); line-height: 1.5; }
+.dg figcaption strong { color: var(--text-1); }
+.dg-line, .dg-thin, .dg-guide, .dg-key-s, .dg-red-s, .dg-blue-s, .dg-green-s, .dg-arrow { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.dg-line  { stroke: var(--text-1); stroke-width: 2; }
+.dg-thin  { stroke: var(--text-2); stroke-width: 1.2; }
+.dg-guide { stroke: var(--text-3); stroke-width: 1.2; stroke-dasharray: 4 4; }
+.dg-arrow { stroke: var(--text-2); stroke-width: 1.4; }
+.dg-ah { fill: var(--text-2); }
+.dg-panel { fill: var(--bg-2); stroke: var(--border-hi); stroke-width: 1; }
+.dg-key   { fill: color-mix(in srgb, var(--amber) 28%, transparent); stroke: var(--amber); stroke-width: 1.8; }
+.dg-key-s { stroke: var(--amber); stroke-width: 2.2; }
+.dg-keyf  { fill: var(--amber); }
+.dg-water { fill: color-mix(in srgb, var(--blue) 30%, transparent); stroke: #6fa3d8; stroke-width: 1.5; }
+.dg-blue-s { stroke: #6fa3d8; stroke-width: 2.2; }
+.dg-red   { fill: color-mix(in srgb, var(--red) 30%, transparent); stroke: #e06a6a; stroke-width: 1.6; }
+.dg-red-s { stroke: #e06a6a; stroke-width: 2.2; }
+.dg-redf  { fill: #e06a6a; }
+.dg-green { fill: color-mix(in srgb, var(--green) 28%, transparent); stroke: #6cc08f; stroke-width: 1.6; }
+.dg-green-s { stroke: #6cc08f; stroke-width: 2.2; }
+.dg-earth { fill: color-mix(in srgb, var(--orange) 22%, transparent); stroke: var(--orange); stroke-width: 1.2; }
+.dg-debris { fill: color-mix(in srgb, #8a6a3a 40%, transparent); stroke: #a8834a; stroke-width: 1.2; }
+.dg-t   { fill: var(--text-1); font: 500 12px var(--font); }
+.dg-tb  { fill: var(--text-0); font: 700 12.5px var(--font); }
+.dg-ts  { fill: var(--text-2); font: 500 10.5px var(--font); }
+.dg-th  { fill: var(--amber-light); font: 800 13px var(--font); letter-spacing: .02em; }
+.dg-big { fill: var(--amber-light); font: 800 20px var(--font); }
+.dg-num { fill: var(--bg-0); font: 800 11px var(--font); }
+.dg-mid { text-anchor: middle; }
+.dg-end { text-anchor: end; }
+body.mode-hc .dg-t, body.mode-hc .dg-ts { fill: #fff; }
+@media print {
+  .dg { background: #fff !important; border: 1px solid #000 !important; padding: 6pt; break-inside: avoid; }
+  .dg svg { max-height: 9cm; }
+  .dg-line, .dg-thin, .dg-arrow, .dg-key-s, .dg-red-s, .dg-blue-s, .dg-green-s { stroke: #000 !important; }
+  .dg-guide { stroke: #666 !important; }
+  .dg-panel { fill: #fff !important; stroke: #000 !important; }
+  .dg-key, .dg-water, .dg-red, .dg-green, .dg-earth, .dg-debris { fill: #e6e6e6 !important; stroke: #000 !important; }
+  .dg-keyf, .dg-redf, .dg-ah { fill: #000 !important; }
+  .dg-t, .dg-tb, .dg-ts, .dg-th, .dg-big { fill: #000 !important; }
+  .dg-num { fill: #fff !important; }
+  .dg figcaption, .dg figcaption strong { color: #000 !important; }
+}

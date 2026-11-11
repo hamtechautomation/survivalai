@@ -85,12 +85,17 @@
 
     <h3>Wiring a Generator Circuit</h3>
     <ul>
-      <li><strong>Rectifier bridge:</strong> 4 × 1N4007 diodes (or a pre-made bridge rectifier); converts pulsing AC to smooth DC</li>
-      <li><strong>Voltage regulator:</strong> LM7812 IC + 2 capacitors — clamps output to 12V regardless of RPM variation</li>
+      <li><strong>Rectifier bridge (only if needed):</strong> a DC treadmill motor already gives DC; a bridge (4 × 1N4007, or a pre-made one) just keeps the polarity right if the motor can spin either way. AC alternators do need one.</li>
+      <li><strong>Charge controller (essential):</strong> an MPPT or PWM solar charge controller rated for the motor’s highest voltage. It regulates charging at 13.8–14.4 V. Do <em>not</em> use a 12 V regulator chip such as the LM7812: 12 V cannot charge a 12 V battery, it handles little more than 1 A, and a 90 V motor exceeds its input limit.</li>
       <li><strong>Blocking diode:</strong> 1N5408 (3A rated) in series — prevents battery current flowing back into motor at rest</li>
       <li><strong>Ammeter:</strong> optional but useful — shows you are actually charging</li>
       <li><strong>Fuse:</strong> 10A blade fuse between output and battery positive terminal</li>
     </ul>
+
+    <figure class="dg" id="fig-pedalchain">
+      <svg viewBox="0 0 456 142" role="img" aria-label="Pedal generator charging chain: pedals, motor, blocking diode, charge controller, fuse, battery"><defs><marker id="ah-pedalchain" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><rect class="dg-panel" x="4" y="30" width="66" height="62" rx="8"/><text class="dg-tb dg-mid" x="37" y="52">Pedals</text><text class="dg-ts dg-mid" x="37" y="68">roller or</text><text class="dg-ts dg-mid" x="37" y="81">chain drive</text><path class="dg-arrow" d="M70 61 L79 61" marker-end="url(#ah-pedalchain)"/><rect class="dg-panel" x="80" y="30" width="66" height="62" rx="8"/><text class="dg-tb dg-mid" x="113" y="52">DC motor</text><text class="dg-ts dg-mid" x="113" y="68">e.g. from a</text><text class="dg-ts dg-mid" x="113" y="81">treadmill</text><path class="dg-arrow" d="M146 61 L155 61" marker-end="url(#ah-pedalchain)"/><rect class="dg-panel" x="156" y="30" width="66" height="62" rx="8"/><text class="dg-tb dg-mid" x="189" y="52">Diode</text><text class="dg-ts dg-mid" x="189" y="68">blocks</text><text class="dg-ts dg-mid" x="189" y="81">back-flow</text><path class="dg-arrow" d="M222 61 L231 61" marker-end="url(#ah-pedalchain)"/><rect class="dg-key" x="232" y="30" width="66" height="62" rx="8"/><text class="dg-tb dg-mid" x="265" y="52">Charge</text><text class="dg-ts dg-mid" x="265" y="68">controller</text><text class="dg-ts dg-mid" x="265" y="81">MPPT/PWM</text><path class="dg-arrow" d="M298 61 L307 61" marker-end="url(#ah-pedalchain)"/><rect class="dg-panel" x="308" y="30" width="66" height="62" rx="8"/><text class="dg-tb dg-mid" x="341" y="52">Fuse</text><text class="dg-ts dg-mid" x="341" y="68">10 A, at</text><text class="dg-ts dg-mid" x="341" y="81">battery +</text><path class="dg-arrow" d="M374 61 L383 61" marker-end="url(#ah-pedalchain)"/><rect class="dg-panel" x="384" y="30" width="66" height="62" rx="8"/><text class="dg-tb dg-mid" x="417" y="52">Battery</text><text class="dg-ts dg-mid" x="417" y="68">12 V</text><text class="dg-ts dg-mid" x="417" y="81">deep-cycle</text><text class="dg-t dg-mid" x="226" y="116">The controller does the regulating: it must accept the motor’s top voltage</text><text class="dg-t dg-mid" x="226" y="132">and charge at 13.8–14.4 V. Never wire a motor straight to a battery.</text><text class="dg-th dg-mid" x="226" y="18">Pedal power → battery, in this order</text></svg>
+      <figcaption>A treadmill motor is already DC, so a rectifier is only needed if the motor can spin backwards. A <strong>12 V regulator chip (e.g. LM7812) cannot charge a 12 V battery</strong> — charging needs 13.8–14.4 V — and handles little more than 1 A.</figcaption>
+    </figure>
 
     <h3>Bicycle Pedal Generator</h3>
     <p>Rear wheel friction-drives a roller which spins the motor shaft. Alternatively, a chain from the bottom bracket sprocket drives the motor directly (more efficient, requires fabrication).</p>
@@ -105,7 +110,7 @@
           <tr><td>Friction roller (25mm steel rod)</td><td>1</td><td>£5</td><td>Any round steel bar, turned on lathe or used as-is</td></tr>
           <tr><td>V-belt + pulleys</td><td>1 set</td><td>£12</td><td>Chain and sprockets from another bicycle</td></tr>
           <tr><td>Bridge rectifier (50A)</td><td>1</td><td>£3</td><td>4 × 1N4007 diodes + heatshrink</td></tr>
-          <tr><td>LM7812 voltage regulator + heatsink</td><td>1</td><td>£2</td><td>MPPT charge controller (better option)</td></tr>
+          <tr><td>Charge controller (PWM or MPPT, rated above the motor’s top voltage)</td><td>1</td><td>£15–40</td><td>Salvaged from a solar kit</td></tr>
           <tr><td>12V lead-acid battery (100Ah)</td><td>1</td><td>£60–80</td><td>Car battery (less deep-cycle capacity)</td></tr>
           <tr><td>MPPT charge controller (12V)</td><td>1</td><td>£20</td><td>PWM controller (cheaper, less efficient)</td></tr>
         </tbody>
@@ -361,7 +366,7 @@
     </ul>
 
     <h3>Blade Design</h3>
-    <p>Use 3 blades for stability (2-blade wobbles, 4+ adds weight without proportional gain). Blade profile: curved on the front (high-pressure), flat on the back (low-pressure) — this creates lift, like an aircraft wing rotating about a vertical axis.</p>
+    <p>Use 3 blades for stability (2-blade wobbles, 4+ adds weight without proportional gain). Blade profile: an aerofoil like an aircraft wing — the curved side is the low-pressure (suction) side and the flatter side the higher-pressure side; the pressure difference creates lift that turns the rotor.</p>
 
     <figure class="svg-diagram">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280">
@@ -370,8 +375,8 @@
         <!-- Aerofoil cross-section -->
         <text x="300" y="50" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">AEROFOIL CROSS-SECTION (view from tip)</text>
         <path d="M 80 120 C 100 85 260 85 380 105 C 420 110 440 118 440 125 C 440 132 390 140 350 142 C 200 148 100 142 80 120 Z" fill="#1c2620" stroke="#c9a94e" stroke-width="2"/>
-        <text x="260" y="98" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="8">CURVED FACE (high pressure)</text>
-        <text x="260" y="148" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">FLAT BACK (low pressure)</text>
+        <text x="260" y="98" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="8">CURVED FACE (low pressure — suction side)</text>
+        <text x="260" y="148" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">FLATTER FACE (higher pressure)</text>
         <text x="65" y="124" text-anchor="end" fill="#9a9488" font-family="monospace" font-size="8">LEADING EDGE</text>
         <text x="460" y="124" text-anchor="start" fill="#9a9488" font-family="monospace" font-size="8">TRAILING EDGE</text>
         <!-- Lift arrow -->
@@ -386,20 +391,20 @@
         <!-- Root section (30°) -->
         <rect x="80" y="215" width="40" height="14" rx="2" fill="#1c2620" stroke="#c9a94e" stroke-width="1.5" transform="rotate(-30, 100, 222)"/>
         <text x="100" y="265" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="9">ROOT</text>
-        <text x="100" y="275" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="8">30° pitch</text>
+        <text x="100" y="275" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="8">≈25° (steep)</text>
         <!-- Mid section -->
         <rect x="220" y="220" width="40" height="14" rx="2" fill="#1c2620" stroke="#8a7035" stroke-width="1.5" transform="rotate(-22, 240, 227)"/>
         <text x="240" y="265" text-anchor="middle" fill="#8a7035" font-family="monospace" font-size="9">MID</text>
-        <text x="240" y="275" text-anchor="middle" fill="#8a7035" font-family="monospace" font-size="8">22° pitch</text>
+        <text x="240" y="275" text-anchor="middle" fill="#8a7035" font-family="monospace" font-size="8">≈10°</text>
         <!-- Tip section (15°) -->
         <rect x="380" y="223" width="40" height="14" rx="2" fill="#1c2620" stroke="#27ae60" stroke-width="1.5" transform="rotate(-15, 400, 230)"/>
         <text x="400" y="265" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="9">TIP</text>
-        <text x="400" y="275" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">15° pitch</text>
+        <text x="400" y="275" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">≈3–5° (nearly flat)</text>
         <!-- Arrow showing twist direction -->
         <path d="M 130 230 Q 265 210 370 228" fill="none" stroke="#9a9488" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#sarr)"/>
         <text x="250" y="205" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">twist decreases root → tip</text>
       </svg>
-      <figcaption>Top: aerofoil cross-section — curved leading face creates lift. Bottom: blade twist from 30° at root to 15° at tip compensates for the different relative wind speeds experienced at different radii.</figcaption>
+      <figcaption>Top: aerofoil cross-section — curved leading face creates lift. Bottom: blade twist from roughly 25° at the root to just a few degrees at the tip compensates for the different relative wind speeds experienced at different radii.</figcaption>
     </figure>
 
     <h3>Materials for Blades</h3>
