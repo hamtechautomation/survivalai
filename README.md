@@ -2,7 +2,7 @@
 
 ![The Last Light Survival Guide](assets/og-image.png)
 
-> **A complete, fully-offline survival library — 27 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
+> **A complete, fully-offline survival library — 28 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
 
 ### See it in action
 
