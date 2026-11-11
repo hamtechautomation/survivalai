@@ -82,6 +82,25 @@ follows the card. Change both together if a reviewer advises it.
 
 ---
 
+## Deadly lookalikes, side by side
+
+Three comparison figures. The two plant figures are in Climate (`#lookalikes`, after the
+illustrated plant cards). The mushroom figure is in Food & Water, under the chanterelle
+entry. Each figure leads with the dangerous plant's tell-tale features and states that
+no single feature proves a plant is safe.
+
+| Figure (`id`) | Edible vs lookalikes | Features shown | Checked against |
+|---|---|---|---|
+| `fig-look-garlic` | Wild garlic vs lords-and-ladies vs lily of the valley | Ramsons: garlic smell, one leaf per stalk, soft matt pointed leaf, white star umbel. Arum: no smell, arrow-shaped glossy leaf, branching net veins, often dark spots, red berry spike later. Lily of the valley: no smell, usually 2 leaves sheathing one stem, white bells hanging on one side. Caption warns that garlic smell lingers on the fingers | Woodland Trust; RHS; Kew Plants of the World; Mabey *Food for Free* |
+| `fig-look-umbel` | Wild carrot vs poison hemlock vs hemlock water dropwort | Daucus: hairy stem, long forked bracts ("ruff"), often a dark central floret, carrot smell, "bird's nest" seedhead. Conium: smooth hairless stem, purple blotches, powdery bloom, mousy smell, tall. Oenanthe crocata: wet ground, grooved hollow stem, pale finger-like tubers, yellowish sap from cut root, parsley smell. Caption: avoid all white umbellifers without expert confirmation | Botanical Society of Britain & Ireland; Poisonous Plants in Britain (HMSO); Kew |
+| `fig-look-chanterelle` | Chanterelle vs false chanterelle vs jack-o'-lantern | Cantharellus: blunt forked ridges running down the stem, pale flesh, on soil, fruity smell. Hygrophoropsis: thin crowded forking true gills, deeper orange, on conifer litter or wood chip (causes stomach upset). Omphalotus: sharp true gills, tight clusters on wood or buried roots, orange flesh throughout, gills may glow (toxic, violent vomiting) | British Mycological Society; Phillips *Mushrooms*; First Nature |
+
+⚑ **needs expert review:** all three lookalike figures. A forager or botanist should confirm
+the drawings aren't misleading at phone size. Wild carrot is labelled "edible root",
+but the caption says not to eat any white umbellifer without expert confirmation.
+
+---
+
 ## Corrections made while checking
 
 | Where | Was | Now | Why |

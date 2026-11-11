@@ -2781,6 +2781,27 @@ body.mode-nv .cpr-count { color: #ff6666; }
 .dg-mid { text-anchor: middle; }
 .dg-end { text-anchor: end; }
 body.mode-hc .dg-t, body.mode-hc .dg-ts { fill: #fff; }
+/* lookalike comparisons */
+.dg-it { font-style: italic; }
+.dg-tb-sm { font-size: 11px; }
+.dg-keyt { fill: var(--text-0); font: 700 11px var(--font); }
+.dg-ok, .dg-bad { font: 800 10.5px var(--font); letter-spacing: .06em; text-anchor: middle; }
+.dg-ok { fill: #6cc08f; } .dg-bad { fill: #ff7b7b; }
+.dg-okbg { fill: color-mix(in srgb, var(--green) 18%, transparent); stroke: #6cc08f; stroke-width: 1; }
+.dg-badbg { fill: color-mix(in srgb, var(--red) 20%, transparent); stroke: #e06a6a; stroke-width: 1; }
+.dg-white { fill: #f4f1e8; stroke: var(--text-2); stroke-width: .8; }
+.dg-spot, .dg-dark { fill: #3a1f2e; stroke: var(--text-2); stroke-width: .6; }
+.dg-stem { fill: color-mix(in srgb, var(--green) 30%, transparent); stroke: #6cc08f; stroke-width: 1.4; }
+.dg-blotch { fill: #9a4a8a; }
+.dg-root { fill: #e9e2cf; stroke: var(--text-2); stroke-width: 1.2; }
+.dg-yellow { fill: #f2c94c; stroke: #c9a227; stroke-width: 1; }
+.dg-cap { fill: #e8b03a; stroke: #b07d1a; stroke-width: 1.4; stroke-linejoin: round; }
+.dg-ridge { fill: none; stroke: #9a6a10; stroke-width: 2.2; stroke-linecap: round; }
+.dg-gill { stroke: #8a4a08; stroke-width: 1; }
+.dg-flesh-pale { fill: #fbf2d6; stroke: none; }
+.dg-flesh-orange { fill: #f08a24; stroke: none; }
+.dg-wood { fill: color-mix(in srgb, #8a6a3a 50%, transparent); stroke: #a8834a; stroke-width: 1.2; }
+.dg-wood-s { stroke: #a8834a; stroke-width: 2; stroke-linecap: round; }
 @media print {
   .dg { background: #fff !important; border: 1px solid #000 !important; padding: 6pt; break-inside: avoid; }
   .dg svg { max-height: 9cm; }
@@ -2791,5 +2812,11 @@ body.mode-hc .dg-t, body.mode-hc .dg-ts { fill: #fff; }
   .dg-keyf, .dg-redf, .dg-ah { fill: #000 !important; }
   .dg-t, .dg-tb, .dg-ts, .dg-th, .dg-big { fill: #000 !important; }
   .dg-num { fill: #fff !important; }
+  .dg-ok, .dg-bad, .dg-keyt { fill: #000 !important; }
+  .dg-okbg, .dg-badbg, .dg-white, .dg-root, .dg-flesh-pale { fill: #fff !important; stroke: #000 !important; }
+  .dg-stem, .dg-cap, .dg-wood, .dg-yellow { fill: #e6e6e6 !important; stroke: #000 !important; }
+  .dg-flesh-orange, .dg-blotch { fill: #999 !important; }
+  .dg-spot, .dg-dark { fill: #000 !important; }
+  .dg-ridge, .dg-gill, .dg-wood-s { stroke: #000 !important; }
   .dg figcaption, .dg figcaption strong { color: #000 !important; }
 }
