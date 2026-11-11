@@ -1,5 +1,5 @@
 /* The Last Light Survival Guide — Service Worker v4 */
-const CACHE = 'last-light-v74';
+const CACHE = 'last-light-v75';
 
 /* Pre-cache: all HTML, CSS, JS, icons, manifest.
    pdf-chunks.json (~30MB) is intentionally excluded from pre-cache to avoid
@@ -97,6 +97,7 @@ const PRECACHE = [
   '/assets/js/bookshelf.js',
   '/assets/js/library-data.js',
   '/assets/js/emergency.js',
+  '/assets/js/emergency-figs.js',
   '/assets/js/tools.js',
   '/assets/js/shared-progress.js',
   '/assets/js/skills-data.js',

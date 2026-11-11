@@ -98,16 +98,19 @@
   </aside>
 
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/emergency-figs.js"></script>
   <script src="assets/js/emergency.js"></script>
   <script>
   /* Cards come straight from emergency mode's data, so print and screen
      never disagree. */
   (function () {
     var cards = (window.LastLight && window.LastLight.emergencyData) || [];
+    var FIGS = (window.LastLight && window.LastLight.emergencyFigs) || {};
     var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
     document.getElementById('pe-cards').innerHTML = cards.map(function (c) {
       return '<article class="pe-card pe-' + c.tone + '"><h2>' + esc(c.title) + '</h2><ol>' +
         c.steps.map(function (s) { return '<li><strong>' + esc(s[0]) + '</strong>' + (s[1] ? ' ' + esc(s[1]) : '') + '</li>'; }).join('') + '</ol>' +
+        (c.fig && FIGS[c.fig] ? '<figure class="ef">' + FIGS[c.fig].svg + '</figure>' : '') +
         (c.dont && c.dont.length ? '<p class="pe-dont"><b>Do not:</b> ' + c.dont.map(esc).join(' ') + '</p>' : '') +
         (c.watch ? '<p class="pe-watch"><b>Watch for:</b> ' + esc(c.watch) + '</p>' : '') +
         '<p class="pe-src">Full detail: ' + esc(c.moreLabel) + '</p></article>';

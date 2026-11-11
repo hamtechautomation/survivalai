@@ -16,7 +16,7 @@
 
   var CARDS = [
     {
-      id: 'bleeding', title: 'Heavy bleeding', tile: 'Blood pouring or spurting', icon: 'drop', tone: 'red',
+      id: 'bleeding', title: 'Heavy bleeding', tile: 'Blood pouring or spurting', icon: 'drop', tone: 'red', fig: 'tourniquet',
       more: 'sections/medical.html#wound-care', moreLabel: 'Wound care & bleeding control',
       steps: [
         ['Press hard, right on the wound.', 'Use a cloth, clothing or your hand. Press firmly and keep pressing for 10 minutes — do not lift to look. If blood soaks through, add more cloth on top and keep pressing.'],
@@ -29,7 +29,7 @@
       watch: 'Shock: pale, cold, sweaty skin, fast weak pulse, confusion. Get them to help urgently.'
     },
     {
-      id: 'cpr', title: 'Not breathing', tile: 'Unresponsive — start CPR', icon: 'heart', tone: 'red',
+      id: 'cpr', title: 'Not breathing', tile: 'Unresponsive — start CPR', icon: 'heart', tone: 'red', fig: 'cpr', beat: true,
       more: 'sections/medical.html#cpr', moreLabel: 'CPR & resuscitation',
       steps: [
         ['Check they’re safe to reach, then shout and tap their shoulders.', 'No response? Shout for help. Send someone to call emergency services and fetch a defibrillator (AED) if one exists.'],
@@ -105,7 +105,7 @@
       watch: 'Every minute counts — aim to bring them down within 30 minutes.'
     },
     {
-      id: 'seizure', title: 'Seizure', tile: 'Fitting, shaking, jerking', icon: 'brain', tone: 'amber',
+      id: 'seizure', title: 'Seizure', tile: 'Fitting, shaking, jerking', icon: 'brain', tone: 'amber', fig: 'recovery',
       more: 'sections/medical.html#seizures', moreLabel: 'Seizures',
       steps: [
         ['Note the time it started.', 'Most stop on their own within 3 minutes.'],
@@ -242,22 +242,100 @@
       }).join('') + '</div>' +
       '<p class="sos-foot"><a href="' + base + 'print-essentials.html">Print all of these</a> · <a href="' + base + 'quick-reference.html">Printable Emergency Card</a> · These steps are a summary — not a substitute for training.</p>';
   }
+  function figure(c) {
+    var F = (window.LastLight && window.LastLight.emergencyFigs) || {};
+    var f = c.fig && F[c.fig];
+    return f ? '<figure class="ef">' + f.svg + '<figcaption>' + esc(f.caption) + '</figcaption></figure>' : '';
+  }
   function card(c) {
     return '<article class="sos-card sos-' + c.tone + '">' +
       '<h3 class="sos-title">' + esc(c.title) + '</h3>' +
+      (c.beat ? '<div class="cpr-beat-host"></div>' : '') +
       '<ol class="sos-steps">' + c.steps.map(function (s) {
         return '<li><strong>' + esc(s[0]) + '</strong>' + (s[1] ? ' <span>' + esc(s[1]) + '</span>' : '') + '</li>';
       }).join('') + '</ol>' +
+      figure(c) +
       (c.dont && c.dont.length ? '<div class="sos-dont"><h4>' + ICON('stop') + 'Do not</h4><ul>' + c.dont.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul></div>' : '') +
       (c.watch ? '<div class="sos-watch"><h4>' + ICON('info') + 'Watch for</h4><p>' + esc(c.watch) + '</p></div>' : '') +
       '<a class="sos-more" href="' + base + c.more + '">Full detail: ' + esc(c.moreLabel) + ' →</a>' +
       '</article>';
   }
+  /* ── CPR beat guide ─────────────────────────────────────────────────
+     Pulses at 110 a minute and counts 30 compressions, then "2 breaths",
+     then repeats. Optional click sound. Keeps the screen awake while it
+     runs (Wake Lock), so the phone doesn't sleep mid-CPR. */
+  var beat = null;
+  function stopBeat() {
+    if (!beat) return;
+    clearInterval(beat.timer); clearTimeout(beat.pause);
+    if (beat.lock) { try { beat.lock.release(); } catch (e) {} }
+    if (beat.host) {
+      beat.host.classList.remove('running');
+      var b = beat.host.querySelector('.cpr-start'); if (b) b.textContent = 'Start beat guide';
+      beat.host.querySelector('.cpr-count').textContent = '30';
+      beat.host.querySelector('.cpr-phase').textContent = 'pushes, then 2 breaths';
+    }
+    beat = null;
+  }
+  function tick(freq, ms) {
+    if (!beat || !beat.sound) return;
+    try {
+      var ac = beat.ac || (beat.ac = new (window.AudioContext || window.webkitAudioContext)());
+      var o = ac.createOscillator(), g = ac.createGain();
+      o.frequency.value = freq; o.type = 'square';
+      g.gain.setValueAtTime(0.12, ac.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + ms / 1000);
+      o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime + ms / 1000);
+    } catch (e) {}
+  }
+  function mountBeat(host) {
+    host.innerHTML =
+      '<div class="cpr-beat">' +
+        '<div class="cpr-dial" aria-hidden="true"><span class="cpr-ring"></span><span class="cpr-count">30</span></div>' +
+        '<div class="cpr-side">' +
+          '<p class="cpr-phase" aria-live="polite">pushes, then 2 breaths</p>' +
+          '<button type="button" class="cpr-start">Start beat guide</button>' +
+          '<label class="cpr-sound"><input type="checkbox"> Click sound</label>' +
+        '</div>' +
+      '</div>';
+    var btn = host.querySelector('.cpr-start'), count = host.querySelector('.cpr-count'),
+        phase = host.querySelector('.cpr-phase'), dial = host.querySelector('.cpr-dial'),
+        snd = host.querySelector('.cpr-sound input');
+    snd.addEventListener('change', function () { if (beat) beat.sound = snd.checked; });
+    btn.addEventListener('click', function () {
+      if (beat) { stopBeat(); return; }
+      beat = { host: host, n: 0, sound: snd.checked };
+      host.classList.add('running');
+      btn.textContent = 'Stop';
+      if (navigator.wakeLock) navigator.wakeLock.request('screen').then(function (l) { if (beat) beat.lock = l; else l.release(); }).catch(function () {});
+      function pushes() {
+        beat.n = 0; phase.textContent = 'Push hard and fast';
+        beat.timer = setInterval(function () {
+          if (!beat) return;
+          beat.n++;
+          count.textContent = beat.n;
+          dial.classList.remove('hit'); void dial.offsetWidth; dial.classList.add('hit');
+          tick(beat.n === 30 ? 1320 : 880, 45);
+          if (beat.n >= 30) {
+            clearInterval(beat.timer);
+            phase.textContent = 'Give 2 breaths';
+            count.textContent = '2';
+            host.classList.add('breaths');
+            beat.pause = setTimeout(function () { if (!beat) return; host.classList.remove('breaths'); pushes(); }, 5000);
+          }
+        }, 545);                                   // 110 per minute
+      }
+      pushes();
+    });
+  }
+
   function show(id) {
     var c = null;
     for (var i = 0; i < CARDS.length; i++) if (CARDS[i].id === id) c = CARDS[i];
     var body = root.querySelector('.sos-body');
+    stopBeat();
     body.innerHTML = c ? card(c) : picker();
+    var bh = body.querySelector('.cpr-beat-host'); if (bh) mountBeat(bh);
     root.querySelector('.sos-back').hidden = !c;
     root.classList.toggle('is-card', !!c);
     root.querySelector('.sos-h span').textContent = c ? c.title : 'Emergency';
@@ -278,6 +356,7 @@
   }
   function close(keepHash) {
     if (!root || root.hidden) return;
+    stopBeat();
     root.hidden = true;
     document.documentElement.classList.remove('sos-open');
     if (keepHash !== true) { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }

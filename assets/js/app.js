@@ -161,7 +161,9 @@
     ensureSearch();
     iconifyChrome();
     wrapTables();
+    setupSectionArt();
     setupOnThisPage();
+    setupReveal();
     setupPalette();
     setupEmergency();
     iconifyEmoji(document.body);
@@ -544,12 +546,8 @@
      emergency.js is loaded on first use (and pre-cached for offline). */
   function loadEmergency() {
     if (window.LastLight && window.LastLight._emergencyReady) return window.LastLight._emergencyReady;
-    const p = new Promise((resolve, reject) => {
-      const sc = document.createElement('script');
-      sc.src = SITE_BASE + 'assets/js/emergency.js';
-      sc.onload = () => resolve(); sc.onerror = reject;
-      document.body.appendChild(sc);
-    });
+    // Diagrams first (cards render them), then the cards.
+    const p = loadScript('emergency-figs.js').catch(() => {}).then(() => loadScript('emergency.js'));
     window.LastLight._emergencyReady = p;
     return p;
   }
@@ -577,6 +575,94 @@
     // Warm the cache so it's there offline even if never opened online.
     if ('requestIdleCallback' in window) requestIdleCallback(() => loadEmergency().catch(() => {}), { timeout: 4000 });
     else setTimeout(() => loadEmergency().catch(() => {}), 2500);
+  }
+
+  /* =================== SECTION BANNER ART =================== */
+  /* A small animated scene on every section header, generated from the
+     page's own menu icon and its group's colour: drifting contour lines
+     (a map), a glowing badge, rising embers. Pure SVG + CSS, no images. */
+  const GROUP_TONE = {
+    'Core Survival': 'amber', 'Knowledge & Skills': 'blue', 'Homesteading & Animals': 'green',
+    'Threats & Disasters': 'red', 'Trades & Materials': 'orange', 'Community & Mind': 'violet', 'Tools & Library': 'teal'
+  };
+  function seeded(str) {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return () => { h ^= h << 13; h ^= h >>> 17; h ^= h << 5; return ((h >>> 0) % 10000) / 10000; };
+  }
+  function contour(cx, cy, r, rnd, wob) {
+    const n = 48, a = [rnd() * 6, rnd() * 6, rnd() * 6], pts = [];
+    for (let i = 0; i < n; i++) {
+      const t = i / n * Math.PI * 2;
+      const k = 1 + wob * (0.5 * Math.sin(3 * t + a[0]) + 0.3 * Math.sin(5 * t + a[1]) + 0.2 * Math.sin(2 * t + a[2]));
+      pts.push([cx + Math.cos(t) * r * 1.35 * k, cy + Math.sin(t) * r * k]);
+    }
+    let d = `M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+    for (let i = 0; i < n; i++) {           // smooth closed curve through the points
+      const p0 = pts[(i - 1 + n) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+      const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
+      const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+      d += ` C${c1[0].toFixed(1)} ${c1[1].toFixed(1)} ${c2[0].toFixed(1)} ${c2[1].toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+    }
+    return d + 'Z';
+  }
+  function setupSectionArt() {
+    const cur = currentNavPage();
+    if (!cur || cur.id === 'home') return;
+    const header = document.querySelector('.content-wrapper .section-header, .content-wrapper .section-hero');
+    if (!header || header.querySelector('.sec-art')) return;
+    const rnd = seeded(cur.id);
+    const cx = 210, cy = 82;
+    let rings = '';
+    for (let i = 0; i < 7; i++) {
+      const r = 22 + i * 15 + rnd() * 4;
+      rings += `<path class="sa-ring" style="--d:${(18 + i * 7 + rnd() * 10).toFixed(1)}s;--o:${(0.5 - i * 0.055).toFixed(2)}" d="${contour(cx, cy, r, rnd, 0.08 + i * 0.012)}"/>`;
+    }
+    let embers = '';
+    for (let i = 0; i < 9; i++) {
+      embers += `<circle class="sa-ember" cx="${(cx - 90 + rnd() * 180).toFixed(0)}" cy="${(150 + rnd() * 10).toFixed(0)}" r="${(1 + rnd() * 1.6).toFixed(1)}" style="--t:${(5 + rnd() * 6).toFixed(1)}s;--dl:${(-rnd() * 10).toFixed(1)}s;--dx:${(rnd() * 30 - 15).toFixed(0)}px"/>`;
+    }
+    const icon = (cur.icon || ICONS.book).replace('<svg ', `<svg x="${cx - 21}" y="${cy - 21}" width="42" height="42" class="sa-icon" `);
+    const art = document.createElement('div');
+    art.className = 'sec-art';
+    art.setAttribute('aria-hidden', 'true');
+    art.dataset.tone = GROUP_TONE[cur.group] || 'amber';
+    art.innerHTML = `<svg viewBox="0 0 320 164" preserveAspectRatio="xMidYMid meet">
+      <defs><radialGradient id="sa-glow"><stop offset="0" stop-color="currentColor" stop-opacity=".55"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></radialGradient></defs>
+      <g class="sa-rings">${rings}</g>
+      <circle class="sa-halo" cx="${cx}" cy="${cy}" r="58" fill="url(#sa-glow)"/>
+      <circle class="sa-badge" cx="${cx}" cy="${cy}" r="33"/>
+      <circle class="sa-badge-ring" cx="${cx}" cy="${cy}" r="39"/>
+      ${icon}
+      <g class="sa-embers">${embers}</g>
+    </svg>`;
+    header.classList.add('has-sec-art');
+    header.insertBefore(art, header.firstChild);
+  }
+
+  /* =================== SCROLL REVEAL =================== */
+  /* Content eases up as it scrolls into view. Off for "reduce motion",
+     printing, and anything already on screen when the page loads. */
+  function setupReveal() {
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const wrap = document.querySelector('.content-wrapper');
+    if (!wrap) return;
+    const targets = wrap.querySelectorAll('.callout, .card, .steps > li, .table-wrap, .table-scroll, .toc, .pdf-card, .zim-card, .install-card, .diagram, figure, .shelf, section > h2, .section-card');
+    const vh = window.innerHeight;
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('rv-in'); io.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+    let n = 0;
+    targets.forEach(el => {
+      if (el.closest('.otp-bar, .sos, .palette')) return;
+      if (el.getBoundingClientRect().top < vh) return;          // already visible: leave alone
+      el.classList.add('rv');
+      if (el.matches('.steps > li')) el.style.setProperty('--rv-d', Math.min([...el.parentNode.children].indexOf(el), 5) * 60 + 'ms');
+      io.observe(el); n++;
+    });
+    if (n) document.documentElement.classList.add('rv-on');
+    // Safety: never leave anything hidden (e.g. jumping to an anchor, find-in-page).
+    window.addEventListener('beforeprint', () => document.querySelectorAll('.rv').forEach(el => el.classList.add('rv-in')));
   }
 
   /* =================== WIDE TABLES =================== */
