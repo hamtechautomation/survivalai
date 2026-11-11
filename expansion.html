@@ -257,6 +257,52 @@ document.getElementById('tier1').innerHTML=TIER1.map(card).join('');
 document.getElementById('tier2').innerHTML=TIER2.map(card).join('');
 document.getElementById('maps').innerHTML=MAPS.map(card).join('');
 </script>
+<script src="assets/js/bookshelf.js"></script>
+<script>
+/* Bookshelf view of the archives — hover / tap a spine for the blurb. */
+(function(){
+  if(!window.Bookshelf) return;
+  // Rough size in GB → spine thickness (log scale, so 20 MB and 200 GB both read sensibly).
+  function gb(s){
+    var m=/([\d.]+)(?:\s*[–-]\s*[\d.]+)?\s*(MB|GB)/i.exec(s||''); if(!m) return 2;
+    var v=parseFloat(m[1]); return m[2].toUpperCase()==='MB'? v/1024 : v;
+  }
+  function hue(n){
+    n=n.toLowerCase();
+    if(/med|doctor/.test(n)) return 'red';
+    if(/wikipedia/.test(n)) return 'navy';
+    if(/gutenberg|book|dictionary|wiktionary/.test(n)) return 'rust';
+    if(/map|osm|topo|os open/.test(n)) return 'teal';
+    if(/water|energy|knots|disaster/.test(n)) return 'green';
+    if(/fix|stack|repair/.test(n)) return 'slate';
+    if(/khan|wikiversity|ted|education/.test(n)) return 'plum';
+    return null;
+  }
+  function plain(h){ var d=document.createElement('div'); d.innerHTML=h; return d.textContent; }
+  [['tier1',TIER1,'Pen-drive essentials'],['tier2',TIER2,'The big archives'],['maps',MAPS,'Offline maps']].forEach(function(g){
+    var grid=document.getElementById(g[0]); if(!grid) return;
+    var items=g[1].map(function(z){
+      var note=/^Free|app|browser|government|raster/.test(z.file)?z.file:'File: '+z.file;
+      return {
+        title:z.name, author:z.size, desc:plain(z.desc), note:note,
+        actions:[{text:z.label||'Download from Kiwix →',href:z.url,primary:true}],
+        hue:hue(z.name), size:Math.min(1,Math.log10(1+gb(z.size)*10)/3.3),
+        spineNote:(function(m){return m?m[1]+m[2].toUpperCase():'';})(/([\d.]+)\s*(MB|GB)/i.exec(z.size))
+      };
+    });
+    var host=document.createElement('div');
+    grid.parentNode.insertBefore(host,grid);
+    Bookshelf.mount(host,items,{label:g[2]+' bookshelf'});
+    var t=Bookshelf.viewToggle('expansion',function(mode){
+      host.classList.toggle('is-shelf-hidden',mode!=='shelf');
+      grid.classList.toggle('is-shelf-hidden',mode==='shelf');
+    });
+    t.style.cssFloat='right'; t.style.marginTop='-.15rem';
+    var h2=grid.previousElementSibling; while(h2&&h2.tagName!=='H2') h2=h2.previousElementSibling;
+    if(h2) h2.insertBefore(t,h2.firstChild);
+  });
+})();
+</script>
 <script src="assets/js/search.js"></script>
 <script src="assets/js/bunker-bot.js"></script>
 <script src="assets/js/app.js"></script>

@@ -1616,6 +1616,7 @@
 
   <script src="assets/js/app.js"></script>
   <script src="assets/js/librarian.js"></script>
+  <script src="assets/js/bookshelf.js"></script>
   <script src="assets/js/bunker-bot.js"></script>
   <script>
     const STORAGE_KEY = 'lib-obtained';
@@ -1719,6 +1720,163 @@
     }
 
     document.addEventListener('DOMContentLoaded', initUI);
+  </script>
+
+  <!-- ── Bookshelf view (hover / tap a spine to read its blurb) ── -->
+  <script>
+  (function () {
+    if (!window.Bookshelf) return;
+    function txt(root, sel) { var n = root.querySelector(sel); return n ? n.textContent.trim() : ''; }
+
+    // ---- Bundled PDFs ------------------------------------------------------
+    var pdfGrid = document.querySelector('.pdf-grid:not(#my-library-grid)');
+    if (pdfGrid) {
+      function pdfHue(t) {
+        t = t.toLowerCase();
+        if (/compendium/.test(t)) return 'cream';
+        if (/doctor|dentist|medicine|first aid|surgery/.test(t)) return 'red';
+        if (/nuclear/.test(t)) return 'ochre';
+        if (/uk /.test(t + ' ')) return 'navy';
+        if (/humanure|hygiene/.test(t)) return 'green';
+        if (/art of war/.test(t)) return 'plum';
+        if (/signal/.test(t)) return 'teal';
+        return 'olive';
+      }
+      function mb(s) {
+        var m = /([\d.]+)\s*(KB|MB|GB)/i.exec(s || ''); if (!m) return 5;
+        var v = parseFloat(m[1]); var u = m[2].toUpperCase();
+        return u === 'KB' ? v / 1024 : u === 'GB' ? v * 1024 : v;
+      }
+      var pdfItems = [].map.call(pdfGrid.querySelectorAll('.pdf-card'), function (card) {
+        var title = txt(card, '.pdf-card-title');
+        var badges = [].map.call(card.querySelectorAll('.pdf-badge'), function (b) { return b.textContent.trim(); });
+        var links = card.querySelectorAll('.pdf-card-actions a');
+        var href = links[0] ? links[0].getAttribute('href') : '#';
+        var pages = /(\d[\d,]*) pages/.exec(card.textContent);
+        return {
+          title: title,
+          author: txt(card, '.pdf-card-author'),
+          desc: txt(card, '.pdf-card-desc'),
+          tags: badges.map(function (b, i) { return { text: b, tone: i === 0 ? 'muted' : (/uk/i.test(b) ? 'ok' : 'info') }; }),
+          actions: [{ text: 'Open PDF', href: href, primary: true }, { text: 'Download', href: href, download: true }],
+          hue: pdfHue(title),
+          size: Math.min(1, Math.log10(1 + mb(badges[0])) / 1.9),
+          spineNote: pages ? pages[1].replace(',', '') + 'p' : ''
+        };
+      });
+      var pdfHost = document.createElement('div');
+      pdfGrid.parentNode.insertBefore(pdfHost, pdfGrid);
+      Bookshelf.mount(pdfHost, pdfItems, { label: 'Bundled PDFs bookshelf' });
+      var pdfHeader = pdfGrid.previousElementSibling;
+      while (pdfHeader && !pdfHeader.classList.contains('pdf-section-header')) pdfHeader = pdfHeader.previousElementSibling;
+      var pdfToggle = Bookshelf.viewToggle('library-pdfs', function (mode) {
+        pdfHost.classList.toggle('is-shelf-hidden', mode !== 'shelf');
+        pdfGrid.classList.toggle('is-shelf-hidden', mode === 'shelf');
+      });
+      if (pdfHeader) {
+        var dl = pdfHeader.querySelector('button');
+        if (dl) { dl.style.marginLeft = '0'; pdfToggle.style.marginLeft = 'auto'; }
+        pdfHeader.insertBefore(pdfToggle, dl || null);
+      }
+    }
+
+    // ---- Curated 60 books, one shelf per subject ---------------------------
+    var bookGrid = document.getElementById('book-grid');
+    if (!bookGrid) return;
+    var firstDivider = bookGrid.previousElementSibling;
+    var TIER = { CRITICAL: ['Critical', 'critical'], IMPORTANT: ['Important', 'important'], NICE: ['Nice to have', 'nice'] };
+    var HUES = { medicine: ['red', 'rust', 'plum'], agriculture: ['green', 'olive', 'ochre'], engineering: ['slate', 'navy', 'rust'],
+                 comms: ['teal', 'navy', 'slate'], security: ['olive', 'slate', 'rust'], psychology: ['plum', 'navy', 'cream'], history: ['ochre', 'cream', 'rust'] };
+
+    var groups = [], group = null;
+    var label = firstDivider && firstDivider.classList.contains('section-divider') ? firstDivider.firstChild.textContent.trim() : 'Books';
+    [].forEach.call(bookGrid.children, function (node) {
+      if (node.classList.contains('section-divider')) { label = node.firstChild.textContent.trim(); group = null; return; }
+      if (!node.classList.contains('book-card')) return;
+      if (!group) { group = { label: label, cards: [] }; groups.push(group); }
+      group.cards.push(node);
+    });
+
+    function itemFor(card, i) {
+      var tier = TIER[card.dataset.tier] || ['', 'muted'];
+      var cb = card.querySelector('.book-check');
+      var link = card.querySelector('.book-link');
+      var tags = [].map.call(card.querySelectorAll('.book-meta .tag'), function (t) {
+        var c = t.className;
+        return { text: t.textContent.trim(), tone: /critical/.test(c) ? 'critical' : /important/.test(c) ? 'important' : /nice/.test(c) ? 'nice' : /free/.test(c) ? 'info' : 'muted' };
+      });
+      var hues = HUES[card.dataset.cat] || ['slate'];
+      var rank = card.dataset.tier === 'CRITICAL' ? 0 : card.dataset.tier === 'IMPORTANT' ? 1 : 2;
+      return {
+        title: txt(card, '.book-title'),
+        author: txt(card, '.book-author'),
+        desc: txt(card, '.book-desc'),
+        note: txt(card, '.book-keychapters'),
+        tags: tags,
+        hue: hues[(rank + i) % hues.length],
+        tall: rank === 0 ? 0.85 + (i % 3) * 0.05 : rank === 1 ? 0.45 + (i % 4) * 0.1 : 0.15 + (i % 3) * 0.1,
+        hidden: card.classList.contains('hidden'),
+        ribbon: cb && cb.checked,
+        spineNote: card.dataset.tier === 'CRITICAL' ? '★' : '',
+        actions: link ? [{ text: link.textContent.trim(), href: link.getAttribute('href') }] : [],
+        check: cb ? { label: 'I have this', checked: cb.checked, onChange: function (on) {
+          cb.checked = on; toggleObtained(cb, card.dataset.id); redraw();
+        } } : null
+      };
+    }
+
+    var host = document.createElement('div');
+    host.className = 'book-shelves';
+    bookGrid.parentNode.insertBefore(host, firstDivider || bookGrid);
+    var shelves = groups.map(function (g) {
+      var head = document.createElement('div');
+      head.className = 'shelf-heading';
+      head.textContent = g.label + ' ';
+      var count = document.createElement('span');
+      head.appendChild(count);
+      host.appendChild(head);
+      var wrap = document.createElement('div');
+      host.appendChild(wrap);
+      var items = g.cards.map(itemFor);
+      return { g: g, head: head, count: count, shelf: Bookshelf.mount(wrap, items, { label: g.label + ' shelf' }) };
+    });
+
+    function redraw() {
+      var any = false;
+      shelves.forEach(function (s) {
+        var items = s.g.cards.map(itemFor);
+        var n = items.filter(function (it) { return !it.hidden; }).length;
+        var have = items.filter(function (it) { return it.ribbon; }).length;
+        s.count.textContent = n + (n === 1 ? ' book' : ' books') + (have ? ' · ' + have + ' obtained' : '');
+        var hide = n === 0;
+        s.head.style.display = s.shelf.el.parentNode.style.display = hide ? 'none' : '';
+        if (!hide) { s.shelf.update(items); any = true; }
+      });
+      empty.style.display = any ? 'none' : '';
+    }
+    var empty = document.createElement('p');
+    empty.className = 'shelf-empty';
+    empty.textContent = 'No books match this filter or search.';
+    host.appendChild(empty);
+
+    // Keep the shelf in step with the existing filters, search and checkboxes.
+    var origApply = window.applyFilters;
+    window.applyFilters = function () { origApply.apply(this, arguments); redraw(); };
+    var origClear = window.clearAll;
+    window.clearAll = function () { origClear.apply(this, arguments); redraw(); };
+    bookGrid.addEventListener('change', redraw);
+    document.addEventListener('DOMContentLoaded', redraw);
+
+    var toggle = Bookshelf.viewToggle('library-books', function (mode) {
+      var shelf = mode === 'shelf';
+      host.classList.toggle('is-shelf-hidden', !shelf);
+      bookGrid.classList.toggle('is-shelf-hidden', shelf);
+      if (firstDivider) firstDivider.classList.toggle('is-shelf-hidden', shelf);
+    });
+    var searchRow = document.getElementById('lib-search');
+    if (searchRow) searchRow.parentNode.insertBefore(toggle, searchRow);
+    redraw();
+  })();
   </script>
 
   <!-- ── Personal Library & PDF RAG scripts ─────────────── -->
