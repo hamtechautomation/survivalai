@@ -190,6 +190,20 @@ async function browserChecks() {
     if (n < 2) fail('diagrams', `tapping "Often dark spots" highlighted ${n} element(s), expected label + spots`);
   }
 
+  // Step-by-step diagrams: Next advances the step and swaps what is shown.
+  await desk.goto(BASE_URL + 'sections/navigation.html');
+  await desk.waitForTimeout(300);
+  if (!(await desk.$('#fig-polaris .dg-ctl'))) fail('players', 'navigation.html: Polaris step diagram has no controls');
+  else {
+    await desk.click('#fig-polaris .dg-ctl-btn[data-a="play"]');   // pause any auto-play
+    await desk.click('#fig-polaris .dg-steps-list li:nth-child(1)');
+    await desk.click('#fig-polaris .dg-ctl-btn[data-a="next"]');
+    const pos = await desk.$eval('#fig-polaris .dg-ctl-pos', e => e.textContent);
+    if (pos !== 'Step 2 of 4') fail('players', `after Next the Polaris diagram says "${pos}"`);
+    const hiddenNow = await desk.$$eval('#fig-polaris [data-s="4-4"]', a => a.every(e => e.classList.contains('dg-off')));
+    if (!hiddenNow) fail('players', 'step 4 parts are visible on step 2');
+  }
+
   await browser.close();
 }
 

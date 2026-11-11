@@ -119,6 +119,25 @@ wide (icons, banners and buttons are skipped).
 
 ---
 
+## Step-by-step animated diagrams (`figure.dg-player`)
+
+Each one has Back / Play / Next controls and a clickable numbered step list. It plays once by itself
+the first time it scrolls into view (not with reduce motion). Print and no-JS show the finished state
+with all the steps listed. Parts carry `data-s="a-b"`, meaning they are shown on steps a to b.
+
+| Page | Diagram (`id`) | Steps | Checked against |
+|---|---|---|---|
+| Navigation | `fig-polaris` (replaces the old text-art sketch) | Plough → pointers Merak→Dubhe → 5× the gap → Polaris, drop to horizon = true north | Section text; star positions schematic, pointer geometry exact (Polaris placed at 5× the Merak–Dubhe gap) |
+| Navigation | `fig-shadowstick` | Stick and 1st mark → wait 15–20 min, 2nd mark → W→E line → left foot on 1st, right on 2nd = facing north. Sun position matches each shadow | Section text; US Army FM 3-25.26 |
+| Medical | `fig-tourniquet-steps` | Wide cloth wrapped twice 5–7 cm above the wound, not on a joint → half knot, stick, full knot → twist until bleeding stops → stick tied down, "TK" + time | Section text; TCCC improvised-tourniquet guidance |
+| Medical | `fig-recovery-steps` | Near arm at a right angle → far hand to near cheek → far knee up, pull to roll → on side, top knee at a right angle, head tilted back | Section text; Resuscitation Council UK / St John Ambulance |
+
+**Text corrected:** Navigation › Shadow Stick said "first mark = west, second = east in
+Northern Hemisphere". It is true in **both** hemispheres, because the sun always moves east
+to west, so the text now says so.
+
+---
+
 ## Corrections made while checking
 
 | Where | Was | Now | Why |

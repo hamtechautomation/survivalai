@@ -164,6 +164,7 @@
     setupSectionArt();
     setupOnThisPage();
     setupReveal();
+    setupPlayers();
     setupDiagrams();
     setupPalette();
     setupEmergency();
@@ -757,7 +758,7 @@
     const vh = window.innerHeight;
     const pending = svgs.filter(svg => {
       const r = svg.getBoundingClientRect();
-      return r.width > 0 && r.top >= vh && !svg.closest('.no-js-only');
+      return r.width > 0 && r.top >= vh && !svg.closest('.no-js-only, .dg-player');
     });
     const finish = svg => {
       svg.classList.remove('dg-anim', 'dg-go');
@@ -797,6 +798,68 @@
     }), { rootMargin: '0px 0px 400px 0px' });
     pending.forEach(svg => near.observe(svg));
     window.addEventListener('beforeprint', () => document.querySelectorAll('svg.dg-anim').forEach(finish));
+  }
+
+  /* Step-by-step diagrams: <figure class="dg dg-player" data-steps="N">.
+     Parts carry data-s="a-b" (shown on steps a..b). Without JS, and in print,
+     the finished state shows with every step listed underneath. */
+  function setupPlayers() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('figure.dg-player').forEach(fig => {
+      const n = +fig.dataset.steps || 1;
+      const parts = [...fig.querySelectorAll('[data-s]')].map(el => {
+        const [a, b] = el.dataset.s.split('-').map(Number);
+        return { el, a, b: b || n };
+      });
+      const items = [...fig.querySelectorAll('.dg-steps-list > li')];
+      const ctl = document.createElement('div');
+      ctl.className = 'dg-ctl no-print';
+      ctl.innerHTML =
+        '<button type="button" class="dg-ctl-btn" data-a="prev" aria-label="Previous step">◀</button>' +
+        '<button type="button" class="dg-ctl-btn dg-ctl-play" data-a="play" aria-label="Play">▶ Play</button>' +
+        '<button type="button" class="dg-ctl-btn" data-a="next" aria-label="Next step">▶</button>' +
+        '<span class="dg-ctl-pos" aria-live="polite"></span>' +
+        '<span class="dg-ctl-bar"><i></i></span>';
+      fig.querySelector('svg').after(ctl);
+      const playBtn = ctl.querySelector('.dg-ctl-play'), pos = ctl.querySelector('.dg-ctl-pos'), bar = ctl.querySelector('.dg-ctl-bar i');
+      let k = 1, timer = null;
+      const STEP_MS = 3600;
+      function show(i) {
+        k = Math.max(1, Math.min(n, i));
+        parts.forEach(p => p.el.classList.toggle('dg-off', k < p.a || k > p.b));
+        items.forEach((li, j) => { li.classList.toggle('on', j === k - 1); li.classList.toggle('done', j < k - 1); });
+        pos.textContent = 'Step ' + k + ' of ' + n;
+        bar.style.width = (k / n * 100) + '%';
+      }
+      function setPlaying(on) {
+        clearInterval(timer); timer = null;
+        fig.classList.toggle('dg-playing', on);
+        playBtn.textContent = on ? '❚❚ Pause' : (k === n ? '↺ Replay' : '▶ Play');
+        playBtn.setAttribute('aria-label', on ? 'Pause' : 'Play');
+        if (on) timer = setInterval(() => { if (k >= n) setPlaying(false); else show(k + 1); if (k >= n) setPlaying(false); }, STEP_MS);
+      }
+      ctl.addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b) return;
+        if (b.dataset.a === 'play') { if (timer) setPlaying(false); else { if (k === n) show(1); setPlaying(true); } return; }
+        setPlaying(false); show(k + (b.dataset.a === 'next' ? 1 : -1)); setPlaying(false);
+      });
+      items.forEach((li, j) => {
+        li.tabIndex = 0; li.setAttribute('role', 'button');
+        const go = () => { setPlaying(false); show(j + 1); setPlaying(false); };
+        li.addEventListener('click', go);
+        li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+      });
+      fig.classList.add('dg-live');
+      show(1); setPlaying(false);
+      // Plays once by itself the first time it comes into view.
+      if (!reduce && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(es => es.forEach(en => {
+          if (en.isIntersecting) { io.disconnect(); if (k === 1 && !timer) setPlaying(true); }
+        }), { threshold: 0.6 });
+        io.observe(fig.querySelector('svg'));
+      }
+      window.addEventListener('beforeprint', () => { setPlaying(false); show(n); });
+    });
   }
 
   let lb = null;
