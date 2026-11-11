@@ -90,6 +90,10 @@
   };
   window.ICONS = ICONS;
 
+  /* Path back to the site root from this page ('' at the root, '../' from
+     sections/ and pdfs/). One helper so no page is left with broken links. */
+  const SITE_BASE = /\/(sections|pdfs)\//.test(window.location.pathname) ? '../' : '';
+
   /* =================== CONSTANTS =================== */
   /* Grouped by real category (was: one flat list plus a single stray
      "Tools & Maps" label that only ever applied to one item). Related
@@ -137,6 +141,7 @@
     { id: 'skills',           href: 'skills.html',                     icon: ICONS.target,   label: 'Practical Skills' },
     { id: 'tools',            href: 'tools.html',                      icon: ICONS.wrench,   label: 'Calculators & Tools' },
     { id: 'gear',             href: 'gear.html',                       icon: ICONS.clipboard, label: 'Gear Checklist' },
+    { id: 'print-essentials', href: 'print-essentials.html',           icon: ICONS.print,    label: 'Print the Essentials' },
     { id: 'literature',       href: 'literature.html',                 icon: ICONS.books,    label: 'Reference Library' },
     { id: 'expansion',        href: 'expansion.html',                  icon: ICONS.cloud,    label: 'Expansion Library' },
     { id: 'download',         href: 'download.html',                   icon: ICONS.download, label: 'Download / Support' },
@@ -286,7 +291,8 @@
   function rootPath() {
     const parts = location.pathname.split('/');
     const file = parts.pop() || 'index.html';
-    return (location.pathname.includes('/sections/') ? 'sections/' : '') + file;
+    const dir = (location.pathname.match(/\/(sections|pdfs)\/[^/]*$/) || [])[1];
+    return (dir ? dir + '/' : '') + file;
   }
   function recordRecent() {
     const cur = currentNavPage();
@@ -299,12 +305,31 @@
     } catch (e) {}
   }
 
-  /* search.js used to be missing on 7 pages, leaving their search box dead. */
+  /* Heavy scripts load only when needed (lighter, faster pages on old
+     phones): search.js (~107 KB) when idle or as soon as you search;
+     bunker-bot.js (~48 KB) the first time the Bunker Bot panel opens.
+     Both are pre-cached by the service worker, so this works offline. */
+  const scriptLoads = {};
+  function loadScript(name) {
+    if (scriptLoads[name]) return scriptLoads[name];
+    const existing = document.querySelector(`script[src$="assets/js/${name}"]`);
+    scriptLoads[name] = existing ? Promise.resolve() : new Promise((resolve, reject) => {
+      const sc = document.createElement('script');
+      sc.src = SITE_BASE + 'assets/js/' + name;
+      sc.onload = () => resolve(); sc.onerror = reject;
+      document.body.appendChild(sc);
+    });
+    return scriptLoads[name];
+  }
+  window.LastLight = window.LastLight || {};
+  window.LastLight.loadScript = loadScript;
   function ensureSearch() {
-    if (window.guideSearch || document.querySelector('script[src$="search.js"]')) return;
-    const sc = document.createElement('script');
-    sc.src = (location.pathname.includes('/sections/') ? '../' : '') + 'assets/js/search.js';
-    document.body.appendChild(sc);
+    const load = () => loadScript('search.js').catch(() => {});
+    const input = document.getElementById('search-input');
+    if (input) input.addEventListener('focus', () => {
+      load().then(() => { if (input.value.trim()) input.dispatchEvent(new Event('input')); });
+    }, { once: true });
+    if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 5000 }); else setTimeout(load, 3000);
   }
 
   /* =================== ON THIS PAGE =================== */
@@ -383,7 +408,7 @@
      screen size — the sidebar box was hidden on phones. Empty box shows
      your recent pages. */
   function setupPalette() {
-    const base = location.pathname.includes('/sections/') ? '../' : '';
+    const base = SITE_BASE;
     const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     const mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
 
@@ -477,6 +502,7 @@
       if (sb && sb.classList.contains('open')) { const ov = document.getElementById('overlay'); if (ov) ov.click(); }
       input.value = '';
       render();
+      if (!window.guideSearch) loadScript('search.js').then(() => { if (!pal.hidden) render(); }).catch(() => {});
       input.focus();                       // focus now so fast typing isn't lost
       setTimeout(() => { if (document.activeElement !== input) input.focus(); }, 0);
     }
@@ -520,7 +546,7 @@
     if (window.LastLight && window.LastLight._emergencyReady) return window.LastLight._emergencyReady;
     const p = new Promise((resolve, reject) => {
       const sc = document.createElement('script');
-      sc.src = (location.pathname.includes('/sections/') ? '../' : '') + 'assets/js/emergency.js';
+      sc.src = SITE_BASE + 'assets/js/emergency.js';
       sc.onload = () => resolve(); sc.onerror = reject;
       document.body.appendChild(sc);
     });
@@ -574,9 +600,7 @@
   /* =================== PWA MANIFEST + IOS META =================== */
   function injectManifest() {
     if (document.querySelector('link[rel="manifest"]')) return;
-    const isSection = window.location.pathname.includes('/sections/');
-    const isPdfs    = window.location.pathname.includes('/pdfs/');
-    const base      = (isSection || isPdfs) ? '../' : '';
+    const base = SITE_BASE;
 
     const link = document.createElement('link');
     link.rel  = 'manifest';
@@ -655,7 +679,7 @@
   function setupPagination() {
     const cur = currentNavPage();
     if (!cur || cur.id === 'home') return;
-    const base = window.location.pathname.includes('/sections/') ? '../' : '';
+    const base = SITE_BASE;
     const pages = navPagesWithGroups();
     const i = pages.findIndex(p => p.id === cur.id);
     const prev = pages[i - 1], next = pages[i + 1];
@@ -703,9 +727,7 @@
     const sidebar = document.getElementById('sidebar');
     if (!sidebar) return;
 
-    /* Resolve base path — pages in /sections/ need ../ prefix */
-    const isSection = window.location.pathname.includes('/sections/');
-    const base = isSection ? '../' : '';
+    const base = SITE_BASE;
 
     // On the public site only, a small link back to the marketing landing page.
     // (The landing isn't bundled in the offline download, so we hide it there
@@ -898,7 +920,10 @@
       if (window.innerWidth < 900 && overlay) {
         overlay.classList.toggle('active', isOpen);
       }
-      if (isOpen && typeof ariaInit === 'function') ariaInit();
+      if (isOpen) {
+        if (typeof window.ariaInit === 'function') window.ariaInit();
+        else loadScript('bunker-bot.js').then(() => window.ariaInit && window.ariaInit()).catch(() => {});
+      }
     });
 
     if (closeBtn) {
@@ -1165,7 +1190,7 @@
     if (visits < 2) return;
     if (dismissed && Date.now() - dismissed < 30 * 86400000) return;
 
-    const base = window.location.pathname.includes('/sections/') ? '../' : '';
+    const base = SITE_BASE;
     const howTo = `${base}download.html#install-phone`;
 
     function showBanner(kind) {

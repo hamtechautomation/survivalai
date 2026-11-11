@@ -12,7 +12,7 @@
   const SEARCH_INDEX = [
     /* ── Life-threatening emergencies: ranked first, written in everyday words ── */
     { id:'sos-bleeding', title:'Stop Heavy Bleeding — Pressure, Tourniquet, Wound Packing', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#wound-care', content:'severe bleeding blood loss haemorrhage hemorrhage direct pressure tourniquet improvised windlass wound packing gauze arterial spurting shock', tags:['bleeding','tourniquet','haemorrhage','hemorrhage','blood','pressure','shock'], urgent:true, sos:'bleeding' },
-    { id:'sos-cpr', title:'CPR — Unresponsive and Not Breathing', section:'medical', sectionLabel:'Emergency steps', file:'index.html', anchor:'#sos-cpr', content:'cpr cardiopulmonary resuscitation chest compressions rescue breaths 30 2 not breathing unresponsive collapsed cardiac arrest heart stopped defibrillator aed recovery position', tags:['cpr','resuscitation','compressions','breathing','unresponsive','cardiac arrest'], urgent:true, sos:'cpr' },
+    { id:'sos-cpr', title:'CPR — Unresponsive and Not Breathing', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#cpr', content:'cpr cardiopulmonary resuscitation chest compressions rescue breaths 30 2 not breathing unresponsive collapsed cardiac arrest heart stopped defibrillator aed recovery position', tags:['cpr','resuscitation','compressions','breathing','unresponsive','cardiac arrest'], urgent:true, sos:'cpr' },
     { id:'sos-choking', title:'Choking — Back Blows & Abdominal Thrusts', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#choking', content:'choking airway obstruction back blows abdominal thrusts heimlich infant baby chest thrusts cannot breathe cough', tags:['choking','heimlich','airway','back blows'], urgent:true, sos:'choking' },
     { id:'sos-anaphylaxis', title:'Severe Allergic Reaction (Anaphylaxis) — Use Adrenaline', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#anaphylaxis', content:'anaphylaxis severe allergy allergic reaction epipen epinephrine adrenaline auto-injector sting bee wasp nut swelling throat', tags:['anaphylaxis','allergy','epipen','adrenaline','epinephrine','sting'], urgent:true, sos:'allergy' },
     { id:'sos-burns', title:'Burns — Cool, Cover, Don’t Pop Blisters', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#burns', content:'burn burns scald fire hot water cool running water 20 minutes cling film dressing blisters', tags:['burn','burns','scald'], urgent:true, sos:'burn' },
@@ -25,6 +25,8 @@
     { id:'sos-snakebite', title:'Snakebite — Keep Still, No Cutting or Tourniquet', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#snakebite', content:'snakebite snake bite venom adder viper rattlesnake antivenom immobilise', tags:['snakebite','snake','venom'], urgent:true, sos:'snake' },
     { id:'sos-drowning', title:'Drowning — Rescue Safely, Breaths First', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#drowning', content:'drowning drowned submersion rescue reach throw rescue breaths cold water', tags:['drowning'], urgent:true, sos:'cpr' },
     { id:'sos-chest', title:'Chest Wound — Seal It, Watch Breathing', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#chest-wounds', content:'chest wound sucking chest wound stab gunshot seal occlusive dressing pneumothorax', tags:['chest wound','pneumothorax'], urgent:true, sos:'bleeding' },
+    { id:'sos-poison', title:'Poisoning & Overdose — Don’t Induce Vomiting', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#poisoning', content:'poisoning poison overdose swallowed chemical bleach carbon monoxide fumes generator indoors activated charcoal naloxone opioid paracetamol mushroom plant', tags:['poisoning','poison','overdose','carbon monoxide','naloxone'], urgent:true, sos:'poison' },
+    { id:'sos-head', title:'Head Injury & Concussion — Danger Signs', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#head-injury', content:'head injury concussion knocked out unconscious fall blow skull fracture drowsy vomiting pupils scalp bleeding', tags:['head injury','concussion','skull','knocked out'], urgent:true, sos:'head' },
     { id:'sos-ors', title:'Diarrhoea & Dehydration — Rehydration Solution (ORS)', section:'food', sectionLabel:'Emergency Card', file:'quick-reference.html', anchor:'', content:'oral rehydration solution ors diarrhoea diarrhea vomiting dehydration sugar salt water recipe', tags:['ors','rehydration','dehydration','diarrhea','diarrhoea'], urgent:true, sos:'dehydration' },
     { id:'sos-water', title:'Make Water Safe to Drink — Boil, Bleach, Filter', section:'food', sectionLabel:'Food & Water', file:'sections/food.html', anchor:'#water-purification', content:'purify water boil bleach drops gallon litre iodine sodis filter safe drinking water', tags:['water purification','purify','boil','bleach','drinking water'], urgent:true, sos:'dehydration' },
     { id:'sos-birth', title:'Emergency Childbirth', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#childbirth', content:'childbirth birth labour labor delivery baby pregnant contractions cord', tags:['childbirth','birth','labour','labor','delivery'], urgent:true },
@@ -401,7 +403,9 @@
     gash:'bleeding wound', cut:'bleeding wound', laceration:'bleeding wound', spurting:'bleeding tourniquet', stab:'bleeding chest wound',
     unconscious:'cpr unresponsive', unresponsive:'cpr', collapsed:'cpr', collapse:'cpr', heart:'cpr cardiac', cardiac:'cpr',
     breathing:'cpr choking', breathe:'cpr choking', resus:'cpr', resuscitation:'cpr', pulse:'cpr', dead:'cpr', dying:'cpr bleeding',
-    choke:'choking', heimlich:'choking', swallowed:'choking',
+    choke:'choking', heimlich:'choking', swallowed:'poisoning choking',
+    poison:'poisoning', poisoned:'poisoning', overdose:'poisoning', od:'poisoning', fumes:'poisoning carbon monoxide', bleach:'poisoning', mushroom:'poisoning', drank:'poisoning', ate:'poisoning',
+    head:'head injury', concussion:'head injury', knocked:'head injury', skull:'head injury', fell:'head injury fracture', fall:'head injury fracture',
     allergic:'anaphylaxis allergy', allergy:'anaphylaxis', anaphylactic:'anaphylaxis', epipen:'anaphylaxis', sting:'anaphylaxis', stung:'anaphylaxis', bee:'anaphylaxis', wasp:'anaphylaxis', swelling:'anaphylaxis',
     burnt:'burns', burned:'burns', scald:'burns', scalded:'burns',
     freezing:'hypothermia', frozen:'hypothermia', shivering:'hypothermia', cold:'hypothermia', frostbite:'hypothermia',
@@ -419,11 +423,11 @@
   const EMERGENCY_TERMS = {
     bleeding:'bleeding', tourniquet:'bleeding', cpr:'cpr', unresponsive:'cpr', drowning:'cpr', choking:'choking',
     anaphylaxis:'allergy', allergy:'allergy', burns:'burn', burn:'burn', hypothermia:'cold', heat:'heat', stroke:'stroke',
-    seizure:'seizure', hypoglycemia:'sugar', diabetic:'sugar', fracture:'fracture', snakebite:'snake', dehydration:'dehydration', ors:'dehydration'
+    seizure:'seizure', hypoglycemia:'sugar', diabetic:'sugar', fracture:'fracture', snakebite:'snake', dehydration:'dehydration', ors:'dehydration', poisoning:'poison', overdose:'poison', concussion:'head', head:'head'
   };
   const EMERGENCY_TITLES = { bleeding:'Heavy bleeding', cpr:'Not breathing (CPR)', choking:'Choking', allergy:'Severe allergy', burn:'Burn',
     cold:'Too cold (hypothermia)', heat:'Too hot (heat stroke)', seizure:'Seizure', stroke:'Stroke', sugar:'Low blood sugar',
-    fracture:'Broken bone', snake:'Snakebite', dehydration:'Diarrhoea & dehydration' };
+    fracture:'Broken bone', snake:'Snakebite', dehydration:'Diarrhoea & dehydration', poison:'Poisoning', head:'Head injury' };
 
   /* Typo tolerance: snap an unknown word to a known one 1 edit away
      ("bleding" → "bleeding", "hypotermia" → "hypothermia"). */
@@ -497,8 +501,7 @@
       return;
     }
 
-    const isSection = window.location.pathname.includes('/sections/');
-    const base = isSection ? '../' : '';
+    const base = /\/(sections|pdfs)\//.test(window.location.pathname) ? '../' : '';
 
     /* Group by section */
     const groups = {};

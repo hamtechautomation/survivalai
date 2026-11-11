@@ -554,7 +554,9 @@ ul li::marker { content: "▸ "; }
 .callout-content { flex: 1; min-width: 0; }
 .callout-content p { margin-bottom: var(--sp-xs); }
 .callout-content p:last-child { margin-bottom: 0; }
-.callout strong { display: block; margin-bottom: var(--sp-xs); font-size: var(--fs-base); letter-spacing: .04em; text-transform: uppercase; }
+/* Only the callout's title is a block heading. (It used to be every <strong>,
+   which broke bold phrases mid-sentence onto their own shouting lines.) */
+.callout-content > strong:first-child, .callout > strong:first-child { display: block; margin-bottom: var(--sp-xs); font-size: var(--fs-base); letter-spacing: .04em; text-transform: uppercase; }
 
 .callout-danger {
   background: rgba(200,72,72,.12);
@@ -2552,3 +2554,43 @@ body.mode-hc .sos-tile, body.mode-hc .sos-steps > li { border-color: #fff; }
 .palette-group-sos { color: #ff9a9a; }
 @media print { .sos, .sos-btn { display: none !important; } }
 @media (max-width: 600px) { .sos.is-card .sos-h span { display: none; } .sos.is-card .sos-h { justify-content: center; } }
+.review-note { display: inline-block; font-size: var(--fs-xs); color: var(--text-2); background: var(--bg-2); border: 1px dashed var(--border-hi); border-radius: 6px; padding: 0.3rem 0.6rem; margin: 0 0 1rem; }
+.review-note strong { color: var(--orange); }
+
+/* =============================================
+   COMPACT SECTION PRINT (paper matters when the power is out)
+   ============================================= */
+@media print {
+  body { font-size: 10pt !important; line-height: 1.42 !important; }
+  .main-content { margin: 0 !important; padding: 0 !important; }
+  h1 { font-size: 20pt !important; margin-bottom: 4pt !important; }
+  h2 { font-size: 14pt !important; margin: 14pt 0 5pt !important; padding-bottom: 2pt !important; }
+  h3 { font-size: 11.5pt !important; margin: 10pt 0 3pt !important; }
+  p, ul, ol { margin-bottom: 5pt !important; }
+  li { margin-bottom: 2pt !important; }
+
+  /* Numbered steps: plain numbered lines, not padded boxes */
+  .steps > li {
+    background: none !important; border: 0 !important; border-radius: 0 !important;
+    min-height: 0 !important; margin: 0 0 3pt !important;
+    padding: 0 0 0 1.7em !important; break-inside: avoid;
+  }
+  .steps > li::before {
+    width: 1.25em !important; height: 1.25em !important; left: 0 !important; top: 0.1em !important;
+    font-size: 8pt !important; background: none !important; color: #000 !important; border: 1px solid #000;
+  }
+
+  .callout { padding: 6pt 8pt !important; margin: 6pt 0 !important; gap: 6pt !important; }
+  .callout-icon .ui-icon { width: 12pt !important; height: 12pt !important; }
+  .toc ol { column-count: 2; column-gap: 18pt; }
+  .toc { padding: 6pt 8pt !important; }
+  .section-meta, .review-note { font-size: 8pt !important; }
+  svg[viewBox] { max-height: 9cm; }
+  .table-scroll { overflow: visible !important; }
+  td, th { padding: 3pt 5pt !important; }
+
+  /* Only print addresses for links that leave the guide */
+  a[href]::after { content: "" !important; }
+  a[href^="http"]::after { content: " (" attr(href) ")" !important; font-size: 7.5pt; color: #444; }
+  .section-pagination, .otp-bar, .otp-panel, .sos, .palette, .display-panel { display: none !important; }
+}

@@ -33,3 +33,6 @@ dist/
 
 # Private marketing/outreach material — never publish
 marketing/
+
+# Test tooling installed by CI / locally
+node_modules/

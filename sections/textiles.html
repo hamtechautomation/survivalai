@@ -60,14 +60,20 @@
 </head>
 <body>
   <div id="app-shell">
-    <nav id="sidebar" aria-label="Main navigation"></nav>
+    <nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
     <div id="overlay" class="overlay"></div>
-    <div class="main-content">
-      <header class="top-bar">
-        <button id="menu-toggle" class="btn-icon" aria-label="Open navigation">☰</button>
-        <div class="breadcrumb"><a href="../index.html">Home</a> › Textiles &amp; Clothing</div>
-        <button id="aria-toggle" class="btn btn-sm btn-ghost">🤖 Bunker Bot</button>
-      </header>
+    <header class="site-header">
+      <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+      <div class="header-breadcrumb">
+        <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+        <span class="page-title">Textiles &amp; Clothing</span>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-sm btn-outline" data-print>Print</button>
+        <button id="aria-toggle" class="btn btn-sm btn-primary">Bunker Bot</button>
+      </div>
+    </header>
+    <main class="main-content" id="main-content">
       <div class="content-wrapper">
 
         <!-- ═══ PAGE HEADER ═══ -->
@@ -1194,7 +1200,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         <a href="vehicles.html" class="pagination-btn pagination-next">Vehicles →</a>
       </nav>
       </div><!-- /content-wrapper -->
-    </div><!-- /main-content -->
+    </main><!-- /main-content -->
 
     <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
     <div class="aria-header">
@@ -1214,7 +1220,5 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
 
   <button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
   <script src="../assets/js/app.js"></script>
-  <script src="../assets/js/search.js"></script>
-  <script src="../assets/js/bunker-bot.js"></script>
 </body>
 </html>

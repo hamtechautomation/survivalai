@@ -5,10 +5,9 @@
    each card) so they never disagree with the full text. Keep them short:
    people read these with shaking hands.
 
-   NOTE FOR REVIEWERS: "Not breathing (CPR)" is the one card with no
-   matching section in the guide yet; it follows standard lay-rescuer CPR
-   guidance (30:2, 100–120/min, 5–6 cm). Please review with the rest of
-   the medical content.
+   NOTE FOR REVIEWERS: the CPR, Poisoning and Head injury cards come from
+   medical sections 27–29, added Nov 2026 from standard lay-rescuer
+   guidance and still awaiting clinician review.
 
    Opened by window.LastLight.openEmergency(id?) (header button, sidebar
    tile, search) or a URL hash like #sos or #sos-bleeding. */
@@ -31,7 +30,7 @@
     },
     {
       id: 'cpr', title: 'Not breathing', tile: 'Unresponsive — start CPR', icon: 'heart', tone: 'red',
-      more: 'sections/medical.html#drowning', moreLabel: 'Drowning & resuscitation',
+      more: 'sections/medical.html#cpr', moreLabel: 'CPR & resuscitation',
       steps: [
         ['Check they’re safe to reach, then shout and tap their shoulders.', 'No response? Shout for help. Send someone to call emergency services and fetch a defibrillator (AED) if one exists.'],
         ['Tilt the head back, lift the chin, check breathing for up to 10 seconds.', 'Gasping or occasional noisy breaths are NOT normal breathing — start CPR.'],
@@ -167,6 +166,32 @@
       watch: 'Pressure-bandaging the whole limb is only for cobra/mamba/coral/Australian snakes — never for vipers or rattlesnakes. See the full section.'
     },
     {
+      id: 'poison', title: 'Poisoning', tile: 'Swallowed, breathed in, overdose', icon: 'flask', tone: 'red',
+      more: 'sections/medical.html#poisoning', moreLabel: 'Poisoning & overdose',
+      steps: [
+        ['Keep yourself safe first.', 'Fumes or gas? Open up or get them into fresh air. Chemicals on skin? Wear gloves.'],
+        ['Not breathing? Start CPR.', 'Use a cloth over their mouth for breaths if there’s poison on their lips. Breathing but drowsy: lie them on their side.'],
+        ['Find out what, how much and when.', 'Keep the bottle, packet, plant or mushroom — and any vomit.'],
+        ['On skin or in eyes: rinse with running water for 15–20 minutes.', 'Take off contaminated clothing first.'],
+        ['Swallowed: rinse the mouth and keep them still and watched.', 'Corrosive (bleach, drain cleaner) and they can swallow: small sips of water only. Get advice from any medic, pharmacist or poison line you can reach.']
+      ],
+      dont: ['Don’t make them vomit — it burns twice and fuels get into the lungs.', 'No salt water, no milk “cures”, no fingers down the throat.'],
+      watch: 'Headache, dizziness or sickness in several people at once = carbon monoxide: everyone into fresh air, generators and stoves outside. Paracetamol overdose can look fine for a day and still kill — get treatment.'
+    },
+    {
+      id: 'head', title: 'Head injury', tile: 'Knocked out, fall, blow to the head', icon: 'brain', tone: 'amber',
+      more: 'sections/medical.html#head-injury', moreLabel: 'Head injury & concussion',
+      steps: [
+        ['Knocked out, fell from height, or neck pain? Keep the head and neck still.', 'Don’t move them unless you must to keep them breathing.'],
+        ['Unresponsive? Airway first.', 'Not breathing → CPR. Breathing → keep the airway open; if you must roll them, move head, neck and body together.'],
+        ['Stop scalp bleeding with firm pressure.', 'If the skull feels soft or dented, press around the edges, not on it.'],
+        ['Cold pack on a bump for 10–20 minutes.', 'Wrapped in cloth.'],
+        ['Someone stays with them for 24 hours.', 'Check they behave normally and wake easily. Paracetamol for pain — no aspirin, ibuprofen, alcohol or sleeping pills.']
+      ],
+      dont: ['Don’t leave them alone tonight.', 'Don’t give alcohol or sedatives — they hide the warning signs.'],
+      watch: 'Danger signs: was knocked out, getting drowsier, worse headache, repeated vomiting, a seizure, unequal pupils, weakness or slurred speech, clear fluid from nose or ears. Get them to medical care.'
+    },
+    {
       id: 'dehydration', title: 'Diarrhoea & dehydration', tile: 'Can’t keep fluids in', icon: 'water', tone: 'blue',
       more: 'quick-reference.html', moreLabel: 'Emergency Card (rehydration recipe)',
       steps: [
@@ -182,7 +207,7 @@
 
   var ICON = function (n) { return (window.ICONS && window.ICONS[n]) || ''; };
   var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
-  var base = location.pathname.indexOf('/sections/') >= 0 ? '../' : '';
+  var base = /\/(sections|pdfs)\//.test(location.pathname) ? '../' : '';
 
   var root, lastFocus;
   function build() {
@@ -215,7 +240,7 @@
           '<span class="sos-ti">' + ICON(c.icon === 'drop' ? 'water' : c.icon) + '</span>' +
           '<span class="sos-tt">' + esc(c.title) + '</span><span class="sos-ts">' + esc(c.tile) + '</span></button>';
       }).join('') + '</div>' +
-      '<p class="sos-foot"><a href="' + base + 'quick-reference.html">Printable Emergency Card</a> · These steps are a summary — not a substitute for training.</p>';
+      '<p class="sos-foot"><a href="' + base + 'print-essentials.html">Print all of these</a> · <a href="' + base + 'quick-reference.html">Printable Emergency Card</a> · These steps are a summary — not a substitute for training.</p>';
   }
   function card(c) {
     return '<article class="sos-card sos-' + c.tone + '">' +
@@ -265,6 +290,7 @@
 
   window.LastLight = window.LastLight || {};
   window.LastLight.openEmergency = open;
+  window.LastLight.emergencyData = CARDS;          // full cards, for print-essentials.html
   window.LastLight.emergencyCards = CARDS.map(function (c) { return { id: c.id, title: c.title, tile: c.tile }; });
   fromHash();
 })();

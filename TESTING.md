@@ -1,5 +1,20 @@
 # Pre-Launch Testing Checklist
 
+> **Automated checks run on every push** (`.github/workflows/site-check.yml`):
+> broken links/anchors, missing offline-cache files, pages not on the standard
+> layout, counts that disagree with the real files ("28 sections", "33 bundled
+> books"), pages wider than a phone, script errors, Prev/Next order, emergency
+> mode and search. Run them yourself before pushing:
+>
+> ```bash
+> python3 -m http.server 8765 &      # serve the guide
+> node tests/site-check.js           # everything (needs: npm i playwright)
+> node tests/site-check.js --static  # file checks only, no browser
+> ```
+>
+> The manual checklist below covers what automation can't: real devices,
+> real USB sticks, real AI models.
+
 A cold-run checklist before going public. The goal: prove the guide actually
 works for a real person on real hardware — not just in a developer's browser.
 Work top to bottom; tick each box on the devices listed.

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Every emergency step card on a few printable sheets — bleeding, CPR, choking, burns and more. Print, cut out and keep in your first-aid kit.">
+  <title>Print the Essentials — The Last Light Survival Guide</title>
+  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .pe-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 1.5rem; }
+    .pe-kit { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .75rem; margin: 0 0 2rem; }
+    .pe-kit a { display: block; padding: .9rem 1rem; background: var(--bg-2); border: 1px solid var(--border-hi); border-radius: 10px; text-decoration: none; color: var(--text-1); }
+    .pe-kit a strong { display: block; color: var(--amber-light); margin-bottom: .2rem; }
+    .pe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: .9rem; }
+    .pe-card { background: var(--bg-2); border: 1px solid var(--border-hi); border-top: 4px solid var(--pe-c, var(--red)); border-radius: 10px; padding: .9rem 1rem; break-inside: avoid; }
+    .pe-card h2 { margin: 0 0 .5rem; padding: 0; border: 0; font-size: 1.2rem; color: var(--text-0); }
+    .pe-card ol { margin: 0 0 .5rem; padding-left: 1.3rem; }
+    .pe-card li { margin: 0 0 .35rem; font-size: .92rem; line-height: 1.45; color: var(--text-1); }
+    .pe-card li strong { color: var(--text-0); }
+    .pe-card li::marker { color: var(--pe-c, var(--red)); font-weight: 800; }
+    .pe-dont, .pe-watch { font-size: .85rem; line-height: 1.45; margin: .35rem 0 0; color: var(--text-1); }
+    .pe-dont b { color: #ff9a9a; } .pe-watch b { color: var(--amber-light); }
+    .pe-src { font-size: .75rem; color: var(--text-3); margin: .45rem 0 0; }
+    .pe-red { --pe-c: #e06060; } .pe-orange { --pe-c: var(--orange); } .pe-blue { --pe-c: #6fa3d8; } .pe-amber { --pe-c: var(--amber); }
+    .pe-note { font-size: var(--fs-sm); color: var(--text-2); margin-top: 1.5rem; }
+    @media print {
+      @page { size: A4; margin: 10mm; }
+      body { font-size: 8.6pt !important; }
+      .section-header, .pe-actions, .pe-kit, .pe-intro { display: none !important; }
+      .pe-print-title { display: block !important; font-size: 13pt; font-weight: 800; margin: 0 0 5pt; border-bottom: 2px solid #000; padding-bottom: 3pt; }
+      .pe-grid { display: block; column-count: 2; column-gap: 8mm; }
+      .pe-card { background: #fff !important; border: 1px solid #000 !important; border-top: 3pt solid #000 !important; border-radius: 0; padding: 5pt 6pt; margin: 0 0 6pt; color: #000 !important; }
+      .pe-card h2 { font-size: 11pt !important; margin: 0 0 3pt !important; color: #000 !important; }
+      .pe-card li, .pe-dont, .pe-watch { font-size: 8.2pt; line-height: 1.32; color: #000 !important; margin-bottom: 1.5pt; }
+      .pe-card li strong, .pe-dont b, .pe-watch b { color: #000 !important; }
+      .pe-card ol { padding-left: 12pt; margin-bottom: 3pt; }
+      .pe-src { font-size: 6.5pt; color: #333; }
+      .pe-note { font-size: 7pt; color: #333; }
+    }
+    .pe-print-title { display: none; }
+  </style>
+</head>
+<body>
+  <nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
+  <div id="overlay" class="overlay"></div>
+
+  <header class="site-header">
+    <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+    <div class="header-breadcrumb">
+      <a href="index.html" class="crumb-parent">Last Light Guide</a>
+      <span class="page-title">Print the Essentials</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-sm btn-outline" data-print>Print</button>
+      <button id="aria-toggle" class="btn btn-sm btn-primary">Bunker Bot</button>
+    </div>
+  </header>
+
+  <main class="main-content" id="main-content">
+  <div class="content-wrapper">
+    <header class="section-header">
+      <h1>Print the Essentials</h1>
+      <p class="section-subtitle">Every emergency step card on a few sheets of paper. Print it, cut the cards out, and keep a set in your first-aid kit, car and go-bag — phones die, paper doesn’t.</p>
+    </header>
+
+    <div class="pe-actions">
+      <button type="button" class="btn btn-primary" onclick="window.print()">Print the emergency cards</button>
+      <a class="btn btn-outline" href="quick-reference.html">Emergency Card (1 page)</a>
+      <a class="btn btn-outline" href="cards.html">Wallet cards</a>
+    </div>
+
+    <p class="pe-intro">A complete paper kit is three things:</p>
+    <div class="pe-kit">
+      <a href="#pe-cards"><strong>1 · These emergency cards</strong>Bleeding, CPR, choking, allergy, burns, cold, heat, seizure, stroke, low sugar, fractures, snakebite, poisoning, head injury, dehydration — about 4 sheets.</a>
+      <a href="quick-reference.html"><strong>2 · The Emergency Card</strong>One double-sided sheet: water purification, triage, radio frequencies, signals, navigation.</a>
+      <a href="cards.html"><strong>3 · Wallet cards</strong>Credit-card-size essentials to laminate and carry.</a>
+    </div>
+
+    <div class="pe-print-title">The Last Light Survival Guide — Emergency step cards</div>
+    <div class="pe-grid" id="pe-cards"><p>Loading the cards…</p></div>
+    <p class="pe-note">These steps summarise the guide’s medical sections (named on each card). They are not a substitute for first-aid training. Call for help if you can — 999 (UK) · 112 (EU) · 911 (US).</p>
+  </div>
+  </main>
+
+  <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
+    <div class="aria-header">
+      <div class="aria-title"><div class="aria-avatar">🤖</div><div class="aria-title-text"><strong>Bunker Bot</strong><small>Offline Survival AI</small></div></div>
+      <button id="aria-close" class="btn-icon" aria-label="Close Bunker Bot">✕</button>
+    </div>
+    <div class="aria-status"><span class="status-dot checking"></span><span class="aria-status-label">Checking connection…</span></div>
+    <div id="aria-messages" class="aria-messages" role="log" aria-live="polite"></div>
+    <div class="aria-input-area">
+      <textarea id="aria-input" placeholder="Ask Bunker Bot…" rows="2" aria-label="Message Bunker Bot"></textarea>
+      <button id="aria-send" class="btn btn-sm btn-amber">Send</button>
+    </div>
+  </aside>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/emergency.js"></script>
+  <script>
+  /* Cards come straight from emergency mode's data, so print and screen
+     never disagree. */
+  (function () {
+    var cards = (window.LastLight && window.LastLight.emergencyData) || [];
+    var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+    document.getElementById('pe-cards').innerHTML = cards.map(function (c) {
+      return '<article class="pe-card pe-' + c.tone + '"><h2>' + esc(c.title) + '</h2><ol>' +
+        c.steps.map(function (s) { return '<li><strong>' + esc(s[0]) + '</strong>' + (s[1] ? ' ' + esc(s[1]) : '') + '</li>'; }).join('') + '</ol>' +
+        (c.dont && c.dont.length ? '<p class="pe-dont"><b>Do not:</b> ' + c.dont.map(esc).join(' ') + '</p>' : '') +
+        (c.watch ? '<p class="pe-watch"><b>Watch for:</b> ' + esc(c.watch) + '</p>' : '') +
+        '<p class="pe-src">Full detail: ' + esc(c.moreLabel) + '</p></article>';
+    }).join('');
+  })();
+  </script>
+</body>
+</html>
