@@ -2262,3 +2262,17 @@ body.mode-nv .quick-emergency { color: var(--text-0); }
   .section-pagination { flex-wrap: nowrap; }
   .section-pagination .pagination-btn { padding: 0.6rem 0.75rem; }
 }
+
+/* Honest offline status (setupOfflineStatus in app.js) */
+.sidebar-live-dot[data-state="busy"] { background: var(--amber); }
+.sidebar-live-dot[data-state="warn"] { background: var(--red); animation: none; }
+.sidebar-live-label[data-state="warn"] { color: var(--red); }
+
+/* Install banner */
+.ib-icon img { width: 40px; height: 40px; border-radius: 10px; display: block; }
+.ib-share {
+  display: inline-block; width: 0.9em; height: 1em; vertical-align: -0.12em;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12M8 7l4-4 4 4'/%3E%3Cpath d='M6 11H5a1 1 0 00-1 1v8a1 1 0 001 1h14a1 1 0 001-1v-8a1 1 0 00-1-1h-1'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12M8 7l4-4 4 4'/%3E%3Cpath d='M6 11H5a1 1 0 00-1 1v8a1 1 0 001 1h14a1 1 0 001-1v-8a1 1 0 00-1-1h-1'/%3E%3C/svg%3E") center / contain no-repeat;
+}

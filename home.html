@@ -6,6 +6,12 @@
   <meta name="description" content="The Last Light Survival Guide — a complete, fully-offline survival library. 28 sections, 33 reference books, an AI that cites its sources, and offline maps. Free. Runs off a USB stick, even a Raspberry Pi.">
   <link rel="canonical" href="https://bunkerbot.co.uk/">
   <meta name="theme-color" content="#070a09">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Last Light">
   <meta property="og:title" content="The Last Light Survival Guide">
   <meta property="og:description" content="A complete, fully-offline survival library — 33 books, an AI that cites them, and offline maps. Free. Runs off a USB stick.">
   <meta property="og:type" content="website">
@@ -16,7 +22,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://bunkerbot.co.uk/assets/og-image.png">
   <title>The Last Light Survival Guide — Free Offline Survival Library</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
   <style>
     @font-face{font-family:'Inter';font-display:swap;font-weight:100 900;src:url('assets/fonts/inter-latin-wght-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
     @font-face{font-family:'Bitter';font-display:swap;font-weight:100 900;src:url('assets/fonts/bitter-latin-wght-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -707,6 +714,13 @@
     }, { threshold: .5 });
     if(typed) tio.observe(typed.closest('.term'));
   })();
+</script>
+<script>
+/* Make the landing page installable too ("Add to Home Screen" from
+   bunkerbot.co.uk): the service worker saves the whole guide for offline. */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function () {});
+}
 </script>
 </body>
 </html>

@@ -1,27 +1,43 @@
 {
   "name": "The Last Light Survival Guide",
   "short_name": "Last Light",
-  "description": "Complete offline emergency preparedness reference — 20 sections, 14 PDFs, AI-powered. No internet required.",
+  "description": "Complete offline emergency preparedness reference — 28 sections, tools, maps and search. Works with no internet once installed.",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
   "background_color": "#070a09",
-  "theme_color": "#c9a94e",
+  "theme_color": "#070a09",
   "orientation": "portrait-primary",
   "lang": "en",
-  "categories": ["education", "health", "utilities"],
+  "categories": [
+    "education",
+    "health",
+    "utilities"
+  ],
   "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
     {
       "src": "assets/icons/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
-    },
-    {
-      "src": "assets/icons/icon-maskable.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
     }
   ],
   "shortcuts": [
@@ -29,13 +45,41 @@
       "name": "Emergency Card",
       "short_name": "Emergency",
       "url": "quick-reference.html",
-      "description": "Quick-reference emergency card"
+      "description": "Quick-reference emergency card",
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
-      "name": "Bunker Bot AI",
-      "short_name": "Bunker Bot",
-      "url": "ai-setup.html",
-      "description": "Offline AI assistant setup"
+      "name": "Medical & First Aid",
+      "short_name": "Medical",
+      "url": "sections/medical.html",
+      "description": "Bleeding, burns, CPR and more",
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Food & Water",
+      "short_name": "Food & Water",
+      "url": "sections/food.html",
+      "description": "Water purification, food storage",
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
-  ]
+  ],
+  "id": "/index.html"
 }

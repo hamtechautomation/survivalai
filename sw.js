@@ -1,5 +1,5 @@
 /* The Last Light Survival Guide — Service Worker v4 */
-const CACHE = 'last-light-v70';
+const CACHE = 'last-light-v71';
 
 /* Pre-cache: all HTML, CSS, JS, icons, manifest.
    pdf-chunks.json (~30MB) is intentionally excluded from pre-cache to avoid
@@ -88,6 +88,8 @@ const PRECACHE = [
   '/search/search-index.json',
   '/manifest.json',
   '/assets/icons/icon.svg',
+  '/assets/icons/icon-192.png',
+  '/assets/icons/apple-touch-icon.png',
 ];
 
 /* ── Install: pre-cache everything, activate immediately ──
@@ -95,11 +97,43 @@ const PRECACHE = [
    from the network, bypassing the long (1-year) browser HTTP cache. This is what
    makes aggressive caching safe: bump CACHE here and every asset refreshes. */
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE)
-      .then(cache => cache.addAll(PRECACHE.map(u => new Request(u, { cache: 'reload' }))))
-      .then(() => self.skipWaiting())
-  );
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE);
+    const total = PRECACHE.length;
+    let done = 0;
+    // Same all-or-nothing result as cache.addAll (any failure fails the
+    // install), but file by file so open pages can show "Saving 42 / 85".
+    const queue = PRECACHE.slice();
+    const worker = async () => {
+      while (queue.length) {
+        const url = queue.shift();
+        const res = await fetch(new Request(url, { cache: 'reload' }));
+        if (!res.ok) throw new Error('precache failed: ' + url);
+        await cache.put(url, res);
+        done++;
+        if (done % 5 === 0 || done === total) broadcast({ type: 'precache-progress', done, total, version: CACHE });
+      }
+    };
+    await Promise.all([worker(), worker(), worker(), worker()]);
+    await self.skipWaiting();
+  })());
+});
+
+async function broadcast(msg) {
+  const clients = await self.clients.matchAll({ includeUncontrolled: true, type: 'window' });
+  clients.forEach(c => c.postMessage(msg));
+}
+
+/* Pages ask "is everything saved?" to show an honest offline-ready status. */
+self.addEventListener('message', event => {
+  if (!event.data || event.data.type !== 'offline-status') return;
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE);
+    const keys = await cache.keys();
+    const have = new Set(keys.map(r => new URL(r.url).pathname));
+    const missing = PRECACHE.filter(u => !have.has(u));
+    event.source.postMessage({ type: 'offline-status', version: CACHE, total: PRECACHE.length, missing: missing.length });
+  })());
 });
 
 /* ── Activate: delete stale caches, take control immediately ── */

@@ -163,6 +163,7 @@
     setupModeBar();
     setupServiceWorker();
     setupInstallPrompt();
+    setupOfflineStatus();
     markStandalone();
   }
 
@@ -277,7 +278,7 @@
 
     const touch = document.createElement('link');
     touch.rel  = 'apple-touch-icon';
-    touch.href = `${base}assets/icons/icon.svg`;
+    touch.href = `${base}assets/icons/apple-touch-icon.png`;
     document.head.appendChild(touch);
 
     /* iOS standalone PWA meta tags */
@@ -470,7 +471,7 @@
         </div>
         <div class="sidebar-live-indicator">
           <span class="sidebar-live-dot"></span>
-          <span class="sidebar-live-label">Guide loaded · offline ready</span>
+          <span class="sidebar-live-label" data-offline-status>Checking offline storage…</span>
         </div>
       </div>`;
 
@@ -797,81 +798,148 @@
     });
   }
 
-  /* =================== INSTALL PROMPT =================== */
+  /* =================== DEVICE / BROWSER =================== */
+  function detectPlatform() {
+    const ua = navigator.userAgent;
+    const ios = /iPad|iPhone|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    const android = /Android/.test(ua);
+    // In-app browsers (Instagram, Facebook, Gmail/Google app, TikTok…) can't install web apps.
+    const inApp = /FBAN|FBAV|FB_IAB|Instagram|LinkedInApp|Snapchat|TikTok|musical_ly|Line\/|GSA\/|Twitter|Pinterest/i.test(ua);
+    let browser = 'other';
+    if (ios) browser = /CriOS/.test(ua) ? 'chrome' : /FxiOS/.test(ua) ? 'firefox' : /EdgiOS/.test(ua) ? 'edge' : 'safari';
+    else if (/SamsungBrowser/.test(ua)) browser = 'samsung';
+    else if (/Firefox\//.test(ua)) browser = 'firefox';
+    else if (/Edg\/|EdgA\//.test(ua)) browser = 'edge';
+    else if (/OPR\//.test(ua)) browser = 'opera';
+    else if (/Chrome\//.test(ua)) browser = 'chrome';
+    else if (/Safari\//.test(ua)) browser = 'safari';
+    const standalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+    const os = ios ? 'ios' : android ? 'android' : 'desktop';
+    return { os, browser, inApp, standalone, ipad: ios && !/iPhone|iPod/.test(ua) };
+  }
+
+  /* Shared install state: the download page's "Install" button and the
+     banner both use the browser's native prompt when it is offered. */
+  const installState = { deferred: null, installed: false };
+  window.LastLight = window.LastLight || {};
+  window.LastLight.platform = detectPlatform;
+  window.LastLight.canPrompt = () => !!installState.deferred;
+  window.LastLight.promptInstall = () => {
+    if (!installState.deferred) return Promise.resolve('unavailable');
+    const d = installState.deferred;
+    installState.deferred = null;
+    d.prompt();
+    return d.userChoice.then(c => {
+      document.dispatchEvent(new CustomEvent('ll-installable', { detail: false }));
+      return c.outcome;
+    });
+  };
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    installState.deferred = e;
+    document.dispatchEvent(new CustomEvent('ll-installable', { detail: true }));
+  });
+  window.addEventListener('appinstalled', () => {
+    installState.installed = true;
+    installState.deferred = null;
+    document.dispatchEvent(new CustomEvent('ll-installable', { detail: false }));
+    const b = document.getElementById('install-banner'); if (b) b.remove();
+  });
+
+  /* =================== INSTALL BANNER =================== */
   function setupInstallPrompt() {
-    /* Don't show if already running as installed PWA */
-    if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) return;
+    const pf = detectPlatform();
+    if (pf.standalone || pf.os === 'desktop') return;
+    if (/download\.html$/.test(location.pathname)) return;   // that page has the full guide
 
-    /* Only on mobile */
-    if (window.innerWidth > 900) return;
-
-    /* Track visits; show on 2nd+ visit only */
-    const visits = parseInt(localStorage.getItem('ll-visits') || '0') + 1;
-    localStorage.setItem('ll-visits', visits);
+    let visits = 1, dismissed = 0;
+    try {
+      visits = parseInt(localStorage.getItem('ll-visits') || '0') + 1;
+      localStorage.setItem('ll-visits', visits);
+      dismissed = parseInt(localStorage.getItem('ll-install-dismissed') || '0');
+    } catch (e) {}
     if (visits < 2) return;
-
-    /* Respect a 30-day dismiss */
-    const dismissed = parseInt(localStorage.getItem('ll-install-dismissed') || '0');
     if (dismissed && Date.now() - dismissed < 30 * 86400000) return;
 
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    let deferred = null;
+    const base = window.location.pathname.includes('/sections/') ? '../' : '';
+    const howTo = `${base}download.html#install-phone`;
 
-    function showBanner() {
+    function showBanner(kind) {
       if (document.getElementById('install-banner')) return;
       const banner = document.createElement('div');
       banner.id = 'install-banner';
+      banner.className = 'no-print';
       banner.setAttribute('role', 'complementary');
       banner.setAttribute('aria-label', 'Install app');
-
-      if (isIOS) {
-        banner.innerHTML = `
-          <span class="ib-icon">${ICONS.energy}</span>
-          <div class="ib-text">
-            <strong>Install Last Light</strong>
-            <small>Tap <strong>Share ↑</strong> then <strong>Add to Home Screen</strong></small>
-          </div>
-          <button class="ib-dismiss" aria-label="Dismiss">✕</button>`;
-      } else {
-        banner.innerHTML = `
-          <span class="ib-icon">${ICONS.energy}</span>
-          <div class="ib-text">
-            <strong>Install Last Light</strong>
-            <small>Works fully offline — no app store needed</small>
-          </div>
-          <button class="ib-install btn btn-sm btn-primary">Install</button>
-          <button class="ib-dismiss" aria-label="Dismiss">✕</button>`;
-      }
-
+      const msg = {
+        prompt: 'One tap — opens like an app and works with no signal.',
+        ios: 'Tap <strong>Share</strong> <span class="ib-share" aria-hidden="true"></span> then <strong>Add to Home Screen</strong>.',
+        inapp: 'Open this page in Safari or Chrome first — apps like Instagram or Gmail can’t install it.'
+      }[kind];
+      banner.innerHTML = `
+        <span class="ib-icon"><img src="${base}assets/icons/icon-192.png" alt="" width="40" height="40"></span>
+        <div class="ib-text">
+          <strong>Keep Last Light on your phone</strong>
+          <small>${msg}</small>
+        </div>
+        ${kind === 'prompt' ? '<button class="ib-install btn btn-sm btn-primary">Install</button>'
+                            : `<a class="btn btn-sm btn-outline" href="${howTo}">How</a>`}
+        <button class="ib-dismiss" aria-label="Dismiss">✕</button>`;
       document.body.appendChild(banner);
-
       banner.querySelector('.ib-dismiss').addEventListener('click', () => {
         banner.remove();
-        localStorage.setItem('ll-install-dismissed', Date.now());
+        try { localStorage.setItem('ll-install-dismissed', Date.now()); } catch (e) {}
       });
-
-      banner.querySelector('.ib-install')?.addEventListener('click', () => {
-        if (!deferred) return;
-        deferred.prompt();
-        deferred.userChoice.then(({ outcome }) => {
-          if (outcome === 'accepted') banner.remove();
-          deferred = null;
-        });
-      });
-
-      /* Auto-hide after 12 s if user ignores it */
-      setTimeout(() => banner?.remove(), 12000);
+      const btn = banner.querySelector('.ib-install');
+      if (btn) btn.addEventListener('click', () => window.LastLight.promptInstall().then(o => { if (o === 'accepted') banner.remove(); }));
     }
 
-    /* Android/Chrome: capture the native install event */
-    window.addEventListener('beforeinstallprompt', e => {
-      e.preventDefault();
-      deferred = e;
-      showBanner();
-    });
+    if (pf.inApp) { setTimeout(() => showBanner('inapp'), 1500); return; }
+    if (pf.os === 'ios') { setTimeout(() => showBanner('ios'), 2000); return; }
+    if (installState.deferred) showBanner('prompt');
+    document.addEventListener('ll-installable', e => { if (e.detail) showBanner('prompt'); });
+  }
 
-    /* iOS: show instructions after a short delay */
-    if (isIOS) setTimeout(showBanner, 2000);
+  /* =================== OFFLINE STATUS =================== */
+  /* The sidebar used to say "offline ready" unconditionally. Now it asks the
+     service worker whether every file is actually saved on this device. */
+  function setupOfflineStatus() {
+    const set = (text, state) => {
+      document.querySelectorAll('[data-offline-status]').forEach(el => {
+        el.textContent = text;
+        el.dataset.state = state;
+        const dot = el.parentElement && el.parentElement.querySelector('.sidebar-live-dot');
+        if (dot) dot.dataset.state = state;
+      });
+      document.dispatchEvent(new CustomEvent('ll-offline-status', { detail: { text, state } }));
+    };
+    if (location.protocol === 'file:') { set('Running from files · works offline', 'ready'); return; }
+    if (!('serviceWorker' in navigator) || !('caches' in window)) { set('This browser can’t save the guide for offline use', 'warn'); return; }
+
+    const pf = detectPlatform();
+    const ask = () => navigator.serviceWorker.ready.then(reg => {
+      const sw = navigator.serviceWorker.controller || reg.active;
+      if (sw) sw.postMessage({ type: 'offline-status' });
+    });
+    navigator.serviceWorker.addEventListener('message', e => {
+      const d = e.data || {};
+      if (d.type === 'precache-progress') {
+        if (d.done < d.total) set(`Saving for offline… ${Math.round(d.done / d.total * 100)}%`, 'busy');
+        else ask();
+      } else if (d.type === 'offline-status') {
+        if (d.missing === 0) set(pf.standalone ? 'Installed · ready offline' : 'Saved · ready offline', 'ready');
+        else set(navigator.onLine ? 'Saving for offline…' : `Not fully saved — reconnect to finish`, navigator.onLine ? 'busy' : 'warn');
+      }
+    });
+    navigator.serviceWorker.addEventListener('controllerchange', ask);
+    window.addEventListener('online', ask);
+    set(navigator.onLine ? 'Saving for offline…' : 'Checking offline storage…', 'busy');
+    let answered = false;
+    document.addEventListener('ll-offline-status', e => { if (e.detail.state !== 'busy') answered = true; });
+    setTimeout(() => {
+      if (!answered && !navigator.onLine) set('Not saved for offline yet — open once with internet', 'warn');
+    }, 10000);
+    ask();
   }
 
 })();

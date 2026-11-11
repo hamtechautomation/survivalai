@@ -18,7 +18,8 @@
   <meta name="twitter:description" content="A free offline survival library you can keep forever. Lite (~2 MB) or full (~580 MB).">
   <meta name="twitter:image" content="https://bunkerbot.co.uk/assets/og-image.png">
   <title>Download &amp; Support — The Last Light Survival Guide</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⬇</text></svg>" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
     .tier-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; margin:1.25rem 0; }
@@ -54,6 +55,37 @@
     .phone-os > strong{color:var(--amber-light);display:block;margin-bottom:.35rem;font-size:var(--fs-base)}
     .phone-os ol{margin:0;padding-left:1.25rem;font-size:var(--fs-base);color:var(--text-1);line-height:1.65}
     .advanced-label{margin:2.2rem 0 .5rem;font-size:var(--fs-sm);text-transform:uppercase;letter-spacing:.12em;color:var(--text-3);border-top:1px solid var(--border);padding-top:1.2rem}
+    /* phone install guide */
+    .inst-status{display:flex;align-items:center;gap:.55rem;margin:.8rem 0 .2rem;padding:.55rem .75rem;background:var(--bg-1);border:1px solid var(--border);border-radius:8px;font-size:var(--fs-sm);color:var(--text-1)}
+    .inst-dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto;background:var(--amber)}
+    .inst-dot[data-state="ready"]{background:var(--green);box-shadow:0 0 0 3px rgba(75,158,106,.2)}
+    .inst-dot[data-state="warn"]{background:var(--red)}
+    .inst-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0 .2rem}
+    .inst-guide{margin-top:2.2rem;scroll-margin-top:calc(var(--header-h) + 1rem)}
+    .inst-detected{color:var(--text-2);font-size:var(--fs-sm);margin:.2rem 0 .8rem}
+    .inst-done{background:rgba(75,158,106,.1);border:1px solid rgba(75,158,106,.45);border-radius:8px;padding:.75rem .9rem;margin:.6rem 0 1rem;color:var(--text-1)}
+    .inst-tabs{display:flex;gap:3px;padding:3px;background:var(--bg-0);border:1px solid var(--border);border-radius:10px;margin:.6rem 0 1rem;max-width:460px}
+    .inst-tabs button{flex:1;font:inherit;font-size:var(--fs-sm);font-weight:600;color:var(--text-2);background:transparent;border:0;border-radius:7px;padding:.5rem .4rem;cursor:pointer}
+    .inst-tabs button[aria-selected="true"]{background:var(--bg-4);color:var(--amber-light);box-shadow:inset 0 0 0 1px var(--border-hi)}
+    .inst-tabs button:focus-visible{outline:2px solid var(--amber);outline-offset:1px}
+    .inst-panel{display:grid;gap:.8rem}
+    .inst-panel[hidden]{display:none}
+    .inst-browser{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
+    .inst-browser.is-you{border-color:var(--amber-dim);box-shadow:0 0 0 1px rgba(201,169,78,.25)}
+    .inst-browser h3,.inst-after h3{margin:0 0 .5rem;font-size:var(--fs-md);color:var(--text-0);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+    .inst-you{font-family:var(--font);font-size:var(--fs-2xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--bg-0);background:var(--amber);border-radius:999px;padding:.1rem .5rem}
+    .inst-steps{margin:0;padding:0;list-style:none;counter-reset:s}
+    .inst-steps>li{position:relative;padding:.45rem 0 .45rem 2.2rem;color:var(--text-1);line-height:1.6}
+    .inst-steps>li::marker{content:none}
+    .inst-steps>li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:.5rem;width:1.55rem;height:1.55rem;border-radius:50%;background:var(--amber-dim);color:var(--amber-light);font-weight:700;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+    .inst-note{display:block;font-size:var(--fs-sm);color:var(--text-2);margin-top:.15rem}
+    p.inst-note{margin:.4rem 0 0}
+    .inst-guide .g{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.22em;color:var(--amber-light);background:var(--bg-0);border:1px solid var(--border-hi);border-radius:5px;padding:2px;box-sizing:content-box;margin:0 .1em}
+    .inst-after{margin-top:1.2rem;background:linear-gradient(180deg,rgba(201,169,78,.08),transparent);border:1px solid var(--amber-dim);border-radius:10px;padding:1rem 1.1rem}
+    .inst-faq{border-top:1px solid var(--border);padding:.2rem 0}
+    .inst-faq:first-of-type{margin-top:1.2rem}
+    .inst-faq summary{cursor:pointer;padding:.6rem 0;font-weight:600;color:var(--text-0)}
+    .inst-faq p{margin:0 0 .8rem;color:var(--text-1);font-size:var(--fs-base)}
     /* ── animated install scenes (marketing-style) ── */
     .scene-box{width:100%;height:150px;display:block;margin:-.2rem 0 1rem;border-radius:8px;
       background:radial-gradient(circle at 50% 38%, #0f1a15, #0a0f0d);border:1px solid var(--border)}
@@ -191,28 +223,130 @@
         <text x="243" y="112" text-anchor="middle" font-size="7" fill="#8a9e86" font-family="monospace">Last Light</text>
       </svg>
       <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>On your phone or tablet (like an app)</h3>
-      <p style="font-size:var(--fs-base);color:var(--text-2);margin:.1rem 0 .2rem">Save the guide to your home screen so it opens like an app and works offline. This gives you the full written guide, all 28 sections, tools, skills and search — no internet needed.</p>
-      <div class="phone-os">
-        <strong>📱 iPhone / iPad — Safari</strong>
-        <ol>
-          <li>Open <strong>bunkerbot.co.uk</strong> in Safari (you may be here now).</li>
-          <li>Tap the <strong>Share</strong> button (the square with an ↑).</li>
-          <li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>
-          <li>Tap <strong>Add</strong> — an app icon appears. Open it anytime, offline.</li>
-        </ol>
+      <p style="font-size:var(--fs-base);color:var(--text-2);margin:.1rem 0 .2rem">Add the guide to your home screen and it opens like an app — all 28 sections, the tools, skills and search, with <strong>no signal needed</strong>. No app store, no account, about 10 MB.</p>
+      <div class="inst-status" aria-live="polite">
+        <span class="inst-dot" data-state="busy"></span>
+        <span><strong>This device:</strong> <span data-offline-status>Checking…</span></span>
       </div>
-      <div class="phone-os">
-        <strong>🤖 Android — Chrome</strong>
-        <ol>
-          <li>Open <strong>bunkerbot.co.uk</strong> in Chrome.</li>
-          <li>Tap the <strong>⋮</strong> menu (top-right).</li>
-          <li>Tap <strong>Add to Home screen</strong> (or <strong>Install app</strong>).</li>
-          <li>Confirm — the icon appears on your home screen and works offline.</li>
-        </ol>
+      <div class="inst-actions">
+        <button type="button" class="btn btn-primary inst-prompt" hidden>Install Last Light</button>
+        <a class="btn btn-outline" href="#install-phone">Step-by-step for your phone ↓</a>
       </div>
-      <p class="install-tip">The offline <strong>AI assistant</strong> and the <strong>bundled PDF books</strong> need a computer to run — the phone install gives you the written guide and search offline, which is the core of it.</p>
+      <p class="install-tip">The offline <strong>AI assistant</strong> and the <strong>bundled PDF books</strong> need a computer — the phone app gives you the written guide, tools and search offline, which is the core of it.</p>
     </div>
   </div>
+
+  <section id="install-phone" class="inst-guide" aria-labelledby="inst-h">
+    <h2 id="inst-h">Install it on your phone</h2>
+    <p class="inst-detected" hidden></p>
+    <div class="inst-done" hidden>
+      <strong>You’re using the installed app.</strong> Nothing else to do — check the status line at the bottom of the menu says <em>ready offline</em>.
+    </div>
+
+    <div class="inst-tabs" role="tablist" aria-label="Your device">
+      <button type="button" role="tab" id="tab-ios" aria-controls="panel-ios" aria-selected="true">iPhone &amp; iPad</button>
+      <button type="button" role="tab" id="tab-android" aria-controls="panel-android" aria-selected="false" tabindex="-1">Android</button>
+      <button type="button" role="tab" id="tab-desktop" aria-controls="panel-desktop" aria-selected="false" tabindex="-1">Computer</button>
+    </div>
+
+    <div class="inst-panel" role="tabpanel" id="panel-ios" aria-labelledby="tab-ios">
+      <div class="inst-browser" data-browser="safari">
+        <h3>Safari <span class="inst-you" hidden>your browser</span></h3>
+        <ol class="inst-steps">
+          <li>Open <strong>bunkerbot.co.uk</strong> in Safari.</li>
+          <li>Tap <strong>Share</strong> <svg class="g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Share"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 00-1 1v8a1 1 0 001 1h14a1 1 0 001-1v-8a1 1 0 00-1-1h-1"/></svg> — in the bar at the bottom on iPhone, top-right on iPad. <span class="inst-note">Only see <svg class="g" viewBox="0 0 24 24" fill="currentColor" aria-label="more"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>? Tap that first, then Share.</span></li>
+          <li>Scroll the list and tap <strong>Add to Home Screen</strong> <svg class="g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="add"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/></svg>. <span class="inst-note">Not there? Scroll to the bottom, tap <em>Edit Actions</em> and add it.</span></li>
+          <li>If you see <strong>Open as Web App</strong>, leave it switched on. Tap <strong>Add</strong>.</li>
+        </ol>
+      </div>
+      <div class="inst-browser" data-browser="chrome edge firefox">
+        <h3>Chrome, Edge or Firefox on iPhone <span class="inst-you" hidden>your browser</span></h3>
+        <ol class="inst-steps">
+          <li>Tap <strong>Share</strong> <svg class="g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Share"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 00-1 1v8a1 1 0 001 1h14a1 1 0 001-1v-8a1 1 0 00-1-1h-1"/></svg> — in Chrome it’s in the address bar, top-right.</li>
+          <li>Tap <strong>Add to Home Screen</strong>, then <strong>Add</strong>. <span class="inst-note">Needs iOS 16.4 or newer. On older iPhones, use Safari.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="inst-panel" role="tabpanel" id="panel-android" aria-labelledby="tab-android" hidden>
+      <div class="inst-browser" data-browser="chrome edge opera other">
+        <h3>Chrome <span class="inst-you" hidden>your browser</span></h3>
+        <ol class="inst-steps">
+          <li>Open <strong>bunkerbot.co.uk</strong> in Chrome.</li>
+          <li>Tap the menu <svg class="g" viewBox="0 0 24 24" fill="currentColor" aria-label="menu"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg> at the top-right.</li>
+          <li>Tap <strong>Add to home screen</strong>, then <strong>Install</strong>. <span class="inst-note">Some phones say <em>Install app</em> instead — same thing.</span></li>
+        </ol>
+        <p class="inst-note">Quicker: if this page shows an <strong>Install Last Light</strong> button above, just tap it.</p>
+      </div>
+      <div class="inst-browser" data-browser="samsung">
+        <h3>Samsung Internet <span class="inst-you" hidden>your browser</span></h3>
+        <ol class="inst-steps">
+          <li>Tap the menu <svg class="g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-label="menu"><path d="M4 6h16M4 12h16M4 18h16"/></svg> at the bottom-right.</li>
+          <li>Tap <strong>Add page to</strong> → <strong>Home screen</strong>, then <strong>Add</strong>. <span class="inst-note">If an install icon <svg class="g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="install"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 8v6M9 11l3 3 3-3M8 21h8"/></svg> shows in the address bar, you can tap that instead.</span></li>
+        </ol>
+      </div>
+      <div class="inst-browser" data-browser="firefox">
+        <h3>Firefox <span class="inst-you" hidden>your browser</span></h3>
+        <ol class="inst-steps">
+          <li>Tap the menu <svg class="g" viewBox="0 0 24 24" fill="currentColor" aria-label="menu"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>.</li>
+          <li>Tap <strong>Add to Home screen</strong> (may say <em>Install</em>), then confirm.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="inst-panel" role="tabpanel" id="panel-desktop" aria-labelledby="tab-desktop" hidden>
+      <div class="inst-browser" data-browser="chrome edge opera">
+        <h3>Chrome or Edge <span class="inst-you" hidden>your browser</span></h3>
+        <ol class="inst-steps">
+          <li>Click the install icon <svg class="g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="install"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 8v6M9 11l3 3 3-3M8 21h8"/></svg> at the right-hand end of the address bar.</li>
+          <li>Click <strong>Install</strong>. It gets its own window and a desktop/Start-menu icon.</li>
+        </ol>
+        <p class="inst-note">No icon? Chrome: menu <svg class="g" viewBox="0 0 24 24" fill="currentColor" aria-label="menu"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg> → <em>Cast, save and share</em> → <em>Install page as app</em>. Edge: menu <svg class="g" viewBox="0 0 24 24" fill="currentColor" aria-label="more"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg> → <em>Apps</em> → <em>Install this site as an app</em>.</p>
+      </div>
+      <div class="inst-browser" data-browser="safari">
+        <h3>Safari on Mac <span class="inst-you" hidden>your browser</span></h3>
+        <ol class="inst-steps">
+          <li>Choose <strong>File → Add to Dock</strong> (macOS Sonoma or newer), then <strong>Add</strong>.</li>
+        </ol>
+      </div>
+      <div class="inst-browser" data-browser="firefox other">
+        <h3>Firefox and other browsers <span class="inst-you" hidden>your browser</span></h3>
+        <p class="inst-note" style="margin:0">Desktop Firefox can’t install web apps. Use the <strong>USB / computer</strong> download above instead — it’s the better option on a computer anyway, because it includes the PDF books and the offline AI.</p>
+      </div>
+    </div>
+
+    <div class="inst-after">
+      <h3>Then do this once — it’s the step people miss</h3>
+      <ol class="inst-steps">
+        <li><strong>Open the new Last Light icon while you still have internet.</strong> On iPhone the home-screen app keeps its own storage, separate from Safari, so this first launch is what saves the guide onto the phone.</li>
+        <li><strong>Wait for “ready offline”.</strong> Open the menu <svg class="g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-label="menu"><path d="M4 6h16M4 12h16M4 18h16"/></svg> — the line at the bottom shows progress and turns green when every page is saved. It takes under a minute on most connections.
+          <div class="inst-status" aria-live="polite"><span class="inst-dot" data-state="busy"></span><span><strong>Right now, this device:</strong> <span data-offline-status>Checking…</span></span></div>
+        </li>
+        <li><strong>Test it.</strong> Turn on Airplane mode, close the app fully, and open it again. If the guide opens, you’re set.</li>
+      </ol>
+    </div>
+
+    <details class="inst-faq">
+      <summary>I can’t find “Add to Home Screen” or “Install”</summary>
+      <p>You’re probably in an app’s built-in browser — links opened from Instagram, Facebook, Gmail or the Google app can’t install anything. Tap <svg class="g" viewBox="0 0 24 24" fill="currentColor" aria-label="more"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg> or <svg class="g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Share"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 00-1 1v8a1 1 0 001 1h14a1 1 0 001-1v-8a1 1 0 00-1-1h-1"/></svg> and choose <em>Open in Safari</em> / <em>Open in Chrome</em>, then follow the steps. Private / Incognito tabs can’t install either.</p>
+    </details>
+    <details class="inst-faq">
+      <summary>The icon opens in the browser instead of like an app</summary>
+      <p>Delete the icon and add it again. On newer iPhones make sure <em>Open as Web App</em> is switched on when you tap Add to Home Screen.</p>
+    </details>
+    <details class="inst-faq">
+      <summary>How do I get updates?</summary>
+      <p>Automatically. Whenever the app is opened with internet, it checks for a newer version and saves it in the background; the next launch uses it. Nothing to reinstall.</p>
+    </details>
+    <details class="inst-faq">
+      <summary>Will my phone delete it to free up space?</summary>
+      <p>An installed app keeps its saved pages. A site you only visit in a browser tab can have its saved data cleared after a few weeks without use — so do install it rather than relying on a bookmark. Open it now and then to be sure, and keep a second copy on a USB stick.</p>
+    </details>
+    <details class="inst-faq">
+      <summary>What’s on the phone version, and what isn’t?</summary>
+      <p>Included offline: every section, the Emergency Card, calculators &amp; tools, skills, checklists and search. Not included: the 33 PDF books (too large — open one while online and it stays saved), the offline maps data, and the Bunker Bot AI, which needs a computer.</p>
+    </details>
+  </section>
 
   <h3 style="margin:1.8rem 0 .3rem;color:var(--text-0)">Where to keep it</h3>
   <p class="section-desc" style="margin-bottom:.3rem">Knowledge only helps if you can reach it. Keep <strong>at least two copies</strong> in different places, so a lost phone or a dead laptop never loses the guide.</p>
@@ -296,5 +430,60 @@
 <script src="assets/js/search.js"></script>
 <script src="assets/js/bunker-bot.js"></script>
 <script src="assets/js/app.js"></script>
+<script>
+/* Phone install guide: open the visitor's device tab, mark their browser,
+   and show a real Install button where the browser offers one. */
+(function () {
+  function init() {
+    var LL = window.LastLight; if (!LL) return;
+    var pf = LL.platform();
+    var tabs = [].slice.call(document.querySelectorAll('.inst-tabs [role=tab]'));
+    function select(id) {
+      tabs.forEach(function (t) {
+        var on = t.id === 'tab-' + id;
+        t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t.id.slice(4)); });
+      t.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
+        var n = tabs[(i + d + tabs.length) % tabs.length]; n.click(); n.focus();
+      });
+    });
+    select(pf.os);
+
+    // Highlight the visitor's browser and put it first.
+    var panel = document.getElementById('panel-' + pf.os);
+    var mine = [].slice.call(panel.querySelectorAll('.inst-browser')).filter(function (b) {
+      return b.dataset.browser.split(' ').indexOf(pf.browser) >= 0;
+    })[0];
+    if (mine && !pf.inApp) { mine.classList.add('is-you'); mine.querySelector('.inst-you').hidden = false; panel.insertBefore(mine, panel.firstChild); }
+
+    var names = { ios: pf.ipad ? 'iPad' : 'iPhone', android: 'Android', desktop: 'a computer' };
+    var bnames = { safari: 'Safari', chrome: 'Chrome', edge: 'Edge', firefox: 'Firefox', samsung: 'Samsung Internet', opera: 'Opera', other: 'your browser' };
+    var det = document.querySelector('.inst-detected');
+    det.hidden = false;
+    det.innerHTML = pf.inApp
+      ? '<strong>You’re in an app’s built-in browser.</strong> These can’t install anything — open this page in Safari or Chrome first (look for <em>Open in browser</em> in the ••• menu).'
+      : 'Showing steps for <strong>' + names[pf.os] + '</strong> using <strong>' + bnames[pf.browser] + '</strong>. On a different device? Pick it below.';
+    if (pf.standalone) { document.querySelector('.inst-done').hidden = false; }
+
+    // Native install button (Android Chrome/Edge/Samsung, desktop Chrome/Edge).
+    var btn = document.querySelector('.inst-prompt');
+    function sync() { btn.hidden = !LL.canPrompt() || pf.standalone; }
+    btn.addEventListener('click', function () { LL.promptInstall().then(sync); });
+    document.addEventListener('ll-installable', sync); sync();
+
+    // Mirror the offline status onto the coloured dots here.
+    function dots(state) { document.querySelectorAll('.inst-dot').forEach(function (d) { d.dataset.state = state; }); }
+    var first = document.querySelector('[data-offline-status]');
+    if (first && first.dataset.state) dots(first.dataset.state);
+    document.addEventListener('ll-offline-status', function (e) { dots(e.detail.state); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
 </body>
 </html>
