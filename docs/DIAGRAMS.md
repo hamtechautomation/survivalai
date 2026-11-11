@@ -138,6 +138,30 @@ to west, so the text now says so.
 
 ---
 
+## More diagrams for the thinnest sections
+
+| Section | Diagram (`id`) | What it shows | Checked against |
+|---|---|---|---|
+| Veterinary | `fig-presentation` | Normal "diving" presentation (two front feet, nose on top) vs head-only/legs back, feet/head back, breech; when and how to help | Section text; Merck Veterinary Manual (dystocia, small ruminants) |
+| Veterinary | `fig-famacha` | Lower-eyelid colour scale 1 (red) to 5 (white); treat 4–5, and 3 if in doubt; treat individuals only | Section text; FAMACHA© guidance (Univ. of Pretoria / ACSRPC). Screen colours approximate |
+| Maternal | `fig-newborn` | Dry and warm skin-to-skin → stimulate, clear mouth then nose → after 30–60 s, small puffs over nose and mouth ~40/min, head level → cord tied and cut after pulsing stops, breast within the hour | Section text; WHO *Helping Babies Breathe*; Resuscitation Council UK NLS |
+| Science | `fig-lever` | Lever: load × a = effort × b (200 kg × 0.5 m = 50 kg × 2 m). 2:1 pulley: rope anchored, under the moving pulley, over the fixed pulley | Section text; standard mechanics |
+| Science | `fig-345` | 3-4-5 right angle with pegs and string, larger multiples, equal-diagonals check | Section text |
+| Communications | `fig-groundair` | V, X, →, F, LL, N, Y, SOS laid in logs, person for scale | Section table; ICAO Annex 12 ground-to-air visual signal code |
+| Projects | `fig-latrine` | ≥30 m from water and downhill of it, pit bottom above the water table, downwind of the kitchen, tippy-tap | Section text; WHO/Sphere sanitation standards |
+| Animal | `fig-rabbit-cycle` | Mate day 0 (doe to buck) → palpate 10–14 → nest box 28 → kindles 31 → check nest next day → wean 6–8 weeks | Section text |
+
+⚑ **needs expert review:**
+- `fig-newborn`: a midwife or neonatal nurse should confirm the drawing.
+- `fig-presentation`: a vet should confirm the drawing.
+- Chemistry › The Cuts says methanol "concentrates first" and is "produced early in every
+  distillation run". Methanol comes from fermentation, not distillation, and in a pot still it
+  comes through across the whole run (with more in the tails), not only in the foreshots.
+  Discarding foreshots is still sensible, but the text overstates what it achieves. **Not
+  diagrammed until a chemist reviews the text.**
+
+---
+
 ## Corrections made while checking
 
 | Where | Was | Now | Why |

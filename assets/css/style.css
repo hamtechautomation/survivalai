@@ -2926,3 +2926,9 @@ svg text[data-hl]:focus-visible { fill: var(--amber-light); text-decoration: und
   .dg-stick { fill: #777 !important; stroke: #000 !important; }
   .dg-shadow { stroke: #555 !important; }
 }
+.dg-limb-s { stroke-width: 6; }
+.dg-stick-l { stroke: #a8834a; stroke-width: 7; stroke-linecap: round; }
+.dg-grass { fill: color-mix(in srgb, var(--green) 14%, var(--bg-2)); }
+.dg-rope { fill: none; stroke: #c9b48a; stroke-width: 2.4; stroke-linejoin: round; }
+.dg-logs { fill: none; stroke: #7a5a32; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+@media print { .dg-logs, .dg-stick-l { stroke: #000 !important; } .dg-grass { fill: #fff !important; } }
