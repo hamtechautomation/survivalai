@@ -85,6 +85,8 @@
     map:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>`,
     tent:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20L12 4l9 16z"/><path d="M12 4v16M9 20l3-5 3 5"/></svg>`,
     display:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18z" fill="currentColor"/></svg>`,
+    back:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>`,
+    snow:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4.9 7l14.2 10M4.9 17L19.1 7"/><path d="M9.5 3.5L12 6l2.5-2.5M9.5 20.5L12 18l2.5 2.5"/></svg>`,
   };
   window.ICONS = ICONS;
 
@@ -156,6 +158,7 @@
     wrapTables();
     setupOnThisPage();
     setupPalette();
+    setupEmergency();
     iconifyEmoji(document.body);
     setupSidebar();
     setupARIAToggle();
@@ -439,12 +442,16 @@
           html += '<div class="palette-group">Recent</div>' + recent.slice(0, 6).map(r => row(r.href, esc(r.title), r.group, ICONS.clock)).join('');
         }
         html += '<div class="palette-group">Quick access</div>' +
-          [['quick-reference.html', 'Emergency Card', 'Fast reference for a crisis in progress', ICONS.alert],
+          `<a class="palette-item palette-sos" role="option" href="#sos" data-sos=""><span class="palette-ico">${ICONS.alert}</span><span class="palette-text"><span class="palette-t">Emergency steps</span><span class="palette-s">Bleeding, not breathing, choking, burns…</span></span></a>` +
+          [['quick-reference.html', 'Emergency Card', 'Printable one-page reference', ICONS.clipboard],
            ['sections/medical.html', 'Medical & First Aid', 'Core Survival', ICONS.medical],
            ['sections/food.html', 'Food & Water', 'Core Survival', ICONS.water]]
           .map(x => row(x[0], esc(x[1]), x[2], x[3])).join('');
       } else {
         const ql = q.toLowerCase();
+        const sosHits = (window.guideSearch && window.guideSearch.emergency) ? window.guideSearch.emergency(q) : [];
+        if (sosHits.length) html += '<div class="palette-group palette-group-sos">Emergency steps</div>' + sosHits.slice(0, 3).map(c =>
+          `<a class="palette-item palette-sos" role="option" href="#sos-${c.id}" data-sos="${c.id}"><span class="palette-ico">${ICONS.alert}</span><span class="palette-text"><span class="palette-t">${esc(c.title)}</span><span class="palette-s">Big step-by-step instructions</span></span></a>`).join('');
         const pm = pages().filter(p => p.label.toLowerCase().includes(ql) || (p.group && p.group.toLowerCase().includes(ql))).slice(0, 5);
         if (pm.length) html += '<div class="palette-group">Pages</div>' + pm.map(p => row(p.href, hl(p.label, q), p.group, ICONS.file)).join('');
         const res = (q.length >= 2 && window.guideSearch) ? window.guideSearch(q) : [];
@@ -470,7 +477,8 @@
       if (sb && sb.classList.contains('open')) { const ov = document.getElementById('overlay'); if (ov) ov.click(); }
       input.value = '';
       render();
-      setTimeout(() => input.focus(), 0);
+      input.focus();                       // focus now so fast typing isn't lost
+      setTimeout(() => { if (document.activeElement !== input) input.focus(); }, 0);
     }
     function close() {
       pal.hidden = true;
@@ -493,11 +501,56 @@
       }
     });
     out.addEventListener('mousemove', e => { const a = e.target.closest('.palette-item'); if (a) { const i = items().indexOf(a); if (i !== idx) { idx = i; mark(); } } });
-    out.addEventListener('click', e => { if (e.target.closest('.palette-item')) close(); });
+    out.addEventListener('click', e => {
+      const it = e.target.closest('.palette-item'); if (!it) return;
+      if (it.hasAttribute('data-sos')) { e.preventDefault(); close(); window.LastLight.sos(it.dataset.sos || undefined); return; }
+      close();
+    });
     pal.querySelector('.palette-backdrop').addEventListener('click', close);
     pal.querySelector('.palette-close').addEventListener('click', close);
     window.LastLight = window.LastLight || {};
     window.LastLight.openSearch = open;
+  }
+
+  /* =================== EMERGENCY MODE =================== */
+  /* Red button in every header (and the sidebar's Emergency tile) opens a
+     full-screen "what's happening?" picker with big numbered steps.
+     emergency.js is loaded on first use (and pre-cached for offline). */
+  function loadEmergency() {
+    if (window.LastLight && window.LastLight._emergencyReady) return window.LastLight._emergencyReady;
+    const p = new Promise((resolve, reject) => {
+      const sc = document.createElement('script');
+      sc.src = (location.pathname.includes('/sections/') ? '../' : '') + 'assets/js/emergency.js';
+      sc.onload = () => resolve(); sc.onerror = reject;
+      document.body.appendChild(sc);
+    });
+    window.LastLight._emergencyReady = p;
+    return p;
+  }
+  function setupEmergency() {
+    window.LastLight = window.LastLight || {};
+    const openSOS = id => loadEmergency().then(() => window.LastLight.openEmergency(id));
+    window.LastLight.sos = openSOS;
+
+    const anchor = document.querySelector('.header-actions') ||
+                   (document.getElementById('aria-toggle') && document.getElementById('aria-toggle').parentNode) ||
+                   document.querySelector('.top-bar');
+    if (anchor) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'btn btn-sm sos-btn no-print';
+      btn.setAttribute('aria-label', 'Emergency — step-by-step first aid');
+      btn.appendChild(iconSpan('alert', false));
+      btn.insertAdjacentHTML('beforeend', '<span class="sos-l-long">Emergency</span><span class="sos-l-short">SOS</span>');
+      btn.addEventListener('click', () => openSOS());
+      anchor.insertBefore(btn, anchor.firstChild);
+    }
+    const tile = document.querySelector('.quick-emergency');
+    if (tile) tile.addEventListener('click', e => { e.preventDefault(); openSOS(); });
+    if (/^#sos/.test(location.hash)) loadEmergency();
+    // Warm the cache so it's there offline even if never opened online.
+    if ('requestIdleCallback' in window) requestIdleCallback(() => loadEmergency().catch(() => {}), { timeout: 4000 });
+    else setTimeout(() => loadEmergency().catch(() => {}), 2500);
   }
 
   /* =================== WIDE TABLES =================== */
