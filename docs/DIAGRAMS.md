@@ -162,6 +162,26 @@ to west, so the text now says so.
 
 ---
 
+## Display modes × diagrams (audit, November 2026)
+
+All 109 diagrams were captured in Standard, Night, High-contrast and print, and measured
+by script (pixel colour, label contrast against the real backdrop, label position).
+
+| Problem found | Scale | Fix |
+|---|---|---|
+| **Night mode leaked green, blue and white light** | 90 of 108 diagrams, plus about 54,000 spots of page chrome across every page | Three layers. (1) The Night palette now defines every colour token. (2) The content area and enlarged diagrams pass through an SVG filter, `#ll-nv`, that turns any colour into red while keeping its brightness. (3) A full-screen red "gel" (`body.mode-nv::after`, multiply) blocks whatever is left: emoji, photos, map tiles. Result: zero non-red pixels |
+| **Colour charts are meaningless in red** | Heat colours, temper colours, eyelid scale | Each shows a note in Night mode: switch to Standard to read it |
+| **Older diagrams printed light-on-black** | 41 of 65 older diagrams | Tagged `dg-legacy`; print flips lightness and keeps hue (`invert(1) hue-rotate(180deg)`). The two steel colour charts (`dg-truecolor`) keep real colours |
+| **Labels cut off at the edge** | 32 labels in 18 diagrams (plant cards, four-stroke cycle, gasifier, kiln…) | Label moved, or drawing area grown. Now 0, and `site-check` fails if one returns |
+| **Faint labels** | 266 of 1,191 labels under 4.5:1 (145 under 3:1) | 211 recoloured individually: same hue, lightened or darkened just enough for its backdrop. The rest are decorative dots or deliberately faded |
+| **Labels on top of each other** | 12 pairs (bellows, biodiesel processor, solar wiring, forge…) | Rearranged; crowded titles given their own band |
+| Enlarge button covered titles on small plant cards | 9 cards | Button hidden under 340 px wide; tapping the card still enlarges it |
+| Contents list repeated "Deadly Lookalikes" 4× | Climate page | Deduplicated |
+
+`home.html` (the marketing landing page) does not load the app script, so it has no display modes.
+
+---
+
 ## Corrections made while checking
 
 | Where | Was | Now | Why |

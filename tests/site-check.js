@@ -190,6 +190,53 @@ async function browserChecks() {
     if (n < 2) fail('diagrams', `tapping "Often dark spots" highlighted ${n} element(s), expected label + spots`);
   }
 
+  // Diagram quality on every section: no label may stick out of its drawing area.
+  for (const pg of sectionPages) {
+    await desk.goto(BASE_URL + pg);
+    await desk.waitForTimeout(120);
+    const clipped = await desk.evaluate(() => {
+      document.querySelectorAll('details').forEach(d => d.open = true);
+      const bad = [];
+      document.querySelectorAll('svg.dg-legacy, figure.dg > svg').forEach(svg => {
+        const r = svg.getBoundingClientRect(); if (r.width < 20) return;
+        const vb = svg.getAttribute('viewBox').split(/[\s,]+/).map(Number);
+        const sc = Math.min(r.width / vb[2], r.height / vb[3]);
+        const ox = r.left + (r.width - vb[2] * sc) / 2, oy = r.top + (r.height - vb[3] * sc) / 2;
+        svg.querySelectorAll('text').forEach(t => {
+          const tr = t.getBoundingClientRect(); if (tr.width < 1 || !t.textContent.trim() || getComputedStyle(t).opacity === '0') return;
+          const over = Math.max(ox - tr.left, tr.right - (ox + vb[2] * sc), oy - tr.top, tr.bottom - (oy + vb[3] * sc)) / sc;
+          if (over > 2) bad.push(t.textContent.trim().slice(0, 30));
+        });
+      });
+      return bad;
+    });
+    if (clipped.length) fail('diagram-labels', `${pg}: ${clipped.length} label(s) cut off at the edge of a diagram, e.g. "${clipped[0]}"`);
+  }
+
+  // Display modes: Night mode must put the red gel over everything and convert the
+  // content to red; print must flip the older light-on-dark diagrams.
+  const night = await browser.newContext({ viewport: { width: 1100, height: 800 } });
+  await night.addInitScript(() => { try { localStorage.setItem('display-mode', 'mode-nv'); } catch (e) {} });
+  const nv = await night.newPage();
+  await nv.goto(BASE_URL + 'sections/metallurgy.html');
+  await nv.waitForTimeout(300);
+  const nvState = await nv.evaluate(() => {
+    const gel = getComputedStyle(document.body, '::after');
+    return { on: document.body.classList.contains('mode-nv'), gel: gel.mixBlendMode === 'multiply' && gel.position === 'fixed' && gel.backgroundColor === 'rgb(255, 0, 0)',
+             filter: !!document.getElementById('ll-nv') && getComputedStyle(document.querySelector('.main-content')).filter.includes('ll-nv'),
+             note: [...document.querySelectorAll('.nv-note')].every(n => getComputedStyle(n).display !== 'none') };
+  });
+  if (!nvState.on) fail('night-mode', 'saved Night mode was not applied on load');
+  if (!nvState.gel) fail('night-mode', 'the red gel overlay (body::after, multiply) is missing — colours will leak');
+  if (!nvState.filter) fail('night-mode', 'content is not passed through the #ll-nv red filter');
+  if (!nvState.note) fail('night-mode', 'colour charts do not show their "cannot be read in Night mode" note');
+  await nv.emulateMedia({ media: 'print' });
+  const pr = await nv.evaluate(() => ({ legacy: [...document.querySelectorAll('svg.dg-legacy:not(.dg-truecolor)')].every(s => getComputedStyle(s).filter.includes('invert')),
+                                        gel: getComputedStyle(document.body, '::after').display }));
+  if (!pr.legacy) fail('print', 'older light-on-dark diagrams are not flipped for print');
+  if (pr.gel !== 'none') fail('print', 'the Night-mode red gel would print');
+  await night.close();
+
   // Step-by-step diagrams: Next advances the step and swaps what is shown.
   await desk.goto(BASE_URL + 'sections/navigation.html');
   await desk.waitForTimeout(300);

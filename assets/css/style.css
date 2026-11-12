@@ -1522,12 +1522,30 @@ body.mode-nv {
   --text-0: #ff4444;
   --text-1: #dd3333;
   --text-2: #aa2222;
+  --text-3: #a02020;
   --amber: #ff6666;
   --amber-light: #ff8888;
+  --amber-dim: #7a2020;
   --green: #cc2222;
+  --green-dim: #551010;
+  --red: #ff5050;
+  --red-dim: #661515;
+  --orange: #e04040;
+  --orange-dim: #661818;
+  --blue: #cc3030;
+  --blue-dim: #551212;
   --border: #330000;
   --border-hi: #550000;
 }
+/* The red "gel": a full-screen multiply layer that lets only red light through.
+   Whatever the page contains (emoji, photos, map tiles, hard-coded colours),
+   no green or blue reaches your eyes. Diagrams and images are converted to red
+   first (see #ll-nv below) so they keep their shading under the gel. */
+body.mode-nv::after {
+  content: ""; position: fixed; inset: 0; z-index: 2147483647;
+  background: #ff0000; mix-blend-mode: multiply; pointer-events: none;
+}
+@media print { body.mode-nv::after { display: none !important; } }
 
 /* =============================================
    FONT SIZE MODES
@@ -2967,3 +2985,37 @@ body.mode-hc input[type="checkbox"] { border-color: #fff; }
   input[type="checkbox"] { border-color: #000 !important; background: #fff !important; }
   input[type="checkbox"]:checked::before { background: #000 !important; }
 }
+
+/* =============================================
+   DISPLAY MODES × DIAGRAMS  (audited: docs/DIAGRAMS.md "Display modes")
+   ============================================= */
+/* Night: red light only. The whole content area goes through the #ll-nv filter
+   (app.js injectNightFilter): every colour becomes a shade of red with its
+   brightness kept, so green "good" text, blue water and photos stay readable
+   instead of going black under the gel. Anything outside the content area that
+   carries its own colours gets the same filter. */
+body.mode-nv .main-content,
+body.mode-nv .dg-lb-pan,
+body.mode-nv .sos figure.ef,
+body.mode-nv .sidebar img,
+body.mode-nv .palette img { filter: url(#ll-nv); }
+.nv-note { display: none; margin: 0.5rem 0 0; padding: 0.45rem 0.7rem; font-size: var(--fs-sm); color: var(--text-0); border: 1px dashed var(--amber); border-radius: 8px; }
+body.mode-nv .nv-note { display: block; }
+@media print { .nv-note { display: none !important; } }
+
+/* High contrast: the older diagrams carry soft greys; lift them. */
+body.mode-hc svg.dg-legacy:not(.dg-truecolor) { filter: brightness(1.3); }
+body.mode-hc .dg-guide, body.mode-hc .dg-thin { stroke: #cfcfcf; }
+body.mode-hc .dg-panel { stroke: #9a9a9a; }
+
+/* Print: the older diagrams were drawn light-on-dark. Flip lightness and keep hue,
+   so they print dark-on-white and don't flood the page with ink. Colour charts
+   (.dg-truecolor) keep their real colours. */
+@media print {
+  svg.dg-legacy:not(.dg-truecolor) { filter: invert(1) hue-rotate(180deg); }
+  figure, .svg-diagram, .svg-figure, .svg-wrap, .plant-card, .diagram, .flowchart-wrap { background: #fff !important; box-shadow: none !important; }
+  figcaption, .svg-caption, .plant-card-info, .plant-card-info * { color: #000 !important; }
+  .plant-card { border: 1px solid #000 !important; break-inside: avoid; }
+  .dg-enlarge { display: none !important; }
+}
+.dg-enlarge-hidden { display: none !important; }

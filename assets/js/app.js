@@ -152,6 +152,7 @@
 
   function init() {
     addSkipNav();
+    injectNightFilter();
     injectManifest();
     buildNav();
     setActiveNav();
@@ -667,6 +668,26 @@
     window.addEventListener('beforeprint', () => document.querySelectorAll('.rv').forEach(el => el.classList.add('rv-in')));
   }
 
+  /* =================== NIGHT-MODE RED FILTER =================== */
+  /* Night mode must emit red light only, or it ruins dark-adapted eyes.
+     Diagrams and images carry their own colours, so in Night mode CSS runs
+     the content through this filter: every colour becomes a shade of red, with
+     brightness preserved so nothing disappears. (style.css: url(#ll-nv)) */
+  function injectNightFilter() {
+    if (document.getElementById('ll-nv')) return;
+    const d = document.createElement('div');
+    d.setAttribute('aria-hidden', 'true');
+    d.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
+    d.innerHTML = '<svg width="0" height="0" focusable="false"><filter id="ll-nv" color-interpolation-filters="sRGB">' +
+      // 1) brightness of any colour → red channel (scaled so nothing clips)
+      '<feColorMatrix type="matrix" values="0.571 0.321 0.107 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>' +
+      // 2) tone curve: Night-mode reds pass through almost unchanged, darks stay dark,
+      //    and bright fills keep some shading instead of all clipping to full red
+      '<feComponentTransfer><feFuncR type="table" tableValues="0 0.10 0.30 0.55 0.74 0.86 0.93 0.97 1"/></feComponentTransfer>' +
+      '</filter></svg>';
+    document.body.appendChild(d);
+  }
+
   /* =================== DIAGRAMS =================== */
   /* Every hand-drawn diagram gets three things:
      1. Tap (or the Enlarge button) opens it full screen; pinch, wheel or the
@@ -699,10 +720,11 @@
     svgs.forEach(svg => {
       svg.classList.add('dg-zoomable');
       const host = svg.parentElement;
+      const small = svg.getBoundingClientRect().width > 0 && svg.getBoundingClientRect().width < 340;   // small cards: tap to enlarge, no button over the art
       if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'dg-enlarge no-print';
+      b.className = 'dg-enlarge no-print' + (small ? ' dg-enlarge-hidden' : '');
       b.setAttribute('aria-label', 'Enlarge diagram');
       b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Enlarge</span>';
       b.addEventListener('click', e => { e.stopPropagation(); openLightbox(svg, b); });
