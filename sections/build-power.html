@@ -117,79 +117,6 @@
       </table>
     </div>
 
-    <figure class="svg-diagram">
-      <svg class="dg-legacy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320">
-        <rect width="700" height="320" fill="#0c0f0e"/>
-        <text x="350" y="22" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="12" font-weight="bold">PEDAL GENERATOR — SYSTEM SCHEMATIC</text>
-        <!-- Bicycle frame (simplified diamond) -->
-        <g stroke="#c9a94e" stroke-width="2" fill="none">
-          <line x1="60" y1="200" x2="130" y2="130"/><!-- down tube -->
-          <line x1="130" y1="130" x2="190" y2="200"/><!-- seat tube -->
-          <line x1="60" y1="200" x2="190" y2="200"/><!-- bottom bracket -->
-          <line x1="130" y1="130" x2="60" y2="200"/><!-- head tube -->
-          <line x1="190" y1="200" x2="240" y2="130"/><!-- chainstay -->
-          <line x1="130" y1="130" x2="240" y2="130"/><!-- top tube -->
-          <!-- Rear wheel -->
-          <circle cx="240" cy="200" r="50" stroke="#8a7035"/>
-          <!-- Front wheel implied -->
-          <circle cx="60" cy="200" r="35" stroke="#8a7035" stroke-dasharray="4,3"/>
-          <!-- Rider (stick figure) -->
-          <circle cx="160" cy="100" r="12" stroke="#4a80b5"/>
-          <line x1="160" y1="112" x2="160" y2="155" stroke="#4a80b5"/>
-          <line x1="145" y1="130" x2="175" y2="130" stroke="#4a80b5"/>
-          <line x1="160" y1="155" x2="175" y2="180" stroke="#4a80b5"/>
-          <line x1="160" y1="155" x2="145" y2="180" stroke="#4a80b5"/>
-        </g>
-        <!-- Friction roller touching rear wheel top -->
-        <circle cx="265" cy="148" r="12" fill="#2a3430" stroke="#c9a94e" stroke-width="2"/>
-        <text x="265" y="136" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">ROLLER</text>
-        <!-- Rotation arrows -->
-        <path d="M 240 148 A 52 52 0 0 1 292 200" fill="none" stroke="#27ae60" stroke-width="1.5" marker-end="url(#arr)"/>
-        <!-- Belt from roller to motor -->
-        <line x1="277" y1="148" x2="340" y2="160" stroke="#c9a94e" stroke-width="2" stroke-dasharray="5,3"/>
-        <!-- Motor box -->
-        <rect x="340" y="145" width="80" height="50" rx="4" fill="#161d1a" stroke="#c9a94e" stroke-width="2"/>
-        <text x="380" y="166" text-anchor="middle" fill="#e8e0cc" font-family="monospace" font-size="10" font-weight="bold">DC</text>
-        <text x="380" y="180" text-anchor="middle" fill="#e8e0cc" font-family="monospace" font-size="10" font-weight="bold">MOTOR</text>
-        <text x="380" y="192" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">AC/DC out</text>
-        <!-- Wire AC out -->
-        <line x1="420" y1="170" x2="460" y2="170" stroke="#f0c040" stroke-width="2"/>
-        <!-- Rectifier box -->
-        <rect x="460" y="155" width="60" height="30" rx="3" fill="#0d2030" stroke="#4a80b5" stroke-width="1.5"/>
-        <text x="490" y="174" text-anchor="middle" fill="#5e8dbb" font-family="monospace" font-size="9">RECTIFIER</text>
-        <!-- Wire DC out -->
-        <line x1="520" y1="170" x2="560" y2="170" stroke="#27ae60" stroke-width="2"/>
-        <!-- Charge controller -->
-        <rect x="560" y="150" width="80" height="40" rx="3" fill="#0d3320" stroke="#27ae60" stroke-width="1.5"/>
-        <text x="600" y="166" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="9">CHARGE</text>
-        <text x="600" y="179" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="9">CTRL</text>
-        <!-- Wire to battery -->
-        <line x1="640" y1="170" x2="640" y2="240" stroke="#27ae60" stroke-width="2"/>
-        <line x1="560" y1="170" x2="540" y2="240" stroke="#c0392b" stroke-width="2" stroke-dasharray="3,2"/>
-        <!-- Battery -->
-        <rect x="530" y="240" width="120" height="50" rx="4" fill="#161d1a" stroke="#c9a94e" stroke-width="2"/>
-        <text x="590" y="260" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="10" font-weight="bold">12V BATTERY</text>
-        <text x="590" y="276" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">100Ah lead-acid</text>
-        <text x="537" y="262" fill="#27ae60" font-family="monospace" font-size="12" font-weight="bold">+</text>
-        <text x="637" y="262" fill="#c0392b" font-family="monospace" font-size="12" font-weight="bold">−</text>
-        <!-- Load -->
-        <rect x="340" y="255" width="70" height="35" rx="3" fill="#161d1a" stroke="#8a7035" stroke-width="1.5"/>
-        <text x="375" y="271" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">LOADS</text>
-        <text x="375" y="283" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">LED / radio</text>
-        <line x1="410" y1="272" x2="530" y2="265" stroke="#c9a94e" stroke-width="1.5"/>
-        <!-- Output labels -->
-        <text x="240" y="290" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">50–150W sustained</text>
-        <!-- Legend -->
-        <line x1="50" y1="295" x2="75" y2="295" stroke="#f0c040" stroke-width="2"/>
-        <text x="78" y="298" fill="#9a9488" font-family="monospace" font-size="8">AC</text>
-        <line x1="100" y1="295" x2="125" y2="295" stroke="#27ae60" stroke-width="2"/>
-        <text x="128" y="298" fill="#9a9488" font-family="monospace" font-size="8">12V DC</text>
-        <line x1="150" y1="295" x2="175" y2="295" stroke="#c0392b" stroke-width="2" stroke-dasharray="3,2"/>
-        <text x="178" y="298" fill="#9a9488" font-family="monospace" font-size="8">Ground</text>
-      </svg>
-      <figcaption>Pedal generator system schematic — from bicycle rear wheel through motor, rectifier, charge controller, to battery bank. Treadmill motors are preferred: large permanent magnets, generate at low RPM.</figcaption>
-    </figure>
-
     <h3>Hand-Crank Version</h3>
     <p>Without a bicycle, build a hand-crank: mount the motor and add a gear train for mechanical advantage. You need at least a 10:1 ratio (hand cranks at ~60 RPM; motor needs 600+ RPM). Wooden gears can be cut with a hand saw — mark teeth with a compass. Output: 20–50W, less than pedal but still enough for LED lighting and phone charging.</p>
 
@@ -233,102 +160,13 @@
       <div class="quick-fact"><span class="qf-value">1500–3000</span><span class="qf-label">Target generator RPM</span></div>
     </div>
 
-    <figure class="svg-diagram">
-      <svg class="dg-legacy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340">
-        <rect width="700" height="340" fill="#0c0f0e"/>
-        <text x="350" y="22" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="12" font-weight="bold">WATER WHEEL TYPES — COMPARISON</text>
-        <!-- OVERSHOT -->
-        <text x="116" y="48" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="11" font-weight="bold">OVERSHOT</text>
-        <text x="116" y="62" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">~85% efficient</text>
-        <!-- Wheel -->
-        <circle cx="116" cy="190" r="80" fill="none" stroke="#c9a94e" stroke-width="2"/>
-        <!-- Spokes -->
-        <g stroke="#8a7035" stroke-width="1">
-          <line x1="116" y1="110" x2="116" y2="270"/>
-          <line x1="36" y1="190" x2="196" y2="190"/>
-          <line x1="59" y1="133" x2="173" y2="247"/>
-          <line x1="59" y1="247" x2="173" y2="133"/>
-        </g>
-        <!-- Buckets (small rectangles on rim) -->
-        <g fill="#1c2620" stroke="#c9a94e" stroke-width="1">
-          <rect x="108" y="108" width="16" height="10" rx="1"/>
-          <rect x="148" y="120" width="10" height="16" rx="1"/>
-          <rect x="182" y="150" width="10" height="16" rx="1"/>
-          <rect x="182" y="214" width="10" height="16" rx="1"/>
-          <rect x="36" y="182" width="16" height="10" rx="1"/>
-        </g>
-        <!-- Water pouring from top -->
-        <g fill="#1a3a50" stroke="#4a80b5" stroke-width="1">
-          <line x1="116" y1="60" x2="110" y2="105" stroke="#4a80b5" stroke-width="2"/>
-          <line x1="116" y1="60" x2="116" y2="108" stroke="#4a80b5" stroke-width="2"/>
-          <line x1="116" y1="60" x2="122" y2="105" stroke="#4a80b5" stroke-width="2"/>
-        </g>
-        <text x="135" y="80" fill="#4a80b5" font-family="monospace" font-size="9">water</text>
-        <text x="135" y="90" fill="#4a80b5" font-family="monospace" font-size="9">from above</text>
-        <!-- Shaft output -->
-        <line x1="196" y1="190" x2="230" y2="190" stroke="#c9a94e" stroke-width="3"/>
-        <text x="235" y="194" fill="#9a9488" font-family="monospace" font-size="8">SHAFT</text>
-        <!-- Rotation arrow -->
-        <path d="M 116 145 A 45 45 0 0 1 161 190" fill="none" stroke="#27ae60" stroke-width="1.5" marker-end="url(#arr2)"/>
-        <!-- Water exit at bottom -->
-        <path d="M 70 265 Q 116 290 162 265" fill="none" stroke="#4a80b5" stroke-width="1.5" stroke-dasharray="4,2"/>
-        <text x="116" y="308" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="8">tailrace →</text>
-        <text x="116" y="325" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">High head, low flow</text>
-
-        <!-- Divider -->
-        <line x1="248" y1="40" x2="248" y2="330" stroke="#2a3430" stroke-width="1"/>
-
-        <!-- UNDERSHOT -->
-        <text x="400" y="48" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="11" font-weight="bold">UNDERSHOT</text>
-        <text x="400" y="62" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">~25–35% efficient</text>
-        <!-- Stream -->
-        <rect x="264" y="230" width="270" height="30" fill="#1a3a50" stroke="#4a80b5" stroke-width="1" rx="2"/>
-        <text x="399" y="249" text-anchor="middle" fill="#86a7c8" font-family="monospace" font-size="9">STREAM FLOW →</text>
-        <!-- Wheel partially submerged -->
-        <circle cx="400" cy="215" r="70" fill="none" stroke="#c9a94e" stroke-width="2"/>
-        <g stroke="#8a7035" stroke-width="1">
-          <line x1="400" y1="145" x2="400" y2="285"/>
-          <line x1="330" y1="215" x2="470" y2="215"/>
-          <line x1="351" y1="166" x2="449" y2="264"/>
-          <line x1="351" y1="264" x2="449" y2="166"/>
-        </g>
-        <!-- Paddles -->
-        <g fill="#1c2620" stroke="#c9a94e" stroke-width="1">
-          <rect x="392" y="143" width="16" height="8" rx="1"/>
-          <rect x="461" y="175" width="8" height="16" rx="1"/>
-          <rect x="323" y="207" width="8" height="16" rx="1"/>
-          <rect x="392" y="277" width="16" height="8" rx="1"/>
-          <rect x="441" y="256" width="8" height="16" rx="1"/>
-        </g>
-        <path d="M 400 175 A 40 40 0 0 0 360 215" fill="none" stroke="#27ae60" stroke-width="1.5" marker-end="url(#arr3)"/>
-        <text x="400" y="325" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">Low head, high flow</text>
-
-        <!-- Divider -->
-        <line x1="535" y1="40" x2="535" y2="330" stroke="#2a3430" stroke-width="1"/>
-
-        <!-- PELTON (propeller) -->
-        <text x="617" y="48" text-anchor="middle" fill="#4a80b5" font-family="monospace" font-size="11" font-weight="bold">PELTON</text>
-        <text x="617" y="62" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">~85%+ efficient</text>
-        <!-- Pipe -->
-        <rect x="553" y="140" width="20" height="80" fill="#1c2620" stroke="#c9a94e" stroke-width="1.5" rx="2"/>
-        <text x="543" y="155" fill="#9a9488" font-family="monospace" font-size="7">HDPE</text>
-        <text x="543" y="165" fill="#9a9488" font-family="monospace" font-size="7">PIPE</text>
-        <!-- Nozzle -->
-        <polygon points="573,195 590,188 590,212" fill="#8a7035" stroke="#c9a94e" stroke-width="1"/>
-        <!-- Water jet -->
-        <line x1="590" y1="200" x2="620" y2="200" stroke="#4a80b5" stroke-width="3"/>
-        <!-- Pelton wheel (side view) -->
-        <circle cx="640" cy="200" r="40" fill="none" stroke="#c9a94e" stroke-width="2"/>
-        <g fill="#1c2620" stroke="#4a80b5" stroke-width="1">
-          <path d="M 640 160 C 630 168 628 178 640 180 C 652 178 650 168 640 160 Z"/>
-          <path d="M 640 220 C 630 222 628 232 640 240 C 652 232 650 222 640 220 Z"/>
-          <path d="M 600 200 C 602 190 612 188 620 200 C 612 212 602 210 600 200 Z"/>
-          <path d="M 660 200 C 662 190 672 188 680 200 C 672 212 662 210 660 200 Z"/>
-        </g>
-        <text x="617" y="265" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">cups catch jet</text>
-        <text x="617" y="325" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">High head, low flow</text>
-      </svg>
-      <figcaption>Three water wheel types. Overshot (left) is most efficient and best for high-head sites. Undershot (centre) suits fast-flowing low-head streams. Pelton (right) is optimal for high-head small streams — a pipe amplifies pressure.</figcaption>
+    <figure class="dg dg-multi" id="fig-waterwheels">
+      <div class="dg-cols" style="--cols:3;--cols-sm:1" role="group" aria-label="Three water wheels compared: overshot, undershot and Pelton">
+        <svg viewBox="2 2 145 212" role="img" aria-label="OVERSHOT"><defs><marker id="ah-ww" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"></path></marker></defs><rect class="dg-panel" x="4" y="4" width="141" height="208" rx="9"></rect><text class="dg-th dg-mid" x="74" y="24">OVERSHOT</text><circle class="dg-line" cx="80" cy="96" r="38" style="fill:none"></circle><circle class="dg-keyf" cx="80" cy="96" r="4"></circle><line class="dg-thin" x1="80" y1="96" x2="117" y2="103"></line><path class="dg-key-s" d="M117 103 l-4 8"></path><line class="dg-thin" x1="80" y1="96" x2="102" y2="127"></line><path class="dg-key-s" d="M102 127 l-9 3"></path><line class="dg-thin" x1="80" y1="96" x2="73" y2="133"></line><path class="dg-key-s" d="M73 133 l-8 -4"></path><line class="dg-thin" x1="80" y1="96" x2="49" y2="118"></line><path class="dg-key-s" d="M49 118 l-3 -9"></path><line class="dg-thin" x1="80" y1="96" x2="43" y2="89"></line><path class="dg-key-s" d="M43 89 l4 -8"></path><line class="dg-thin" x1="80" y1="96" x2="58" y2="65"></line><path class="dg-key-s" d="M58 65 l9 -3"></path><line class="dg-thin" x1="80" y1="96" x2="87" y2="59"></line><path class="dg-key-s" d="M87 59 l8 4"></path><line class="dg-thin" x1="80" y1="96" x2="111" y2="74"></line><path class="dg-key-s" d="M111 74 l3 9"></path><path class="dg-water" d="M10 42 L76 42 L76 50 L10 50 Z"></path><path class="dg-blue-s" d="M76 50 q10 4 12 16" marker-end="url(#ah-ww)"></path><path class="dg-water" d="M34 140 L139 140 L139 146 L34 146 Z"></path><text class="dg-ts" x="14" y="38">flume</text><text class="dg-tb dg-mid" x="74" y="168">up to ~85% efficient</text><text class="dg-ts dg-mid" x="74" y="184">needs a drop: high</text><text class="dg-ts dg-mid" x="74" y="197">head, small flow</text></svg>
+        <svg viewBox="149 2 145 212" role="img" aria-label="UNDERSHOT"><rect class="dg-panel" x="151" y="4" width="141" height="208" rx="9"></rect><text class="dg-th dg-mid" x="221" y="24">UNDERSHOT</text><circle class="dg-line" cx="221" cy="92" r="38" style="fill:none"></circle><circle class="dg-keyf" cx="221" cy="92" r="4"></circle><line class="dg-thin" x1="221" y1="92" x2="258" y2="99"></line><path class="dg-key-s" d="M250 97 L263 99"></path><line class="dg-thin" x1="221" y1="92" x2="243" y2="123"></line><path class="dg-key-s" d="M238 116 L246 127"></path><line class="dg-thin" x1="221" y1="92" x2="214" y2="129"></line><path class="dg-key-s" d="M216 121 L214 134"></path><line class="dg-thin" x1="221" y1="92" x2="190" y2="114"></line><path class="dg-key-s" d="M197 109 L186 117"></path><line class="dg-thin" x1="221" y1="92" x2="184" y2="85"></line><path class="dg-key-s" d="M192 87 L179 85"></path><line class="dg-thin" x1="221" y1="92" x2="199" y2="61"></line><path class="dg-key-s" d="M204 68 L196 57"></path><line class="dg-thin" x1="221" y1="92" x2="228" y2="55"></line><path class="dg-key-s" d="M226 63 L228 50"></path><line class="dg-thin" x1="221" y1="92" x2="252" y2="70"></line><path class="dg-key-s" d="M245 75 L256 67"></path><path class="dg-water" d="M157 118 L286 118 L286 146 L157 146 Z"></path><path class="dg-blue-s" d="M167 132 L273 132" marker-end="url(#ah-ww)"></path><text class="dg-tb dg-mid" x="221" y="168">~25–35% efficient</text><text class="dg-ts dg-mid" x="221" y="184">sits in the stream:</text><text class="dg-ts dg-mid" x="221" y="197">low head, big flow</text></svg>
+        <svg viewBox="296 2 145 212" role="img" aria-label="PELTON"><rect class="dg-panel" x="298" y="4" width="141" height="208" rx="9"></rect><text class="dg-th dg-mid" x="368" y="24">PELTON</text><circle class="dg-line" cx="378" cy="98" r="28" style="fill:none"></circle><circle class="dg-keyf" cx="378" cy="98" r="4"></circle><line class="dg-thin" x1="378" y1="98" x2="406" y2="103"></line><path class="dg-key-s" d="M406 103 l-4 8"></path><line class="dg-thin" x1="378" y1="98" x2="394" y2="121"></line><path class="dg-key-s" d="M394 121 l-9 3"></path><line class="dg-thin" x1="378" y1="98" x2="373" y2="126"></line><path class="dg-key-s" d="M373 126 l-8 -4"></path><line class="dg-thin" x1="378" y1="98" x2="355" y2="114"></line><path class="dg-key-s" d="M355 114 l-3 -9"></path><line class="dg-thin" x1="378" y1="98" x2="350" y2="93"></line><path class="dg-key-s" d="M350 93 l4 -8"></path><line class="dg-thin" x1="378" y1="98" x2="362" y2="75"></line><path class="dg-key-s" d="M362 75 l9 -3"></path><line class="dg-thin" x1="378" y1="98" x2="383" y2="70"></line><path class="dg-key-s" d="M383 70 l8 4"></path><line class="dg-thin" x1="378" y1="98" x2="401" y2="82"></line><path class="dg-key-s" d="M401 82 l3 9"></path><path class="dg-blue-s" d="M306 40 L318 40 L318 110 L332 120" stroke-width="5"></path><path class="dg-blue-s" d="M334 122 L354 124" marker-end="url(#ah-ww)"></path><text class="dg-ts" x="326" y="44">pipe from</text><text class="dg-ts" x="326" y="56">high up</text><text class="dg-ts dg-mid" x="378" y="146">cups split the jet</text><text class="dg-tb dg-mid" x="368" y="168">~85%+ efficient</text><text class="dg-ts dg-mid" x="368" y="184">piped jet: very high</text><text class="dg-ts dg-mid" x="368" y="197">head, small flow</text></svg>
+      </div>
+      <figcaption><strong>Head</strong> is how far the water falls; <strong>flow</strong> is how much there is. An overshot wheel uses the weight of falling water; an undershot wheel only the push of the current, so it wastes most of it; a Pelton wheel turns a long drop in a pipe into a fast jet.</figcaption>
     </figure>
 
     <h3>Generator Coupling</h3>

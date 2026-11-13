@@ -309,55 +309,9 @@ SIDE VIEW:
 Build time: 1–2 hours. Cost: near zero.
     </pre>
 
-    <figure class="svg-diagram" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
-      <svg class="dg-legacy" viewBox="0 0 560 300" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="jabod-title">
-        <title id="jabod-title">JABOD Forge Cross-Section Diagram</title>
-        <desc>Cross-section of a Just-A-Box-Of-Dirt (JABOD) forge showing the wooden box, compacted clay/dirt fill, firepot depression, steel pipe tuyere for air supply, and workpiece position.</desc>
-        <defs><marker id="jb-arr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c9a94e"/></marker></defs>
-        <!-- Labels -->
-        <text x="280" y="16" text-anchor="middle" font-size="13" fill="#c9a94e" font-family="sans-serif" font-weight="700">JABOD FORGE — Side Cross-Section</text>
-        <!-- Box outer -->
-        <rect x="100" y="60" width="360" height="200" rx="4" fill="#0c110f" stroke="#8a9e86" stroke-width="2.5"/>
-        <!-- Wood sides (hatched) -->
-        <rect x="100" y="60" width="18" height="200" fill="#1e2820" stroke="#3a4838" stroke-width="1"/>
-        <rect x="442" y="60" width="18" height="200" fill="#1e2820" stroke="#3a4838" stroke-width="1"/>
-        <rect x="100" y="242" width="360" height="18" fill="#1e2820" stroke="#3a4838" stroke-width="1"/>
-        <text x="52" y="96" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">Wood</text>
-        <text x="52" y="109" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">box →</text>
-        <!-- Dirt/clay fill -->
-        <rect x="118" y="120" width="324" height="122" fill="#182016" stroke="none"/>
-        <!-- Dirt texture dots -->
-        <text x="200" y="200" font-size="9" fill="#243028" font-family="sans-serif">·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·</text>
-        <text x="200" y="215" font-size="9" fill="#243028" font-family="sans-serif">·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·</text>
-        <text x="200" y="230" font-size="9" fill="#243028" font-family="sans-serif">·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·</text>
-        <text x="368" y="180" text-anchor="middle" font-size="10" fill="#c4cebc" font-family="sans-serif">Compacted clay/dirt</text>
-        <text x="368" y="193" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(50% clay, 50% sand)</text>
-        <!-- Firepot depression (bowl shape) -->
-        <ellipse cx="280" cy="122" rx="60" ry="24" fill="#070a09" stroke="#c9a94e" stroke-width="2"/>
-        <text x="280" y="115" text-anchor="middle" font-size="10" fill="#c9a94e" font-family="sans-serif" font-weight="700">FIREPOT</text>
-        <text x="280" y="128" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">10–15 cm dia.</text>
-        <!-- Tuyere pipe -->
-        <rect x="118" y="152" width="172" height="14" rx="3" fill="#4a80b5" stroke="#28486a" stroke-width="1.5"/>
-        <text x="190" y="145" text-anchor="middle" font-size="10" fill="#5e8dbb" font-family="sans-serif">Steel pipe tuyere</text>
-        <text x="190" y="157" text-anchor="middle" font-size="9" fill="#ffffff" font-family="sans-serif">(2–3 cm diameter)</text>
-        <!-- Air flow arrow -->
-        <line x1="70" y1="159" x2="114" y2="159" stroke="#4a80b5" stroke-width="2" marker-end="url(#jb-arr)"/>
-        <text x="40" y="151" font-size="10" fill="#6f9fd0" font-family="sans-serif">AIR</text>
-        <text x="22" y="176" font-size="9" fill="#8a9e86" font-family="sans-serif">(bellows / fan)</text>
-        <!-- Fire/heat zone -->
-        <text x="280" y="82" text-anchor="middle" font-size="18" fill="#c87a40" font-family="sans-serif" opacity="0.8">🔥</text>
-        <text x="380" y="78" font-size="10" fill="#c87a40" font-family="sans-serif">← Work here</text>
-        <text x="380" y="92" font-size="9" fill="#8a9e86" font-family="sans-serif">orange/yellow heat</text>
-        <!-- Workpiece -->
-        <rect x="246" y="64" width="68" height="14" rx="2" fill="#eceee0" stroke="#8a9e86" stroke-width="1.5"/>
-        <text x="280" y="74" text-anchor="middle" font-size="9" fill="#0c110f" font-family="sans-serif" font-weight="700">WORKPIECE</text>
-        <!-- Dimensions -->
-        <line x1="100" y1="275" x2="460" y2="275" stroke="#3a4838" stroke-width="1"/>
-        <line x1="100" y1="270" x2="100" y2="280" stroke="#3a4838" stroke-width="1"/>
-        <line x1="460" y1="270" x2="460" y2="280" stroke="#3a4838" stroke-width="1"/>
-        <text x="280" y="288" text-anchor="middle" font-size="10" fill="#728c6b" font-family="sans-serif">Min. 40 cm wide · 20 cm deep · Low cost · Build time: 1–2 hours</text>
-      </svg>
-      <figcaption>JABOD forge cross-section — the firepot depression concentrates heat at the center. The tuyere pipe enters horizontally through the clay pack from the side. Use forced air (bellows, hair dryer, or shop vac on blow setting) for enough heat to forge mild steel.</figcaption>
+    <figure class="dg" id="fig-jabod">
+      <svg viewBox="0 0 444 244" role="img" aria-label="Box-of-dirt forge in cross-section: a wooden box packed with clay and sand, a bowl-shaped firepot and an air pipe entering from the side"><defs><marker id="ah-jb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><path class="dg-earth" d="M70 84 L176 84 Q190 84 196 100 Q208 134 222 134 Q236 134 248 100 Q254 84 268 84 L374 84 L374 196 L70 196 Z"/><path class="dg-debris" d="M60 78 L70 78 L70 196 L374 196 L374 78 L384 78 L384 206 L60 206 Z"/><path class="dg-red" d="M200 100 Q210 128 222 128 Q234 128 244 100 Q232 78 222 62 Q212 78 200 100 Z"/><path class="dg-key" d="M210 104 Q216 122 222 122 Q228 122 234 104 Q228 92 222 82 Q216 92 210 104 Z"/><circle class="dg-dark" cx="204" cy="98" r="3.2"/><circle class="dg-dark" cx="214" cy="110" r="3.2"/><circle class="dg-dark" cx="230" cy="110" r="3.2"/><circle class="dg-dark" cx="240" cy="98" r="3.2"/><circle class="dg-dark" cx="222" cy="116" r="3.2"/><circle class="dg-dark" cx="196" cy="90" r="3.2"/><circle class="dg-dark" cx="248" cy="90" r="3.2"/><rect class="dg-panel" x="14" y="112" width="192" height="11" rx="3"/><path class="dg-blue-s" d="M0 117 L40 117" marker-end="url(#ah-jb)"/><path class="dg-line" d="M234 96 L330 62" stroke-width="5"/><path class="dg-key-s" d="M226 99 L246 92" stroke-width="5"/><text class="dg-tb" x="8" y="100">AIR</text><text class="dg-ts" x="8" y="142">bellows, hair dryer</text><text class="dg-ts" x="8" y="154">or a fan</text><text class="dg-ts dg-mid" x="112" y="74">steel pipe tuyere, 2–3 cm</text><line class="dg-thin" x1="112" y1="78" x2="120" y2="112"/><circle class="dg-keyf" cx="120" cy="112" r="2.2"/><text class="dg-tb" x="336" y="56">workpiece</text><text class="dg-ts" x="336" y="69">tip in the heart</text><text class="dg-th dg-mid" x="222" y="30">FIREPOT</text><text class="dg-ts dg-mid" x="222" y="44">a bowl 10–15 cm across</text><line class="dg-thin" x1="222" y1="48" x2="222" y2="60"/><circle class="dg-keyf" cx="222" cy="60" r="2.2"/><text class="dg-t dg-mid" x="296" y="150">packed clay and sand,</text><text class="dg-ts dg-mid" x="296" y="164">half and half</text><text class="dg-ts" x="8" y="186">wooden</text><text class="dg-ts" x="8" y="198">box</text><line class="dg-thin" x1="46" y1="190" x2="64" y2="190"/><circle class="dg-keyf" cx="64" cy="190" r="2.2"/><path class="dg-thin" d="M60 222 L384 222 M60 217 v10 M384 217 v10"/><text class="dg-ts dg-mid" x="222" y="238">at least 40 cm wide, 20 cm deep</text></svg>
+      <figcaption>“Just a box of dirt.” The packed fill insulates the wood from the fire, and the bowl holds the charcoal in a deep, hot heart right at the end of the air pipe. An hour or two to build, and hot enough to forge mild steel.</figcaption>
     </figure>
 
     <div class="callout callout-amber">
@@ -463,58 +417,13 @@ Build time: 1–2 hours. Cost: near zero.
     <p>A bellows provides forced air without electricity. Critical for off-grid smithing. Build a double-action bellows for continuous airflow — one chamber fills while the other delivers air.</p>
 
     <!-- BELLOWS SVG DIAGRAM -->
-    <div class="svg-wrap">
-      <svg class="dg-legacy" viewBox="0 -24 568 284" style="width:100%;max-width:560px;display:block;margin:0 auto;" aria-label="Bellows construction diagram">
-        <rect x="0" y="-24" width="568" height="284" fill="#070a09"/>
-
-        <!-- Top board -->
-        <rect x="80" y="30" width="300" height="20" rx="4" fill="#5a3a1a" stroke="#8a6030" stroke-width="1.5"/>
-        <text x="246" y="25" fill="#c9a94e" font-size="10" font-family="monospace">TOP BOARD (30×50 cm wood)</text>
-
-        <!-- Intake valve on top board -->
-        <rect x="190" y="30" width="40" height="8" rx="2" fill="#8a6030"/>
-        <text x="210" y="26" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">INTAKE FLAP</text>
-        <text x="210" y="46" fill="#a7b5a4" font-size="8" font-family="monospace" text-anchor="middle">(leather valve)</text>
-
-        <!-- Leather sides (pleated) -->
-        <path d="M80,50 Q65,70 70,90 Q65,110 80,130 Q65,150 70,170 Q65,190 80,210" stroke="#8a5020" stroke-width="2.5" fill="none"/>
-        <path d="M380,50 Q395,70 390,90 Q395,110 380,130 Q395,150 390,170 Q395,190 380,210" stroke="#8a5020" stroke-width="2.5" fill="none"/>
-        <!-- Side fill suggestion -->
-        <path d="M80,50 Q65,70 70,90 Q65,110 80,130 Q65,150 70,170 Q65,190 80,210 L380,210 Q395,190 390,170 Q395,150 380,130 Q395,110 390,90 Q395,70 380,50 Z" fill="#3a1a08" opacity="0.5"/>
-
-        <!-- Bottom board -->
-        <rect x="80" y="210" width="300" height="20" rx="4" fill="#5a3a1a" stroke="#8a6030" stroke-width="1.5"/>
-        <text x="230" y="246" fill="#c9a94e" font-size="11" font-family="monospace" text-anchor="middle">BOTTOM BOARD (30×50 cm wood) — fixed</text>
-
-        <!-- Nozzle outlet -->
-        <rect x="380" y="120" width="80" height="18" rx="4" fill="#4a4a4a" stroke="#666" stroke-width="1.5"/>
-        <text x="458" y="126" fill="#c9a94e" font-size="10" font-family="monospace">NOZZLE</text>
-        <text x="458" y="139" fill="#8a9e86" font-size="9" font-family="monospace">(outlet valve</text>
-        <text x="458" y="150" fill="#8a9e86" font-size="9" font-family="monospace"> leather flap)</text>
-        <!-- Arrow showing airflow out -->
-        <text x="506" y="130" fill="#c9a94e" font-size="14" font-family="monospace">&#8594;</text>
-        <text x="515" y="130" fill="#8a9e86" font-size="9" font-family="monospace"> to tuyere</text>
-
-        <!-- Handle on top -->
-        <rect x="355" y="28" width="12" height="24" rx="3" fill="#7a5020" stroke="#9a7030" stroke-width="1"/>
-        <text x="374" y="38" fill="#c9a94e" font-size="10" font-family="monospace">HANDLE</text>
-        <text x="374" y="50" fill="#8a9e86" font-size="9" font-family="monospace">(lift/push)</text>
-
-        <!-- Pivot point -->
-        <circle cx="80" cy="210" r="5" fill="#c9a94e"/>
-        <text x="22" y="215" fill="#c9a94e" font-size="10" font-family="monospace">PIVOT</text>
-
-        <!-- Dimensions -->
-        <line x1="80" y1="9" x2="380" y2="9" stroke="#4d6048" stroke-width="1" stroke-dasharray="4,2"/>
-        <text x="230" y="6" fill="#6a8263" font-size="9" font-family="monospace" text-anchor="middle">50 cm</text>
-
-        <line x1="70" y1="30" x2="70" y2="210" stroke="#4d6048" stroke-width="1" stroke-dasharray="4,2"/>
-        <text x="38" y="125" fill="#6a8263" font-size="9" font-family="monospace">30 cm</text>
-
-        <text x="280" y="-7" fill="#e8c96e" font-size="13" font-family="monospace" text-anchor="middle" font-weight="bold">DOUBLE-ACTION BELLOWS</text>
-      </svg>
-      <div class="svg-caption">Bellows construction — hinged at bottom, handle on top board. Leather sides expand and contract. Two flap valves: intake on top board (opens on pull), outlet on nozzle (opens on push).</div>
-    </div>
+    <figure class="dg dg-multi" id="fig-bellows">
+      <div class="dg-cols" style="--cols:2;--cols-sm:1" role="group" aria-label="Single bellows in two states: lifting the handle fills it through the intake flap; pushing down blows air out of the nozzle">
+        <svg viewBox="2 2 220 200" role="img" aria-label="LIFT: fills"><defs><marker id="ah-bel" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"></path></marker></defs><rect class="dg-panel" x="4" y="4" width="216" height="196" rx="9"></rect><text class="dg-th dg-mid" x="112" y="24">LIFT: fills</text><path class="dg-leather" d="M48 128 L190 68 L190 128 Z"></path><line class="dg-thin" x1="48" y1="128" x2="190" y2="83"></line><line class="dg-thin" x1="48" y1="128" x2="190" y2="98"></line><line class="dg-thin" x1="48" y1="128" x2="190" y2="113"></line><rect class="dg-debris" x="44" y="128" width="150" height="9" rx="2"></rect><path class="dg-debris" d="M44 122 L194 60 L194 69 L44 130 Z"></path><path class="dg-line" d="M194 64 L214 64"></path><text class="dg-ts dg-end" x="192" y="52">handle</text><path class="dg-line" d="M44 120 L18 126 L18 132 L44 138 Z"></path><path class="dg-key-s" d="M119 97 L134 111"></path><path class="dg-blue-s" d="M128 65 L128 93" marker-end="url(#ah-bel)"></path><text class="dg-ts" x="136" y="69.28">air in</text><path class="dg-key-s" d="M46 122 L46 136"></path><path class="dg-arrow" d="M208 104 L208 74" marker-end="url(#ah-bel)"></path><text class="dg-tb dg-mid" x="112" y="170">intake flap opens</text><text class="dg-ts dg-mid" x="112" y="184">nozzle flap shut</text><text class="dg-ts" x="16" y="112">nozzle</text><text class="dg-ts dg-mid" x="122" y="150">fixed board</text></svg>
+        <svg viewBox="222 2 220 200" role="img" aria-label="PUSH: blows"><rect class="dg-panel" x="224" y="4" width="216" height="196" rx="9"></rect><text class="dg-th dg-mid" x="332" y="24">PUSH: blows</text><path class="dg-leather" d="M268 128 L410 104 L410 128 Z"></path><line class="dg-thin" x1="268" y1="128" x2="410" y2="110"></line><line class="dg-thin" x1="268" y1="128" x2="410" y2="116"></line><line class="dg-thin" x1="268" y1="128" x2="410" y2="122"></line><rect class="dg-debris" x="264" y="128" width="150" height="9" rx="2"></rect><path class="dg-debris" d="M264 122 L414 96 L414 105 L264 130 Z"></path><path class="dg-line" d="M414 100 L434 100"></path><text class="dg-ts dg-end" x="412" y="88">handle</text><path class="dg-line" d="M264 120 L238 126 L238 132 L264 138 Z"></path><path class="dg-key-s" d="M339 116 L357 114"></path><path class="dg-key-s" d="M266 123 L274 131"></path><path class="dg-blue-s" d="M260 129 L232 129" marker-end="url(#ah-bel)"></path><path class="dg-arrow" d="M428 62 L428 90" marker-end="url(#ah-bel)"></path><text class="dg-ts dg-mid" x="332" y="170">intake flap shut</text><text class="dg-tb dg-mid" x="332" y="184">air out to the fire</text><text class="dg-ts" x="236" y="112">nozzle</text><text class="dg-ts dg-mid" x="342" y="150">fixed board</text></svg>
+      </div>
+      <figcaption>Two boards about <strong>30 × 50 cm</strong>, hinged at the nozzle end, with pleated leather sides and two leather flap valves: a 5–7 cm intake hole in the top board and a 2–3 cm nozzle. One bellows blows only on the push. For a steady blast, join <strong>two</strong> to one tuyere with a Y-pipe and work them in turn.</figcaption>
+    </figure>
 
     <ul>
       <li><strong>Frame:</strong> Two boards 30 × 50 cm each. Hardwood preferred (oak, ash). Connected by a leather or canvas hinge at one end (the pivot end).</li>

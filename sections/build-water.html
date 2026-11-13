@@ -289,82 +289,9 @@
 
     <p>No pumps. No electricity. Water at pressure — just by raising your tank above the point of use. Every metre of head (height difference between tank water surface and outlet) provides approximately 0.1 bar (10 kPa) of pressure.</p>
 
-    <figure class="svg-diagram">
-      <svg class="dg-legacy" viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gravity water distribution system schematic">
-        <rect width="700" height="420" fill="#0c0f0e"/>
-        <!-- Rain cloud -->
-        <ellipse cx="100" cy="50" rx="45" ry="22" fill="#1a2a3a" stroke="#4a9abd" stroke-width="1.5"/>
-        <ellipse cx="75" cy="60" rx="30" ry="18" fill="#1a2a3a" stroke="#4a9abd" stroke-width="1.5"/>
-        <ellipse cx="130" cy="62" rx="28" ry="16" fill="#1a2a3a" stroke="#4a9abd" stroke-width="1.5"/>
-        <!-- Rain drops -->
-        <line x1="80" y1="78" x2="75" y2="92" stroke="#4a9abd" stroke-width="1.5" stroke-dasharray="3,3"/>
-        <line x1="100" y1="80" x2="95" y2="95" stroke="#4a9abd" stroke-width="1.5" stroke-dasharray="3,3"/>
-        <line x1="120" y1="78" x2="115" y2="93" stroke="#4a9abd" stroke-width="1.5" stroke-dasharray="3,3"/>
-        <!-- House outline -->
-        <rect x="140" y="180" width="180" height="120" fill="#111714" stroke="#c9a94e" stroke-width="1.5"/>
-        <!-- Roof -->
-        <polygon points="130,180 230,120 330,180" fill="#1a2018" stroke="#c9a94e" stroke-width="1.5"/>
-        <!-- Gutter -->
-        <rect x="130" y="180" width="200" height="8" rx="4" fill="#1e2a1e" stroke="#4a9abd" stroke-width="1.5"/>
-        <!-- Downpipe with first flush T -->
-        <rect x="320" y="188" width="12" height="60" fill="#0c0f0e" stroke="#4a9abd" stroke-width="1.5"/>
-        <!-- First flush T junction -->
-        <rect x="308" y="228" width="36" height="10" rx="2" fill="#0c0f0e" stroke="#c9a94e" stroke-width="1.5"/>
-        <text x="350" y="237" fill="#c9a94e" font-size="9" font-family="monospace">First Flush T</text>
-        <!-- First flush standpipe going down -->
-        <rect x="326" y="238" width="8" height="40" fill="#0c0f0e" stroke="#4a9abd" stroke-width="1.5" stroke-dasharray="4,2"/>
-        <text x="340" y="280" fill="#6a8a9a" font-size="8" font-family="monospace">to drain</text>
-        <!-- Platform (elevated) -->
-        <rect x="430" y="165" width="90" height="14" rx="2" fill="#1a2018" stroke="#c9a94e" stroke-width="2"/>
-        <line x1="450" y1="179" x2="450" y2="280" stroke="#c9a94e" stroke-width="2"/>
-        <line x1="500" y1="179" x2="500" y2="280" stroke="#c9a94e" stroke-width="2"/>
-        <!-- Platform legs bracing -->
-        <line x1="450" y1="200" x2="500" y2="230" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,3"/>
-        <line x1="500" y1="200" x2="450" y2="230" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,3"/>
-        <!-- IBC Tank on platform -->
-        <rect x="432" y="110" width="86" height="55" rx="4" fill="#0d1a2a" stroke="#4a9abd" stroke-width="2"/>
-        <text x="475" y="141" fill="#4a9abd" font-size="10" font-family="monospace" text-anchor="middle">IBC</text>
-        <text x="475" y="153" fill="#4a9abd" font-size="9" font-family="monospace" text-anchor="middle">1000 L</text>
-        <!-- Water level inside IBC -->
-        <rect x="436" y="130" width="78" height="25" rx="2" fill="#0d1f2e" opacity="0.8"/>
-        <!-- Height arrow -->
-        <line x1="415" y1="162" x2="415" y2="280" stroke="#77cc77" stroke-width="1.5" marker-start="url(#arr)" marker-end="url(#arr)"/>
-        <text x="421" y="218" fill="#77cc77" font-size="9" font-family="monospace">3 m =</text>
-        <text x="421" y="230" fill="#77cc77" font-size="9" font-family="monospace">0.3 bar</text>
-        <!-- Pipe from IBC to house -->
-        <line x1="432" y1="165" x2="336" y2="238" stroke="#4a9abd" stroke-width="3"/>
-        <!-- Pipe from T to tank inlet -->
-        <line x1="332" y1="233" x2="432" y2="165" stroke="#4a9abd" stroke-width="2" stroke-dasharray="5,3" opacity="0.5"/>
-        <!-- Distribution pipe along ground -->
-        <line x1="432" y1="165" x2="432" y2="280" stroke="#4a9abd" stroke-width="3"/>
-        <line x1="432" y1="280" x2="200" y2="280" stroke="#4a9abd" stroke-width="3"/>
-        <!-- Ground line -->
-        <line x1="0" y1="290" x2="700" y2="290" stroke="#2a3028" stroke-width="2"/>
-        <rect x="0" y="290" width="700" height="130" fill="#0a0d0b"/>
-        <!-- Tap at house -->
-        <circle cx="200" cy="280" r="6" fill="#c9a94e" stroke="#c9a94e" stroke-width="1"/>
-        <line x1="200" y1="280" x2="200" y2="298" stroke="#4a9abd" stroke-width="2"/>
-        <text x="210" y="278" fill="#c9a94e" font-size="10" font-family="monospace">Tap</text>
-        <!-- Garden drip line -->
-        <line x1="432" y1="280" x2="600" y2="280" stroke="#4a9abd" stroke-width="1.5" stroke-dasharray="5,3"/>
-        <circle cx="530" cy="280" r="3" fill="#4a9abd"/>
-        <circle cx="560" cy="280" r="3" fill="#4a9abd"/>
-        <circle cx="590" cy="280" r="3" fill="#4a9abd"/>
-        <text x="545" y="270" fill="#6a8a9a" font-size="9" font-family="monospace">drip irrigation</text>
-        <!-- Arrow definitions -->
-        <defs>
-          <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#77cc77"/>
-          </marker>
-        </defs>
-        <!-- Flow arrows on main pipe -->
-        <text x="380" y="272" fill="#4a9abd" font-size="14" font-family="monospace">→</text>
-        <!-- Labels -->
-        <text x="230" y="145" fill="#9a9488" font-size="10" font-family="monospace">Roof catchment</text>
-        <text x="435" y="100" fill="#9a9488" font-size="10" font-family="monospace">Elevated tank</text>
-        <text x="435" y="295" fill="#6a8a9a" font-size="9" font-family="monospace">Below ground distribution</text>
-      </svg>
-      <figcaption>Gravity-fed rainwater system: roof → first flush diverter → elevated IBC → distribution by gravity pressure. Every metre of tank height above the outlet provides 0.1 bar pressure.</figcaption>
+    <figure class="dg" id="fig-gravity">
+      <svg viewBox="0 0 444 286" role="img" aria-label="Gravity-fed rainwater system: roof, first-flush diverter, raised tank, and buried pipe to a tap and drip irrigation"><defs><marker id="ah-gv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><line class="dg-line" x1="2" y1="250" x2="442" y2="250"/><path class="dg-line" d="M24 250 L24 110 L150 110 L150 250"/><path class="dg-line" d="M12 112 L87 56 L162 112"/><path class="dg-blue-s" d="M160 112 L172 112 L172 136"/><rect class="dg-key" x="164" y="136" width="16" height="44" rx="3"/><path class="dg-thin" d="M172 180 L172 214" marker-end="url(#ah-gv)"/><path class="dg-blue-s" d="M180 142 L300 150"/><rect class="dg-line" x="300" y="128" width="78" height="62" rx="4" style="fill:none"/><rect class="dg-water" x="302" y="142" width="74" height="46"/><path class="dg-thin" d="M308 190 L308 250 M370 190 L370 250 M308 250 L370 190 M370 250 L308 190"/><path class="dg-blue-s" d="M339 190 L339 262 L60 262 L60 232"/><path class="dg-blue-s" d="M339 262 L436 262" stroke-dasharray="7 5"/><circle class="dg-keyf" cx="60" cy="230" r="5"/><path class="dg-line" d="M60 230 L46 230 L46 238"/><path class="dg-thin" d="M408 142 L408 230 M402 142 h12 M402 230 h12"/><text class="dg-th dg-end" x="436" y="94">3 m of head</text><text class="dg-tb dg-end" x="436" y="109">= 0.3 bar at the tap</text><line class="dg-guide" x1="68" y1="230" x2="400" y2="230"/><line class="dg-guide" x1="380" y1="142" x2="400" y2="142"/><circle class="dg-keyf" cx="87" cy="40" r="9"/><text class="dg-num dg-mid" x="87" y="44">1</text><text class="dg-tb" x="102" y="44">roof catches rain</text><circle class="dg-keyf" cx="206" cy="122" r="9"/><text class="dg-num dg-mid" x="206" y="126">2</text><text class="dg-tb" x="220" y="118">first flush</text><text class="dg-ts" x="220" y="131">dirty first water</text><text class="dg-ts" x="180" y="226">to drain</text><circle class="dg-keyf" cx="392" cy="186" r="9"/><text class="dg-num dg-mid" x="392" y="190">3</text><text class="dg-tb dg-mid" x="339" y="162">raised tank</text><text class="dg-ts dg-mid" x="339" y="176">1000 L IBC</text><circle class="dg-keyf" cx="60" cy="206" r="9"/><text class="dg-num dg-mid" x="60" y="210">4</text><text class="dg-tb" x="74" y="210">tap</text><text class="dg-ts dg-end" x="436" y="278">drip irrigation</text><text class="dg-ts dg-mid" x="200" y="278">buried pipe</text></svg>
+      <figcaption>No pump. <strong>Every metre</strong> the water surface stands above the tap gives about <strong>0.1 bar</strong> of pressure. The tank has to sit below the gutter so it fills, and above the tap so it flows.</figcaption>
     </figure>
 
     <h3>Head Pressure Reference</h3>

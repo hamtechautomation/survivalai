@@ -3147,3 +3147,8 @@ body.mode-day .dg-lb-pan svg.dg-keep { filter: invert(1) hue-rotate(180deg); }
 .dg-lb-pan > .dg-cols > svg { max-height: 100%; }
 body.mode-day .dg-lb-pan .dg-keep svg { filter: invert(1) hue-rotate(180deg); }
 @media print { .dg-cols { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)) !important; } .dg-cols > svg { max-height: none; } }
+/* redrawn diagrams (tools/redraw.py) */
+.dg-leather { fill: color-mix(in srgb, #a8763a 55%, transparent); stroke: #c9965a; stroke-width: 1.4; stroke-linejoin: round; }
+.dg-stitch { fill: none; stroke: var(--amber-light); stroke-width: 2.4; stroke-dasharray: 3 3; stroke-linecap: round; }
+.dg-stitch2 { stroke: #ff8f6b; }
+@media print { .dg-leather { fill: #ddd !important; stroke: #000 !important; } .dg-stitch { stroke: #000 !important; } }

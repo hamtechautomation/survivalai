@@ -375,112 +375,15 @@
     <p>Understanding these four strokes lets you diagnose <em>any</em> gasoline engine problem as a failure in one of four systems: <strong>Fuel · Air · Spark · Compression</strong>. If the engine has all four in correct amounts at the right time, it runs. If it doesn't, one of these four is missing.</p>
 
     <!-- SVG 4: 4-stroke engine diagram -->
-    <div class="diagram-wrap">
-      <figure>
-        <svg class="dg-legacy" viewBox="0 0 700 287" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto">
-          <rect x="0" y="0" width="700" height="287" fill="#050a07"/>
-          <text x="350" y="20" text-anchor="middle" class="svg-title" font-size="13" fill="#e0d0b0">FOUR-STROKE ENGINE CYCLE</text>
-
-          <!-- Helper: draw cylinder with piston at position (cx, top, pistonY) -->
-          <!-- Stroke 1: INTAKE — piston down, intake valve open -->
-          <g transform="translate(40,40)">
-            <rect x="20" y="0" width="100" height="160" rx="4" fill="none" stroke="#555" stroke-width="2"/>
-            <!-- Intake valve (left, open = gap) -->
-            <rect x="20" y="0" width="38" height="6" fill="#777"/>
-            <!-- Exhaust valve (right, closed) -->
-            <rect x="62" y="0" width="38" height="6" fill="#888"/>
-            <rect x="62" y="6" width="8" height="14" fill="#666"/>
-            <!-- Piston — low (intake, piston down) -->
-            <rect x="25" y="100" width="90" height="22" rx="3" fill="#7a6030"/>
-            <rect x="65" y="122" width="10" height="35" fill="#666"/>
-            <!-- Connecting rod to crank -->
-            <ellipse cx="70" cy="172" rx="14" ry="14" fill="none" stroke="#555" stroke-width="2"/>
-            <!-- Air+fuel arrows flowing in -->
-            <text x="22" y="35" fill="#4a9a6a" font-size="10">↓</text>
-            <text x="22" y="48" fill="#4a9a6a" font-size="9">air</text>
-            <text x="22" y="58" fill="#4a9a6a" font-size="9">+fuel</text>
-            <!-- Label -->
-            <text x="70" y="215" text-anchor="middle" class="svg-title" font-size="11" fill="#c9a94e">INTAKE</text>
-            <text x="70" y="228" text-anchor="middle" class="svg-dim" font-size="9">piston down</text>
-            <text x="70" y="240" text-anchor="middle" class="svg-dim" font-size="9">intake valve open</text>
-          </g>
-
-          <!-- Stroke 2: COMPRESSION — piston up, both valves closed -->
-          <g transform="translate(205,40)">
-            <rect x="20" y="0" width="100" height="160" rx="4" fill="none" stroke="#555" stroke-width="2"/>
-            <!-- Both valves closed -->
-            <rect x="20" y="0" width="38" height="6" fill="#888"/>
-            <rect x="22" y="6" width="8" height="14" fill="#666"/>
-            <rect x="62" y="0" width="38" height="6" fill="#888"/>
-            <rect x="64" y="6" width="8" height="14" fill="#666"/>
-            <!-- Piston high (compression) -->
-            <rect x="25" y="25" width="90" height="22" rx="3" fill="#7a6030"/>
-            <rect x="65" y="47" width="10" height="80" fill="#666"/>
-            <!-- Dense fuel/air fill in cylinder -->
-            <rect x="21" y="6" width="98" height="19" fill="#1a1a05" opacity="0.6"/>
-            <!-- Connecting rod to crank -->
-            <ellipse cx="70" cy="148" rx="14" ry="14" fill="none" stroke="#555" stroke-width="2"/>
-            <!-- Label -->
-            <text x="70" y="215" text-anchor="middle" class="svg-title" font-size="11" fill="#c9a94e">COMPRESSION</text>
-            <text x="70" y="228" text-anchor="middle" class="svg-dim" font-size="9">piston up, ~8:1</text>
-            <text x="70" y="240" text-anchor="middle" class="svg-dim" font-size="9">both valves closed</text>
-          </g>
-
-          <!-- Stroke 3: POWER — spark fires, piston going down -->
-          <g transform="translate(370,40)">
-            <rect x="20" y="0" width="100" height="160" rx="4" fill="none" stroke="#c9a94e" stroke-width="2.5"/>
-            <!-- Both valves closed -->
-            <rect x="20" y="0" width="38" height="6" fill="#888"/>
-            <rect x="22" y="6" width="8" height="14" fill="#666"/>
-            <rect x="62" y="0" width="38" height="6" fill="#888"/>
-            <rect x="64" y="6" width="8" height="14" fill="#666"/>
-            <!-- Spark plug effect -->
-            <circle cx="70" cy="8" r="5" fill="#ffffaa" opacity="0.9"/>
-            <line x1="65" y1="8" x2="58" y2="18" stroke="#ffff00" stroke-width="1.5"/>
-            <line x1="75" y1="8" x2="82" y2="18" stroke="#ffff00" stroke-width="1.5"/>
-            <!-- Explosion glow -->
-            <ellipse cx="70" cy="35" rx="45" ry="28" fill="#ff6600" opacity="0.2"/>
-            <ellipse cx="70" cy="35" rx="30" ry="18" fill="#ffaa00" opacity="0.15"/>
-            <!-- Piston moving down (mid stroke) -->
-            <rect x="25" y="60" width="90" height="22" rx="3" fill="#7a6030"/>
-            <rect x="65" y="82" width="10" height="50" fill="#666"/>
-            <!-- Power arrow -->
-            <text x="108" y="75" fill="#ff8800" font-size="14">↓</text>
-            <!-- Connecting rod to crank -->
-            <ellipse cx="70" cy="158" rx="14" ry="14" fill="none" stroke="#c9a94e" stroke-width="2"/>
-            <!-- Label -->
-            <text x="70" y="215" text-anchor="middle" class="svg-title" font-size="11" fill="#c9a94e">POWER</text>
-            <text x="70" y="228" text-anchor="middle" class="svg-dim" font-size="9">spark ignites; explosion</text>
-            <text x="70" y="240" text-anchor="middle" class="svg-dim" font-size="9">drives piston down</text>
-          </g>
-
-          <!-- Stroke 4: EXHAUST — piston up, exhaust valve open -->
-          <g transform="translate(535,40)">
-            <rect x="20" y="0" width="100" height="160" rx="4" fill="none" stroke="#555" stroke-width="2"/>
-            <!-- Intake closed, exhaust open -->
-            <rect x="20" y="0" width="38" height="6" fill="#888"/>
-            <rect x="22" y="6" width="8" height="14" fill="#666"/>
-            <rect x="62" y="0" width="38" height="6" fill="#777"/>
-            <!-- Exhaust gas arrows leaving -->
-            <text x="88" y="22" fill="#888" font-size="10">↑</text>
-            <text x="84" y="34" fill="#e5e5e5" font-size="9">exhaust</text>
-            <text x="86" y="44" fill="#e5e5e5" font-size="9">out</text>
-            <!-- Piston high (exhaust) -->
-            <rect x="25" y="28" width="90" height="22" rx="3" fill="#7a6030"/>
-            <rect x="65" y="50" width="10" height="78" fill="#666"/>
-            <!-- Exhaust gas in cylinder (grey) -->
-            <rect x="21" y="6" width="98" height="22" fill="#1a1a1a" opacity="0.5"/>
-            <!-- Connecting rod to crank -->
-            <ellipse cx="70" cy="148" rx="14" ry="14" fill="none" stroke="#555" stroke-width="2"/>
-            <!-- Label -->
-            <text x="70" y="215" text-anchor="middle" class="svg-title" font-size="11" fill="#c9a94e">EXHAUST</text>
-            <text x="70" y="228" text-anchor="middle" class="svg-dim" font-size="9">piston up again</text>
-            <text x="70" y="240" text-anchor="middle" class="svg-dim" font-size="9">exhaust valve open</text>
-          </g>
-        </svg>
-        <figcaption>Four-stroke engine cycle — fuel, air, spark, compression must all be present for the engine to run</figcaption>
-      </figure>
-    </div>
+    <figure class="dg dg-multi" id="fig-fourstroke">
+      <div class="dg-cols" style="--cols:4;--cols-sm:2" role="group" aria-label="Four-stroke engine cycle: intake, compression, power, exhaust">
+        <svg viewBox="2 2 108 222" role="img" aria-label="air + fuel"><defs><marker id="ah-4s" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"></path></marker></defs><rect class="dg-panel" x="4" y="4" width="104" height="218" rx="9"></rect><rect class="dg-water" x="34" y="42" width="44" height="54"></rect><path class="dg-line" d="M32 38 L32 132 M80 38 L80 132 M32 38 L80 38"></path><rect class="dg-key" x="34" y="96" width="44" height="16" rx="2"></rect><line class="dg-line" x1="56" y1="112" x2="65" y2="150"></line><circle class="dg-thin" cx="56" cy="152" r="13"></circle><circle class="dg-keyf" cx="65" cy="150" r="3"></circle><path class="dg-key-s" d="M44 26 L44 46 M38 46 L50 46"></path><path class="dg-line" d="M68 26 L68 39 M62 39 L74 39"></path><line class="dg-thin" x1="56" y1="28" x2="56" y2="40"></line><path class="dg-blue-s" d="M22 20 L39 32" marker-end="url(#ah-4s)"></path><text class="dg-ts" x="10" y="16">air + fuel</text><path class="dg-arrow" d="M20 70 L20 104" marker-end="url(#ah-4s)"></path><text class="dg-tb dg-tb-sm dg-mid" x="56" y="186">1 INTAKE</text><text class="dg-ts dg-mid" x="56" y="200">piston down,</text><text class="dg-ts dg-mid" x="56" y="212">intake valve open</text></svg>
+        <svg viewBox="112 2 108 222" role="img" aria-label="2 COMPRESSION"><rect class="dg-panel" x="114" y="4" width="104" height="218" rx="9"></rect><rect class="dg-water" x="144" y="42" width="44" height="20" style="fill-opacity:.75"></rect><path class="dg-line" d="M142 38 L142 132 M190 38 L190 132 M142 38 L190 38"></path><rect class="dg-key" x="144" y="62" width="44" height="16" rx="2"></rect><line class="dg-line" x1="166" y1="78" x2="157" y2="146"></line><circle class="dg-thin" cx="166" cy="152" r="13"></circle><circle class="dg-keyf" cx="157" cy="146" r="3"></circle><path class="dg-line" d="M154 26 L154 39 M148 39 L160 39"></path><path class="dg-line" d="M178 26 L178 39 M172 39 L184 39"></path><line class="dg-thin" x1="166" y1="28" x2="166" y2="40"></line><path class="dg-arrow" d="M130 104 L130 70" marker-end="url(#ah-4s)"></path><text class="dg-tb dg-tb-sm dg-mid" x="166" y="186">2 COMPRESSION</text><text class="dg-ts dg-mid" x="166" y="200">piston up, both</text><text class="dg-ts dg-mid" x="166" y="212">valves shut (~8:1)</text></svg>
+        <svg viewBox="222 2 108 222" role="img" aria-label="3 POWER"><rect class="dg-panel" x="224" y="4" width="104" height="218" rx="9"></rect><rect class="dg-red" x="254" y="42" width="44" height="50"></rect><path class="dg-line" d="M252 38 L252 132 M300 38 L300 132 M252 38 L300 38"></path><rect class="dg-key" x="254" y="92" width="44" height="16" rx="2"></rect><line class="dg-line" x1="276" y1="108" x2="285" y2="152"></line><circle class="dg-thin" cx="276" cy="152" r="13"></circle><circle class="dg-keyf" cx="285" cy="152" r="3"></circle><path class="dg-line" d="M264 26 L264 39 M258 39 L270 39"></path><path class="dg-line" d="M288 26 L288 39 M282 39 L294 39"></path><path class="dg-keyf" d="M276 44 l3 7 l7 1 l-5 5 l2 8 l-7 -4 l-7 4 l2 -8 l-5 -5 l7 -1 z"></path><path class="dg-arrow" d="M240 70 L240 104" marker-end="url(#ah-4s)"></path><text class="dg-tb dg-tb-sm dg-mid" x="276" y="186">3 POWER</text><text class="dg-ts dg-mid" x="276" y="200">spark fires, burn</text><text class="dg-ts dg-mid" x="276" y="212">drives piston down</text></svg>
+        <svg viewBox="332 2 108 222" role="img" aria-label="out"><rect class="dg-panel" x="334" y="4" width="104" height="218" rx="9"></rect><rect class="dg-debris" x="364" y="42" width="44" height="24"></rect><path class="dg-line" d="M362 38 L362 132 M410 38 L410 132 M362 38 L410 38"></path><rect class="dg-key" x="364" y="66" width="44" height="16" rx="2"></rect><line class="dg-line" x1="386" y1="82" x2="377" y2="146"></line><circle class="dg-thin" cx="386" cy="152" r="13"></circle><circle class="dg-keyf" cx="377" cy="146" r="3"></circle><path class="dg-line" d="M374 26 L374 39 M368 39 L380 39"></path><path class="dg-key-s" d="M398 26 L398 46 M392 46 L404 46"></path><line class="dg-thin" x1="386" y1="28" x2="386" y2="40"></line><path class="dg-arrow" d="M402 30 L416 14" marker-end="url(#ah-4s)"></path><text class="dg-ts dg-end" x="432" y="30">out</text><path class="dg-arrow" d="M350 104 L350 70" marker-end="url(#ah-4s)"></path><text class="dg-tb dg-tb-sm dg-mid" x="386" y="186">4 EXHAUST</text><text class="dg-ts dg-mid" x="386" y="200">piston up again,</text><text class="dg-ts dg-mid" x="386" y="212">exhaust valve open</text></svg>
+      </div>
+      <figcaption>Suck, squeeze, bang, blow. Only <strong>one stroke in four makes power</strong>; a flywheel carries the engine through the other three. No fuel, no air, no spark or no compression means one of these strokes is failing, which is where fault-finding starts.</figcaption>
+    </figure>
 
     <h3>Carbureted vs. Fuel Injected</h3>
     <div class="table-wrap">
@@ -568,111 +471,10 @@
     <p><strong>Principle:</strong> Burning wood in a restricted-oxygen environment produces carbon monoxide (CO) and hydrogen (H₂) gas. This gas mixture is combustible and runs in any carbureted gasoline engine. Expect a 30–40% power reduction versus gasoline.</p>
 
     <!-- SVG 2: Wood gasifier cross-section -->
-    <div class="diagram-wrap">
-      <figure>
-        <svg class="dg-legacy" viewBox="-54 0 754 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto">
-          <rect x="-54" y="0" width="754" height="420" fill="#050a07"/>
-          <text x="350" y="22" text-anchor="middle" class="svg-title" font-size="13" fill="#e0d0b0">FEMA DOWNDRAFT WOOD GASIFIER — Cross Section</text>
-
-          <!-- Reactor vessel body -->
-          <rect x="220" y="40" width="160" height="250" rx="8" fill="#1a0f05" stroke="#7a5a20" stroke-width="3"/>
-
-          <!-- HOPPER top -->
-          <rect x="225" y="42" width="150" height="50" rx="4" fill="#2a1a05" stroke="#7a5a20" stroke-width="1.5"/>
-          <text x="300" y="62" text-anchor="middle" class="svg-label">FUEL HOPPER</text>
-          <text x="300" y="76" text-anchor="middle" class="svg-dim">Hardwood chunks 2–3"</text>
-          <!-- Wood chunk icons -->
-          <rect x="240" y="48" width="16" height="10" rx="2" fill="#5a3810"/>
-          <rect x="260" y="52" width="14" height="9" rx="2" fill="#4a3010"/>
-          <rect x="278" y="47" width="18" height="11" rx="2" fill="#5a3810"/>
-          <rect x="300" y="51" width="15" height="9" rx="2" fill="#4a3010"/>
-          <rect x="320" y="47" width="17" height="10" rx="2" fill="#5a3010"/>
-          <rect x="340" y="52" width="14" height="8" rx="2" fill="#4a3010"/>
-
-          <!-- Zone labels on left -->
-          <!-- Drying zone -->
-          <rect x="225" y="92" width="150" height="35" fill="#1a1005" stroke="#5a4010" stroke-width="1" stroke-dasharray="4,3"/>
-          <text x="230" y="107" class="svg-dim" font-size="9">DRYING ZONE</text>
-          <text x="230" y="120" class="svg-dim" font-size="9">100–300°C — moisture out</text>
-
-          <!-- Pyrolysis zone -->
-          <rect x="225" y="127" width="150" height="35" fill="#1a0d05" stroke="#6a4015" stroke-width="1" stroke-dasharray="4,3"/>
-          <text x="230" y="142" class="svg-dim" font-size="9">PYROLYSIS ZONE</text>
-          <text x="230" y="155" class="svg-dim" font-size="9">300–500°C — volatiles release</text>
-
-          <!-- Air nozzle entry points -->
-          <line x1="185" y1="178" x2="225" y2="178" stroke="#4a8a6a" stroke-width="2.5"/>
-          <line x1="375" y1="178" x2="415" y2="178" stroke="#4a8a6a" stroke-width="2.5"/>
-          <text x="170" y="176" text-anchor="end" class="svg-label" font-size="9" fill="#4a8a6a">AIR IN</text>
-          <text x="430" y="176" class="svg-label" font-size="9" fill="#4a8a6a">AIR IN</text>
-
-          <!-- Combustion / Oxidation zone (throat) -->
-          <!-- Narrow throat -->
-          <polygon points="225,162 375,162 360,195 240,195" fill="#3a1505" stroke="#c9a94e" stroke-width="1.5"/>
-          <text x="300" y="175" text-anchor="middle" class="svg-label" font-size="9" fill="#ff8800">COMBUSTION ZONE</text>
-          <text x="300" y="187" text-anchor="middle" class="svg-dim" font-size="8">900–1100°C at throat</text>
-
-          <!-- Reduction zone -->
-          <rect x="240" y="195" width="120" height="55" fill="#100a05" stroke="#7a5a20" stroke-width="1"/>
-          <text x="300" y="215" text-anchor="middle" class="svg-label" font-size="9">REDUCTION ZONE</text>
-          <text x="300" y="228" text-anchor="middle" class="svg-dim" font-size="8">CO₂ + H₂O + C → CO + H₂</text>
-          <text x="300" y="241" text-anchor="middle" class="svg-dim" font-size="8">(the useful gas is made here)</text>
-
-          <!-- Ash grate -->
-          <line x1="240" y1="250" x2="360" y2="250" stroke="#888" stroke-width="3"/>
-          <line x1="252" y1="250" x2="252" y2="262" stroke="#777" stroke-width="2"/>
-          <line x1="268" y1="250" x2="268" y2="262" stroke="#777" stroke-width="2"/>
-          <line x1="284" y1="250" x2="284" y2="262" stroke="#777" stroke-width="2"/>
-          <line x1="300" y1="250" x2="300" y2="262" stroke="#777" stroke-width="2"/>
-          <line x1="316" y1="250" x2="316" y2="262" stroke="#777" stroke-width="2"/>
-          <line x1="332" y1="250" x2="332" y2="262" stroke="#777" stroke-width="2"/>
-          <line x1="348" y1="250" x2="348" y2="262" stroke="#777" stroke-width="2"/>
-          <text x="300" y="278" text-anchor="middle" class="svg-label" font-size="9">ASH GRATE</text>
-          <text x="300" y="290" text-anchor="middle" class="svg-dim" font-size="8">Perforated steel — ash falls, gas rises</text>
-
-          <!-- Gas outlet from vessel -->
-          <line x1="375" y1="220" x2="460" y2="220" stroke="#c9a94e" stroke-width="3"/>
-          <text x="455" y="215" class="svg-label" font-size="9">HOT GAS OUT</text>
-
-          <!-- Cooling coil (right side) -->
-          <path d="M 460 220 C 520 220 530 240 480 240 C 430 240 440 260 500 260 C 560 260 570 280 510 280 C 450 280 460 300 520 300 C 580 300 590 320 530 320"
-                fill="none" stroke="#4a6a8a" stroke-width="3"/>
-          <text x="555" y="255" class="svg-label" font-size="9" fill="#4a8aaa">COOLING</text>
-          <text x="555" y="267" class="svg-dim" font-size="8">10–15 ft pipe</text>
-          <text x="555" y="279" class="svg-dim" font-size="8">2" diameter</text>
-
-          <!-- Condensate trap -->
-          <rect x="500" y="325" width="45" height="35" rx="4" fill="#0a0a14" stroke="#5555aa" stroke-width="1.5"/>
-          <line x1="522" y1="320" x2="522" y2="325" stroke="#4a6a8a" stroke-width="2"/>
-          <text x="522" y="348" text-anchor="middle" class="svg-label" font-size="9" fill="#8888cc">CONDENSATE</text>
-          <text x="522" y="360" text-anchor="middle" class="svg-dim" font-size="8">TRAP — drain daily</text>
-          <!-- drain valve -->
-          <line x1="522" y1="360" x2="522" y2="370" stroke="#5555aa" stroke-width="2"/>
-          <line x1="515" y1="370" x2="529" y2="370" stroke="#5555aa" stroke-width="3"/>
-
-          <!-- Filter box -->
-          <rect x="55" y="310" width="90" height="60" rx="5" fill="#0a100a" stroke="#3a5a3a" stroke-width="2"/>
-          <text x="100" y="335" text-anchor="middle" class="svg-label" font-size="9" fill="#4a8a4a">FILTER BOX</text>
-          <text x="100" y="348" text-anchor="middle" class="svg-dim" font-size="8">Sawdust or hay</text>
-          <text x="100" y="360" text-anchor="middle" class="svg-dim" font-size="8">removes particulates</text>
-          <!-- Line from condensate to filter -->
-          <line x1="500" y1="342" x2="145" y2="342" stroke="#4a6a8a" stroke-width="2"/>
-
-          <!-- Output to engine -->
-          <line x1="55" y1="342" x2="20" y2="342" stroke="#c9a94e" stroke-width="2.5"/>
-          <text x="18" y="336" text-anchor="end" class="svg-label" font-size="9">TO ENGINE</text>
-          <text x="18" y="348" text-anchor="end" class="svg-dim" font-size="8">carb air intake</text>
-
-          <!-- Zone arrows on left -->
-          <text x="210" y="72" text-anchor="middle" class="svg-dim" font-size="9" fill="#888">↓ fuel</text>
-          <text x="210" y="112" text-anchor="middle" class="svg-dim" font-size="9" fill="#888">↓ dry</text>
-          <text x="210" y="150" text-anchor="middle" class="svg-dim" font-size="9" fill="#888">↓ pyro</text>
-          <text x="210" y="200" text-anchor="middle" class="svg-dim" font-size="9" fill="#ff8800">↓ burn</text>
-          <text x="210" y="232" text-anchor="middle" class="svg-dim" font-size="9" fill="#888">↓ reduce</text>
-        </svg>
-        <figcaption>FEMA downdraft gasifier — the standard design used by millions of WWII-era vehicles</figcaption>
-      </figure>
-    </div>
+    <figure class="dg" id="fig-gasifier">
+      <svg viewBox="0 0 444 356" role="img" aria-label="Downdraft wood gasifier: fuel dries, chars, burns at the throat and is reduced to fuel gas, which is cooled, trapped and filtered before the engine"><defs><marker id="ah-gas" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><path class="dg-line" d="M40 22 L160 22 L160 150 L124 182 L140 216 L160 216 L160 252 L40 252 L40 216 L60 216 L76 182 L40 150 Z"/><path class="dg-earth" d="M42 24 L158 24 L158 86 L42 86 Z"/><text class="dg-tb dg-mid" x="100" y="46">FUEL HOPPER</text><text class="dg-ts dg-mid" x="100" y="60">hardwood chunks,</text><text class="dg-ts dg-mid" x="100" y="73">2–3 in across</text><path class="dg-debris" d="M42 88 L158 88 L158 118 L42 118 Z" opacity=".75"/><text class="dg-tb dg-mid" x="100" y="107">DRYING</text><path class="dg-debris" d="M42 120 L158 120 L158 149 L42 149 Z"/><text class="dg-tb dg-mid" x="100" y="139">PYROLYSIS</text><path class="dg-red" d="M44 152 L156 152 L123 181 L77 181 Z"/><text class="dg-tb dg-mid" x="100" y="171">BURN</text><path class="dg-key" d="M77 184 L123 184 L138 214 L62 214 Z"/><text class="dg-tb dg-mid" x="100" y="204">REDUCE</text><line class="dg-line" x1="50" y1="218" x2="150" y2="218" stroke-dasharray="6 4"/><text class="dg-ts dg-mid" x="100" y="240">ash</text><path class="dg-blue-s" d="M8 166 L62 166" marker-end="url(#ah-gas)"/><text class="dg-ts" x="6" y="158">air in</text><text class="dg-t" x="168" y="107">100–300 °C</text><text class="dg-ts" x="168" y="120">moisture driven out</text><text class="dg-t" x="168" y="139">300–500 °C</text><text class="dg-ts" x="168" y="152">wood gives off tar gas</text><text class="dg-t" x="168" y="171">900–1100 °C at the throat</text><text class="dg-ts" x="168" y="184">tar is burnt up</text><text class="dg-t" x="168" y="203">CO₂ + H₂O + C → CO + H₂</text><text class="dg-ts" x="168" y="216">the useful gas is made here</text><text class="dg-ts" x="168" y="240">perforated steel grate</text><path class="dg-key-s" d="M160 262 L160 280 L206 280" marker-end="url(#ah-gas)"/><path class="dg-key-s" d="M214 280 q6 -16 12 0 t12 0 t12 0 t12 0 t12 0"/><circle class="dg-keyf" cx="244" cy="302" r="9"/><text class="dg-num dg-mid" x="244" y="306">1</text><text class="dg-tb dg-mid" x="244" y="326">cooling pipe</text><text class="dg-ts dg-mid" x="244" y="339">10–15 ft of 2 in</text><path class="dg-key-s" d="M276 280 L296 280"/><path class="dg-water" d="M296 272 h22 v22 q-11 8 -22 0 z"/><circle class="dg-keyf" cx="307" cy="312" r="9"/><text class="dg-num dg-mid" x="307" y="316">2</text><text class="dg-tb dg-mid" x="307" y="336">trap</text><text class="dg-ts dg-mid" x="307" y="349">drain daily</text><path class="dg-key-s" d="M318 280 L356 280"/><rect class="dg-panel" x="356" y="264" width="50" height="32" rx="5"/><circle class="dg-guide" cx="364" cy="272" r="1.6"/><circle class="dg-guide" cx="372" cy="272" r="1.6"/><circle class="dg-guide" cx="380" cy="272" r="1.6"/><circle class="dg-guide" cx="388" cy="272" r="1.6"/><circle class="dg-guide" cx="396" cy="272" r="1.6"/><circle class="dg-guide" cx="364" cy="280" r="1.6"/><circle class="dg-guide" cx="372" cy="280" r="1.6"/><circle class="dg-guide" cx="380" cy="280" r="1.6"/><circle class="dg-guide" cx="388" cy="280" r="1.6"/><circle class="dg-guide" cx="396" cy="280" r="1.6"/><circle class="dg-guide" cx="364" cy="288" r="1.6"/><circle class="dg-guide" cx="372" cy="288" r="1.6"/><circle class="dg-guide" cx="380" cy="288" r="1.6"/><circle class="dg-guide" cx="388" cy="288" r="1.6"/><circle class="dg-guide" cx="396" cy="288" r="1.6"/><circle class="dg-keyf" cx="381" cy="312" r="9"/><text class="dg-num dg-mid" x="381" y="316">3</text><text class="dg-tb dg-mid" x="381" y="336">filter</text><text class="dg-ts dg-mid" x="381" y="349">sawdust or hay</text><path class="dg-key-s" d="M406 280 L436 280" marker-end="url(#ah-gas)"/><text class="dg-tb dg-end" x="436" y="244">to engine</text><text class="dg-ts dg-end" x="436" y="257">air intake</text><text class="dg-ts dg-mid" x="120" y="296">hot gas out</text></svg>
+      <figcaption>Wood moves <strong>down</strong> through four zones and the gas leaves at the bottom, so tar has to pass through the hottest part and is burnt. This throat type ran over a million vehicles in the 1940s; FEMA’s 1989 emergency design is a simpler, throatless version of the same idea. The gas is mostly <strong>carbon monoxide: it kills</strong>. Run it outdoors only.</figcaption>
+    </figure>
 
     <h3>Key Gasifier Components</h3>
     <ul>
@@ -718,90 +520,10 @@
     </div>
 
     <!-- SVG 3: Biodiesel processor -->
-    <div class="diagram-wrap">
-      <figure>
-        <svg class="dg-legacy" viewBox="0 -24 620 384" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;display:block;margin:0 auto">
-          <rect y="-24" width="620" height="384" fill="#050a07"/>
-          <text x="310" y="-6" text-anchor="middle" class="svg-title" font-size="13" fill="#e0d0b0">APPLESEED BIODIESEL PROCESSOR</text>
-
-          <!-- Main tank -->
-          <rect x="180" y="45" width="200" height="240" rx="10" fill="#0a1210" stroke="#3a6a4a" stroke-width="3"/>
-          <!-- Tank dome/top -->
-          <ellipse cx="280" cy="45" rx="100" ry="12" fill="#0a1a10" stroke="#3a6a4a" stroke-width="2"/>
-          <!-- Tank bottom curve -->
-          <ellipse cx="280" cy="285" rx="100" ry="12" fill="#0a1210" stroke="#3a6a4a" stroke-width="2"/>
-
-          <!-- Heating element at bottom interior -->
-          <rect x="205" y="255" width="150" height="14" rx="5" fill="#3a1505" stroke="#c9a94e" stroke-width="1.5"/>
-          <line x1="210" y1="262" x2="345" y2="262" stroke="#ff8800" stroke-width="2" stroke-dasharray="8,5"/>
-          <text x="280" y="259" text-anchor="middle" class="svg-dim" font-size="8" fill="#ff8800">HEATING ELEMENT</text>
-          <!-- Heat indicator -->
-          <text x="200" y="263" class="svg-dim" font-size="9" fill="#ff6600">🔥</text>
-
-          <!-- Methanol inlet pipe at top -->
-          <line x1="280" y1="33" x2="280" y2="8" stroke="#4a8aaa" stroke-width="2.5"/>
-          <line x1="260" y1="8" x2="300" y2="8" stroke="#4a8aaa" stroke-width="3"/>
-          <text x="310" y="12" class="svg-label" font-size="9" fill="#4a8aaa">METHANOL INLET</text>
-          <text x="310" y="24" class="svg-dim" font-size="8">25% of oil volume</text>
-
-          <!-- Oil inlet -->
-          <line x1="180" y1="100" x2="140" y2="100" stroke="#8a6a20" stroke-width="2.5"/>
-          <rect x="100" y="88" width="40" height="24" rx="4" fill="#1a1205" stroke="#8a6a20" stroke-width="1.5"/>
-          <text x="120" y="100" text-anchor="middle" class="svg-label" font-size="9" fill="#8a6a20">OIL IN</text>
-          <text x="120" y="112" text-anchor="middle" class="svg-dim" font-size="8">filtered, dry</text>
-
-          <!-- Stirrer/mixer (agitator shown as paddles) -->
-          <line x1="280" y1="45" x2="280" y2="250" stroke="#555" stroke-width="2" stroke-dasharray="3,6"/>
-          <!-- Paddle 1 -->
-          <line x1="250" y1="130" x2="310" y2="130" stroke="#888" stroke-width="3"/>
-          <line x1="250" y1="130" x2="242" y2="145" stroke="#888" stroke-width="2"/>
-          <line x1="310" y1="130" x2="318" y2="145" stroke="#888" stroke-width="2"/>
-          <!-- Paddle 2 -->
-          <line x1="255" y1="180" x2="305" y2="180" stroke="#888" stroke-width="3"/>
-          <line x1="255" y1="180" x2="247" y2="195" stroke="#888" stroke-width="2"/>
-          <line x1="305" y1="180" x2="313" y2="195" stroke="#888" stroke-width="2"/>
-          <line x1="313" y1="190" x2="386" y2="192" stroke="#888" stroke-width="0.8"/>
-          <text x="390" y="195" class="svg-label" font-size="9">STIRRER / PUMP</text>
-          <text x="390" y="206" class="svg-dim" font-size="8">circulate 1–2 hrs</text>
-
-          <!-- Contents visualization -->
-          <!-- Biodiesel layer (top, golden) -->
-          <rect x="183" y="60" width="194" height="100" fill="#3a2a05" opacity="0.5"/>
-          <text x="280" y="115" text-anchor="middle" class="svg-label" font-size="10" fill="#c9a94e">BIODIESEL</text>
-          <text x="280" y="128" text-anchor="middle" class="svg-dim" font-size="8">(floats, golden/amber)</text>
-
-          <!-- Separation line -->
-          <line x1="183" y1="160" x2="377" y2="160" stroke="#888" stroke-width="1" stroke-dasharray="8,4"/>
-          <text x="390" y="164" class="svg-dim" font-size="8">separation</text>
-
-          <!-- Glycerin layer (bottom, dark) -->
-          <rect x="183" y="160" width="194" height="90" fill="#1a0505" opacity="0.6"/>
-          <text x="280" y="210" text-anchor="middle" class="svg-label" font-size="10" fill="#aa4444">GLYCERIN</text>
-          <text x="280" y="223" text-anchor="middle" class="svg-dim" font-size="8">(sinks, dark/thick)</text>
-
-          <!-- Glycerin drain valve at bottom -->
-          <line x1="280" y1="297" x2="280" y2="330" stroke="#aa4444" stroke-width="2.5"/>
-          <rect x="260" y="325" width="40" height="16" rx="4" fill="#1a0505" stroke="#aa4444" stroke-width="2"/>
-          <text x="280" y="336" text-anchor="middle" class="svg-label" font-size="9" fill="#aa4444">GLYCERIN DRAIN</text>
-          <text x="280" y="350" text-anchor="middle" class="svg-dim" font-size="8">bottom valve — drain after settling</text>
-
-          <!-- Biodiesel output (top side) -->
-          <line x1="380" y1="90" x2="430" y2="90" stroke="#c9a94e" stroke-width="2.5"/>
-          <rect x="430" y="78" width="60" height="24" rx="4" fill="#1a1205" stroke="#c9a94e" stroke-width="1.5"/>
-          <text x="460" y="90" text-anchor="middle" class="svg-label" font-size="9">BIODIESEL</text>
-          <text x="460" y="102" text-anchor="middle" class="svg-dim" font-size="8">OUTPUT</text>
-
-          <!-- Temperature indicator -->
-          <rect x="183" y="200" width="50" height="30" rx="3" fill="#0a0a14" stroke="#4444aa" stroke-width="1"/>
-          <text x="208" y="212" text-anchor="middle" class="svg-dim" font-size="8" fill="#8888cc">TEMP</text>
-          <text x="208" y="224" text-anchor="middle" class="svg-dim" font-size="9" fill="#c9a94e">55°C</text>
-
-          <!-- Thermometer line to tank wall -->
-          <line x1="233" y1="215" x2="220" y2="215" stroke="#4444aa" stroke-width="1" stroke-dasharray="2,2"/>
-        </svg>
-        <figcaption>Appleseed processor — the most common DIY biodiesel design; heated tank with agitation, gravity separation</figcaption>
-      </figure>
-    </div>
+    <figure class="dg" id="fig-biodiesel">
+      <svg viewBox="0 0 444 298" role="img" aria-label="Appleseed biodiesel processor: a heated tank with a circulation pump; biodiesel floats on glycerin after settling"><defs><marker id="ah-bio" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><path class="dg-line" d="M150 60 Q150 44 222 44 Q294 44 294 60 L294 230 Q294 246 222 246 Q150 246 150 230 Z"/><path class="dg-key" d="M152 78 L292 78 L292 168 L152 168 Z"/><text class="dg-tb dg-mid" x="222" y="116">BIODIESEL</text><text class="dg-ts dg-mid" x="222" y="130">golden, floats</text><path class="dg-debris" d="M152 170 L292 170 L292 230 Q292 244 222 244 Q152 244 152 230 Z"/><text class="dg-tb dg-mid" x="222" y="196">GLYCERIN</text><text class="dg-ts dg-mid" x="222" y="210">dark, sinks</text><line class="dg-guide" x1="152" y1="169" x2="292" y2="169"/><path class="dg-red-s" d="M166 226 L278 226" stroke-dasharray="7 4"/><path class="dg-line" d="M222 246 L222 276"/><path class="dg-key" d="M214 262 L230 272 L230 262 L214 272 Z"/><path class="dg-blue-s" d="M294 214 L330 214 L330 74 L296 74" marker-end="url(#ah-bio)"/><circle class="dg-panel" cx="330" cy="144" r="13"/><text class="dg-tb dg-mid" x="330" y="148">P</text><path class="dg-arrow" d="M150 22 L170 22 L170 44" marker-end="url(#ah-bio)"/><circle class="dg-keyf" cx="30" cy="30" r="9"/><text class="dg-num dg-mid" x="30" y="34">1</text><text class="dg-tb" x="44" y="26">oil in</text><text class="dg-ts" x="44" y="39">filtered and dry</text><circle class="dg-keyf" cx="30" cy="226" r="9"/><text class="dg-num dg-mid" x="30" y="230">2</text><text class="dg-tb" x="44" y="222">heat to 55 °C</text><text class="dg-ts" x="44" y="235">and hold it there</text><line class="dg-thin" x1="132" y1="226" x2="164" y2="226"/><circle class="dg-keyf" cx="164" cy="226" r="2.2"/><path class="dg-arrow" d="M352 30 L274 30 L274 44" marker-end="url(#ah-bio)"/><circle class="dg-keyf" cx="366" cy="30" r="9"/><text class="dg-num dg-mid" x="366" y="34">3</text><text class="dg-tb" x="380" y="26">methoxide</text><text class="dg-ts" x="380" y="39">in</text><circle class="dg-keyf" cx="366" cy="144" r="9"/><text class="dg-num dg-mid" x="366" y="148">4</text><text class="dg-tb" x="380" y="140">circulate</text><text class="dg-ts" x="380" y="153">1–2 hours</text><circle class="dg-keyf" cx="30" cy="100" r="9"/><text class="dg-num dg-mid" x="30" y="104">5</text><text class="dg-tb" x="44" y="96">settle 8+ h</text><text class="dg-ts" x="44" y="109">two layers form</text><line class="dg-thin" x1="126" y1="104" x2="154" y2="150"/><circle class="dg-keyf" cx="154" cy="150" r="2.2"/><circle class="dg-keyf" cx="254" cy="280" r="9"/><text class="dg-num dg-mid" x="254" y="284">6</text><text class="dg-tb" x="268" y="276">drain the glycerin first,</text><text class="dg-ts" x="268" y="289">from the bottom valve</text></svg>
+      <figcaption>An old water heater does all of it: heat, mix, settle, drain. <strong>Methoxide (methanol + lye) is the dangerous step</strong>: mix it sealed and outdoors, gloves and goggles on, no flame anywhere near. The numbers follow the steps below; washing and drying come after.</figcaption>
+    </figure>
 
     <h3>Appleseed Processor — Step by Step</h3>
     <div class="process-steps">

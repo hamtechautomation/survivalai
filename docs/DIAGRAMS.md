@@ -236,6 +236,35 @@ shows the panel you tapped.
 
 ---
 
+## Redrawn diagrams (the ten weakest older ones, November 2026)
+
+Chosen from contact sheets of all 65 older diagrams: tiny or overlapping labels, cramped
+layout. Redrawn in the shared `.dg` style by `python3 tools/redraw.py`, so they follow the
+display modes, print cleanly, draw in, and enlarge. Every label comes from the diagram it
+replaces or the section text beside it. After running `redraw.py` again, re-run
+`tools/split-panels.js` for the four multi-panel ones.
+
+| Section | New `id` | What changed besides the look |
+|---|---|---|
+| Textiles | `fig-welt` | Proper cross-section with both rows of stitching; tap-to-highlight parts |
+| Vehicles | `fig-gasifier` | **Title and caption corrected.** It was labelled "FEMA downdraft gasifier — used by millions of WWII vehicles". The drawing (with a throat) is the wartime Imbert type; FEMA's 1989 design is a simpler throatless one. Carbon-monoxide warning added |
+| Vehicles | `fig-biodiesel` | Steps numbered to match the text; the methanol percentage is left to the text |
+| Vehicles | `fig-fourstroke` | Four panels (stack 2 × 2 on a phone); valves, piston direction and crank drawn per stroke |
+| Metallurgy | `fig-bellows` | **Title corrected.** It said "double-action bellows" but showed, and the text describes, a single-chamber bellows. Now drawn as lift/push, with the text's Y-pipe method for a steady blast in the caption |
+| Metallurgy | `fig-jabod` | Labels untangled; fire and workpiece position shown |
+| Food & Water | `fig-pitlatrine` | **Distance corrected: 60 m → 30 m** from water, matching the same page's well-siting text, the Projects page and WHO/Sphere guidance. 1.5 m above the water table kept |
+| Water Systems | `fig-gravity` | Numbered flow; head-to-pressure rule drawn as a dimension |
+| Medicine Making | `fig-tincture` | Five steps plus the 1:5 ratio as panels |
+| Power Generation | `fig-waterwheels` | Overshot efficiency now "up to ~85%" (it was a flat "~85%"); head and flow explained |
+
+Also removed: the old pedal-generator schematic in Power Generation, which duplicated
+`fig-pedalchain` directly above it and still showed a rectifier as a required stage.
+
+⚑ **needs expert review:** `fig-gasifier` (zone temperatures and the gas train come from the
+section text), `fig-biodiesel` (process chemistry), and `fig-pitlatrine` (siting figures).
+
+---
+
 ## Corrections made while checking
 
 | Where | Was | Now | Why |
