@@ -213,6 +213,29 @@ The taut-line hitch has several named variants and deserves the closest look.
 
 ---
 
+## Daylight mode, full-screen step player, stacked panels (November 2026)
+
+**Daylight mode** (`body.mode-day`, Display → Daylight). The dark design is flipped: lightness
+inverted, hue kept (`invert(1) hue-rotate(180deg)` on each top-level block, so fixed bars and
+panels stay put). Flipped back to their real colours: photos, map tiles, the steel colour
+charts, the eyelid-scale swatches (`.no-flip`), and all plant-identification art (plant cards
+and the three lookalike figures), because white flowers must stay white. Print ignores it.
+
+**Full-screen step player.** Enlarging a `figure.dg-player` opens a player, not a frozen frame:
+swipe or arrow keys to step, Space or the button to play (it loops and holds the finished
+state), the step text shown large, screen kept awake while playing. A phone on its side puts
+the picture left and the text right. Closing hands the current step back to the page.
+
+**Stacked panels.** A figure made of separate panels is now one `<svg>` per panel inside
+`.dg-cols` (`--cols` on a wide screen, `--cols-sm` on a phone). Split with
+`node tools/split-panels.js <page> <figure-id>:<cols>:<cols on phone>`; nothing is redrawn,
+each panel just gets its own viewBox. Done for the three lookalike comparisons (3 → 1),
+birth presentations (4 → 2), ground-to-air signals (4 → 2), newborn first minutes (2 → 1) and
+reef vs granny (2 → 1). On a wide screen Enlarge shows the whole comparison; on a phone it
+shows the panel you tapped.
+
+---
+
 ## Corrections made while checking
 
 | Where | Was | Now | Why |

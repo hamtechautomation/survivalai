@@ -702,10 +702,12 @@
   function isDiagram(svg) {
     if (svg.closest(DG_SKIP)) return false;
     const vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
+    if (svg.closest('.dg-cols')) return vb.length === 4;          // a panel of a split figure, whatever its size
     return vb.length === 4 && vb[2] >= 150 && vb[3] >= 60;
   }
   function diagramTitle(svg) {
     const fig = svg.closest('figure');
+    if (fig && fig.classList.contains('dg-player')) return svg.getAttribute('aria-label') || 'Step by step';
     const cap = fig && fig.querySelector('figcaption');
     let t = '';
     if (cap) { const c = cap.cloneNode(true); c.querySelectorAll('.dg-hint').forEach(h => h.remove()); t = c.textContent.trim(); }
@@ -721,6 +723,24 @@
     // ── 1. enlarge ──
     svgs.forEach(svg => {
       svg.classList.add('dg-zoomable');
+      const group = svg.closest('.dg-cols');
+      // Panels of one figure: on a wide screen enlarge them together (it is a comparison); on a phone they
+      // are already stacked full-width, so enlarge just the one that was tapped.
+      const target = () => (group && !window.matchMedia('(max-width: 600px)').matches) ? group : svg;
+      if (group) {
+        svg.addEventListener('click', e => { if (e.target.closest('[data-hl]')) return; openLightbox(target(), svg); });
+        if (!group.dataset.zoomBtn) {
+          group.dataset.zoomBtn = '1';
+          const fig = group.closest('figure'); if (getComputedStyle(fig).position === 'static') fig.style.position = 'relative';
+          const gb = document.createElement('button'); gb.type = 'button'; gb.className = 'dg-enlarge no-print'; gb.setAttribute('aria-label', 'Enlarge diagram');
+          gb.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Enlarge</span>';
+          gb.addEventListener('click', e => { e.stopPropagation(); openLightbox(group, gb); });
+          fig.appendChild(gb);
+          const cap = fig.querySelector('figcaption');
+          if (group.querySelector('[data-hl]') && cap && !cap.querySelector('.dg-hint')) cap.insertAdjacentHTML('afterbegin', '<span class="dg-hint no-print">Tap a feature to see where it is. </span>');
+        }
+        return;
+      }
       const host = svg.parentElement;
       const small = svg.getBoundingClientRect().width > 0 && svg.getBoundingClientRect().width < 340;   // small cards: tap to enlarge, no button over the art
       if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
@@ -781,6 +801,7 @@
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const vh = window.innerHeight;
     const pending = svgs.filter(svg => {
+      if (svg.closest('.dg-cols')) return false;
       const r = svg.getBoundingClientRect();
       return r.width > 0 && r.top >= vh && !svg.closest('.no-js-only, .dg-player');
     });
@@ -900,21 +921,69 @@
         '<button type="button" class="dg-lb-btn" data-z="1" aria-label="Zoom in">+</button>' +
         '<button type="button" class="dg-lb-btn dg-lb-x" aria-label="Close">✕</button></div>' +
         '<div class="dg-lb-stage"><div class="dg-lb-pan"></div></div>' +
-        '<p class="dg-lb-help">Pinch or + / − to zoom · drag to move · ✕ or Back to close</p>';
+        // step-by-step diagrams get their own controls here, so a propped-up phone can be driven by swipes
+        '<div class="dg-lb-steps" hidden><p class="dg-lb-steptext" aria-live="polite"></p><div class="dg-lb-ctl">' +
+        '<button type="button" class="dg-lb-pbtn" data-p="prev" aria-label="Previous step">◀</button>' +
+        '<button type="button" class="dg-lb-pbtn dg-lb-play" data-p="play">▶ Play</button>' +
+        '<button type="button" class="dg-lb-pbtn" data-p="next" aria-label="Next step">▶</button>' +
+        '<span class="dg-lb-dots" aria-hidden="true"></span><span class="dg-lb-pos"></span></div></div>' +
+        '<p class="dg-lb-help"></p>';
       document.body.appendChild(lb);
     }
     const stage = lb.querySelector('.dg-lb-stage'), pan = lb.querySelector('.dg-lb-pan');
     const clone = svg.cloneNode(true);
     clone.classList.remove('dg-anim', 'dg-go', 'hl-on', 'dg-zoomable');
-    clone.querySelectorAll('.hl').forEach(el => el.classList.remove('hl'));
+    clone.classList.toggle('dg-keep', !!svg.closest('.plant-card, #fig-look-garlic, #fig-look-umbel, #fig-look-chanterelle'));   // true-colour art stays true in Daylight mode
+    clone.querySelectorAll('.hl, .hl-on, .dg-zoomable').forEach(el => el.classList.remove('hl', 'hl-on', 'dg-zoomable'));
     clone.querySelectorAll('[tabindex]').forEach(el => el.setAttribute('tabindex', '0'));
-    clone.removeAttribute('style');
+    if (clone.tagName.toLowerCase() === 'svg') clone.removeAttribute('style');
     // sizing: the figure's own colour context (emergency tone etc.) can't follow, so copy the variable
     const sosc = getComputedStyle(svg).getPropertyValue('--sos-c'); if (sosc) clone.style.setProperty('--sos-c', sosc);
     pan.replaceChildren(clone);
     const title = diagramTitle(svg);
     lb.querySelector('.dg-lb-title').textContent = title;
     lb.setAttribute('aria-label', title.slice(0, 120));
+
+    // ── step-by-step diagrams: a full-screen player ──
+    const pfig = svg.closest('figure.dg-player');
+    const stepsBox = lb.querySelector('.dg-lb-steps'), playBtn = lb.querySelector('.dg-lb-play');
+    let pk = 1, pn = 0, ptimer = null, pparts = [], ptexts = [], wake = null;
+    pan.classList.toggle('dg-live', !!pfig);
+    stepsBox.hidden = !pfig;
+    lb.classList.toggle('is-player', !!pfig);
+    lb.querySelector('.dg-lb-help').textContent = pfig ? 'Swipe or use ◀ ▶ for steps · pinch to zoom · ✕ or Back to close' : 'Pinch or + / − to zoom · drag to move · ✕ or Back to close';
+    const pshow = i => {
+      pk = Math.max(1, Math.min(pn, i));
+      pparts.forEach(q => q.el.classList.toggle('dg-off', pk < q.a || pk > q.b));
+      lb.querySelector('.dg-lb-steptext').innerHTML = '<b>' + pk + '.</b> ' + (ptexts[pk - 1] || '');
+      lb.querySelector('.dg-lb-pos').textContent = 'Step ' + pk + ' of ' + pn;
+      lb.querySelector('.dg-lb-dots').innerHTML = ptexts.map((t, j) => '<i class="' + (j === pk - 1 ? 'on' : j < pk - 1 ? 'done' : '') + '"></i>').join('');
+    };
+    const pplay = on => {
+      clearInterval(ptimer); ptimer = null;
+      playBtn.textContent = on ? '❚❚ Pause' : '▶ Play';
+      lb.classList.toggle('is-playing', on);
+      if (on) {
+        if (pk >= pn) pshow(1);
+        let hold = 0;                                    // loops: the finished knot is held for two beats, then it starts again
+        ptimer = setInterval(() => { if (pk >= pn) { if (++hold >= 2) { hold = 0; pshow(1); } } else pshow(pk + 1); }, 4200);
+        if (navigator.wakeLock && !wake) navigator.wakeLock.request('screen').then(w => { wake = w; }).catch(() => {});
+      } else if (wake) { wake.release().catch(() => {}); wake = null; }
+    };
+    if (pfig) {
+      if (pfig.classList.contains('dg-playing')) { const ib = pfig.querySelector('.dg-ctl-play'); if (ib) ib.click(); }   // pause the one on the page
+      pn = +pfig.dataset.steps || 1;
+      pparts = [...clone.querySelectorAll('[data-s]')].map(el => { const [a, b] = el.dataset.s.split('-').map(Number); return { el, a, b: b || pn }; });
+      const lis = [...pfig.querySelectorAll('.dg-steps-list > li')];
+      ptexts = lis.map(li => li.innerHTML);
+      pshow(Math.max(1, lis.findIndex(li => li.classList.contains('on')) + 1));
+      pplay(false);
+    }
+    const onStep = e => {
+      const b = e.target.closest('.dg-lb-pbtn'); if (!b) return;
+      if (b.dataset.p === 'play') return pplay(!ptimer);
+      pplay(false); pshow(pk + (b.dataset.p === 'next' ? 1 : -1));
+    };
 
     let s = 1, x = 0, y = 0;
     const apply = () => { pan.style.transform = `translate(${x}px, ${y}px) scale(${s})`; };
@@ -928,10 +997,12 @@
     };
     apply();
 
-    const pts = new Map(); let last = null, lastTap = 0;
+    const pts = new Map(); let last = null, lastTap = 0, swipe = null;
     const onDown = e => {
       if (e.target.closest('[data-hl]')) return;
-      stage.setPointerCapture(e.pointerId); pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      try { stage.setPointerCapture(e.pointerId); } catch (err) {}
+      pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      swipe = pts.size === 1 ? { x: e.clientX, y: e.clientY, t: Date.now() } : null;
       if (pts.size === 1) {
         const now = Date.now();
         if (now - lastTap < 300) zoomAt(s > 1 ? 1 : 2.5, e.clientX, e.clientY);
@@ -949,7 +1020,14 @@
         last = d;
       } else if (pts.size === 1 && s > 1) { x += e.clientX - prev.x; y += e.clientY - prev.y; apply(); }
     };
-    const onUp = e => { pts.delete(e.pointerId); if (pts.size < 2) last = null; };
+    const onUp = e => {
+      pts.delete(e.pointerId); if (pts.size < 2) last = null;
+      if (pfig && swipe && s === 1 && e.type === 'pointerup') {            // a sideways flick steps the diagram
+        const dx = e.clientX - swipe.x, dy = e.clientY - swipe.y;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5 && Date.now() - swipe.t < 700) { pplay(false); pshow(pk + (dx < 0 ? 1 : -1)); lastTap = 0; }
+      }
+      swipe = null;
+    };
     const onWheel = e => { e.preventDefault(); zoomAt(s * (e.deltaY < 0 ? 1.15 : 1 / 1.15), e.clientX, e.clientY); };
     const onBtn = e => {
       const b = e.target.closest('.dg-lb-btn'); if (!b) return;
@@ -960,6 +1038,8 @@
       if (e.key === 'Escape') { e.preventDefault(); close(); }
       else if (e.key === '+' || e.key === '=') zoomAt(s * 1.4);
       else if (e.key === '-') zoomAt(s / 1.4);
+      else if (pfig && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { e.preventDefault(); pplay(false); pshow(pk + (e.key === 'ArrowRight' ? 1 : -1)); }
+      else if (pfig && e.key === ' ' && !e.target.closest('button')) { e.preventDefault(); pplay(!ptimer); }
       else if (e.key === 'Tab') {                                     // keep focus inside
         const f = [...lb.querySelectorAll('button, [tabindex="0"]')];
         const i = f.indexOf(document.activeElement);
@@ -971,16 +1051,19 @@
     function close(fromHistory) {
       stage.removeEventListener('pointerdown', onDown); stage.removeEventListener('pointermove', onMove);
       stage.removeEventListener('pointerup', onUp); stage.removeEventListener('pointercancel', onUp);
-      stage.removeEventListener('wheel', onWheel); lb.removeEventListener('click', onBtn);
+      stage.removeEventListener('wheel', onWheel); lb.removeEventListener('click', onBtn); lb.removeEventListener('click', onStep);
       document.removeEventListener('keydown', onKey); window.removeEventListener('popstate', onPop);
-      lb.classList.remove('open'); document.documentElement.classList.remove('dg-lb-open');
+      lb.classList.remove('open', 'is-player', 'is-playing'); document.documentElement.classList.remove('dg-lb-open');
+      pplay(false);
+      if (pfig) { const li = pfig.querySelectorAll('.dg-steps-list > li')[pk - 1]; if (li) li.click(); }     // the page picks up where you left off
+      pan.classList.remove('dg-live');
       pan.replaceChildren();
       if (fromHistory !== true && history.state && history.state.dgLb) history.back();
       if (returnFocus && returnFocus.focus) returnFocus.focus({ preventScroll: true });
     }
     stage.addEventListener('pointerdown', onDown); stage.addEventListener('pointermove', onMove);
     stage.addEventListener('pointerup', onUp); stage.addEventListener('pointercancel', onUp);
-    stage.addEventListener('wheel', onWheel, { passive: false }); lb.addEventListener('click', onBtn);
+    stage.addEventListener('wheel', onWheel, { passive: false }); lb.addEventListener('click', onBtn); lb.addEventListener('click', onStep);
     document.addEventListener('keydown', onKey);
     try { history.pushState({ dgLb: 1 }, ''); window.addEventListener('popstate', onPop); } catch (e) {}
     document.documentElement.classList.add('dg-lb-open');
@@ -1446,17 +1529,27 @@
   /* Colour mode (normal / high-contrast / night-vision red) and text size.
      Lives behind a "Display" button in the page header instead of a bar that
      floated over the content; pages without a header keep the floating bar. */
+  // The browser's own toolbar colour follows the display mode.
+  function syncThemeColor() {
+    let m = document.querySelector('meta[name="theme-color"]');
+    if (!m) { m = document.createElement('meta'); m.name = 'theme-color'; document.head.appendChild(m); }
+    const b = document.body.classList;
+    m.content = b.contains('mode-day') ? '#f5f8f7' : b.contains('mode-nv') ? '#110000' : b.contains('mode-hc') ? '#000000' : '#070a09';
+  }
+
   function setupModeBar() {
     const savedMode = localStorage.getItem('display-mode') || '';
     const savedFont = localStorage.getItem('font-size') || '';
     if (savedMode) document.body.classList.add(savedMode);
+    syncThemeColor();
     if (savedFont) document.body.classList.add(savedFont);
 
     const controls = `
       <div class="display-group" role="group" aria-label="Colour mode">
         <span class="display-label">Colours</span>
         <div class="seg">
-          <button type="button" data-mode="" title="Normal colours">Normal</button>
+          <button type="button" data-mode="" title="Normal colours (dark)">Normal</button>
+          <button type="button" data-mode="mode-day" title="Daylight — dark text on a light page, for reading outdoors in bright sun">Daylight</button>
           <button type="button" data-mode="mode-hc" title="High contrast">High contrast</button>
           <button type="button" data-mode="mode-nv" title="Night vision (red) — keeps your eyes dark-adapted">Night</button>
         </div>
@@ -1523,11 +1616,12 @@
       document.body.classList.remove(...cls);
       if (val) document.body.classList.add(val);
       try { localStorage.setItem(key, val); } catch (e) {}
+      syncThemeColor();
     };
     root.querySelectorAll('[data-mode]').forEach(b => {
       const on = b.dataset.mode === savedMode;
       b.classList.toggle('active', on); b.setAttribute('aria-pressed', String(on));
-      b.addEventListener('click', () => pick('data-mode', ['mode-hc', 'mode-nv'], 'display-mode', b.dataset.mode));
+      b.addEventListener('click', () => pick('data-mode', ['mode-hc', 'mode-nv', 'mode-day'], 'display-mode', b.dataset.mode));
     });
     root.querySelectorAll('[data-font]').forEach(b => {
       const on = b.dataset.font === savedFont;

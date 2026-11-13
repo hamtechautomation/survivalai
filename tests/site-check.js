@@ -197,7 +197,7 @@ async function browserChecks() {
     const clipped = await desk.evaluate(() => {
       document.querySelectorAll('details').forEach(d => d.open = true);
       const bad = [];
-      document.querySelectorAll('svg.dg-legacy, figure.dg > svg').forEach(svg => {
+      document.querySelectorAll('svg.dg-legacy, figure.dg svg').forEach(svg => {
         const r = svg.getBoundingClientRect(); if (r.width < 20) return;
         const vb = svg.getAttribute('viewBox').split(/[\s,]+/).map(Number);
         const sc = Math.min(r.width / vb[2], r.height / vb[3]);
@@ -211,6 +211,50 @@ async function browserChecks() {
       return bad;
     });
     if (clipped.length) fail('diagram-labels', `${pg}: ${clipped.length} label(s) cut off at the edge of a diagram, e.g. "${clipped[0]}"`);
+  }
+
+  // Daylight mode: every top-level block is flipped, and true-colour art is flipped back.
+  const dayCtx = await browser.newContext({ viewport: { width: 1100, height: 800 } });
+  await dayCtx.addInitScript(() => { try { localStorage.setItem('display-mode', 'mode-day'); } catch (e) {} });
+  const day = await dayCtx.newPage();
+  await day.goto(BASE_URL + 'sections/climate.html');
+  await day.waitForTimeout(300);
+  const dayState = await day.evaluate(() => {
+    const f = el => el ? getComputedStyle(el).filter : '';
+    return { on: document.body.classList.contains('mode-day'), main: f(document.querySelector('.main-content')), side: f(document.getElementById('sidebar')),
+             plant: f(document.querySelector('.plant-card svg')), theme: (document.querySelector('meta[name="theme-color"]') || {}).content };
+  });
+  if (!dayState.on) fail('daylight', 'saved Daylight mode was not applied on load');
+  if (!/invert/.test(dayState.main) || !/invert/.test(dayState.side)) fail('daylight', 'content or sidebar is not flipped to light');
+  if (!/invert/.test(dayState.plant)) fail('daylight', 'plant identification art is not kept in its true colours');
+  if (dayState.theme !== '#f5f8f7') fail('daylight', `browser toolbar colour is ${dayState.theme}, expected the light page colour`);
+  await dayCtx.close();
+
+  // Split figures: panels side by side on a wide screen, stacked on a phone.
+  await desk.goto(BASE_URL + 'sections/climate.html');
+  await desk.waitForTimeout(200);
+  const wideCols = await desk.$eval('#fig-look-umbel .dg-cols', e => getComputedStyle(e).gridTemplateColumns.split(' ').length).catch(() => 0);
+  if (wideCols !== 3) fail('panels', `lookalike comparison shows ${wideCols} column(s) on a wide screen, expected 3`);
+  await page.goto(BASE_URL + 'sections/climate.html');
+  await page.waitForTimeout(200);
+  const phoneCols = await page.$eval('#fig-look-umbel .dg-cols', e => getComputedStyle(e).gridTemplateColumns.split(' ').length).catch(() => 0);
+  if (phoneCols !== 1) fail('panels', `lookalike comparison shows ${phoneCols} column(s) on a phone, expected 1 (stacked)`);
+
+  // Full-screen step player: enlarging a step-by-step diagram gives controls; arrow keys step; closing hands the step back.
+  await desk.goto(BASE_URL + 'sections/knots.html');
+  await desk.waitForTimeout(300);
+  await desk.click('#fig-bowline .dg-steps-list li:nth-child(1)');
+  await desk.evaluate(() => document.querySelector('#fig-bowline svg').dispatchEvent(new MouseEvent('click', { bubbles: true })));
+  await desk.waitForTimeout(200);
+  const lbp = await desk.evaluate(() => { const l = document.querySelector('.dg-lb'); return l && l.classList.contains('open') && l.classList.contains('is-player') && !l.querySelector('.dg-lb-steps').hidden; });
+  if (!lbp) fail('fullscreen-player', 'enlarging a step-by-step diagram did not open the full-screen player');
+  else {
+    await desk.keyboard.press('ArrowRight'); await desk.keyboard.press('ArrowRight');
+    const pos = await desk.$eval('.dg-lb-pos', e => e.textContent);
+    if (pos !== 'Step 3 of 5') fail('fullscreen-player', `after two right-arrows the player says "${pos}"`);
+    await desk.keyboard.press('Escape'); await desk.waitForTimeout(150);
+    const back = await desk.$eval('#fig-bowline .dg-ctl-pos', e => e.textContent);
+    if (back !== 'Step 3 of 5') fail('fullscreen-player', `the page did not pick up the step on close (shows "${back}")`);
   }
 
   // Knots: each of the six has a working step player, and the drawings are the generated ones.

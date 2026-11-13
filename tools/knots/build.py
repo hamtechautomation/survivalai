@@ -171,18 +171,18 @@ def fig_reef():
 
 
 def fig_reef_vs_granny():
-    r = K.reef(110, 64, 0.66).setup('rg-')
-    g = K.reef(334, 64, 0.66, granny=True).setup('gg-')
-    b = '<rect class="dg-panel" x="2" y="2" width="216" height="146" rx="10"/><rect class="dg-panel" x="226" y="2" width="216" height="146" rx="10"/>'
-    dr, dg = r.draw(), g.draw()
-    b += r.defs_svg() + g.defs_svg() + dr + dg
-    b += '<rect class="dg-okbg" x="60" y="12" width="100" height="17" rx="8"/>' + T(110, 24.5, 'REEF', 'dg-ok', 'mid')
-    b += '<rect class="dg-badbg" x="284" y="12" width="100" height="17" rx="8"/>' + T(334, 24.5, 'GRANNY', 'dg-bad', 'mid')
-    b += T(110, 112, 'lies flat; each rope’s two', 'dg-ts', 'mid') + T(110, 125, 'parts leave side by side', 'dg-ts', 'mid') + T(110, 140, 'holds a bundle', 'dg-tb', 'mid')
-    b += T(334, 112, 'ends stick out crossways;', 'dg-ts', 'mid') + T(334, 125, 'one part over, one under', 'dg-ts', 'mid') + T(334, 140, 'slips, then jams', 'dg-tb', 'mid')
-    b += '<circle class="kn-good" cx="%.0f" cy="%.0f" r="12"/>' % (110 + 79 * 0.66, 64 + 14 * 0.66) + '<circle class="kn-warn" cx="%.0f" cy="%.0f" r="12"/>' % (334 + 79 * 0.66, 64 + 14 * 0.66)
-    return ('    <figure class="dg" id="fig-reef-granny">\n      <svg viewBox="0 0 444 150" role="img" aria-label="Reef knot compared with a granny knot">%s</svg>\n'
-            '      <figcaption>Look where the tan rope’s lower part leaves the blue bight (ringed). In a reef it passes the <strong>same side</strong> as its upper part; in a granny it passes the other side. If you see a granny, undo the top half knot and tie it the other way.</figcaption>\n    </figure>\n' % b)
+    def panel(granny, x0):
+        k = K.reef(x0 + 108, 64, 0.66, granny=granny).setup('gg-' if granny else 'rg-')
+        drawn = k.draw()
+        b = '<rect class="dg-panel" x="%d" y="2" width="216" height="146" rx="10"/>' % x0 + k.defs_svg() + drawn
+        b += ('<rect class="dg-badbg" x="%d" y="12" width="100" height="17" rx="8"/>' % (x0 + 58) + T(x0 + 108, 24.5, 'GRANNY', 'dg-bad', 'mid') if granny
+              else '<rect class="dg-okbg" x="%d" y="12" width="100" height="17" rx="8"/>' % (x0 + 58) + T(x0 + 108, 24.5, 'REEF', 'dg-ok', 'mid'))
+        l1, l2, l3 = (('ends stick out crossways;', 'one part over, one under', 'slips, then jams') if granny else ('lies flat; each rope’s two', 'parts leave side by side', 'holds a bundle'))
+        b += T(x0 + 108, 112, l1, 'dg-ts', 'mid') + T(x0 + 108, 125, l2, 'dg-ts', 'mid') + T(x0 + 108, 140, l3, 'dg-tb', 'mid')
+        b += '<circle class="%s" cx="%.0f" cy="%.0f" r="12"/>' % ('kn-warn' if granny else 'kn-good', x0 + 108 + 79 * 0.66, 64 + 14 * 0.66)
+        return '<svg viewBox="%d 0 220 150" role="img" aria-label="%s">%s</svg>' % (x0, 'Granny knot: slips, then jams' if granny else 'Reef knot: lies flat', b)
+    return ('    <figure class="dg dg-multi" id="fig-reef-granny">\n      <div class="dg-cols" style="--cols:2;--cols-sm:1" role="group" aria-label="Reef knot compared with a granny knot">\n        %s\n        %s\n      </div>\n'
+            '      <figcaption>Look where the tan rope’s lower part leaves the blue bight (ringed). In a reef it passes the <strong>same side</strong> as its upper part; in a granny it passes the other side. If you see a granny, undo the top half knot and tie it the other way.</figcaption>\n    </figure>\n' % (panel(False, 0), panel(True, 224)))
 
 
 # ═══ TRUCKER'S HITCH (a system, drawn as a rope diagram) ═══════════════════
