@@ -171,6 +171,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://bunkerbot.co.uk/sections/knots.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://bunkerbot.co.uk/sections/security.html</loc>
     <lastmod>2026-06-29</lastmod>
     <priority>0.7</priority>

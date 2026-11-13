@@ -1,7 +1,7 @@
 {
   "name": "The Last Light Survival Guide",
   "short_name": "Last Light",
-  "description": "Complete offline emergency preparedness reference — 28 sections, tools, maps and search. Works with no internet once installed.",
+  "description": "Complete offline emergency preparedness reference — 29 sections, tools, maps and search. Works with no internet once installed.",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",

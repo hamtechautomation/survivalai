@@ -182,6 +182,37 @@ by script (pixel colour, label contrast against the real backdrop, label positio
 
 ---
 
+## Knots & Rope (`sections/knots.html`, generated)
+
+The page is written by `python3 tools/knots/build.py`. Edit the generator, not the HTML.
+
+**How the drawings are kept honest.** Each knot is a rope path plus a list of what the rope
+does at every crossing (over or under), in order. `tools/knots/rope.py` finds the crossings
+itself and refuses to draw unless (a) the list accounts for every crossing found and (b) the
+two passes at each crossing disagree. A mistyped crossing is a build error, not a wrong picture.
+`python3 tools/knots/knots.py` prints every knot's crossings.
+
+| Knot | Crossings | How the structure was derived | Reference |
+|---|---|---|---|
+| Bowline | 7 | "Rabbit" sequence. Checked by the textbook test: after "up through the hole" alone, the three crossings alternate, i.e. an overhand knot. Tail finishes inside the loop | Ashley Book of Knots #1010 |
+| Sheet bend | 7 | Same structure as the bowline with the loop cut (mirror image, turned on its side). Matches "up through the bight, round the back of both legs, under itself"; end lies across the front of the bight; both short ends on the same side | ABOK #1431 |
+| Reef knot | 6 | Two interlocked bights. The reef is point-symmetric (half turn plus flip), which fixes the marks: each rope's two parts pass the same side of the other's bight | ABOK #1402 |
+| Granny (comparison) | 6 | Same geometry with plain half-turn symmetry: each rope's two parts pass opposite sides | ABOK #1405 |
+| Clove hitch | 2 visible | Front view on a post: two turns under one diagonal; ends leave in opposite directions | ABOK #1245 |
+| Taut-line hitch | 8 | Two turns inside the loop working towards the peg, end crosses over its own line, one turn outside in the same direction, tucked under the crossing | ABOK #1856 |
+| Trucker's hitch | system | Loop used as a pulley; the loop knot and the two half hitches are shown as blocks, described in the steps, not drawn strand by strand | — |
+
+Text claims and their basis: knots cost roughly a third to a half of rope strength; working load
+about a fifth of breaking strength (a tenth where a failure could injure); trucker's hitch 3:1 in
+theory, nearer 2:1 with rope friction; taut-line needs a third turn in slick cord.
+
+⚑ **needs expert review:** a rigger, sailor or scout leader should tie each knot from the page
+alone and confirm the result. The crossing check proves each drawing is self-consistent and
+matches the structure described above; it cannot prove I described the right structure.
+The taut-line hitch has several named variants and deserves the closest look.
+
+---
+
 ## Corrections made while checking
 
 | Where | Was | Now | Why |

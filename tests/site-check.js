@@ -6,7 +6,7 @@
                 that don't exist (one missing file stops offline install),
                 section pages not using the standard page layout, emergency
                 cards / urgent search entries pointing at missing sections,
-                missing book covers, and site-wide counts ("28 sections",
+                missing book covers, and site-wide counts ("29 sections",
                 "33 bundled books") that disagree with the real files.
      browser  — every page fits a 390px phone screen with no script errors,
                 Prev/Next walks the guide in menu order, emergency mode and
@@ -212,6 +212,18 @@ async function browserChecks() {
     });
     if (clipped.length) fail('diagram-labels', `${pg}: ${clipped.length} label(s) cut off at the edge of a diagram, e.g. "${clipped[0]}"`);
   }
+
+  // Knots: each of the six has a working step player, and the drawings are the generated ones.
+  await desk.goto(BASE_URL + 'sections/knots.html');
+  await desk.waitForTimeout(300);
+  for (const id of ['fig-bowline', 'fig-clove', 'fig-tautline', 'fig-sheetbend', 'fig-trucker', 'fig-reef']) {
+    const st = await desk.evaluate(i => { const f = document.getElementById(i); if (!f) return null;
+      return { steps: +f.dataset.steps, items: f.querySelectorAll('.dg-steps-list li').length, ctl: !!f.querySelector('.dg-ctl'), full: !!document.getElementById(i + '-full'), rope: f.querySelectorAll('use.kn-a, use.kn-b').length }; }, id);
+    if (!st) { fail('knots', `${id} is missing from knots.html`); continue; }
+    if (st.steps !== st.items) fail('knots', `${id}: ${st.steps} frames but ${st.items} written steps`);
+    if (!st.ctl || !st.full || st.rope < 3) fail('knots', `${id}: step player or rope drawing did not render`);
+  }
+  if ((await desk.$$('.knot-card')).length !== 6) fail('knots', 'the "Which knot?" chooser should have six cards');
 
   // Display modes: Night mode must put the red gel over everything and convert the
   // content to red; print must flip the older light-on-dark diagrams.

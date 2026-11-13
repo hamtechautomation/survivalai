@@ -2,7 +2,7 @@
 
 > **Automated checks run on every push** (`.github/workflows/site-check.yml`):
 > broken links/anchors, missing offline-cache files, pages not on the standard
-> layout, counts that disagree with the real files ("28 sections", "33 bundled
+> layout, counts that disagree with the real files ("29 sections", "33 bundled
 > books"), pages wider than a phone, script errors, Prev/Next order, emergency
 > mode and search. Run them yourself before pushing:
 >

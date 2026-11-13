@@ -2,7 +2,7 @@
 
 ![The Last Light Survival Guide](assets/og-image.png)
 
-> **A complete, fully-offline survival library — 28 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
+> **A complete, fully-offline survival library — 29 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
 
 ### See it in action
 
@@ -317,7 +317,7 @@ last-light-survival-guide/
 ├── deploy-s3.sh                ← Publish to AWS S3 + CloudFront
 ├── build-packages.sh           ← Build the downloadable ZIPs
 ├── rebuild-index.sh            ← Rebuild the PDF search index after adding books
-├── sections/                   ← 28 content section pages
+├── sections/                   ← 29 content section pages
 │   ├── food.html               medical.html        energy.html
 │   ├── shelter.html            communications.html navigation.html
 │   ├── security.html           knowledge.html      science.html (First Principles)
