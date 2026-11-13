@@ -72,7 +72,7 @@
       <ul style="margin:0.5rem 0 0; padding-left:1.2rem;">
         <li><strong>Never use aluminum containers</strong> with lye — violent reaction produces hydrogen gas and destroys the container</li>
         <li><strong>Always add lye to water</strong>, never water to lye — reverse causes violent heat spike and spattering</li>
-        <li><strong>Methanol in distillate foreshots</strong> is odorless and causes blindness/death — always discard first 50ml per 20L wash</li>
+        <li><strong>Methanol</strong> causes blindness and death and cannot be told from ethanol by smell or taste. It is made during fermentation (mostly from fruit pectin), not by the still, so the safest spirit starts from a grain or sugar wash. Always discard the foreshots (first 50–100&nbsp;mL per 20&nbsp;L wash) — but that alone does not remove methanol</li>
         <li><strong>Quicklime + water</strong> is exothermic and can cause burns and fires on contact with combustibles</li>
         <li><strong>Work outdoors or with ventilation</strong> for all processes involving heat, acid, or volatile compounds</li>
       </ul>
@@ -273,7 +273,7 @@ SEALING: Rye flour + water paste seals joints temporarily.
     <h3>The Cuts — What to Keep and What to Discard</h3>
 
     <div class="callout-danger">
-      Methanol is produced early in every distillation run. It causes optic nerve destruction leading to permanent blindness, and at higher doses, death. It cannot be detected by smell alone. Always discard the foreshots. This is non-negotiable.
+      Methanol destroys the optic nerve, causing permanent blindness, and at higher doses death. It cannot be told from ethanol by smell or taste. <strong>It is made in the fermenter, not the still</strong> — mostly from pectin in fruit skins, pulp and pomace; grain and plain-sugar washes make very little. In a pot still it does <em>not</em> all come over first: it holds on to water and comes through across the whole run, with more of it in the tails. So: <strong>(1)</strong> drink only spirit made from a grain or sugar wash, and treat spirit from fruit (especially pomace or whole crushed fruit) as fuel or antiseptic; <strong>(2)</strong> always discard the foreshots — they hold acetone and acetaldehyde, and keep them labelled away from drink; <strong>(3)</strong> keep only the hearts, and never drink the tails. Non-negotiable.
     </div>
 
     <table>
@@ -283,7 +283,7 @@ SEALING: Rye flour + water paste seals joints temporarily.
           <td><strong>Foreshots</strong></td>
           <td style="color:var(--red)">First 50–100ml</td>
           <td>~65–72°C</td>
-          <td>Methanol, acetone, acetaldehyde — toxic compounds that concentrate first</td>
+          <td>Acetone, acetaldehyde, ethyl acetate — the most volatile compounds, which come over first. Some methanol too, but discarding these does not remove it all (see above)</td>
           <td style="color:var(--red);font-weight:600">DISCARD. No exceptions. Store separately to avoid accidental use.</td>
         </tr>
         <tr class="cuts-row-heads">
@@ -304,8 +304,8 @@ SEALING: Rye flour + water paste seals joints temporarily.
           <td><strong>Tails</strong></td>
           <td>Final portion</td>
           <td>&gt;82°C</td>
-          <td>Fusel oils (higher alcohols), water, congeners. Harsh flavor, some useful compounds.</td>
-          <td>Set aside; can be added to next run for efficiency or discard</td>
+          <td>Fusel oils (higher alcohols), water, congeners — and much of the methanol. Harsh flavor.</td>
+          <td>Never drink. Set aside for fuel, or add to the next run of the same wash</td>
         </tr>
       </tbody>
     </table>
@@ -368,59 +368,9 @@ SIGNS OF COMPLETION:
   ✓ Do NOT open while hot — instant ignition
 ──────────────────────────────────────────────</pre>
 
-    <figure class="svg-diagram" aria-label="Retort charcoal kiln cross-section diagram">
-      <svg class="dg-legacy" xmlns="http://www.w3.org/2000/svg" viewBox="0 -22 540 322" width="100%" role="img" aria-label="Retort charcoal kiln cross-section">
-        <defs>
-          <marker id="ck-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#d4a843"/>
-          </marker>
-          <!-- hatching for wood -->
-          <pattern id="wood-hatch" patternUnits="userSpaceOnUse" width="8" height="8">
-            <path d="M-1,1 L3,-3 M0,8 L8,0 M5,11 L11,5" stroke="#8b6914" stroke-width="1.2" opacity=".6"/>
-          </pattern>
-          <!-- fire pattern -->
-          <pattern id="fire-dots" patternUnits="userSpaceOnUse" width="10" height="10">
-            <circle cx="5" cy="5" r="1.5" fill="#c0450a" opacity=".5"/>
-          </pattern>
-        </defs>
-
-        <!-- barrel wall -->
-        <rect x="160" y="40" width="220" height="200" rx="6" ry="6" fill="#3a3a3a" stroke="#666" stroke-width="2"/>
-        <!-- lid -->
-        <rect x="155" y="32" width="230" height="16" rx="4" ry="4" fill="#555" stroke="#888" stroke-width="1.5"/>
-        <!-- wood charge interior -->
-        <rect x="172" y="55" width="196" height="178" fill="url(#wood-hatch)" stroke="none"/>
-        <!-- vent pipe through lid -->
-        <rect x="256" y="10" width="28" height="28" rx="3" fill="#444" stroke="#888" stroke-width="1.5"/>
-        <rect x="265" y="4" width="10" height="12" fill="#333" stroke="#777" stroke-width="1"/>
-
-        <!-- fire/heat surrounding barrel -->
-        <rect x="80" y="100" width="80" height="140" rx="8" fill="url(#fire-dots)" stroke="#c0450a" stroke-width="1.5" opacity=".8"/>
-        <rect x="380" y="100" width="80" height="140" rx="8" fill="url(#fire-dots)" stroke="#c0450a" stroke-width="1.5" opacity=".8"/>
-        <!-- fire label text inside fire blocks -->
-        <text x="120" y="168" text-anchor="middle" font-size="11" fill="#e07030" font-family="monospace">FIRE</text>
-        <text x="420" y="168" text-anchor="middle" font-size="11" fill="#e07030" font-family="monospace">FIRE</text>
-
-        <!-- vent gas arrow upward -->
-        <line x1="270" y1="4" x2="270" y2="-12" stroke="#d4a843" stroke-width="2" marker-end="url(#ck-arrow)"/>
-
-        <!-- labels -->
-        <!-- lid -->
-        <line x1="390" y1="40" x2="430" y2="28" stroke="#888" stroke-width="1"/>
-        <text x="433" y="27" font-size="11" fill="#aaa" font-family="monospace">Lid (clamped)</text>
-        <!-- vent pipe -->
-        <line x1="290" y1="14" x2="360" y2="5" stroke="#888" stroke-width="1"/>
-        <text x="362" y="9" font-size="11" fill="#aaa" font-family="monospace">Vent pipe</text>
-        <!-- wood charge -->
-        <text x="270" y="148" text-anchor="middle" font-size="13" fill="#c8a040" font-family="monospace" font-weight="bold">WOOD</text>
-        <text x="270" y="165" text-anchor="middle" font-size="13" fill="#c8a040" font-family="monospace" font-weight="bold">CHARGE</text>
-        <!-- vent gas label -->
-        <text x="310" y="-8" font-size="10" fill="#d4a843" font-family="monospace">Vent gas → ignite for heat</text>
-
-        <!-- caption bar -->
-        <rect x="0" y="270" width="540" height="30" fill="#1a1a1a"/>
-        <text x="270" y="290" text-anchor="middle" font-size="11" fill="#888" font-family="monospace">Retort Kiln: no oxygen enters barrel — wood carbonizes rather than burning</text>
-      </svg>
+    <figure class="dg" id="fig-retort">
+      <svg viewBox="0 0 444 312" role="img" aria-label="Retort charcoal kiln: a sealed barrel of wood sits inside a fire box; a pipe from the lid carries the wood gas back down into the fire"><defs><marker id="ah-rt" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><g data-hl="box"><path class="dg-debris" d="M20 70 L250 70 L250 240 L20 240 Z"/><rect class="dg-panel" x="34" y="84" width="202" height="142"/></g><g data-hl="fire"><path class="dg-red" d="M40 220 q10 -26 20 -6 q8 -30 20 -4 q10 -24 20 -2 q10 -28 22 0 q8 -24 20 -2 q10 -26 20 -4 q8 -22 18 0 q10 -20 20 4 L236 226 L40 226 Z"/><path class="dg-red" d="M40 120 q-2 26 10 40 q-12 20 -4 44 L40 204 Z M230 120 q2 26 -10 40 q12 20 4 44 L230 204 Z" opacity=".8"/></g><g data-hl="barrel"><rect class="dg-line" x="70" y="96" width="130" height="104" rx="6"/><rect class="dg-wood" x="78" y="108" width="106" height="13" rx="6"/><rect class="dg-wood" x="86" y="122" width="98" height="13" rx="6"/><rect class="dg-wood" x="78" y="136" width="106" height="13" rx="6"/><rect class="dg-wood" x="86" y="150" width="98" height="13" rx="6"/><rect class="dg-wood" x="78" y="164" width="106" height="13" rx="6"/><rect class="dg-wood" x="86" y="178" width="98" height="13" rx="6"/></g><g data-hl="lid"><rect class="dg-key" x="64" y="88" width="142" height="10" rx="2"/><path class="dg-key-s" d="M68 86 l0 16 M202 86 l0 16"/></g><g data-hl="pipe"><path class="dg-blue-s" d="M135 88 L135 50 L270 50 L270 252 L120 252 L120 232" stroke-width="5" opacity=".75"/><path class="dg-ah" d="M114 234 L120 222 L126 234 Z" transform="translate(0 2)"/></g><text class="dg-th" x="20" y="22">RETORT KILN</text><text class="dg-ts" x="20" y="36">wood cooks in a sealed barrel inside the fire</text><text class="dg-tb dg-mid" x="135" y="154" data-hl="barrel">WOOD</text><text class="dg-tb" x="280" y="64" data-hl="pipe">GAS PIPE</text><text class="dg-ts" x="280" y="77" data-hl="pipe">smoke and gas from the</text><text class="dg-ts" x="280" y="89" data-hl="pipe">wood are piped back into</text><text class="dg-ts" x="280" y="101" data-hl="pipe">the fire and burn: the</text><text class="dg-ts" x="280" y="113" data-hl="pipe">wood helps heat itself</text><text class="dg-tb" x="280" y="136" data-hl="lid">TIGHT LID</text><text class="dg-ts" x="280" y="149" data-hl="lid">clamped or bolted: no air</text><text class="dg-ts" x="280" y="161" data-hl="lid">gets in, so the wood chars</text><text class="dg-ts" x="280" y="173" data-hl="lid">instead of burning</text><text class="dg-tb" x="280" y="196" data-hl="barrel">WOOD packed tight,</text><text class="dg-ts" x="280" y="209" data-hl="barrel">billets 6–12 in long</text><text class="dg-th" x="20" y="270">DONE WHEN</text><text class="dg-t" x="20" y="286">✓ no more smoke from the pipe   ✓ the gas no longer burns</text><text class="dg-tb" x="20" y="302" data-hl="lid">⚠ cool completely before opening: hot charcoal bursts into flame</text></svg>
+      <figcaption>No air reaches the wood, so it turns to charcoal instead of ash. Once it starts to cook, the gas it gives off burns in the fire around it. Never open it hot.</figcaption>
     </figure>
 
     <h3>Activated Charcoal</h3>
@@ -843,10 +793,10 @@ WICK CHANNEL: Punch small hole in lid or use
         <div class="result">Immediate ignition — charcoal auto-ignites on oxygen contact when hot; always cool fully</div>
       </div>
       <div class="compat-card">
-        <div class="mix-a">Methanol (foreshots)</div>
+        <div class="mix-a">Methanol (in foreshots, tails, fruit spirit)</div>
         <div>+</div>
         <div class="mix-b">Any consumption</div>
-        <div class="result">Permanent blindness / death — not a mixture, but a severe hazard. Always discard first 50ml per 20L wash.</div>
+        <div class="result">Permanent blindness / death — not a mixture, but a severe hazard. Drink only the hearts of a grain or sugar wash; discard the first 50–100&nbsp;mL per 20&nbsp;L wash and never drink tails.</div>
       </div>
     </div>
 

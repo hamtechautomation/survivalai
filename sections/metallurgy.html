@@ -327,80 +327,11 @@ Build time: 1–2 hours. Cost: near zero.
 
     <!-- FORGE SVG DIAGRAM -->
     <div class="svg-wrap">
-      <svg class="dg-legacy" viewBox="0 0 560 320" style="width:100%;max-width:560px;display:block;margin:0 auto;" aria-label="Brake drum forge cross-section diagram">
-        <!-- Background -->
-        <rect width="560" height="320" fill="#070a09"/>
-
-        <!-- Stand legs -->
-        <rect x="155" y="210" width="14" height="95" fill="#3a3a3a" rx="2"/>
-        <rect x="391" y="210" width="14" height="95" fill="#3a3a3a" rx="2"/>
-        <rect x="140" y="295" width="45" height="10" fill="#3a3a3a" rx="2"/>
-        <rect x="375" y="295" width="45" height="10" fill="#3a3a3a" rx="2"/>
-
-        <!-- Stand crossbar -->
-        <rect x="155" y="255" width="250" height="10" fill="#555" rx="3"/>
-
-        <!-- Brake drum body (outer) -->
-        <rect x="145" y="130" width="270" height="90" rx="12" fill="#4a4a4a" stroke="#666" stroke-width="2"/>
-        <!-- Drum inner (firepot area) -->
-        <rect x="175" y="140" width="210" height="70" rx="8" fill="#1a1a1a"/>
-        <!-- Drum rim top -->
-        <rect x="145" y="125" width="270" height="12" rx="4" fill="#5a5a5a"/>
-
-        <!-- Fire in firepot -->
-        <ellipse cx="280" cy="170" rx="70" ry="22" fill="#c84800" opacity="0.7"/>
-        <ellipse cx="280" cy="160" rx="50" ry="18" fill="#e86000" opacity="0.8"/>
-        <ellipse cx="270" cy="150" rx="35" ry="14" fill="#ffaa00" opacity="0.9"/>
-        <ellipse cx="285" cy="143" rx="20" ry="10" fill="#ffee88" opacity="0.8"/>
-
-        <!-- Fuel/coal above -->
-        <ellipse cx="240" cy="128" rx="18" ry="7" fill="#333" stroke="#555" stroke-width="1"/>
-        <ellipse cx="280" cy="122" rx="22" ry="8" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
-        <ellipse cx="320" cy="128" rx="16" ry="6" fill="#333" stroke="#555" stroke-width="1"/>
-
-        <!-- Workpiece above fire -->
-        <rect x="230" y="85" width="100" height="14" rx="2" fill="#c87a40" stroke="#e89050" stroke-width="1"/>
-        <!-- glow on workpiece -->
-        <rect x="245" y="86" width="70" height="12" rx="2" fill="#ffaa30" opacity="0.5"/>
-
-        <!-- Air pipe from below drum -->
-        <rect x="262" y="220" width="16" height="55" fill="#666" rx="2"/>
-        <!-- Air direction arrows -->
-        <text x="242" y="238" fill="#c9a94e" font-size="11" font-family="monospace">&#8593;</text>
-        <text x="296" y="238" fill="#c9a94e" font-size="11" font-family="monospace">&#8593;</text>
-
-        <!-- Blower box -->
-        <rect x="230" y="275" width="100" height="30" rx="5" fill="#2a3a2a" stroke="#4a6a4a" stroke-width="1.5"/>
-        <text x="280" y="295" fill="#c9a94e" font-size="11" font-family="monospace" text-anchor="middle">BLOWER / BELLOWS</text>
-
-        <!-- Optional ash dump -->
-        <rect x="365" y="190" width="50" height="14" rx="3" fill="#2a2a2a" stroke="#555" stroke-width="1"/>
-        <text x="390" y="202" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">ASH DUMP</text>
-
-        <!-- Labels -->
-        <text x="22" y="100" fill="#c9a94e" font-size="11" font-family="monospace">WORKPIECE</text>
-        <line x1="100" y1="97" x2="228" y2="92" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
-
-        <text x="422" y="130" fill="#c9a94e" font-size="11" font-family="monospace">BRAKE DRUM</text>
-        <line x1="416" y1="128" x2="415" y2="148" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
-
-        <text x="422" y="165" fill="#c9a94e" font-size="11" font-family="monospace">FUEL + FIRE</text>
-        <line x1="416" y1="163" x2="352" y2="162" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
-
-        <text x="422" y="198" fill="#c9a94e" font-size="11" font-family="monospace">ASH DUMP</text>
-        <line x1="416" y1="196" x2="416" y2="197" stroke="#c9a94e" stroke-width="1"/>
-
-        <text x="22" y="240" fill="#c9a94e" font-size="11" font-family="monospace">AIR TUYERE</text>
-        <text x="22" y="253" fill="#c9a94e" font-size="11" font-family="monospace">(2–3 cm pipe)</text>
-        <line x1="110" y1="240" x2="261" y2="240" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
-
-        <text x="22" y="290" fill="#c9a94e" font-size="11" font-family="monospace">STAND / LEGS</text>
-        <line x1="110" y1="290" x2="155" y2="270" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
-
-        <!-- Title -->
-        <text x="280" y="22" fill="#e8c96e" font-size="13" font-family="monospace" text-anchor="middle" font-weight="bold">BRAKE DRUM FORGE — CROSS SECTION</text>
-      </svg>
-      <div class="svg-caption">Brake drum forge — side cross-section. Drum sits on steel or masonry stand at hip height. Tuyere pipe enters from below; air is forced up through fuel.</div>
+      <figure class="dg" id="fig-drumforge">
+      <svg viewBox="0 0 444 296" role="img" aria-label="Brake drum forge in cross-section: a cast-iron truck brake drum at hip height, a grate over a central air pipe fed by a blower, fire and workpiece in the bowl, and a side ash dump"><defs><marker id="ah-bd" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><line class="dg-line" x1="20" y1="284" x2="424" y2="284"/><g data-hl="stand"><path class="dg-line" d="M134 140 L130 284 M310 140 L314 284 M132 262 L312 262"/></g><g data-hl="drum"><path class="dg-white" d="M110 70 L334 70 L334 82 L316 82 L316 140 L250 140 L250 150 L194 150 L194 140 L128 140 L128 82 L110 82 Z" opacity=".35"/><path class="dg-line" d="M110 70 L110 82 L128 82 L128 140 L194 140 L194 150 M334 70 L334 82 L316 82 L316 140 L250 140 L250 150"/></g><g data-hl="grate"><rect class="dg-key" x="140" y="122" width="10" height="6" rx="1"/><rect class="dg-key" x="158" y="122" width="10" height="6" rx="1"/><rect class="dg-key" x="176" y="122" width="10" height="6" rx="1"/><rect class="dg-key" x="194" y="122" width="10" height="6" rx="1"/><rect class="dg-key" x="212" y="122" width="10" height="6" rx="1"/><rect class="dg-key" x="230" y="122" width="10" height="6" rx="1"/><rect class="dg-key" x="248" y="122" width="10" height="6" rx="1"/><rect class="dg-key" x="266" y="122" width="10" height="6" rx="1"/><rect class="dg-key" x="284" y="122" width="10" height="6" rx="1"/><rect class="dg-key" x="302" y="122" width="10" height="6" rx="1"/></g><g data-hl="fire"><path class="dg-debris" d="M132 120 Q134 96 160 94 L290 94 Q312 96 312 120 Z"/><path class="dg-red" d="M176 118 Q182 80 222 74 Q262 80 268 118 Z"/></g><g data-hl="work"><rect class="dg-key" x="150" y="86" width="210" height="8" rx="2" transform="rotate(-4 255 90)"/></g><g data-hl="tuy"><rect class="dg-water" x="210" y="150" width="24" height="80" opacity=".9"/><path class="dg-water" d="M210 206 L210 230 L380 230 L380 206 Z" opacity=".9"/></g><g data-hl="ash"><rect class="dg-panel" x="316" y="130" width="22" height="8"/><path class="dg-thin" d="M338 134 L352 134"/></g><g data-hl="blow"><rect class="dg-green" x="380" y="190" width="44" height="52" rx="8"/></g><path class="dg-blue-s" d="M372 218 L240 218" marker-end="url(#ah-bd)"/><path class="dg-blue-s" d="M222 200 L222 128" marker-end="url(#ah-bd)"/><text class="dg-th dg-mid" x="222" y="20">BRAKE DRUM FORGE — CROSS-SECTION</text><text class="dg-tb" x="30" y="48" data-hl="work">WORKPIECE</text><text class="dg-ts" x="30" y="61" data-hl="work">in the hottest spot</text><line class="dg-thin" x1="132" y1="60" x2="152" y2="90"/><circle class="dg-keyf" cx="152" cy="90" r="2.2"/><text class="dg-tb dg-end" x="436" y="48" data-hl="fire">FIRE + FUEL</text><text class="dg-ts dg-end" x="436" y="61" data-hl="fire">coal or charcoal</text><line class="dg-thin" x1="362" y1="56" x2="262" y2="98"/><circle class="dg-keyf" cx="262" cy="98" r="2.2"/><text class="dg-tb" x="30" y="92" data-hl="drum">BRAKE DRUM</text><text class="dg-ts" x="30" y="105" data-hl="drum">truck, cast iron</text><line class="dg-thin" x1="112" y1="96" x2="114" y2="80"/><circle class="dg-keyf" cx="114" cy="80" r="2.2"/><text class="dg-tb" x="30" y="136" data-hl="grate">GRATE: steel</text><text class="dg-ts" x="30" y="149" data-hl="grate">bars hold fuel</text><text class="dg-ts" x="30" y="161" data-hl="grate">above the air hole</text><line class="dg-thin" x1="108" y1="140" x2="140" y2="126"/><circle class="dg-keyf" cx="140" cy="126" r="2.2"/><text class="dg-tb dg-end" x="436" y="120" data-hl="ash">ASH DUMP</text><text class="dg-ts dg-end" x="436" y="133" data-hl="ash">hole 2 cm below</text><text class="dg-ts dg-end" x="436" y="145" data-hl="ash">the grate</text><text class="dg-tb dg-end" x="204" y="168" data-hl="tuy">TUYERE</text><text class="dg-ts dg-end" x="204" y="181" data-hl="tuy">4–6 cm pipe</text><text class="dg-ts dg-end" x="204" y="193" data-hl="tuy">up the centre</text><text class="dg-tb dg-mid" x="402" y="260" data-hl="blow">BLOWER</text><text class="dg-ts dg-mid" x="402" y="273" data-hl="blow">or bellows</text><path class="dg-thin" d="M18 70 L18 284 M14 70 l8 0 M14 284 l8 0"/><text class="dg-ts dg-end" x="12" y="181.0"></text><text class="dg-ts dg-mid" transform="translate(12 220) rotate(-90)">hip height ≈ 90 cm</text></svg>
+      <figcaption>Air is forced up the tuyere, through the grate and into the fire. Mount the drum at hip height, about 90&nbsp;cm. A hand-crank blower, bellows or even an old hair dryer will drive it. The side ash dump lets you clear clinker without disturbing the fire.</figcaption>
+    </figure>
+      
     </div>
 
     <ol>
@@ -883,78 +814,11 @@ Build time: 1–2 hours. Cost: near zero.
 
     <!-- KNIFE FORGING SVG -->
     <div class="svg-wrap">
-      <svg class="dg-legacy" viewBox="0 0 560 280" style="width:100%;max-width:560px;display:block;margin:0 auto;" aria-label="Knife forging sequence showing 5 stages">
-        <rect width="560" height="280" fill="#070a09"/>
-        <text x="280" y="22" fill="#e8c96e" font-size="12" font-family="monospace" text-anchor="middle" font-weight="bold">KNIFE FORGING SEQUENCE — 5 STAGES</text>
-
-        <!-- Stage 1: Flat bar stock -->
-        <rect x="20" y="40" width="100" height="22" rx="3" fill="#5a5a5a" stroke="#888" stroke-width="1.5"/>
-        <text x="70" y="35" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">1. STOCK</text>
-        <text x="70" y="77" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">flat bar</text>
-        <text x="70" y="88" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">anneal first</text>
-
-        <!-- Arrow -->
-        <text x="128" y="54" fill="#c9a94e" font-size="16" font-family="monospace">&#8594;</text>
-
-        <!-- Stage 2: Rough profile (drawn-out tip, rough tang) -->
-        <polygon points="150,40 230,40 240,51 230,62 190,62 150,62" fill="#5a5a5a" stroke="#888" stroke-width="1.5"/>
-        <text x="195" y="35" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">2. ROUGH PROFILE</text>
-        <text x="195" y="77" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">draw tip, mark</text>
-        <text x="195" y="88" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">tang length</text>
-
-        <!-- Arrow -->
-        <text x="248" y="54" fill="#c9a94e" font-size="16" font-family="monospace">&#8594;</text>
-
-        <!-- Stage 3: Bevels started (wedge shape at blade) -->
-        <polygon points="270,43 340,40 352,51 340,62 305,62 270,57" fill="#5a5a5a" stroke="#888" stroke-width="1.5"/>
-        <!-- Bevel indicator lines -->
-        <line x1="290" y1="43" x2="340" y2="40" stroke="#c9a94e" stroke-width="0.7" stroke-dasharray="2,1"/>
-        <line x1="290" y1="57" x2="340" y2="62" stroke="#c9a94e" stroke-width="0.7" stroke-dasharray="2,1"/>
-        <text x="311" y="35" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">3. BEVELS</text>
-        <text x="311" y="77" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">forge bevel +</text>
-        <text x="311" y="88" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">draw tang</text>
-
-        <!-- Arrow -->
-        <text x="360" y="54" fill="#c9a94e" font-size="16" font-family="monospace">&#8594;</text>
-
-        <!-- Stage 4: Fully forged (complete shape, thinner) -->
-        <polygon points="380,44 445,40 460,51 445,62 415,62 380,56" fill="#4a4a4a" stroke="#aaa" stroke-width="1.5"/>
-        <text x="420" y="35" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">4. FORGED</text>
-        <text x="420" y="77" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">normalize 3x</text>
-        <text x="420" y="88" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">grind bevels</text>
-
-        <!-- Arrow -->
-        <text x="465" y="54" fill="#c9a94e" font-size="16" font-family="monospace">&#8594;</text>
-
-        <!-- Stage 5: Final (finished knife silhouette) -->
-        <polygon points="487,44 536,41 542,51 536,61 510,61 487,56" fill="#888888" stroke="#c9a94e" stroke-width="1.5"/>
-        <!-- edge line -->
-        <line x1="487" y1="56" x2="542" y2="51" stroke="#e8c96e" stroke-width="1"/>
-        <text x="514" y="35" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">5. FINISHED</text>
-        <text x="514" y="77" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">heat treat +</text>
-        <text x="514" y="88" fill="#8a9e86" font-size="9" font-family="monospace" text-anchor="middle">sharpen</text>
-
-        <!-- Bottom: detailed cross-section of bevel angle -->
-        <text x="280" y="118" fill="#e8c96e" font-size="11" font-family="monospace" text-anchor="middle">BEVEL ANGLE CROSS-SECTION</text>
-
-        <!-- Cross section of blade -->
-        <polygon points="200,165 360,145 360,185 200,165" fill="#5a5a5a" stroke="#888" stroke-width="1"/>
-        <!-- edge highlight -->
-        <line x1="360" y1="145" x2="360" y2="185" stroke="#e8c96e" stroke-width="2"/>
-
-        <!-- Angle indicators -->
-        <line x1="360" y1="165" x2="310" y2="145" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
-        <line x1="360" y1="165" x2="310" y2="185" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
-
-        <text x="295" y="142" fill="#c9a94e" font-size="10" font-family="monospace">20–25°</text>
-        <text x="295" y="192" fill="#c9a94e" font-size="10" font-family="monospace">20–25°</text>
-        <text x="370" y="168" fill="#e8c96e" font-size="10" font-family="monospace">EDGE</text>
-        <text x="220" y="162" fill="#8a9e86" font-size="10" font-family="monospace">SPINE</text>
-
-        <text x="280" y="218" fill="#6a8263" font-size="9" font-family="monospace" text-anchor="middle">20–25° per side = utility/camp knife. 15° per side = slicing/fillet. 30° per side = heavy chopper.</text>
-        <text x="280" y="235" fill="#6a8263" font-size="9" font-family="monospace" text-anchor="middle">Maintain consistent angle throughout sharpening. A wood guide block cut to angle helps.</text>
-      </svg>
-      <div class="svg-caption">Knife forging sequence and bevel geometry. Each stage is a full forging heat — do not rush between stages. Normalize after rough forging before grinding.</div>
+      <figure class="dg" id="fig-knife">
+      <svg viewBox="0 0 444 300" role="img" aria-label="Forging a knife in five stages, from annealed bar stock to hardened blade, and three edge bevels: 15° for slicing, 20 to 25° for a utility knife, 30° for chopping"><defs><marker id="ah-kn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><g data-hl="k0"><circle class="dg-keyf" cx="20" cy="50" r="9"/><text class="dg-num dg-mid" x="20" y="54">1</text><text class="dg-tb dg-tb-sm" x="34" y="54">STOCK</text><g transform="translate(14 66)"><rect class="dg-line" x="0" y="0" width="70" height="14" rx="1"/></g><text class="dg-ts" x="12" y="102">anneal: heat</text><text class="dg-ts" x="12" y="114">to cherry red,</text><text class="dg-ts" x="12" y="126">cool in ash</text></g><path class="dg-arrow" d="M86 74 L96 74" marker-end="url(#ah-kn)"/><g data-hl="k1"><circle class="dg-keyf" cx="108" cy="50" r="9"/><text class="dg-num dg-mid" x="108" y="54">2</text><text class="dg-tb dg-tb-sm" x="122" y="54">PROFILE</text><g transform="translate(102 66)"><path class="dg-line" d="M0 2 L48 2 L70 12 L48 14 L0 14 Z"/></g><text class="dg-ts" x="100" y="102">mark it, cut</text><text class="dg-ts" x="100" y="114">3–4 mm outside</text><text class="dg-ts" x="100" y="126">the line</text></g><path class="dg-arrow" d="M174 74 L184 74" marker-end="url(#ah-kn)"/><g data-hl="k2"><circle class="dg-keyf" cx="196" cy="50" r="9"/><text class="dg-num dg-mid" x="196" y="54">3</text><text class="dg-tb dg-tb-sm" x="210" y="54">FORGE</text><g transform="translate(190 66)"><path class="dg-line" d="M0 4 L24 2 L50 2 L70 12 L50 14 L24 12 L0 12 Z"/><path class="dg-thin" d="M24 8 L66 11"/></g><text class="dg-ts" x="188" y="102">draw the tip,</text><text class="dg-ts" x="188" y="114">forge bevels,</text><text class="dg-ts" x="188" y="126">draw the tang</text></g><path class="dg-arrow" d="M262 74 L272 74" marker-end="url(#ah-kn)"/><g data-hl="k3"><circle class="dg-keyf" cx="284" cy="50" r="9"/><text class="dg-num dg-mid" x="284" y="54">4</text><text class="dg-tb dg-tb-sm" x="298" y="54">GRIND</text><g transform="translate(278 66)"><path class="dg-line" d="M0 5 L24 3 L50 2 L70 12 L50 14 L24 12 L0 11 Z"/><path class="dg-thin" d="M24 9 L66 11.5"/></g><text class="dg-ts" x="276" y="102">normalize 3×,</text><text class="dg-ts" x="276" y="114">then grind; edge</text><text class="dg-ts" x="276" y="126">left 0.5 mm</text></g><path class="dg-arrow" d="M350 74 L360 74" marker-end="url(#ah-kn)"/><g data-hl="k4"><circle class="dg-keyf" cx="372" cy="50" r="9"/><text class="dg-num dg-mid" x="372" y="54">5</text><text class="dg-tb dg-tb-sm" x="386" y="54">HARDEN</text><g transform="translate(366 66)"><rect class="dg-wood" x="0" y="2" width="26" height="12" rx="4"/><path class="dg-key" d="M26 2 L50 2 L70 12 L50 14 L26 14 Z"/><path class="dg-thin" d="M26 10 L66 12"/></g><text class="dg-ts" x="364" y="102">oil quench,</text><text class="dg-ts" x="364" y="114">temper straw,</text><text class="dg-ts" x="364" y="126">sharpen</text></g><text class="dg-th dg-mid" x="222" y="22">FORGING A KNIFE</text><text class="dg-ts dg-mid" x="222" y="36">each stage is a full forging heat — do not rush</text><line class="dg-guide" x1="10" y1="138" x2="434" y2="138"/><text class="dg-th dg-mid" x="222" y="154">EDGE BEVEL — the blade cut across</text><g data-hl="b0"><path class="dg-white" d="M53.9 172 L102.1 172 L78 262 Z" opacity=".9"/><line class="dg-guide" x1="78" y1="168" x2="78" y2="262"/><path class="dg-key-s" d="M78 222 A 40 40 0 0 1 88.4 223.4" stroke-width="1.6"/><text class="dg-tb dg-tb-sm" x="108.11542731880104" y="194">15°</text><text class="dg-tb dg-mid" x="78" y="278">slicing</text><text class="dg-ts dg-mid" x="78" y="291">fillet, kitchen</text></g><g data-hl="b1"><path class="dg-white" d="M184.7 172 L259.3 172 L222 262 Z" opacity=".9"/><line class="dg-guide" x1="222" y1="168" x2="222" y2="262"/><path class="dg-key-s" d="M222 222 A 40 40 0 0 1 237.3 225.0" stroke-width="1.6"/><text class="dg-tb dg-tb-sm" x="265.27922061357856" y="194">20–25°</text><text class="dg-tb dg-mid" x="222" y="278">utility</text><text class="dg-ts dg-mid" x="222" y="291">20–25° a side</text></g><g data-hl="b2"><path class="dg-white" d="M314.0 172 L418.0 172 L366 262 Z" opacity=".9"/><line class="dg-guide" x1="366" y1="168" x2="366" y2="262"/><path class="dg-key-s" d="M366 222 A 40 40 0 0 1 386.0 227.4" stroke-width="1.6"/><text class="dg-tb dg-tb-sm" x="423.9615242270663" y="194">30°</text><text class="dg-tb dg-mid" x="366" y="278">chopping</text><text class="dg-ts dg-mid" x="366" y="291">heavy chopper</text></g><text class="dg-ts" x="8" y="186">spine</text><text class="dg-ts" x="8" y="258">edge</text></svg>
+      <figcaption>Normalize three times after forging and before grinding. Leave the edge about 0.5&nbsp;mm thick until after the quench, or it may warp. Bevel angles are per side: keep the same angle every time you sharpen (a wooden guide block cut to the angle helps).</figcaption>
+    </figure>
+      
     </div>
 
     <h3>Full Knife-Making Process</h3>
@@ -1014,65 +878,16 @@ HOW IT WORKS:
   5. Nail drops through pritchel hole when cooled
     </pre>
 
-    <figure class="svg-diagram" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
-      <svg class="dg-legacy" viewBox="0 0 580 200" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="nail-seq-title">
-        <title id="nail-seq-title">Nail Making Sequence — 5 Steps</title>
-        <desc>Five-step diagram showing the nail making process: starting rod, forging the point, marking cut length, hot cutting with stub above header, and striking the head.</desc>
-        <defs><marker id="na-arr" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#8a9e86"/></marker></defs>
-        <text x="290" y="16" text-anchor="middle" font-size="12" fill="#c9a94e" font-family="sans-serif" font-weight="700">NAIL MAKING SEQUENCE</text>
-        <!-- Step labels -->
-        <text x="52" y="36" text-anchor="middle" font-size="10" fill="#728c6b" font-family="sans-serif" font-weight="700">① START</text>
-        <text x="160" y="36" text-anchor="middle" font-size="10" fill="#728c6b" font-family="sans-serif" font-weight="700">② POINT</text>
-        <text x="268" y="36" text-anchor="middle" font-size="10" fill="#728c6b" font-family="sans-serif" font-weight="700">③ MARK</text>
-        <text x="376" y="36" text-anchor="middle" font-size="10" fill="#728c6b" font-family="sans-serif" font-weight="700">④ CUT</text>
-        <text x="484" y="36" text-anchor="middle" font-size="10" fill="#728c6b" font-family="sans-serif" font-weight="700">⑤ HEAD</text>
-        <!-- Arrows between steps -->
-        <line x1="86" y1="110" x2="114" y2="110" stroke="#3a4838" stroke-width="1.5" marker-end="url(#na-arr)"/>
-        <line x1="194" y1="110" x2="222" y2="110" stroke="#3a4838" stroke-width="1.5" marker-end="url(#na-arr)"/>
-        <line x1="302" y1="110" x2="330" y2="110" stroke="#3a4838" stroke-width="1.5" marker-end="url(#na-arr)"/>
-        <line x1="410" y1="110" x2="438" y2="110" stroke="#3a4838" stroke-width="1.5" marker-end="url(#na-arr)"/>
-        <!-- STEP 1: Round rod -->
-        <rect x="10" y="90" width="76" height="16" rx="3" fill="#8a9e86" stroke="#4d6048" stroke-width="1.5"/>
-        <text x="48" y="124" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">Round rod</text>
-        <text x="48" y="136" text-anchor="middle" font-size="9" fill="#728c6b" font-family="sans-serif">4–6 mm dia.</text>
-        <!-- STEP 2: Rod with point tapered on end -->
-        <polygon points="118,90 186,90 186,106 118,106 118,98" fill="#8a9e86" stroke="#4d6048" stroke-width="1.5"/>
-        <polygon points="186,90 198,98 186,106" fill="#c9a94e" stroke="#7a6430" stroke-width="1"/>
-        <text x="158" y="124" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">4-sided taper</text>
-        <text x="158" y="136" text-anchor="middle" font-size="9" fill="#728c6b" font-family="sans-serif">orange heat</text>
-        <!-- STEP 3: Rod with mark line -->
-        <polygon points="226,90 294,90 294,106 226,106 226,98" fill="#8a9e86" stroke="#4d6048" stroke-width="1.5"/>
-        <polygon points="294,90 306,98 294,106" fill="#c9a94e" stroke="#7a6430" stroke-width="1"/>
-        <line x1="258" y1="84" x2="258" y2="112" stroke="#c84848" stroke-width="2" stroke-dasharray="3,2"/>
-        <text x="258" y="80" text-anchor="middle" font-size="9" fill="#cd6464" font-family="sans-serif">← cut mark</text>
-        <text x="266" y="124" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">Soapstone mark</text>
-        <text x="266" y="136" text-anchor="middle" font-size="9" fill="#728c6b" font-family="sans-serif">= shank length</text>
-        <!-- STEP 4: In header, stub above -->
-        <!-- Header tool -->
-        <rect x="334" y="104" width="68" height="20" rx="2" fill="#243028" stroke="#c9a94e" stroke-width="1.5"/>
-        <text x="368" y="118" text-anchor="middle" font-size="8" fill="#c9a94e" font-family="sans-serif">HEADER TOOL</text>
-        <!-- Shank below header -->
-        <rect x="356" y="124" width="24" height="50" rx="2" fill="#8a9e86" stroke="#4d6048" stroke-width="1"/>
-        <polygon points="356,174 380,174 368,186" fill="#c9a94e" stroke="#7a6430" stroke-width="1"/>
-        <!-- Stub above header -->
-        <rect x="360" y="88" width="16" height="16" rx="1" fill="#c87a40" stroke="#6e4020" stroke-width="1.5"/>
-        <text x="368" y="80" text-anchor="middle" font-size="9" fill="#c87a40" font-family="sans-serif">6 mm stub</text>
-        <text x="376" y="138" font-size="9" fill="#8a9e86" font-family="sans-serif">← point</text>
-        <text x="376" y="150" font-size="9" fill="#728c6b" font-family="sans-serif">shank below</text>
-        <text x="376" y="162" font-size="9" fill="#728c6b" font-family="sans-serif">header</text>
-        <!-- STEP 5: Completed nail with head -->
-        <!-- Nail with flat head -->
-        <ellipse cx="484" cy="84" rx="26" ry="8" fill="#c9a94e" stroke="#7a6430" stroke-width="2"/>
-        <rect x="476" y="84" width="16" height="70" rx="2" fill="#8a9e86" stroke="#4d6048" stroke-width="1.5"/>
-        <polygon points="476,154 492,154 484,168" fill="#c9a94e" stroke="#7a6430" stroke-width="1"/>
-        <text x="522" y="90" font-size="10" fill="#c9a94e" font-family="sans-serif" font-weight="700">Flat head</text>
-        <text x="522" y="108" font-size="9" fill="#8a9e86" font-family="sans-serif">3 blows</text>
-        <text x="522" y="120" font-size="9" fill="#728c6b" font-family="sans-serif">spreads stub</text>
-        <text x="484" y="185" text-anchor="middle" font-size="9" fill="#4b9e6a" font-family="sans-serif">FINISHED NAIL</text>
-        <!-- Bottom caption -->
-        <text x="290" y="198" text-anchor="middle" font-size="9" fill="#728c6b" font-family="sans-serif">Expert rate: 60–100 nails/hr · Make nail header tool first · 3–4 inch framing nails are highest priority</text>
-      </svg>
-      <figcaption>Nail making sequence — the nail header tool (Step 4) is the key to production speed; without it, forming a consistent head requires repositioning and multiple heats. Make the header tool before producing nails in bulk.</figcaption>
+    <figure class="dg dg-multi" id="fig-nail">
+      <div class="dg-cols" style="--cols:3;--cols-sm:2" role="group" aria-label="Making a nail in six steps: point the rod, mark the length in the header, nick it, set it in the header and twist off, strike the head, tap it out">
+        <svg viewBox="0 0 148 136" role="img" aria-label="1"><defs><marker id="ah-nl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"></path></marker></defs><rect class="dg-panel" x="2" y="2" width="144" height="132" rx="9"></rect><circle class="dg-keyf" cx="16" cy="18" r="9"></circle><text class="dg-num dg-mid" x="16" y="22">1</text><text class="dg-tb dg-tb-sm" x="30" y="22">POINT</text><g transform="translate(16 12) scale(.8)"><path class="dg-line" d="M68 48 L76 48 L76 96 L68 96 Z"></path><path class="dg-key" d="M68 96 L76 96 L72 110 Z"></path><rect class="dg-red" x="66" y="82" width="12" height="28" opacity=".5"></rect><path class="dg-key-s" d="M96 92 a 10 10 0 1 1 -4 -10" stroke-width="1.6"></path><path class="dg-ah" d="M92 77 l6 2 l-5 5z"></path></g><text class="dg-ts" x="10" y="114">four-sided taper; turn</text><text class="dg-ts" x="10" y="126">90° between blows</text></svg>
+        <svg viewBox="150 0 148 136" role="img" aria-label="2"><rect class="dg-panel" x="152" y="2" width="144" height="132" rx="9"></rect><circle class="dg-keyf" cx="166" cy="18" r="9"></circle><text class="dg-num dg-mid" x="166" y="22">2</text><text class="dg-tb dg-tb-sm" x="180" y="22">MARK</text><g transform="translate(166 12) scale(.8)"><rect class="dg-white" x="52" y="70" width="70" height="10" rx="3" opacity=".55"></rect><rect class="dg-panel" x="68" y="70" width="8" height="10"></rect><path class="dg-line" d="M68 36 L76 36 L76 96 L68 96 Z"></path><path class="dg-key" d="M68 96 L76 96 L72 110 Z"></path><path class="dg-key-s" d="M60 58 L84 58" stroke-dasharray="3 2"></path><text class="dg-ts" x="92" y="62">mark</text></g><text class="dg-ts" x="160" y="114">point in the header;</text><text class="dg-ts" x="160" y="126">mark the length</text></svg>
+        <svg viewBox="300 0 148 136" role="img" aria-label="3"><rect class="dg-panel" x="302" y="2" width="144" height="132" rx="9"></rect><circle class="dg-keyf" cx="316" cy="18" r="9"></circle><text class="dg-num dg-mid" x="316" y="22">3</text><text class="dg-tb dg-tb-sm" x="330" y="22">NICK</text><g transform="translate(316 12) scale(.8)"><path class="dg-line" d="M68 36 L76 36 L76 96 L68 96 Z"></path><path class="dg-key" d="M68 96 L76 96 L72 110 Z"></path><path class="dg-red" d="M76 58 L88 52 L88 64 Z"></path><path class="dg-line" d="M88 50 L112 44 L112 70 L88 66 Z"></path><text class="dg-ts" x="116" y="56">hot</text><text class="dg-ts" x="116" y="68">chisel</text></g><text class="dg-ts" x="310" y="114">hot-cut almost through</text><text class="dg-ts" x="310" y="126">leave it just attached</text></svg>
+        <svg viewBox="0 138 148 136" role="img" aria-label="4"><rect class="dg-panel" x="2" y="140" width="144" height="132" rx="9"></rect><circle class="dg-keyf" cx="16" cy="156" r="9"></circle><text class="dg-num dg-mid" x="16" y="160">4</text><text class="dg-tb dg-tb-sm" x="30" y="160">IN THE HEADER</text><g transform="translate(16 150) scale(.8)"><rect class="dg-white" x="52" y="76" width="70" height="10" rx="3" opacity=".55"></rect><rect class="dg-panel" x="68" y="76" width="8" height="10"></rect><path class="dg-line" d="M68 80 L76 80 L76 98 L68 98 Z"></path><path class="dg-key" d="M68 98 L76 98 L72 112 Z"></path><rect class="dg-line" x="68" y="64" width="8" height="12"></rect><path class="dg-guide" d="M68 36 L76 36 L76 60 L68 60 Z"></path><text class="dg-ts" x="84" y="74">stub</text></g><text class="dg-ts" x="10" y="252">header over the point;</text><text class="dg-ts" x="10" y="264">twist the rod off</text></svg>
+        <svg viewBox="150 138 148 136" role="img" aria-label="5"><rect class="dg-panel" x="152" y="140" width="144" height="132" rx="9"></rect><circle class="dg-keyf" cx="166" cy="156" r="9"></circle><text class="dg-num dg-mid" x="166" y="160">5</text><text class="dg-tb dg-tb-sm" x="180" y="160">HEAD</text><g transform="translate(166 150) scale(.8)"><rect class="dg-white" x="52" y="80" width="70" height="10" rx="3" opacity=".55"></rect><rect class="dg-panel" x="68" y="80" width="8" height="10"></rect><path class="dg-line" d="M68 84 L76 84 L76 98 L68 98 Z"></path><path class="dg-key" d="M68 98 L76 98 L72 112 Z"></path><path class="dg-key" d="M58 80 Q72 66 86 80 Z"></path><rect class="dg-line" x="56" y="40" width="32" height="14" rx="2"></rect><path class="dg-line" d="M88 47 L118 47"></path><path class="dg-arrow" d="M72 56 L72 66" marker-end="url(#ah-nl)"></path></g><text class="dg-ts" x="160" y="252">3–4 blows spread</text><text class="dg-ts" x="160" y="264">the stub into a head</text></svg>
+        <svg viewBox="300 138 148 136" role="img" aria-label="6"><rect class="dg-panel" x="302" y="140" width="144" height="132" rx="9"></rect><circle class="dg-keyf" cx="316" cy="156" r="9"></circle><text class="dg-num dg-mid" x="316" y="160">6</text><text class="dg-tb dg-tb-sm" x="330" y="160">RELEASE</text><g transform="translate(316 150) scale(.8)"><path class="dg-key" d="M58 52 Q72 40 86 52 Z"></path><path class="dg-line" d="M68 52 L76 52 L76 102 L68 102 Z"></path><path class="dg-key" d="M68 102 L76 102 L72 116 Z"></path><path class="dg-arrow" d="M104 70 L104 100" marker-end="url(#ah-nl)"></path></g><text class="dg-ts" x="310" y="252">over the pritchel hole:</text><text class="dg-ts" x="310" y="264">tap, the nail drops out</text></svg>
+      </div>
+      <figcaption>Mild steel rod, 4–6&nbsp;mm. <strong>Make the nail header first</strong>: without it every head takes several heats. With one, a practised smith makes 60–100 nails an hour; 3–4&nbsp;in framing nails are the most needed.</figcaption>
     </figure>
 
     <h3>Nail-Making Process</h3>

@@ -154,11 +154,14 @@ to west, so the text now says so.
 ⚑ **needs expert review:**
 - `fig-newborn`: a midwife or neonatal nurse should confirm the drawing.
 - `fig-presentation`: a vet should confirm the drawing.
-- Chemistry › The Cuts says methanol "concentrates first" and is "produced early in every
-  distillation run". Methanol comes from fermentation, not distillation, and in a pot still it
-  comes through across the whole run (with more in the tails), not only in the foreshots.
-  Discarding foreshots is still sensible, but the text overstates what it achieves. **Not
-  diagrammed until a chemist reviews the text.**
+- Chemistry › The Cuts said methanol "concentrates first" and is "produced early in every
+  distillation run". **Text fixed (November 2026):** it now says methanol is made in the
+  fermenter (mostly from fruit pectin), comes through across a pot-still run with more in the
+  tails, and that discarding foreshots does not remove it. The rules are now: drink only the
+  hearts of a grain or sugar wash; treat fruit spirit as fuel or antiseptic; always discard the
+  foreshots; never drink tails. The safety list, the foreshots/tails rows of the cuts table, the
+  hazard card and the Salvage still note were brought into line, and the "first 50 mL" in the
+  summaries now matches the table's 50–100 mL. ⚑ A chemist should still check it. Not diagrammed.
 
 ---
 
@@ -293,6 +296,31 @@ rotation, so rotated parts land in the right panel.
 
 ⚑ **needs expert review:** `fig-falloutshelter` (protection factors), `fig-decon` (PPE removal
 order), `fig-fever` (thresholds).
+
+---
+
+## Redrawn diagrams, third batch (`tools/redraw3.py`)
+
+| Section | New `id` | What changed besides the look |
+|---|---|---|
+| Building | `fig-aframe-house` | End view with ridge beam, purlins and collar tie. **Caption fixed:** it said trusses at 1.2 m centres while the drawing said rafters every 600 mm; both now say 600 mm. The floor beam is shown tying the rafter feet, which is what stops them spreading (a tie high up does much less) |
+| Building | `fig-earthbag` | Half cut away: bags, barbed wire on every course, courses stepping in, rubble trench, plaster, door frame, centre-pin string |
+| Chemistry | `fig-retort` | Barrel inside the fire box, with the gas pipe led back into the fire (the "closed loop" the text describes); completion signs and the never-open-hot warning |
+| Metalworking | `fig-drumforge` | **Tuyere size fixed: 2–3 cm → 4–6 cm**, matching the build steps beside it. Grate, ash dump 2 cm below it, hip height ≈ 90 cm |
+| Metalworking | `fig-knife` | Five stages with what happens at each, and three edge bevels (15°, 20–25°, 30° per side) drawn at their real angles |
+| Metalworking | `fig-nail` | Six steps in panels (3 across, 2 on a phone), following the text: point, mark, nick, header, head, release |
+| Textiles | `fig-spindle` | Spindle parts plus a Z/S twist panel showing which way the fibres slant |
+| Textiles | `fig-loom` | Warp, weft, shed stick, shuttle and woven plain weave; terms beside it. Beating shown downward onto the woven cloth |
+| Textiles | `fig-moccasin` | Pattern plus the sewn-up shoe |
+| Food & Water | `fig-rainwater` | First-flush pipe with its floating ball and slow-drip cap. The flush volume is now given with the usual rule of thumb (about 10 gal per 1,000 sq ft of roof) rather than a flat 10 gal |
+| Vehicles | `fig-dugout` | Plan and cross-section. **Two errors fixed:** the text called the crossbeams "amas" (the ama is the float; the crossbeams are iako), and said 18–24 in crossbeams hold the float 3–4 ft out, which cannot work. It now says the crossbeams must be long enough to hold the float 3–4 ft out |
+| Vehicles | `fig-skiff` | Plan and side view; frames every 18 in, thwarts at thirds. **Text fixed:** "4×12 ft" plywood sheets → standard 4×8 ft sheets joined end to end |
+| Agriculture | `fig-tbh` | End and side views drawn to the page's own dimensions. **The "120°" wall angle was dropped:** it did not match the drawing's own numbers (top 38–40 cm, bottom 24–28 cm, depth 25–30 cm give walls about 15° off vertical) |
+
+⚑ **needs expert review:** `fig-earthbag` — earthbag domes are usually built pointed (taller than
+half the width); a 4 m dome only 2 m high, as the page says, is a hemisphere, which is harder to
+corbel. `fig-tbh` — 38 mm bars as the page says; many beekeepers use about 32–35 mm for brood comb.
+`fig-rainwater` — first-flush volume.
 
 ---
 
