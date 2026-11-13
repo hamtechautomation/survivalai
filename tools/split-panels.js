@@ -39,8 +39,11 @@ if (!page || !targets.length) { console.error('usage: split-panels.js <page.html
       const groups = boxes.map(() => []);
       for (const k of kids) {
         if (k.tagName === 'defs') continue;
-        let bb; try { bb = k.getBBox(); } catch (e) { continue; }
-        const cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2;
+        // centre of the element as drawn (its own transform included), in the svg's user units
+        const r = k.getBoundingClientRect(); if (!r.width && !r.height) { try { k.getBBox(); } catch (e) { continue; } }
+        const inv = svg.getScreenCTM().inverse(), pt = svg.createSVGPoint();
+        pt.x = r.left + r.width / 2; pt.y = r.top + r.height / 2;
+        const c = pt.matrixTransform(inv), cx = c.x, cy = c.y;
         let best = 0, bd = Infinity;
         boxes.forEach((r, i) => {          // inside a panel = distance 0; otherwise the nearest panel
           const dx = Math.max(r.x - cx, 0, cx - (r.x + r.width)), dy = Math.max(r.y - cy, 0, cy - (r.y + r.height));

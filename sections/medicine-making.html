@@ -228,53 +228,9 @@
       <span class="timeline-tag tag-72hr">72hr</span>
     </div>
 
-    <figure class="svg-diagram">
-      <svg class="dg-legacy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 190">
-        <rect width="640" height="190" fill="#0c0f0e"/>
-        <text x="320" y="20" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="11" font-weight="bold">FEVER TEMPERATURE GUIDE &amp; ACTION THRESHOLDS</text>
-        <!-- Temperature scale bar -->
-        <rect x="40" y="50" width="560" height="40" rx="4" fill="#161d1a" stroke="#2a3430" stroke-width="1"/>
-        <!-- Zone fills -->
-        <rect x="40" y="50" width="112" height="40" rx="4" fill="#1c2620"/><!-- NORMAL 36-38 -->
-        <rect x="152" y="50" width="140" height="40" fill="#2d2015"/><!-- MILD 38-39.5 -->
-        <rect x="292" y="50" width="112" height="40" fill="#2d1505"/><!-- HIGH 39.5-40.5 -->
-        <rect x="404" y="50" width="112" height="40" fill="#3d0d0a"/><!-- DANGER 40.5-41.5 -->
-        <rect x="516" y="50" width="84" height="40" rx="4" fill="#500a08"/><!-- CRITICAL 41.5+ -->
-        <!-- Zone labels in bar -->
-        <text x="96" y="74" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="9" font-weight="bold">NORMAL</text>
-        <text x="222" y="74" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="9" font-weight="bold">MILD FEVER</text>
-        <text x="348" y="74" text-anchor="middle" fill="#e87040" font-family="monospace" font-size="9" font-weight="bold">HIGH FEVER</text>
-        <text x="460" y="74" text-anchor="middle" fill="#d46a5f" font-family="monospace" font-size="9" font-weight="bold">DANGER</text>
-        <text x="558" y="74" text-anchor="middle" fill="#fd5353" font-family="monospace" font-size="8" font-weight="bold">CRITICAL</text>
-        <!-- Temperature markers (°C) -->
-        <g fill="#9a9488" font-family="monospace" font-size="9" text-anchor="middle">
-          <text x="40" y="104">36°C</text>
-          <text x="152" y="104">38°C</text>
-          <text x="292" y="104">39.5°</text>
-          <text x="404" y="104">40.5°</text>
-          <text x="516" y="104">41.5°</text>
-          <text x="610" y="104">42°C+</text>
-        </g>
-        <!-- Actions below -->
-        <text x="96" y="122" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">Monitor only</text>
-        <text x="222" y="122" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="8">Fluids · rest</text>
-        <text x="222" y="132" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="8">Yarrow tea</text>
-        <text x="348" y="122" text-anchor="middle" fill="#e87040" font-family="monospace" font-size="8">Cool cloths</text>
-        <text x="348" y="132" text-anchor="middle" fill="#e87040" font-family="monospace" font-size="8">Willow bark</text>
-        <text x="460" y="122" text-anchor="middle" fill="#d1584b" font-family="monospace" font-size="8">Physical cooling</text>
-        <text x="460" y="132" text-anchor="middle" fill="#d1584b" font-family="monospace" font-size="8">NOW — armpits</text>
-        <text x="558" y="122" text-anchor="middle" fill="#ff4444" font-family="monospace" font-size="8">LIFE-THREATENING</text>
-        <text x="558" y="132" text-anchor="middle" fill="#ff4444" font-family="monospace" font-size="8">Cold water bath</text>
-        <!-- F equivalents -->
-        <text x="40" y="152" fill="#837d75" font-family="monospace" font-size="8">96.8°F</text>
-        <text x="152" y="152" fill="#837d75" font-family="monospace" font-size="8">100.4°F</text>
-        <text x="292" y="152" fill="#837d75" font-family="monospace" font-size="8">103°F</text>
-        <text x="404" y="152" fill="#837d75" font-family="monospace" font-size="8">105°F</text>
-        <text x="516" y="152" fill="#837d75" font-family="monospace" font-size="8">107°F</text>
-        <!-- Key note -->
-        <text x="320" y="175" text-anchor="middle" fill="#837d75" font-family="monospace" font-size="8">Up to 39°C: beneficial immune response. Above 40.5°C: act immediately. Above 41.5°C: life-threatening.</text>
-      </svg>
-      <figcaption>Fever temperature guide and action thresholds. Physical cooling (cool damp cloths to armpits, groin, and forehead) is the primary intervention above 40.5°C — do not use cold water which causes shivering and raises temperature.</figcaption>
+    <figure class="dg" id="fig-fever">
+      <svg viewBox="0 0 444 228" role="img" aria-label="Fever temperature scale with what to do at each level"><rect class="dg-green" x="26" y="30" width="128" height="26"/><text class="dg-tb dg-mid" x="90.0" y="22">normal</text><rect class="dg-key" x="154" y="30" width="96" height="26"/><text class="dg-tb dg-mid" x="202.0" y="22">fever</text><rect class="dg-earth" x="250" y="30" width="64" height="26"/><text class="dg-tb dg-mid" x="282.0" y="22">high</text><rect class="dg-red" x="314" y="30" width="64" height="26"/><text class="dg-tb dg-mid" x="346.0" y="22">danger</text><rect class="dg-red" x="378" y="30" width="32" height="26" style="fill-opacity:.9"/><line class="dg-line" x1="26" y1="56" x2="26" y2="64"/><text class="dg-tb dg-mid" x="26" y="78">36 °C</text><text class="dg-ts dg-mid" x="26" y="91">96.8 °F</text><line class="dg-line" x1="154" y1="56" x2="154" y2="64"/><text class="dg-tb dg-mid" x="154" y="78">38 °C</text><text class="dg-ts dg-mid" x="154" y="91">100.4 °F</text><line class="dg-line" x1="250" y1="56" x2="250" y2="64"/><text class="dg-tb dg-mid" x="250.0" y="78">39.5 °C</text><text class="dg-ts dg-mid" x="250.0" y="91">103 °F</text><line class="dg-line" x1="314" y1="56" x2="314" y2="64"/><text class="dg-tb dg-mid" x="314.0" y="78">40.5 °C</text><text class="dg-ts dg-mid" x="314.0" y="91">105 °F</text><line class="dg-line" x1="378" y1="56" x2="378" y2="64"/><text class="dg-tb dg-mid" x="378.0" y="78">41.5 °C</text><text class="dg-ts dg-mid" x="378.0" y="91">107 °F</text><rect class="dg-key" x="8" y="105" width="14" height="14" rx="3"/><text class="dg-tb" x="28" y="116">38–39.5 °C</text><text class="dg-ts" x="124" y="116">Fluids and rest.</text><text class="dg-ts" x="124" y="129">Up to about 39 °C a fever helps fight infection.</text><rect class="dg-earth" x="8" y="137" width="14" height="14" rx="3"/><text class="dg-tb" x="28" y="148">39.5–40.5 °C</text><text class="dg-ts" x="124" y="148">Cool (not cold) damp cloths, light clothing,</text><text class="dg-ts" x="124" y="161">small sips. Yarrow or elderflower tea.</text><rect class="dg-red" x="8" y="169" width="14" height="14" rx="3"/><text class="dg-tb" x="28" y="180">over 40.5 °C</text><text class="dg-ts" x="124" y="180">Act now: cool cloths to armpits, groin</text><text class="dg-ts" x="124" y="193">and forehead. Get medical help.</text><rect class="dg-red" x="8" y="201" width="14" height="14" rx="3"/><text class="dg-tb" x="28" y="212">over 41.5 °C</text><text class="dg-ts" x="124" y="212">Life-threatening. This high is usually heat</text><text class="dg-ts" x="124" y="225">stroke, not infection: cool fast (Medical §4).</text></svg>
+      <figcaption><strong>Cool, never cold:</strong> ice or cold water makes a feverish person shiver, and shivering makes heat. Willow bark and meadowsweet work like aspirin, so the same rule applies: <strong>not for anyone under 16</strong>.</figcaption>
     </figure>
 
     <h3>Physical Cooling Protocol (No Drugs Needed)</h3>

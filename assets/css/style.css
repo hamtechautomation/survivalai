@@ -3152,3 +3152,20 @@ body.mode-day .dg-lb-pan .dg-keep svg { filter: invert(1) hue-rotate(180deg); }
 .dg-stitch { fill: none; stroke: var(--amber-light); stroke-width: 2.4; stroke-dasharray: 3 3; stroke-linecap: round; }
 .dg-stitch2 { stroke: #ff8f6b; }
 @media print { .dg-leather { fill: #ddd !important; stroke: #000 !important; } .dg-stitch { stroke: #000 !important; } }
+
+/* Step diagrams with real movement: when a step appears, its .mv parts move into place from
+   --from (around transform-origin, in diagram units), .mv-draw lines draw themselves, and
+   .mv-drip drops keep falling while their step is showing. (scratch generator: player.py) */
+.mv { transform-box: view-box; }
+.dg-live [data-s]:not(.dg-off) .mv { animation: mv-in var(--mv-t, .9s) cubic-bezier(.45,.05,.3,1) var(--mv-d, .1s) both; }
+@keyframes mv-in { from { transform: var(--from); opacity: var(--from-o, 1); } }
+.mv-draw { stroke-dasharray: 1 1.01; }
+.dg-live [data-s]:not(.dg-off) .mv-draw { animation: mv-draw var(--mv-t, .8s) ease-out var(--mv-d, .3s) both; }
+@keyframes mv-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.dg-live [data-s]:not(.dg-off) .mv-late { animation: kn-in .4s ease var(--mv-d, 1s) both; }
+.dg-live [data-s]:not(.dg-off) .mv-drip { transform-box: fill-box; animation: mv-drip 1.6s ease-in var(--mv-d, 0s) infinite; }
+@keyframes mv-drip { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(26px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .dg-live [data-s] .mv, .dg-live [data-s] .mv-draw, .dg-live [data-s] .mv-late, .dg-live [data-s] .mv-drip { animation: none !important; } }
+@media print { .mv, .mv-draw, .mv-late, .mv-drip { animation: none !important; transform: none !important; opacity: 1 !important; stroke-dashoffset: 0 !important; } }
+.dg-hdrbg { fill: var(--bg-3); stroke: var(--border-hi); stroke-width: 1; }
+@media print { .dg-hdrbg { fill: #fff !important; stroke: #000 !important; } }

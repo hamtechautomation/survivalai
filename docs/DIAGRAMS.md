@@ -265,6 +265,37 @@ section text), `fig-biodiesel` (process chemistry), and `fig-pitlatrine` (siting
 
 ---
 
+## Movement in the first-aid step diagrams (November 2026)
+
+The tourniquet and recovery-position players now move instead of cross-fading. When a step
+appears, its parts move into place from where they were: the band wraps on, the stick drops
+onto the knot and is spun until tight, blood keeps dripping until it is, the tie draws itself
+and the TK tag appears; the near arm swings out to a right angle, the far arm folds to the
+cheek, the far knee rises and the body rolls towards you. Done with three CSS classes
+(`.mv`, `.mv-draw`, `.mv-drip`); off for reduced motion and in print.
+
+## Redrawn diagrams, second batch (`tools/redraw2.py`)
+
+| Section | New `id` | What changed besides the look |
+|---|---|---|
+| Power Generation | `fig-blade` | Aerofoil and twist as two panels; the twisted sections are drawn at their real angles to the plane of rotation |
+| Water Systems | `fig-swale` | Plan and cross-section as two panels; overflow from swale to swale shown |
+| Governance | `fig-disputes` + `fig-disputes-print` | **Two flowcharts that disagreed merged into one.** One said mediation by 3 days and council by 7; the other 48 and 72 hours. The section text says: talk it out within 24 hours, then mediation, then a council hearing within 3 days, then one appeal. Both copies now say exactly that (the second is in the printable templates) |
+| Medicine Making | `fig-fever` | **Contradiction removed.** The chart recommended a "cold water bath" while its own caption and the protocol below say never use cold water. Willow bark now carries the page's own "not under 16" rule. Notes that above 41.5 °C is usually heat stroke, which is treated differently (Medical §4) |
+| NBC | `fig-falloutshelter` | **Numbers aligned with the page's table**: basement PF 10–100 (was 40–100). Removed "inner shelter PF 200–500" and "exit only below 2 R/hr", which nothing on the page supports |
+| NBC | `fig-decon` | Six zones as panels (3 × 2, 2 across on a phone); PPE removal order unchanged |
+| Water Systems | `fig-well` | Sealed top 3 m and open-jointed lining below drawn against the soil layers and water table |
+| Power Generation | `fig-biogas` | Inlet, dome, gas pipe and displacement chamber; how the pressure is held explained |
+| Building | `fig-cob` | Roof now sits on the wall; overhang, plinth and rubble trench dimensioned |
+
+`tools/split-panels.js` fix: it now uses each part's drawn position, including its own
+rotation, so rotated parts land in the right panel.
+
+⚑ **needs expert review:** `fig-falloutshelter` (protection factors), `fig-decon` (PPE removal
+order), `fig-fever` (thresholds).
+
+---
+
 ## Corrections made while checking
 
 | Where | Was | Now | Why |

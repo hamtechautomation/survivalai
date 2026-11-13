@@ -206,43 +206,12 @@
     <h3>Blade Design</h3>
     <p>Use 3 blades for stability (2-blade wobbles, 4+ adds weight without proportional gain). Blade profile: an aerofoil like an aircraft wing — the curved side is the low-pressure (suction) side and the flatter side the higher-pressure side; the pressure difference creates lift that turns the rotor.</p>
 
-    <figure class="svg-diagram">
-      <svg class="dg-legacy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280">
-        <rect width="600" height="280" fill="#0c0f0e"/>
-        <text x="300" y="22" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="12" font-weight="bold">WIND TURBINE BLADE — PROFILE &amp; TWIST</text>
-        <!-- Aerofoil cross-section -->
-        <text x="300" y="50" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">AEROFOIL CROSS-SECTION (view from tip)</text>
-        <path d="M 80 120 C 100 85 260 85 380 105 C 420 110 440 118 440 125 C 440 132 390 140 350 142 C 200 148 100 142 80 120 Z" fill="#1c2620" stroke="#c9a94e" stroke-width="2"/>
-        <text x="260" y="98" text-anchor="middle" fill="#6692bd" font-family="monospace" font-size="8">CURVED FACE (low pressure — suction side)</text>
-        <text x="260" y="148" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">FLATTER FACE (higher pressure)</text>
-        <text x="65" y="124" text-anchor="end" fill="#9a9488" font-family="monospace" font-size="8">LEADING EDGE</text>
-        <text x="460" y="124" text-anchor="start" fill="#9a9488" font-family="monospace" font-size="8">TRAILING EDGE</text>
-        <!-- Lift arrow -->
-        <line x1="380" y1="115" x2="380" y2="75" stroke="#27ae60" stroke-width="2" marker-end="url(#larr)"/>
-        <text x="395" y="85" fill="#27ae60" font-family="monospace" font-size="9">LIFT</text>
-
-        <!-- Twist diagram -->
-        <text x="300" y="180" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="9">BLADE TWIST ANGLE (view from side)</text>
-        <!-- Reference horizontal line -->
-        <line x1="60" y1="235" x2="540" y2="235" stroke="#2a3430" stroke-width="1" stroke-dasharray="4,3"/>
-        <text x="550" y="238" fill="#6d837a" font-family="monospace" font-size="8">Reference</text>
-        <!-- Root section (30°) -->
-        <rect x="80" y="215" width="40" height="14" rx="2" fill="#1c2620" stroke="#c9a94e" stroke-width="1.5" transform="rotate(-30, 100, 222)"/>
-        <text x="100" y="265" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="9">ROOT</text>
-        <text x="100" y="275" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="8">≈25° (steep)</text>
-        <!-- Mid section -->
-        <rect x="220" y="220" width="40" height="14" rx="2" fill="#1c2620" stroke="#8a7035" stroke-width="1.5" transform="rotate(-22, 240, 227)"/>
-        <text x="240" y="265" text-anchor="middle" fill="#977b3b" font-family="monospace" font-size="9">MID</text>
-        <text x="240" y="275" text-anchor="middle" fill="#977b3b" font-family="monospace" font-size="8">≈10°</text>
-        <!-- Tip section (15°) -->
-        <rect x="380" y="223" width="40" height="14" rx="2" fill="#1c2620" stroke="#27ae60" stroke-width="1.5" transform="rotate(-15, 400, 230)"/>
-        <text x="400" y="265" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="9">TIP</text>
-        <text x="400" y="275" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">≈3–5° (nearly flat)</text>
-        <!-- Arrow showing twist direction -->
-        <path d="M 130 230 Q 265 210 370 228" fill="none" stroke="#9a9488" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#sarr)"/>
-        <text x="250" y="205" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">twist decreases root → tip</text>
-      </svg>
-      <figcaption>Top: aerofoil cross-section — curved leading face creates lift. Bottom: blade twist from roughly 25° at the root to just a few degrees at the tip compensates for the different relative wind speeds experienced at different radii.</figcaption>
+    <figure class="dg dg-multi" id="fig-blade">
+      <div class="dg-cols" style="--cols:2;--cols-sm:1" role="group" aria-label="Wind turbine blade: aerofoil section with its low- and high-pressure faces, and the twist from root to tip">
+        <svg viewBox="0 0 220 204" role="img" aria-label="THE BLADE IN SECTION"><defs><marker id="ah-bl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"></path></marker></defs><rect class="dg-panel" x="2" y="2" width="216" height="200" rx="9"></rect><text class="dg-th dg-mid" x="110" y="22">THE BLADE IN SECTION</text><text class="dg-ts dg-mid" x="110" y="36">seen end-on, from the tip</text><path class="dg-blue-s" d="M8 96 L40 96" marker-end="url(#ah-bl)"></path><path class="dg-blue-s" d="M8 110 L40 110" marker-end="url(#ah-bl)"></path><path class="dg-blue-s" d="M8 124 L40 124" marker-end="url(#ah-bl)"></path><text class="dg-ts" x="10" y="146">wind</text><g data-hl="suction"><path class="dg-key" d="M46 112 C52 78 120 70 206 116 C150 120 80 124 46 112 Z"></path></g><path class="dg-red-s" d="M46 112 C52 78 120 70 206 116" data-hl="suction"></path><path class="dg-blue-s" d="M46 112 C80 124 150 120 206 116" data-hl="pressure"></path><path class="dg-key-s" d="M112 92 L112 50" marker-end="url(#ah-bl)"></path><text class="dg-tb" x="122" y="58">LIFT</text><text class="dg-tb" x="10" y="68" data-hl="suction">curved face:</text><text class="dg-ts" x="10" y="81" data-hl="suction">low pressure</text><text class="dg-tb" x="10" y="172" data-hl="pressure">flatter face: higher pressure</text><line class="dg-thin" x1="150" y1="168" x2="140" y2="122"></line><circle class="dg-keyf" cx="140" cy="122" r="2.2"></circle><text class="dg-ts dg-mid" x="46" y="192">leading edge</text><line class="dg-thin" x1="46" y1="184" x2="46" y2="116"></line><circle class="dg-keyf" cx="46" cy="116" r="2.2"></circle><text class="dg-ts dg-end" x="204" y="192">trailing edge</text><line class="dg-thin" x1="196" y1="184" x2="204" y2="120"></line><circle class="dg-keyf" cx="204" cy="120" r="2.2"></circle></svg>
+        <svg viewBox="224 0 220 204" role="img" aria-label="THE TWIST"><rect class="dg-panel" x="226" y="2" width="216" height="200" rx="9"></rect><text class="dg-th dg-mid" x="334" y="22">THE TWIST</text><text class="dg-ts dg-mid" x="334" y="36">steep at the hub, nearly flat at the tip</text><line class="dg-guide" x1="250" y1="70" x2="420" y2="70"></line><path class="dg-key" d="M-37.0 0.0 C-32.6 -12.2 14.8 -13.0 37.0 0.0 C14.8 2.8 -32.6 4.5 -37.0 0.0 Z" transform="translate(330.0 70.0) rotate(-25.0)"></path><path class="dg-thin" d="M364 70 A 34 34 0 0 0 360.8 55.6"></path><text class="dg-tb" x="244" y="74">root</text><text class="dg-tb dg-end" x="434" y="74">≈25°</text><line class="dg-guide" x1="250" y1="116" x2="420" y2="116"></line><path class="dg-key" d="M-37.0 0.0 C-32.6 -12.2 14.8 -13.0 37.0 0.0 C14.8 2.8 -32.6 4.5 -37.0 0.0 Z" transform="translate(330.0 116.0) rotate(-10.0)"></path><path class="dg-thin" d="M364 116 A 34 34 0 0 0 363.5 110.1"></path><text class="dg-tb" x="244" y="120">middle</text><text class="dg-tb dg-end" x="434" y="120">≈10°</text><line class="dg-guide" x1="250" y1="162" x2="420" y2="162"></line><path class="dg-key" d="M-37.0 0.0 C-32.6 -12.2 14.8 -13.0 37.0 0.0 C14.8 2.8 -32.6 4.5 -37.0 0.0 Z" transform="translate(330.0 162.0) rotate(-4.0)"></path><path class="dg-thin" d="M364 162 A 34 34 0 0 0 363.9 159.6"></path><text class="dg-tb" x="244" y="166">tip</text><text class="dg-tb dg-end" x="434" y="166">≈3–5°</text><text class="dg-ts dg-mid" x="334" y="196">dashed line = the plane the blade spins in</text></svg>
+      </div>
+      <figcaption>The tip travels much faster than the root, so it meets the wind at a flatter angle. Twisting the blade from about 25° at the root to 3–5° at the tip keeps every part of it meeting the wind at the angle that gives most lift.</figcaption>
     </figure>
 
     <h3>Materials for Blades</h3>
@@ -326,67 +295,9 @@ MICRO-HYDRO PELTON SYSTEM LAYOUT:
 
     <p>Anaerobic bacteria in a sealed tank decompose organic waste into methane (CH₄) and CO₂. The methane is captured and used for cooking or heating. The residual slurry is an excellent fertiliser — better than the raw inputs. <strong>1 cow produces enough waste for a 1m³ digester, generating enough gas for 2–3 hours of cooking daily.</strong></p>
 
-    <figure class="svg-diagram">
-      <svg class="dg-legacy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 607 400">
-        <rect x="0" y="0" width="607" height="400" fill="#0c0f0e"/>
-        <text x="300" y="22" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="12" font-weight="bold">FIXED DOME BIOGAS DIGESTER — CROSS-SECTION</text>
-        <!-- Ground line -->
-        <line x1="40" y1="180" x2="560" y2="180" stroke="#27ae60" stroke-width="1.5"/>
-        <text x="570" y="184" fill="#27ae60" font-family="monospace" font-size="9">GROUND</text>
-        <!-- Dome below ground -->
-        <ellipse cx="300" cy="270" rx="200" ry="130" fill="#161d1a" stroke="#c9a94e" stroke-width="2"/>
-        <!-- Brick texture on dome wall -->
-        <g stroke="#8a7035" stroke-width="0.5" fill="none">
-          <rect x="108" y="240" width="18" height="10" rx="1"/>
-          <rect x="126" y="250" width="18" height="10" rx="1"/>
-          <rect x="100" y="260" width="18" height="10" rx="1"/>
-          <rect x="473" y="240" width="18" height="10" rx="1"/>
-          <rect x="457" y="250" width="18" height="10" rx="1"/>
-          <rect x="475" y="260" width="18" height="10" rx="1"/>
-        </g>
-        <!-- Gas accumulation zone (top) -->
-        <ellipse cx="300" cy="165" rx="130" ry="35" fill="#0d2030" stroke="#4a80b5" stroke-width="1" stroke-dasharray="4,3"/>
-        <text x="300" y="162" text-anchor="middle" fill="#5e8dbb" font-family="monospace" font-size="9">BIOGAS ACCUMULATION</text>
-        <text x="300" y="173" text-anchor="middle" fill="#5e8dbb" font-family="monospace" font-size="8">CH₄ + CO₂</text>
-        <!-- Bubbles -->
-        <g fill="none" stroke="#4a80b5" stroke-width="0.8">
-          <circle cx="250" cy="195" r="5"/>
-          <circle cx="280" cy="205" r="4"/>
-          <circle cx="320" cy="198" r="6"/>
-          <circle cx="350" cy="207" r="3"/>
-        </g>
-        <!-- Slurry level -->
-        <path d="M 105 215 Q 300 225 495 215" fill="#1a2b1a" stroke="#27ae60" stroke-width="1" stroke-dasharray="3,2"/>
-        <text x="500" y="214" fill="#27ae60" font-family="monospace" font-size="8">SLURRY</text>
-        <!-- Organic waste below -->
-        <text x="300" y="290" text-anchor="middle" fill="#8b867e" font-family="monospace" font-size="10">MIXED WASTE + WATER</text>
-        <text x="300" y="306" text-anchor="middle" fill="#8b867e" font-family="monospace" font-size="8">(manure, food scraps, crop residue)</text>
-        <!-- Inlet pipe (left side, angled) -->
-        <line x1="40" y1="155" x2="130" y2="235" stroke="#c9a94e" stroke-width="4"/>
-        <rect x="20" y="135" width="60" height="30" rx="3" fill="#0d3320" stroke="#27ae60" stroke-width="1.5"/>
-        <text x="50" y="153" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">INLET</text>
-        <text x="50" y="162" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="7">waste + water</text>
-        <!-- Gas outlet (top centre, vertical) -->
-        <line x1="300" y1="130" x2="300" y2="50" stroke="#4a80b5" stroke-width="3"/>
-        <rect x="265" y="35" width="70" height="25" rx="3" fill="#0d2030" stroke="#4a80b5" stroke-width="1.5"/>
-        <text x="300" y="52" text-anchor="middle" fill="#5e8dbb" font-family="monospace" font-size="9">GAS OUTLET</text>
-        <!-- Gas pipe going right -->
-        <line x1="300" y1="45" x2="560" y2="45" stroke="#4a80b5" stroke-width="2" stroke-dasharray="5,3"/>
-        <text x="480" y="35" fill="#4a80b5" font-family="monospace" font-size="8">to stove / storage</text>
-        <!-- Pressure relief arrow -->
-        <text x="420" y="60" fill="#9a9488" font-family="monospace" font-size="7">+ pressure relief valve</text>
-        <!-- Slurry outlet (right side) -->
-        <line x1="465" y1="240" x2="555" y2="195" stroke="#c9a94e" stroke-width="4"/>
-        <rect x="545" y="175" width="50" height="35" rx="3" fill="#0d3320" stroke="#27ae60" stroke-width="1.5"/>
-        <text x="570" y="191" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">SLURRY</text>
-        <text x="570" y="202" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="8">OUTLET</text>
-        <!-- Depth label -->
-        <line x1="55" y1="180" x2="55" y2="395" stroke="#9a9488" stroke-width="1" stroke-dasharray="2,2"/>
-        <line x1="50" y1="180" x2="60" y2="180" stroke="#9a9488" stroke-width="1"/>
-        <line x1="50" y1="395" x2="60" y2="395" stroke="#9a9488" stroke-width="1"/>
-        <text x="20" y="295" fill="#9a9488" font-family="monospace" font-size="8" transform="rotate(-90, 20, 295)">DEPTH 1–2m</text>
-      </svg>
-      <figcaption>Fixed dome biogas digester cross-section. The dome is built below ground from brick and mortar. Gas accumulates at the top, displacing slurry through the outlet. The system is fully sealed — no gas escapes except through the controlled outlet.</figcaption>
+    <figure class="dg" id="fig-biogas">
+      <svg viewBox="0 0 444 252" role="img" aria-label="Fixed-dome biogas digester: a buried brick dome where slurry makes gas, with an inlet, a gas outlet and a displacement chamber"><defs><marker id="ah-bg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><path class="dg-earth" d="M2 70 L442 70 L442 246 L2 246 Z"/><path class="dg-panel" d="M126 214 L126 140 Q126 92 220 92 Q314 92 314 140 L314 214 Z"/><path class="dg-debris" d="M128 150 L312 150 L312 212 L128 212 Z"/><text class="dg-tb dg-mid" x="226" y="174">SLURRY</text><text class="dg-ts dg-mid" x="226" y="188">manure, food scraps,</text><text class="dg-ts dg-mid" x="226" y="200">crop waste + water</text><path class="dg-key" d="M128 148 L128 140 Q128 94 220 94 Q312 94 312 140 L312 148 Z" style="fill-opacity:.35"/><text class="dg-tb dg-mid" x="220" y="124">GAS  CH₄ + CO₂</text><rect class="dg-panel" x="18" y="48" width="62" height="22" rx="3"/><text class="dg-ts dg-mid" x="49" y="40">mixing pit</text><path class="dg-line" d="M66 70 L136 200" stroke-width="7" style="opacity:.6"/><rect class="dg-panel" x="334" y="96" width="78" height="118"/><rect class="dg-debris" x="336" y="116" width="74" height="96"/><path class="dg-line" d="M314 200 L336 200" stroke-width="10" style="opacity:.6"/><path class="dg-arrow" d="M374 112 L374 70 L434 70" marker-end="url(#ah-bg)"/><text class="dg-tb dg-end" x="436" y="48">slurry out</text><text class="dg-ts dg-end" x="436" y="61">= fertiliser</text><path class="dg-key-s" d="M220 94 L220 22 L300 22" marker-end="url(#ah-bg)"/><rect class="dg-key" x="212" y="38" width="16" height="12" rx="2"/><text class="dg-tb" x="304" y="18">gas to stove</text><text class="dg-ts" x="304" y="31">pressure-relief valve</text><path class="dg-red-s" d="M296 168 L330 150" marker-end="url(#ah-bg)"/><text class="dg-ts dg-mid" x="373" y="228">gas pushes slurry</text><text class="dg-ts dg-mid" x="373" y="240">up into here</text><path class="dg-thin" d="M104 70 L104 214 M98 70 h12 M98 214 h12"/><text class="dg-tb dg-end" x="96" y="146">1–2 m</text><text class="dg-tb" x="10" y="128">inlet:</text><text class="dg-ts" x="10" y="141">waste +</text><text class="dg-ts" x="10" y="153">water</text></svg>
+      <figcaption>As gas collects under the dome it pushes slurry up into the outlet chamber; as you burn the gas, the slurry flows back and keeps the pressure steady. Sealed except for the gas pipe. Biogas burns: <strong>no flames near the dome</strong>, and never go into an empty digester.</figcaption>
     </figure>
 
     <div class="callout callout-danger">
