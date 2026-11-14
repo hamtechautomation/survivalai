@@ -299,6 +299,63 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Text accuracy sweep — safety-critical pages (November 2026)
+
+Read through Medical, Food & Water, Water Systems, Chemistry, NBC and Medicine Making. Fixed only
+what is clearly wrong against current standard guidance (Resuscitation Council UK / ERC, WHO, USDA,
+CDC/EPA, FDA, TCCC) or contradicted elsewhere in the guide. Emergency cards changed to match.
+
+| Page | Was | Now |
+|---|---|---|
+| Medical | Tourniquet only after 5–10 min of direct pressure | Straight away for life-threatening limb bleeding |
+| Medical | Irrigate 100–200 mL per cm of wound *depth* | 50–100 mL per cm of wound *length* |
+| Medical, cards | Cool burns 10–20 min, "most benefit within 30 min" | 20 min; still helps up to 3 hours later |
+| Medical | Newborn not breathing: adult-style 30 compressions : 2 breaths at 100/min | Breaths first (5, then ~40/min, head level); compressions only if still no sign of life, 3:1 — matches Pregnancy & Infant Care |
+| Medical | Cord tied at 10 and 15 cm | Wait 1–3 min / until it stops pulsing; tie at about 2 and 5 cm (WHO) |
+| Medical | Misoprostol 400–600 mcg under the tongue | 600 mcg by mouth to prevent; 800 mcg under the tongue to treat (WHO) |
+| Medical | Ibuprofen 400–800 mg, no daily maximum | 400 mg; max 1,200 mg/day without advice (2,400 with) |
+| Medical | Sucking chest wound: tape three sides | Vented seal, or an airtight seal you watch and “burp”; three-sided method no longer advised |
+| Medical | Needle decompression "just above the 3rd rib (inserting below a rib avoids…)" | Over the top of the lower rib; 4th–5th space anterior axillary line now preferred, 2nd space mid-clavicular as alternative |
+| Medical, cards | Snakebite: limb below heart level | At about heart level |
+| Medical | "70% of snakebites" dry | A fifth to a half of bites are dry |
+| Medical | Tetanus: flush punctures with hydrogen peroxide (contradicted the wound section) | Water, then diluted iodine |
+| Medical, NBC | Lime "speeds" decomposition in graves | Reduces smell; does not speed decay |
+| Medical | START triage branch "<6/min" | Removed (START uses >30/min only) |
+| Food & Water | Latrine 60 m from water (contradicted its own diagram and Projects page) | 30 m (WHO/Sphere), further on sandy or rocky ground |
+| Food & Water | Pressure canning "10 PSI, +1 per 2,000 ft" | Weighted gauge 10 PSI (15 above 1,000 ft); dial gauge 11 PSI +1 per 2,000 ft above 2,000 ft (USDA) |
+| Food & Water | Dry cure "1 oz curing salt per 5 lb meat" (about 5× too much nitrite) | 1 level tsp Prague Powder #1 per 5 lb |
+| Food & Water | Jerky 160°F poultry / 165°F game (swapped) | 160°F meat, 165°F poultry (USDA) |
+| Food & Water | Trichinella called "pork tapeworm" | A parasitic roundworm |
+| Food & Water | Nixtamalisation 1 Tbsp lime per cup of corn | About 1 Tbsp per 2 lb (1 kg) |
+| Food & Water | Pine needle tea, no warnings | Not in pregnancy; never confuse with yew |
+| Food & Water | Bleach table lumped 6% and 8.25% | Separate rows (8.25%: 6 drops/gallon) |
+| Water Systems | Storage chlorination "0.5 mg/L … 1 mL per 10 L" and buckets 0.5 mL/10 L (two different doses) | One dose: 1 mL of 5% per 10 L (= 2 drops/L) |
+| Water Systems | Well shock 250 mL bleach per 1,000 L (~12 mg/L) | About 1 L per 1,000 L (~50 mg/L) |
+| Water Systems | SODIS "12 hours if cloudy" (Food page said 2 days) | Two days if more than half cloudy |
+| Water Systems | Biosand "removes 99% of pathogens" | Most bacteria, almost all parasites, fewer viruses — still disinfect |
+| Chemistry | Coconut oil NaOH SAP 0.190 | 0.183 (matches its own KOH value) |
+| Chemistry | Corn mash with "1 cup malted barley" for 5 kg corn | Boil to gelatinise, then ~1 kg malt at 60–65°C |
+| Chemistry | Antiseptic alcohol "must be above 70%" (Food page said 60%+) | 60–90%, about 70% best |
+| Chemistry | Charcoal for poisoning 50–100 g | 50 g adult, 1 g/kg child — matches Medical |
+| Chemistry | Charcoal needs 2–3× coal "by weight" | Similar heat by weight; 2–3× by volume |
+| Chemistry | Tin + spirit makes "organotin compounds" | Acidic liquids dissolve tin, solder and zinc; use glass |
+| NBC | KI "up to 4 hours after"; reactor box "within 24 hours" | Best within 24 h before to 2 h after; some benefit to ~8 h (FDA/WHO) |
+| NBC | Sealed food safe because "radiation does not penetrate" | Radiation passing through does not make food radioactive; wipe off fallout dust |
+| NBC | Carrington repeat "would destroy most of the grid"; all modern cars disabled by EMP | Could damage many transformers; in US tests most cars kept running or restarted |
+| NBC | Smallpox rash "face, palms and soles simultaneously"; "no treatment", VIG | Starts in mouth and face, spreads out; tecovirimat stockpiled; vaccine within 3–4 days |
+| NBC | Pralidoxime "within minutes for sarin" | Before ageing: ~2 min for soman, hours for sarin |
+| NBC | Cyanide: "amyl nitrite (poppers)" | Amyl nitrite from a cyanide antidote kit |
+| Medicine Making | "Do not use tap water on wounds" (contradicted Medical) | Drinkable tap water is as good as saline |
+| Medicine Making | "No iodine in wounds" (contradicted Medical) | Only well diluted, about 1:10 |
+| Medicine Making | Quick card: ">41.5°C cold immersion" beside "never cold" | Above 41.5°C is usually heat stroke, where cold immersion is right |
+| Medicine Making | Comfrey vs foxglove, wild garlic vs lords-and-ladies tells were wrong | Rough bristly leaves with winged stems vs soft downy rosette; arrow-shaped net-veined leaves; autumn crocus added |
+| Agriculture | Ribbon test: 1–2 in ribbon = loam | Under 1 in = loams; 1–2 in = clay loams; over 2 in = clays (USDA ribbon method) |
+
+⚑ Still for a clinician: everything on the Medical page (it says so at the top); the chest-seal and
+needle-decompression changes especially.
+
+---
+
 ## Redrawn diagrams, fourth batch (`tools/redraw4.py`)
 
 This finishes the redraws. Left as they are on purpose: the illustrated plant cards, the two

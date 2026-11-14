@@ -71,7 +71,7 @@
       id: 'burn', title: 'Burn', tile: 'Fire, hot liquid, chemical', icon: 'fire', tone: 'orange', fig: 'burn',
       more: 'sections/medical.html#burns', moreLabel: 'Burns',
       steps: [
-        ['Cool it under cool running water for 10–20 minutes.', 'Cool, not cold — no ice. Start as soon as possible; it helps most within 30 minutes.'],
+        ['Cool it under cool running water for 20 minutes.', 'Cool, not cold — no ice. Start as soon as possible; it still helps up to 3 hours later.'],
         ['Take off rings, watches and tight clothing near the burn', 'before it swells. Leave anything stuck to the skin.'],
         ['Cover loosely with cling film or a clean non-stick dressing.', 'Not cotton wool or anything fluffy.'],
         ['Keep them warm and give sips of fluid', 'if they’re conscious and not vomiting — big burns lose a lot of fluid.']
@@ -157,7 +157,7 @@
       more: 'sections/medical.html#snakebite', moreLabel: 'Snakebite & envenomation',
       steps: [
         ['Move away from the snake.', 'Don’t try to catch or kill it.'],
-        ['Keep them still and calm. Keep the bitten limb still and below heart level.', 'Movement spreads venom.'],
+        ['Keep them still and calm. Keep the bitten limb still, at about heart level.', 'Movement spreads venom.'],
         ['Take off rings, watches and tight clothing on that limb', 'before it swells.'],
         ['Mark the edge of the swelling with a pen and write the time.', 'Repeat every 15–30 minutes to see how fast it spreads.'],
         ['Get them to antivenom (hospital) as fast as possible.', 'It is the only real treatment.']
