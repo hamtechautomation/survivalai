@@ -299,6 +299,27 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Emergency-first openings, phone tables, calculators, more step players (November 2026)
+
+- **"If this is happening now" strip** under every section header (`setupNowStrip` in app.js):
+  four big cards. Red ones open the emergency card; the rest jump to the right part of the page and
+  flash it. Calm sections get "Start here" instead. The map of cards per page is `NOW` in app.js.
+- **Tables become cards on phones** (`stackTables`): 3+ columns, no merged cells. Column names
+  become labels. Wide screens and print are unchanged; `.no-stack` opts a table out.
+- **Calculators** (`assets/js/calc.js`, loaded only where used), each beside the text it works from:
+  fallout clock (NBC, 7-10 rule, R = R₁·t⁻¹·², with shelter protection factor), bleach dose (Food,
+  EPA drops per gallon), rainwater yield (Food, area × rain × 0.623 × roof runoff; first flush
+  10 gal per 1,000 sq ft), solar sizing (Energy, the page's three steps — 550 Wh/day gives the
+  page's 275 Ah).
+- **Four more step players** (`tools/players2.py`; the earlier ones now live in `tools/players.py`):
+  adult CPR (compressions pump at 110 a minute while that step shows), choking (back blows, in-and-up
+  thrusts), splinting a forearm, and making water safe (settle, filter, boil, store). Text follows
+  the page beside each one.
+
+⚑ **needs expert review:** the CPR, choking and splint drawings (a first-aid trainer).
+
+---
+
 ## Text accuracy sweep — safety-critical pages (November 2026)
 
 Read through Medical, Food & Water, Water Systems, Chemistry, NBC and Medicine Making. Fixed only

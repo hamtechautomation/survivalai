@@ -219,7 +219,7 @@ def sky(fid, stars, cx, cy, k, base, sign, lines, labels, extra, spin, title, ho
     for text, cls, at, dx, dy, hl in labels:
         x, y = (pos[at][0], pos[at][1]) if isinstance(at, str) else at
         g += '<g class="dg-sky-lab">%s</g>' % T(round(x + dx, 1), round(y + dy, 1), text, cls, 'mid', hl)
-    s += '<g class="dg-sky %s" style="transform-origin:%dpx %dpx">%s</g>' % (spin, cx, cy, g)
+    s += '<g class="dg-skyturn %s" style="transform-origin:%dpx %dpx">%s</g>' % (spin, cx, cy, g)
     s += horizon
     s += T(222, 18, title, 'dg-th', 'mid')
     return fig(fid, '0 0 444 444', label, s, cap)

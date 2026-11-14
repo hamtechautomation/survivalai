@@ -144,6 +144,18 @@ async function browserChecks() {
     await page.waitForTimeout(250);
     const w = await page.evaluate(() => document.documentElement.scrollWidth);
     if (w > 392) fail('phone-width', `${p}: ${w}px wide on a 390px phone (content sticks out sideways)`);
+    if (p.includes('sections/')) {
+      // "If this is happening now" / "Start here" strip: present, and every card leads somewhere.
+      const strip = await page.evaluate(() => {
+        const n = document.querySelector('.now-strip'); if (!n) return 'missing';
+        const bad = [...n.querySelectorAll('a.now-card')].filter(a => !document.getElementById(a.getAttribute('href').slice(1))).map(a => a.getAttribute('href'));
+        return bad.length ? 'broken links ' + bad.join(' ') : n.querySelectorAll('.now-card').length >= 2 ? '' : 'too few cards';
+      });
+      if (strip) fail('now-strip', `${p}: ${strip}`);
+      // Wide tables stack into cards on a phone and no stacked table pokes out sideways.
+      const tw = await page.evaluate(() => [...document.querySelectorAll('table.tbl-stack')].filter(t => t.getBoundingClientRect().right > innerWidth + 2).length);
+      if (tw) fail('tables', `${p}: ${tw} stacked table(s) wider than the phone`);
+    }
     for (const e of errors) fail('js-error', `${p}: ${e}`);
   }
 
@@ -306,6 +318,27 @@ async function browserChecks() {
     const hiddenNow = await desk.$$eval('#fig-polaris [data-s="4-4"]', a => a.every(e => e.classList.contains('dg-off')));
     if (!hiddenNow) fail('players', 'step 4 parts are visible on step 2');
   }
+
+  // Calculators: each one renders and reacts to its inputs.
+  for (const [pg, kind, sel, val] of [['nbc', 'fallout', 'input[type=range]', '500'], ['food', 'bleach', 'input[type=number]', '40'], ['food', 'rain', 'input[type=number]', '1000'], ['energy', 'solar', 'input[type=number]', '1100']]) {
+    await desk.goto(BASE_URL + 'sections/' + pg + '.html');
+    const ok = await desk.waitForSelector(`.calc[data-calc=${kind}] .calc-ov`, { timeout: 5000 }).catch(() => null);
+    if (!ok) { fail('calc', `${pg}.html: ${kind} calculator did not render`); continue; }
+    const before = await desk.$eval(`.calc[data-calc=${kind}] .calc-ov`, e => e.textContent);
+    await desk.$eval(`.calc[data-calc=${kind}] ${sel}`, (e, v) => { e.value = v; e.dispatchEvent(new Event('input')); }, val);
+    const after = await desk.$eval(`.calc[data-calc=${kind}] .calc-ov`, e => e.textContent);
+    if (before === after || /NaN|—/.test(after)) fail('calc', `${pg}.html: ${kind} calculator did not update (${before} → ${after})`);
+  }
+  // Fixed numbers from the page text: 20 L clear water, 5–6% bleach = 43 drops; 550 Wh/day = 275 Ah at 12 V.
+  await desk.goto(BASE_URL + 'sections/food.html'); await desk.waitForSelector('.calc[data-calc=bleach] .calc-ov');
+  if (await desk.$eval('.calc[data-calc=bleach] [data-o=drops]', e => e.textContent) !== '43 drops') fail('calc', 'bleach dose for 20 L is not 43 drops');
+  await desk.goto(BASE_URL + 'sections/energy.html'); await desk.waitForSelector('.calc[data-calc=solar] .calc-ov');
+  if (await desk.$eval('.calc[data-calc=solar] [data-o=bat]', e => e.textContent) !== '275 Ah at 12 V') fail('calc', 'solar battery for 550 Wh/day is not 275 Ah (the page’s worked example)');
+
+  // New step players exist and have controls.
+  await desk.goto(BASE_URL + 'sections/medical.html'); await desk.waitForTimeout(300);
+  for (const id of ['fig-cpr-steps', 'fig-choking-steps', 'fig-splint-steps', 'fig-tourniquet-steps', 'fig-recovery-steps'])
+    if (!(await desk.$('#' + id + ' .dg-ctl'))) fail('players', `medical.html: ${id} has no controls`);
 
   await browser.close();
 }

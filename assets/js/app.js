@@ -164,6 +164,7 @@
     ensureSearch();
     iconifyChrome();
     wrapTables();
+    stackTables();
     setupSectionArt();
     setupOnThisPage();
     setupReveal();
@@ -171,6 +172,8 @@
     setupDiagrams();
     setupPalette();
     setupEmergency();
+    setupNowStrip();
+    if (document.querySelector('.calc[data-calc]')) loadScript('calc.js').catch(() => {});
     iconifyEmoji(document.body);
     setupSidebar();
     setupARIAToggle();
@@ -580,6 +583,93 @@
     // Warm the cache so it's there offline even if never opened online.
     if ('requestIdleCallback' in window) requestIdleCallback(() => loadEmergency().catch(() => {}), { timeout: 4000 });
     else setTimeout(() => loadEmergency().catch(() => {}), 2500);
+  }
+
+  /* =================== "IF THIS IS HAPPENING NOW" STRIP ===================
+     Big tappable cards under each section header. Red cards (s:) open the
+     step-by-step emergency card; the others (#) jump to the part of the page
+     that deals with it and flash it. Pages with no emergencies get "Start
+     here" instead. Each entry: [target, title, subtitle, icon, tone]. */
+  const NOW = {
+    medical: ['now', [['s:bleeding', 'Heavy bleeding', 'Pressure, then tourniquet', 'firstaid', 'red'], ['s:cpr', 'Not breathing', 'Start CPR', 'heart', 'red'],
+      ['s:choking', 'Choking', 'Back blows and thrusts', 'alert', 'red'], ['s:burn', 'Burn', 'Cool it for 20 minutes', 'fire', 'orange']]],
+    maternal: ['now', [['#danger-birth', 'Birth going wrong', 'Bleeding, stuck, cord first', 'alert', 'red'], ['#newborn', 'Baby not breathing', 'Dry, warm, breathe for them', 'baby', 'red'],
+      ['#infant-danger', 'Sick baby', 'Danger signs to act on', 'baby', 'orange'], ['s:dehydration', 'Diarrhoea', 'Rehydrate now', 'water', 'blue']]],
+    food: ['now', [['#water-purification', 'Make water safe', 'Boil, bleach or sun', 'water', 'blue'], ['#water-sourcing', 'Find water', 'Where to look first', 'tap', 'blue'],
+      ['s:dehydration', 'Diarrhoea', 'Oral rehydration', 'water', 'red'], ['#foraging', 'Is this plant safe?', 'Edibility rules and lookalikes', 'leaf', 'amber']]],
+    'build-water': ['start', [['#testing', 'Is it safe to drink?', 'Treat and test', 'water', 'blue'], ['#rainwater', 'Collect rain', 'Roof, gutter, tank', 'cloud', 'blue'],
+      ['#firstflush', 'First flush', 'Throw the dirty water away', 'tap', 'amber'], ['#wells', 'Dig a well', 'Siting and lining', 'hammer', 'amber']]],
+    nbc: ['now', [['#nuclear', 'Flash or blast', 'Drop, cover, then get inside', 'nbc', 'red'], ['#fallout', 'Fallout coming', 'Shelter and the 7-10 rule', 'nbc', 'red'],
+      ['#ki-dosing', 'Iodine tablets', 'Who takes what, when', 'pill', 'orange'], ['#decon', 'Contaminated', 'Strip, wash, bag it', 'alert', 'orange']]],
+    disasters: ['now', [['#earthquake', 'Earthquake', 'Drop, cover, hold on', 'alert', 'red'], ['#flood', 'Flood', 'Get high, stay out of water', 'water', 'blue'],
+      ['#wildfire', 'Wildfire', 'Leave early or shelter', 'fire', 'red'], ['#grid-down', 'Grid down', 'First hours and days', 'energy', 'amber']]],
+    security: ['now', [['#bug-out', 'Stay or go?', 'Four questions in order', 'compass', 'red'], ['#negotiation', 'Someone hostile', 'Talk it down', 'users', 'orange'],
+      ['#opsec', 'Keep a low profile', 'What not to show', 'lock', 'amber'], ['#fortification', 'Secure the house', 'Doors, windows, safe room', 'shield', 'amber']]],
+    psychology: ['now', [['#breathing', 'Panic attack', 'Box breathing, now', 'brain', 'blue'], ['#suicide', 'Talking about suicide', 'Ask directly, stay with them', 'heart', 'red'],
+      ['#grief', 'Grief', 'Helping someone through loss', 'heart', 'amber'], ['#children', 'Frightened children', 'What they need', 'baby', 'amber']]],
+    climate: ['now', [['s:poison', 'Ate an unknown plant', 'Poisoning steps', 'alert', 'red'], ['#lookalikes', 'Deadly lookalikes', 'Check before you eat', 'leaf', 'orange'],
+      ['#uk-hazards', 'Weather hazards', 'Floods, storms, heat', 'cloud', 'amber'], ['#uk-edibles', 'What to forage', 'Safe beginner plants', 'leaf', 'green']]],
+    navigation: ['now', [['#fig-polaris', 'North at night', 'Find Polaris', 'compass', 'blue'], ['#fig-shadowstick', 'North by day', 'Shadow stick', 'solar', 'amber'],
+      ['#compass', 'Use a compass', 'Bearings and declination', 'compass', 'amber'], ['#natural', 'No compass', 'Signs in nature', 'leaf', 'green']]],
+    shelter: ['now', [['s:cold', 'Someone too cold', 'Hypothermia steps', 'snow', 'blue'], ['#emergency-shelters', 'Shelter tonight', 'Fast emergency shelters', 'tent', 'red'],
+      ['#site-selection', 'Where to camp', 'Pick a safe site', 'map', 'amber'], ['#insulation', 'Stay warm', 'Insulate and seal', 'home', 'amber']]],
+    'medicine-making': ['now', [['#ors', 'Diarrhoea', 'Make rehydration drink', 'water', 'red'], ['#fever', 'Fever', 'Cool, not cold', 'medical', 'orange'],
+      ['#antiseptics', 'Clean a wound', 'Saline, honey, iodine', 'firstaid', 'amber'], ['#pain', 'Pain', 'What helps, safely', 'pill', 'amber']]],
+    veterinary: ['now', [['#sick', 'Is it sick?', 'Signs to look for', 'paw', 'orange'], ['#birthing', 'Birth going wrong', 'When and how to help', 'alert', 'red'],
+      ['#wounds', 'Wounded animal', 'Clean and close', 'firstaid', 'amber'], ['#vitals', 'Normal vitals', 'Temperature, pulse, breathing', 'heart', 'amber']]],
+    communications: ['now', [['#baofeng', 'Call for help', 'Handheld radio', 'radio', 'red'], ['#visual-signals', 'Signal rescuers', 'Fire, mirror, ground marks', 'target', 'orange'],
+      ['#morse', 'SOS in Morse', '··· ––– ···', 'radio', 'amber'], ['#ham-radio', 'Radio basics', 'Bands and range', 'comms', 'amber']]],
+    energy: ['now', [['#generators', 'Running a generator', 'Outdoors only — carbon monoxide', 'alert', 'red'], ['#rocket-stove', 'Cook on little fuel', 'Rocket stove', 'fire', 'orange'],
+      ['#solar', 'Solar power', 'Size and wire a system', 'solar', 'amber'], ['#batteries', 'Batteries', 'Keep them alive', 'energy', 'amber']]],
+    chemistry: ['now', [['#compat', 'What not to mix', 'Toxic gas combinations', 'alert', 'red'], ['#cleaning', 'Disinfect', 'Bleach, vinegar, lye', 'flask', 'blue'],
+      ['#soap', 'Make soap', 'From ash and fat', 'flask', 'amber'], ['#charcoal', 'Charcoal', 'Fuel and filters', 'fire', 'amber']]],
+    knots: ['start', [['#which-knot', 'Which knot?', 'Pick by job', 'knot', 'amber'], ['#fig-bowline', 'Fixed loop', 'Bowline', 'knot', 'blue'],
+      ['#fig-clove', 'Tie to a post', 'Clove hitch', 'knot', 'blue'], ['#fig-trucker', 'Tie a load down', 'Trucker’s hitch', 'knot', 'blue']]],
+    animal: ['start', [['#chickens', 'Chickens', 'Eggs and meat', 'paw', 'amber'], ['#goats', 'Goats', 'Milk on rough ground', 'paw', 'amber'], ['#feed', 'Feed', 'Without buying it', 'leaf', 'green'], ['#veterinary', 'Sick animal', 'First checks', 'vet', 'red']]],
+    agriculture: ['start', [['#soil-testing', 'Test your soil', 'Jar and ribbon tests', 'leaf', 'amber'], ['#planting-calendar', 'What to plant', 'Month by month', 'calendar', 'green'],
+      ['#companion-planting', 'Companions', 'What grows well together', 'leaf', 'green'], ['#seed-saving', 'Save seed', 'Next year’s crop', 'leaf', 'amber']]],
+    'build-power': ['start', [['#quick-ref', 'Quick reference', 'Every build at a glance', 'clipboard', 'amber'], ['#pedal', 'Pedal power', 'A bike generator', 'energy', 'amber'], ['#wind', 'Wind', 'A small turbine', 'energy', 'blue'], ['#biogas', 'Biogas', 'Fuel from waste', 'fire', 'green']]],
+    'build-structures': ['start', [['#emergency', 'Shelter fast', 'Emergency builds', 'tent', 'red'], ['#site', 'Choose a site', 'Before you build', 'map', 'amber'], ['#earthbag', 'Earthbag', 'Strong and cheap', 'building', 'amber'], ['#quick-ref', 'Quick reference', 'All builds compared', 'clipboard', 'amber']]],
+    governance: ['start', [['#forming', 'Form a group', 'First meeting', 'users', 'amber'], ['#justice', 'Settle a dispute', 'The dispute ladder', 'columns', 'orange'], ['#roles', 'Who does what', 'Roles', 'user', 'amber'], ['#templates', 'Templates', 'Printable forms', 'file', 'amber']]],
+    knowledge: ['start', [['#preserve', 'Save knowledge', 'What to keep, how', 'book', 'amber'], ['#teaching', 'Teach it', 'Pass skills on', 'users', 'amber'], ['#children', 'Children', 'Schooling without schools', 'baby', 'green'], ['#library', 'Build a library', 'What to collect', 'books', 'amber']]],
+    metallurgy: ['start', [['#building-forge', 'Build a forge', 'Brake drum, bellows', 'fire', 'orange'], ['#basic-techniques', 'Basic forging', 'Draw, upset, bend', 'hammer', 'amber'], ['#heat-treating', 'Harden & temper', 'Colours and quench', 'fire', 'red'], ['#knife-making', 'Make a knife', 'Five stages', 'hammer', 'amber']]],
+    projects: ['start', [['#waterfilter', 'Water filter', 'Biosand build', 'water', 'blue'], ['#toilets', 'Toilets', 'Latrines that work', 'home', 'amber'], ['#cooling', 'Cool food', 'Without power', 'snow', 'blue'], ['#firefighting', 'Fight a fire', 'Bucket brigade and more', 'fire', 'red']]],
+    salvage: ['start', [['#safety', 'Stay safe', 'Before you salvage', 'alert', 'red'], ['#where', 'Where to look', 'Best sources', 'map', 'amber'], ['#gen-maintenance', 'Keep a generator going', 'Maintenance', 'wrench', 'amber'], ['#fuel-overview', 'Fuel', 'What keeps, what doesn’t', 'fire', 'orange']]],
+    science: ['start', [['#ptable', 'Periodic table', 'Elements you can use', 'atom', 'blue'], ['#equations', 'Key equations', 'Physics and chemistry', 'atom', 'amber'], ['#maths', 'Maths', 'Practical methods', 'grid4', 'amber'], ['#constants', 'Constants', 'Numbers to know', 'clipboard', 'amber']]],
+    textiles: ['start', [['#repair', 'Mend clothes', 'Patch and darn', 'scissors', 'amber'], ['#sewing', 'Sewing', 'Stitches that hold', 'scissors', 'amber'], ['#boots', 'Footwear', 'Repair or make', 'scissors', 'orange'], ['#quick-ref', 'Quick reference', 'At a glance', 'clipboard', 'amber']]],
+    vehicles: ['start', [['#hierarchy', 'Which vehicle?', 'Best options, in order', 'car', 'amber'], ['#bicycles', 'Bicycles', 'Load and repair', 'wheel', 'green'], ['#engines', 'Engines', 'Keep them running', 'gear', 'amber'], ['#watercraft', 'Boats', 'Canoe, skiff, raft', 'water', 'blue']]]
+  };
+  function setupNowStrip() {
+    const page = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
+    const conf = NOW[page]; if (!conf) return;
+    const [kind, items] = conf;
+    const live = items.filter(([t]) => t.startsWith('s:') || document.getElementById(t.slice(1)));
+    if (live.length < 2) return;
+    const nav = document.createElement('nav');
+    nav.className = 'now-strip no-print now-' + kind;
+    nav.setAttribute('aria-label', kind === 'now' ? 'If this is happening now' : 'Start here');
+    nav.innerHTML = '<p class="now-h">' + (kind === 'now' ? '<span class="now-dot"></span>If this is happening now' : 'Start here') + '</p><div class="now-grid"></div>';
+    const grid = nav.lastChild;
+    live.forEach(([t, title, sub, icon, tone], i) => {
+      const sos = t.startsWith('s:');
+      const el = document.createElement(sos ? 'button' : 'a');
+      el.className = 'now-card now-' + tone;
+      el.style.setProperty('--i', i);
+      if (sos) { el.type = 'button'; el.addEventListener('click', () => window.LastLight.sos && window.LastLight.sos(t.slice(2))); }
+      else el.href = t;
+      el.innerHTML = '<span class="now-i">' + (ICONS[icon] || ICONS.alert) + '</span><span class="now-t">' + title + '</span><span class="now-s">' + sub + '</span><span class="now-go" aria-hidden="true">' + (sos ? 'Steps' : '→') + '</span>';
+      grid.appendChild(el);
+    });
+    const head = document.querySelector('.section-header');
+    const after = head || document.querySelector('.content-wrapper h1') ;
+    if (after) after.after(nav); else return;
+    // Jumping to a part of the page flashes it so the eye lands there.
+    nav.addEventListener('click', e => {
+      const a = e.target.closest('a.now-card'); if (!a) return;
+      const target = document.getElementById(a.getAttribute('href').slice(1)); if (!target) return;
+      target.classList.remove('now-flash'); void target.offsetWidth; target.classList.add('now-flash');
+      setTimeout(() => target.classList.remove('now-flash'), 2200);
+    });
   }
 
   /* =================== SECTION BANNER ART =================== */
@@ -1086,6 +1176,38 @@
       w.setAttribute('aria-label', cap ? 'Table: ' + cap.textContent.trim().slice(0, 60) : 'Table');
       p.insertBefore(w, t);
       w.appendChild(t);
+    });
+  }
+
+  /* =================== TABLES → CARDS ON PHONES ===================
+     A table with 3+ columns becomes a stack of cards below 640px: the first
+     cell is the card's heading and every other cell is shown with its column
+     name as a label (CSS reads data-label). Tables with merged cells, or marked
+     .no-stack, keep sideways scrolling. Print and wide screens are unchanged. */
+  function stackTables() {
+    document.querySelectorAll('.main-content table, .content-wrapper table').forEach(t => {
+      if (t.classList.contains('no-stack') || t.closest('.dg, figure, .no-stack') || t.querySelector('[rowspan],[colspan]')) return;
+      const rows = [...t.rows];
+      if (rows.length < 2) return;
+      let head = t.tHead && t.tHead.rows[0];
+      if (!head && [...rows[0].cells].every(c => c.tagName === 'TH')) head = rows[0];
+      if (!head) return;
+      const names = [...head.cells].map(c => c.textContent.replace(/\s+/g, ' ').trim());
+      if (names.length < 3) return;
+      rows.forEach(r => {
+        if (r === head) { r.classList.add('tbl-head'); return; }
+        [...r.cells].forEach((c, i) => {
+          if (!names[i]) return;
+          c.setAttribute('data-label', names[i]);
+          if (i > 0 && c.childNodes.length) {          // one wrapper, so the label/value grid has exactly two items
+            const v = document.createElement('div'); v.className = 'tbl-v';
+            while (c.firstChild) v.appendChild(c.firstChild);
+            c.appendChild(v);
+          }
+        });
+      });
+      t.classList.add('tbl-stack');
+      const w = t.closest('.table-scroll, .table-wrap'); if (w) w.classList.add('tbl-stack-wrap');
     });
   }
 
