@@ -3169,3 +3169,19 @@ body.mode-day .dg-lb-pan .dg-keep svg { filter: invert(1) hue-rotate(180deg); }
 @media print { .mv, .mv-draw, .mv-late, .mv-drip { animation: none !important; transform: none !important; opacity: 1 !important; stroke-dashoffset: 0 !important; } }
 .dg-hdrbg { fill: var(--bg-3); stroke: var(--border-hi); stroke-width: 1; }
 @media print { .dg-hdrbg { fill: #fff !important; stroke: #000 !important; } }
+
+/* Turning star charts (tools/redraw4.py): the sky group turns about the pole, each label turns back
+   the other way so it stays upright. One turn every 2 minutes; pauses on hover/focus; off for
+   reduced motion and in print. */
+.dg-sky { transform-box: view-box; animation: dg-sky-ccw 120s linear infinite; }
+.dg-sky.dg-sky-cw { animation-name: dg-sky-cw; }
+.dg-sky .dg-sky-lab { transform-box: fill-box; transform-origin: center; animation: dg-sky-cw 120s linear infinite; }
+.dg-sky.dg-sky-cw .dg-sky-lab { animation-name: dg-sky-ccw; }
+@keyframes dg-sky-ccw { to { transform: rotate(-360deg); } }
+@keyframes dg-sky-cw { to { transform: rotate(360deg); } }
+figure.dg:hover .dg-sky, figure.dg:hover .dg-sky-lab, figure.dg:focus-within .dg-sky, figure.dg:focus-within .dg-sky-lab { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .dg-sky, .dg-sky .dg-sky-lab { animation: none; } }
+@media print { .dg-sky, .dg-sky .dg-sky-lab { animation: none !important; } }
+.dg-okt { fill: #6cc08f; } .dg-badt { fill: #ff7b7b; }
+.dg-sky-lab text { paint-order: stroke; stroke: var(--bg-2); stroke-width: 3.5px; stroke-linejoin: round; }
+@media print { .dg-okt, .dg-badt { fill: #000 !important; } .dg-sky-lab text { stroke: #fff !important; } }

@@ -328,63 +328,9 @@ HALF-LAP (fastest joint):
       </div>
     </div>
 
-    <figure class="svg-diagram">
-      <svg class="dg-legacy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 560">
-        <rect width="700" height="560" fill="#0c0f0e"/>
-        <text x="350" y="22" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="12" font-weight="bold">COMMUNITY DEFENSIVE PERIMETER — PLAN VIEW</text>
-        <!-- Outer perimeter hedge/ditch (dashed green) -->
-        <rect x="60" y="55" width="580" height="460" rx="15" fill="none" stroke="#27ae60" stroke-width="2" stroke-dasharray="10,5"/>
-        <text x="350" y="74" text-anchor="middle" fill="#27ae60" font-family="monospace" font-size="9">LAYER 1: THORNY HEDGE / DITCH / BERM</text>
-        <!-- Obstacle field (× marks between perimeters) -->
-        <g fill="#c0392b" font-family="monospace" font-size="10">
-          <text x="90" y="120">×</text><text x="140" y="105">×</text><text x="190" y="120">×</text>
-          <text x="90" y="170">×</text><text x="140" y="155">×</text><text x="190" y="170">×</text>
-          <text x="90" y="445">×</text><text x="140" y="460">×</text><text x="190" y="445">×</text>
-          <text x="90" y="395">×</text><text x="140" y="410">×</text><text x="190" y="395">×</text>
-          <text x="500" y="120">×</text><text x="550" y="105">×</text><text x="600" y="120">×</text>
-          <text x="500" y="170">×</text><text x="550" y="155">×</text><text x="600" y="170">×</text>
-          <text x="500" y="445">×</text><text x="550" y="460">×</text><text x="600" y="445">×</text>
-          <text x="500" y="395">×</text><text x="550" y="410">×</text><text x="600" y="395">×</text>
-        </g>
-        <text x="350" y="110" text-anchor="middle" fill="#d1584b" font-family="monospace" font-size="8">× OBSTACLES (abatis, dragon's teeth, czech hedgehogs)</text>
-        <!-- Inner perimeter wall (solid amber) -->
-        <rect x="175" y="155" width="355" height="275" rx="5" fill="none" stroke="#c9a94e" stroke-width="3"/>
-        <text x="350" y="175" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="9">LAYER 2: WALL / GABION / EARTHBAG</text>
-        <!-- Watchtowers at corners -->
-        <g fill="#1c2620" stroke="#c9a94e" stroke-width="1.5">
-          <rect x="160" y="140" width="30" height="30" rx="2"/>
-          <rect x="515" y="140" width="30" height="30" rx="2"/>
-          <rect x="160" y="415" width="30" height="30" rx="2"/>
-          <rect x="515" y="415" width="30" height="30" rx="2"/>
-        </g>
-        <text x="175" y="160" text-anchor="middle" fill="#cfb56d" font-family="monospace" font-size="7">WT</text>
-        <text x="530" y="160" text-anchor="middle" fill="#cfb56d" font-family="monospace" font-size="7">WT</text>
-        <text x="175" y="434" text-anchor="middle" fill="#cfb56d" font-family="monospace" font-size="7">WT</text>
-        <text x="530" y="434" text-anchor="middle" fill="#cfb56d" font-family="monospace" font-size="7">WT</text>
-        <!-- Watchtower coverage arcs -->
-        <g fill="none" stroke="#27ae60" stroke-width="0.8" opacity="0.3">
-          <path d="M 175 155 L 240 90 A 80 80 0 0 1 90 240 Z" fill="#27ae60"/>
-          <path d="M 530 155 L 620 240 A 80 80 0 0 1 460 90 Z" fill="#27ae60"/>
-          <path d="M 175 430 L 90 345 A 80 80 0 0 0 240 500 Z" fill="#27ae60"/>
-          <path d="M 530 430 L 460 500 A 80 80 0 0 0 620 345 Z" fill="#27ae60"/>
-        </g>
-        <!-- Gate -->
-        <rect x="318" y="152" width="65" height="10" rx="2" fill="#0c0f0e" stroke="#c9a94e" stroke-width="1.5"/>
-        <text x="350" y="148" text-anchor="middle" fill="#c9a94e" font-family="monospace" font-size="8">GATE</text>
-        <!-- Buildings in centre -->
-        <rect x="240" y="240" width="100" height="70" rx="3" fill="#161d1a" stroke="#8a7035" stroke-width="1.5"/>
-        <rect x="365" y="240" width="100" height="70" rx="3" fill="#161d1a" stroke="#8a7035" stroke-width="1.5"/>
-        <rect x="295" y="330" width="115" height="60" rx="3" fill="#161d1a" stroke="#8a7035" stroke-width="1.5"/>
-        <text x="350" y="283" text-anchor="middle" fill="#977b3b" font-family="monospace" font-size="9">BUILDINGS</text>
-        <!-- Distance label -->
-        <line x1="60" y1="540" x2="175" y2="540" stroke="#9a9488" stroke-width="1"/>
-        <text x="117" y="552" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">50–100m</text>
-        <text x="350" y="552" text-anchor="middle" fill="#9a9488" font-family="monospace" font-size="8">WT = Watchtower   × = Obstacles   ---- = Outer perimeter   —— = Inner wall</text>
-        <!-- Legend -->
-        <text x="560" y="490" fill="#2cbb68" font-family="monospace" font-size="8">coverage</text>
-        <text x="560" y="500" fill="#2cbb68" font-family="monospace" font-size="8">arc</text>
-      </svg>
-      <figcaption>Community defensive perimeter plan view. Corner watchtowers provide overlapping fields of observation. Obstacle fields between perimeters slow any approach. The gate is a choke point — position watchtowers to cover it directly.</figcaption>
+    <figure class="dg" id="fig-perimeter">
+      <svg viewBox="0 0 444 350" role="img" aria-label="Community perimeter from above: outer hedge, ditch and berm with an obstacle belt, an inner wall with watchtowers at each corner whose views overlap, a single gate, and buildings inside"><g data-hl="outer"><rect class="dg-green" x="20" y="34" width="404" height="244" rx="40" opacity=".35"/><rect class="dg-green-s" x="20" y="34" width="404" height="244" rx="40" fill="none" stroke-dasharray="10 5"/></g><g data-hl="obst"><path class="dg-red-s" d="M52 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M52 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M78 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M78 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M104 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M104 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M130 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M130 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M156 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M156 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M182 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M182 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M208 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M208 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M234 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M234 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M260 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M260 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M286 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M286 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M312 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M312 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M338 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M338 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M364 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M364 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M390 60 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M390 246 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M44 90 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M44 116 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M44 142 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M44 168 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M44 194 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M44 220 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M394 90 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M394 116 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M394 142 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M394 168 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M394 194 l6 6 m0 -6 l-6 6" stroke-width="1.6"/><path class="dg-red-s" d="M394 220 l6 6 m0 -6 l-6 6" stroke-width="1.6"/></g><g data-hl="wall"><rect class="dg-line" x="92" y="84" width="260" height="144" rx="4" fill="none" stroke-width="5"/></g><g data-hl="gate"><rect class="dg-panel" x="204" y="224" width="36" height="9"/><path class="dg-key-s" d="M204 228 l8 -12 M240 228 l-8 -12"/></g><g data-hl="tower"><path class="dg-key" d="M92 84 L46.2 88.0 A 46 46 0 0 1 96.0 38.2 Z" opacity=".35"/><rect class="dg-key" x="85" y="77" width="14" height="14"/></g><g data-hl="tower"><path class="dg-key" d="M352 84 L348.0 38.2 A 46 46 0 0 1 397.8 88.0 Z" opacity=".35"/><rect class="dg-key" x="345" y="77" width="14" height="14"/></g><g data-hl="tower"><path class="dg-key" d="M92 228 L96.0 273.8 A 46 46 0 0 1 46.2 224.0 Z" opacity=".35"/><rect class="dg-key" x="85" y="221" width="14" height="14"/></g><g data-hl="tower"><path class="dg-key" d="M352 228 L397.8 224.0 A 46 46 0 0 1 348.0 273.8 Z" opacity=".35"/><rect class="dg-key" x="345" y="221" width="14" height="14"/></g><g data-hl="bldg"><rect class="dg-debris" x="150" y="118" width="60" height="38"/><rect class="dg-debris" x="232" y="118" width="64" height="38"/><rect class="dg-debris" x="182" y="170" width="80" height="30"/></g><text class="dg-th dg-mid" x="222" y="22">COMMUNITY PERIMETER — FROM ABOVE</text><text class="dg-tb dg-mid" x="222" y="104" data-hl="wall">LAYER 2: WALL</text><text class="dg-ts" x="30" y="300" data-hl="outer">LAYER 1 (100–200 m out): thorny hedge, ditch and berm</text><text class="dg-ts" x="30" y="314" data-hl="obst">✕ obstacle belt: abatis, dragon’s teeth, hedgehogs</text><text class="dg-ts" x="30" y="328" data-hl="tower">■ watchtower at every corner, fields of view overlap</text><text class="dg-ts dg-mid" x="222" y="216" data-hl="gate">GATE: one choke point, covered by two towers</text><text class="dg-ts" x="30" y="342" data-hl="bldg">▭ buildings inside: Layer 3, hardened</text></svg>
+      <figcaption>Layers buy time: anyone approaching meets the hedge and ditch, then the obstacle belt, then the wall, all in view of at least two towers. Keep one gate, and make sure the towers can see it.</figcaption>
     </figure>
 
     <h3>Layer 1 — Outer Perimeter (100–200m)</h3>

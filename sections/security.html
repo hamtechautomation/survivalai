@@ -381,93 +381,9 @@
       <li>Mandatory evacuation orders exist and the threat is real</li>
     </ul>
 
-    <figure class="svg-diagram" style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1.5rem 0;display:flex;flex-direction:column;align-items:center;gap:.5rem">
-      <svg class="dg-legacy" viewBox="0 0 580 520" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bugout-tree-title">
-        <title id="bugout-tree-title">Bug-Out vs. Bug-In Decision Flowchart</title>
-        <desc>A flowchart for deciding whether to evacuate or shelter in place during an emergency. Starts at top with an emergency situation, then guides through four yes/no questions to reach a recommendation.</desc>
-        <!-- Start node -->
-        <rect x="170" y="10" width="240" height="44" rx="22" fill="#243028" stroke="#c9a94e" stroke-width="2.5"/>
-        <text x="290" y="27" text-anchor="middle" font-size="12" fill="#c9a94e" font-family="sans-serif" font-weight="800">EMERGENCY SITUATION</text>
-        <text x="290" y="43" text-anchor="middle" font-size="10" fill="#8a9e86" font-family="sans-serif">Step through each question in order</text>
-        <!-- Arrow down -->
-        <line x1="290" y1="54" x2="290" y2="80" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr-g)"/>
-        <defs>
-          <marker id="arr-g" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c9a94e"/></marker>
-          <marker id="arr-r" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c84848"/></marker>
-          <marker id="arr-green" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4b9e6a"/></marker>
-          <marker id="arr-amb" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c87a40"/></marker>
-        </defs>
-        <!-- Q1 Diamond -->
-        <polygon points="290,80 390,120 290,160 190,120" fill="#182016" stroke="#c84848" stroke-width="2"/>
-        <text x="290" y="113" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">Immediate mortal danger</text>
-        <text x="290" y="127" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">at current location?</text>
-        <text x="290" y="141" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(fire, flood, attack, collapse)</text>
-        <!-- Q1 YES → left → EVACUATE NOW -->
-        <line x1="190" y1="120" x2="80" y2="120" stroke="#c84848" stroke-width="2" marker-end="url(#arr-r)"/>
-        <text x="135" y="113" text-anchor="middle" font-size="10" fill="#cd6464" font-family="sans-serif" font-weight="700">YES</text>
-        <rect x="10" y="100" width="70" height="40" rx="6" fill="#6e2828" stroke="#c84848" stroke-width="2.5"/>
-        <text x="45" y="118" text-anchor="middle" font-size="11" fill="#eceee0" font-family="sans-serif" font-weight="800">GO NOW</text>
-        <text x="45" y="132" text-anchor="middle" font-size="9" fill="#eceee0" font-family="sans-serif">Do not wait</text>
-        <!-- Q1 NO → down -->
-        <line x1="290" y1="160" x2="290" y2="188" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr-g)"/>
-        <text x="305" y="178" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">NO</text>
-        <!-- Q2 Diamond -->
-        <polygon points="290,188 390,228 290,268 190,228" fill="#182016" stroke="#c9a94e" stroke-width="2"/>
-        <text x="290" y="221" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">Water, food, shelter secure</text>
-        <text x="290" y="235" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">for 72+ hours?</text>
-        <text x="290" y="249" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(include group needs)</text>
-        <!-- Q2 YES → right → STAY -->
-        <line x1="390" y1="228" x2="500" y2="228" stroke="#4b9e6a" stroke-width="2" marker-end="url(#arr-green)"/>
-        <text x="445" y="221" text-anchor="middle" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">YES</text>
-        <rect x="500" y="208" width="78" height="40" rx="6" fill="#2a5a3c" stroke="#4b9e6a" stroke-width="2.5"/>
-        <text x="539" y="224" text-anchor="middle" font-size="11" fill="#eceee0" font-family="sans-serif" font-weight="800">STAY</text>
-        <text x="539" y="238" text-anchor="middle" font-size="9" fill="#eceee0" font-family="sans-serif">Monitor &amp; prepare</text>
-        <!-- Q2 NO → down -->
-        <line x1="290" y1="268" x2="290" y2="296" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr-g)"/>
-        <text x="305" y="286" font-size="10" fill="#cd6464" font-family="sans-serif" font-weight="700">NO</text>
-        <!-- Q3 Diamond -->
-        <polygon points="290,296 390,336 290,376 190,336" fill="#182016" stroke="#c9a94e" stroke-width="2"/>
-        <text x="290" y="329" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">Evacuation routes</text>
-        <text x="290" y="343" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">accessible &amp; safe?</text>
-        <text x="290" y="357" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(not flooded, hostile, gridlocked)</text>
-        <!-- Q3 NO → left → SHELTER IN PLACE -->
-        <line x1="190" y1="336" x2="80" y2="336" stroke="#c87a40" stroke-width="2" marker-end="url(#arr-amb)"/>
-        <text x="135" y="329" text-anchor="middle" font-size="10" fill="#c87a40" font-family="sans-serif" font-weight="700">NO</text>
-        <rect x="5" y="314" width="75" height="44" rx="6" fill="#3d2010" stroke="#c87a40" stroke-width="2"/>
-        <text x="42" y="330" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">SHELTER</text>
-        <text x="42" y="343" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">IN PLACE</text>
-        <text x="42" y="354" text-anchor="middle" font-size="8" fill="#8a9e86" font-family="sans-serif">Fortify, conserve</text>
-        <!-- Q3 YES → down -->
-        <line x1="290" y1="376" x2="290" y2="404" stroke="#c9a94e" stroke-width="2" marker-end="url(#arr-g)"/>
-        <text x="305" y="394" font-size="10" fill="#4b9e6a" font-family="sans-serif" font-weight="700">YES</text>
-        <!-- Q4 Diamond -->
-        <polygon points="290,404 390,444 290,484 190,444" fill="#182016" stroke="#c9a94e" stroke-width="2"/>
-        <text x="290" y="437" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">Known safe destination</text>
-        <text x="290" y="451" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">confirmed available?</text>
-        <text x="290" y="465" text-anchor="middle" font-size="9" fill="#8a9e86" font-family="sans-serif">(pre-arranged contact made?)</text>
-        <!-- Q4 YES → right → BUG OUT -->
-        <line x1="390" y1="444" x2="500" y2="444" stroke="#c87a40" stroke-width="2" marker-end="url(#arr-amb)"/>
-        <text x="445" y="437" text-anchor="middle" font-size="10" fill="#c87a40" font-family="sans-serif" font-weight="700">YES</text>
-        <rect x="500" y="422" width="78" height="44" rx="6" fill="#3d2010" stroke="#c87a40" stroke-width="2.5"/>
-        <text x="539" y="438" text-anchor="middle" font-size="11" fill="#eceee0" font-family="sans-serif" font-weight="800">BUG OUT</text>
-        <text x="539" y="451" text-anchor="middle" font-size="9" fill="#eceee0" font-family="sans-serif">Execute plan</text>
-        <text x="539" y="462" text-anchor="middle" font-size="8" fill="#8a9e86" font-family="sans-serif">Tell someone route</text>
-        <!-- Q4 NO → left → shelter in place / evaluate -->
-        <line x1="190" y1="444" x2="80" y2="444" stroke="#c87a40" stroke-width="2" marker-end="url(#arr-amb)"/>
-        <text x="135" y="437" text-anchor="middle" font-size="10" fill="#c87a40" font-family="sans-serif" font-weight="700">NO</text>
-        <rect x="5" y="422" width="75" height="44" rx="6" fill="#182016" stroke="#c87a40" stroke-width="2"/>
-        <text x="42" y="438" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">SHELTER</text>
-        <text x="42" y="451" text-anchor="middle" font-size="10" fill="#eceee0" font-family="sans-serif" font-weight="700">IN PLACE</text>
-        <text x="42" y="462" text-anchor="middle" font-size="8" fill="#8a9e86" font-family="sans-serif">Keep finding options</text>
-        <!-- Legend -->
-        <rect x="10" y="498" width="12" height="12" rx="2" fill="#6e2828" stroke="#c84848" stroke-width="1.5"/>
-        <text x="26" y="509" font-size="9" fill="#8a9e86" font-family="sans-serif">Immediate action</text>
-        <rect x="130" y="498" width="12" height="12" rx="2" fill="#2a5a3c" stroke="#4b9e6a" stroke-width="1.5"/>
-        <text x="146" y="509" font-size="9" fill="#8a9e86" font-family="sans-serif">Stay (preferred when safe)</text>
-        <rect x="320" y="498" width="12" height="12" rx="2" fill="#3d2010" stroke="#c87a40" stroke-width="1.5"/>
-        <text x="336" y="509" font-size="9" fill="#8a9e86" font-family="sans-serif">Situational — assess fully</text>
-      </svg>
-      <figcaption>Bug-out decision flowchart — work top to bottom. Moving exposes you to unpredictable hazards; the default choice is always to shelter in place unless a specific question triggers evacuation. Never bug out without a confirmed destination.</figcaption>
+    <figure class="dg" id="fig-bugout">
+      <svg viewBox="0 0 444 362" role="img" aria-label="Bug-out decision: immediate danger means go now; otherwise stay if supplies are secure for 72 hours; leave only if routes are safe and a destination is confirmed; otherwise shelter in place"><defs><marker id="ah-bo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><rect class="dg-panel" x="8" y="34" width="262" height="46" rx="8"/><circle class="dg-keyf" cx="24" cy="57" r="9"/><text class="dg-num dg-mid" x="24" y="61">1</text><text class="dg-tb dg-tb-sm" x="40" y="55">Immediate danger to life where you are?</text><text class="dg-ts" x="40" y="70">fire, flood, attack, collapse</text><path class="dg-red-s" d="M272 57 L318 57" marker-end="url(#ah-bo)"/><text class="dg-ts" x="284" y="51">yes</text><rect class="dg-badbg" x="320" y="36" width="118" height="42" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="379" y="54">GO NOW</text><text class="dg-ts dg-mid" x="379" y="69">do not wait</text><path class="dg-arrow" d="M139 81 L139 102" marker-end="url(#ah-bo)"/><text class="dg-ts" x="146" y="96">no</text><rect class="dg-panel" x="8" y="104" width="262" height="46" rx="8"/><circle class="dg-keyf" cx="24" cy="127" r="9"/><text class="dg-num dg-mid" x="24" y="131">2</text><text class="dg-tb dg-tb-sm" x="40" y="125">Water, food and shelter secure for 72 h+?</text><text class="dg-ts" x="40" y="140">for the whole group</text><path class="dg-green-s" d="M272 127 L318 127" marker-end="url(#ah-bo)"/><text class="dg-ts" x="284" y="121">yes</text><rect class="dg-okbg" x="320" y="106" width="118" height="42" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="379" y="124">STAY</text><text class="dg-ts dg-mid" x="379" y="139">monitor and prepare</text><path class="dg-arrow" d="M139 151 L139 172" marker-end="url(#ah-bo)"/><text class="dg-ts" x="146" y="166">no</text><rect class="dg-panel" x="8" y="174" width="262" height="46" rx="8"/><circle class="dg-keyf" cx="24" cy="197" r="9"/><text class="dg-num dg-mid" x="24" y="201">3</text><text class="dg-tb dg-tb-sm" x="40" y="195">Routes out open and safe?</text><text class="dg-ts" x="40" y="210">not flooded, hostile or gridlocked</text><path class="dg-green-s" d="M272 197 L318 197" marker-end="url(#ah-bo)"/><text class="dg-ts" x="284" y="191">no</text><rect class="dg-okbg" x="320" y="176" width="118" height="42" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="379" y="194">SHELTER IN PLACE</text><text class="dg-ts dg-mid" x="379" y="209">fortify, conserve</text><path class="dg-arrow" d="M139 221 L139 242" marker-end="url(#ah-bo)"/><text class="dg-ts" x="146" y="236">yes</text><rect class="dg-panel" x="8" y="244" width="262" height="46" rx="8"/><circle class="dg-keyf" cx="24" cy="267" r="9"/><text class="dg-num dg-mid" x="24" y="271">4</text><text class="dg-tb dg-tb-sm" x="40" y="265">Safe destination confirmed?</text><text class="dg-ts" x="40" y="280">contact made, they expect you</text><path class="dg-key-s" d="M272 267 L318 267" marker-end="url(#ah-bo)"/><text class="dg-ts" x="284" y="261">yes</text><rect class="dg-key" x="320" y="246" width="118" height="42" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="379" y="264">BUG OUT</text><text class="dg-ts dg-mid" x="379" y="279">tell others the route</text><path class="dg-arrow" d="M139 291 L139 312" marker-end="url(#ah-bo)"/><text class="dg-ts" x="146" y="306">no</text><rect class="dg-okbg" x="60" y="314" width="158" height="42" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="139" y="332">SHELTER IN PLACE</text><text class="dg-ts dg-mid" x="139" y="347">keep finding options</text><text class="dg-th dg-mid" x="222" y="20">BUG OUT OR STAY? — ASK IN ORDER</text></svg>
+      <figcaption>Staying is the default: moving exposes you to hazards you cannot predict. Only an immediate threat, or a safe route <em>and</em> a confirmed destination, should move you. Never bug out without somewhere to go.</figcaption>
     </figure>
 
     <h3>72-Hour Go-Bag Contents</h3>

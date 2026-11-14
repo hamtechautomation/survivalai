@@ -197,60 +197,13 @@
     <!-- ═══ BLAST ZONES ═══ -->
     <h2 id="blast-zones">2. Blast Radius by Yield</h2>
 
-    <svg class="dg-legacy" viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;background:var(--bg-0);border:1px solid var(--border);border-radius:8px;display:block;margin:1rem auto;">
-      <defs>
-        <radialGradient id="fireballGrad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#fff" stop-opacity="1"/>
-          <stop offset="60%" stop-color="#ff8c00" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="#ff2200" stop-opacity="0.6"/>
-        </radialGradient>
-      </defs>
-      <text x="350" y="28" text-anchor="middle" fill="#c9a94e" font-size="16" font-weight="bold" font-family="system-ui">Blast Radius Comparison by Yield</text>
-      <text x="350" y="46" text-anchor="middle" fill="#888" font-size="11" font-family="system-ui">Rings = 5 psi blast radius (most houses collapse), drawn to scale · airburst</text>
-      <!-- 1 Mt zones -->
-      <circle cx="350" cy="270" r="200" fill="none" stroke="#8b0000" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
-      <circle cx="350" cy="270" r="185" fill="#1a0500" opacity="0.25"/>
-      <!-- 100kt -->
-      <circle cx="350" cy="270" r="85" fill="#1a0800" opacity="0.35"/>
-      <!-- 10kt -->
-      <circle cx="350" cy="270" r="40" fill="#250a00" opacity="0.5"/>
-      <!-- 1kt -->
-      <circle cx="350" cy="270" r="18" fill="#3a1000" opacity="0.7"/>
-      <!-- Fireball -->
-      <circle cx="350" cy="270" r="8" fill="url(#fireballGrad)" opacity="0.95"/>
-      <!-- Labels -->
-      <line x1="350" y1="270" x2="532" y2="135" stroke="#8b0000" stroke-width="0.8" opacity="0.6"/>
-      <text x="538" y="130" fill="#ff4444" font-size="11" font-family="system-ui" font-weight="bold">1 Mt</text>
-      <text x="538" y="143" fill="#888" font-size="9.5" font-family="system-ui">Fireball: ~0.6 mi</text>
-      <text x="538" y="155" fill="#888" font-size="9.5" font-family="system-ui">5 psi: ~4.6 mi</text>
-      <text x="538" y="167" fill="#888" font-size="9.5" font-family="system-ui">3rd-degree burns: ~7 mi</text>
-      <line x1="350" y1="270" x2="435" y2="180" stroke="#c94444" stroke-width="0.8" opacity="0.6"/>
-      <text x="440" y="178" fill="#ff8844" font-size="11" font-family="system-ui" font-weight="bold">100 kt</text>
-      <text x="440" y="191" fill="#888" font-size="9.5" font-family="system-ui">Fireball: ~0.25 mi</text>
-      <text x="440" y="203" fill="#888" font-size="9.5" font-family="system-ui">5 psi: ~2.1 mi</text>
-      <text x="440" y="215" fill="#888" font-size="9.5" font-family="system-ui">3rd-degree burns: ~2.8 mi</text>
-      <line x1="350" y1="270" x2="390" y2="228" stroke="#e08840" stroke-width="0.8" opacity="0.6"/>
-      <text x="395" y="226" fill="#ffa040" font-size="10" font-family="system-ui" font-weight="bold">10 kt</text>
-      <text x="395" y="238" fill="#888" font-size="9" font-family="system-ui">5 psi: ~1.0 mi</text>
-      <text x="395" y="249" fill="#888" font-size="9" font-family="system-ui">Burns: ~1.1 mi</text>
-      <line x1="350" y1="265" x2="350" y2="236" stroke="#c9a94e" stroke-width="0.8" opacity="0.6"/>
-      <text x="340" y="300" fill="#c9a94e" font-size="9" font-family="system-ui" font-weight="bold" text-anchor="end">1 kt</text>
-      <text x="340" y="311" fill="#888" font-size="8.5" font-family="system-ui" text-anchor="end">5 psi: ~0.45 mi</text>
-      <text x="350" y="272" text-anchor="middle" fill="#fff" font-size="7" font-family="system-ui">GZ</text>
-      <!-- Wind / fallout note -->
-      <text x="62" y="274" fill="#aaa" font-size="10" font-family="system-ui">Wind →</text>
-      <text x="62" y="287" fill="#888" font-size="8.5" font-family="system-ui">Fallout travels</text>
-      <text x="62" y="298" fill="#888" font-size="8.5" font-family="system-ui">downwind 100s mi</text>
-      <!-- Survival zone table -->
-      <rect x="20" y="340" width="660" height="130" rx="4" fill="#0a0f0a" stroke="#333" stroke-width="1"/>
-      <text x="30" y="358" fill="#c9a94e" font-size="11" font-weight="bold" font-family="system-ui">Survival Zones (1 Mt airburst example)</text>
-      <text x="30" y="374" fill="#ff4444" font-size="10" font-family="system-ui">● 0–1.5 mi: Fireball (~0.6 mi) and 20 psi+. Almost no survival above ground.</text>
-      <text x="30" y="390" fill="#ff8844" font-size="10" font-family="system-ui">● 1.5–3 mi: ~10 psi. Most buildings collapse; severe burns in the open.</text>
-      <text x="30" y="406" fill="#ffa040" font-size="10" font-family="system-ui">● 3–5 mi: ~5 psi. Houses collapse; burns to ~7 mi on a clear day. Shelter saves lives.</text>
-      <text x="30" y="422" fill="#ffcc44" font-size="10" font-family="system-ui">● 5–10 mi: 1–3 psi. Windows blown in — flying glass is the main injury. Shelter in place.</text>
-      <text x="30" y="438" fill="#aaffaa" font-size="10" font-family="system-ui">● 10+ mi: Light damage. Ground bursts make heavy fallout downwind (airbursts little) — shelter.</text>
-      <text x="30" y="456" fill="#888" font-size="9" font-family="system-ui">Dirty bomb (RDD): blast zone CONVENTIONAL ONLY. Radiation contamination may cover only a few city blocks.</text>
-    </svg>
+    <figure class="dg dg-multi" id="fig-blast">
+      <div class="dg-cols" style="--cols:1;--cols-sm:1" role="group" aria-label="Nuclear blast effects: bars showing how far the fireball, 5 psi blast and third-degree burns reach for 1 kiloton to 1 megaton airbursts, and the damage zones around a 1 megaton airburst">
+        <svg viewBox="0 0 444 180" role="img" aria-label="HOW FAR EACH EFFECT REACHES"><rect class="dg-panel" x="2" y="2" width="440" height="176" rx="9"></rect><text class="dg-th dg-mid" x="222.0" y="22">HOW FAR EACH EFFECT REACHES</text><text class="dg-ts dg-mid" x="222.0" y="36">airburst, drawn to scale</text><text class="dg-tb dg-tb-sm dg-end" x="56" y="59">1 kt</text><rect class="dg-key" x="66" y="50" width="22.5" height="12" rx="3" data-hl="p5"></rect><text class="dg-tb dg-tb-sm dg-end" x="56" y="85">10 kt</text><rect class="dg-earth" x="66" y="76" width="55.0" height="12" rx="3" data-hl="burn"></rect><rect class="dg-key" x="66" y="76" width="50.0" height="12" rx="3" data-hl="p5"></rect><text class="dg-tb dg-tb-sm dg-end" x="56" y="111">100 kt</text><rect class="dg-earth" x="66" y="102" width="140.0" height="12" rx="3" data-hl="burn"></rect><rect class="dg-key" x="66" y="102" width="105.0" height="12" rx="3" data-hl="p5"></rect><rect class="dg-red" x="66" y="102" width="12.5" height="12" rx="2" data-hl="fb"></rect><text class="dg-tb dg-tb-sm dg-end" x="56" y="137">1 Mt</text><rect class="dg-earth" x="66" y="128" width="350.0" height="12" rx="3" data-hl="burn"></rect><rect class="dg-key" x="66" y="128" width="230.0" height="12" rx="3" data-hl="p5"></rect><rect class="dg-red" x="66" y="128" width="30.0" height="12" rx="2" data-hl="fb"></rect><line class="dg-thin" x1="66" y1="152" x2="416" y2="152"></line><line class="dg-thin" x1="66" y1="149" x2="66" y2="155"></line><text class="dg-ts dg-mid" x="66" y="167">0</text><line class="dg-thin" x1="116" y1="149" x2="116" y2="155"></line><text class="dg-ts dg-mid" x="116" y="167">1 mi</text><line class="dg-thin" x1="166" y1="149" x2="166" y2="155"></line><text class="dg-ts dg-mid" x="166" y="167">2 mi</text><line class="dg-thin" x1="216" y1="149" x2="216" y2="155"></line><text class="dg-ts dg-mid" x="216" y="167">3 mi</text><line class="dg-thin" x1="266" y1="149" x2="266" y2="155"></line><text class="dg-ts dg-mid" x="266" y="167">4 mi</text><line class="dg-thin" x1="316" y1="149" x2="316" y2="155"></line><text class="dg-ts dg-mid" x="316" y="167">5 mi</text><line class="dg-thin" x1="366" y1="149" x2="366" y2="155"></line><text class="dg-ts dg-mid" x="366" y="167">6 mi</text><line class="dg-thin" x1="416" y1="149" x2="416" y2="155"></line><text class="dg-ts dg-mid" x="416" y="167">7 mi</text><rect class="dg-red" x="252" y="56" width="12" height="10" data-hl="fb"></rect><text class="dg-ts" x="270" y="65" data-hl="fb">fireball</text><rect class="dg-key" x="252" y="74" width="12" height="10" data-hl="p5"></rect><text class="dg-ts" x="270" y="83" data-hl="p5">5 psi: most houses collapse</text><rect class="dg-earth" x="252" y="92" width="12" height="10" data-hl="burn"></rect><text class="dg-ts" x="270" y="101" data-hl="burn">3rd-degree burns (clear day)</text></svg>
+        <svg viewBox="0 184 444 240" role="img" aria-label="WHAT TO EXPECT — 1 Mt AIRBURST"><rect class="dg-panel" x="2" y="186" width="440" height="236" rx="9"></rect><text class="dg-th dg-mid" x="222.0" y="206">WHAT TO EXPECT — 1 Mt AIRBURST</text><path class="dg-green" d="M22 404 L22 217.0 A 187.0 187.0 0 0 1 209.0 404 Z" opacity=".25" data-hl="z4"></path><path class="dg-water" d="M22 404 L22 234.0 A 170.0 170.0 0 0 1 192.0 404 Z" opacity=".45" data-hl="z3"></path><path class="dg-key" d="M22 404 L22 319.0 A 85.0 85.0 0 0 1 107.0 404 Z" opacity=".45" data-hl="z2"></path><path class="dg-red" d="M22 404 L22 353.0 A 51.0 51.0 0 0 1 73.0 404 Z" opacity=".45" data-hl="z1"></path><path class="dg-red" d="M22 404 L22 378.5 A 25.5 25.5 0 0 1 47.5 404 Z" opacity=".45" data-hl="z0"></path><circle class="dg-keyf" cx="22" cy="404" r="4"></circle><text class="dg-tb dg-tb-sm" x="26" y="398">GZ</text><rect class="dg-red" x="226" y="212" width="12" height="12" rx="2" data-hl="z0"></rect><text class="dg-tb dg-tb-sm" x="244" y="222" data-hl="z0">0–1.5 mi: fireball and 20 psi+</text><text class="dg-ts" x="244" y="235" data-hl="z0">almost no survival above ground</text><rect class="dg-red" x="226" y="242" width="12" height="12" rx="2" data-hl="z1"></rect><text class="dg-tb dg-tb-sm" x="244" y="252" data-hl="z1">1.5–3 mi: ~10 psi</text><text class="dg-ts" x="244" y="265" data-hl="z1">most buildings collapse</text><rect class="dg-key" x="226" y="272" width="12" height="12" rx="2" data-hl="z2"></rect><text class="dg-tb dg-tb-sm" x="244" y="282" data-hl="z2">3–5 mi: ~5 psi</text><text class="dg-ts" x="244" y="295" data-hl="z2">houses collapse; shelter saves lives</text><rect class="dg-water" x="226" y="302" width="12" height="12" rx="2" data-hl="z3"></rect><text class="dg-tb dg-tb-sm" x="244" y="312" data-hl="z3">5–10 mi: 1–3 psi</text><text class="dg-ts" x="244" y="325" data-hl="z3">windows blown in — flying glass</text><rect class="dg-green" x="226" y="332" width="12" height="12" rx="2" data-hl="z4"></rect><text class="dg-tb dg-tb-sm" x="244" y="342" data-hl="z4">10+ mi: light damage</text><text class="dg-ts" x="244" y="355" data-hl="z4">ground bursts bring heavy fallout</text><text class="dg-ts" x="226" y="378">Fallout drifts downwind for hundreds</text><text class="dg-ts" x="226" y="390">of miles. A dirty bomb is an ordinary</text><text class="dg-ts" x="226" y="402">blast; contamination may cover only</text><text class="dg-ts" x="226" y="414">a few city blocks.</text></svg>
+      </div>
+      <figcaption>Blast falls off quickly with distance; burns reach further on a clear day. Outside the blast zone the danger is <strong>fallout</strong>, and getting into the best shelter you can reach within minutes is what saves lives (see Fallout, below).</figcaption>
+    </figure>
 
     <!-- ═══ FALLOUT ═══ -->
     <h2 id="fallout">3. Fallout — The Survivable Threat</h2>

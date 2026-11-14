@@ -1067,53 +1067,10 @@ Hypothalamus → CRH → Pituitary → ACTH → Adrenal cortex
 
         <h3>Conflict De-Escalation Flowchart</h3>
         <div class="flowchart-wrap">
-          <svg class="dg-legacy" viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto;" aria-label="Conflict de-escalation flowchart">
-            <defs>
-              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                <path d="M0,0 L0,6 L8,3 z" fill="#c9a94e"/>
-              </marker>
-            </defs>
-            <!-- Start -->
-            <rect x="250" y="10" width="200" height="40" rx="20" fill="#1a2a1a" stroke="#4a9a4a" stroke-width="1.5"/>
-            <text x="350" y="35" text-anchor="middle" fill="#7acc7a" font-size="13" font-family="sans-serif">Conflict Detected</text>
-            <!-- Arrow down -->
-            <line x1="350" y1="50" x2="350" y2="90" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
-            <!-- Assess stage -->
-            <rect x="200" y="90" width="300" height="40" rx="4" fill="#14140a" stroke="#5c4a1e" stroke-width="1.5"/>
-            <text x="350" y="110" text-anchor="middle" fill="#d4a840" font-size="12" font-family="sans-serif">Assess: Is violence imminent?</text>
-            <text x="350" y="124" text-anchor="middle" fill="#888" font-size="10" font-family="sans-serif">Physical posturing, raised voices, weapons visible?</text>
-            <!-- Yes / No branches -->
-            <line x1="350" y1="130" x2="350" y2="155" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
-            <!-- Diamond -->
-            <polygon points="350,155 430,185 350,215 270,185" fill="#1a0a0a" stroke="#8b0000" stroke-width="1.5"/>
-            <text x="350" y="190" text-anchor="middle" fill="#e07070" font-size="12" font-family="sans-serif">Yes</text>
-            <!-- Yes path right -->
-            <line x1="430" y1="185" x2="540" y2="185" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
-            <rect x="540" y="165" width="150" height="40" rx="4" fill="#1a0505" stroke="#8b0000" stroke-width="1.5"/>
-            <text x="615" y="181" text-anchor="middle" fill="#e07070" font-size="11" font-family="sans-serif">Physical separation</text>
-            <text x="615" y="197" text-anchor="middle" fill="#e07070" font-size="11" font-family="sans-serif">Remove audience</text>
-            <!-- No path down -->
-            <text x="295" y="205" text-anchor="middle" fill="#7acc7a" font-size="11" font-family="sans-serif">No</text>
-            <line x1="350" y1="215" x2="350" y2="245" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
-            <!-- Step 1 -->
-            <rect x="180" y="245" width="340" height="40" rx="4" fill="#0a1a1a" stroke="#2a5a5a" stroke-width="1.5"/>
-            <text x="350" y="262" text-anchor="middle" fill="#7acccc" font-size="12" font-family="sans-serif">Separate parties — neutral locations</text>
-            <text x="350" y="277" text-anchor="middle" fill="#888" font-size="10" font-family="sans-serif">No audience. Cool-down period (minimum 20 minutes).</text>
-            <line x1="350" y1="285" x2="350" y2="315" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
-            <!-- Step 2 -->
-            <rect x="180" y="315" width="340" height="40" rx="4" fill="#0a1a1a" stroke="#2a5a5a" stroke-width="1.5"/>
-            <text x="350" y="332" text-anchor="middle" fill="#7acccc" font-size="12" font-family="sans-serif">Individual listening — mediator hears each side</text>
-            <text x="350" y="347" text-anchor="middle" fill="#888" font-size="10" font-family="sans-serif">"What happened?" — no interruptions, no judgment</text>
-            <line x1="350" y1="355" x2="350" y2="385" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
-            <!-- Step 3 -->
-            <rect x="180" y="385" width="340" height="40" rx="4" fill="#0a1a1a" stroke="#2a5a5a" stroke-width="1.5"/>
-            <text x="350" y="402" text-anchor="middle" fill="#7acccc" font-size="12" font-family="sans-serif">Joint session — name the core needs, not positions</text>
-            <text x="350" y="417" text-anchor="middle" fill="#888" font-size="10" font-family="sans-serif">"You both need X. Let's find a solution that meets both."</text>
-            <line x1="350" y1="425" x2="350" y2="455" stroke="#c9a94e" stroke-width="1.5" marker-end="url(#arrow)"/>
-            <!-- End -->
-            <rect x="240" y="455" width="220" height="30" rx="15" fill="#0f1a0f" stroke="#4a9a4a" stroke-width="1.5"/>
-            <text x="350" y="474" text-anchor="middle" fill="#7acc7a" font-size="12" font-family="sans-serif">Agreement + Written Record</text>
-          </svg>
+          <figure class="dg" id="fig-deescalate">
+      <svg viewBox="0 0 444 376" role="img" aria-label="Conflict de-escalation: if violence is imminent, separate the people and remove the audience first; then cool down for at least 20 minutes, listen to each alone, hold a joint session about needs, and write down the agreement"><defs><marker id="ah-de" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><rect class="dg-hdrbg" x="130" y="6" width="184" height="30" rx="8"/><text class="dg-tb dg-mid" x="222" y="26">CONFLICT DETECTED</text><path class="dg-arrow" d="M222 38 L222 52" marker-end="url(#ah-de)"/><path class="dg-key" d="M222 54 L312 84 L222 114 L132 84 Z"/><text class="dg-tb dg-tb-sm dg-mid" x="222" y="82">Is violence</text><text class="dg-tb dg-tb-sm dg-mid" x="222" y="96">imminent?</text><text class="dg-ts dg-mid" x="222" y="130">posturing, raised voices, weapons in sight?</text><path class="dg-red-s" d="M312 84 L338 84" marker-end="url(#ah-de)"/><text class="dg-ts" x="320" y="76">yes</text><rect class="dg-badbg" x="340" y="58" width="100" height="54" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="390" y="78">SEPARATE</text><text class="dg-ts dg-mid" x="390" y="92">move them apart;</text><text class="dg-ts dg-mid" x="390" y="104">clear onlookers</text><path class="dg-arrow" d="M406 114 L406 171 L374 171" marker-end="url(#ah-de)"/><text class="dg-ts" x="412" y="146">then</text><path class="dg-arrow" d="M222 136 L222 148" marker-end="url(#ah-de)"/><text class="dg-ts" x="230" y="146">no</text><rect class="dg-panel" x="70" y="150" width="302" height="42" rx="8"/><circle class="dg-keyf" cx="88" cy="171" r="9"/><text class="dg-num dg-mid" x="88" y="175">1</text><text class="dg-tb dg-tb-sm" x="104" y="168">SEPARATE AND COOL DOWN</text><text class="dg-ts" x="104" y="183">neutral places, no audience, at least 20 minutes</text><path class="dg-arrow" d="M222 193 L222 205" marker-end="url(#ah-de)"/><rect class="dg-panel" x="70" y="206" width="302" height="42" rx="8"/><circle class="dg-keyf" cx="88" cy="227" r="9"/><text class="dg-num dg-mid" x="88" y="231">2</text><text class="dg-tb dg-tb-sm" x="104" y="224">LISTEN TO EACH ALONE</text><text class="dg-ts" x="104" y="239">“What happened?” — no interrupting, no judging</text><path class="dg-arrow" d="M222 249 L222 261" marker-end="url(#ah-de)"/><rect class="dg-panel" x="70" y="262" width="302" height="42" rx="8"/><circle class="dg-keyf" cx="88" cy="283" r="9"/><text class="dg-num dg-mid" x="88" y="287">3</text><text class="dg-tb dg-tb-sm" x="104" y="280">JOINT SESSION</text><text class="dg-ts" x="104" y="295">name the needs, not the positions: “you both need X”</text><path class="dg-arrow" d="M222 305 L222 317" marker-end="url(#ah-de)"/><rect class="dg-okbg" x="70" y="318" width="302" height="42" rx="8"/><circle class="dg-keyf" cx="88" cy="339" r="9"/><text class="dg-num dg-mid" x="88" y="343">4</text><text class="dg-tb dg-tb-sm" x="104" y="336">AGREEMENT</text><text class="dg-ts" x="104" y="351">write it down and both sign</text></svg>
+      <figcaption>Safety first, talking second. Nobody resolves anything while angry and watched, so cool-down and privacy come before any discussion.</figcaption>
+    </figure>
         </div>
 
         <!-- ═══ SECTION 9: MORALE ═══ -->

@@ -299,6 +299,35 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Redrawn diagrams, fourth batch (`tools/redraw4.py`)
+
+This finishes the redraws. Left as they are on purpose: the illustrated plant cards, the two
+decorative scenes, the interactive foraging wheel, the compass rose, the box-breathing widget, and
+the heat and temper colour charts (their colours are the information).
+
+| Section | New `id` | What changed besides the look |
+|---|---|---|
+| Agriculture | `fig-soiltri` | **Now the real USDA triangle**: all 12 soil classes drawn from their published boundaries (it was a sketch with 5 rough zones), with a worked jar-test example |
+| Agriculture | `fig-rotation` | The cycle plus the four staggered beds as a grid |
+| Agriculture | `fig-companion` | Cards instead of a wheel; same pairs, plus the three sisters |
+| Agriculture | `fig-swale-ag` | Same drawing as Water Systems (`fig-swale`) |
+| Agriculture | `fig-aquaponics` | System and nitrogen cycle as two panels |
+| Building | `fig-perimeter` | The drawing's "50–100 m" appears nowhere in the text; it now uses the text's 100–200 m for the outer line |
+| Energy | `fig-solar` | Positive and negative wires and every fuse shown. **Modified-sine note corrected**: the old label said modified sine is "OK for motors/tools"; motors run hotter on it and some electronics and chargers fail |
+| Navigation | `fig-sky-north`, `fig-sky-south` | **Plotted from real star positions**, and **the sky turns** (anticlockwise round Polaris, clockwise round the south pole; one turn per 2 minutes; labels stay upright; pauses on hover; off for reduced motion and in print). **Orion removed from the north-facing chart**: northern observers see it in the south. Capella and Deneb added. The 4.5× Crux rule checks out on the real positions |
+| Navigation | `fig-sky-signposts` | Replaces an "all-sky winter" chart that also showed Vega and Arcturus (not winter-evening stars). Now two seasonal signposts: arc to Arcturus (spring) and Orion's belt to Sirius (winter) |
+| NBC | `fig-blast` | Effect distances as bars to scale, and the 1 Mt zones as quarter rings |
+| Psychology | `fig-deescalate` | Same steps as a ladder |
+| Security | `fig-bugout` | Same four questions, in order |
+| Textiles | `fig-tunic` | Layout and sewn-up view |
+| Textiles | `fig-sashiko` | **The wave pattern is now real seikaiha** (overlapping arcs); it was drawn as wavy lines |
+| Vehicles | `fig-cargobike` | **Contradiction removed**: the drawing gave the rear rack "max 50 lb" but each pannier "40 lb" (panniers hang on the rack). Now the rack rating covers the panniers, with typical figures and a reminder to check the stamped rating |
+
+⚑ **needs expert review:** `fig-blast` (zone pressures for a 1 Mt airburst, kept from the page),
+`fig-aquaponics` (1 fish per 40 L stocking).
+
+---
+
 ## Redrawn diagrams, third batch (`tools/redraw3.py`)
 
 | Section | New `id` | What changed besides the look |
