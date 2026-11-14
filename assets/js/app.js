@@ -169,6 +169,7 @@
     setupOnThisPage();
     setupReveal();
     setupPlayers();
+    setupKnotScrub();
     setupDiagrams();
     setupPalette();
     setupEmergency();
@@ -788,7 +789,7 @@
         Off for "reduce motion" and when printing.
      3. Parts tagged data-hl="key" light up together with their label when
         you hover, tap or focus either one. */
-  const DG_SKIP = 'h1, h2, h3, a, button, .sec-art, .sos, .palette, .otp-bar, .dg-lb, [class*="icon"], .hero-stat';
+  const DG_SKIP = 'h1, h2, h3, a, button, .kn-tie, .sec-art, .sos, .palette, .otp-bar, .dg-lb, [class*="icon"], .hero-stat';
   function isDiagram(svg) {
     if (svg.closest(DG_SKIP)) return false;
     const vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
@@ -994,6 +995,106 @@
         io.observe(fig.querySelector('svg'));
       }
       window.addEventListener('beforeprint', () => { setPlaying(false); show(n); });
+    });
+  }
+
+  /* =================== KNOTS THAT TIE THEMSELVES ===================
+     Each knot player (sections/knots.html, built by tools/knots/build.py) also holds a
+     "tie it" drawing in which every rope piece knows its strand and arc range. A slider
+     moves through the step keyframes and lays the rope along its real path: crossings
+     only cover once both passes are there, the whipped end rides the tip. "Turn it
+     over" flips to the knot seen from behind (mirrored, every over now under). */
+  function setupKnotScrub() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('figure.dg-knot').forEach(fig => {
+      const tie = fig.querySelector('.kn-tie'); if (!tie) return;
+      const svgs = [...tie.querySelectorAll('svg.kn-scrub')];
+      const keys = JSON.parse(svgs[0].dataset.keys);
+      const segW = keys.slice(1).map((k, j) => k.reduce((a, v, i) => a + Math.abs(v - keys[j][i]), 0) || 1);
+      const total = segW.reduce((a, b) => a + b, 0);
+      const views = svgs.map(svg => ({
+        pcs: [...svg.querySelectorAll('.ks-pc')].map(g => ({ i: +g.dataset.i, a: +g.dataset.a, b: +g.dataset.b,
+          need: g.dataset.need ? g.dataset.need.split(',').map(x => x.split(':').map(Number)) : null,
+          r: [...g.querySelectorAll('.ks-r')], hi: g.querySelector('.ks-hi'), g })),
+        bk: [...svg.querySelectorAll('.ks-bk')].map(p => ({ i: +p.dataset.i, a: +p.dataset.a, p })),
+        tips: [...svg.querySelectorAll('.ks-tip')].map(g => ({ i: +g.dataset.i, g })),
+        axes: [...svg.querySelectorAll('.ks-axis')].reduce((o, p) => (o[+p.dataset.i] = { p, len: +p.dataset.len, tl: p.getTotalLength() }, o), {})
+      }));
+      views.forEach(v => v.pcs.forEach(pc => {
+        pc.r.forEach(p => { p.style.strokeDasharray = '100 101'; });
+        const L = Math.max(1, pc.b - Math.max(0, pc.a - 0.7));      // shared path has pathLength 100: keep the 5/4 highlight stripes in real units
+        if (pc.hi) pc.hi.style.strokeDasharray = (500 / L).toFixed(3) + ' ' + (400 / L).toFixed(3);
+      }));
+      function at(t) {                       // per-strand arc length at slider position t (0..1)
+        let x = t * total, j = 0;
+        while (j < segW.length - 1 && x > segW[j]) { x -= segW[j]; j++; }
+        const f = Math.min(1, x / segW[j]);
+        return keys[j].map((v, i) => v + (keys[j + 1][i] - v) * f);
+      }
+      function render(t) {
+        const u = at(t), done = t >= 0.999;
+        views.forEach(v => {
+          v.pcs.forEach(pc => {
+            const ok = !pc.need || pc.need.every(([i, s]) => u[i] >= s - 0.5);
+            const f = ok ? Math.max(0, Math.min(1, (u[pc.i] - pc.a) / (pc.b - pc.a))) : 0;
+            pc.g.style.display = f > 0 ? '' : 'none';
+            pc.r.forEach(p => { p.style.strokeDashoffset = (100 * (1 - f)).toFixed(2); });
+            pc.hi.style.opacity = done ? '' : '0';
+          });
+          v.bk.forEach(b => { b.p.style.opacity = u[b.i] > b.a + 1 ? '' : '0'; });
+          v.tips.forEach(tp => {
+            const ax = v.axes[tp.i]; if (!ax) return;
+            const s = u[tp.i]; if (s < 2) { tp.g.style.display = 'none'; return; }
+            const k = ax.tl / ax.len, p1 = ax.p.getPointAtLength(s * k), p0 = ax.p.getPointAtLength(Math.max(0, s - 4) * k);
+            tp.g.style.display = '';
+            tp.g.setAttribute('transform', 'translate(' + p1.x.toFixed(1) + ' ' + p1.y.toFixed(1) + ') rotate(' + (Math.atan2(p1.y - p0.y, p1.x - p0.x) * 180 / Math.PI).toFixed(1) + ')');
+          });
+        });
+      }
+      // controls
+      const name = (svgs[0].getAttribute('aria-label') || 'the knot').replace(/, tying itself$/, '');
+      const mode = document.createElement('div');
+      mode.className = 'kn-mode no-print'; mode.setAttribute('role', 'tablist');
+      mode.innerHTML = '<button type="button" role="tab" aria-selected="true" data-m="steps">Steps</button><button type="button" role="tab" aria-selected="false" data-m="tie">Watch it tie</button>';
+      fig.insertBefore(mode, fig.firstChild);
+      const bar = document.createElement('div');
+      bar.className = 'kn-bar';
+      bar.innerHTML = '<button type="button" class="dg-ctl-btn kn-play">▶ Play</button>' +
+        '<input type="range" min="0" max="1000" value="1000" aria-label="How far ' + name + ' is tied">' +
+        (svgs.length > 1 ? '<button type="button" class="dg-ctl-btn kn-turn" aria-pressed="false">↻ Turn it over</button>' : '');
+      tie.appendChild(bar);
+      const slider = bar.querySelector('input'), play = bar.querySelector('.kn-play'), turn = bar.querySelector('.kn-turn'), flip = tie.querySelector('.kn-flip');
+      let raf = null;
+      const stop = () => { if (raf) cancelAnimationFrame(raf); raf = null; play.textContent = +slider.value >= 1000 ? '↺ Replay' : '▶ Play'; };
+      function run() {
+        if (raf) { stop(); return; }
+        if (+slider.value >= 1000) slider.value = 0;
+        const t0 = performance.now(), v0 = +slider.value, dur = 9000 * (1 - v0 / 1000);
+        play.textContent = '❚❚ Pause';
+        const step = now => {
+          const v = Math.min(1000, v0 + (now - t0) / dur * (1000 - v0));
+          slider.value = v; render(v / 1000);
+          if (v < 1000) raf = requestAnimationFrame(step); else { raf = null; stop(); }
+        };
+        raf = requestAnimationFrame(step);
+      }
+      slider.addEventListener('input', () => { stop(); render(+slider.value / 1000); });
+      play.addEventListener('click', run);
+      if (turn) turn.addEventListener('click', () => {
+        const on = !flip.classList.contains('is-turned');
+        flip.classList.toggle('is-turned', on); turn.setAttribute('aria-pressed', String(on));
+        turn.textContent = on ? '↺ Turn it back' : '↻ Turn it over';
+      });
+      mode.addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b) return;
+        const tieOn = b.dataset.m === 'tie';
+        mode.querySelectorAll('button').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+        fig.classList.toggle('kn-tying', tieOn); tie.hidden = !tieOn;
+        const ps = fig.querySelector('.dg-ctl .dg-ctl-play');
+        if (tieOn) { if (fig.classList.contains('dg-playing') && ps) ps.click(); slider.value = 0; render(0); if (!reduce) run(); else { slider.value = 1000; render(1); } }
+        else stop();
+      });
+      render(1);
     });
   }
 

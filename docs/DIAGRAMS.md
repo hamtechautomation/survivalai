@@ -299,6 +299,29 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Knots that tie themselves, sun clock, Morse trainer (November 2026)
+
+- **Watch it tie** (Knots): each knot player has a Steps / Watch it tie switch. A slider (or Play)
+  lays the rope along its real path through the same keyframes as the steps; a crossing only
+  covers once both passes have arrived, and the whipped end rides the tip. The drawing comes from
+  the same checked geometry (`Knot.scrub` in tools/knots/rope.py). **Turn it over** (bowline, sheet
+  bend, reef) flips to the knot seen from behind: mirrored with every over now under, built by
+  `turned_over()` and passed through the same crossing checker. Not for knots drawn against a post
+  or anchor, whose back is hidden.
+- **Sun clock** (`data-calc="sun"`): Navigation (shadow stick from above, with the tip's path for
+  the whole day) and Shelter (a window under an overhang at noon). Sun time; declination
+  23.44°·sin(360/365·(day − 81)). London midsummer noon gives 62°, midwinter 15°.
+- **Morse trainer** (Communications): type a message to hear it and see it flash in step
+  (dot 1, dash 3, gaps 1/3/7 units, unit = 1.2 s ÷ wpm), Repeat, a full-screen lamp for
+  signalling with a phone (keeps the screen awake), and a listen-and-decode game.
+
+**Correction:** Shelter › Overhang Sizing gave depth = height × tan(90° − latitude − 23.5°), which
+makes overhangs *smaller* further from the equator. The geometry for shading the whole window at
+midsummer noon is depth = height × tan(latitude − 23.5°): 0.1× at 30°, 0.4× at 45°, 0.55× at 52°.
+The "50–65% for 30–45°N" rule of thumb was removed.
+
+---
+
 ## Emergency-first openings, phone tables, calculators, more step players (November 2026)
 
 - **"If this is happening now" strip** under every section header (`setupNowStrip` in app.js):

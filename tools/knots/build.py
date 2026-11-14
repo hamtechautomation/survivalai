@@ -8,7 +8,7 @@ numbered steps always match the frames.
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import knots as K
-from rope import Strand, Knot
+from rope import Strand, Knot, turned_over
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -25,7 +25,7 @@ def arrow_defs(i):
     return '<marker id="ah-%s" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker>' % i
 
 
-def player(fid, vb, label, knot, frames, final, steps, cap, objects='', extra_defs='', final_knot=None):
+def player(fid, vb, label, knot, frames, final, steps, cap, objects='', extra_defs='', final_knot=None, scrub=True):
     """frames: list of (upto, labels_svg) for the tying steps; final: labels for the finished, checked knot.
     upto = list (one entry per strand) of arc lengths, None = whole strand."""
     n = len(frames) + 1
@@ -44,8 +44,27 @@ def player(fid, vb, label, knot, frames, final, steps, cap, objects='', extra_de
     body += '<g data-s="%d-%d"><use href="#%s-full"/>%s</g>' % (n, n, fid, final)
     svg = '<svg viewBox="%s" role="img" aria-label="%s">%s<defs>%s%s</defs>%s</svg>' % (vb, label, knot.defs_svg(), extra_defs, full, body)   # body and full are built above, so defs_svg() is complete here
     lis = ''.join('<li>%s</li>' % s for s in steps)
-    return ('    <figure class="dg dg-player dg-knot" id="%s" data-steps="%d">\n      %s\n      <ol class="dg-steps-list">%s</ol>\n'
-            '      <figcaption>%s</figcaption>\n    </figure>\n' % (fid, n, svg, lis, cap))
+    tie = scrub_view(fid, vb, label, knot, frames, objects) if scrub else ''
+    return ('    <figure class="dg dg-player dg-knot" id="%s" data-steps="%d">\n      %s\n%s      <ol class="dg-steps-list">%s</ol>\n'
+            '      <figcaption>%s</figcaption>\n    </figure>\n' % (fid, n, svg, tie, lis, cap))
+
+
+def scrub_view(fid, vb, label, knot, frames, objects):
+    """The 'watch it tie' drawing: the same rope laid continuously along its path by a slider
+    (keyframes = the step frames), plus the knot seen from behind for knots that stand free."""
+    S = knot.strands
+    full = [s.length for s in S]
+    start = [s.length if frames[0][0][i] is None else 0.0 for i, s in enumerate(S)]
+    keys = [start] + [[s.length if u is None else u for s, u in zip(S, upto)] for upto, _ in frames] + [full]
+    body, kj = knot.scrub(keys, objects, prefix=fid.replace('fig-', 'ks') + 'f')
+    out = '      <div class="kn-tie" hidden>\n        <div class="kn-flip">\n'
+    out += '          <svg class="kn-scrub kn-front" viewBox="%s" role="img" aria-label="%s, tying itself" data-keys=\'%s\'>%s</svg>\n' % (vb, label.split(' tied')[0].split(' set up')[0], kj, body)
+    if not objects:
+        x0, y0, w, h = map(float, vb.split())
+        back = turned_over(knot, x0 + w / 2)
+        bb, _ = back.scrub(keys, prefix=fid.replace('fig-', 'ks') + 'b')
+        out += '          <svg class="kn-scrub kn-rear" viewBox="%s" role="img" aria-label="The same knot seen from the back" data-keys=\'%s\'>%s</svg>\n' % (vb, kj, bb)
+    return out + '        </div>\n      </div>\n'
 
 
 def arcs(strand, idxs):
@@ -218,7 +237,7 @@ def fig_trucker():
                    'Pull the free end back towards the near anchor. The loop works as a pulley: in theory you pull three times as hard as your hand, in practice nearer twice, because rope rubs on rope.',
                    'Pinch the rope where it leaves the loop to hold the tension, then lock it with <strong>two half hitches</strong> round the line just below the loop.'],
                   'The pale blocks stand for knots described in the steps, not drawn strand by strand. An overhand loop jams after a hard pull; an alpine butterfly loop does not, if you know it. Rope sawing on rope wears the loop, so shift its position on a line you use often.',
-                  anchors, arrow_defs('tr'), final_knot=kf)
+                  anchors, arrow_defs('tr'), final_knot=kf, scrub=False)
 
 
 # ═══ ROPE WORDS ════════════════════════════════════════════════════════════

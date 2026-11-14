@@ -335,6 +335,30 @@ async function browserChecks() {
   await desk.goto(BASE_URL + 'sections/energy.html'); await desk.waitForSelector('.calc[data-calc=solar] .calc-ov');
   if (await desk.$eval('.calc[data-calc=solar] [data-o=bat]', e => e.textContent) !== '275 Ah at 12 V') fail('calc', 'solar battery for 550 Wh/day is not 275 Ah (the page’s worked example)');
 
+  // Sun clock: London midsummer noon sun stands about 62° high; the overhang shades the window then.
+  await desk.goto(BASE_URL + 'sections/shelter.html'); await desk.waitForSelector('.calc[data-calc=sun] .calc-ov', { timeout: 5000 }).catch(() => fail('calc', 'shelter.html: sun clock did not render'));
+  if (await desk.$('.calc[data-calc=sun]')) {
+    await desk.$eval('.calc[data-calc=sun] input[id$=d]', e => { e.value = 172; e.dispatchEvent(new Event('input')); });
+    await desk.$eval('.calc[data-calc=sun] input[id$=t]', e => { e.value = 12; e.dispatchEvent(new Event('input')); });
+    const alt = await desk.$eval('.calc[data-calc=sun] [data-o=alt]', e => e.textContent), win = await desk.$eval('.calc[data-calc=sun] [data-o=win]', e => e.textContent);
+    if (!alt.startsWith('62°') || win !== '0%') fail('calc', `sun clock: London midsummer noon gives "${alt}", window ${win}`);
+  }
+  // Morse trainer renders the code for SOS.
+  await desk.goto(BASE_URL + 'sections/communications.html');
+  const mo = await desk.waitForSelector('.calc[data-calc=morse] .mo-code .mo-ch', { timeout: 5000 }).catch(() => null);
+  if (!mo) fail('calc', 'communications.html: Morse trainer did not render');
+  else if (await desk.$$eval('.calc[data-calc=morse] .mo-code i', a => a.map(i => i.className).join(' ')) !== 'mo-dot mo-dot mo-dot mo-dash mo-dash mo-dash mo-dot mo-dot mo-dot') fail('calc', 'Morse trainer does not show SOS as ··· ––– ···');
+
+  // Knots tie themselves: switching to "Watch it tie" shows the drawing; at the end every rope piece is fully laid.
+  await desk.goto(BASE_URL + 'sections/knots.html'); await desk.waitForTimeout(300);
+  for (const id of ['fig-bowline', 'fig-clove', 'fig-tautline', 'fig-sheetbend', 'fig-reef']) {
+    if (!(await desk.$('#' + id + ' .kn-mode'))) { fail('knots', `${id}: no "Watch it tie" switch`); continue; }
+    await desk.click('#' + id + ' .kn-mode [data-m=tie]');
+    await desk.$eval('#' + id + ' .kn-bar input', e => { e.value = 1000; e.dispatchEvent(new Event('input')); });
+    const r = await desk.$eval('#' + id, f => ({ shown: !f.querySelector('.kn-tie').hidden, notLaid: [...f.querySelectorAll('.kn-front .ks-r')].filter(p => parseFloat(p.style.strokeDashoffset) > 0.5).length }));
+    if (!r.shown || r.notLaid) fail('knots', `${id}: tie view ${r.shown ? '' : 'not shown, '}${r.notLaid} rope pieces not laid at the end`);
+  }
+
   // New step players exist and have controls.
   await desk.goto(BASE_URL + 'sections/medical.html'); await desk.waitForTimeout(300);
   for (const id of ['fig-cpr-steps', 'fig-choking-steps', 'fig-splint-steps', 'fig-tourniquet-steps', 'fig-recovery-steps'])

@@ -3291,3 +3291,64 @@ figure.dg:hover .dg-skyturn, figure.dg:hover .dg-sky-lab, figure.dg:focus-within
 @media (prefers-reduced-motion: reduce) { .dg-live [data-s] .mv-loop, .dg-live [data-s] .mv-flow { animation: none !important; } }
 @media print { .mv-loop, .mv-flow { animation: none !important; transform: none !important; }
   .dg-rlimb { stroke: #888 !important; } .dg-rbody, .dg-rhand { fill: #ccc !important; stroke: #000 !important; } }
+
+/* Knots that tie themselves (app.js setupKnotScrub; drawings from tools/knots/build.py). */
+.kn-mode { display: inline-flex; margin: 0 0 .5rem; padding: 3px; background: var(--bg-1); border: 1px solid var(--border-hi); border-radius: 999px; }
+.kn-mode button { min-height: 34px; padding: 0 14px; font: 700 .82rem var(--font); color: var(--text-2); background: none; border: 0; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s; }
+.kn-mode button[aria-selected="true"] { background: var(--amber); color: var(--bg-0); }
+.kn-mode button:focus-visible { outline: 2px solid var(--amber-light); outline-offset: 2px; }
+figure.kn-tying > svg, figure.kn-tying > .dg-ctl { display: none; }
+.kn-tie { perspective: 1400px; }
+.kn-flip { display: grid; transition: transform .9s cubic-bezier(.4, .1, .2, 1); transform-style: preserve-3d; }
+.kn-flip > svg { grid-area: 1 / 1; display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.kn-flip > svg.kn-rear { transform: rotateY(180deg); }
+.kn-flip.is-turned { transform: rotateY(180deg); }
+.kn-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: .6rem 0 .2rem; }
+.kn-bar input[type=range] { flex: 1 1 180px; height: 34px; accent-color: var(--amber); cursor: pointer; }
+.kn-play { min-width: 96px; }
+@media (prefers-reduced-motion: reduce) { .kn-flip { transition: none; } }
+@media print { .kn-mode, .kn-tie { display: none !important; } figure.kn-tying > svg { display: block !important; } }
+
+/* Sun clock and Morse trainer (assets/js/calc.js). */
+.calc-btns { display: flex; flex-wrap: wrap; gap: 6px; margin: .3rem 0 .6rem; align-items: center; }
+.calc-btns select { min-height: 36px; }
+.calc-btns .dg-ctl-btn[aria-pressed="true"] { border-color: var(--amber); color: var(--amber-light); }
+.calc input[type=text] { flex: 1 1 12rem; min-height: 42px; padding: .35rem .6rem; font: 700 1.05rem var(--font-mono, monospace); letter-spacing: .08em; text-transform: uppercase; color: var(--text-0); background: var(--bg-1); border: 1px solid var(--border-hi); border-radius: 8px; }
+.calc-sunball { fill: #ffd25a; stroke: #ffb020; stroke-width: 2; filter: drop-shadow(0 0 8px #ffcf4a); }
+.calc-shadow { stroke: #000; stroke-opacity: .8; stroke-width: 5; stroke-linecap: round; }
+.calc-ray { stroke: #ffd25a; stroke-width: 1.4; stroke-dasharray: 6 5; opacity: .75; }
+.calc-sunlit { fill: #ffd25a; opacity: .28; }
+@media print { .calc-sunball { fill: #fff !important; stroke: #000 !important; filter: none; } }
+/* Morse */
+.mo-top { display: flex; gap: 1rem; align-items: flex-start; }
+.mo-main { flex: 1; min-width: 0; }
+.mo-lamp { flex: none; width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 40% 35%, #3a3424, #1b1912); border: 3px solid #5a4d2a; box-shadow: inset 0 2px 8px rgba(0,0,0,.6); transition: background .04s, box-shadow .04s; }
+.mo-lamp i { width: 34px; height: 34px; border-radius: 50%; background: #4a4230; transition: background .04s, box-shadow .04s; }
+.mo-lamp.lit { background: radial-gradient(circle at 40% 35%, #fff6cf, #ffd25a); box-shadow: 0 0 34px 10px rgba(255, 210, 90, .55); }
+.mo-lamp.lit i { background: #fffbe8; box-shadow: 0 0 18px 6px #fff2b0; }
+.mo-code { display: flex; flex-wrap: wrap; gap: .45rem .9rem; min-height: 2.2rem; margin: .5rem 0 .2rem; align-items: center; }
+.mo-ch { display: inline-flex; align-items: center; gap: 3px; padding: 3px 6px; border-radius: 6px; transition: background .15s; }
+.mo-ch b { margin-right: 4px; font: 800 .95rem var(--font); color: var(--text-1); }
+.mo-ch.on { background: color-mix(in srgb, var(--amber) 16%, transparent); }
+.mo-dot, .mo-dash { display: inline-block; height: 8px; border-radius: 4px; background: var(--text-3); transition: background .05s, box-shadow .05s; }
+.mo-dot { width: 8px; } .mo-dash { width: 22px; }
+.mo-dot.on, .mo-dash.on { background: var(--amber-light); box-shadow: 0 0 8px var(--amber); }
+.mo-sp { width: 14px; }
+.mo-snd { display: inline-flex; gap: .35rem; align-items: center; font-size: .82rem; color: var(--text-2); margin-top: .3rem; }
+.mo-game { margin-top: 1rem; padding-top: .8rem; border-top: 1px dashed var(--border-hi); }
+.mo-keys { display: grid; grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); gap: 5px; margin: .3rem 0 .5rem; }
+.mo-key { min-height: 42px; font: 800 1rem var(--font); color: var(--text-0); background: var(--bg-1); border: 1px solid var(--border-hi); border-radius: 8px; cursor: pointer; transition: transform .1s, background .2s; }
+.mo-key:active { transform: scale(.94); }
+.mo-key.ok { background: color-mix(in srgb, #6cc08f 35%, var(--bg-1)); border-color: #6cc08f; animation: mo-pop .35s ease; }
+.mo-key.bad { background: color-mix(in srgb, #e06060 35%, var(--bg-1)); border-color: #e06060; animation: mo-shake .35s ease; }
+@keyframes mo-pop { 50% { transform: scale(1.12); } }
+@keyframes mo-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+.mo-res { margin: 0; font-size: .9rem; color: var(--text-1); }
+.mo-yes { color: #6cc08f; } .mo-no { color: #ff8a8a; }
+.mo-pat { font: 700 1.05rem var(--font-mono, monospace); letter-spacing: .15em; color: var(--amber-light); }
+.mo-torch { position: fixed; inset: 0; z-index: 9500; display: flex; align-items: flex-end; justify-content: center; background: #000; cursor: pointer; }
+.mo-torch.lit { background: #fff; }
+.mo-torch p { margin: 0 0 max(24px, env(safe-area-inset-bottom)); padding: .4rem .9rem; font: 700 .9rem var(--font); color: #888; background: rgba(0,0,0,.6); border-radius: 999px; }
+@media (max-width: 600px) { .mo-top { flex-direction: column; align-items: center; } .mo-main { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .mo-key.ok, .mo-key.bad { animation: none; } }
+body.mode-day > .mo-torch { filter: none !important; }

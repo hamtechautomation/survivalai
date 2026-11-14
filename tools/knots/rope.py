@@ -216,3 +216,52 @@ class Knot:
                       '<line class="kn-whip" x1="-4.6" y1="%.1f" x2="-4.6" y2="%.1f"/><line class="kn-whip" x1="-1.8" y1="%.1f" x2="-1.8" y2="%.1f"/></g>') % (
                     ' kn-pop' if upto[i] > prev[i] else '', x, y, ang, s.cls, -W / 2 - 0.6, W + 1.2, -W / 2, W / 2, -W / 2, W / 2)
         return o + over
+
+    # ── scrub drawing: one picture whose rope is revealed by a slider (assets/js/app.js setupKnotScrub) ──
+    def scrub(self, keys, objects='', label='', prefix='ks'):
+        """Every visible piece of rope and every crossing patch carries its strand and arc range;
+        keys = list of per-strand arc lengths (keyframes) the slider moves through."""
+        S = self.strands
+        defs = []
+        def layers(s, a, b, extra=''):
+            d = s.d(max(0, a - 0.7), b)
+            if not d: return ''
+            pid = '%s%d' % (prefix, len(defs)); defs.append('<path id="%s" pathLength="100" d="%s"/>' % (pid, d))
+            return (''.join('<use href="#%s" class="%s ks-r"/>' % (pid, c) for c in ('kn-case', 'kn-%s-edge' % s.cls, 'kn-%s' % s.cls))
+                    + '<use href="#%s" class="kn-%s-hi ks-hi"/>' % (pid, s.cls))
+        o = ''
+        for i, s in enumerate(S):
+            o += '<path class="ks-axis" data-i="%d" data-len="%.1f" d="%s" fill="none" stroke="none"/>' % (i, s.length, s.d(0, s.length))
+        cuts = [sorted(set([0.0, s.length] + [x for ab in s.behind() for x in ab])) for s in S]
+        for i, s in enumerate(S):
+            for a, b in zip(cuts[i], cuts[i][1:]):
+                if b - a > 0.5 and s.is_behind((a + b) / 2):
+                    o += '<path class="kn-back ks-bk" data-i="%d" data-a="%.1f" d="%s"/>' % (i, a, s.d(a, b))
+        o += objects
+        for i, s in enumerate(S):
+            for a, b in zip(cuts[i], cuts[i][1:]):
+                if b - a > 0.5 and not s.is_behind((a + b) / 2):
+                    o += '<g class="ks-pc" data-i="%d" data-a="%.1f" data-b="%.1f">%s</g>' % (i, a, b, layers(s, a, b))
+        for c in self.cross:
+            (ia, sa), (ib, sb) = c['a'], c['b']
+            io, so = (ia, sa) if c['over'] == 'a' else (ib, sb)
+            s = S[io]; a, b = max(0, so - PATCH), min(s.length, so + PATCH)
+            o += '<g class="ks-pc ks-patch" data-i="%d" data-a="%.1f" data-b="%.1f" data-need="%d:%.1f,%d:%.1f">%s</g>' % (io, a, b, ia, sa, ib, sb, layers(s, a, b))
+        for i, s in enumerate(S):
+            if getattr(s, 'tip', True):
+                o += ('<g class="ks-tip" data-i="%d"><rect class="kn-%s-tip" x="-7" y="%.1f" width="8.5" height="%.1f" rx="1.6"/>'
+                      '<line class="kn-whip" x1="-4.6" y1="%.1f" x2="-4.6" y2="%.1f"/><line class="kn-whip" x1="-1.8" y1="%.1f" x2="-1.8" y2="%.1f"/></g>') % (
+                    i, s.cls, -W / 2 - 0.6, W + 1.2, -W / 2, W / 2, -W / 2, W / 2)
+        import json
+        return '<defs>' + ''.join(defs) + '</defs>' + o, json.dumps([[round(v, 1) for v in k] for k in keys])
+
+
+def turned_over(knot, cx):
+    """The same knot seen from behind: mirrored left-right, every over becomes an under."""
+    sw = lambda m: m.translate(str.maketrans('OU', 'UO'))
+    out = []
+    for s in knot.strands:
+        t = Strand(s.name, [(2 * cx - x, y) for x, y in s.ctrl], sw(s.marks), s.cls, behind=s.behind_pts)
+        t.tip = getattr(s, 'tip', True)
+        out.append(t)
+    return Knot(out, knot.name + ' (back)')
