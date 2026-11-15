@@ -524,40 +524,17 @@
     <h3>START Triage System</h3>
     <p>Simple Triage and Rapid Treatment. Assess each victim in under 60 seconds.</p>
 
-    <div class="diagram">
-START TRIAGE ALGORITHM
-══════════════════════════════════════════════════════
+    <!--fig-start-->
+    <figure class="dg" id="fig-start">
+      <svg viewBox="0 0 444 400" role="img" aria-label="START triage flowchart: walking — green; not breathing after opening the airway — black, breathing once opened — red; breathing over 30 a minute — red; no radial pulse or refill over 2 seconds — red; cannot obey commands — red; otherwise yellow"><defs><marker id="ah-fig-start" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><text class="dg-th dg-mid" x="222" y="18">START TRIAGE — UNDER 60 SECONDS EACH</text><rect class="dg-panel" x="20" y="34" width="196" height="34" rx="6"/><text class="dg-tb dg-tb-sm dg-mid" x="118" y="55">Can they walk?</text><line class="dg-thin" x1="216" y1="51" x2="300" y2="51" marker-end="url(#ah-fig-start)"/><text class="dg-ts dg-mid" x="258" y="46">yes</text><rect class="" x="306" y="36" width="96" height="30" rx="6" style="fill:#3f9a5c;stroke:#888"/><text class="dg-tb dg-tb-sm dg-mid" x="354" y="49" style="fill:#fff">GREEN</text><text class="dg-ts dg-mid" x="354" y="61" style="fill:#fff">minor — later</text><rect class="dg-panel" x="20" y="94" width="196" height="34" rx="6"/><text class="dg-tb dg-tb-sm dg-mid" x="118" y="115">Breathing?</text><rect class="dg-panel" x="20" y="164" width="196" height="34" rx="6"/><text class="dg-tb dg-tb-sm dg-mid" x="118" y="185">Breathing over 30 a minute?</text><line class="dg-thin" x1="216" y1="181" x2="300" y2="181" marker-end="url(#ah-fig-start)"/><text class="dg-ts dg-mid" x="258" y="176">yes</text><rect class="" x="306" y="166" width="96" height="30" rx="6" style="fill:#c9473f;stroke:#888"/><text class="dg-tb dg-tb-sm dg-mid" x="354" y="179" style="fill:#fff">RED</text><text class="dg-ts dg-mid" x="354" y="191" style="fill:#fff">immediate</text><rect class="dg-panel" x="20" y="224" width="196" height="34" rx="6"/><text class="dg-tb dg-tb-sm dg-mid" x="118" y="245">Radial pulse, refill ≤ 2 s?</text><line class="dg-thin" x1="216" y1="241" x2="300" y2="241" marker-end="url(#ah-fig-start)"/><text class="dg-ts dg-mid" x="258" y="236">no</text><rect class="" x="306" y="226" width="96" height="30" rx="6" style="fill:#c9473f;stroke:#888"/><text class="dg-tb dg-tb-sm dg-mid" x="354" y="239" style="fill:#fff">RED</text><text class="dg-ts dg-mid" x="354" y="251" style="fill:#fff">immediate</text><rect class="dg-panel" x="20" y="284" width="196" height="34" rx="6"/><text class="dg-tb dg-tb-sm dg-mid" x="118" y="305">Obeys simple commands?</text><line class="dg-thin" x1="216" y1="301" x2="300" y2="301" marker-end="url(#ah-fig-start)"/><text class="dg-ts dg-mid" x="258" y="296">no</text><rect class="" x="306" y="286" width="96" height="30" rx="6" style="fill:#c9473f;stroke:#888"/><text class="dg-tb dg-tb-sm dg-mid" x="354" y="299" style="fill:#fff">RED</text><text class="dg-ts dg-mid" x="354" y="311" style="fill:#fff">immediate</text><line class="dg-thin" x1="118" y1="68" x2="118" y2="94" marker-end="url(#ah-fig-start)"/><text class="dg-ts" x="126" y="85">no</text><line class="dg-thin" x1="118" y1="128" x2="118" y2="164" marker-end="url(#ah-fig-start)"/><text class="dg-ts" x="126" y="150">yes</text><line class="dg-thin" x1="118" y1="198" x2="118" y2="224" marker-end="url(#ah-fig-start)"/><text class="dg-ts" x="126" y="215">no</text><line class="dg-thin" x1="118" y1="258" x2="118" y2="284" marker-end="url(#ah-fig-start)"/><text class="dg-ts" x="126" y="275">yes</text><line class="dg-thin" x1="118" y1="318" x2="118" y2="344" marker-end="url(#ah-fig-start)"/><text class="dg-ts" x="126" y="335">yes</text><rect class="" x="70" y="346" width="96" height="30" rx="6" style="fill:#d4a843;stroke:#888"/><text class="dg-tb dg-tb-sm dg-mid" x="118" y="359" style="fill:#222">YELLOW</text><text class="dg-ts dg-mid" x="118" y="371" style="fill:#222">delayed</text><line class="dg-thin" x1="216" y1="111" x2="252" y2="111" marker-end="url(#ah-fig-start)"/><text class="dg-ts dg-mid" x="234" y="105">no</text><rect class="dg-panel" x="258" y="88" width="178" height="46" rx="6"/><text class="dg-tb dg-tb-sm dg-mid" x="347" y="105">Open airway: breathing?</text><text class="dg-ts dg-mid" x="347" y="123">yes → RED      no → BLACK</text><text class="dg-ts dg-mid" x="222" y="394">Re-check everyone every 15–30 minutes; people move between colours.</text></svg>
+      <figcaption>The only treatments during triage: open the airway, and stop catastrophic bleeding. Tag, move on, and come back. Children use a modified version (JumpSTART) — give five rescue breaths to a child who isn’t breathing but has a pulse.</figcaption>
+    </figure>
 
-[Can they walk?]
-       │
-      YES ──────────────────────────────→ GREEN (Minor) — Walking wounded
-       │                                  Treat last
-      NO
-       │
-       ▼
-[Check Respirations]
-  Not breathing → Reposition airway
-       │
-  Still not breathing ───────────────→ BLACK (Deceased/Expectant)
-       │                                  No treatment resources
-  Breathing — Rate?
-       │
-  >30/min ─────────────────────────→ RED (Immediate) — Treat first
-       │
-  30/min or under
-       │
-       ▼
-[Check Perfusion — Radial Pulse or Capillary Refill]
-  No radial pulse OR cap refill >2 sec ──→ RED (Immediate)
-       │
-  Pulse present, cap refill ≤2 sec
-       │
-       ▼
-[Check Mental Status — "Squeeze my hand"]
-  Unable to follow simple commands ──→ RED (Immediate)
-       │
-  Follows commands ───────────────────→ YELLOW (Delayed) — Treat after Red
-    </div>
+
+
+
+
+
 
     <div class="table-wrap">
       <table>

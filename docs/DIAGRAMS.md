@@ -299,6 +299,27 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Sweep figures, first batch (`tools/sweepfigs.py`)
+
+Drawn where the sweep found the words alone weren't enough. Each is generated in code, placed by a text anchor and safe to regenerate; three replace ASCII-art blocks.
+
+- **Car in water — S·W·C·O** (Disasters, flood): seatbelt, window, children, out, with the water rising panel by panel; replaces the deadly "wait for the pressure to equalise" advice.
+- **Three birth emergency positions** (Pregnancy): knee-chest for cord prolapse, McRoberts with suprapubic pressure for stuck shoulders, fundal massage for bleeding. **⚑ midwife check.**
+- **START triage flowchart** (Medical; replaces ASCII): includes the airway-repositioning branch.
+- **Hazard diamonds 1–9** (Disasters, chemical): true colours kept in daylight mode.
+- **Stunning points by species** (Veterinary): cattle, pig, sheep/goat. **⚑ check against HSA guidance.**
+- **Quinzhee cross-section** (Shelter): guide sticks, high bed, low entrance, vent; CO warning.
+- **Crystal radio** (Communications): antenna → coil → diode → earpiece → earth.
+- **Reading a river** (Vehicles): fast water, V's, eddy, strainer, with a numbered key.
+- **Figure-four deadfall** (Food; replaces ASCII).
+- **Calories per 100 sq ft** (Agriculture): the corrected yield ranges as bars.
+- **Baseplate compass parts** (Navigation; replaces ASCII).
+- **Discharging a capacitor** (Salvage): bleed, check, short.
+
+Still to draw from the sweep list (next batch): defensible-space zones, chimney 3-2-10, egg candling, feed-conversion chart, which crops cross, sweet vs horse chestnut, tick removal, spark-test patterns, sand-casting mould, micro-hydro layout, box solar cooker, drawbore joint, signal mirror, Corsi–Rosenthal cube, storage-media lifespans, pot still, pressure-immobilisation bandage, KFM, layered defence, hand stitches and weaves.
+
+---
+
 ## Accuracy sweep — every section (November 2026)
 
 All 29 pages re-read against standard references (WHO, CDC/USDA, NHS/Resuscitation Council UK, HSA, FEMA, NIOSH, EMP Commission, Hugh Piggott, Jeavons, Aprovecho and the guide's own other pages). Each correction below was applied with `tools/sweepfix.py`, which matches visible text through the HTML and refuses any change that would leave tags unbalanced. Items marked **ADD** are new safety notes; **IMG** are pictures planned or drawn (see the next section).
