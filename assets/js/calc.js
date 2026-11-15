@@ -474,6 +474,7 @@
       last = t; paint();
       if (run && visible) raf = requestAnimationFrame(tick); else last = null;
     }
+    box.mcGo = x => { f = x; shown = -1; paint(); };            // lets a machine restart itself (e.g. after picking another fire lay)
     const setBtn = () => { play.textContent = run ? '❚❚ Pause' : '▶ Run'; };
     play.addEventListener('click', () => { run = !run; setBtn(); if (run && !raf) raf = requestAnimationFrame(tick); });
     $(box, '.mc-step').addEventListener('click', () => { run = false; setBtn(); const k = (stageOf(f) + 1) % stages.length; f = stages[k] + 0.001; paint(); });
@@ -609,7 +610,105 @@
       } });
   }
 
-  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram };
+  // Weather fronts: a whole low-pressure system drifts west → east over someone on the ground.
+  // Warm front: shallow slope, cloud lowering ahead of it. Cold front: steep, towering cloud.
+  function fronts(box) {
+    const OBS = 360, G = 206;
+    const cloud = (x, y, w, h, cls, op) => { let d = 'M' + P(x, y + h); const n = Math.max(2, Math.round(w / 22)); for (let i = 0; i < n; i++) { const x0 = x + i * w / n, x1 = x + (i + 1) * w / n; d += ' Q' + P((x0 + x1) / 2, y - h * (.3 + .25 * ((i * 7) % 3))) + ' ' + P(x1, y + h); } return '<path class="' + cls + '" d="' + d + ' Z" opacity="' + op + '"/>'; };
+    machine(box, { title: 'Weather fronts, passing over', sub: 'A low-pressure system drifts west to east over the person on the right. Watch the sky change above them, in order.', vb: '0 0 444 250', label: 'A warm front then a cold front passing over an observer, with the clouds in order', period: 30, speed: 0.5,
+      phases: [['Cirrus', 'High wispy cirrus (“mare’s tails”) spreading in from the west: a warm front and rain are about 12–24 hours away. The wind starts to back.', 0],
+               ['Halo', 'Cirrostratus: a thin milky sheet and a halo round the sun or moon. Rain within a day.', .143],
+               ['Lowering', 'Altostratus: grey, thickening and lowering; the sun goes watery, then vanishes. Steady rain within hours.', .262],
+               ['Steady rain', 'Nimbostratus: low, dark and even. Long steady rain as the warm front arrives; the barometer keeps falling.', .381],
+               ['Warm sector', 'Behind the warm front: milder and muggy, with low cloud and drizzle. The barometer steadies.', .476],
+               ['Cold front', 'Cumulonimbus: towering cloud, a sudden burst of heavy rain, gusts, perhaps thunder and hail. The wind veers and the temperature drops.', .733],
+               ['Clearing', 'Behind the cold front: colder, clearer air, scattered showers and puffy cumulus. The barometer rises; better weather.', .79]],
+      draw(f) {
+        const D = 1600 - 2100 * f, o = OBS - D;                 // o = where the cold front meets the ground
+        const wet = D > 600 && D < 800 ? 1 : D >= 800 && D < 1000 ? (1000 - D) / 200 * .6 : D > -60 && D < 60 ? 1 : D >= 60 && D < 600 ? .35 : 0;
+        let g = '<defs><clipPath id="wf-c"><rect width="444" height="250"/></clipPath><linearGradient id="wf-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + (wet > .5 ? '#2a3442' : '#26466b') + '"/><stop offset="1" stop-color="' + (wet > .5 ? '#56606c' : '#6f98c2') + '"/></linearGradient></defs>';
+        g += '<g clip-path="url(#wf-c)"><rect width="444" height="250" fill="url(#wf-sky)"/>';
+        // warm air above the sloping warm-front surface, and the cold-front wedge
+        g += '<path d="M' + P(o - 130, 20) + ' L' + P(o, G) + ' L' + P(o + 600, G) + ' L' + P(o + 1500, 26) + ' Z" fill="#ff9a5a" opacity=".10"/>';
+        g += '<path class="dg-red-s" d="M' + P(o + 600, G) + ' L' + P(o + 1500, 26) + '" stroke-dasharray="7 5" stroke-width="2"/><path class="dg-blue-s" d="M' + P(o, G) + ' L' + P(o - 130, 20) + '" stroke-dasharray="7 5" stroke-width="2"/>';
+        for (let k = 0; k < 10; k++) g += '<path class="dg-white" d="M' + P(o + 1180 + k * 34, 40 + (k % 3) * 6) + ' q14 -8 26 -2" fill="none" style="stroke:#e9eef5;stroke-width:1.6"/>';            // cirrus
+        g += cloud(o + 980, 56, 340, 8, 'wf-cl wf-hi', .45);                                                                         // cirrostratus
+        g += cloud(o + 740, 92, 330, 18, 'wf-cl', .7);                                                                               // altostratus
+        g += cloud(o + 560, 128, 260, 42, 'wf-cl wf-dark', .95);                                                                     // nimbostratus
+        for (let x = o + 570; x < o + 790; x += 12) g += '<path class="wf-rain" d="M' + P(x + (f * 4000 % 12), 168) + ' l-4 34"/>';
+        g += cloud(o + 60, 156, 520, 14, 'wf-cl', .55);                                                                              // warm-sector stratus
+        for (let x = o + 120; x < o + 560; x += 26) g += '<path class="wf-rain wf-driz" d="M' + P(x + (f * 2400 % 26), 176) + ' l-2 14"/>';
+        g += '<path class="wf-cl wf-dark" d="M' + P(o - 70, 172) + ' Q' + P(o - 86, 146) + ' ' + P(o - 58, 132) + ' Q' + P(o - 72, 104) + ' ' + P(o - 40, 92) + ' Q' + P(o - 50, 66) + ' ' + P(o - 22, 52) +
+             ' L' + P(o - 76, 40) + ' Q' + P(o + 30, 22) + ' ' + P(o + 150, 32) + ' L' + P(o + 46, 50) + ' Q' + P(o + 70, 72) + ' ' + P(o + 56, 98) + ' Q' + P(o + 90, 112) + ' ' + P(o + 74, 136) + ' Q' + P(o + 100, 154) + ' ' + P(o + 80, 172) + ' Z" opacity=".95"/>';  // cumulonimbus: broad base, tower, anvil
+        for (let x = o - 36; x < o + 54; x += 7) g += '<path class="wf-rain wf-heavy" d="M' + P(x + (f * 6000 % 7), 172) + ' l-5 34"/>';
+        for (let k = 0; k < 4; k++) g += cloud(o - 420 + k * 95, 120 + (k % 2) * 14, 46, 12, 'wf-cl', .8);                         // cumulus behind
+        g += '</g>';
+        g += '<rect x="0" y="' + G + '" width="444" height="44" fill="#2b2418"/>';
+        g += '<g><rect class="dg-panel" x="' + (OBS + 14) + '" y="' + (G - 22) + '" width="30" height="22"/><path class="dg-line" d="M' + P(OBS + 10, G - 20) + ' L' + P(OBS + 29, G - 34) + ' L' + P(OBS + 48, G - 20) + '"/><circle class="dg-keyf" cx="' + OBS + '" cy="' + (G - 26) + '" r="4"/><path class="dg-line" d="M' + OBS + ' ' + (G - 22) + ' V' + (G - 6) + ' M' + (OBS - 5) + ' ' + G + ' L' + OBS + ' ' + (G - 6) + ' L' + (OBS + 5) + ' ' + G + ' M' + (OBS - 6) + ' ' + (G - 16) + ' H' + (OBS + 6) + '"/></g>';
+        g += '<path class="dg-arrow" d="M' + (OBS - 4) + ' ' + (G - 34) + ' L' + (OBS - 4) + ' 18" stroke-dasharray="2 4" opacity=".6"/>';
+        g += TX(10, 18, '← west', 'dg-tb dg-tb-sm') + TX(434, 18, 'east →', 'dg-tb dg-tb-sm', 'end') + TX(10, 238, 'weather moves this way →', 'dg-tb dg-tb-sm') + TX(OBS, 238, 'you', 'dg-tb', 'mid');
+        if (o + 900 > 0 && o + 900 < 444) g += TX(o + 900, 200, 'warm front', 'dg-ts', 'mid');
+        if (o > 0 && o < 444) g += TX(o - 76, 188, 'cold front', 'dg-ts', 'end');
+        if (o + 330 > 20 && o + 330 < 430) g += TX(o + 330, 140, 'warm air', 'dg-ts', 'mid');
+        return g;
+      } });
+  }
+
+  // Fire lays: tinder in the middle, kindling around it, fuel last; light it on the windward side.
+  function firelay(box) {
+    let lay = 'teepee';
+    const INFO = { teepee: 'Teepee: lights fast and burns hot — good for a quick boil, drying out or a signal. It collapses as it burns, so feed it.',
+                   cabin: 'Log cabin: a teepee inside a square of crossed sticks. Stable, burns down to an even bed of coals — the best cooking fire.',
+                   leanto: 'Lean-to: kindling leaned on a log laid across the wind. The log shields the tinder, so it lights in wind and wet.' };
+    const flame = (x, y, h, w, op) => '<path class="calc-flame" d="M' + P(x - w, y) + ' Q' + P(x - w * .8, y - h * .5) + ' ' + P(x, y - h) + ' Q' + P(x + w * .8, y - h * .5) + ' ' + P(x + w, y) + ' Z" opacity="' + op.toFixed(2) + '"/>';
+    machine(box, { title: 'Fire lays, catching', sub: 'Tinder, then kindling no thicker than a pencil, then fuel as thick as your wrist. Pick a lay and watch it catch.', vb: '0 0 444 230', label: 'A fire lay being built, lit and catching', period: 12, speed: 0.6,
+      phases: [['Build', 'Build it before you light it: a fist of dry tinder in the middle, kindling around it, fuel ready to hand.', 0],
+               ['Light', 'Light the tinder low on the side the wind comes from, so the wind pushes the flame into the fuel.', .3],
+               ['Catch', 'Flame climbs through the kindling. Air drawn in at the bottom feeds it; don’t smother it with fuel yet.', .45],
+               ['Burn', 'Add fuel a little at a time as the kindling burns down. Too much at once chokes it.', .7]],
+      draw(f) {
+        const bx = 222, by = 196, cx0 = 0;
+        const built = Math.min(1, f / .3), lit = f >= .3, catchF = f < .3 ? 0 : Math.min(1, (f - .3) / .4), burnF = f < .7 ? 0 : (f - .7) / .3;
+        let g = '<rect class="dg-earth" x="0" y="' + by + '" width="444" height="34" opacity=".7"/>';
+        // wind
+        for (let i = 0; i < 4; i++) { const x = ((f * 900 + i * 110) % 440) - 20; g += '<path class="dg-arrow" d="M' + P(x, 120 + i * 16) + ' q14 -6 28 0" opacity=".45"/>'; }
+        g += TX(10, 20, 'wind →', 'dg-tb');
+        // tinder
+        g += '<ellipse class="dg-white" cx="' + bx + '" cy="' + (by - 7) + '" rx="' + (16 * Math.min(1, built * 3)).toFixed(1) + '" ry="7" opacity=".85"/>';
+        const sticks = [];
+        if (lay === 'teepee' || lay === 'cabin') for (let i = 0; i < 9; i++) { const a = -70 + i * 17.5, r = 44; sticks.push([bx + r * Math.sin(a * Math.PI / 180) * 1.1, by, bx + 2 * Math.sin(a * Math.PI / 180), by - 64, i / 9]); }
+        if (lay === 'leanto') for (let i = 0; i < 8; i++) { const x = bx - 30 + i * 10; sticks.push([x - 26, by, x + 16, by - 40, i / 8]); }
+        // log cabin square / lean-to log
+        if (lay === 'cabin') for (let l = 0; l < 4; l++) { const t = (l + 1) / 5; if (built < t) continue; const y = by - 6 - l * 9; g += l % 2 ? '<rect class="dg-wood" x="' + (bx - 60) + '" y="' + (y - 4) + '" width="120" height="9" rx="4"/>' : '<circle class="dg-wood" cx="' + (bx - 52) + '" cy="' + y + '" r="5"/><circle class="dg-wood" cx="' + (bx + 52) + '" cy="' + y + '" r="5"/>'; }
+        if (lay === 'leanto') g += '<rect class="dg-wood" x="' + (bx - 70) + '" y="' + (by - 22) + '" width="40" height="22" rx="10"/>' + TX(bx - 50, by + 22, 'log across the wind', 'dg-ts', 'mid');
+        sticks.forEach(([x1, y1, x2, y2, t]) => {
+          if (built < t) return;
+          const char = lit ? Math.min(1, Math.max(0, catchF * 1.6 - Math.abs(x1 - (bx - 40)) / 160)) : 0;
+          g += '<path class="dg-wood-s" style="stroke-width:4;opacity:' + (1 - .6 * burnF).toFixed(2) + ';stroke:' + (char > .5 ? '#5a3b22' : '') + '" d="M' + P(x1, y1) + ' L' + P(x2, y2) + '"/>';
+        });
+        if (lit) {
+          const start = lay === 'leanto' ? bx - 18 : bx - 14;                 // lit on the windward (left) side
+          g += flame(start, by - 4, 18 + 10 * Math.sin(f * 90), 7, .9);
+          if (catchF > 0) {
+            const H = 30 + 70 * catchF + 8 * Math.sin(f * 70), W = 14 + 30 * catchF;
+            g += flame(bx + 4 * Math.sin(f * 50), by - 2, H, W, .55 + .4 * catchF) + flame(bx - 8, by - 2, H * .7, W * .55, .85);
+            for (let i = 0; i < 5; i++) { const t = (f * 9 + i / 5) % 1; g += '<circle class="calc-spk" cx="' + (bx - 20 + i * 10 + 10 * Math.sin(t * 6 + i)).toFixed(1) + '" cy="' + (by - H - 40 * t).toFixed(1) + '" r="1.6" opacity="' + (1 - t).toFixed(2) + '"/>'; }
+            for (let i = 0; i < 3; i++) { const t = (f * 6 + i / 3) % 1; g += '<path class="dg-blue-s" style="stroke-width:1.6" d="M' + P(bx - 90 + 60 * t, by - 4) + ' l10 -2" opacity="' + (1 - t).toFixed(2) + '"/>'; }
+          }
+          if (burnF > 0) for (let i = 0; i < 4; i++) g += '<rect class="dg-wood" x="' + (bx - 40 + i * 6) + '" y="' + (by - 14 - i * 6) + '" width="80" height="7" rx="3" transform="rotate(' + (i % 2 ? 8 : -8) + ' ' + bx + ' ' + (by - 14 - i * 6) + ')" opacity="' + Math.min(1, burnF * 2).toFixed(2) + '"/>';
+          g += '<ellipse class="calc-coal" cx="' + bx + '" cy="' + (by - 3) + '" rx="' + (20 + 30 * catchF) + '" ry="6" opacity="' + (.3 + .6 * catchF).toFixed(2) + '"/>';
+        }
+        g += TX(bx + 70, 70, 'kindling', 'dg-ts') + TX(bx + 70, 84, 'pencil-thin', 'dg-ts') + TX(bx + 70, by - 8, 'tinder', 'dg-ts');
+        return g;
+      } });
+    const bar = document.createElement('div'); bar.className = 'kn-mode fl-pick'; bar.setAttribute('role', 'tablist');
+    bar.innerHTML = [['teepee', 'Teepee'], ['cabin', 'Log cabin'], ['leanto', 'Lean-to']].map(([k, t]) => '<button type="button" role="tab" aria-selected="' + (k === lay) + '" data-l="' + k + '">' + t + '</button>').join('');
+    const info = document.createElement('p'); info.className = 'calc-note fl-info'; info.textContent = INFO[lay];
+    $(box, '.calc-sub').after(bar); bar.after(info);
+    bar.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; lay = b.dataset.l; bar.querySelectorAll('button').forEach(x => x.setAttribute('aria-selected', String(x === b))); info.textContent = INFO[lay]; box.mcGo(0); });
+  }
+
+  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram, fronts, firelay };
   document.querySelectorAll('.calc[data-calc]').forEach(box => {
     const f = KINDS[box.dataset.calc]; if (!f || box.dataset.ready) return;
     box.dataset.ready = '1'; f(box);

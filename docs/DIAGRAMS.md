@@ -299,6 +299,18 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Weather fronts and fire lays, animated (November 2026)
+
+- **Weather fronts** (Climate › Predicting weather): a low-pressure system drifts west to east over
+  a person on the ground: cirrus, cirrostratus with a halo, altostratus lowering, nimbostratus and
+  steady rain at the warm front, the mild drizzly warm sector, then the cold front's cumulonimbus
+  and heavy shower, and clearing colder air behind. Timings and wind/pressure notes follow the
+  page (rain ~12–24 h after cirrus thickens; wind backs ahead, veers behind).
+- **Fire lays** (Climate › UK Fire Starting): teepee, log cabin and lean-to, each built, lit on the
+  windward side, catching through the kindling (air drawn in at the bottom) and fed with fuel.
+
+---
+
 ## Plant-or-lookalike game, machines that run, living home sky (November 2026)
 
 - **Plant or lookalike?** (Climate › Deadly lookalikes): flip cards made from the guide's own nine

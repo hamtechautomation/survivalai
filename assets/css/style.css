@@ -3475,3 +3475,9 @@ body.mode-day .lk-face svg { filter: invert(1) hue-rotate(180deg); }
 .sky-note { margin: 0 auto var(--sp-sm, .6rem); font: 600 .8rem var(--font); letter-spacing: .02em; color: var(--text-2); }
 @media (prefers-reduced-motion: reduce) { .hs-star, .hs-glow { animation: none; } }
 @media print { .home-sky, .sky-note { display: none !important; } }
+/* Weather fronts and fire lays (calc.js fronts, firelay). */
+.wf-cl { fill: #dfe5ee; } .wf-cl.wf-hi { fill: #f0f3f7; } .wf-cl.wf-dark { fill: #6b7380; }
+.wf-rain { stroke: #9cc4ee; stroke-width: 1.4; stroke-linecap: round; opacity: .8; }
+.wf-rain.wf-driz { stroke-width: 1; opacity: .5; } .wf-rain.wf-heavy { stroke-width: 2.2; opacity: .9; }
+.fl-pick { margin: .1rem 0 .3rem; }
+.fl-info { margin: .1rem 0 .4rem; }

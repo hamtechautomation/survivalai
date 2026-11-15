@@ -371,9 +371,9 @@ async function browserChecks() {
     if (!(await desk.$('.lk-card.turned'))) fail('game', 'answering did not turn the card');
   }
   // Machines run and step through their stages.
-  for (const [pg, kind] of [['vehicles', 'engine'], ['metallurgy', 'forge'], ['build-water', 'handpump'], ['projects', 'ram']]) {
+  for (const [pg, kind] of [['vehicles', 'engine'], ['metallurgy', 'forge'], ['build-water', 'handpump'], ['projects', 'ram'], ['climate', 'fronts'], ['climate', 'firelay']]) {
     await desk.goto(BASE_URL + 'sections/' + pg + '.html');
-    if (!(await desk.waitForSelector(`.calc[data-calc=${kind}] .mc-svg *`, { timeout: 5000 }).catch(() => null))) { fail('machines', `${pg}.html: ${kind} did not draw`); continue; }
+    if (!(await desk.waitForSelector(`.calc[data-calc=${kind}] .mc-svg *`, { timeout: 5000, state: "attached" }).catch(() => null))) { fail('machines', `${pg}.html: ${kind} did not draw`); continue; }
     const a = await desk.$eval(`.calc[data-calc=${kind}] .mc-phases .on`, e => e.textContent);
     await desk.click(`.calc[data-calc=${kind}] .mc-step`);
     const b = await desk.$eval(`.calc[data-calc=${kind}] .mc-phases .on`, e => e.textContent);
