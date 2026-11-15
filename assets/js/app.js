@@ -673,6 +673,75 @@
     });
   }
 
+  /* =================== LIVING SECTION BADGES ===================
+     Each section's badge (in the header art) gets its own small looping scene, drawn
+     in a -24…24 box: .ba = line, .baf = filled, .bat = thin line. Motion classes are
+     .bm-* in style.css (origin via --ox/--oy, timing via --t/--dl); all off for
+     reduced motion and in print. Pages not listed keep their menu icon. */
+  function gearPath(r, teeth, depth) {
+    let d = '';
+    for (let i = 0; i < teeth * 2; i++) {
+      const a0 = i * Math.PI / teeth, a1 = (i + 1) * Math.PI / teeth, R = i % 2 ? r - depth : r;
+      d += (i ? 'L' : 'M') + (R * Math.cos(a0)).toFixed(1) + ' ' + (R * Math.sin(a0)).toFixed(1) + 'L' + (R * Math.cos(a1)).toFixed(1) + ' ' + (R * Math.sin(a1)).toFixed(1);
+    }
+    return d + 'Z';
+  }
+  const O = (x, y) => `--ox:${x}px;--oy:${y}px`;
+  const BADGE = {
+    food: `<path class="ba bm bm-bob" style="--t:3s" d="M0 -20 C6 -10 10 -5 10 0 A10 10 0 0 1 -10 0 C-10 -5 -6 -10 0 -20Z"/>` +
+      [0, 1, 2].map(i => `<ellipse class="bat bm bm-ripple" style="${O(0, 17)};--t:3s;--dl:${i}s" cx="0" cy="17" rx="14" ry="3.5"/>`).join(''),
+    'build-water': `<path class="ba" d="M-20 -14 H2 C7 -14 9 -11 9 -7 V-4"/><path class="ba" d="M-20 -8 H0 C2 -8 3 -7 3 -5 V-4"/>` +
+      `<path class="baf bm bm-drip" style="--t:2.4s" d="M6 -1 C8 2 9 4 9 5 A3 3 0 0 1 3 5 C3 4 4 2 6 -1Z"/>` +
+      `<ellipse class="bat bm bm-ripple" style="${O(6, 17)};--t:2.4s;--dl:.9s" cx="6" cy="17" rx="10" ry="2.6"/>`,
+    medical: `<g class="bm bm-beat" style="${O(0, 0)};--t:1.4s"><path class="ba" d="M0 15 C-19 3 -21 -10 -12 -14 C-6 -16 -2 -12 0 -8 C2 -12 6 -16 12 -14 C21 -10 19 3 0 15Z"/></g>` +
+      `<path class="bat bm bm-trace" style="--t:1.4s" pathLength="100" d="M-22 0 H-10 L-7 -6 L-4 7 L0 -11 L4 9 L7 0 H22"/>`,
+    energy: `<g class="bm bm-flick" style="${O(0, 18)};--t:.9s"><path class="ba" d="M0 -19 C6 -11 12 -5 10 5 C9 12 4 17 0 17 C-4 17 -9 12 -10 5 C-11 -3 -5 -7 -3 -13 C-2 -8 1 -7 1 -10 C1 -13 -1 -16 0 -19Z"/></g>` +
+      `<g class="bm bm-flick" style="${O(0, 16)};--t:.6s;--dl:-.3s"><path class="baf" opacity=".55" d="M0 -3 C4 2 6 6 5 10 C4 13 2 15 0 15 C-2 15 -5 13 -5 10 C-5 6 -2 3 0 -3Z"/></g>`,
+    shelter: `<path class="ba" d="M-17 1 L0 -13 L17 1 M-12 -3 V17 H12 V-3"/><path class="bat" d="M-3 17 V9 H3 V17"/><path class="ba" d="M8 -6 V-13 H12 V-3"/>` +
+      [0, 1, 2].map(i => `<circle class="bat bm bm-smoke" style="--t:4.5s;--dl:${i * 1.5}s" cx="10" cy="-16" r="2.6"/>`).join(''),
+    communications: `<path class="ba" d="M0 -3 L-8 19 M0 -3 L8 19 M-5 10 H5"/><circle class="baf" cx="0" cy="-5" r="2.6"/>` +
+      [[6, 0], [11, .35], [16, .7]].map(([r, d]) => `<path class="bat bm bm-wave" style="--t:2.2s;--dl:${d}s" d="M${-r} ${-5 - r * .8} A${r} ${r} 0 0 0 ${-r} ${-5 + r * .8} M${r} ${-5 - r * .8} A${r} ${r} 0 0 1 ${r} ${-5 + r * .8}"/>`).join(''),
+    navigation: `<circle class="ba" r="19"/><path class="bat" d="M0 -19 V-15 M0 19 V15 M-19 0 H-15 M19 0 H15"/>` +
+      `<g class="bm bm-needle" style="${O(0, 0)};--t:7s"><path class="baf" d="M0 -14 L3.6 0 L-3.6 0Z"/><path class="ba" style="stroke-width:1.6" d="M0 14 L3.6 0 L-3.6 0Z"/></g><circle class="baf" r="2"/>`,
+    security: `<clipPath id="ba-cl"><path d="M0 -19 L15 -13 V0 C15 9 8 16 0 19 C-8 16 -15 9 -15 0 V-13 Z"/></clipPath>` +
+      `<g clip-path="url(#ba-cl)"><rect class="baf bm bm-shine" style="--t:4s" x="-30" y="-24" width="8" height="48" opacity=".45" transform="skewX(-20)"/></g>` +
+      `<path class="ba" d="M0 -19 L15 -13 V0 C15 9 8 16 0 19 C-8 16 -15 9 -15 0 V-13 Z"/><path class="ba" d="M-6 0 L-1 5 L7 -5"/>`,
+    agriculture: `<path class="ba" d="M-18 15 H18"/><path class="ba bm bm-grow" style="--t:6s" pathLength="100" d="M0 15 C0 8 0 2 0 -6"/>` +
+      `<g class="bm bm-leaf" style="${O(0, -1)};--t:6s"><path class="ba" d="M0 -1 C-8 -3 -13 -9 -11 -14 C-4 -12 -1 -7 0 -1Z"/><path class="ba" d="M0 -4 C7 -7 12 -12 11 -17 C4 -15 0 -10 0 -4Z"/></g>`,
+    animal: [[-14, 14, 0], [-5, 7, .5], [3, 12, 1], [11, 3, 1.5]].map(([x, y, d]) => `<g class="bm bm-step" style="--t:3.2s;--dl:${d}s"><ellipse class="baf" cx="${x}" cy="${y}" rx="3.2" ry="2.6"/><circle class="baf" cx="${x - 3.2}" cy="${y - 4}" r="1.3"/><circle class="baf" cx="${x}" cy="${y - 5.2}" r="1.3"/><circle class="baf" cx="${x + 3.2}" cy="${y - 4}" r="1.3"/></g>`).join(''),
+    veterinary: `<ellipse class="baf" cx="0" cy="5" rx="7" ry="6"/><circle class="baf" cx="-8" cy="-4" r="2.8"/><circle class="baf" cx="-3" cy="-9" r="2.8"/><circle class="baf" cx="3" cy="-9" r="2.8"/><circle class="baf" cx="8" cy="-4" r="2.8"/>` +
+      `<circle class="bat bm bm-ripple" style="${O(0, 0)};--t:2.6s" r="18"/>`,
+    maternal: `<g class="bm bm-rock" style="${O(0, -20)};--t:4s"><path class="ba" d="M5 -13 A13 13 0 1 0 5 13 A10 10 0 1 1 5 -13Z"/></g>` +
+      [[13, -12, 0], [16, 3, .8], [9, 14, 1.6]].map(([x, y, d]) => `<path class="baf bm bm-twinkle" style="${O(x, y)};--t:2.4s;--dl:${d}s" d="M${x} ${y - 3.5} L${x + 1} ${y - 1} L${x + 3.5} ${y} L${x + 1} ${y + 1} L${x} ${y + 3.5} L${x - 1} ${y + 1} L${x - 3.5} ${y} L${x - 1} ${y - 1}Z"/>`).join(''),
+    'medicine-making': `<g class="bm bm-grind" style="${O(0, 4)};--t:1.6s"><path class="ba" style="stroke-width:3.4" d="M2 2 L13 -16"/></g><path class="ba" d="M-16 0 H16 C16 10 8 17 0 17 C-8 17 -16 10 -16 0Z"/><path class="bat" d="M-6 21 H6"/>`,
+    chemistry: `<path class="ba" d="M-5 -18 H5 M-3 -18 V-7 L-14 15 H14 L3 -7 V-18"/><path class="baf" opacity=".35" d="M-9 5 H9 L13 14 H-13Z"/>` +
+      [[-4, 0], [3, .7], [0, 1.4]].map(([x, d]) => `<circle class="bat bm bm-bubble" style="--t:2.1s;--dl:${d}s" cx="${x}" cy="11" r="1.8"/>`).join(''),
+    metallurgy: `<path class="ba" d="M-17 4 H9 C13 4 15 1 16 -1 H-9 C-13 -1 -16 1 -17 4Z M-6 4 L-8 15 H6 L4 4"/>` +
+      `<g class="bm bm-strike" style="${O(18, -18)};--t:1.6s"><path class="ba" style="stroke-width:2.8" d="M18 -18 L3 -8"/><path class="baf" d="M4.3 -1.5 L9.1 -4.9 L1.7 -14.5 L-3.1 -11.1Z"/></g>` +
+      [[-3, -7, -6, -13], [4, -6, 9, -12], [0, -6, 1, -15]].map(([x1, y1, x2, y2]) => `<path class="bat bm bm-spark" style="--t:1.6s" d="M${x1} ${y1} L${x2} ${y2}"/>`).join(''),
+    textiles: `<path class="bat bm bm-flow" style="--t:1.2s" d="M-20 12 H20" stroke-dasharray="5 4"/><g class="bm bm-sew" style="--t:1.2s"><path class="ba" d="M-14 8 L13 -15"/><ellipse class="bat" cx="10" cy="-12.5" rx="2.4" ry="1.1" transform="rotate(-40 10 -12.5)"/></g>`,
+    knots: `<path class="ba" style="stroke-width:5;opacity:.9" d="M-19 9 C-8 9 -2 -14 6 -10 C14 -6 6 6 -2 2 C-8 -1 2 -9 19 -9"/>` +
+      `<path class="bat bm bm-flow" style="--t:1.8s;stroke:var(--bg-1);stroke-width:1.4" stroke-dasharray="3 4" d="M-19 9 C-8 9 -2 -14 6 -10 C14 -6 6 6 -2 2 C-8 -1 2 -9 19 -9"/>`,
+    vehicles: `<g class="bm bm-spin" style="${O(0, -2)};--t:3s"><circle class="ba" cy="-2" r="15"/>` + [0, 60, 120].map(a => `<path class="bat" transform="rotate(${a} 0 -2)" d="M0 -17 V13"/>`).join('') + `<circle class="baf" cy="-2" r="3"/></g>` +
+      `<path class="bat bm bm-flow" style="--t:.8s" stroke-dasharray="6 5" d="M-22 15 H22"/>`,
+    'build-power': `<path class="ba" d="M0 -2 L-2 20 H2 Z"/><g class="bm bm-spin" style="${O(0, -4)};--t:2.6s">` + [0, 120, 240].map(a => `<path class="baf" transform="rotate(${a} 0 -4)" d="M0 -4 C2 -9 2 -16 0 -21 C-2 -16 -2 -9 0 -4Z"/>`).join('') + `</g><circle class="baf" cy="-4" r="2.4"/>`,
+    'build-structures': [[-15, 9, 0], [1, 9, .3], [-7, 1, .6], [-15, -7, .9], [1, -7, 1.2]].map(([x, y, d]) => `<rect class="ba bm bm-stack" style="--t:5s;--dl:${d}s" x="${x}" y="${y}" width="14" height="7" rx="1"/>`).join('') + `<path class="ba" d="M-18 17 H18"/>`,
+    projects: `<g class="bm bm-spin" style="${O(-6, -4)};--t:6s"><path class="ba" transform="translate(-6 -4)" d="${gearPath(11, 9, 3)}"/><circle class="bat" cx="-6" cy="-4" r="3.5"/></g>` +
+      `<g class="bm bm-spin-r" style="${O(10, 11)};--t:4.67s"><path class="ba" transform="translate(10 11)" d="${gearPath(8, 7, 2.6)}"/><circle class="bat" cx="10" cy="11" r="2.4"/></g>`,
+    salvage: `<path class="ba" d="M-6 6 L-2 -1 H6 L10 6 L6 13 H-2Z" transform="translate(-2 2)"/><g class="bm bm-rock" style="${O(2, 9)};--t:1.6s"><path class="ba" style="stroke-width:3.2" d="M4 4 L18 -14"/><path class="ba" d="M15 -19 A6 6 0 1 0 22 -11"/></g>`,
+    science: `<circle class="baf" r="3"/>` + [[0, 3.5], [60, 5], [120, 4.2]].map(([a, t]) => `<g transform="rotate(${a})"><g class="bm bm-spin" style="${O(0, 0)};--t:${t}s"><ellipse class="bat" rx="20" ry="7"/><circle class="baf" cx="20" r="2"/></g></g>`).join(''),
+    knowledge: `<path class="ba" d="M0 -12 C-6 -16 -14 -16 -19 -13 V13 C-14 10 -6 10 0 14 C6 10 14 10 19 13 V-13 C14 -16 6 -16 0 -12 Z M0 -12 V14"/>` +
+      `<g class="bm bm-page" style="${O(0, 0)};--t:4s"><path class="bat" d="M0 -12 C5 -15 11 -15 16 -12 V12 C11 10 5 10 0 13"/></g>`,
+    governance: `<path class="ba" d="M0 -16 V16 M-8 16 H8"/><g class="bm bm-tilt" style="${O(0, -14)};--t:5s"><path class="ba" d="M-17 -14 H17"/>` +
+      `<path class="bat" d="M-17 -14 L-22 -2 M-17 -14 L-12 -2 M17 -14 L12 -2 M17 -14 L22 -2"/><path class="ba" d="M-23 -2 A6 4 0 0 0 -11 -2 Z M11 -2 A6 4 0 0 0 23 -2 Z"/></g>`,
+    psychology: `<circle class="bat" r="19" stroke-dasharray="2 4"/><circle class="baf bm bm-breathe" style="${O(0, 0)};--t:16s" r="13" opacity=".35"/><circle class="ba bm bm-breathe" style="${O(0, 0)};--t:16s" r="13"/>`,
+    climate: `<path class="ba" d="M-14 2 A7 7 0 0 1 -11 -11 A9 9 0 0 1 6 -14 A8 8 0 0 1 16 -4 A6 6 0 0 1 13 2 Z"/>` +
+      [[-8, 0], [0, .5], [8, 1]].map(([x, d]) => `<path class="bat bm bm-rain" style="--t:1.5s;--dl:${d}s" d="M${x} 6 L${x - 2} 12"/>`).join(''),
+    disasters: `<g class="bm bm-sway" style="${O(0, 18)};--t:3s">` + [[-16, -16, 32], [-13, -9, 26], [-10, -2, 20], [-7, 5, 14], [-4, 11, 8], [-2, 17, 4]].map(([x, y, w], i) => `<path class="ba bm bm-flow" style="--t:${(1 + i * .15).toFixed(2)}s" stroke-dasharray="${(w * .9).toFixed(0)} 4" d="M${x} ${y} H${x + w}"/>`).join('') + `</g>`,
+    nbc: `<circle class="baf" r="3"/><g class="bm bm-spin" style="${O(0, 0)};--t:12s">` + [0, 120, 240].map(a => `<path class="baf" transform="rotate(${a})" d="M-5.2 -9 A10.4 10.4 0 0 1 5.2 -9 L9 -15.6 A18 18 0 0 0 -9 -15.6 Z"/>`).join('') + `</g>` +
+      `<circle class="bat bm bm-ripple" style="${O(0, 0)};--t:3s" r="20"/>`
+  };
+
   /* =================== SECTION BANNER ART =================== */
   /* A small animated scene on every section header, generated from the
      page's own menu icon and its group's colour: drifting contour lines
@@ -718,7 +787,9 @@
     for (let i = 0; i < 9; i++) {
       embers += `<circle class="sa-ember" cx="${(cx - 90 + rnd() * 180).toFixed(0)}" cy="${(150 + rnd() * 10).toFixed(0)}" r="${(1 + rnd() * 1.6).toFixed(1)}" style="--t:${(5 + rnd() * 6).toFixed(1)}s;--dl:${(-rnd() * 10).toFixed(1)}s;--dx:${(rnd() * 30 - 15).toFixed(0)}px"/>`;
     }
-    const icon = (cur.icon || ICONS.book).replace('<svg ', `<svg x="${cx - 21}" y="${cy - 21}" width="42" height="42" class="sa-icon" `);
+    const icon = BADGE[cur.id]
+      ? `<svg x="${cx - 27}" y="${cy - 27}" width="54" height="54" viewBox="-24 -24 48 48" class="sa-icon sa-live" overflow="visible">${BADGE[cur.id]}</svg>`
+      : (cur.icon || ICONS.book).replace('<svg ', `<svg x="${cx - 21}" y="${cy - 21}" width="42" height="42" class="sa-icon" `);
     const art = document.createElement('div');
     art.className = 'sec-art';
     art.setAttribute('aria-hidden', 'true');

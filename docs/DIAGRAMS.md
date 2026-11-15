@@ -299,6 +299,21 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Living section badges (November 2026)
+
+Every section's header badge now holds its own small looping scene instead of the static menu
+icon (`BADGE` in app.js, `.bm-*` in style.css): a drop rippling (Food & Water), a heart beating with
+a trace (Medical), a flame flickering (Energy), smoke from a chimney (Shelter), a compass needle
+swinging and settling (Navigation), a shine across a shield (Security), a sprout growing
+(Agriculture), paw prints (Animals), a hammer striking with sparks (Metalworking), a needle sewing
+(Textiles), bubbles in a flask (Chemistry), turning gears (Projects), a turbine (Power), a dripping
+tap (Water Systems), bricks stacking (Building), orbiting electrons (Science), a page turning
+(Knowledge), scales tilting (Governance), a 4-4-4-4 breathing circle (Psychology), rain (Climate),
+a tornado (Disasters), a turning trefoil (NBC), and more. All in the section colour; still for
+reduced motion and in print.
+
+---
+
 ## Knots that tie themselves, sun clock, Morse trainer (November 2026)
 
 - **Watch it tie** (Knots): each knot player has a Steps / Watch it tie switch. A slider (or Play)
