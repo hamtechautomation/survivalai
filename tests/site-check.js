@@ -390,7 +390,7 @@ async function browserChecks() {
     const sk = await mp.waitForSelector('.calc[data-calc=stars] .sk-up-now b', { timeout: 5000 }).catch(() => null);
     const up = sk ? await mp.$eval('.calc[data-calc=stars] .sk-up-now', e => e.textContent) : '';
     if (!/Capella ENE, 5\d° up/.test(up)) fail('calc', `constellation finder from London: "${up}"`);
-    await mp.click('.calc[data-calc=stars] .sk-up');
+    await mp.click('.calc[data-calc=stars] .sk-up'); await mp.clock.runFor(200);
     if (!/straight up/.test(await mp.$eval('.calc[data-calc=stars] .sk-read', e => e.textContent))) fail('calc', 'constellation finder: Overhead did not look up');
     await mp.close(); }
   // Exploded views come apart and explain the part tapped.
