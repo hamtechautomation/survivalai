@@ -3496,3 +3496,78 @@ body.mode-day .lk-face svg { filter: invert(1) hue-rotate(180deg); }
 .mn-day:hover { border-color: var(--border-hi); }
 @media (max-width: 600px) { .mn-top { flex-direction: column; text-align: center; } .mn-strip { grid-template-columns: repeat(10, 1fr); } }
 @media print { .mn-dark { fill: #ddd !important; } .mn-lit { fill: #fff !important; } .mn-rim { stroke: #000 !important; } }
+
+/* Seasons wheel (calc.js seasons). */
+.sw-wrap { display: grid; grid-template-columns: minmax(220px, 320px) 1fr; gap: 1rem; align-items: start; }
+.sw-dial { width: 100%; height: auto; touch-action: none; cursor: grab; }
+.sw-dial:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 50%; }
+.sw-bg { fill: var(--bg-1); stroke: var(--border-hi); }
+.sw-mo { fill: var(--bg-3); stroke: var(--bg-1); stroke-width: 1; cursor: pointer; transition: fill .2s; }
+.sw-mo.on { fill: var(--amber); }
+.sw-ml { font: 700 9.5px var(--font); fill: var(--text-2); text-anchor: middle; pointer-events: none; }
+.sw-ml.on { fill: var(--bg-0); }
+.sw-hand { stroke: var(--amber); stroke-width: 2; stroke-linecap: round; transition: all .3s; }
+.sw-hub { fill: var(--bg-2); stroke: var(--border-hi); }
+.sw-ic { fill: none; stroke: var(--amber-light); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.sw-spin { animation: bm-spin 18s linear infinite; transform-box: fill-box; transform-origin: center; }
+.sw-sprout { animation: sw-grow 3s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: bottom center; }
+@keyframes sw-grow { from { transform: scale(.8); } to { transform: scale(1.05); } }
+.sw-fall { animation: sw-fall 3.5s ease-in-out infinite; transform-box: fill-box; transform-origin: top center; }
+@keyframes sw-fall { 0%, 100% { transform: rotate(-12deg) translateY(-2px); } 50% { transform: rotate(12deg) translateY(2px); } }
+.sw-season { font: 800 11px var(--font); fill: var(--text-1); text-anchor: middle; text-transform: uppercase; letter-spacing: .1em; }
+.sw-head { display: flex; align-items: center; gap: 6px; margin-bottom: .5rem; }
+.sw-month { flex: 1; font: 800 1.2rem var(--font); color: var(--amber-light); }
+.sw-cards { display: grid; gap: .5rem; }
+.sw-card { padding: .55rem .75rem; background: var(--bg-1); border: 1px solid var(--border); border-left: 4px solid var(--c, var(--amber)); border-radius: 10px; }
+.sw-forage { --c: #6cc08f; } .sw-grow { --c: #d4a843; } .sw-store { --c: #dd8f55; } .sw-prep { --c: #6fa3d8; }
+.sw-t { margin: 0 0 .2rem; font: 800 .78rem var(--font); letter-spacing: .06em; text-transform: uppercase; color: var(--c); display: flex; justify-content: space-between; align-items: center; }
+.sw-x { margin: 0; font-size: .88rem; color: var(--text-1); line-height: 1.45; }
+ul.sw-x { padding-left: 1.1rem; }
+.sw-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: .35rem 0 0; }
+.sw-chips span { padding: 1px 8px; font: 700 .72rem var(--font); color: var(--bg-0); background: #6cc08f; border-radius: 999px; }
+.sw-zone { font: 600 .72rem var(--font); text-transform: none; letter-spacing: 0; color: var(--text-2); display: inline-flex; gap: .3rem; align-items: center; }
+.sw-key { display: inline-block; width: 10px; height: 10px; margin: 0 .25rem 0 .4rem; border-radius: 2px; background: var(--c); vertical-align: middle; }
+@media (max-width: 640px) { .sw-wrap { grid-template-columns: 1fr; } .sw-dial { max-width: 300px; margin: 0 auto; } }
+@media (prefers-reduced-motion: reduce) { .sw-spin, .sw-sprout, .sw-fall { animation: none; } }
+
+/* Exploded views (calc.js explode). */
+.ex-svg { max-width: 560px; }
+.ex-ly { cursor: pointer; transition: transform .9s cubic-bezier(.4, .1, .2, 1), opacity .3s; }
+.ex-open-v .ex-ly { transform: translateY(var(--dy)); }
+.ex-lab { opacity: 0; transition: opacity .4s .3s; }
+.ex-open-v .ex-lab { opacity: 1; }
+.ex-picked .ex-ly:not(.ex-sel) { filter: saturate(.35) brightness(.55); }
+.ex-ly:focus-visible { outline: none; } .ex-ly:focus-visible .ex-t { stroke: var(--amber); stroke-width: 2; }
+.ex-t, .ex-l, .ex-r { stroke: rgba(0, 0, 0, .55); stroke-width: .8; stroke-linejoin: round; }
+.ex-brick.ex-t { fill: #c47a4e; } .ex-brick.ex-l { fill: #a35e38; } .ex-brick.ex-r { fill: #8a4c2c; }
+.ex-brick.ex-hi.ex-t { fill: #d48a5c; }
+.ex-cut.ex-t, .ex-cut.ex-l, .ex-cut.ex-r { opacity: .35; }
+.ex-metal.ex-t { fill: #b8c0c6; } .ex-metal.ex-l, .ex-metal.ex-r { fill: #7f878d; }
+.ex-pot.ex-t { fill: #6c757d; } .ex-pot.ex-r { fill: #4d555c; }
+.ex-concrete.ex-t { fill: #b9b4a8; } .ex-concrete.ex-r, .ex-concrete.ex-l { fill: #8e897e; }
+.ex-concrete.ex-hi.ex-t { fill: #cfcabd; }
+.ex-open.ex-r { stroke-dasharray: 6 3; stroke: #6fa3d8; stroke-width: 1.4; }
+.ex-water.ex-t { fill: #6fa3d8; } .ex-water.ex-r { fill: #3f6f9e; }
+.ex-gravel.ex-t { fill: #8a8378; } .ex-gravel.ex-r { fill: #6b655c; } .ex-gravel.ex-fine.ex-t { fill: #a39b8e; }
+.ex-sand.ex-t { fill: #d8c38f; } .ex-sand.ex-r { fill: #b9a26c; } .ex-sand.ex-fine.ex-t { fill: #e6d6a8; } .ex-sand.ex-fine.ex-r { fill: #c9b37e; }
+.ex-bio.ex-t { fill: #5f9e5f; } .ex-bio.ex-r { fill: #487a48; }
+.ex-hole { fill: #11140f; }
+.ex-info { min-height: 2.6em; margin: .4rem 0 0; font-size: .9rem; color: var(--text-1); }
+body.mode-day .ex-svg, body.mode-day .sw-dial { filter: invert(1) hue-rotate(180deg); }
+@media (prefers-reduced-motion: reduce) { .ex-ly, .ex-lab { transition: none; } }
+
+/* Constellation finder (calc.js stars): a true night sky in every theme. */
+.sk-svg { max-width: 640px; border-radius: 12px; touch-action: none; cursor: grab; user-select: none; }
+.sk-svg:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.sk-line { stroke: #6f8fc9; stroke-width: 1.1; opacity: .7; }
+.sk-guide { stroke: #d4a843; stroke-width: 1; stroke-dasharray: 4 5; opacity: .6; }
+.sk-name { font: 600 10px var(--font); fill: #c9d4ea; }
+.sk-con { font: 700 9px var(--font); fill: #d4a843; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+.sk-pole { stroke: #d4a843; stroke-width: 1.4; }
+.sk-ground { fill: #10140d; opacity: .94; }
+.sk-hz { stroke: #6a7a52; stroke-width: 1.4; }
+.sk-cmp { font: 800 12px var(--font); fill: #e0c070; }
+.sk-aim { stroke: #fff; stroke-width: 1.2; opacity: .45; }
+.sk-read { margin: .1rem 0 .5rem; font: 700 .92rem var(--font); color: var(--amber-light); }
+.sk-dim { color: var(--text-2); font-size: .85em; }
+.sk-gps { margin-left: .3rem; padding: 1px 8px; font: 700 .75rem var(--font); color: var(--amber-light); background: none; border: 1px solid var(--border-hi); border-radius: 999px; cursor: pointer; }

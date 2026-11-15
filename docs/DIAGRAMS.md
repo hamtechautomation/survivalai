@@ -299,6 +299,31 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Exploded views, seasons wheel, constellation finder (November 2026)
+
+- **Exploded views** (`data-calc="explode"`): rocket stove (Energy, after the build steps), hand-dug
+  well (Water Systems, after the well steps) and biosand filter (Water Systems, after its build
+  list). "Take it apart" slides the layers up; tapping a part reads out what it is and why, using
+  the page's own numbers (feed tube ~15 × 30 cm; sealed lining top 3 m, open joints below; apron
+  1.5 m; biosand 5 + 5 cm gravel, 10 cm coarse sand, 50 cm fine sand 0.15–0.35 mm, 5–10 cm
+  standing water). Well not to scale; biosand heights to scale.
+- **Seasons wheel** (Climate, above the foraging calendar; `tools/seasons_data.py`): one dial for the
+  year. Forage rings and month notes come straight from the foraging wheel's data; Grow comes from
+  the Agriculture planting calendar ('cold' zone, with a "milder area" switch for 'temperate');
+  Store and Get-ready notes are new, written for UK conditions — **⚑ check for other climates**.
+  Opens on the current month.
+- **Constellation finder** (Navigation, after the star charts): 70 bright stars (J2000 places,
+  precession ~0.3° ignored) turned to altitude/azimuth from the device clock, latitude (typed or GPS)
+  and longitude (guessed from the time zone, or GPS). Stereographic view about 100° wide with the
+  horizon, compass points, constellation lines, the pointer line to Polaris, the Summer Triangle and
+  the south celestial pole. "Use phone compass" aims it with the phone's orientation sensors (iOS
+  asks permission); otherwise drag, arrow keys or N/E/S/W/Overhead. Checked against known skies:
+  London 22:00 UT 15 Nov (Capella ENE ~55°, Orion rising ESE, Big Dipper low in the north) and
+  Sydney 21:00 local 15 May (Crux and the Pointers high SSE, south pole 34° up).
+  **⚑ The compass mode needs testing on real iPhone and Android handsets.**
+
+---
+
 ## Moon phase dial and water-flow calculator (November 2026)
 
 - **Moon phase dial** (Navigation, after the star signposts): any night from a month back to two

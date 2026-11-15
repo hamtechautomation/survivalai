@@ -807,7 +807,275 @@
     paint(); if (!reduce) raf = requestAnimationFrame(tick);
   }
 
-  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram, fronts, firelay, moon, waterflow };
+  /* ── Seasons wheel: one dial for the year — forage, grow, store, prepare. Data comes from the
+     guide's own foraging and planting calendars (tools/seasons_data.py → #seasons-data). ── */
+  function seasons(box) {
+    const el = document.getElementById('seasons-data'); if (!el) return;
+    const D = JSON.parse(el.textContent);
+    const MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const SEASON = m => m === 11 || m < 2 ? 'winter' : m < 5 ? 'spring' : m < 8 ? 'summer' : 'autumn';
+    let m = new Date().getMonth(), zone = 'cold';
+    const CX = 160, CY = 160, R0 = 58, RW = 12, ROUT = R0 + D.cats.length * RW + 6, RM = ROUT + 24;
+    const pt = (r, a) => [CX + r * Math.sin(a * Math.PI / 180), CY - r * Math.cos(a * Math.PI / 180)];
+    const arc = (r1, r2, a1, a2) => { const [x1, y1] = pt(r2, a1), [x2, y2] = pt(r2, a2), [x3, y3] = pt(r1, a2), [x4, y4] = pt(r1, a1); return 'M' + P(x1, y1) + ' A' + r2 + ' ' + r2 + ' 0 0 1 ' + P(x2, y2) + ' L' + P(x3, y3) + ' A' + r1 + ' ' + r1 + ' 0 0 0 ' + P(x4, y4) + ' Z'; };
+    const ICON = { winter: '<g class="sw-ic sw-spin"><path d="M0 -18 V18 M-15.6 -9 L15.6 9 M-15.6 9 L15.6 -9 M-5 -14 L0 -18 L5 -14 M-5 14 L0 18 L5 14"/></g>',
+                   spring: '<g class="sw-ic"><path d="M-18 14 H18 M0 14 V-2"/><g class="sw-sprout"><path d="M0 2 C-8 0 -12 -6 -10 -11 C-3 -9 0 -4 0 2Z M0 -2 C7 -5 12 -10 11 -15 C4 -13 0 -8 0 -2Z"/></g></g>',
+                   summer: '<g class="sw-ic"><circle r="8"/><g class="sw-spin">' + [0, 45, 90, 135, 180, 225, 270, 315].map(a => '<path transform="rotate(' + a + ')" d="M0 -12 V-18"/>').join('') + '</g></g>',
+                   autumn: '<g class="sw-ic sw-fall"><path d="M0 -16 C9 -10 12 0 0 14 C-12 0 -9 -10 0 -16Z M0 -12 V18"/></g>' };
+    box.innerHTML =
+      '<p class="calc-title">The year at a glance</p><p class="calc-sub">Turn the dial: what to forage, sow, store and get ready for each month, from this guide’s calendars (UK timings).</p>' +
+      '<div class="sw-wrap"><svg class="sw-dial" viewBox="0 0 320 320" role="slider" tabindex="0" aria-label="Month" aria-valuemin="1" aria-valuemax="12"></svg>' +
+      '<div class="sw-cards"><div class="sw-head"><button type="button" class="dg-ctl-btn" data-a="prev" aria-label="Previous month">◀</button><b class="sw-month"></b><button type="button" class="dg-ctl-btn" data-a="next" aria-label="Next month">▶</button><button type="button" class="dg-ctl-btn" data-a="now">This month</button></div>' +
+      '<div class="sw-card sw-forage"><p class="sw-t">Forage</p><p class="sw-x" data-o="f"></p><p class="sw-chips" data-o="fp"></p></div>' +
+      '<div class="sw-card sw-grow"><p class="sw-t">Grow <label class="sw-zone"><input type="checkbox" data-a="mild"> milder area</label></p><ul class="sw-x" data-o="g"></ul></div>' +
+      '<div class="sw-card sw-store"><p class="sw-t">Store</p><p class="sw-x" data-o="s"></p></div>' +
+      '<div class="sw-card sw-prep"><p class="sw-t">Get ready for</p><p class="sw-x" data-o="p"></p></div></div></div>' +
+      '<p class="calc-note">Forage bands, inside to out: ' + D.cats.map(c => '<span class="sw-key" style="--c:' + c.color + '"></span>' + c.name).join(' · ') + '. Bright = peak, faint = some. Never eat anything you can’t identify for certain.</p>';
+    const svg = $(box, '.sw-dial');
+    function draw() {
+      let g = '<circle cx="' + CX + '" cy="' + CY + '" r="' + (RM + 12) + '" class="sw-bg"/>';
+      for (let i = 0; i < 12; i++) {
+        const a1 = i * 30 + 1, a2 = (i + 1) * 30 - 1;
+        D.cats.forEach((c, k) => { const v = c.avail[i]; if (v) g += '<path d="' + arc(R0 + k * RW, R0 + (k + 1) * RW - 2, a1, a2) + '" fill="' + c.color + '" opacity="' + (v === 2 ? .95 : .35) + '"/>'; });
+        g += '<path class="sw-mo' + (i === m ? ' on' : '') + '" data-m="' + i + '" d="' + arc(ROUT, RM, a1, a2) + '"/>';
+        const [tx, ty] = pt((ROUT + RM) / 2, i * 30 + 15);
+        g += '<text class="sw-ml' + (i === m ? ' on' : '') + '" x="' + tx.toFixed(1) + '" y="' + (ty + 4).toFixed(1) + '">' + MON[i].slice(0, 3) + '</text>';
+      }
+      const [hx, hy] = pt(RM + 8, m * 30 + 15);
+      g += '<line class="sw-hand" x1="' + CX + '" y1="' + CY + '" x2="' + hx.toFixed(1) + '" y2="' + hy.toFixed(1) + '"/><circle class="sw-hub" cx="' + CX + '" cy="' + CY + '" r="' + (R0 - 6) + '"/>';
+      g += '<g transform="translate(' + CX + ' ' + (CY - 8) + ')">' + ICON[SEASON(m)] + '</g><text class="sw-season" x="' + CX + '" y="' + (CY + 26) + '">' + SEASON(m) + '</text>';
+      svg.innerHTML = g; svg.setAttribute('aria-valuenow', m + 1); svg.setAttribute('aria-valuetext', MON[m]);
+      $(box, '.sw-month').textContent = MON[m];
+      $(box, '[data-o=f]').textContent = D.forage[m].summary;
+      $(box, '[data-o=fp]').innerHTML = D.forage[m].peak.map(x => '<span>' + x + '</span>').join('');
+      const g2 = D.grow[zone][m]; $(box, '[data-o=g]').innerHTML = g2.length ? g2.map(x => '<li>' + x + '</li>').join('') : '<li>Nothing to sow outdoors: plan, mend and order seed.</li>';
+      $(box, '[data-o=s]').textContent = D.store[m]; $(box, '[data-o=p]').textContent = D.prepare[m];
+    }
+    function fromPointer(e) { const r = svg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 320 - CX, y = (e.clientY - r.top) / r.height * 320 - CY; const a = (Math.atan2(x, -y) * 180 / Math.PI + 360) % 360; const nm = Math.floor(a / 30) % 12; if (nm !== m) { m = nm; draw(); } }
+    let drag = false;
+    svg.addEventListener('pointerdown', e => { drag = true; try { svg.setPointerCapture(e.pointerId); } catch (x) {} fromPointer(e); });
+    svg.addEventListener('pointermove', e => { if (drag) fromPointer(e); });
+    svg.addEventListener('pointerup', () => { drag = false; });
+    svg.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { m = (m + 1) % 12; draw(); e.preventDefault(); } if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { m = (m + 11) % 12; draw(); e.preventDefault(); } });
+    box.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.a === 'prev') m = (m + 11) % 12; if (b.dataset.a === 'next') m = (m + 1) % 12; if (b.dataset.a === 'now') m = new Date().getMonth(); draw(); });
+    $(box, '[data-a=mild]').addEventListener('change', e => { zone = e.target.checked ? 'temperate' : 'cold'; draw(); });
+    draw();
+  }
+
+  /* ── Exploded views: the parts of a build in isometric, sliding apart and back together.
+     Tap a part to read about it. Each follows the build steps on its page. ── */
+  const ISO = { c: Math.cos(Math.PI / 6), s: .5 };
+  function explode(box) {
+    const view = box.dataset.view || 'stove';
+    const k = 4.2;
+    let ox = 150, oy = 0;
+    const S = (X, Y, Z) => [ox + (X - Y) * ISO.c * k, oy + (X + Y) * ISO.s * k - Z * k];
+    const poly = (pts, cls) => '<polygon class="' + cls + '" points="' + pts.map(p => P(...p)).join(' ') + '"/>';
+    function ibox(x, y, z, w, d, h, cls) {
+      const T = [S(x, y, z + h), S(x + w, y, z + h), S(x + w, y + d, z + h), S(x, y + d, z + h)];
+      const Rf = [S(x + w, y, z), S(x + w, y + d, z), S(x + w, y + d, z + h), S(x + w, y, z + h)];
+      const Lf = [S(x, y + d, z), S(x + w, y + d, z), S(x + w, y + d, z + h), S(x, y + d, z + h)];
+      return poly(Lf, cls + ' ex-l') + poly(Rf, cls + ' ex-r') + poly(T, cls + ' ex-t');
+    }
+    function cyl(X, Y, z, R, h, cls, open) {        // vertical cylinder; open = draw a dark hole in the top
+      const [cx, cyb] = S(X, Y, z), cyt = cyb - h * k, rx = R * 1.2247 * k, ry = R * .7071 * k;
+      let o = '<path class="' + cls + ' ex-r" d="M' + P(cx - rx, cyb) + ' A' + rx.toFixed(1) + ' ' + ry.toFixed(1) + ' 0 0 0 ' + P(cx + rx, cyb) + ' L' + P(cx + rx, cyt) + ' A' + rx.toFixed(1) + ' ' + ry.toFixed(1) + ' 0 0 1 ' + P(cx - rx, cyt) + ' Z"/>';
+      o += '<ellipse class="' + cls + ' ex-t" cx="' + cx.toFixed(1) + '" cy="' + cyt.toFixed(1) + '" rx="' + rx.toFixed(1) + '" ry="' + ry.toFixed(1) + '"/>';
+      if (open) o += '<ellipse class="ex-hole" cx="' + cx.toFixed(1) + '" cy="' + cyt.toFixed(1) + '" rx="' + (rx * open).toFixed(1) + '" ry="' + (ry * open).toFixed(1) + '"/>';
+      return o;
+    }
+    let L, title, sub, H0, gap;
+    if (view === 'stove') {
+      title = 'Rocket stove, taken apart'; sub = 'Brick build from the steps above. Tap “Take it apart”, then tap a part.'; oy = 330; H0 = 0; gap = 46;
+      L = [{ n: 'Floor', t: 'Two bricks side by side with a 5–8 cm gap between them: the air inlet under the fire.', d: () => ibox(-6, 0, 0, 34, 5, 3, 'ex-brick') + ibox(-6, 9, 0, 34, 5, 3, 'ex-brick'), z: 1.5 },
+           { n: 'Feed tube', t: 'Side walls two bricks high: a channel about 15 cm wide and 30 cm long. Sticks go in here.', d: () => ibox(8, -5, 3, 20, 5, 7, 'ex-brick') + ibox(8, 14, 3, 20, 5, 7, 'ex-brick'), z: 6 },
+           { n: 'Grate', t: 'Two metal bars at the bend hold the wood above the air gap, so air flows under and through it.', d: () => ibox(5, -1, 4, 1, 16, 1, 'ex-metal') + ibox(9, -1, 4, 1, 16, 1, 'ex-metal'), z: 4.5 },
+           { n: 'Chimney', t: 'Straight up from the back of the feed tube, 3–4 bricks high, the same width inside. The tall hot column is what pulls the draft.', d: () => ibox(-6, -5, 3, 14, 5, 26, 'ex-brick') + ibox(-6, 14, 3, 14, 5, 26, 'ex-brick') + ibox(3, 0, 3, 5, 14, 26, 'ex-brick ex-cut') + ibox(-6, 0, 3, 5, 14, 26, 'ex-brick'), z: 16 },
+           { n: 'Pot rest', t: 'Two bricks or a metal ring on top, leaving a 2–4 cm gap round the pot so the hot gas can get out.', d: () => ibox(-6, -5, 29, 14, 5, 3, 'ex-brick ex-hi') + ibox(-6, 14, 29, 14, 5, 3, 'ex-brick ex-hi'), z: 30.5 },
+           { n: 'Pot', t: 'Sits close over the flame and covers most (not all) of the chimney opening.', d: () => cyl(1, 7, 32.5, 9, 10, 'ex-pot', .82), z: 37 }];
+    } else if (view === 'well') {
+      title = 'Hand-dug well, taken apart'; sub = 'From the steps above (not to scale). Tap “Take it apart”, then tap a part.'; oy = 362; gap = 34;
+      L = [{ n: 'Water', t: 'Dig 1–2 m into the saturated ground; stop when the well holds 0.5–1 m of standing water.', d: () => cyl(0, 0, 0, 10, 12, 'ex-water'), z: 6 },
+           { n: 'Open-jointed lining', t: 'Below 3 m down to the water table: leave every other upright joint unmortared. This is where groundwater gets in.', d: () => cyl(0, 0, 12, 12, 34, 'ex-brick ex-open', .82), z: 29 },
+           { n: 'Sealed lining (top 3 m)', t: 'Dense mortar with no gaps, so dirty surface water can’t seep in near the top.', d: () => cyl(0, 0, 46, 12, 26, 'ex-concrete', .82), z: 59 },
+           { n: 'Concrete apron', t: '1.5 m all round, sloped away from the well to shed rain and spills.', d: () => cyl(0, 0, 72, 30, 2, 'ex-concrete', .42), z: 73 },
+           { n: 'Lid and hatch', t: 'Concrete lid with an inspection hatch; use a pump or windlass, and never let a bucket rope touch the ground.', d: () => cyl(0, 0, 76, 14, 2.5, 'ex-concrete ex-hi') + ibox(-3, -3, 78.5, 6, 6, 1.2, 'ex-metal'), z: 78 }];
+    } else {
+      title = 'Biosand filter, taken apart'; sub = 'Layers from the page, to scale in height. Tap “Take it apart”, then tap a part.'; oy = 356; gap = 42;
+      const R = 12, sc = .7;   // 1 unit = 1/0.7 cm in height
+      L = [{ n: 'Coarse gravel, 5 cm', t: 'At the bottom, round the outlet pipe’s inlet; it stops the sand washing out.', d: () => cyl(0, 0, 0, R, 5 * sc, 'ex-gravel'), z: 2 },
+           { n: 'Medium gravel, 5 cm', t: 'A step between the gravel and the sand so the sand can’t sink into the gravel.', d: () => cyl(0, 0, 5 * sc, R, 5 * sc, 'ex-gravel ex-fine'), z: 5.5 },
+           { n: 'Coarse sand, 10 cm', t: 'Another step down in grain size.', d: () => cyl(0, 0, 10 * sc, R, 10 * sc, 'ex-sand'), z: 10.5 },
+           { n: 'Fine sand, 50 cm', t: 'Washed river sand, 0.15–0.35 mm. Most of the cleaning happens in its top few centimetres.', d: () => cyl(0, 0, 20 * sc, R, 50 * sc, 'ex-sand ex-fine'), z: 31 },
+           { n: 'Biological layer', t: 'The schmutzdecke: a living film that forms on the sand over 3–4 weeks and removes most of the germs. Never let it dry out.', d: () => cyl(0, 0, 70 * sc, R, 1.2, 'ex-bio'), z: 49.5 },
+           { n: 'Standing water, 5–10 cm', t: 'The outlet pipe is bent up so the water always stands 5–10 cm above the sand, keeping the living layer wet.', d: () => cyl(0, 0, 70 * sc + 1.2, R, 6, 'ex-water'), z: 54 }];
+    }
+    const n = L.length, Htot = (view === 'stove' ? 44 : view === 'well' ? 80 : 60) * k + n * gap + 30;
+    box.innerHTML = '<p class="calc-title">' + title + '</p><p class="calc-sub">' + sub + '</p>' +
+      '<div class="calc-btns"><button type="button" class="dg-ctl-btn ex-go">⇕ Take it apart</button></div>' +
+      '<svg class="calc-chart ex-svg" viewBox="0 ' + (oy - Htot) + ' 444 ' + (Htot + (view === 'stove' ? 60 : 26)) + '" role="img" aria-label="' + title + '"></svg><p class="ex-info" aria-live="polite">Tap a part to read about it.</p>';
+    const svg = $(box, '.ex-svg');
+    let g = '';
+    L.forEach((ly, i) => {
+      const [, ly0] = S(0, 0, ly.z);
+      g += '<g class="ex-ly" data-i="' + i + '" style="--dy:' + (-i * gap) + 'px" tabindex="0" role="button" aria-label="' + ly.n + '">' + ly.d() +
+        '<g class="ex-lab"><line class="dg-thin" x1="300" y1="' + ly0.toFixed(1) + '" x2="' + (view === 'well' && i === 3 ? 290 : 240) + '" y2="' + ly0.toFixed(1) + '"/><text class="dg-tb dg-tb-sm" x="304" y="' + (ly0 + 4).toFixed(1) + '">' + ly.n + '</text></g></g>';
+    });
+    svg.innerHTML = g;
+    try { // fit the viewBox to the drawing, exploded height included
+      let x0 = 0, x1 = 444, y0 = 1e9, y1 = -1e9;
+      svg.querySelectorAll('.ex-ly').forEach((el, i) => { const r = el.getBBox(); x0 = Math.min(x0, r.x); x1 = Math.max(x1, r.x + r.width); y0 = Math.min(y0, r.y - i * gap); y1 = Math.max(y1, r.y + r.height); });
+      if (y1 > y0) svg.setAttribute('viewBox', [x0 - 6, y0 - 8, x1 - x0 + 12, y1 - y0 + 16].map(v => v.toFixed(1)).join(' '));
+    } catch (e) { /* keep the estimate */ }
+    const go = $(box, '.ex-go'), info = $(box, '.ex-info');
+    go.addEventListener('click', () => { const on = !box.classList.contains('ex-open-v'); box.classList.toggle('ex-open-v', on); go.textContent = on ? '⇕ Put it together' : '⇕ Take it apart'; });
+    const pick = el => { const i = +el.dataset.i; box.querySelectorAll('.ex-ly').forEach(x => x.classList.toggle('ex-sel', x === el)); svg.classList.add('ex-picked'); info.innerHTML = '<b>' + L[i].n + '.</b> ' + L[i].t; };
+    svg.addEventListener('click', e => { const el = e.target.closest('.ex-ly'); if (el) pick(el); });
+    svg.addEventListener('keydown', e => { const el = e.target.closest('.ex-ly'); if (el && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); pick(el); } });
+  }
+
+  /* ── Constellation finder: bright stars (J2000 RA hours, Dec degrees, magnitude) turned to
+     altitude and azimuth for the device clock, your latitude and a longitude guessed from the time
+     zone (or the phone's GPS). Hold the phone up and its compass and tilt aim the window; or drag.
+     Precession since 2000 (about 0.3°) and refraction are ignored: far below what the eye can see. */
+  const STARS = [
+    ['Dubhe', 11.062, 61.751, 1.8], ['Merak', 11.031, 56.382, 2.4], ['Phecda', 11.897, 53.695, 2.4], ['Megrez', 12.257, 57.033, 3.3], ['Alioth', 12.900, 55.960, 1.8], ['Mizar', 13.399, 54.925, 2.2], ['Alkaid', 13.792, 49.313, 1.9],
+    ['Polaris', 2.530, 89.264, 2.0], ['Yildun', 17.537, 86.586, 4.4], ['εUMi', 16.766, 82.037, 4.2], ['ζUMi', 15.734, 77.795, 4.3], ['Kochab', 14.845, 74.156, 2.1], ['Pherkad', 15.345, 71.834, 3.0], ['ηUMi', 16.292, 75.755, 5.0],
+    ['Caph', 0.153, 59.150, 2.3], ['Schedar', 0.675, 56.537, 2.2], ['γCas', 0.945, 60.717, 2.5], ['Ruchbah', 1.430, 60.235, 2.7], ['Segin', 1.907, 63.670, 3.4],
+    ['Betelgeuse', 5.919, 7.407, 0.5], ['Rigel', 5.242, -8.202, 0.1], ['Bellatrix', 5.419, 6.350, 1.6], ['Mintaka', 5.533, -0.299, 2.2], ['Alnilam', 5.604, -1.202, 1.7], ['Alnitak', 5.679, -1.943, 1.8], ['Saiph', 5.796, -9.670, 2.1],
+    ['Sirius', 6.752, -16.716, -1.46], ['Procyon', 7.655, 5.225, 0.4], ['Aldebaran', 4.599, 16.509, 0.9], ['Elnath', 5.438, 28.608, 1.7], ['Pleiades', 3.791, 24.105, 2.9], ['Capella', 5.278, 45.998, 0.1],
+    ['Castor', 7.577, 31.888, 1.6], ['Pollux', 7.755, 28.026, 1.1], ['Regulus', 10.139, 11.967, 1.4], ['Algieba', 10.333, 19.842, 2.0], ['Zosma', 11.235, 20.524, 2.6], ['Chertan', 11.237, 15.430, 3.3], ['Denebola', 11.818, 14.572, 2.1],
+    ['Arcturus', 14.261, 19.182, -0.05], ['Spica', 13.420, -11.161, 1.0], ['Vega', 18.616, 38.784, 0.0], ['Deneb', 20.690, 45.280, 1.25], ['Altair', 19.846, 8.868, 0.8],
+    ['Sadr', 20.370, 40.257, 2.2], ['Gienah', 20.770, 33.970, 2.5], ['δCyg', 19.750, 45.131, 2.9], ['Albireo', 19.512, 27.960, 3.1],
+    ['Antares', 16.490, -26.432, 1.0], ['Dschubba', 16.006, -22.622, 2.3], ['εSco', 16.836, -34.293, 2.3], ['Sargas', 17.622, -42.998, 1.9], ['Shaula', 17.560, -37.104, 1.6],
+    ['Fomalhaut', 22.961, -29.622, 1.2], ['Mirfak', 3.405, 49.861, 1.8], ['Alpheratz', 0.140, 29.091, 2.1], ['Scheat', 23.063, 28.083, 2.4], ['Markab', 23.079, 15.205, 2.5], ['Algenib', 0.220, 15.184, 2.8],
+    ['Acrux', 12.443, -63.099, 0.8], ['Mimosa', 12.795, -59.689, 1.3], ['Gacrux', 12.519, -57.113, 1.6], ['δCru', 12.252, -58.749, 2.8],
+    ['Rigil Kent.', 14.660, -60.835, -0.27], ['Hadar', 14.064, -60.373, 0.6], ['Canopus', 6.399, -52.696, -0.74], ['Achernar', 1.629, -57.237, 0.46]];
+  const SLINES = [['Dubhe', 'Merak'], ['Merak', 'Phecda'], ['Phecda', 'Megrez'], ['Megrez', 'Dubhe'], ['Megrez', 'Alioth'], ['Alioth', 'Mizar'], ['Mizar', 'Alkaid'],
+    ['Polaris', 'Yildun'], ['Yildun', 'εUMi'], ['εUMi', 'ζUMi'], ['ζUMi', 'Kochab'], ['Kochab', 'Pherkad'], ['Pherkad', 'ηUMi'], ['ηUMi', 'ζUMi'],
+    ['Caph', 'Schedar'], ['Schedar', 'γCas'], ['γCas', 'Ruchbah'], ['Ruchbah', 'Segin'],
+    ['Betelgeuse', 'Bellatrix'], ['Bellatrix', 'Mintaka'], ['Betelgeuse', 'Alnitak'], ['Mintaka', 'Alnilam'], ['Alnilam', 'Alnitak'], ['Mintaka', 'Rigel'], ['Alnitak', 'Saiph'], ['Rigel', 'Saiph'],
+    ['Castor', 'Pollux'], ['Aldebaran', 'Elnath'], ['Regulus', 'Algieba'], ['Algieba', 'Zosma'], ['Zosma', 'Denebola'], ['Denebola', 'Chertan'], ['Chertan', 'Regulus'],
+    ['Deneb', 'Sadr'], ['Sadr', 'Albireo'], ['δCyg', 'Sadr'], ['Sadr', 'Gienah'],
+    ['Dschubba', 'Antares'], ['Antares', 'εSco'], ['εSco', 'Sargas'], ['Sargas', 'Shaula'],
+    ['Alpheratz', 'Scheat'], ['Scheat', 'Markab'], ['Markab', 'Algenib'], ['Algenib', 'Alpheratz'], ['Acrux', 'Gacrux'], ['Mimosa', 'δCru']];
+  const SGUIDE = [['Merak', 'Dubhe', 'Polaris'], ['Vega', 'Deneb'], ['Deneb', 'Altair'], ['Altair', 'Vega'], ['Hadar', 'Rigil Kent.']];
+  const SCONS = [['Big Dipper', 'Megrez', 0, -14], ['Little Dipper', 'ζUMi', 0, 16], ['Cassiopeia', 'γCas', 0, -12], ['Orion', 'Saiph', 0, 18], ['Southern Cross', 'Mimosa', 12, 4], ['Leo', 'Zosma', 0, -12],
+    ['Cygnus', 'Sadr', 14, 4], ['Scorpius', 'εSco', 14, 4], ['Great Square', 'Scheat', 0, -12], ['Gemini', 'Castor', 0, -12], ['Summer Triangle', 'Altair', 0, 18]];
+  function stars(box) {
+    const u = 'sk' + (++uid), D = Math.PI / 180, W = 444, Hh = 330, cx = W / 2, cy = Hh / 2;
+    const tzLon = -new Date().getTimezoneOffset() / 4;               // rough: the zone's centre, ± 7.5°
+    let lat = 51.5, lon = Math.round(tzLon), A = 0, h = 25, off = 0, live = false, fov = 100, lastV = null;
+    box.innerHTML =
+      '<p class="calc-title">Constellation finder</p><p class="calc-sub">Hold your phone up to the night sky and the chart turns to match it. On a computer, drag the sky or use the buttons. Works offline.</p>' +
+      '<div class="calc-btns"><button type="button" class="dg-ctl-btn sk-live" aria-pressed="false">📱 Use phone compass</button>' +
+        ['N', 'E', 'S', 'W'].map((d, i) => '<button type="button" class="dg-ctl-btn sk-dir" data-a="' + i * 90 + '">' + d + '</button>').join('') +
+        '<button type="button" class="dg-ctl-btn sk-up">Overhead</button></div>' +
+      '<svg class="calc-chart sk-svg no-flip" viewBox="0 0 ' + W + ' ' + Hh + '" role="img" aria-label="The sky in the direction you are looking" tabindex="0"></svg>' +
+      '<p class="sk-read" aria-live="polite"></p>' +
+      '<div class="calc-in">' + field(u + 't', 'Time: <b data-o="t"></b>', '<input id="' + u + 't" type="range" min="0" max="24" step="0.25" value="0">') +
+        field(u + 'la', 'Latitude (+ north, − south)', '<input id="' + u + 'la" type="number" min="-89" max="89" step="0.1" value="' + lat + '" inputmode="decimal"><span class="calc-u">°</span>') +
+        field(u + 'lo', 'Longitude (+ east)', '<input id="' + u + 'lo" type="number" min="-180" max="180" step="0.1" value="' + lon + '" inputmode="decimal"><span class="calc-u">°</span>', 'Guessed from your time zone. <button type="button" class="sk-gps">Use GPS</button>') + '</div>' +
+      '<p class="calc-sub sk-up-now"></p>' +
+      '<p class="calc-note">Star places are good to well under a degree. A phone compass can be 10–20° out near metal, cars or power lines, so check against Polaris or the Southern Cross. Planets and the moon are not shown. Use the screen’s Night mode to keep your dark vision.</p>';
+    const svg = $(box, '.sk-svg'), tt = $(box, '#' + u + 't'), la = $(box, '#' + u + 'la'), lo = $(box, '#' + u + 'lo'), lb = $(box, '.sk-live');
+    const idx = {}; STARS.forEach((s, i) => { idx[s[0]] = i; });
+    const dirName = a => ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'][Math.round(((a % 360) + 360) % 360 / 22.5) % 16];
+    function altaz(ra, dec, lst) {                                   // degrees in, degrees out (az from north, clockwise)
+      const H = (lst - ra * 15) * D, d = dec * D, p = lat * D;
+      const alt = Math.asin(Math.sin(p) * Math.sin(d) + Math.cos(p) * Math.cos(d) * Math.cos(H));
+      const az = Math.atan2(-Math.sin(H) * Math.cos(d), Math.cos(p) * Math.sin(d) - Math.sin(p) * Math.cos(d) * Math.cos(H));
+      return [alt / D, ((az / D) + 360) % 360];
+    }
+    const when = () => new Date(Date.now() + off * 3600e3);
+    const lstAt = t => { const jd = t.getTime() / 864e5 + 2440587.5; return ((280.46061837 + 360.98564736629 * (jd - 2451545) + lon) % 360 + 360) % 360; };
+    const vec = (alt, az) => [Math.cos(alt * D) * Math.sin(az * D), Math.cos(alt * D) * Math.cos(az * D), Math.sin(alt * D)];
+    function draw() {
+      const t = when(), lst = lstAt(t);
+      const d = vec(h, A), r = [Math.cos(A * D), -Math.sin(A * D), 0], up = [r[1] * d[2] - r[2] * d[1], r[2] * d[0] - r[0] * d[2], r[0] * d[1] - r[1] * d[0]];
+      const K = (W / 2) / (2 * Math.tan(fov / 4 * D));
+      const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+      const proj = v => { const c = dot(v, d); if (c < 0.05) return null; return [cx + 2 * K * dot(v, r) / (1 + c), cy - 2 * K * dot(v, up) / (1 + c)]; };
+      const P2 = STARS.map(s => { const [al, az] = altaz(s[1], s[2], lst); return { al, az, p: proj(vec(al, az)) }; });
+      let g = '<defs><radialGradient id="' + u + 'g"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>';
+      g += '<rect width="' + W + '" height="' + Hh + '" fill="#070b16"/>';
+      for (let a = 0; a < 360; a += 30) for (const al of [30, 60]) {                 // altitude guide rings, dotted
+        const p = proj(vec(al, a)); if (p) g += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r=".8" fill="#2b3a5a"/>';
+      }
+      SGUIDE.forEach(l => { for (let i = 0; i + 1 < l.length; i++) { const a = P2[idx[l[i]]].p, b = P2[idx[l[i + 1]]].p; if (a && b && P2[idx[l[i]]].al > -5) g += '<line class="sk-guide" x1="' + a[0].toFixed(1) + '" y1="' + a[1].toFixed(1) + '" x2="' + b[0].toFixed(1) + '" y2="' + b[1].toFixed(1) + '"/>'; } });
+      SLINES.forEach(([x, y]) => { const a = P2[idx[x]].p, b = P2[idx[y]].p; if (a && b) g += '<line class="sk-line" x1="' + a[0].toFixed(1) + '" y1="' + a[1].toFixed(1) + '" x2="' + b[0].toFixed(1) + '" y2="' + b[1].toFixed(1) + '"/>'; });
+      STARS.forEach((s, i) => { const q = P2[i]; if (!q.p) return; const rr = Math.max(1.1, 4.2 - 0.85 * s[3]);
+        g += '<circle cx="' + q.p[0].toFixed(1) + '" cy="' + q.p[1].toFixed(1) + '" r="' + (rr * 2.2).toFixed(1) + '" fill="url(#' + u + 'g)"' + (s[0] === 'Pleiades' ? ' opacity=".7"' : '') + '/>';
+        if ((s[3] < 1.3 || s[0] === 'Polaris') && q.al > -1) g += '<text class="sk-name" x="' + (q.p[0] + rr + 4).toFixed(1) + '" y="' + (q.p[1] + 3.5).toFixed(1) + '">' + s[0] + '</text>'; });
+      SCONS.forEach(([n, s, dx, dy]) => { const q = P2[idx[s]]; if (q.p && q.al > 0) g += '<text class="sk-con" x="' + (q.p[0] + dx).toFixed(1) + '" y="' + (q.p[1] + dy).toFixed(1) + '"' + (dx ? '' : ' text-anchor="middle"') + '>' + n + '</text>'; });
+      [[90, 'north celestial pole'], [-90, 'south celestial pole']].forEach(([dec, n]) => { const [al, az] = altaz(0, dec, lst); const p = proj(vec(al, az)); if (p && al > -2 && dec < 0) g += '<path class="sk-pole" d="M' + (p[0] - 6) + ' ' + p[1] + 'h12M' + p[0] + ' ' + (p[1] - 6) + 'v12"/><text class="sk-con" x="' + (p[0] + 8).toFixed(1) + '" y="' + (p[1] + 14).toFixed(1) + '">' + n + '</text>'; });
+      // ground: the horizon is a circle in this projection; for upward looks the ground lies outside it
+      const hz = Math.abs(h) < 0.3 ? null : (() => { const yf = -2 * Math.tan(h * D / 2), yb = 2 / Math.tan(h * D / 2); return [cy - K * (yf + yb) / 2, Math.abs(K * (yb - yf) / 2)]; })();
+      const box4 = 'M-2000 -2000H2444V2330H-2000Z';
+      if (!hz) g += '<rect class="sk-ground" x="0" y="' + cy + '" width="' + W + '" height="' + (Hh - cy) + '"/><line class="sk-hz" x1="0" y1="' + cy + '" x2="' + W + '" y2="' + cy + '"/>';
+      else {
+        const circ = 'M' + (cx - hz[1]).toFixed(1) + ' ' + hz[0].toFixed(1) + 'a' + hz[1].toFixed(1) + ' ' + hz[1].toFixed(1) + ' 0 1 0 ' + (2 * hz[1]).toFixed(1) + ' 0a' + hz[1].toFixed(1) + ' ' + hz[1].toFixed(1) + ' 0 1 0 ' + (-2 * hz[1]).toFixed(1) + ' 0Z';
+        g += '<path class="sk-ground" fill-rule="evenodd" d="' + (h > 0 ? box4 + circ : circ) + '"/><path class="sk-hz" fill="none" d="' + circ + '"/>';
+      }
+      for (let a = 0; a < 360; a += 45) { const p = proj(vec(0, a)); if (p && p[0] > 8 && p[0] < W - 8) g += '<text class="sk-cmp" x="' + p[0].toFixed(1) + '" y="' + Math.min(Hh - 6, p[1] + 16).toFixed(1) + '" text-anchor="middle">' + dirName(a) + '</text>'; }
+      g += '<path class="sk-aim" d="M' + (cx - 10) + ' ' + cy + 'h6m8 0h6M' + cx + ' ' + (cy - 10) + 'v6m0 8v6"/>';
+      svg.innerHTML = g;
+      $(box, '.sk-read').textContent = (h >= 89.5 ? 'Looking straight up, top of the chart towards ' + dirName(A + 180) : 'Looking ' + dirName(A) + ' (' + Math.round((A + 360) % 360) + '°), ' + Math.round(h) + '° ' + (h >= 0 ? 'up' : 'down')) + (live ? ' · following your phone' : '');
+      $(box, '[data-o=t]').textContent = (off === 0 ? 'now, ' : '+' + off + ' h, ') + t.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      const vis = STARS.map((s, i) => [s, P2[i]]).filter(([s, q]) => q.al > 8 && s[3] < 1.3).sort((a, b) => a[0][3] - b[0][3]).slice(0, 6);
+      $(box, '.sk-up-now').innerHTML = vis.length ? '<b>Brightest up now:</b> ' + vis.map(([s, q]) => s[0] + ' <span class="sk-dim">' + dirName(q.az) + ', ' + Math.round(q.al) + '° up</span>').join(' · ') : '';
+    }
+    let pend = false; const redraw = () => { if (!pend) { pend = true; requestAnimationFrame(() => { pend = false; draw(); }); } };
+    const setView = (a, al) => { A = ((a % 360) + 360) % 360; h = Math.max(-20, Math.min(90, al)); redraw(); };
+    const stopLive = () => { if (!live) return; live = false; lb.setAttribute('aria-pressed', 'false'); lb.textContent = '📱 Use phone compass'; window.removeEventListener('deviceorientationabsolute', onOri); window.removeEventListener('deviceorientation', onOri); };
+    box.querySelectorAll('.sk-dir').forEach(b => b.addEventListener('click', () => { stopLive(); setView(+b.dataset.a, 25); }));
+    $(box, '.sk-up').addEventListener('click', () => { stopLive(); setView(A, 90); });
+    let drag = null;
+    svg.addEventListener('pointerdown', e => { stopLive(); drag = [e.clientX, e.clientY, A, h]; svg.setPointerCapture(e.pointerId); });
+    svg.addEventListener('pointermove', e => { if (!drag) return; const s = fov / svg.getBoundingClientRect().width; setView(drag[2] - (e.clientX - drag[0]) * s, drag[3] + (e.clientY - drag[1]) * s); });
+    ['pointerup', 'pointercancel'].forEach(t => svg.addEventListener(t, () => { drag = null; }));
+    svg.addEventListener('keydown', e => { const k = { ArrowLeft: [-10, 0], ArrowRight: [10, 0], ArrowUp: [0, 5], ArrowDown: [0, -5] }[e.key]; if (k) { e.preventDefault(); stopLive(); setView(A + k[0], h + k[1]); } });
+    // Phone: the direction the back of the phone points (W3C device orientation, z-x'-y'' angles).
+    function onOri(e) {
+      let al = e.alpha; const be = e.beta, ga = e.gamma;
+      if (be == null || ga == null) return;
+      if (e.webkitCompassHeading != null) al = 360 - e.webkitCompassHeading; else if (!e.absolute && e.type !== 'deviceorientationabsolute') return;
+      if (al == null) return;
+      const sX = Math.sin(be * D), cX = Math.cos(be * D), sY = Math.sin(ga * D), cY = Math.cos(ga * D), sZ = Math.sin(al * D), cZ = Math.cos(al * D);
+      let v = [-(cY * sZ * sX + cZ * sY), -(sZ * sY - cZ * cY * sX), -cX * cY];
+      if (lastV) v = v.map((x, i) => lastV[i] * 0.75 + x * 0.25);      // steady the jitter
+      lastV = v;
+      setView(Math.atan2(v[0], v[1]) / D, Math.asin(Math.max(-1, Math.min(1, v[2] / Math.hypot(...v)))) / D);
+    }
+    lb.addEventListener('click', async () => {
+      if (live) { stopLive(); redraw(); return; }
+      try {
+        if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+          if (await DeviceOrientationEvent.requestPermission() !== 'granted') throw new Error('denied');
+        }
+        if (typeof DeviceOrientationEvent === 'undefined') throw new Error('none');
+        live = true; lastV = null; lb.setAttribute('aria-pressed', 'true'); lb.textContent = '📱 Following phone — tap to stop';
+        if ('ondeviceorientationabsolute' in window) window.addEventListener('deviceorientationabsolute', onOri); else window.addEventListener('deviceorientation', onOri);
+        setTimeout(() => { if (live && !lastV) { stopLive(); $(box, '.sk-read').textContent = 'No compass found on this device: drag the sky instead.'; } }, 2500);
+      } catch (err) { $(box, '.sk-read').textContent = 'The compass was not allowed or is not there: drag the sky instead.'; }
+    });
+    $(box, '.sk-gps').addEventListener('click', e => {
+      e.preventDefault();
+      if (!navigator.geolocation) return;
+      navigator.geolocation.getCurrentPosition(p => { la.value = p.coords.latitude.toFixed(1); lo.value = p.coords.longitude.toFixed(1); lat = +la.value; lon = +lo.value; redraw(); },
+        () => { $(box, '.sk-read').textContent = 'No GPS fix: type your latitude and longitude.'; }, { timeout: 20000, maximumAge: 3600e3 });
+    });
+    tt.addEventListener('input', () => { off = +tt.value; redraw(); });
+    la.addEventListener('input', () => { lat = Math.max(-89, Math.min(89, num(la))); redraw(); });
+    lo.addEventListener('input', () => { lon = Math.max(-180, Math.min(180, num(lo))); redraw(); });
+    if (box.dataset.lat) { lat = +box.dataset.lat; la.value = lat; }
+    if (box.dataset.lon) { lon = +box.dataset.lon; lo.value = lon; }
+    if (lat < 0) A = 180;
+    draw();
+    setInterval(() => { if (!document.hidden && box.isConnected) draw(); }, 60e3);
+  }
+
+  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram, fronts, firelay, moon, waterflow, seasons, explode, stars };
   document.querySelectorAll('.calc[data-calc]').forEach(box => {
     const f = KINDS[box.dataset.calc]; if (!f || box.dataset.ready) return;
     box.dataset.ready = '1'; f(box);

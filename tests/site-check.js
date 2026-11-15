@@ -379,6 +379,30 @@ async function browserChecks() {
     const pct = ok ? await mp.$eval('.calc[data-calc=moon] .mn-pct', e => e.textContent) : '';
     if (name !== 'Waxing crescent' || !/^3\d% lit/.test(pct)) fail('calc', `moon dial for 15 Nov 2026 says "${name}", "${pct}"`);
     await mp.close(); }
+  // Seasons wheel opens on this month; constellation finder puts Capella high in the ENE from London at 10 pm in mid-November.
+  { const mp = await browser.newPage({ viewport: { width: 1280, height: 900 }, timezoneId: 'Europe/London' });
+    await mp.clock.install({ time: new Date('2026-11-15T22:00:00Z') });
+    await mp.goto(BASE_URL + 'sections/climate.html');
+    const sw = await mp.waitForSelector('.calc[data-calc=seasons] .sw-month', { timeout: 5000 }).catch(() => null);
+    const mo = sw ? await sw.textContent() : '', chips = sw ? await mp.$$eval('.calc[data-calc=seasons] .sw-chips span', a => a.map(x => x.textContent)) : [];
+    if (mo !== 'November' || !chips.includes('Rosehips')) fail('calc', `seasons wheel opens on "${mo}" with ${chips.join(', ')}`);
+    await mp.goto(BASE_URL + 'sections/navigation.html');
+    const sk = await mp.waitForSelector('.calc[data-calc=stars] .sk-up-now b', { timeout: 5000 }).catch(() => null);
+    const up = sk ? await mp.$eval('.calc[data-calc=stars] .sk-up-now', e => e.textContent) : '';
+    if (!/Capella ENE, 5\d° up/.test(up)) fail('calc', `constellation finder from London: "${up}"`);
+    await mp.click('.calc[data-calc=stars] .sk-up');
+    if (!/straight up/.test(await mp.$eval('.calc[data-calc=stars] .sk-read', e => e.textContent))) fail('calc', 'constellation finder: Overhead did not look up');
+    await mp.close(); }
+  // Exploded views come apart and explain the part tapped.
+  for (const [pg, v] of [['energy', 'stove'], ['build-water', 'well'], ['build-water', 'biosand']]) {
+    await desk.goto(BASE_URL + 'sections/' + pg + '.html');
+    const sel = `.calc[data-calc=explode][data-view=${v}]`;
+    if (!(await desk.waitForSelector(sel + ' .ex-ly', { timeout: 5000, state: 'attached' }).catch(() => null))) { fail('calc', `${pg}.html: ${v} exploded view did not draw`); continue; }
+    await desk.click(sel + ' .ex-go');
+    await desk.$eval(sel + ' .ex-ly', e => e.dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    const r = await desk.$eval(sel, b => [b.classList.contains('ex-open-v'), b.querySelector('.ex-info').textContent]);
+    if (!r[0] || !/\. \S/.test(r[1])) fail('calc', `${v} exploded view: open ${r[0]}, info "${r[1]}"`);
+  }
   // Water flow: follows the page's head table (3 m on 25 mm MDPE ≈ 8 L/min, 0.29 bar).
   await desk.goto(BASE_URL + 'sections/build-water.html');
   if (await desk.waitForSelector('.calc[data-calc=waterflow] .calc-ov', { timeout: 5000 }).catch(() => null)) {
