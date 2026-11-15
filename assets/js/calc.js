@@ -708,7 +708,106 @@
     bar.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; lay = b.dataset.l; bar.querySelectorAll('button').forEach(x => x.setAttribute('aria-selected', String(x === b))); info.textContent = INFO[lay]; box.mcGo(0); });
   }
 
-  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram, fronts, firelay };
+  /* ── Moon phase dial: any date, worked out offline (mean synodic month from the new moon of
+     6 Jan 2000, 18:14 UTC; good to within about a day). Rises about 50 minutes later each day. */
+  function moonAt(d) {
+    const P = 29.530588853, age = (((d - Date.UTC(2000, 0, 6, 18, 14)) / 864e5) % P + P) % P, lit = (1 - Math.cos(2 * Math.PI * age / P)) / 2, wax = age < P / 2;
+    const name = lit < .03 ? 'New moon' : lit > .97 ? 'Full moon' : lit < .45 ? (wax ? 'Waxing crescent' : 'Waning crescent') : lit <= .55 ? (wax ? 'First quarter' : 'Last quarter') : (wax ? 'Waxing gibbous' : 'Waning gibbous');
+    return { age, lit, wax, name, P };
+  }
+  function moonSVG(m, R, south) {
+    const k = Math.cos(2 * Math.PI * m.age / m.P);
+    const d = 'M0 ' + -R + ' A' + R + ' ' + R + ' 0 0 1 0 ' + R + ' A' + (R * Math.abs(k)).toFixed(2) + ' ' + R + ' 0 0 ' + (k > 0 ? 0 : 1) + ' 0 ' + -R + 'Z';
+    const flip = (m.wax ? 1 : -1) * (south ? -1 : 1);
+    return '<circle r="' + R + '" class="mn-dark"/>' + (m.lit > .01 ? '<path class="mn-lit" d="' + d + '" transform="scale(' + flip + ' 1)"/>' : '') + '<circle r="' + R + '" class="mn-rim"/>';
+  }
+  function moon(box) {
+    const u = 'mn' + (++uid), today = new Date(); today.setHours(21, 0, 0, 0);
+    box.innerHTML =
+      '<p class="calc-title">Moon phase dial</p><p class="calc-sub">How much moonlight you’ll get, and when the moon is up — for any night. Worked out on this device, no signal needed.</p>' +
+      '<div class="mn-top"><svg class="mn-big" viewBox="-60 -60 120 120" role="img" aria-label="The moon’s phase"></svg><div class="mn-info"><p class="mn-name"></p><p class="mn-pct"></p><p class="mn-light"></p><p class="mn-up"></p><p class="mn-next"></p></div></div>' +
+      '<div class="calc-in">' + field(u + 'd', 'Night of <b data-o="date"></b>', '<input id="' + u + 'd" type="range" min="-30" max="60" step="1" value="0">') +
+        field(u + 'h', 'Seen from', select(u + 'h', [['n', 'Northern hemisphere'], ['s', 'Southern hemisphere']], 'n')) + '</div>' +
+      '<div class="mn-strip" role="list" aria-label="The next 30 nights"></div>' +
+      '<p class="calc-note">Rise and set times are rough sun times; hills, cloud and your exact longitude shift them. Phases are accurate to within about a day.</p>';
+    const dd = $(box, '#' + u + 'd'), hs = $(box, '#' + u + 'h');
+    const day = n => new Date(today.getTime() + n * 864e5);
+    const fmt = x => x.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' });
+    const hm = h => { h = ((h % 24) + 24) % 24; return String(Math.floor(h)).padStart(2, '0') + ':' + String(Math.round((h % 1) * 60) % 60).padStart(2, '0'); };
+    function nextPhase(from, target) { for (let i = 1; i < 31; i++) { const m = moonAt(day(from + i)); const prev = moonAt(day(from + i - 1)); if (target === 'full' ? (prev.age < m.P / 2 && m.age >= m.P / 2) : (m.age < prev.age)) return i; } return null; }
+    function draw() {
+      const n = +dd.value, d = day(n), m = moonAt(d), south = hs.value === 's';
+      $(box, '.mn-big').innerHTML = moonSVG(m, 52, south);
+      $(box, '[data-o=date]').textContent = n === 0 ? 'tonight, ' + fmt(d) : fmt(d);
+      $(box, '.mn-name').textContent = m.name;
+      $(box, '.mn-pct').textContent = Math.round(m.lit * 100) + '% lit · ' + m.age.toFixed(1) + ' days since new moon';
+      $(box, '.mn-light').textContent = m.lit > .85 ? 'Bright: you can walk open ground and read a map edge without a torch; you can also be seen.' :
+        m.lit > .45 ? 'Useful light once your eyes adjust (20–30 minutes); dark under trees.' : m.lit > .1 ? 'Little light, and only part of the night.' : 'Dark night: best for hiding and for stars; bad for moving.';
+      const rise = 6 + m.age / m.P * 24, set = rise + 12.4;
+      $(box, '.mn-up').textContent = m.lit < .03 ? 'Up with the sun, so not seen.' : 'Rises about ' + hm(rise) + ', sets about ' + hm(set) + (m.lit > .97 ? ' — up all night.' : m.wax ? ' — up in the evening.' : ' — up after midnight and into the morning.');
+      const nf = nextPhase(n, 'full'), nn = nextPhase(n, 'new');
+      $(box, '.mn-next').textContent = (m.lit > .97 ? 'Full tonight' : 'Next full moon in ' + nf + ' day' + (nf === 1 ? '' : 's')) + ' · next new moon in ' + nn + ' day' + (nn === 1 ? '' : 's');
+      $(box, '.mn-strip').innerHTML = Array.from({ length: 30 }, (_, i) => { const x = n + i, mm = moonAt(day(x)); return '<button type="button" role="listitem" class="mn-day' + (i === 0 ? ' on' : '') + '" data-n="' + x + '" aria-label="' + fmt(day(x)) + ': ' + mm.name + '"><svg viewBox="-12 -12 24 24">' + moonSVG(mm, 10, south) + '</svg><span>' + day(x).getDate() + '</span></button>'; }).join('');
+    }
+    $(box, '.mn-strip').addEventListener('click', e => { const b = e.target.closest('.mn-day'); if (b) { dd.value = Math.max(-30, Math.min(60, +b.dataset.n)); draw(); } });
+    [dd, hs].forEach(e => e.addEventListener('input', draw)); draw();
+  }
+
+  /* ── Water flow from a raised tank: 0.1 bar per metre of head (as the page says). Flow follows
+     the page's own table for 25 mm MDPE (about 19 mm bore): Q ≈ 4 × H^0.72 L/min, which matches
+     its 1, 3, 5, 10 and 20 m rows within about 10%; other bores scale by (bore/19)^2.63 (friction). */
+  function waterflow(box) {
+    const u = 'wf' + (++uid);
+    box.innerHTML =
+      '<p class="calc-title">Water flow from a raised tank</p><p class="calc-sub">Drag the height. Every metre the water surface stands above the tap gives about 0.1 bar.</p>' +
+      '<svg class="calc-chart wf-svg" viewBox="0 0 444 250" role="img" aria-label="A raised tank feeding a tap that fills a bucket"></svg>' +
+      '<div class="calc-in">' + field(u + 'h', 'Height of water surface above the tap: <b data-o="h"></b>', '<input id="' + u + 'h" type="range" min="0.5" max="20" step="0.5" value="3">') +
+        field(u + 'p', 'Pipe', select(u + 'p', [['13', '15 mm copper / 20 mm MDPE (13 mm bore)'], ['19', '22 mm copper / 25 mm MDPE (19 mm bore)'], ['25', '28 mm copper / 32 mm MDPE (25 mm bore)'], ['35', '40 mm MDPE (35 mm bore)']], '19')) +
+        field(u + 'b', 'Container', select(u + 'b', [['10', '10 L bucket'], ['20', '20 L jerrycan'], ['200', '200 L barrel']], '10')) + '</div>' +
+      '<div class="calc-outs">' + out('bar', 'Pressure at the tap', 'calc-big') + out('q', 'Flow', 'calc-big') + out('t', 'Fills the container in') + out('use', 'Good for') + '</div>' +
+      '<p class="calc-note">A rough guide for an ordinary tap on a 10–30 m run; long runs, bends and narrow fittings cut the flow. The bucket fills ten times faster than real time.</p>';
+    const H = $(box, '#' + u + 'h'), pp = $(box, '#' + u + 'p'), bk = $(box, '#' + u + 'b'), svg = $(box, '.wf-svg');
+    let fill = 0, last = null, raf = null, visible = true;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const flow = () => 4 * Math.pow(+H.value, 0.72) * Math.pow(+pp.value / 19, 2.63);
+    function paint() {
+      const h = +H.value, q = flow(), bar = h * 0.0981, cap = +bk.value;
+      const tapY = 194, ty = tapY - h * 8;                       // water surface: h metres above the tap (8 units a metre)
+      let g = '<rect x="0" y="214" width="444" height="36" fill="#2b2418"/>';
+      if (ty + 30 < 214) g += '<path class="dg-wood-s" style="stroke-width:5" d="M86 ' + (ty + 30) + ' L74 214 M146 ' + (ty + 30) + ' L158 214 M80 ' + ((ty + 244) / 2).toFixed(0) + ' H152"/>';
+      g += '<rect class="dg-line" x="70" y="' + (ty - 10) + '" width="92" height="40" rx="5" fill="none"/><rect class="dg-water" x="72" y="' + ty + '" width="88" height="28" rx="3"/>';
+      const pipe = 'M160 ' + (ty + 24) + ' H190 V' + Math.max(ty + 24, tapY - 6) + ' H322 V' + (tapY + 2);
+      g += '<path class="dg-line" d="' + pipe + '" style="stroke-width:5;fill:none"/>';
+      g += '<path class="dg-blue-s" d="' + pipe + '" style="stroke-width:2;fill:none" stroke-dasharray="5 7" stroke-dashoffset="' + (-(fill * 400) % 12).toFixed(1) + '"/>';
+      g += '<rect class="dg-key" x="314" y="' + (tapY - 4) + '" width="18" height="8" rx="2"/>';
+      g += '<path class="dg-guide" d="M64 ' + tapY + ' H314"/><path class="dg-thin" d="M58 ' + ty + ' V' + tapY + ' M52 ' + ty + ' H64 M52 ' + tapY + ' H64"/>' + '<text class="dg-tb dg-end" x="50" y="' + ((ty + tapY) / 2 + 4).toFixed(0) + '">' + h.toFixed(1) + ' m</text>';
+      const sw = Math.max(1.5, Math.min(9, q / 4));
+      g += '<path class="dg-blue-s" d="M323 ' + (tapY + 4) + ' Q324 212 323 222" style="stroke-width:' + sw.toFixed(1) + '"/>';
+      const lvl = Math.min(1, fill);
+      g += '<path class="dg-line" d="M300 214 L304 248 H342 L346 214" fill="none"/><path class="dg-water" d="M' + (304 - 4 * (1 - lvl)).toFixed(1) + ' ' + (248 - 34 * lvl).toFixed(1) + ' L304 248 H342 L' + (342 + 4 * (1 - lvl)).toFixed(1) + ' ' + (248 - 34 * lvl).toFixed(1) + ' Z" opacity=".85"/>';
+      const ang = Math.min(270, bar / 2 * 270) - 135;              // gauge: 0–2 bar over 270°
+      g += '<circle class="dg-panel" cx="392" cy="150" r="30"/><circle class="dg-line" cx="392" cy="150" r="30" fill="none"/><path class="dg-red-s" d="M392 150 L' + (392 + 22 * Math.sin(ang * Math.PI / 180)).toFixed(1) + ' ' + (150 - 22 * Math.cos(ang * Math.PI / 180)).toFixed(1) + '"/><circle class="dg-keyf" cx="392" cy="150" r="3"/>';
+      g += '<text class="dg-ts dg-mid" x="392" y="196">' + bar.toFixed(2) + ' bar</text><text class="dg-ts dg-mid" x="116" y="' + (ty - 16) + '">tank</text>';
+      svg.innerHTML = g;
+      $(box, '[data-o=h]').textContent = h.toFixed(1) + ' m';
+      $(box, '[data-o=bar]').textContent = bar.toFixed(2) + ' bar (' + (bar * 14.5).toFixed(1) + ' psi)';
+      $(box, '[data-o=q]').textContent = '≈ ' + q.toFixed(q < 10 ? 1 : 0) + ' L/min';
+      const tmin = cap / q;
+      $(box, '[data-o=t]').textContent = tmin < 1 ? Math.round(tmin * 60) + ' seconds' : tmin < 90 ? tmin.toFixed(1) + ' minutes' : (tmin / 60).toFixed(1) + ' hours';
+      $(box, '[data-o=use]').textContent = bar < 0.15 ? 'a slow trickle — filling containers' : bar < 0.4 ? 'a comfortable tap' : bar < 0.8 ? 'a shower' : bar < 1.5 ? 'mains-like pressure' : 'several outlets at once';
+    }
+    function tick(t) {
+      raf = null;
+      if (last != null) { fill += (t - last) / 1000 * 10 / 60 * flow() / +bk.value; if (fill > 1.15) fill = 0; }
+      last = t; paint();
+      if (visible && !reduce) raf = requestAnimationFrame(tick); else last = null;
+    }
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible && !raf && !reduce) raf = requestAnimationFrame(tick); }).observe(svg);
+    [H, pp, bk].forEach(e => e.addEventListener('input', () => { fill = 0; paint(); }));
+    paint(); if (!reduce) raf = requestAnimationFrame(tick);
+  }
+
+  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram, fronts, firelay, moon, waterflow };
   document.querySelectorAll('.calc[data-calc]').forEach(box => {
     const f = KINDS[box.dataset.calc]; if (!f || box.dataset.ready) return;
     box.dataset.ready = '1'; f(box);

@@ -299,6 +299,20 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Moon phase dial and water-flow calculator (November 2026)
+
+- **Moon phase dial** (Navigation, after the star signposts): any night from a month back to two
+  months ahead, worked out offline (mean synodic month from the new moon of 6 Jan 2000; within
+  about a day). Shows the phase, % lit, how useful the light is, rough rise and set (sun time;
+  rises about 50 minutes later each night), next full and new moon, a 30-night strip, and a
+  northern/southern hemisphere switch.
+- **Water flow from a raised tank** (Water Systems, under the head-pressure table): drag the
+  height; 0.1 bar per metre as the page says. Flow follows the page's own table for 25 mm MDPE
+  (Q ≈ 4·H^0.72 L/min matches its 1/3/5/10/20 m rows within ~10%), scaled to other bores by
+  (bore/19 mm)^2.63; time to fill a bucket, jerrycan or barrel, and what the pressure is good for.
+
+---
+
 ## Weather fronts and fire lays, animated (November 2026)
 
 - **Weather fronts** (Climate › Predicting weather): a low-pressure system drifts west to east over

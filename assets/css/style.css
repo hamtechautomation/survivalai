@@ -3481,3 +3481,18 @@ body.mode-day .lk-face svg { filter: invert(1) hue-rotate(180deg); }
 .wf-rain.wf-driz { stroke-width: 1; opacity: .5; } .wf-rain.wf-heavy { stroke-width: 2.2; opacity: .9; }
 .fl-pick { margin: .1rem 0 .3rem; }
 .fl-info { margin: .1rem 0 .4rem; }
+
+/* Moon phase dial and water-flow calculator (calc.js moon, waterflow). */
+.mn-top { display: flex; gap: 1.1rem; align-items: center; margin-bottom: .6rem; }
+.mn-big { flex: none; width: 128px; height: 128px; filter: drop-shadow(0 0 18px rgba(239, 231, 207, .25)); }
+.mn-dark { fill: #1a2238; } .mn-lit { fill: #efe7cf; } .mn-rim { fill: none; stroke: rgba(239, 231, 207, .35); stroke-width: 1; }
+.mn-info p { margin: 0 0 .25rem; font-size: .9rem; color: var(--text-1); }
+.mn-info .mn-name { font: 800 1.2rem var(--font); color: var(--amber-light); }
+.mn-info .mn-pct { color: var(--text-2); }
+.mn-strip { display: grid; grid-template-columns: repeat(15, 1fr); gap: 4px; margin: .4rem 0; }
+.mn-day { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 4px 0; background: var(--bg-1); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font: 600 .68rem var(--font); color: var(--text-2); }
+.mn-day svg { width: 22px; height: 22px; }
+.mn-day.on { border-color: var(--amber); color: var(--amber-light); }
+.mn-day:hover { border-color: var(--border-hi); }
+@media (max-width: 600px) { .mn-top { flex-direction: column; text-align: center; } .mn-strip { grid-template-columns: repeat(10, 1fr); } }
+@media print { .mn-dark { fill: #ddd !important; } .mn-lit { fill: #fff !important; } .mn-rim { stroke: #000 !important; } }

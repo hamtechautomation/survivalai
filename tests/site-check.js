@@ -370,6 +370,22 @@ async function browserChecks() {
     await desk.click('.lk-choice >> nth=0');
     if (!(await desk.$('.lk-card.turned'))) fail('game', 'answering did not turn the card');
   }
+  // Moon dial: a known date. 15 Nov 2026 is six days after new moon: waxing crescent, about a third lit.
+  { const mp = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+    await mp.clock.install({ time: new Date('2026-11-15T20:00:00') });
+    await mp.goto(BASE_URL + 'sections/navigation.html');
+    const ok = await mp.waitForSelector('.calc[data-calc=moon] .mn-name', { timeout: 5000 }).catch(() => null);
+    const name = ok ? await mp.$eval('.calc[data-calc=moon] .mn-name', e => e.textContent) : '';
+    const pct = ok ? await mp.$eval('.calc[data-calc=moon] .mn-pct', e => e.textContent) : '';
+    if (name !== 'Waxing crescent' || !/^3\d% lit/.test(pct)) fail('calc', `moon dial for 15 Nov 2026 says "${name}", "${pct}"`);
+    await mp.close(); }
+  // Water flow: follows the page's head table (3 m on 25 mm MDPE ≈ 8 L/min, 0.29 bar).
+  await desk.goto(BASE_URL + 'sections/build-water.html');
+  if (await desk.waitForSelector('.calc[data-calc=waterflow] .calc-ov', { timeout: 5000 }).catch(() => null)) {
+    const v = await desk.$$eval('.calc[data-calc=waterflow] .calc-ov', a => a.map(x => x.textContent));
+    if (!v[0].startsWith('0.29 bar') || !/≈ (8|9)/.test(v[1])) fail('calc', `water flow at 3 m: ${v.join(' | ')}`);
+  } else fail('calc', 'build-water.html: water-flow calculator did not render');
+
   // Machines run and step through their stages.
   for (const [pg, kind] of [['vehicles', 'engine'], ['metallurgy', 'forge'], ['build-water', 'handpump'], ['projects', 'ram'], ['climate', 'fronts'], ['climate', 'firelay']]) {
     await desk.goto(BASE_URL + 'sections/' + pg + '.html');
