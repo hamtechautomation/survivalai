@@ -424,6 +424,12 @@ async function browserChecks() {
     await desk.uncheck('.calc[data-calc=watertreat] .wt-chk input >> nth=0');
     if (!/Do not drink it/.test(await steps())) fail('calc', `water chooser, sea without fire: ${await steps()}`);
   } else fail('calc', 'food.html: water chooser did not render');
+  // Biodiesel calculator: 20 L at titration 2 with NaOH → (3.5 + 2) × 20 ÷ 0.99 ≈ 111 g, methanol 4 L.
+  await desk.goto(BASE_URL + 'sections/fuel.html');
+  if (await desk.waitForSelector('.calc[data-calc=biodiesel] .calc-ov', { timeout: 5000 }).catch(() => null)) {
+    const v = await desk.$$eval('.calc[data-calc=biodiesel] .calc-ov', a => a.map(x => x.textContent));
+    if (!/^111 g NaOH/.test(v[0]) || !/^4 L/.test(v[1])) fail('calc', `biodiesel calculator for 20 L, titration 2: ${v.join(' | ')}`);
+  } else fail('calc', 'fuel.html: biodiesel calculator did not render');
   // Water flow: follows the page's head table (3 m on 25 mm MDPE ≈ 8 L/min, 0.29 bar).
   await desk.goto(BASE_URL + 'sections/build-water.html');
   if (await desk.waitForSelector('.calc[data-calc=waterflow] .calc-ov', { timeout: 5000 }).catch(() => null)) {

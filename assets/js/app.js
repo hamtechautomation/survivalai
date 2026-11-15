@@ -38,6 +38,7 @@
     tap:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8H3a1 1 0 000 2h1v3a3 3 0 006 0v-3h1V8z"/><path d="M14 10h2a3 3 0 013 3v5"/><path d="M21 18H17"/><path d="M7 3v5"/></svg>`,
     knot:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9h11a3 3 0 010 6h-2.5"/><path d="M22 15H11a3 3 0 010-6h2.5"/></svg>`,
     target:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>`,
+    fuel:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11l3 3v10H4z"/><path d="M7 7V4h5"/><path d="M8 13l5 4M13 13l-5 4"/></svg>`,
     wrench:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.77 3.77z"/></svg>`,
     books:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h4V4H4zM10 4v16h4V4h-4z"/><path d="M17 6l3.5 14M17 6l3 1"/></svg>`,
     cloud:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 17.5a4 4 0 00-1.3-7.78A6 6 0 005 9.5a4.5 4.5 0 00.5 8h11"/><path d="M12 12v6m0 0l-2.5-2.5M12 18l2.5-2.5"/></svg>`,
@@ -133,7 +134,8 @@
     { id: 'chemistry',        href: 'sections/chemistry.html',         icon: ICONS.flask,    label: 'Chemistry & Materials' },
     { id: 'textiles',         href: 'sections/textiles.html',          icon: ICONS.scissors, label: 'Textiles & Clothing' },
     { id: 'vehicles',         href: 'sections/vehicles.html',          icon: ICONS.wheel,    label: 'Vehicles & Transport' },
-    { id: 'salvage',          href: 'sections/salvage.html',           icon: ICONS.wrench,   label: 'Salvage & Fuel' },
+    { id: 'salvage',          href: 'sections/salvage.html',           icon: ICONS.wrench,   label: 'Salvage & Rebuild' },
+    { id: 'fuel',             href: 'sections/fuel.html',              icon: ICONS.fuel,     label: 'Making Fuel' },
     { id: 'projects',         href: 'sections/projects.html',          icon: ICONS.projects, label: 'Practical Projects' },
 
     { id: 'governance',       href: 'sections/governance.html',        icon: ICONS.columns,  label: 'Governance', section: 'Community & Mind' },
@@ -636,7 +638,8 @@
     knowledge: ['start', [['#preserve', 'Save knowledge', 'What to keep, how', 'book', 'amber'], ['#teaching', 'Teach it', 'Pass skills on', 'users', 'amber'], ['#children', 'Children', 'Schooling without schools', 'baby', 'green'], ['#library', 'Build a library', 'What to collect', 'books', 'amber']]],
     metallurgy: ['start', [['#building-forge', 'Build a forge', 'Brake drum, bellows', 'fire', 'orange'], ['#basic-techniques', 'Basic forging', 'Draw, upset, bend', 'hammer', 'amber'], ['#heat-treating', 'Harden & temper', 'Colours and quench', 'fire', 'red'], ['#knife-making', 'Make a knife', 'Five stages', 'hammer', 'amber']]],
     projects: ['start', [['#waterfilter', 'Water filter', 'Biosand build', 'water', 'blue'], ['#toilets', 'Toilets', 'Latrines that work', 'home', 'amber'], ['#cooling', 'Cool food', 'Without power', 'snow', 'blue'], ['#firefighting', 'Fight a fire', 'Bucket brigade and more', 'fire', 'red']]],
-    salvage: ['start', [['#safety', 'Stay safe', 'Before you salvage', 'alert', 'red'], ['#where', 'Where to look', 'Best sources', 'map', 'amber'], ['#gen-maintenance', 'Keep a generator going', 'Maintenance', 'wrench', 'amber'], ['#fuel-overview', 'Fuel', 'What keeps, what doesn’t', 'fire', 'orange']]],
+    salvage: ['start', [['#safety', 'Stay safe', 'Before you salvage', 'alert', 'red'], ['#where', 'Where to look', 'Best sources', 'map', 'amber'], ['#gen-maintenance', 'Keep a generator going', 'Maintenance', 'wrench', 'amber'], ['#batteries', 'Rescue batteries', 'Test and revive', 'wrench', 'amber']]],
+    fuel: ['start', [['#which-fuel', 'Which fuel?', 'For your engine', 'fire', 'orange'], ['#biodiesel', 'Biodiesel', 'From used cooking oil', 'flask', 'amber'], ['#woodgas', 'Wood gas', 'Run an engine on wood', 'fire', 'amber'], ['#storage', 'Keep fuel usable', 'Storage and rotation', 'alert', 'amber']]],
     science: ['start', [['#ptable', 'Periodic table', 'Elements you can use', 'atom', 'blue'], ['#equations', 'Key equations', 'Physics and chemistry', 'atom', 'amber'], ['#maths', 'Maths', 'Practical methods', 'grid4', 'amber'], ['#constants', 'Constants', 'Numbers to know', 'clipboard', 'amber']]],
     textiles: ['start', [['#repair', 'Mend clothes', 'Patch and darn', 'scissors', 'amber'], ['#sewing', 'Sewing', 'Stitches that hold', 'scissors', 'amber'], ['#boots', 'Footwear', 'Repair or make', 'scissors', 'orange'], ['#quick-ref', 'Quick reference', 'At a glance', 'clipboard', 'amber']]],
     vehicles: ['start', [['#hierarchy', 'Which vehicle?', 'Best options, in order', 'car', 'amber'], ['#bicycles', 'Bicycles', 'Load and repair', 'wheel', 'green'], ['#engines', 'Engines', 'Keep them running', 'gear', 'amber'], ['#watercraft', 'Boats', 'Canoe, skiff, raft', 'water', 'blue']]]
@@ -730,6 +733,7 @@
     projects: `<g class="bm bm-spin" style="${O(-6, -4)};--t:6s"><path class="ba" transform="translate(-6 -4)" d="${gearPath(11, 9, 3)}"/><circle class="bat" cx="-6" cy="-4" r="3.5"/></g>` +
       `<g class="bm bm-spin-r" style="${O(10, 11)};--t:4.67s"><path class="ba" transform="translate(10 11)" d="${gearPath(8, 7, 2.6)}"/><circle class="bat" cx="10" cy="11" r="2.4"/></g>`,
     salvage: `<path class="ba" d="M-6 6 L-2 -1 H6 L10 6 L6 13 H-2Z" transform="translate(-2 2)"/><g class="bm bm-rock" style="${O(2, 9)};--t:1.6s"><path class="ba" style="stroke-width:3.2" d="M4 4 L18 -14"/><path class="ba" d="M15 -19 A6 6 0 1 0 22 -11"/></g>`,
+    fuel: `<path class="ba" d="M-12 -6 H4 L9 -1 V15 H-12Z"/><path class="ba" d="M-8 -6 V-11 H-1"/><path class="bat" d="M-8 3 L2 11 M2 3 L-8 11"/><path class="baf bm bm-drip" style="${O(14, 0)};--t:2.2s" d="M14 0 c-2.4 3.4 -2.4 6 0 6 c2.4 0 2.4 -2.6 0 -6z"/>`,
     science: `<circle class="baf" r="3"/>` + [[0, 3.5], [60, 5], [120, 4.2]].map(([a, t]) => `<g transform="rotate(${a})"><g class="bm bm-spin" style="${O(0, 0)};--t:${t}s"><ellipse class="bat" rx="20" ry="7"/><circle class="baf" cx="20" r="2"/></g></g>`).join(''),
     knowledge: `<path class="ba" d="M0 -12 C-6 -16 -14 -16 -19 -13 V13 C-14 10 -6 10 0 14 C6 10 14 10 19 13 V-13 C14 -16 6 -16 0 -12 Z M0 -12 V14"/>` +
       `<g class="bm bm-page" style="${O(0, 0)};--t:4s"><path class="bat" d="M0 -12 C5 -15 11 -15 16 -12 V12 C11 10 5 10 0 13"/></g>`,

@@ -299,6 +299,17 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Making Fuel — a page of its own (November 2026, `tools/fuelpage.py`)
+
+Salvage §10–15 moved to **sections/fuel.html** (Salvage keeps a pointer and is renamed *Salvage & Rebuild*); registered in the menu, home cards, offline cache, search (both copies), Bunker Bot's section list, the living badge (a jerry can with a drip) and the emergency-first strip. Section counts updated to 30.
+
+- **New figures:** which fuel for which engine; biodiesel in eight stages; titration; two-tank veg-oil system; fuel ethanol chain with practical yields per kg (sugar ~0.55 L, grain ~0.38, potatoes/beet ~0.1, apples ~0.05); energy per litre (diesel 38.6, kerosene 37, petrol 34.2, veg oil 34, biodiesel 33, ethanol 21.2, methanol 15.8 MJ).
+- **Reused figures:** the Appleseed processor (Vehicles), pot still (Chemistry), gasifier (Vehicles), biogas digester (Power), retort (Chemistry).
+- **Biodiesel calculator:** lye = (3.5 g NaOH or 4.9 g KOH + titration mL) × litres ÷ purity; methanol 20%; expect ~95% fuel, ~22% glycerine layer; warns above 6 mL titration. Tested at 20 L / 2 mL → 111 g NaOH, 4 L methanol.
+- **New text:** biogas as fuel (energy, use, H₂S scrubbing, storage) and dry wood and charcoal. Typo fixed ("coke's" → "cokes").
+
+---
+
 ## Sweep figures, first batch (`tools/sweepfigs.py`)
 
 Drawn where the sweep found the words alone weren't enough. Each is generated in code, placed by a text anchor and safe to regenerate; three replace ASCII-art blocks.

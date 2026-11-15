@@ -1292,7 +1292,36 @@
     box.addEventListener('input', plan); box.addEventListener('change', plan); plan();
   }
 
-  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram, fronts, firelay, moon, waterflow, seasons, explode, stars, genwave, genmatch, watertreat };
+
+  /* ── Biodiesel batch: the doses on the Making Fuel page. Catalyst = (base + titration) × litres ÷ purity
+     (base 3.5 g/L NaOH or 4.9 g/L KOH, for pure chemical; titrate with a 1 g/L solution of the same lye).
+     Methanol 20% of the oil volume. ─────────────────────────────────────────────────────────────── */
+  function biodiesel(box) {
+    const u = 'bd' + (++uid);
+    box.innerHTML =
+      '<p class="calc-title">Biodiesel batch calculator</p><p class="calc-sub">Enter your oil and titration result. Make the titration solution from the same lye you will react with.</p>' +
+      '<div class="calc-in">' + field(u + 'v', 'Oil', '<input id="' + u + 'v" type="number" min="1" step="any" value="20" inputmode="decimal"><span class="calc-u">litres</span>') +
+        field(u + 't', 'Titration result', '<input id="' + u + 't" type="number" min="0" step="0.1" value="2" inputmode="decimal"><span class="calc-u">mL</span>', 'mL of 1 g/L lye solution for 1 mL of oil') +
+        field(u + 'c', 'Lye', select(u + 'c', [['na', 'Sodium hydroxide (NaOH), 99% pure'], ['k90', 'Potassium hydroxide (KOH), 90% flakes'], ['k85', 'Potassium hydroxide (KOH), 85%']], 'na')) + '</div>' +
+      '<div class="calc-outs">' + out('lye', 'Weigh out lye', 'calc-big') + out('me', 'Methanol', 'calc-big') + out('fuel', 'Expect about') + out('gly', 'Glycerine layer') + out('wash', 'Wash water (3 rounds)') + '</div>' +
+      '<p class="calc-note bd-warn" aria-live="polite"></p>' +
+      '<p class="calc-note">React at 55–60 °C for 1–2 hours, settle 8–24 hours. Dissolve the lye in the methanol in a sealed HDPE container, outdoors, gloves and goggles on.</p>';
+    const V = $(box, '#' + u + 'v'), T = $(box, '#' + u + 't'), C = $(box, '#' + u + 'c');
+    function calc() {
+      const v = num(V), t = num(T), k = C.value;
+      const base = k === 'na' ? 3.5 : 4.9, pur = k === 'na' ? 0.99 : k === 'k90' ? 0.9 : 0.85;
+      const g = (base + t) * v / pur;
+      $(box, '[data-o=lye]').textContent = fmt(g, g < 100 ? 1 : 0) + ' g ' + (k === 'na' ? 'NaOH' : 'KOH');
+      $(box, '[data-o=me]').textContent = fmt(v * 0.2, 1) + ' L (' + fmt(v * 200, 0) + ' mL)';
+      $(box, '[data-o=fuel]').textContent = fmt(v * 0.95, 1) + ' L of biodiesel';
+      $(box, '[data-o=gly]').textContent = 'about ' + fmt(v * 0.22, 1) + ' L (with spent methanol)';
+      $(box, '[data-o=wash]').textContent = fmt(v * 0.3, 1) + ' L each time';
+      $(box, '.bd-warn').textContent = t > 6 ? 'Titration over 6 mL: very used or acidic oil. Expect lots of soap and a poor split — blend with fresher oil, or burn it in a heater instead.' : t < 0.5 && t > 0 ? '' : '';
+    }
+    box.addEventListener('input', calc); calc();
+  }
+
+  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram, fronts, firelay, moon, waterflow, seasons, explode, stars, genwave, genmatch, watertreat, biodiesel };
   document.querySelectorAll('.calc[data-calc]').forEach(box => {
     const f = KINDS[box.dataset.calc]; if (!f || box.dataset.ready) return;
     box.dataset.ready = '1'; f(box);
