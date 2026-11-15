@@ -229,7 +229,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
     <ol class="steps">
       <li><strong>Intake:</strong> Build a small weir (low dam) in the stream. Divert water into a settling tank (removes sediment), then into the penstock pipe.</li>
-      <li><strong>Penstock:</strong> Use PVC or HDPE pipe. Larger diameter = less friction loss. For 3 L/s flow, use minimum 2" (50mm) pipe. Keep bends minimal — each 90° bend costs ~10m of equivalent head in friction loss.</li>
+      <li><strong>Penstock:</strong> Use PVC or HDPE pipe. Larger diameter = less friction loss. For 3 L/s flow, use minimum 2" (50mm) pipe. Keep bends minimal — each sharp 90° bend adds as much friction as a few extra metres of pipe — use long sweeping bends.</li>
       <li><strong>Nozzle:</strong> At the bottom, a nozzle converts pressure to a high-speed jet. Nozzle diameter determines flow rate — adjustable nozzle (ball valve) allows power regulation.</li>
       <li><strong>Turbine:</strong> A Pelton wheel (cups on a wheel that catch and deflect water jets) is most efficient for high-head, low-flow systems. Can be fabricated from steel plate, or cast from aluminum. Spoons/cups can be improvised from cut pipe sections.</li>
       <li><strong>Generator:</strong> Permanent magnet alternator is most reliable. Pair with a full-bridge rectifier for 12/24V DC charging.</li>
@@ -322,7 +322,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
           <tr><td>Check electrolyte level (flooded batteries)</td><td>Monthly</td><td>Top up with distilled water only. Plates must be covered. If plates are exposed, battery is likely damaged.</td></tr>
           <tr><td>Check specific gravity with hydrometer</td><td>Monthly</td><td>Fully charged: 1.265–1.280. Discharged: 1.150. All cells should read within 0.025 of each other. Large variance = failing cell.</td></tr>
           <tr><td>Clean terminals</td><td>Every 3 months</td><td>Neutralize corrosion with baking soda paste, rinse, dry, apply petroleum jelly (Vaseline) to prevent future corrosion.</td></tr>
-          <tr><td>Equalization charge</td><td>Monthly (flooded only)</td><td>Controlled overcharge (15.5–16V for 12V system) for 2–3 hours. Mixes stratified electrolyte, removes sulfation. Do not equalize sealed/AGM/gel batteries.</td></tr>
+          <tr><td>Equalization charge</td><td>When cells differ by more than 0.030, or every 1–3 months (flooded only)</td><td>Controlled overcharge (15.5–16V for 12V system) for 2–3 hours. Mixes stratified electrolyte, removes sulfation. Do not equalize sealed/AGM/gel batteries.</td></tr>
           <tr><td>Check charge voltage</td><td>Ongoing</td><td>Bulk: 14.4–14.8V. Float: 13.4–13.8V. Never let rest below 12.0V (50% DoD for flooded).</td></tr>
         </tbody>
       </table>
@@ -333,7 +333,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     <p><strong>Pulse desulfation:</strong> Specialized charger sends high-frequency pulses that break down lead sulfate crystals. Commercial desulfators ($20–80) work on mildly sulfated batteries. Severely sulfated batteries are generally unrecoverable.</p>
 
     <h3>Lithium Iron Phosphate (LiFePO4)</h3>
-    <p>The preferred battery type for long-term off-grid use. Advantages: 3,000–5,000 cycle life (vs 300–500 for lead-acid), 80% usable capacity (vs 50%), lighter, no maintenance, no hydrogen gas. Disadvantages: higher upfront cost, requires a BMS (Battery Management System — almost always included in cells), cannot tolerate freezing during charging.</p>
+    <p>The preferred battery type for long-term off-grid use. Advantages: 3,000–5,000 cycle life (vs 300–500 for lead-acid), 80% usable capacity (vs 50%), lighter, no maintenance, no hydrogen gas. Disadvantages: higher upfront cost, requires a BMS (Battery Management System — almost always built into packs), cannot tolerate freezing during charging.</p>
 
     <h3>Improvised Batteries (Emergency / Educational)</h3>
     <p>These are extremely low capacity and are useful only for demonstrating principles or powering very small loads (LED, watch).</p>
@@ -457,7 +457,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
       <span class="callout-icon">💡</span>
       <div class="callout-content">
         <strong>Key Principles</strong>
-        <p>1. Continuous conductive surface with no gaps larger than the wavelength you're blocking (EMP: ensure seams overlap or are taped with metallic tape). 2. No conductors should penetrate the cage (if items inside have power cables, those cables must also be inside or disconnected). 3. Nested cages (bag inside a box inside a room) provide better protection than single layers.</p>
+        <p>1. Continuous conductive surface with no gaps — any gap must be far smaller than the wavelength you're blocking (EMP: ensure seams overlap or are taped with metallic tape). 2. No conductors should penetrate the cage (if items inside have power cables, those cables must also be inside or disconnected). 3. Nested cages (bag inside a box inside a room) provide better protection than single layers.</p>
       </div>
     </div>
 
@@ -556,7 +556,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     <h3>Diesel</h3>
     <ul>
       <li><strong>Shelf life:</strong> Treated diesel: 12–24 months. Biodiesel blends degrade faster (6–12 months).</li>
-      <li>Store in blue containers (diesel standard) or clearly labeled drums.</li>
+      <li>Store in clearly labelled containers (US colours: petrol red, diesel yellow, kerosene blue).</li>
       <li>Diesel is less explosive than gasoline (higher flash point) but still a significant fire risk.</li>
       <li>Algae growth: add biocide (Biobor JF) at storage to prevent microbial growth in long-term stored diesel. Filter before use if stored &gt;6 months.</li>
     </ul>
@@ -574,7 +574,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
         <thead><tr><th>Fuel</th><th>Container Color</th><th>Shelf Life (treated)</th><th>Storage Location</th><th>Fire Class</th></tr></thead>
         <tbody>
           <tr><td>Gasoline</td><td>Red</td><td>12–24 months</td><td>Detached shed, ventilated</td><td>Class B</td></tr>
-          <tr><td>Diesel</td><td>Blue/Yellow</td><td>12–24 months</td><td>Detached shed, ventilated</td><td>Class B</td></tr>
+          <tr><td>Diesel</td><td>Yellow (US)</td><td>12–24 months</td><td>Detached shed, ventilated</td><td>Class B</td></tr>
           <tr><td>Propane</td><td>Gray/Silver cylinder</td><td>Indefinite</td><td>Outdoor, upright, ventilated</td><td>Class B</td></tr>
           <tr><td>Kerosene</td><td>Blue</td><td>2–5 years</td><td>Detached shed, cool and dark</td><td>Class B</td></tr>
           <tr><td>Ethanol (HEET)</td><td>Yellow bottle</td><td>1–2 years sealed</td><td>Same as gasoline</td><td>Class B</td></tr>
@@ -595,11 +595,11 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
   <section id="rocket-stove">
     <h2>12. Rocket Stoves</h2>
 
-    <p>A rocket stove burns small-diameter wood (pencil to wrist thickness) with 80–90% efficiency compared to 10–20% for an open campfire. It uses an L-shaped combustion chamber that creates a powerful natural draft, producing intense, clean heat with minimal smoke. After mastering the Faraday cage and solar panel, the rocket stove is the highest-impact energy build in a long-term survival scenario.</p>
+    <p>A rocket stove burns small-diameter wood (pencil to wrist thickness) and puts roughly 25–40% of the wood’s heat into the pot, against about 10–15% for an open fire. It uses an L-shaped combustion chamber that creates a powerful natural draft, producing intense, clean heat with minimal smoke. After mastering the Faraday cage and solar panel, the rocket stove is the highest-impact energy build in a long-term survival scenario.</p>
 
     <h3>Why Rocket Stoves Matter</h3>
     <ul>
-      <li><strong>Fuel reduction:</strong> Cook the same meal using 80–90% less wood than an open fire.</li>
+      <li><strong>Fuel reduction:</strong> Cook the same meal on roughly half the wood of an open fire (tests show 30–60% savings).</li>
       <li><strong>Smoke reduction:</strong> High combustion temperature burns off most particulates — critical for indoor or semi-enclosed use.</li>
       <li><strong>Fuel flexibility:</strong> Burns small diameter twigs, scrap wood, and biomass that open fires can't use efficiently.</li>
       <li><strong>Build time:</strong> A functional brick rocket stove can be built in under 2 hours with basic materials.</li>
@@ -651,7 +651,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
       <span class="callout-icon">💡</span>
       <div class="callout-content">
         <strong>Rocket Mass Heater (Advanced)</strong>
-        <p>A rocket mass heater extends the rocket stove principle to space heating. Exhaust gases travel through a long horizontal duct buried in a thermal mass (cob bench, earthen floor) before exiting. The mass absorbs heat and radiates it over 12–24 hours from a single firing. It can heat a well-insulated space with 5–10% of the wood required by a conventional wood stove. Significantly more complex to build but extraordinary efficiency for cold climates.</p>
+        <p>A rocket mass heater extends the rocket stove principle to space heating. Exhaust gases travel through a long horizontal duct buried in a thermal mass (cob bench, earthen floor) before exiting. The mass absorbs heat and radiates it over 12–24 hours from a single firing. Builders report heating a well-insulated space on a fraction of the wood of a conventional stove (claims of a fifth to a tenth are common). Significantly more complex to build but extraordinary efficiency for cold climates.</p>
       </div>
     </div>
   </section>
@@ -700,7 +700,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
 
     <ol class="steps">
       <li>Make a parabolic dish from cardboard covered with foil, a satellite dish lined with mirrors or foil, or shaped aluminum sheeting. The dish should be at least 60cm (24") in diameter for useful cooking power.</li>
-      <li>Identify or calculate the focal point — where all reflected sunlight converges. For a parabolic dish, the focal point is approximately at the center of curvature.</li>
+      <li>Identify or calculate the focal point — where all reflected sunlight converges. For a parabolic dish the focal length is diameter² ÷ (16 × depth) — half the radius of curvature, not at its centre.</li>
       <li>Mount a cooking stand or arm to hold the pot at the focal point. Use a dark, thin-walled metal pot or pan for fastest heat transfer.</li>
       <li>Point the dish directly at the sun. A 1-liter pot of water can boil in 20–30 minutes in good sun with a well-built dish.</li>
       <li>Reposition every 10–15 minutes as the sun moves. Use long-handled pots or gloves — the focal point is genuinely dangerous to look at or touch.</li>
@@ -725,7 +725,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
   <section id="biogas">
     <h2>14. Biogas from Organic Waste</h2>
 
-    <p>Biogas (methane + CO₂) is produced by bacteria digesting organic matter in the absence of oxygen. Animal manure, kitchen scraps, and crop waste can power a cooking stove or lamp continuously when set up in a digester. A well-loaded household digester can supply 2–4 hours of cooking gas per day from the waste of 3–4 large animals or 8–10 people.</p>
+    <p>Biogas (methane + CO₂) is produced by bacteria digesting organic matter in the absence of oxygen. Animal manure, kitchen scraps, and crop waste can power a cooking stove or lamp continuously when set up in a digester. A well-loaded household digester can supply 2–4 hours of cooking gas a day from the dung of 3–4 cattle; human waste from a household alone gives well under an hour.</p>
 
     <div class="callout callout-warning">
       <span class="callout-icon">⚠️</span>
@@ -761,18 +761,18 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
       <li>Place an inverted 200L drum over the gas collection opening. Weight it so it floats but stays centered. Connect a gas pipe from the drum's highest point to your stove.</li>
       <li>Load the digester: 1 part fresh manure : 1 part water by volume. Ideal temperature is 35°C (95°F) — warmer = faster digestion. Below 15°C, digestion nearly stops.</li>
       <li>Allow 2–4 weeks for initial bacterial population to establish. First gas produced will contain high CO₂ — purge it before using (light and let it burn off, or vent).</li>
-      <li>Daily loading: add fresh slurry each day equal to approximately 5% of tank volume. Feed consistently — irregular loading disrupts bacterial balance.</li>
+      <li>Daily loading: add fresh slurry each day equal to about 2–3% of tank volume (so material stays 30–60 days). Feed consistently — irregular loading disrupts bacterial balance.</li>
     </ol>
 
     <h3>Feedstock Guide</h3>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Material</th><th>Gas Yield (m³/kg)</th><th>Notes</th></tr></thead>
+        <thead><tr><th>Material</th><th>Gas Yield (m³ per kg dry matter)</th><th>Notes</th></tr></thead>
         <tbody>
           <tr><td>Cow/cattle manure</td><td>0.20–0.30</td><td>Best all-around feedstock; consistent</td></tr>
           <tr><td>Pig manure</td><td>0.25–0.50</td><td>High yield; can be too acidic if overloaded</td></tr>
           <tr><td>Chicken manure</td><td>0.35–0.60</td><td>Very high nitrogen — dilute well, use sparingly</td></tr>
-          <tr><td>Human waste</td><td>0.20–0.35</td><td>Viable; must be treated as pathogen-containing; safe after 30+ days digestion</td></tr>
+          <tr><td>Human waste</td><td>0.20–0.35</td><td>Viable; digestion reduces but does not kill all pathogens (worm eggs survive) — compost or store the slurry before use, never on crops eaten raw</td></tr>
           <tr><td>Food scraps</td><td>0.30–0.50</td><td>Good yield; avoid meat and oils in large quantities</td></tr>
           <tr><td>Crop residues</td><td>0.10–0.25</td><td>Low yield alone; best as supplement</td></tr>
         </tbody>

@@ -54,7 +54,7 @@
     <span class="callout-icon">⚡</span>
     <div class="callout-content">
       <strong>Power Generation Priorities</strong>
-      <p>TEG from a wood stove is available tonight with £20–40 of parts. A pedal generator can be built in a weekend. A water wheel takes weeks but produces continuous power. Order: TEG → pedal → water wheel/wind → biogas. Match the source to your site — water and wind are intermittent, biogas is continuous.</p>
+      <p>TEG from a wood stove is available tonight with £20–40 of parts. A pedal generator can be built in a weekend. A water wheel takes weeks but produces continuous power. Order: TEG → pedal → water wheel/wind → biogas. Match the source to your site — sun and wind come and go; water and biogas run steadily.</p>
     </div>
   </div>
 
@@ -86,7 +86,7 @@
 
     <h3>Wiring a Generator Circuit</h3>
     <ul>
-      <li><strong>Rectifier bridge (only if needed):</strong> a DC treadmill motor already gives DC; a bridge (4 × 1N4007, or a pre-made one) just keeps the polarity right if the motor can spin either way. AC alternators do need one.</li>
+      <li><strong>Rectifier bridge (only if needed):</strong> a DC treadmill motor already gives DC; a bridge (4 × 10 A diodes, or a pre-made 25 A bridge) just keeps the polarity right if the motor can spin either way. AC alternators do need one.</li>
       <li><strong>Charge controller (essential):</strong> an MPPT or PWM solar charge controller rated for the motor’s highest voltage. It regulates charging at 13.8–14.4 V. Do <em>not</em> use a 12 V regulator chip such as the LM7812: 12 V cannot charge a 12 V battery, it handles little more than 1 A, and a 90 V motor exceeds its input limit.</li>
       <li><strong>Blocking diode:</strong> rated above the fuse — a 10 A diode (10A10) or a Schottky on a small heat sink — in series, so the battery cannot drive current back into the motor at rest. A 3 A diode such as the 1N5408 burns out at full pedal output (100 W ÷ 13 V ≈ 8 A).</li>
       <li><strong>Ammeter:</strong> optional but useful — shows you are actually charging</li>
@@ -157,7 +157,7 @@
       <div class="quick-fact"><span class="qf-value">~85%</span><span class="qf-label">Overshot efficiency</span></div>
       <div class="quick-fact"><span class="qf-value">~30%</span><span class="qf-label">Undershot efficiency</span></div>
       <div class="quick-fact"><span class="qf-value">1m × 10 L/s</span><span class="qf-label">Minimum viable site</span></div>
-      <div class="quick-fact"><span class="qf-value">1500–3000</span><span class="qf-label">Target generator RPM</span></div>
+      <div class="quick-fact"><span class="qf-value">150–1,500+</span><span class="qf-label">Generator RPM needed (depends on type)</span></div>
     </div>
 
     <figure class="dg dg-multi" id="fig-waterwheels">
@@ -263,7 +263,7 @@ MICRO-HYDRO PELTON SYSTEM LAYOUT:
      │  sealed, no air pockets
      │
   [ELEVATION = HEAD]
-  10m head = 1 bar = 142 PSI
+  10m head = 1 bar = 14.5 PSI
      │
      ▼
   NOZZLE (brass fitting + needle valve)
@@ -295,7 +295,7 @@ MICRO-HYDRO PELTON SYSTEM LAYOUT:
       <span class="timeline-tag tag-1year">1-Year Payoff</span>
     </div>
 
-    <p>Anaerobic bacteria in a sealed tank decompose organic waste into methane (CH₄) and CO₂. The methane is captured and used for cooking or heating. The residual slurry is an excellent fertiliser — better than the raw inputs. <strong>1 cow produces enough waste for a 1m³ digester, generating enough gas for 2–3 hours of cooking daily.</strong></p>
+    <p>Anaerobic bacteria in a sealed tank decompose organic waste into methane (CH₄) and CO₂. The methane is captured and used for cooking or heating. The residual slurry is an excellent fertiliser — better than the raw inputs. <strong>1 cow produces enough dung for a 1m³ digester, giving roughly an hour of cooking gas a day; 3 cows give 2–3 hours.</strong></p>
 
     <figure class="dg" id="fig-biogas">
       <svg viewBox="0 0 444 252" role="img" aria-label="Fixed-dome biogas digester: a buried brick dome where slurry makes gas, with an inlet, a gas outlet and a displacement chamber"><defs><marker id="ah-bg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><path class="dg-earth" d="M2 70 L442 70 L442 246 L2 246 Z"/><path class="dg-panel" d="M126 214 L126 140 Q126 92 220 92 Q314 92 314 140 L314 214 Z"/><path class="dg-debris" d="M128 150 L312 150 L312 212 L128 212 Z"/><text class="dg-tb dg-mid" x="226" y="174">SLURRY</text><text class="dg-ts dg-mid" x="226" y="188">manure, food scraps,</text><text class="dg-ts dg-mid" x="226" y="200">crop waste + water</text><path class="dg-key" d="M128 148 L128 140 Q128 94 220 94 Q312 94 312 140 L312 148 Z" style="fill-opacity:.35"/><text class="dg-tb dg-mid" x="220" y="124">GAS  CH₄ + CO₂</text><rect class="dg-panel" x="18" y="48" width="62" height="22" rx="3"/><text class="dg-ts dg-mid" x="49" y="40">mixing pit</text><path class="dg-line" d="M66 70 L136 200" stroke-width="7" style="opacity:.6"/><rect class="dg-panel" x="334" y="96" width="78" height="118"/><rect class="dg-debris" x="336" y="116" width="74" height="96"/><path class="dg-line" d="M314 200 L336 200" stroke-width="10" style="opacity:.6"/><path class="dg-arrow" d="M374 112 L374 70 L434 70" marker-end="url(#ah-bg)"/><text class="dg-tb dg-end" x="436" y="48">slurry out</text><text class="dg-ts dg-end" x="436" y="61">= fertiliser</text><path class="dg-key-s" d="M220 94 L220 22 L300 22" marker-end="url(#ah-bg)"/><rect class="dg-key" x="212" y="38" width="16" height="12" rx="2"/><text class="dg-tb" x="304" y="18">gas to stove</text><text class="dg-ts" x="304" y="31">pressure-relief valve</text><path class="dg-red-s" d="M296 168 L330 150" marker-end="url(#ah-bg)"/><text class="dg-ts dg-mid" x="373" y="228">gas pushes slurry</text><text class="dg-ts dg-mid" x="373" y="240">up into here</text><path class="dg-thin" d="M104 70 L104 214 M98 70 h12 M98 214 h12"/><text class="dg-tb dg-end" x="96" y="146">1–2 m</text><text class="dg-tb" x="10" y="128">inlet:</text><text class="dg-ts" x="10" y="141">waste +</text><text class="dg-ts" x="10" y="153">water</text></svg>
@@ -309,7 +309,7 @@ MICRO-HYDRO PELTON SYSTEM LAYOUT:
         <ul>
           <li>Methane is explosive (5–15% concentration in air). Never use an open flame near the digester inlet or outlet</li>
           <li>Install a pressure relief valve — if gas cannot escape, pressure builds and can rupture the dome</li>
-          <li>Hydrogen sulphide (H₂S) in the gas smells of rotten eggs and is toxic. Filter through iron filings (iron oxide reacts with H₂S) before use</li>
+          <li>Hydrogen sulphide (H₂S) in the gas smells of rotten eggs and is toxic. Filter through rusty steel wool or iron filings (the iron oxide reacts with H₂S) before use</li>
           <li>Always ventilate areas where biogas equipment is stored</li>
         </ul>
       </div>
@@ -327,7 +327,7 @@ MICRO-HYDRO PELTON SYSTEM LAYOUT:
     <p>TEG modules exploit the Seebeck effect: a temperature difference across a special ceramic tile generates a small DC voltage. Mount the hot side on your wood stove flue pipe, the cold side on a heatsink in the air — and you're generating electricity from the heat you were already producing.</p>
 
     <div class="quick-facts">
-      <div class="quick-fact"><span class="qf-value">5–30W</span><span class="qf-label">Output from wood stove</span></div>
+      <div class="quick-fact"><span class="qf-value">5–15W</span><span class="qf-label">Output from wood stove</span></div>
       <div class="quick-fact"><span class="qf-value">£20–40</span><span class="qf-label">Enough for phone + LEDs</span></div>
       <div class="quick-fact"><span class="qf-value">SP1848</span><span class="qf-label">Common module (27145SA)</span></div>
       <div class="quick-fact"><span class="qf-value">0W</span><span class="qf-label">Extra fuel cost</span></div>
@@ -335,11 +335,11 @@ MICRO-HYDRO PELTON SYSTEM LAYOUT:
 
     <h3>Installation</h3>
     <ul>
-      <li><strong>Module placement:</strong> hot side flat against stove body or flue pipe (200–300°C range); cold side with large aluminium heatsink + fan if possible</li>
+      <li><strong>Module placement:</strong> hot side on a steel plate fixed to the stove, kept below about 150 °C — common SP1848 modules are ruined above that; never directly on a flue at 200–300 °C; cold side with large aluminium heatsink + fan if possible</li>
       <li><strong>Thermal compound:</strong> CPU thermal paste between surfaces dramatically improves conductivity</li>
       <li><strong>Wiring:</strong> connect modules in series to increase voltage; in parallel to increase current. Target: 12V+ open circuit to charge batteries</li>
       <li><strong>Protection:</strong> add a diode and 15V Zener to prevent overvoltage when stove is very hot</li>
-      <li><strong>4–6 modules</strong> in series give ~12V and 2–5A = 24–60W from a hot stove</li>
+      <li><strong>4–6 modules</strong> in series give roughly 5–15 W from a stove — enough for phones and LED lights</li>
     </ul>
   </section>
 
@@ -363,7 +363,7 @@ MICRO-HYDRO PELTON SYSTEM LAYOUT:
 
     <h3>Basic Components</h3>
     <ul>
-      <li><strong>Boiler:</strong> steel pressure vessel, rated minimum 150 PSI working pressure; test at 1.5× working pressure before use</li>
+      <li><strong>Boiler:</strong> steel pressure vessel, rated minimum 150 PSI working pressure; test with water (never air) at 1.5× working pressure before use</li>
       <li><strong>Pressure relief valve:</strong> spring-loaded, set at 60 PSI for safe small-scale operation</li>
       <li><strong>Single-acting cylinder:</strong> steel pipe with machined or cast piston; steam enters one end, pushes piston, exhausts on return</li>
       <li><strong>Slide valve:</strong> controls steam admission timing; oscillating valve is simplest to build</li>
@@ -371,7 +371,7 @@ MICRO-HYDRO PELTON SYSTEM LAYOUT:
       <li><strong>Crankshaft:</strong> converts linear piston motion to rotation; can be forged or machined from steel</li>
     </ul>
 
-    <p>Historical note: James Watt's first separate condenser engine of 1769 was built by hand with similar tools. The technology that powered the Industrial Revolution is fully rebuildable from first principles with basic machining skills.</p>
+    <p>Historical note: James Watt patented his separate condenser in 1769, but his engines only worked well once John Wilkinson could bore a true cylinder (1776) — accurate machining is the hard part. The technology that powered the Industrial Revolution is fully rebuildable from first principles with basic machining skills.</p>
   </section>
 
   <!-- =================== QUICK REF =================== -->
@@ -383,13 +383,13 @@ MICRO-HYDRO PELTON SYSTEM LAYOUT:
         <table>
           <thead><tr><th>Method</th><th>Output</th><th>Build Time</th><th>Cost</th><th>Continuous?</th></tr></thead>
           <tbody>
-            <tr><td>TEG (stove)</td><td>5–30W</td><td>Hours</td><td>£20–40</td><td>While fire burns</td></tr>
+            <tr><td>TEG (stove)</td><td>5–15W</td><td>Hours</td><td>£20–40</td><td>While fire burns</td></tr>
             <tr><td>Hand-crank generator</td><td>20–50W</td><td>1 weekend</td><td>£30–60</td><td>No (manual)</td></tr>
-            <tr><td>Pedal generator</td><td>50–150W</td><td>1 weekend</td><td>£80–120</td><td>No (manual)</td></tr>
-            <tr><td>Wind (1m blade, 20mph)</td><td>~100W</td><td>3 months</td><td>£100–200</td><td>When windy</td></tr>
-            <tr><td>Water wheel (1m head, 10 L/s)</td><td>60–200W</td><td>4–8 weeks</td><td>£80–200</td><td>Yes</td></tr>
+            <tr><td>Pedal generator</td><td>50–100W</td><td>1 weekend</td><td>£80–120</td><td>No (manual)</td></tr>
+            <tr><td>Wind (1 m rotor, 20mph)</td><td>~100W</td><td>3 months</td><td>£100–200</td><td>When windy</td></tr>
+            <tr><td>Water wheel (1m head, 10 L/s)</td><td>40–80W</td><td>4–8 weeks</td><td>£80–200</td><td>Yes</td></tr>
             <tr><td>Pelton (10m head)</td><td>200–500W</td><td>6–12 weeks</td><td>£150–300</td><td>Yes</td></tr>
-            <tr><td>Biogas (1 cow)</td><td>Cooking 2–3 hr/day</td><td>3 months</td><td>£100–300</td><td>Yes</td></tr>
+            <tr><td>Biogas (1 cow)</td><td>Cooking ~1 hr/day</td><td>3 months</td><td>£100–300</td><td>Yes</td></tr>
           </tbody>
         </table>
       </div>

@@ -299,6 +299,221 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Accuracy sweep — every section (November 2026)
+
+All 29 pages re-read against standard references (WHO, CDC/USDA, NHS/Resuscitation Council UK, HSA, FEMA, NIOSH, EMP Commission, Hugh Piggott, Jeavons, Aprovecho and the guide's own other pages). Each correction below was applied with `tools/sweepfix.py`, which matches visible text through the HTML and refuses any change that would leave tags unbalanced. Items marked **ADD** are new safety notes; **IMG** are pictures planned or drawn (see the next section).
+
+### Maternal
+- **FIX** cord stump "dip in antiseptic" vs "keep clean and dry": make consistent (dry care; 7.1% chlorhexidine where infection common)
+- **FIX** cord prolapse: add lift presenting part off the cord with gloved fingers
+- **ADD** shoulder dystocia danger sign (McRoberts + suprapubic pressure, or all-fours)
+- **IMG** emergency positions: knee-chest (cord prolapse), McRoberts + suprapubic (stuck shoulders), fundal massage (bleeding)
+### Veterinary
+- **FIX** frothy bloat oil dose: cattle 250–500 mL, sheep/goats 100–200 mL
+- **FIX** milk fever: never drench an animal that cannot swallow / is flat (aspiration)
+- **FIX** humane slaughter: eye-to-opposite-horn X is cattle-only; pig point higher (~2 cm above eye line, midline), sheep/goat top of head (polled) or behind poll (horned) aimed at throat; bleed within 60 s; chest stick for cattle/pigs
+- **IMG** stun points: cattle, pig, sheep/goat heads
+### Disasters
+- **FIX** car in water (hurricane + flood): do NOT wait for door handles/pressure; seatbelt off, window open/break at once, out, children first (SWOC)
+- **FIX** hurricane Cat 4/5 actions overstated ("evacuate or die"); add storm-surge point: run from water, hide from wind
+- **FIX** wildfire trapped in car: engine running, lights on, AC recirculate, below windows under wool blanket
+- **FIX** N95 "ineffective against smoke" -> filters particles (main harm), not CO/gases
+- **FIX** flood food: undamaged all-metal commercial cans can be kept after washing+sanitising (USDA); discard home-canned/screw-top/pouch
+- **FIX** "CO kills more than the storm/event" (x2) -> a leading cause of death after storms
+- **FIX** EMP cars "2000+ likely disabled" -> EMP Commission tests: most kept running or restarted; uncertain
+- **FIX** nuclear "take KI if available" -> only if radioiodine fallout expected; thyroid only
+- **FIX** Katrina ">100 drowned in attics" unsourced -> soften; Maria deaths attribution soften
+- **IMG** hazmat placard classes 1–9; car-in-water escape (SWOC); defensible-space zones around a house
+### Shelter
+- **FIX** chimney rule: 0.9 m above roof where it exits, and 0.6 m above anything within 3 m (3-2-10)
+- **FIX** water heat storage "3x masonry" -> about 2x per volume
+- **FIX** thatch life: straw 15–25 y, water reed 50+
+- **FIX** sod roof weight 40–80 -> 150–300 kg/m² wet
+- **FIX** bark: take from felled trees (stripping a ring kills a living tree)
+- **FIX** lean-to: sloping back faces the wind
+- **IMG** quinzhee cross-section (guide sticks, platform above entrance, vent); chimney 3-2-10 rule
+### Animal
+- **FIX** feed conversion: rabbits ~3–4:1, broilers ~2:1, pigs ~3:1, cattle 6–8:1 (rabbits NOT best) — table + §4 intro
+- **FIX** rabbit yield "pair 200–300 lb/yr in 3x3 hutch" -> one doe 40–50 young/yr ≈ 45 kg (100 lb) dressed
+- **FIX** rabbit space table "1 sq ft" -> hutch ~76×90 cm (30×36") each
+- **FIX** eggs 4–6/day "1,000–1,500 kcal" -> ~300–450 kcal; feed "2 lb per dozen" -> ~4 lb (1.8 kg)
+- **FIX** "Chicken — Cervical Dislocation" describes decapitation; drop hanging-upside-down "drowsiness"; cone, head off in one stroke
+- **FIX** meds: penicillin not toxic to chickens; rabbits injection only, never by mouth; enrofloxacin banned in food birds (US) — last resort
+- **FIX** goat minerals garble: goat mineral; sheep mineral lacks copper; never give goat/cattle mineral to sheep
+- **FIX** iceberg "toxic" -> poor food, causes diarrhoea; "80% of disease" soften
+- **IMG** egg candling day 7 / 14 / 18; feed-to-meat bar chart
+### Security
+- **FIX** pepper spray/taser/baton "legal most places" -> illegal to carry in UK and many countries; check local law
+- **FIX** go-bag Baofeng: transmitting needs a licence except in emergencies (link Comms)
+- **IMG** layered defence rings (replace ASCII)
+### Agriculture
+- **FIX** calorie table: beans 10–20 lb/100 sq ft (real 2–5), wheat 10–15 (4–9), amaranth 10–20 (2–6), corn 15–25 (5–15 garden), potato 50–100 (25–75), sweet potato (25–60), squash (30–60), cassava (30–75); recompute kcal; note roots win per area, grains/beans store
+- **FIX** seed saving: squash crosses only within its species (C. pepo / maxima / moschata), not "all cucurbits"; brassicas cross within species (B. oleracea group; B. rapa group), not "ALL"; carrots cross with wild carrot
+- **FIX** worm yield: 1 kg castings/week from 0.5 kg waste impossible -> ~0.25 kg
+- **FIX** marigold "thiopene" -> alpha-terthienyl (a thiophene)
+- **FIX** forced molt by starving: drop (banned/welfare); let them molt
+- **FIX** goat milk: Nubian 2–3 L, Alpine 3–4 L (avg); animal page Nubian 2–3 qt; Boer "60 days to harvest" -> market 4–8 months
+- **FIX** Kunekune "fastest to finish" -> grazes well but slow (12+ months)
+- **FIX** mead: Campden tablet is not a nutrient (it suppresses wild yeast; add 24 h before yeast); beeswax "5× longer" -> longer, less smoke
+- **IMG** calories per 100 sq ft bar chart; which crops cross (seed-saving families)
+### Climate
+- **FIX** "Fool's watercress ... dangerous" — it is edible; real risk is confusing it with hemlock water dropwort. Replace in Deadly Five with death cap (Amanita phalloides)
+- **FIX** hawthorn: seeds NOT edible (cyanogenic) — strain them
+- **FIX** UK rainfall 885 mm -> UK ~1,150 mm (England ~850)
+- **FIX** "Wet-Bulb Hypothermia" -> wet-cold hypothermia
+- **FIX** sea purslane "high in omega-3" drop; mist: following streams downhill can lead into gullies — follow paths
+- **IMG** sweet chestnut vs horse chestnut (husk, nut, leaf) side by side; tick removal
+### Metallurgy
+- **FIX** bell metal "95/5" -> about 78% Cu / 22% tin; bronze melts ~950–1,000 °C (not 913), pour ~1,100
+- **FIX** tin cans as tin source -> micron coat, useless
+- **FIX** oil-bonded sand: needs bentonite + oil (not sand + oil)
+- **FIX** "cut nails ... forged by hand" -> wrought (hand-forged) nails; cut nails were machine-cut
+- **FIX** hot chisel mild steel -> medium-carbon tempered blue; mild steel deforms
+- **FIX** hardening: heat a shade past non-magnetic (not exactly at)
+- **FIX** used motor oil quench: toxic fumes (PAHs) — outdoors, upwind; lost foam: styrene fumes outdoors
+- **FIX** files: cheap modern files may be case-hardened mild steel — spark test first; railroad "HC" spikes barely harden
+- **FIX** loose handle "soak in linseed oil swells it" -> re-wedge; water swelling is temporary
+- **FIX** steel carbon range 0.2–2 -> about 0.05–2 (mild 0.05–0.25)
+- **IMG** spark-test patterns (mild / high-carbon / cast iron / stainless); sand-casting cope & drag cross-section
+- **Layout** remove ASCII art duplicated by SVG figures (JABOD, nail header; also shelter debris hut; food filter/still?)
+### Vehicles
+- **FIX** bicycle "50× more efficient than walking" (x3) -> about 3–5× less energy per km
+- **FIX** bike generator: diode 1N5408 -> 10 A; output 50–150 W -> 50–100 W sustained
+- **FIX** EMP: soften "1972 pickup worth more", "Post-1990 vulnerable" -> may be; EMP Commission tests
+- **FIX** gasifier ash grate "gas rises and exits sideways" -> in a downdraft gas is drawn down through the grate
+- **FIX** biodiesel titration: 1 mL oil in 10 mL alcohol; "zero modification" -> old rubber fuel lines/seals perish; change filters early
+- **FIX** ethanol "85%+" -> as strong as you can (90–95%); "don't store in plastic — absorbs water" -> keep sealed; ethanol pulls water from air
+- **FIX** thermostat removal "will not overheat" -> soften
+- **FIX** donkey load "50–80 lb" -> about 20% of body weight (40–50 kg standard donkey); ox "horses not food" soften
+- **FIX** dugout: carve green, seal ends, dry slowly after (not dry 6–12 months first)
+- **FIX** steam bending 20–30 min/inch -> about 1 hour per inch
+- **FIX** raft buoyancy maths (net 25–30 lb/cu ft dry softwood; 50 cu ft ≈ 1,300 lb at waterline; load half)
+- **Layout** remove four-stroke ASCII (figure exists)
+- **IMG** reading a river: downstream V, upstream V (rock), eddy, strainer, outside-of-bend
+### Salvage
+- **FIX** fridge: venting refrigerant is illegal (UK/US) — have it recovered; in a true collapse vent outdoors away from flame
+- **FIX** §10 petrol "6–12 months stabilised" -> 1–2 years (matches §15)
+- **FIX** vehicles biodiesel methanol 25% -> 20% (match salvage)
+- **IMG** safe capacitor discharge: resistor on insulated leads, meter check, shorting wire
+### Energy
+- **FIX** rocket stove "80–90% efficiency vs 10–20%" and "80–90% less wood" -> ~25–40% vs ~10–15%; about half the wood (30–60% less)
+- **FIX** rocket mass heater "5–10% of the wood" -> soften (builders claim a fifth to a tenth)
+- **FIX** hydro "each 90° bend ~10 m head" -> a few metres of extra pipe; use long sweeps
+- **FIX** parabolic focal point "centre of curvature" -> focal length = D² ÷ (16 × depth) (half the radius of curvature)
+- **FIX** biogas: "8–10 people" -> human waste alone gives under an hour; daily load 5% -> ~2–3% (30–60 day retention); yields per kg dry matter; human-waste slurry not pathogen-free (compost/store; not on raw-eaten crops)
+- **FIX** Faraday "no gaps larger than the wavelength" -> gaps far smaller than the wavelength; overlapping seams
+- **FIX** fuel container colours: US petrol red, diesel yellow, kerosene blue
+- **FIX** equalise "monthly" -> when cells differ >0.030 / every 1–3 months; LiFePO4 BMS "in cells" -> in packs
+- **Layout** replace ASCII (solar, Pelton, gasifier, rocket L, box cooker, biogas) with figures (reuse fig-gasifier, fig-biogas copies; new Pelton layout + box cooker)
+- **IMG** micro-hydro layout with head marked; solar box cooker cross-section
+### Build-structures
+- **FIX** quinzhee "-5 °C regardless of outside" (quick-fact + text) -> usually around −5 to 0 °C inside even in deep cold; walls 25–30 cm
+- **FIX** debris thickness: 1 m here vs 60 cm shelter -> "at least 60 cm; nearer 1 m in frost" both pages
+- **FIX** earthbag "flood-proof" -> unstabilised earth softens if soaked; raise on gravel/stone, stabilise lowest courses
+- **FIX** "2.5 cm oak shutter stops handgun rounds" -> wood doesn't stop bullets; shutters stop entry; protection = earth/sand/masonry
+- **FIX** sandbags "2 bags/4 bags" -> thickness: ~30 cm packed sand for handgun, 45–60 cm for rifle
+- **FIX** Czech hedgehog 90 cm -> needs 1.2–1.5 m arms
+- **Layout** mortise/drawbore ASCII -> figure
+- **IMG** drawbored mortise & tenon (offset hole pulls shoulder tight)
+### Build-power
+- **FIX** Pelton "10m head = 1 bar = 142 PSI" -> 14.5 psi
+- **FIX** TEG: hot side on flue 200–300 °C destroys SP1848 (≈150 °C max) -> mount on a plate, keep under ~150 °C; 4–6 modules ≈ 5–15 W (not 24–60); quick fact 5–30W -> 5–15 W
+- **FIX** wiring list rectifier "4 × 1N4007" -> 10 A diodes
+- **FIX** quick stat "1500–3000 target RPM" -> depends on generator (150–1,500+)
+- **FIX** quick ref: water wheel 1 m × 10 L/s "60–200 W" -> 40–80 W; pedal 50–150 -> 50–100; wind "1m blade" -> 1 m rotor; biogas 1 cow "2–3 h" -> about 1 h per cow
+- **FIX** "water and wind intermittent, biogas continuous" -> wind/sun intermittent; water & biogas steady
+- **FIX** steam test: hydraulic (water) test, never air; Watt 1769 -> worked once Wilkinson bored true cylinders (1776)
+- **FIX** H2S filter: rusty iron (iron oxide)
+- **Layout** Pelton ASCII -> micro-hydro figure (shared)
+### Science
+- **FIX** battery runtime 0.8 for lead-acid -> 0.5 (longer life), LiFePO4 0.8–0.9; example 100 Ah 40 W ≈ 15 h
+- **FIX** "baking soda neutralises acid burns" -> acid spills; on skin flush with water only
+- **FIX** wood to boil 5 L: say it assumes ~25% efficient fire
+### Communications
+- **FIX** prosign AR "· — · —" -> · — · — · (and check morse.js table)
+- **FIX** CHIRP URL "chirp.danplabell.us" -> chirpmyradio.com (formerly chirp.danplanet.com)
+- **FIX** "Technician exam open book" -> not open book (but question pool is public)
+- **FIX** Meshtastic "8+ hop limit" -> up to 7 hops (default 3)
+- **FIX** FRS/MURS: Baofengs aren't certified for FRS/MURS transmit — listen only
+- **ADD** UK note: calling 145.500 MHz (2 m) / 433.500 (70 cm); UK licences Foundation/Intermediate/Full; PMR446 licence-free
+- **IMG** crystal set pictorial (antenna, coil+slider, diode, earpiece, ground); signal mirror V-finger aim
+### Navigation
+- **FIX** triangulation "two landmarks -> line of intersection" -> a point; three -> small triangle
+- **FIX** tree-ring spacing "Medium" -> unreliable (rings wider where the tree leans/reaction wood, not sun)
+- **FIX** Orion's belt "at equinox" -> rises due east and sets due west on every night
+- **ADD** watch method: in summer time (BST/DST) use 1 o'clock, not 12
+- **ADD** UK declination: about 0–2° W and shrinking (2026) — check map legend
+- **Layout** baseplate compass ASCII -> figure
+- **IMG** baseplate compass parts ("red in the shed")
+### Projects
+- **FIX** bucket bio-sand: gravel on top of the sand contradicts the biolayer -> diffuser plate (holed lid) on top, standing water above sand; gravel only at bottom
+- **FIX** "faecal-oral disease kills more than the disaster itself" -> can, in camps/long outages (Haiti 2010)
+- **IMG** Corsi–Rosenthal cube (4 filters + fan on top, airflow arrows)
+### Knowledge
+- **FIX** timeline: fire (~1 million–400,000 BCE) placed before 300,000; Bronze Age collapse was the eastern Mediterranean (Hittites, Mycenae; Egypt weakened) — Indus faded ~1900 BCE, Akkad fell ~2150, Shang continued; "early Islam ~1–400 CE" remove (7th c.); "scientific method born 500 BCE" -> logic & geometry formalised; Gutenberg "1/300th" -> fell sharply; child mortality "falls 80%" -> more than halved since 1960
+- **FIX** Story of Mankind "1921 Newbery winner" -> published 1921, first Newbery Medal 1922
+- **FIX** reading list: Farming the Woods = Ken Mudge & Steve Gabriel; "How Things Work" dup -> The Way Things Work once; Emergency War Surgery free from the Borden Institute (not AMSUS)
+- **FIX** media: DVD-R standard 10–25 y (archival gold 50–100); SSD unpowered 1–5+ y (power up yearly); HDD stored 5–10+ (spin up yearly)
+- **IMG** storage lifespan bar chart (paper, M-DISC, DVD, USB, SSD, HDD)
+### Governance
+- **FIX** pencil/ballpoint contradiction with knowledge page -> graphite doesn't fade but smudges/erases; iron-gall or archival pigment ink for records; ballpoint lasts decades in the dark, fades in light; regular paper "5–30 years" -> yellows/brittle over decades
+- **FIX** Iroquois "influenced US Constitution" -> often credited (debated)
+### Psychology
+- **FIX** decision fatigue "~200 decisions" and "glucose directly affects PFC" -> fixed decision budget is debated; tiredness, hunger and sleep loss clearly worsen judgment
+- **FIX** CIWA bands -> 0–8 minimal, 9–15 moderate, 16+ severe (20+ very high risk); 10 items (nausea, tremor, sweats, anxiety, agitation, tactile, auditory, visual, headache 0–7; orientation 0–4)
+- **FIX** PTSD "20–30% after severe trauma" -> roughly 1 in 10 to 1 in 3 depending on the event
+### Textiles
+- **FIX** sinew "waterproof when dry" -> softens/stretches when wet; protect joins with pitch or glue
+- **FIX** hat "up to 30% of body heat through the head" -> about 10% (by area), more when it's the only bare part
+- **FIX** milkweed "6× warmer than wool" / "150% of down" -> roughly as warm as down when dry (claims vary)
+- **FIX** wool washing "cold ONLY / hot+agitation" vs scouring 60 °C -> scouring hot is fine without agitation; it's agitation + temperature shock that felts; wash garments lukewarm
+- **FIX** brain-tan saying -> traditional saying, roughly true for deer; eggs work too
+- **FIX** warp-weighted loom "nearly every European textile until 1200" -> much of northern European cloth until the treadle loom spread (11th–13th c.)
+- **FIX** repair "200:1" -> about 120:1 (40 h vs 20 min); newspaper "20–30%" -> noticeably
+- **IMG** six hand stitches + saddle stitch (replace ASCII); plain vs twill (replace ASCII)
+### Medical
+- **FIX** needle-decompression note "A three-sided chest seal alone will help" -> a vented seal, or a sealed one you burp (contradicts §12)
+- **FIX** status epilepticus diazepam "5–10 mg rectal" -> 10 mg rectal for adults (0.5 mg/kg child, max 10–20) / 5–10 mg IV
+- **FIX** wound packing "5+ minutes" -> at least 3 min with haemostatic gauze, 10 with plain gauze
+- **Layout** START ASCII -> flowchart figure (include "breathes after airway repositioned -> RED")
+- **IMG** START triage flowchart; pressure-immobilisation bandage (neurotoxic bites)
+### Food
+- **FIX** berries "white/yellow/red high risk; blue/black lower risk" -> colour is no guide (deadly nightshade berries are black)
+- **FIX** cactus "saguaro and fishhook barrel among safer" -> most cactus juice causes vomiting; fishhook barrel is the one usually cited; don't rely on it
+- **FIX** transpiration bag "0.5–1 L in several hours" -> about a cup a day per bag; dew "1–2 L/hour" -> up to ~1 L/hour in heavy dew
+- **FIX** giant puffball "car-sized" -> up to beach-ball size; chicken of the woods: never from yew/conifers/eucalyptus hosts
+- **ADD** snares: banned in Wales, restricted elsewhere (check law; survival only)
+- **Layout** ASCII (filter, still, catchment, latrine, rotation, snare, deadfall) -> figures where they exist; remove duplicates
+- **IMG** figure-four deadfall trigger + snare set; improvised still (pot, lid tube, cold-water condenser)
+### Build-water
+- **FIX** well candle test: a candle that goes out = deadly air, but one that stays lit does NOT prove safe (it burns down to ~16% O2; CO/CO2/H2S invisible; methane can ignite) -> ventilate before every entry, harness + surface team
+- **FIX** swale spacing formula (contradicts itself) -> spacing by canopy/rainfall: ~5–10 m steep, 15–30 m gentle
+- **FIX** first-flush quick ref 9.5 L/m -> 8.5 L/m (104 mm bore)
+- **FIX** UK rainfall "650 mm avg" -> south-east England ~650; UK average ~1,150 (label)
+- **FIX** frost depth 600 -> 750 mm (UK water regs)
+### Chemistry
+- **FIX** soap recipe "otherwise use all lard" with same 140 g NaOH = no superfat -> all-lard 1 kg: 130 g NaOH
+- **ADD** ash lye is mostly potassium carbonate; boiling it with slaked lime makes stronger caustic potash
+- **FIX** sunflower KOH 0.194 -> 0.188 (match NaOH 0.134)
+- **FIX** quicklime "900 °C locally" -> several hundred °C — enough to boil water and start fires
+- **FIX** "puering" (that's bating) -> weak tan liquor first
+- **ADD** pot still: never a sealed system — remove pressure-cooker valve/weights; a blocked condenser builds pressure
+- **FIX** nixtamalisation "5% lye or slaked lime" -> about 1% slaked lime by weight of corn (match Food page)
+- **Layout** pot still, retort, oil lamp ASCII -> figures (retort fig exists)
+- **IMG** pot still (open system: boiler, lyne arm, condenser in cold water, collection)
+### Nbc
+- **FIX** EMP "Highly vulnerable: all computers, smartphones, pacemakers, digital ham radios; E1 destroys microelectronics instantly" -> "At risk" — most damage expected in devices wired to long cables/grid; unplugged handhelds often survive; effects uncertain
+- **FIX** H2S IDLH 50 ppm -> 100 ppm (NIOSH)
+- **FIX** burial distance 50 m here vs 30 m Medical -> at least 30 m from water (further for many bodies; 250 m from drinking wells for mass graves) — make both match
+- **ADD** ammonia: a big anhydrous release can hug the ground as a cold fog at first
+- **Layout** KFM + Faraday trash-can ASCII -> figures
+- **IMG** KFM electroscope (can, foil leaves, insulating thread, desiccant, window)
+### Medicine-making
+- **ADD** horsetail: short courses only (contains thiaminase); marsh horsetail (E. palustre) is toxic — confirm species
+- **ADD** comfrey: up to ~10 days at a time, intact skin only (pyrrolizidine alkaloids)
+
+---
+
 ## Power from scrap and the water-treatment chooser (November 2026)
 
 - **How spinning makes electricity** (Power Generation, "How It Works"): a four-magnet rotor sweeps

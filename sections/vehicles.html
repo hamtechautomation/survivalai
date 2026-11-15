@@ -102,7 +102,7 @@
         <div class="rank-num">2</div>
         <div class="rank-body">
           <h4>Bicycle</h4>
-          <p>50× more efficient than walking at the same caloric expenditure. No fuel. Repairable with basic hand tools. Can carry 200+ lbs with panniers and trailer. Silent. Can access trails no car can use. Also serves as an electricity generator.</p>
+          <p>Uses about a third to a fifth of the energy of walking for the same distance. No fuel. Repairable with basic hand tools. Can carry 200+ lbs with panniers and trailer. Silent. Can access trails no car can use. Also serves as an electricity generator.</p>
         </div>
       </div>
       <div class="rank-card">
@@ -116,14 +116,14 @@
         <div class="rank-num">4</div>
         <div class="rank-body">
           <h4>Pre-1980 Vehicle</h4>
-          <p>No computer ECU. Points ignition — purely mechanical. Carbureted fuel delivery. Can run on alternative fuels with minimal modification. Locally repairable with basic tools. A 1972 pickup is worth more than a 2022 pickup in an EMP scenario.</p>
+          <p>No computer ECU. Points ignition — purely mechanical. Carbureted fuel delivery. Can run on alternative fuels with minimal modification. Locally repairable with basic tools. After a large EMP, a simple older vehicle is the safer bet — though tests suggest most modern cars would also survive.</p>
         </div>
       </div>
       <div class="rank-card">
         <div class="rank-num">5</div>
         <div class="rank-body">
           <h4>Modern Vehicle (Post-1990)</h4>
-          <p>ECU-dependent. Vulnerable to EMP. Fuel injection is complex to repair without dealer scan tools. High short-term value when fuel and parts exist; rapidly loses utility as supply chains fail.</p>
+          <p>ECU-dependent. Possibly vulnerable to EMP (tests are mixed). Fuel injection is complex to repair without dealer scan tools. High short-term value when fuel and parts exist; rapidly loses utility as supply chains fail.</p>
         </div>
       </div>
       <div class="rank-card">
@@ -144,13 +144,13 @@
       <span class="callout-icon">🚲</span>
       <div class="callout-content">
         <strong>The Most Valuable Machine in a Post-Collapse World</strong>
-        <p>A bicycle in good repair may be the single most valuable piece of hardware you own after collapse. It is 50× more efficient than walking, carries 200+ lbs, requires no fuel, is repairable with simple hand tools, operates silently, and can double as a power generation source. Maintain yours obsessively.</p>
+        <p>A bicycle in good repair may be the single most valuable piece of hardware you own after collapse. It covers ground on a third to a fifth of the energy of walking, carries 200+ lbs, requires no fuel, is repairable with simple hand tools, operates silently, and can double as a power generation source. Maintain yours obsessively.</p>
       </div>
     </div>
 
     <h3>Why Bicycles Win</h3>
     <ul>
-      <li>50× more efficient than walking at the same caloric expenditure</li>
+      <li>About 3–5× less energy per mile than walking</li>
       <li>No fuel required — ever</li>
       <li>Repairable with simple hand tools and improvised parts</li>
       <li>Can carry 200+ lbs with proper cargo setup (panniers + trailer)</li>
@@ -226,12 +226,12 @@
 
     <h3>Bicycle Generator</h3>
     <div class="spec-note">
-      <strong>Output:</strong> A human in sustained aerobic effort can produce 50–150W continuously. This is enough to charge 12V batteries, phones (via USB regulator), radios, and LED lighting systems.
+      <strong>Output:</strong> A human in sustained aerobic effort can produce 50–100 W continuously. This is enough to charge 12V batteries, phones (via USB regulator), radios, and LED lighting systems.
     </div>
     <ul>
       <li><strong>Motor:</strong> Salvage a permanent-magnet DC motor — treadmill motors are ideal; some direct-drive washing-machine motors work too. (Car starter motors make poor generators: they are built for huge current for a few seconds, and many have field windings rather than magnets.)</li>
       <li><strong>Friction drive:</strong> Mount motor with a rubber wheel on its shaft pressing against the tire sidewall. The rubber wheel contacts and spins the motor as you pedal.</li>
-      <li><strong>Blocking diode:</strong> A PM DC motor already gives DC. Put a heavy diode (e.g. 1N5408) in the positive line so the battery can’t drive the motor when you stop. A bridge rectifier is only needed if the motor might spin backwards.</li>
+      <li><strong>Blocking diode:</strong> A PM DC motor already gives DC. Put a heavy diode (10 A or more — a 3 A 1N5408 burns out) in the positive line so the battery can’t drive the motor when you stop. A bridge rectifier is only needed if the motor might spin backwards.</li>
       <li><strong>Charge controller:</strong> Always charge through a PWM or MPPT controller rated above the motor’s top voltage — never wire the motor straight to a battery. (A 12 V regulator chip like the LM7812 can’t charge a 12 V battery.)</li>
       <li><strong>Output connections:</strong> battery via the controller and a fuse; phones via a USB 5 V regulator from the battery; LED strips from the battery at 12 V. See <a href="build-power.html">Power Generation</a> for the full circuit.</li>
     </ul>
@@ -295,7 +295,7 @@
       <span class="callout-icon">⚠️</span>
       <div class="callout-content">
         <strong>Why Pre-1980s Vehicles Survive EMP</strong>
-        <p>Points ignition is purely mechanical — a cam-triggered contact set with no semiconductors. No ECU means no chips to fry. Carbureted fuel delivery is fully mechanical with no solenoids or computers. A well-maintained 1972 pickup truck is more operationally valuable than a 2022 pickup after an electromagnetic pulse event.</p>
+        <p>Points ignition is purely mechanical — a cam-triggered contact set with no semiconductors. No ECU means no chips to fry. Carbureted fuel delivery is fully mechanical with no solenoids or computers. In US EMP Commission tests most modern cars kept running or restarted, so the risk is uncertain; an old points-ignition vehicle simply removes the doubt.</p>
       </div>
     </div>
 
@@ -324,7 +324,7 @@
           <li>Coolant circulates: engine block → radiator → back → thermostat → repeat</li>
           <li>Overheating causes: low coolant, failed water pump, clogged radiator, stuck thermostat, blown head gasket</li>
           <li><strong>Improvised radiator repair:</strong> crack 2 raw eggs into the coolant — proteins coagulate at the leak point and seal it temporarily (hours to days)</li>
-          <li><strong>Failed thermostat:</strong> Remove the thermostat entirely and reinstall the housing. Engine runs cooler and less efficiently but will not overheat</li>
+          <li><strong>Failed thermostat:</strong> Remove the thermostat entirely and reinstall the housing. Engine runs cooler and less efficiently; it usually stops a stuck-shut thermostat overheating the engine</li>
         </ul>
       </div>
     </div>
@@ -372,7 +372,7 @@
       <li><strong>Reactor vessel:</strong> Heat-resistant steel drum or pipe, ¼"+ wall. Fire brick lining ideal for throat area where temperatures reach 1,100°C.</li>
       <li><strong>Air nozzle:</strong> 1–2 steel pipes entering at combustion zone. The restriction creates gasification, not full combustion.</li>
       <li><strong>Reduction zone:</strong> Below combustion, above the grate. CO₂ + H₂O → CO + H₂ conversion happens here — this is where the usable fuel gas is made.</li>
-      <li><strong>Ash grate:</strong> Perforated steel plate. Ash falls through; fuel bed rests on top; gas rises and exits sideways.</li>
+      <li><strong>Ash grate:</strong> Perforated steel plate. Ash falls through; the fuel bed rests on top; in a downdraft unit the engine draws the gas down through the grate and out below it.</li>
       <li><strong>Cooling tubes:</strong> 10–15 feet of 2" pipe. Cools hot gas to a usable temperature for the engine. Coil in water or air-cool with fins.</li>
       <li><strong>Condensate trap:</strong> Lowest point in the cooling run. Collects tar and water. Drain after every use — neglected traps cause engine failure.</li>
       <li><strong>Filter:</strong> Sawdust or hay box removes particulates. Clean and replace regularly. Particulates destroy engine rings.</li>
@@ -419,8 +419,8 @@
     <h3>Appleseed Processor — Step by Step</h3>
     <div class="process-steps">
       <div class="process-step"><strong>Filter the oil:</strong> Remove food particles. Heat to 150°F/65°C briefly to drive off water — water causes soap formation and ruins the batch. Oil must be completely dry (no bubbling when heated).</div>
-      <div class="process-step"><strong>Titration:</strong> Test free fatty acid level to calculate the exact lye amount needed. Dissolve 1g NaOH in 1L distilled water. Dissolve oil sample in isopropyl alcohol; add phenolphthalein indicator; add lye solution drop by drop until pink. Each ml = 1 extra gram of NaOH needed per liter of oil.</div>
-      <div class="process-step"><strong>Make sodium methoxide:</strong> Combine methanol (25% of oil volume) + NaOH lye (3.5g/L of oil + titration amount). Exothermic and toxic — mix in a sealed container. This is your catalyst solution.</div>
+      <div class="process-step"><strong>Titration:</strong> Test free fatty acid level to calculate the exact lye amount needed. Dissolve 1g NaOH in 1L distilled water. Dissolve 1 mL of oil in 10 mL of isopropyl alcohol; add phenolphthalein indicator; add lye solution drop by drop until pink. Each ml = 1 extra gram of NaOH needed per liter of oil.</div>
+      <div class="process-step"><strong>Make sodium methoxide:</strong> Combine methanol (20% of oil volume) + NaOH lye (3.5g/L of oil + titration amount). Exothermic and toxic — mix in a sealed container. This is your catalyst solution.</div>
       <div class="process-step"><strong>React:</strong> Add sodium methoxide to oil heated to 55°C (130°F) with continuous mixing. React for 1–2 hours. Temperature must be maintained.</div>
       <div class="process-step"><strong>Settle:</strong> Allow 8+ hours without disturbing. Glycerin (darker, denser) sinks to the bottom. Biodiesel (golden, clearer) floats on top. Drain glycerin from the bottom valve.</div>
       <div class="process-step"><strong>Wash:</strong> Gently spray-wash biodiesel with water 3 times, allowing separation each time. This removes soap residue and catalyst.</div>
@@ -428,13 +428,13 @@
     </div>
 
     <div class="spec-note">
-      <strong>Key notes:</strong> ~1 gallon oil yields ~1 gallon biodiesel. Methanol source: HEET yellow bottle, racing fuel, or industrial methanol. Lye source: hardware store drain cleaner (must be "100% sodium hydroxide"). Runs in any diesel engine with zero modification. Gels below 35°F/2°C — blend 20% petroleum diesel in winter.
+      <strong>Key notes:</strong> ~1 gallon oil yields ~1 gallon biodiesel. Methanol source: HEET yellow bottle, racing fuel, or industrial methanol. Lye source: hardware store drain cleaner (must be "100% sodium hydroxide"). Runs in most diesels; it perishes old natural-rubber fuel lines and seals, and loosens old deposits, so change fuel filters early. Gels below 35°F/2°C — blend 20% petroleum diesel in winter.
     </div>
 
     <!-- ────────────── ETHANOL ────────────── -->
     <h3>Ethanol as Fuel</h3>
     <ul>
-      <li>Ferment any sugar or starch source → distill to 85%+ ABV → fuel grade ethanol (see Chemistry section for full distillation process)</li>
+      <li>Ferment any sugar or starch source → distil as strong as you can (90–95%) → fuel grade ethanol (see Chemistry section for full distillation process)</li>
       <li>Runs in flex-fuel vehicles natively; carbureted engines need main jet needle adjustment (~30% richer mixture)</li>
       <li>Lower energy density: approximately 30% more volume needed than equivalent gasoline energy</li>
       <li>Also functions as: solvent, disinfectant (at 70–90% ABV), trade commodity, antiseptic for medical use</li>
@@ -449,7 +449,7 @@
           <tr><td>Gasoline</td><td>3–6 months</td><td>1–2 years (STA-BIL)</td><td>Metal jerry can</td><td>Ethanol blends degrade faster; E0 lasts longer</td></tr>
           <tr><td>Diesel</td><td>1–2 years</td><td>5–10 years (biocide)</td><td>Metal or HDPE</td><td>Less volatile than gasoline; easier to store safely</td></tr>
           <tr><td>Biodiesel</td><td>6 months</td><td>1–2 years</td><td>Dark sealed container</td><td>Degrades in light and oxygen; keep sealed</td></tr>
-          <tr><td>Ethanol</td><td>1+ year</td><td>2+ years</td><td>Glass or metal</td><td>Do not store in plastic — absorbs water</td></tr>
+          <tr><td>Ethanol</td><td>1+ year</td><td>2+ years</td><td>Glass or metal</td><td>Keep tightly sealed — ethanol pulls water from the air</td></tr>
           <tr><td>Wood gas</td><td>N/A</td><td>—</td><td>N/A</td><td>Generate on demand only; cannot be stored</td></tr>
         </tbody>
       </table>
@@ -516,13 +516,13 @@
       <li>Slower than a horse, but with greater pulling strength for their size and dramatically lower maintenance cost</li>
       <li><strong>Yoke construction:</strong> Neck yoke for single ox (wooden bow fits under throat); head yoke for a team of two (crossbeam rests on poll)</li>
       <li><strong>Basic commands:</strong> Gee (right), Haw (left), Whoa (stop), Get up (forward) — consistent training from the start is critical</li>
-      <li><strong>Key advantage:</strong> The ox becomes food at the end of its working life — horses and mules do not</li>
+      <li><strong>Key advantage:</strong> The ox becomes food at the end of its working life (horses and mules can be eaten too, but many people won’t)</li>
     </ul>
 
     <h3>Donkey</h3>
     <ul>
       <li>The hardiest of all working animals — survives on minimal forage where horses and mules cannot</li>
-      <li>Excellent pack animal; carries 20–30% of body weight (50–80 lbs) reliably</li>
+      <li>Excellent pack animal; carries about 20% of its body weight (40–50 kg for a standard donkey) all day</li>
       <li>Strong attachment to home territory makes them difficult to steal and easy to return</li>
       <li>The loud bray is a liability in stealth situations — consider this for operational security</li>
     </ul>
@@ -554,7 +554,7 @@
       <div style="padding: 0.75rem 0 0">
         <ul>
           <li><strong>Tree selection:</strong> Straight grain, rot-resistant species. Cedar is the first choice; cypress, tulip poplar, and basswood also work. Diameter must equal your intended finished beam width plus 6" minimum for wall thickness.</li>
-          <li><strong>Felling and drying:</strong> Score the cut ends with a saw and apply paint or pine pitch to slow drying — this prevents cracking. Dry the log 6–12 months before hollowing.</li>
+          <li><strong>Felling and drying:</strong> Carve while the log is green — it is far easier — and seal the cut ends with paint or pine pitch so it doesn’t split. Dry the finished hull slowly, in shade.</li>
           <li><strong>Burn and adze:</strong> Controlled burning inside the log while adzing (scraping) accelerates removal. Burn → scrape → burn → scrape cycle. Maintain 1.5–2" wall thickness throughout.</li>
           <li><strong>Outrigger assembly:</strong> Two crossbeams (<em>iako</em>) lashed across the canoe gunwales, long enough to hold the float 3–4 ft out from the hull. One float log (the <em>ama</em>) lashed to the outboard ends. Lashing with plant fiber rope or paracord is sufficient.</li>
           <li><strong>Propulsion options:</strong> Double-blade paddle (fastest, most efficient), single-blade, pole in shallow water, or a simple lateen sail on a mast stepped through a thwart.</li>
@@ -576,7 +576,7 @@
       <div class="process-step">Build the <strong>transom</strong> (stern board) and <strong>bow piece</strong> (stem). These anchor the hull shape.</div>
       <div class="process-step">Lay the <strong>bottom planks</strong> full length between transom and bow, glued and ring-shank nailed. Exterior plywood makes a one-piece bottom: standard sheets are 4×8 ft, so join two end to end with a glued butt block (or scarf joint) to get 12 ft.</div>
       <div class="process-step">Add <strong>frames and ribs</strong> across the bottom every 18" for rigidity. Bend into shape; nail to bottom planks.</div>
-      <div class="process-step">Steam-bend and attach <strong>side strakes</strong> (planks) to the frames. Two strakes per side, lapping or butted. Steam bending: wrap plank in wet burlap, apply steam for 20–30 min per inch of thickness until flexible.</div>
+      <div class="process-step">Steam-bend and attach <strong>side strakes</strong> (planks) to the frames. Two strakes per side, lapping or butted. Steam bending: wrap plank in wet burlap, steam for about an hour per inch of thickness until flexible.</div>
       <div class="process-step"><strong>Caulk all seams:</strong> Drive oakum (hemp fiber) into every seam with a caulking iron. Seal with pine pitch or pine tar. Modern substitute: polyurethane marine caulk.</div>
       <div class="process-step">Install <strong>thwarts</strong> (seats) spanning the beam at thirds. These are structural members, not optional — they hold the hull shape under load.</div>
     </div>
@@ -584,7 +584,7 @@
     <h3>Raft Construction</h3>
     <ul>
       <li>Lash logs or planks to cross-members. No joinery required — only lashing skill.</li>
-      <li><strong>Buoyancy calculation:</strong> 1 cubic foot of wood floats approximately 30–40 lbs net. A raft 10 ft × 10 ft × 6" thick uses about 50 cu ft of wood → ~1,500–2,000 lbs gross buoyancy → supports ~800 lbs cargo plus raft weight.</li>
+      <li><strong>Buoyancy calculation:</strong> each cubic foot of dry softwood holds up about 25–30 lb beyond its own weight before it sinks (green wood much less). A raft 10 ft × 10 ft × 6" thick (50 cu ft) carries about 1,300 lb with its deck awash — plan on half that, about 650 lb, so it rides high.</li>
       <li>Steering oar: long pole or oar at the stern on a simple pin pivot. One person steering; others can pole in shallow water.</li>
       <li>Current does most of the downstream work — reserve energy for poling upstream or across current.</li>
     </ul>

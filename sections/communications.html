@@ -89,7 +89,7 @@
       <span class="callout-icon">💡</span>
       <div class="callout-content">
         <strong>Emergency Use Without a License</strong>
-        <p>FCC rules allow unlicensed operation of any amateur radio in an immediate threat to life or property (47 CFR 97.405). In a genuine emergency, transmit for help on any frequency available. In non-emergency situations, unlicensed transmission is illegal and can interfere with emergency services. Get your license now — the Technician exam is easy and open book.</p>
+        <p>FCC rules allow unlicensed operation of any amateur radio in an immediate threat to life or property (47 CFR 97.405). In a genuine emergency, transmit for help on any frequency available. In non-emergency situations, unlicensed transmission is illegal and can interfere with emergency services. Get your licence now — the Technician exam is not open book, but the whole question pool is published, so it is very learnable. (UK: Foundation, Intermediate and Full licences.)</p>
       </div>
     </div>
 
@@ -99,7 +99,7 @@
         <thead><tr><th>Frequency</th><th>Band</th><th>Use</th><th>Notes</th></tr></thead>
         <tbody>
           <tr><td>146.520 MHz</td><td>2m VHF</td><td>National simplex calling frequency</td><td>Monitor this frequency. First place to call in an emergency on VHF.</td></tr>
-          <tr><td>446.000 MHz</td><td>70cm UHF</td><td>National UHF simplex calling</td><td>Secondary to 146.520</td></tr>
+          <tr><td>446.000 MHz</td><td>70cm UHF</td><td>National UHF simplex calling</td><td>Secondary to 146.520. UK: 145.500 MHz (2 m) and 433.500 MHz (70 cm) are the FM calling channels</td></tr>
           <tr><td>7.200–7.300 MHz</td><td>40m HF</td><td>Regional emergency nets (night)</td><td>40m travels 500–3,000 miles at night; reliable daytime skip 50–300 miles</td></tr>
           <tr><td>14.300 MHz</td><td>20m HF</td><td>Maritime mobile net; global calling</td><td>Daytime 1,000–10,000 miles</td></tr>
           <tr><td>3.985 MHz</td><td>75m HF</td><td>ARES/RACES emergency nets</td><td>Regional nighttime; 100–500 miles</td></tr>
@@ -141,7 +141,7 @@
     <h3>Programming with CHIRP (Recommended)</h3>
     <p>CHIRP is free open-source radio programming software. Much easier than programming channels manually via the keypad.</p>
     <ol class="steps">
-      <li>Download CHIRP from <code>chirp.danplabell.us</code> (or store on USB). Requires Python or standalone installer.</li>
+      <li>Download CHIRP from chirpmyradio.com (formerly chirp.danplanet.com) and keep a copy on USB. Requires Python or standalone installer.</li>
       <li>Connect radio to computer with the programming cable (USB to 2.5mm/3.5mm cable — must be Baofeng-compatible; cheap cables sometimes fail).</li>
       <li>In CHIRP: Radio → Download from Radio. Select your model. Download current configuration.</li>
       <li>Add channels: Name, frequency, mode (FM), tone (CTCSS if using a repeater), power level.</li>
@@ -152,10 +152,10 @@
     <ul>
       <li>146.520 MHz FM — National VHF simplex calling</li>
       <li>446.000 MHz FM — UHF simplex calling</li>
-      <li>FRS channels (462.5625–467.7125 MHz — receive only, no TX license needed for FRS)</li>
+      <li>FRS channels (462.5625–467.7125 MHz) — listen only: Baofengs aren’t approved to transmit on FRS</li>
       <li>NOAA weather: 162.400, 162.425, 162.450, 162.475, 162.500, 162.525, 162.550 MHz (RX only)</li>
       <li>Your local repeater frequencies (find at repeaterbook.com or local ham club)</li>
-      <li>MURS: 151.820, 151.880, 151.940, 154.570, 154.600 MHz (legal without license for business/personal)</li>
+      <li>MURS: 151.820, 151.880, 151.940, 154.570, 154.600 MHz (licence-free in the US on approved radios — Baofengs aren’t)</li>
     </ul>
 
     <div class="callout callout-warning">
@@ -219,7 +219,7 @@ Punctuation:
 = (break)      — · · · —
 
 Prosigns:
-AR (end of transmission)   · — · —
+AR (end of transmission) · — · — ·
 BK (break)                 — · · · — · —
 CQ (calling all stations)  — · — · — — · —
 DE (from / this is)        — · · ·
@@ -306,7 +306,7 @@ SK (end of contact)        · · · — · —
     <h3>Key Characteristics</h3>
     <div class="quick-facts">
       <div class="quick-fact"><span class="qf-value">5–15 km</span><span class="qf-label">Node range (line of sight)</span></div>
-      <div class="quick-fact"><span class="qf-value">8+</span><span class="qf-label">Hop relay limit</span></div>
+      <div class="quick-fact"><span class="qf-value">7</span><span class="qf-label">Max hops (default 3)</span></div>
       <div class="quick-fact"><span class="qf-value">AES256</span><span class="qf-label">Encryption</span></div>
       <div class="quick-fact"><span class="qf-value">$30–60</span><span class="qf-label">Per node cost</span></div>
     </div>
