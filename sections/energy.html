@@ -177,7 +177,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
       <div class="quick-fact"><span class="qf-value">50–100W</span><span class="qf-label">Sustained cycling</span></div>
       <div class="quick-fact"><span class="qf-value">200W</span><span class="qf-label">Peak (trained athlete)</span></div>
       <div class="quick-fact"><span class="qf-value">100Wh</span><span class="qf-label">1 hour of cycling</span></div>
-      <div class="quick-fact"><span class="qf-value">~5W</span><span class="qf-label">Hand crank (sustained)</span></div>
+      <div class="quick-fact"><span class="qf-value">20–50W</span><span class="qf-label">Hand crank, two hands (sustained)</span></div>
     </div>
 
     <p>Human power is best used for high-value, low-power tasks: charging phones, radios, LED lighting, small medical devices. It cannot power large appliances efficiently.</p>
@@ -186,8 +186,8 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     <ol class="steps">
       <li><strong>Mount the bike:</strong> Use a bike trainer stand, or remove the rear wheel and mount the bike on a frame (rear axle resting on a support, rear dropout clamped to a board).</li>
       <li><strong>Drive system:</strong> The simplest approach is to mount a friction drive roller (rubber-covered spindle) against the bike tire. The roller connects to the generator shaft. Tire rotation spins the generator.</li>
-      <li><strong>Generator/alternator:</strong> A car alternator (12V, 50–100A) is ideal — widely available, robust, produces 12V DC. Also usable: permanent magnet DC motors (most scooter and drill motors used as generators), stepper motors from printers. At typical cycling speed, you need a gear ratio to spin the generator fast enough — car alternators need 1,500+ RPM.</li>
-      <li><strong>Rectifier (for AC generators/alternators):</strong> If using an AC generator or alternator, add a full-bridge diode rectifier to convert to DC. Car alternators have built-in rectification.</li>
+      <li><strong>Generator:</strong> A permanent-magnet DC motor is best for pedal power: a treadmill motor (about 12–14 V at 600–700 RPM) is ideal, and scooter or cordless-drill motors work on a smaller scale. A car alternator works but is a poor match for legs: its field coil uses 2–4 A (25–50 W) of the 50–100 W you can pedal, and it needs 1,500+ RPM before it charges. Printer stepper motors give only a few watts.</li>
+      <li><strong>Rectifier (for AC generators):</strong> A DC motor needs none (a blocking diode stops the battery spinning it). AC machines (steppers, direct-drive washing-machine motors) need a diode bridge to make DC. Car alternators have a rectifier built in.</li>
       <li><strong>Voltage regulator:</strong> Add a simple 12V charge controller between output and battery to prevent overcharging. Do not connect directly to battery without regulation.</li>
       <li><strong>Output:</strong> Connect to 12V battery bank. Battery smooths the variable output and allows you to rest while loads continue to be powered.</li>
     </ol>
@@ -196,9 +196,10 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
       <span class="callout-icon">✅</span>
       <div class="callout-content">
         <strong>Gear Ratio Calculation</strong>
-        <p>If cycling at 60 RPM with a 26" wheel (circumference ≈ 2m), and your generator needs 1,500 RPM: Gear ratio = 1500 ÷ 60 = 25:1. Achieve this with friction roller diameter: if wheel is 660mm, roller needs to be 660 ÷ 25 = 26mm diameter. Or use multiple belt-and-pulley stages.</p>
+        <p>Pedalling at 60–70 RPM in a middle gear turns the back wheel about 150–200 RPM. A treadmill motor needs about 700 RPM to charge a 12 V battery, so the ratio is about 700 ÷ 175 ≈ 4:1. With a friction roller, the ratio is wheel diameter ÷ roller diameter: a 660 mm (26") wheel needs a roller about 165 mm across. A smaller roller spins the motor faster and gives a higher voltage, which an MPPT controller can turn into charging current. A car alternator needs about 1,500 RPM: roughly 9:1, or a 75 mm roller. The calculator below works it out for each generator.</p>
       </div>
     </div>
+    <div class="calc no-print" data-calc="genmatch" data-drive="pedal" data-gen="treadmill"></div>
   </section>
 
   <!-- =================== HYDRO =================== -->
@@ -243,7 +244,7 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     <h3>Wind Power Basics</h3>
     <p>Wind power varies with the cube of wind speed: doubling wind speed gives 8× more power. Consistent 12+ mph (5+ m/s) average wind is needed for practical generation.</p>
 
-    <div class="ratio-box">P ≈ 0.3 × D² × v³ (Watts) — D = rotor diameter in meters, v = wind speed in m/s</div>
+    <div class="ratio-box">P ≈ 0.15 × D² × v³ (Watts) — D = rotor diameter in metres, v = wind speed in m/s. A good home-built turbine; 0.3 is the theoretical (Betz) ceiling that no real rotor reaches.</div>
 
     <h3>DIY Small Turbine</h3>
     <ul>
@@ -254,6 +255,8 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
       <li><strong>Furling tail:</strong> A tail vane that swings the rotor out of high winds to protect against overspeed. Angle between tail hinge and rotor axis determines furling wind speed.</li>
       <li><strong>Dump load:</strong> Essential — when batteries are full, a dump load (resistor water heater) absorbs excess power. Without it, over-voltage destroys the alternator or batteries.</li>
     </ul>
+
+    <div class="calc no-print" data-calc="explode" data-view="pma"></div>
   </section>
 
   <!-- =================== GASIFICATION =================== -->

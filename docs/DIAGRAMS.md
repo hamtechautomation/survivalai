@@ -299,6 +299,48 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Power from scrap and the water-treatment chooser (November 2026)
+
+- **How spinning makes electricity** (Power Generation, "How It Works"): a four-magnet rotor sweeps
+  past a coil; a scope trace shows AC, or DC through a diode bridge; speed slider.
+- **Generator matcher** (Energy, after the bicycle generator; Power Generation, under water-wheel
+  coupling): drive (hand crank 20–50 W, pedal 50–100 W with the wheel at ~175 RPM, small engine
+  ~3,000 RPM, overshot water wheel ~12 RPM) × salvaged generator (treadmill PM motor ~20 V per
+  1,000 RPM, so 14 V at ~700; car alternator charging from ~1,500 RPM with a 25–50 W field;
+  direct-drive washing-machine motor ~14 V at ~200 RPM; printer stepper, a few watts). Gives the
+  ratio, roller or pulley sizes (two belt stages above 8:1), volts, watts into a 12 V battery, and
+  what that runs. "Best ratio" searches for the most charge without over-speed. Washing-machine
+  figures depend on rewiring — **⚑ check against a real conversion**.
+- **Axial-flux wind alternator, exploded** (Energy, wind): hub, rear magnet rotor (12 magnets,
+  alternating poles), stator (9 coils, 3 phases, in resin), front rotor (with the crushing-hazard
+  warning), blades. After Hugh Piggott's published design; not to scale.
+- **Car-alternator rig** (Salvage §8, `tools/altrig.py`): engine, big-to-small pulleys, alternator,
+  fused B+ to battery, frame to negative, lamp-and-switch exciter, slotted mount; numbered 1–5 to
+  match the steps.
+- **Water-treatment chooser** (Food & Water, before Method 1): source, look, amount and what you
+  have → a numbered plan using the page's own doses (boil 1 min / 3 above 2,000 m; bleach 2 drops/L
+  of 5–6%, 1.5 of 8.25%, 10 of 1%, doubled for cloudy, 30 min or 60 cold/cloudy; iodine 1–2
+  tablets/L; SODIS 6 h or two days, ≤ 2 L PET, clear only). Sea water and chemical sources go to
+  distillation or "do not drink"; floodwater, Cryptosporidium and iodine-in-pregnancy warnings.
+
+### Text corrections made while building these
+
+| Page | Was | Now | Why |
+|---|---|---|---|
+| Energy — bicycle generator | car alternator "ideal" | PM DC (treadmill) motor best; alternator works poorly on muscle power | Field draws 25–50 W of a 50–100 W rider; needs 1,500+ RPM |
+| Energy — gear ratio | cadence 60 RPM taken as wheel speed; 25:1, 26 mm roller | wheel ~175 RPM at 60–70 cadence; ~4:1 for a treadmill motor (165 mm roller), ~9:1 for an alternator | Bike gearing was ignored |
+| Energy — wind power | P ≈ 0.3·D²·v³ | P ≈ 0.15·D²·v³ (0.3 = Betz ceiling) | 0.3 is the theoretical maximum; home-built rotors reach about half |
+| Energy — human power | hand crank ~5 W sustained | 20–50 W two-handed | Matched Power Generation's figure; ~5 W is a small torch crank |
+| Power Gen — water wheel | small pulley on the wheel, large on the motor; 100:1 example | large pulley on the wheel, small on the generator; choose a slow generator | The old layout slows the generator down |
+| Power Gen — motors table | treadmill "generates at walking pace"; washing machine "universal… needs rectifier"; stepper as a real option | treadmill ~12–14 V at 600–700 RPM; universal motors don't self-generate, direct-drive PM ones are excellent; steppers give a few watts | Accuracy |
+| Power Gen — blocking diode | 1N5408 (3 A) | 10 A diode or Schottky on a heat sink | Pedal output ~8 A burns out a 3 A diode |
+| Power Gen — parts list | 50 A bridge "or 4 × 1N4007"; duplicate charge-controller row | 10 A diodes; duplicate removed | 1N4007 is a 1 A diode |
+| Power Gen — wind tower | printer stepper "easiest option" | direct-drive washing-machine or treadmill motor; axial-flux best | A stepper makes a few watts |
+| Vehicles — e-bike motor | starter motors "not permanent-magnet" | built for huge short bursts; many have field windings | Many modern starters do use magnets |
+| Salvage — alternator rig | no switch in the exciter lamp wire | switch it off when the engine stops | Otherwise the field drains the battery |
+
+---
+
 ## Exploded views, seasons wheel, constellation finder (November 2026)
 
 - **Exploded views** (`data-calc="explode"`): rocket stove (Energy, after the build steps), hand-dug

@@ -394,7 +394,7 @@ async function browserChecks() {
     if (!/straight up/.test(await mp.$eval('.calc[data-calc=stars] .sk-read', e => e.textContent))) fail('calc', 'constellation finder: Overhead did not look up');
     await mp.close(); }
   // Exploded views come apart and explain the part tapped.
-  for (const [pg, v] of [['energy', 'stove'], ['build-water', 'well'], ['build-water', 'biosand']]) {
+  for (const [pg, v] of [['energy', 'stove'], ['build-water', 'well'], ['build-water', 'biosand'], ['energy', 'pma']]) {
     await desk.goto(BASE_URL + 'sections/' + pg + '.html');
     const sel = `.calc[data-calc=explode][data-view=${v}]`;
     if (!(await desk.waitForSelector(sel + ' .ex-ly', { timeout: 5000, state: 'attached' }).catch(() => null))) { fail('calc', `${pg}.html: ${v} exploded view did not draw`); continue; }
@@ -403,6 +403,27 @@ async function browserChecks() {
     const r = await desk.$eval(sel, b => [b.classList.contains('ex-open-v'), b.querySelector('.ex-info').textContent]);
     if (!r[0] || !/\. \S/.test(r[1])) fail('calc', `${v} exploded view: open ${r[0]}, info "${r[1]}"`);
   }
+  // Generator matcher: pedal + treadmill motor gives ~50 W at ~700 RPM; a hand-cranked car alternator gives nothing (its field eats it).
+  await desk.goto(BASE_URL + 'sections/energy.html');
+  if (await desk.waitForSelector('.calc[data-calc=genmatch] .calc-ov', { timeout: 5000 }).catch(() => null)) {
+    const g = sel => desk.$$eval('.calc[data-calc=genmatch] .calc-ov', a => a.map(x => x.textContent));
+    let v = await g();
+    if (!/^7\d\d RPM/.test(v[0]) || !/≈ (4\d|5\d|6\d) W/.test(v[2])) fail('calc', `generator matcher, pedal + treadmill: ${v.join(' | ')}`);
+    await desk.selectOption('.calc[data-calc=genmatch] select >> nth=0', 'hand'); await desk.selectOption('.calc[data-calc=genmatch] select >> nth=1', 'alternator');
+    v = await g();
+    if (!/nothing/.test(v[2])) fail('calc', `generator matcher, hand crank + alternator should give nothing: ${v[2]}`);
+  } else fail('calc', 'energy.html: generator matcher did not render');
+  await desk.goto(BASE_URL + 'sections/build-power.html');
+  if (!(await desk.waitForSelector('.calc[data-calc=genwave] .gw-svg path', { timeout: 5000, state: 'attached' }).catch(() => null))) fail('calc', 'build-power.html: generator animation did not draw');
+  // Water chooser: river water with a stove says boil; sea water without fire says do not drink.
+  await desk.goto(BASE_URL + 'sections/food.html');
+  if (await desk.waitForSelector('.calc[data-calc=watertreat] .wt-step', { timeout: 5000 }).catch(() => null)) {
+    const steps = () => desk.$$eval('.calc[data-calc=watertreat] .wt-step b', a => a.map(x => x.textContent).join(' / '));
+    if (!/Boil it: a rolling boil for 1 minute/.test(await steps())) fail('calc', `water chooser, river + stove: ${await steps()}`);
+    await desk.selectOption('.calc[data-calc=watertreat] select >> nth=0', 'sea');
+    await desk.uncheck('.calc[data-calc=watertreat] .wt-chk input >> nth=0');
+    if (!/Do not drink it/.test(await steps())) fail('calc', `water chooser, sea without fire: ${await steps()}`);
+  } else fail('calc', 'food.html: water chooser did not render');
   // Water flow: follows the page's head table (3 m on 25 mm MDPE ≈ 8 L/min, 0.29 bar).
   await desk.goto(BASE_URL + 'sections/build-water.html');
   if (await desk.waitForSelector('.calc[data-calc=waterflow] .calc-ov', { timeout: 5000 }).catch(() => null)) {

@@ -900,6 +900,21 @@
            { n: 'Sealed lining (top 3 m)', t: 'Dense mortar with no gaps, so dirty surface water can’t seep in near the top.', d: () => cyl(0, 0, 46, 12, 26, 'ex-concrete', .82), z: 59 },
            { n: 'Concrete apron', t: '1.5 m all round, sloped away from the well to shed rain and spills.', d: () => cyl(0, 0, 72, 30, 2, 'ex-concrete', .42), z: 73 },
            { n: 'Lid and hatch', t: 'Concrete lid with an inspection hatch; use a pump or windlass, and never let a bucket rope touch the ground.', d: () => cyl(0, 0, 76, 14, 2.5, 'ex-concrete ex-hi') + ibox(-3, -3, 78.5, 6, 6, 1.2, 'ex-metal'), z: 78 }];
+    } else if (view === 'pma') {
+      title = 'Axial-flux wind alternator, taken apart'; sub = 'The usual home-built design (after Hugh Piggott’s plans). Not to scale; blades shortened. Tap “Take it apart”, then tap a part.'; oy = 300; gap = 52;
+      const ring = (n, r, f) => Array.from({ length: n }, (_, i) => { const a = (i + .5) / n * 2 * Math.PI; return [r * Math.cos(a), r * Math.sin(a), i]; }).sort((a, b) => (a[0] + a[1]) - (b[0] + b[1])).map(f).join('');
+      const coil = (x, y, z) => { const [cx, cy] = S(x, y, z), rx = 2.7 * 1.2247 * k, ry = 2.7 * .7071 * k; return '<ellipse class="ex-coil" cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" rx="' + rx.toFixed(1) + '" ry="' + ry.toFixed(1) + '"/>'; };
+      function blade(a, z) {
+        const c = Math.cos(a), sn = Math.sin(a), pt = (r, w) => [r * c - w * sn, r * sn + w * c];
+        const top = [pt(4, -2.2), pt(22, -1.1), pt(22.6, 0), pt(22, .9), pt(4, 1.8)].map(([x, y]) => S(x, y, z + .7));
+        const bot = top.map(([x, y]) => [x, y + .7 * k]);
+        return '<polygon class="ex-wood ex-r" points="' + bot.concat(top.slice().reverse()).map(q => P(...q)).join(' ') + '"/><polygon class="ex-wood ex-t" points="' + top.map(q => P(...q)).join(' ') + '"/>';
+      }
+      L = [{ n: 'Spindle and hub', t: 'A car or trailer wheel hub on its stub axle: its bearings carry everything that spins. The spindle bolts to the yaw head on top of the tower.', d: () => cyl(0, 0, 0, 3, 9, 'ex-metal') + cyl(0, 0, 9, 5.5, 1.6, 'ex-metal'), z: 6 },
+           { n: 'Rear magnet rotor', t: 'A steel disc (6–10 mm) with neodymium block magnets glued in a ring, poles alternating north–south, and cast in resin. The steel carries the magnetism behind the magnets. Usual pattern: 12 magnets with 9 coils.', d: () => cyl(0, 0, 11, 15, 1.2, 'ex-metal') + ring(12, 11.4, ([x, y, i]) => ibox(x - 1.7, y - 1.7, 12.2, 3.4, 3.4, 1, i % 2 ? 'ex-magS' : 'ex-magN')), z: 12.5 },
+           { n: 'Stator: coils in resin', t: 'Coils of enamelled copper wire, cast in resin with glass cloth. It never turns: it is bolted to the frame between the two rotors. The coils are joined in three phases, giving three wires to a 3-phase bridge rectifier and then the battery. This is where the power is made.', d: () => cyl(0, 0, 15, 15.6, 2.2, 'ex-resin', .3) + ring(9, 11.2, ([x, y]) => coil(x, y, 17.2)), z: 16 },
+           { n: 'Front magnet rotor', t: 'A second magnet disc, its magnets facing down at the stator, each opposite a magnet of the other pole so the field passes straight through the coils. A few millimetres of air gap each side. ⚠ Magnets this strong slam together and crush fingers: lower the rotor on long jacking screws, never by hand.', d: () => cyl(0, 0, 19.5, 15, 1.2, 'ex-metal', .3) + ring(4, 7.5, ([x, y]) => ibox(x - .5, y - .5, 20.7, 1, 1, 2.2, 'ex-metal')), z: 20.3 },
+           { n: 'Blades', t: 'Three carved wooden blades bolted to the front rotor. The rotor’s diameter sets the power: about 0.15 × D² × v³ watts, so a 2.4 m rotor in a 5 m/s wind gives about 110 W, and in 10 m/s about 860 W.', d: () => [0, 2.094, 4.189].map(a => blade(a + .4, 23)).join('') + cyl(0, 0, 23, 4.5, 1.4, 'ex-metal'), z: 24 }];
     } else {
       title = 'Biosand filter, taken apart'; sub = 'Layers from the page, to scale in height. Tap “Take it apart”, then tap a part.'; oy = 356; gap = 42;
       const R = 12, sc = .7;   // 1 unit = 1/0.7 cm in height
@@ -1075,7 +1090,209 @@
     setInterval(() => { if (!document.hidden && box.isConnected) draw(); }, 60e3);
   }
 
-  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram, fronts, firelay, moon, waterflow, seasons, explode, stars };
+  /* Runs fn(dt seconds) every frame while el is on screen; never when the reader asks for less motion. */
+  function animLoop(el, fn) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let raf = null, last = null, vis = true;
+    const tick = t => { raf = null; if (last != null) fn(Math.min(0.1, (t - last) / 1000)); last = t; if (vis && el.isConnected) raf = requestAnimationFrame(tick); else last = null; };
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis && !raf) raf = requestAnimationFrame(tick); }).observe(el);
+    raf = requestAnimationFrame(tick);
+  }
+
+  /* ── How a generator works: magnets sweep past a coil; the voltage follows. Faster = more volts
+     and more cycles a second; a diode bridge flips the negative halves to make DC. ───────────── */
+  function genwave(box) {
+    const u = 'gw' + (++uid);
+    box.innerHTML =
+      '<p class="calc-title">How spinning makes electricity</p><p class="calc-sub">Each magnet sweeping past the coil pushes the current one way, then the other. Spin faster and the push is bigger. Drag the speed.</p>' +
+      '<svg class="calc-chart gw-svg" viewBox="0 0 444 230" role="img" aria-label="A rotor with four magnets spinning past a coil, and the voltage trace it makes"></svg>' +
+      '<div class="calc-in">' + field(u + 's', 'Speed: <b data-o="s"></b>', '<input id="' + u + 's" type="range" min="0" max="100" step="1" value="45">') +
+        field(u + 'r', 'Output', select(u + 'r', [['ac', 'Straight from the coil (AC)'], ['dc', 'Through a diode bridge (DC)']], 'ac')) + '</div>' +
+      '<p class="calc-note">A permanent-magnet motor (treadmill, drill, scooter) does this with the magnets fixed and the coils turning; its brushes act as the bridge, so it gives DC directly. A car alternator uses an electromagnet instead of magnets, which is why it needs a battery to “excite” it first.</p>';
+    const svg = $(box, '.gw-svg'), sp = $(box, '#' + u + 's'), rc = $(box, '#' + u + 'r');
+    let ang = 0, hist = [];
+    const N = 150;
+    function draw() {
+      const s = +sp.value / 100, dc = rc.value === 'dc';
+      const v = Math.sin(ang * 4) * s;                                      // 4 magnets: four pulses a turn
+      const out = dc ? Math.abs(v) : v;
+      hist.push(out); if (hist.length > N) hist.shift();
+      let g = '<circle class="dg-panel" cx="92" cy="112" r="70"/>';
+      g += '<g transform="rotate(' + (ang * 180 / Math.PI).toFixed(1) + ' 92 112)"><circle cx="92" cy="112" r="52" fill="#4b5157" stroke="#2a2e32" stroke-width="2"/>';
+      for (let i = 0; i < 4; i++) g += '<g transform="rotate(' + (i * 90) + ' 92 112)"><rect x="80" y="54" width="24" height="16" rx="2" fill="' + (i % 2 ? '#5b8fd6' : '#d65b5b') + '"/><text class="gw-pole" x="92" y="66.5">' + (i % 2 ? 'S' : 'N') + '</text></g>';
+      g += '<circle cx="92" cy="112" r="7" fill="#2a2e32"/></g>';
+      // coil above the rotor, glowing with the current
+      const glow = Math.abs(v);
+      g += '<rect x="70" y="10" width="44" height="26" rx="4" fill="#3a2a18" stroke="#b87333"/>';
+      for (let i = 0; i < 6; i++) g += '<path d="M' + (74 + i * 6.6) + ' 12 v22" stroke="#d58b45" stroke-width="3.4" stroke-linecap="round" opacity="' + (0.55 + glow * 0.45).toFixed(2) + '"/>';
+      g += '<path d="M76 12 V4 H190 V60 M108 12 V8 H186 V60" fill="none" class="dg-thin"/>';
+      if (dc) g += '<rect x="170" y="60" width="34" height="34" rx="4" class="dg-panel"/><path d="M178 80 l9 -10 l9 10 M178 86 h18" class="dg-thin" fill="none"/><text class="dg-ts dg-mid" x="187" y="106">bridge</text>';
+      // bulb
+      g += '<circle cx="187" cy="' + (dc ? 140 : 100) + '" r="' + (14 + glow * 4).toFixed(1) + '" fill="#ffd25a" opacity="' + (glow * 0.85 * s > 0.02 ? (0.15 + glow * 0.85).toFixed(2) : 0) + '" filter="url(#' + u + 'b)"/><circle cx="187" cy="' + (dc ? 140 : 100) + '" r="11" fill="none" class="dg-line"/>';
+      // scope
+      const X0 = 230, X1 = 432, Y0 = 112, A = 70;
+      g += '<rect x="' + (X0 - 6) + '" y="' + (Y0 - A - 12) + '" width="' + (X1 - X0 + 12) + '" height="' + (2 * A + 24) + '" rx="8" fill="#0c1410" stroke="#2d4a38"/>';
+      g += '<line x1="' + X0 + '" y1="' + Y0 + '" x2="' + X1 + '" y2="' + Y0 + '" stroke="#2d4a38"/>';
+      g += '<path fill="none" stroke="#7dff9a" stroke-width="2" d="' + hist.map((h, i) => (i ? 'L' : 'M') + (X0 + (X1 - X0) * i / (N - 1)).toFixed(1) + ' ' + (Y0 - h * A).toFixed(1)).join('') + '"/>';
+      g += '<text class="gw-scope" x="' + (X0 + 2) + '" y="' + (Y0 - A - 1) + '">' + (dc ? 'DC: always one way' : 'AC: + then −') + '</text><text class="gw-scope" x="' + X1 + '" y="' + (Y0 + A + 8) + '" text-anchor="end">volts →  time</text>';
+      svg.innerHTML = '<defs><filter id="' + u + 'b"><feGaussianBlur stdDeviation="3"/></filter></defs>' + g;
+      $(box, '[data-o=s]').textContent = s === 0 ? 'stopped — no volts' : s < .3 ? 'slow — small, slow waves' : s < .7 ? 'medium' : 'fast — big, quick waves';
+    }
+    sp.addEventListener('input', draw); rc.addEventListener('change', () => { hist = []; draw(); });
+    for (let i = 0; i < N; i++) { ang += 0.03 * 0.45 * 3; draw(); }
+    animLoop(svg, dt => { ang += dt * (+sp.value / 100) * 3.2; draw(); });
+  }
+
+  /* ── Generator matcher: what a drive and a salvaged generator give together. Charging speeds and
+     outputs follow the guide's tables (treadmill motor about 20 V per 1,000 RPM; car alternator charges
+     from about 1,500 RPM and loses 25–50 W to its field). Human power: 50–100 W pedalling, 20–50 W
+     cranking. Direct-drive washing-machine figures are rough: they depend on how it is rewired. ── */
+  const GDRV = { hand: ['Hand crank (two hands)', 60, 35, 'crank'], pedal: ['Pedal, roller on the back tyre', 175, 75, 'tyre'], engine: ['Small petrol engine (mower)', 3000, 1100, 'pulley'], water: ['Water wheel, overshot (slow)', 12, 150, 'pulley'] };
+  const GGEN = {
+    treadmill: { n: 'Treadmill motor (PM DC)', charge: 700, vk: 20, max: 4000, cap: 900, loss: 0, ac: false, note: 'Gives DC straight away. Above about 30 V you need an MPPT controller rated for it.' },
+    alternator: { n: 'Car alternator', charge: 1500, full: 6000, max: 15000, cap: 900, loss: 40, ac: false, note: 'Needs its field excited from the battery, and uses 25–50 W doing it — fine on an engine, a heavy tax on muscle.' },
+    washer: { n: 'Direct-drive washing-machine motor (PM, 3-phase)', charge: 200, vk: 70, max: 800, cap: 500, loss: 0, ac: true, note: 'Charges at low speed — ideal on a water wheel or wind rotor. Needs a 3-phase bridge rectifier. Speeds vary with how it is rewired.' },
+    stepper: { n: 'Printer stepper motor', charge: 300, vk: 47, max: 1500, cap: 5, loss: 0, ac: true, note: 'Only a few watts: a phone trickle or a toy turbine, not a battery bank.' } };
+  function genmatch(box) {
+    const u = 'gm' + (++uid);
+    box.innerHTML =
+      '<p class="calc-title">Match a drive to a scrap generator</p><p class="calc-sub">Pick what turns it and what you salvaged. It works out the gearing, the pulley or roller size, and what you will really get into a 12 V battery.</p>' +
+      '<svg class="calc-chart gm-svg" viewBox="0 0 444 200" role="img" aria-label="Drive pulley turning a generator by a belt"></svg>' +
+      '<div class="calc-in">' + field(u + 'd', 'What turns it', select(u + 'd', Object.entries(GDRV).map(([k, v]) => [k, v[0]]), box.dataset.drive || 'pedal')) +
+        field(u + 'g', 'Generator', select(u + 'g', Object.entries(GGEN).map(([k, v]) => [k, v.n]), box.dataset.gen || 'treadmill')) +
+        field(u + 'r', 'Step-up ratio: <b data-o="r"></b>', '<input id="' + u + 'r" type="range" min="0" max="1" step="0.005" value="0.5">', '<button type="button" class="sk-gps gm-best">Best ratio</button>') + '</div>' +
+      '<div class="calc-outs">' + out('rpm', 'Generator speed') + out('v', 'Volts off the generator') + out('w', 'Into the battery', 'calc-big') + out('size', 'Pulley / roller') + out('use', 'Enough for') + '</div>' +
+      '<p class="gm-note calc-sub"></p>' +
+      '<p class="calc-note">Rough figures for a well-aligned belt or roller (about 70% from shaft to battery). Always charge through a fuse, a blocking diode (or the alternator’s own rectifier) and a charge controller — see the wiring list.</p>';
+    const svg = $(box, '.gm-svg'), dS = $(box, '#' + u + 'd'), gS = $(box, '#' + u + 'g'), rS = $(box, '#' + u + 'r');
+    const RMIN = 1, RMAX = 100, ratioOf = x => RMIN * Math.pow(RMAX / RMIN, x), xOf = r => Math.log(r / RMIN) / Math.log(RMAX / RMIN);
+    let a1 = 0, a2 = 0, w = 0;
+    function calc() {
+      const d = GDRV[dS.value], g = GGEN[gS.value], ratio = ratioOf(+rS.value), rpm = d[1] * ratio;
+      let volts, cap;
+      if (g.vk) { volts = rpm / 1000 * g.vk; cap = rpm < g.charge ? 0 : g.cap * Math.min(1, (rpm - g.charge) / (g.charge * 1.5) + 0.25); }
+      else { volts = rpm < g.charge ? rpm / g.charge * 11 : 14; cap = rpm < g.charge ? 0 : g.cap * Math.min(1, Math.pow((rpm - g.charge) / (g.full - g.charge), 0.6) * 0.85 + 0.15); }
+      const shaft = d[2] * 0.7;
+      const watts = Math.max(0, Math.min(shaft, cap) - (rpm >= g.charge ? g.loss : 0));
+      return { d, g, ratio, rpm, volts, watts, over: rpm > g.max };
+    }
+    function best() {
+      const d = GDRV[dS.value], g = GGEN[gS.value];
+      let bx = 0.5, bw = -1;
+      for (let x = 0; x <= 1.0001; x += 0.005) { rS.value = x; const c = calc(); const score = c.watts - (c.over ? 1e4 : 0) - (c.volts > 30 && g.vk ? 1e-3 * c.volts : 0); if (score > bw + 0.5) { bw = score; bx = x; } }
+      rS.value = bx; void d;
+    }
+    function show() {
+      const c = calc(), d = c.d, g = c.g;
+      $(box, '[data-o=r]').textContent = c.ratio < 1.05 ? 'direct (1:1)' : c.ratio.toFixed(c.ratio < 10 ? 1 : 0) + ' : 1';
+      $(box, '[data-o=rpm]').textContent = Math.round(c.rpm).toLocaleString() + ' RPM' + (c.over ? ' — too fast!' : '');
+      $(box, '[data-o=v]').textContent = c.volts < 0.5 ? '—' : g.vk ? '≈ ' + c.volts.toFixed(c.volts < 10 ? 1 : 0) + ' V' + (c.volts > 30 ? ' (needs MPPT)' : '') : (c.rpm >= g.charge ? '14 V (regulated)' : 'not charging yet');
+      $(box, '[data-o=w]').textContent = c.over ? 'stop — over-speed' : c.watts < 0.5 ? (c.rpm < g.charge ? 'nothing — spin it faster' : 'nothing — the field eats it all') : '≈ ' + Math.round(c.watts) + ' W' + (c.watts >= 5 ? ' (' + (c.watts / 13).toFixed(1) + ' A)' : '');
+      const sz = d[3] === 'tyre' ? 'roller ' + Math.round(660 / c.ratio) + ' mm on a 26″ wheel' : d[3] === 'crank' ? 'crank gear ' + Math.round(c.ratio) + '× the motor gear (or a belt: ' + Math.round(50 * c.ratio) + ' mm pulley to 50 mm)' : (c.ratio > 8 ? 'two belt stages, each ' + Math.sqrt(c.ratio).toFixed(1) + ':1 — ' + Math.round(60 * Math.sqrt(c.ratio)) + ' mm pulley to 60 mm, twice' : 'drive pulley ' + Math.round(60 * c.ratio) + ' mm to a 60 mm pulley');
+      $(box, '[data-o=size]').textContent = sz;
+      const wh = c.watts;
+      $(box, '[data-o=use]').textContent = wh < 1 ? '—' : wh < 8 ? 'a slow phone charge' : wh < 40 ? Math.floor(wh / 5) + ' LED lamps, or a phone in about ' + Math.max(1, Math.round(15 / wh * 60)) + ' min' : wh < 200 ? 'lights, radios and phones; 100 Ah battery half-filled in ' + (650 / wh / .85).toFixed(1) + ' h' : 'a battery bank in a few hours; 100 Ah half-filled in ' + (650 / wh / .85).toFixed(1) + ' h';
+      $(box, '.gm-note').innerHTML = '<b>' + g.n + ':</b> ' + g.note + (c.over ? ' <span class="gm-warn">Over its safe speed — gear down.</span>' : '');
+      w = c.watts;
+    }
+    function draw() {
+      const c = calc(), r1 = Math.min(64, 14 * Math.sqrt(c.ratio)), r2 = Math.max(10, r1 / c.ratio);
+      const x1 = 100, x2 = 292, y = 100;
+      const t = (x, yy, r) => '<circle cx="' + x + '" cy="' + yy + '" r="' + r.toFixed(1) + '" class="gm-pul"/>';
+      const spokes = (x, yy, r, a) => '<g transform="rotate(' + a.toFixed(1) + ' ' + x + ' ' + yy + ')"><path class="gm-spk" d="M' + (x - r + 3) + ' ' + yy + 'H' + (x + r - 3) + 'M' + x + ' ' + (yy - r + 3) + 'V' + (yy + r - 3) + '"/></g>';
+      // belt: external tangents
+      const dx = x2 - x1, al = Math.asin((r1 - r2) / dx);
+      const p = (x, r, s) => [x + s * r * Math.sin(al), y - s * r * Math.cos(al)];
+      const [ax, ay] = p(x1, r1, 1), [bx, by] = p(x2, r2, 1), [cx2, cy2] = p(x2, r2, -1), [dx1, dy1] = p(x1, r1, -1);
+      let g = '<path class="gm-belt" d="M' + P(ax, ay) + ' L' + P(bx, by) + ' A' + r2.toFixed(1) + ' ' + r2.toFixed(1) + ' 0 0 1 ' + P(cx2, cy2) + ' L' + P(dx1, dy1) + ' A' + r1.toFixed(1) + ' ' + r1.toFixed(1) + ' 0 1 1 ' + P(ax, ay) + 'Z" stroke-dashoffset="' + (-a1 * Math.PI / 180 * r1).toFixed(1) + '"/>';
+      g += t(x1, y, r1) + spokes(x1, y, r1, a1) + t(x2, y, r2) + spokes(x2, y, r2, a2);
+      g += '<rect x="' + (x2 + r2 + 2) + '" y="' + (y - 26) + '" width="70" height="52" rx="10" class="gm-gen"/><text class="dg-ts dg-mid" x="' + (x2 + r2 + 37) + '" y="' + (y + 4) + '">generator</text>';
+      g += TX(x1, y + r1 + 16, c.d[0].split(',')[0].split(' (')[0], 'dg-ts', 'mid') + TX(x2, y + Math.max(r2, 26) + 16, Math.round(c.rpm).toLocaleString() + ' RPM', 'dg-ts', 'mid');
+      const lit = Math.min(1, w / 60);
+      g += '<circle cx="414" cy="30" r="' + (8 + lit * 10).toFixed(1) + '" fill="#ffd25a" opacity="' + (w < 0.5 ? 0 : 0.2 + lit * 0.7).toFixed(2) + '" filter="url(#' + u + 'b)"/><circle cx="414" cy="30" r="9" class="dg-line" fill="none"/><path class="dg-thin" d="M410 39v8h8v-8" fill="none"/>';
+      g += '<rect x="384" y="150" width="50" height="32" rx="4" class="dg-panel"/><rect x="388" y="154" width="' + (42 * Math.min(1, w / 300)).toFixed(1) + '" height="24" rx="2" fill="#6cc08f" opacity=".8"/><text class="dg-ts dg-mid" x="409" y="196">battery</text>';
+      svg.innerHTML = '<defs><filter id="' + u + 'b"><feGaussianBlur stdDeviation="3"/></filter></defs>' + g;
+    }
+    const all = () => { show(); draw(); };
+    [dS, gS].forEach(e => e.addEventListener('change', () => { best(); all(); }));
+    rS.addEventListener('input', all);
+    $(box, '.gm-best').addEventListener('click', e => { e.preventDefault(); best(); all(); });
+    best(); all();
+    animLoop(svg, dt => { const c = calc(); const vis = Math.min(0.6, c.d[1] / 300); a1 = (a1 + dt * 360 * vis) % 360; a2 = (a2 + dt * 360 * Math.min(vis * c.ratio, 2.2)) % 360; draw(); });
+  }
+
+  /* ── Water treatment chooser: answers in, a plan out, using the doses on this page
+     (boil 1 min / 3 above 2,000 m; bleach 2 drops per litre of 5–6% clear, double cloudy, 30 min,
+     60 cold or cloudy; iodine 1 tab/L, 2 cloudy; SODIS 6 h or two days, PET ≤ 2 L, clear only). ── */
+  function watertreat(box) {
+    const u = 'wt' + (++uid);
+    const q = (id, label, opts, sel) => field(u + id, label, select(u + id, opts, sel));
+    const chk = (id, t, on) => '<label class="wt-chk"><input type="checkbox" id="' + u + id + '"' + (on ? ' checked' : '') + '> ' + t + '</label>';
+    box.innerHTML =
+      '<p class="calc-title">What should I do with this water?</p><p class="calc-sub">Answer three questions and get a step-by-step plan, with the doses for the amount you have.</p>' +
+      '<div class="calc-in">' +
+        q('src', '1. Where is it from?', [['rain', 'Rain off a clean roof or tarp'], ['tap', 'Tap, well or spring'], ['river', 'River, stream or lake'], ['pond', 'Pond, ditch or puddle (animals around)'], ['flood', 'Floodwater'], ['sea', 'Sea or brackish water'], ['chem', 'Near fuel, chemicals, mines or farm run-off']], 'river') +
+        q('look', '2. How does it look?', [['clear', 'Clear'], ['cloudy', 'Cloudy'], ['mud', 'Muddy or coloured']], 'clear') +
+        field(u + 'v', 'How much? <b data-o="v"></b>', '<input id="' + u + 'v" type="range" min="1" max="40" step="1" value="10">') + '</div>' +
+      '<p class="calc-l wt-have">3. What have you got?</p><div class="wt-chks">' + chk('fire', 'Fire or stove and a pot', true) + chk('bl', 'Plain unscented bleach', true) +
+        '<select id="' + u + 'bs" aria-label="Bleach strength">' + [['6', '5–6%'], ['8', '8.25%'], ['1', '1% (diluted)']].map(o => '<option value="' + o[0] + '">' + o[1] + '</option>').join('') + '</select>' +
+        chk('io', 'Iodine tablets', false) + chk('sun', 'Clear PET bottles and sunshine', false) + chk('cloth', 'Cloth, sand or charcoal', true) + chk('hi', 'Above 2,000 m', false) + chk('cold', 'The water is very cold', false) + chk('preg', 'Pregnant or thyroid problems', false) + '</div>' +
+      '<ol class="wt-plan" aria-live="polite"></ol><p class="wt-warn"></p>' +
+      '<p class="calc-note">Disinfecting kills germs. It does nothing for fuel, chemicals, metals or salt: only distillation (Method 6) or a different source deals with those.</p>';
+    const $u = id => $(box, '#' + u + id);
+    const IC = {
+      settle: '<path d="M6 4h20l-2 22H8z" class="wt-i"/><path d="M9 20h14" class="wt-i"/><circle cx="12" cy="23" r="1.2" class="wt-f"/><circle cx="17" cy="24" r="1.2" class="wt-f"/><circle cx="21" cy="23" r="1" class="wt-f"/>',
+      filter: '<path d="M5 6h22l-8 10v8l-6 3V16z" class="wt-i"/>',
+      boil: '<path d="M6 14h20v10a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z" class="wt-i"/><path class="wt-i wt-steam" d="M11 10c-2-2 2-4 0-6M16 10c-2-2 2-4 0-6M21 10c-2-2 2-4 0-6"/>',
+      bleach: '<path d="M12 4h8v5l4 4v14H8V13l4-4z" class="wt-i"/><path class="wt-f wt-drip" d="M16 17c-2 3-2 5 0 5s2-2 0-5z"/>',
+      iodine: '<rect x="7" y="9" width="18" height="14" rx="7" class="wt-i"/><path d="M16 9v14" class="wt-i"/>',
+      sun: '<circle cx="16" cy="16" r="5" class="wt-i"/><path class="wt-i wt-rays" d="M16 3v4M16 25v4M3 16h4M25 16h4M7 7l3 3M22 22l3 3M25 7l-3 3M10 22l-3 3"/>',
+      still: '<path d="M4 18h12v8H4zM16 20q6-12 12 0v6h-4" class="wt-i"/>',
+      stop: '<circle cx="16" cy="16" r="11" class="wt-i"/><path d="M9 23L23 9" class="wt-i"/>',
+      store: '<path d="M10 4h12v4l3 3v16H7V11l3-3z" class="wt-i"/><path d="M7 18h18" class="wt-i"/>' };
+    function plan() {
+      const src = $u('src').value, look = $u('look').value, L = +$u('v').value;
+      const has = k => $u(k).checked, bs = +$u('bs').value, cloudy = look !== 'clear';
+      $(box, '[data-o=v]').textContent = L + ' litre' + (L > 1 ? 's' : '');
+      const st = [], warn = [];
+      const step = (ic, t, x) => st.push('<li class="wt-step"><svg viewBox="0 0 32 32" aria-hidden="true">' + IC[ic] + '</svg><div><b>' + t + '</b>' + (x ? '<span>' + x + '</span>' : '') + '</div></li>');
+      if (src === 'sea' || src === 'chem') {
+        if (has('fire')) { step('still', 'Distil it (Method 6)', src === 'sea' ? 'Boil in a covered pot and condense the steam through a tube in cold water. Drinking salt water, even mixed, makes thirst worse.' : 'Distilling leaves most chemicals behind — but fuels and solvents that boil off with the water can come over too. Throw away the first part you collect, and find another source if you can.');
+          step('store', 'Store it covered', 'Distilled water has no minerals: add a pinch of salt per litre if you drink it for weeks.'); }
+        else step('stop', 'Do not drink it', 'Without heat to distil it there is no safe way to treat ' + (src === 'sea' ? 'salt water' : 'chemically polluted water') + '. Find another source, or collect rain or dew.');
+        warn.push(src === 'sea' ? 'Boiling, bleach, filters and sunlight do not remove salt.' : 'Boiling, bleach, filters and sunlight do not remove chemicals, fuel or metals.');
+      } else {
+        if (src === 'flood') warn.push('Floodwater often carries sewage and fuel or chemicals. Treat it as below only if nothing better exists, and never if it smells of fuel or chemicals — then distil it or find another source.');
+        if (look === 'mud') step('settle', 'Let it settle', 'Stand it for 2 hours, then pour or siphon off the top 80% and leave the sediment.');
+        if (cloudy) step('filter', 'Filter it through cloth' + (has('cloth') ? ' and sand' : ''), has('cloth') ? 'Clean cloth, then sand (and charcoal for taste). This clears it but does not make it safe.' : 'Any clean folded cloth. This clears it but does not make it safe.');
+        else if (src !== 'rain' && src !== 'tap') step('filter', 'Pour it through a clean cloth', 'Catches bits and insect larvae. It does not make it safe.');
+        const crypto = src === 'pond' || src === 'flood' || src === 'river';
+        const coldOrCloudy = has('cold') || cloudy;
+        let done = false;
+        if (has('fire')) { step('boil', 'Boil it: a rolling boil for ' + (has('hi') ? '3 minutes' : '1 minute'), 'Kills all germs: bacteria, viruses and parasites. Let it cool covered; don’t add ice.'); done = true; }
+        if (!done && has('sun') && look !== 'mud') {
+          step('sun', 'Sunlight (SODIS)', 'Clear PET bottles of 2 L or less, shake, lay flat in full sun: 6 hours, or two full days if more than half the sky is cloud. ' + Math.ceil(L / 2) + ' bottle' + (Math.ceil(L / 2) > 1 ? 's' : '') + ' for ' + L + ' L.' + (cloudy ? ' Only once it is clear after filtering.' : '')); done = true; }
+        if (!done && has('bl')) {
+          const per = bs === 6 ? 2 : bs === 8 ? 1.5 : 10, drops = per * (cloudy ? 2 : 1) * L;
+          const ml = drops / 20;
+          step('bleach', 'Bleach: ' + (drops <= 60 ? Math.round(drops) + ' drops' : ml.toFixed(1) + ' mL (' + Math.round(drops) + ' drops)') + ' for ' + L + ' L', (cloudy ? 'Double dose for cloudy water. ' : '') + 'Stir, wait ' + (coldOrCloudy ? '60' : '30') + ' minutes. It should smell faintly of chlorine; if not, dose again and wait 15 minutes more.' + (crypto ? ' Bleach is weak against Cryptosporidium, common in ' + (src === 'river' ? 'rivers grazed by animals' : 'ponds and floodwater') + ': boil if you can.' : '')); done = true; }
+        if (!done && has('io')) {
+          if (has('preg')) warn.push('Iodine is not suitable in pregnancy or with thyroid problems.');
+          else { step('iodine', 'Iodine: ' + L * (cloudy ? 2 : 1) + ' tablet' + (L * (cloudy ? 2 : 1) > 1 ? 's' : '') + ' for ' + L + ' L', 'Wait ' + (has('cold') ? '60' : '30') + ' minutes; add vitamin C for taste only after. Not for long-term use (more than a few weeks).' + (crypto ? ' Iodine does not kill Cryptosporidium.' : '')); done = true; }
+        }
+        if (!done && has('sun') && look === 'mud') warn.push('Sunlight does not work on muddy water: settle and filter it until clear first.');
+        if (!done) step('stop', 'Not safe yet', 'Cloth and sand alone do not kill germs. You need heat, bleach, iodine or a sunny day. If you must drink, take the clearest water you can find — running water from a spring is the least risky.');
+        else step('store', 'Store it clean and covered', 'Use a clean, covered container and pour, don’t dip.' + (has('fire') || has('sun') ? ' Boiled or sun-treated water has no lasting protection: use it within a day or add bleach.' : ''));
+        if (src === 'tap' && look === 'clear' && !has('fire') && !has('bl')) warn.push('If the mains is still working and there is no boil-water notice, tap water is already treated.');
+      }
+      $(box, '.wt-plan').innerHTML = st.join('');
+      $(box, '.wt-warn').textContent = warn.join(' ');
+      $(box, '.wt-warn').hidden = !warn.length;
+    }
+    box.addEventListener('input', plan); box.addEventListener('change', plan); plan();
+  }
+
+  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram, fronts, firelay, moon, waterflow, seasons, explode, stars, genwave, genmatch, watertreat };
   document.querySelectorAll('.calc[data-calc]').forEach(box => {
     const f = KINDS[box.dataset.calc]; if (!f || box.dataset.ready) return;
     box.dataset.ready = '1'; f(box);

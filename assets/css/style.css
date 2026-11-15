@@ -3571,3 +3571,41 @@ body.mode-day .ex-svg, body.mode-day .sw-dial { filter: invert(1) hue-rotate(180
 .sk-read { margin: .1rem 0 .5rem; font: 700 .92rem var(--font); color: var(--amber-light); }
 .sk-dim { color: var(--text-2); font-size: .85em; }
 .sk-gps { margin-left: .3rem; padding: 1px 8px; font: 700 .75rem var(--font); color: var(--amber-light); background: none; border: 1px solid var(--border-hi); border-radius: 999px; cursor: pointer; }
+
+/* Generator animations and matcher, water chooser, axial-flux exploded view (calc.js). */
+.gw-pole { font: 800 10px var(--font); fill: #fff; text-anchor: middle; }
+.gw-scope { font: 600 9.5px var(--font-mono, monospace); fill: #7dff9a; opacity: .8; }
+.gm-pul { fill: var(--bg-3); stroke: var(--text-1); stroke-width: 2; }
+.gm-spk { stroke: var(--text-2); stroke-width: 2.4; stroke-linecap: round; }
+.gm-belt { fill: none; stroke: #8a7a66; stroke-width: 5; stroke-linejoin: round; stroke-dasharray: 10 4; }
+.gm-gen { fill: color-mix(in srgb, var(--amber) 18%, var(--bg-2)); stroke: var(--amber); stroke-width: 1.6; }
+.gm-warn { color: #ff8a8a; font-weight: 700; }
+.wt-have { margin: .6rem 0 .3rem; }
+.wt-chks { display: flex; flex-wrap: wrap; gap: .35rem .5rem; align-items: center; }
+.wt-chk { display: inline-flex; gap: .35rem; align-items: center; padding: .3rem .6rem; font-size: .86rem; color: var(--text-1); background: var(--bg-1); border: 1px solid var(--border); border-radius: 999px; cursor: pointer; }
+.wt-chk:has(input:checked) { border-color: var(--amber); color: var(--text-0); }
+.wt-chks select { min-height: 32px; }
+.wt-plan { list-style: none; counter-reset: wt; margin: .9rem 0 .3rem; padding: 0; display: grid; gap: .5rem; }
+.wt-step { counter-increment: wt; position: relative; display: flex; gap: .7rem; align-items: flex-start; padding: .55rem .7rem .55rem .6rem; background: var(--bg-1); border: 1px solid var(--border); border-radius: 10px; animation: wt-in .35s ease both; }
+.wt-step:nth-child(2) { animation-delay: .06s; } .wt-step:nth-child(3) { animation-delay: .12s; } .wt-step:nth-child(4) { animation-delay: .18s; } .wt-step:nth-child(5) { animation-delay: .24s; }
+@keyframes wt-in { from { opacity: 0; transform: translateY(6px); } }
+.wt-step::before { content: counter(wt); position: absolute; left: -.45rem; top: -.45rem; width: 1.3rem; height: 1.3rem; display: grid; place-items: center; font: 800 .72rem var(--font); color: var(--bg-0); background: var(--amber); border-radius: 50%; }
+.wt-step:not(:last-child)::after { content: ""; position: absolute; left: 1.6rem; bottom: -.55rem; height: .55rem; border-left: 2px dashed var(--border-hi); }
+.wt-step svg { flex: none; width: 34px; height: 34px; }
+.wt-step b { display: block; color: var(--text-0); font-size: .95rem; }
+.wt-step span { display: block; font-size: .86rem; color: var(--text-2); line-height: 1.45; margin-top: .1rem; }
+.wt-i { fill: none; stroke: var(--amber-light); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.wt-f { fill: #6fa3d8; }
+.wt-steam { animation: wt-steam 2.4s ease-in-out infinite; }
+@keyframes wt-steam { 0%, 100% { opacity: .3; transform: translateY(1px); } 50% { opacity: 1; transform: translateY(-1px); } }
+.wt-drip { animation: wt-drip 1.8s ease-in infinite; }
+@keyframes wt-drip { 0%, 30% { opacity: 0; transform: translateY(-5px); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateY(4px); } }
+.wt-rays { transform-origin: 16px 16px; animation: bm-spin 12s linear infinite; }
+.wt-warn { margin: .4rem 0; padding: .5rem .7rem; font-size: .88rem; color: #ffd0d0; background: color-mix(in srgb, var(--red) 16%, transparent); border-left: 4px solid #e06060; border-radius: 8px; }
+.wt-warn[hidden] { display: none; }
+.ex-magN.ex-t { fill: #d65b5b; } .ex-magN.ex-l, .ex-magN.ex-r { fill: #9e3d3d; }
+.ex-magS.ex-t { fill: #5b8fd6; } .ex-magS.ex-l, .ex-magS.ex-r { fill: #3d639e; }
+.ex-resin.ex-t { fill: color-mix(in srgb, #e0b04a 45%, #1a1a10); } .ex-resin.ex-r { fill: color-mix(in srgb, #b8862a 50%, #1a1a10); }
+.ex-coil { fill: none; stroke: #d58b45; stroke-width: 3.2; }
+.ex-wood.ex-t { fill: #c79a5c; } .ex-wood.ex-r { fill: #8f6a3a; }
+@media (prefers-reduced-motion: reduce) { .wt-step, .wt-steam, .wt-drip, .wt-rays { animation: none; } }

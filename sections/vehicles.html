@@ -229,7 +229,7 @@
       <strong>Output:</strong> A human in sustained aerobic effort can produce 50–150W continuously. This is enough to charge 12V batteries, phones (via USB regulator), radios, and LED lighting systems.
     </div>
     <ul>
-      <li><strong>Motor:</strong> Salvage a permanent-magnet DC motor — treadmill motors are ideal; some direct-drive washing-machine motors work too. (Car starter motors are not permanent-magnet and make poor generators.)</li>
+      <li><strong>Motor:</strong> Salvage a permanent-magnet DC motor — treadmill motors are ideal; some direct-drive washing-machine motors work too. (Car starter motors make poor generators: they are built for huge current for a few seconds, and many have field windings rather than magnets.)</li>
       <li><strong>Friction drive:</strong> Mount motor with a rubber wheel on its shaft pressing against the tire sidewall. The rubber wheel contacts and spins the motor as you pedal.</li>
       <li><strong>Blocking diode:</strong> A PM DC motor already gives DC. Put a heavy diode (e.g. 1N5408) in the positive line so the battery can’t drive the motor when you stop. A bridge rectifier is only needed if the motor might spin backwards.</li>
       <li><strong>Charge controller:</strong> Always charge through a PWM or MPPT controller rated above the motor’s top voltage — never wire the motor straight to a battery. (A 12 V regulator chip like the LM7812 can’t charge a 12 V battery.)</li>

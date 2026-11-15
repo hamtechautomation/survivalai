@@ -67,6 +67,7 @@
     </div>
 
     <h3>How It Works</h3>
+    <div class="calc no-print" data-calc="genwave"></div>
     <p>A DC motor is a generator running in reverse: spin the shaft mechanically, and it produces electricity. Any permanent-magnet DC motor works. The higher the RPM, the higher the output voltage. A rectifier bridge converts AC (from some motors) to DC; a voltage regulator holds output steady at 12V; a blocking diode prevents the battery discharging back through the motor when you stop pedalling.</p>
 
     <h3>Salvaging Motors</h3>
@@ -74,11 +75,11 @@
       <table>
         <thead><tr><th>Source</th><th>Motor Type</th><th>Typical Voltage</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td>Treadmill</td><td>Permanent-magnet DC</td><td>90–180V DC</td><td>Best option — large, robust, generates at walking pace</td></tr>
-          <tr><td>Washing machine</td><td>Universal AC motor</td><td>Varies</td><td>Needs rectifier; brushed motors work better as generators</td></tr>
+          <tr><td>Treadmill</td><td>Permanent-magnet DC</td><td>90–180V DC at full speed</td><td>Best option — large and robust; about 12–14 V at 600–700 RPM, so it needs only modest gearing</td></tr>
+          <tr><td>Washing machine</td><td>Universal (most older machines) or direct-drive permanent-magnet (many newer ones)</td><td>Varies</td><td>A universal motor has no magnets and will not generate on its own — skip it. A direct-drive (“no belt”) motor is a 3-phase permanent-magnet machine that generates at low RPM: excellent for wind and water wheels, with a 3-phase rectifier</td></tr>
           <tr><td>Car alternator</td><td>3-phase AC</td><td>12–14V at 1000+ RPM</td><td>Needs high RPM — requires gearing up</td></tr>
           <tr><td>Electric drill</td><td>Brushed DC or Universal</td><td>12–36V</td><td>Small; limited output but easy to rig</td></tr>
-          <tr><td>Printer stepper motor</td><td>Stepper</td><td>Low V at low RPM</td><td>Very low RPM generation — wire multiple in series</td></tr>
+          <tr><td>Printer stepper motor</td><td>Stepper (2-phase AC out)</td><td>Low V at low RPM</td><td>Generates at low RPM but only a few watts: a toy turbine or phone trickle, not a battery bank. Needs a rectifier per phase</td></tr>
         </tbody>
       </table>
     </div>
@@ -87,7 +88,7 @@
     <ul>
       <li><strong>Rectifier bridge (only if needed):</strong> a DC treadmill motor already gives DC; a bridge (4 × 1N4007, or a pre-made one) just keeps the polarity right if the motor can spin either way. AC alternators do need one.</li>
       <li><strong>Charge controller (essential):</strong> an MPPT or PWM solar charge controller rated for the motor’s highest voltage. It regulates charging at 13.8–14.4 V. Do <em>not</em> use a 12 V regulator chip such as the LM7812: 12 V cannot charge a 12 V battery, it handles little more than 1 A, and a 90 V motor exceeds its input limit.</li>
-      <li><strong>Blocking diode:</strong> 1N5408 (3A rated) in series — prevents battery current flowing back into motor at rest</li>
+      <li><strong>Blocking diode:</strong> rated above the fuse — a 10 A diode (10A10) or a Schottky on a small heat sink — in series, so the battery cannot drive current back into the motor at rest. A 3 A diode such as the 1N5408 burns out at full pedal output (100 W ÷ 13 V ≈ 8 A).</li>
       <li><strong>Ammeter:</strong> optional but useful — shows you are actually charging</li>
       <li><strong>Fuse:</strong> 10A blade fuse between output and battery positive terminal</li>
     </ul>
@@ -109,11 +110,10 @@
           <tr><td>Steel angle iron frame (25×25mm)</td><td>4m</td><td>£15</td><td>Scrap steel, welded or bolted</td></tr>
           <tr><td>Friction roller (25mm steel rod)</td><td>1</td><td>£5</td><td>Any round steel bar, turned on lathe or used as-is</td></tr>
           <tr><td>V-belt + pulleys</td><td>1 set</td><td>£12</td><td>Chain and sprockets from another bicycle</td></tr>
-          <tr><td>Bridge rectifier (50A)</td><td>1</td><td>£3</td><td>4 × 1N4007 diodes + heatshrink</td></tr>
+          <tr><td>Bridge rectifier (only for AC motors; 25 A+)</td><td>1</td><td>£3</td><td>4 × 10 A diodes (10A10) — 1 A diodes such as the 1N4007 are far too small</td></tr>
           <tr><td>Charge controller (PWM or MPPT, rated above the motor’s top voltage)</td><td>1</td><td>£15–40</td><td>Salvaged from a solar kit</td></tr>
           <tr><td>12V lead-acid battery (100Ah)</td><td>1</td><td>£60–80</td><td>Car battery (less deep-cycle capacity)</td></tr>
-          <tr><td>MPPT charge controller (12V)</td><td>1</td><td>£20</td><td>PWM controller (cheaper, less efficient)</td></tr>
-        </tbody>
+                  </tbody>
       </table>
     </div>
 
@@ -170,7 +170,9 @@
     </figure>
 
     <h3>Generator Coupling</h3>
-    <p>Water wheels turn slowly (10–60 RPM). Most generators need 1500–3000 RPM. Use a belt drive with pulleys — small pulley on the wheel shaft, large pulley on the motor — to multiply RPM. Ratio needed: 3000 RPM ÷ wheel RPM = pulley ratio. Example: 30 RPM wheel × 100:1 belt ratio = 3000 RPM at generator.</p>
+    <p>Water wheels turn slowly (10–60 RPM). A car alternator needs 1,500+ RPM and a treadmill motor about 700, but a direct-drive washing-machine motor charges at only 150–250 — so pick a slow generator and you need far less gearing. Use a belt drive with a <strong>large pulley on the wheel shaft and a small pulley on the generator</strong> to multiply the speed. Ratio needed = generator RPM ÷ wheel RPM: a 20 RPM wheel needs 10:1 for a washing-machine motor (two belt stages) but 75:1 for a car alternator, which is rarely practical.</p>
+
+    <div class="calc no-print" data-calc="genmatch" data-drive="water" data-gen="washer"></div>
 
     <div class="callout callout-warning">
       <span class="callout-icon">⚠️</span>
@@ -225,7 +227,7 @@
     <ul>
       <li>Guyed mast: steel pipe sections (50mm OD), guy wires every 3m of height, minimum 6m above nearest obstruction within 100m</li>
       <li>Tilt-up design: hinge at base, raise and lower for maintenance without climbing</li>
-      <li>Alternator: salvaged stepper motor from printer/CNC generates at low RPM — easiest option. Car alternator needs 1000+ RPM (requires gearing up).</li>
+      <li>Generator: a direct-drive washing-machine motor (permanent-magnet, 3-phase) or a treadmill motor is the easiest salvage; a home-built axial-flux alternator is best (see <a href="energy.html#wind">Energy</a>). Printer steppers make only a few watts; a car alternator needs 1,500+ RPM and gearing, and its field drains the battery in light wind.</li>
       <li>Furling tail: mount tail fin offset from rotor axis — in high winds, rotor turns sideways out of wind automatically</li>
     </ul>
 
