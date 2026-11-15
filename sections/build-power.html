@@ -254,34 +254,16 @@
 
     <p>The Pelton wheel is the most efficient turbine for <strong>high head (5m+), low flow</strong> streams. A pipe from an elevated intake converts head pressure into a high-speed water jet, which strikes double-cupped buckets on the wheel rim. Output: 200–500W from a stream with 10m+ head.</p>
 
-    <div class="diagram">
-MICRO-HYDRO PELTON SYSTEM LAYOUT:
+    <!--fig-hydro-->
+    <figure class="dg" id="fig-hydro">
+      <svg viewBox="0 0 444 240" role="img" aria-label="Micro-hydro: water taken from a screened intake passes through a settling tank into a penstock pipe running downhill to a nozzle that drives a Pelton wheel and generator; the water returns to the stream by a tailrace; the head is the vertical drop from intake to nozzle"><defs><marker id="ah-fig-hydro" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><text class="dg-th dg-mid" x="222" y="18">MICRO-HYDRO LAYOUT</text><path class="dg-blue-s" d="M10 82 H32" stroke-width="6" opacity=".7"/><text class="dg-ts" x="10" y="66">stream</text><rect class="dg-water" x="30" y="72" width="40" height="22"/><text class="dg-ts dg-mid" x="50" y="108">intake + screen</text><rect class="dg-panel" x="84" y="74" width="40" height="26"/><text class="dg-ts dg-mid" x="104" y="66">settling tank</text><path class="dg-line" d="M124 88 C200 96 260 140 316 186" fill="none" stroke-width="5"/><text class="dg-ts" x="208" y="112">penstock pipe — few bends, no air traps</text><circle class="dg-panel" cx="336" cy="192" r="18"/><circle class="dg-key" cx="352" cy="192" r="3.5"/><circle class="dg-key" cx="348.944" cy="201.405" r="3.5"/><circle class="dg-key" cx="340.944" cy="207.217" r="3.5"/><circle class="dg-key" cx="331.056" cy="207.217" r="3.5"/><circle class="dg-key" cx="323.056" cy="201.405" r="3.5"/><circle class="dg-key" cx="320" cy="192" r="3.5"/><circle class="dg-key" cx="323.056" cy="182.595" r="3.5"/><circle class="dg-key" cx="331.056" cy="176.783" r="3.5"/><circle class="dg-key" cx="340.944" cy="176.783" r="3.5"/><circle class="dg-key" cx="348.944" cy="182.595" r="3.5"/><line class="dg-blue-s" x1="316" y1="186" x2="326" y2="190"/><text class="dg-ts dg-end" x="314" y="232">nozzle → Pelton wheel</text><rect class="dg-key" x="366" y="182" width="40" height="20" rx="4"/><text class="dg-ts dg-end" x="410" y="178">generator</text><path class="dg-blue-s" d="M340 212 q20 10 60 6" marker-end="url(#ah-fig-hydro)" fill="none"/><text class="dg-ts dg-end" x="440" y="236">tailrace</text><line class="dg-thin" x1="20" y1="72" x2="20" y2="192" marker-end="url(#ah-fig-hydro)"/><line class="dg-thin" x1="20" y1="192" x2="20" y2="72" marker-end="url(#ah-fig-hydro)"/><line class="dg-guide" x1="14" y1="192" x2="318" y2="192"/><text class="dg-tb dg-tb-sm" x="28" y="140">HEAD</text><text class="dg-ts" x="28" y="154">(vertical drop)</text></svg>
+      <figcaption>Power ≈ head (m) × flow (L/s) × 5 watts, roughly. The head counts, not the pipe length — but a long, narrow pipe loses much of it to friction.</figcaption>
+    </figure>
 
-  INTAKE SCREEN
-     │
-     │  HDPE pressure pipe (≥32mm)
-     │  sealed, no air pockets
-     │
-  [ELEVATION = HEAD]
-  10m head = 1 bar = 14.5 PSI
-     │
-     ▼
-  NOZZLE (brass fitting + needle valve)
-  → HIGH-SPEED WATER JET →
-                         ⊙  PELTON WHEEL
-                         │  (wooden cups on plywood disc)
-                         │
-                    [GENERATOR]
-                    DC motor 12–24V
-                         │
-                  [CHARGE CONTROLLER]
-                         │
-                    [BATTERY BANK]
-                         │
-                    [LOADS / INVERTER]
 
-  TAILRACE → back to stream (below wheel)
-    </div>
+
+
+
 
     <p>Nozzle construction: brass garden hose fitting with a needle valve for flow control. Wheel: 300–500mm diameter plywood disc with 16–24 wooden cups attached at the rim. Each cup has a central ridge to split the jet and deflect water sideways.</p>
   </section>

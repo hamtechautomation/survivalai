@@ -316,7 +316,12 @@ Drawn where the sweep found the words alone weren't enough. Each is generated in
 - **Baseplate compass parts** (Navigation; replaces ASCII).
 - **Discharging a capacitor** (Salvage): bleed, check, short.
 
-Still to draw from the sweep list (next batch): defensible-space zones, chimney 3-2-10, egg candling, feed-conversion chart, which crops cross, sweet vs horse chestnut, tick removal, spark-test patterns, sand-casting mould, micro-hydro layout, box solar cooker, drawbore joint, signal mirror, Corsi–Rosenthal cube, storage-media lifespans, pot still, pressure-immobilisation bandage, KFM, layered defence, hand stitches and weaves.
+### Second batch (`tools/sweepfigs2.py`)
+
+- **New:** defensible-space zones (Disasters), chimney 3-2-10 rule and passive-solar section (Shelter), egg candling (Animals), which crops cross (Agriculture), sweet vs horse chestnut and tick removal (Climate), spark-test streams and sand mould (Metallurgy), micro-hydro layout (Power and Energy), solar box cooker (Energy), drawbored mortise and tenon (Building and Shelter), signal-mirror aiming (Communications), Corsi–Rosenthal cube (Projects), storage-media lifespans (Knowledge), pot still (Chemistry) and water still (Food), pressure-immobilisation bandage (Medical), Kearny fallout meter and nested Faraday storage (NBC), layered defence (Security), six hand stitches, plain vs twill and saddle stitch (Textiles), oil lamp (Chemistry), snare (Food).
+- **ASCII art replaced** by these, or removed where a drawn figure on the same page already showed it: solar system, rocket-stove L, gasifier and biogas (Energy — the Vehicles gasifier and Power biogas figures are reused), water filter, rain catchment, pit latrine and rotation (Food — the Agriculture rotation figure is reused), JABOD and nail header (Metallurgy), retort (Chemistry), debris hut (Shelter), four-stroke (Vehicles). The six ASCII stitch boxes became one figure plus a list.
+- Left as text on purpose: Morse/number tables, the Caesar cipher, the community ledger, contour-line rules, the rule-of-nines list, the nuclear decision steps and the stress cascade — they read fine as text.
+- **⚑ checks:** pressure immobilisation (clinician), KFM (build from the NWSS patterns, not this sketch), stun points and birth positions (from batch 1).
 
 ---
 

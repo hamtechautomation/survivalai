@@ -80,20 +80,6 @@
     <h3>How PV Solar Works</h3>
     <p>Photovoltaic (PV) panels convert sunlight to DC electricity. A charge controller regulates voltage to safely charge batteries. Batteries store energy. An inverter converts stored DC to AC for household appliances.</p>
 
-    <div class="diagram">
-┌──────────┐    DC     ┌────────────────┐    DC    ┌──────────┐
-│  Solar   │ ────────→ │ Charge         │ ────────→ │ Battery  │
-│  Panels  │           │ Controller     │           │ Bank     │
-└──────────┘           │ (MPPT or PWM)  │           └────┬─────┘
-                       └────────────────┘                │
-                                                         │ DC
-                                                         ▼
-                                                   ┌──────────┐     AC
-                                                   │ Inverter │ ──────────→ Loads
-                                                   └──────────┘    (appliances)
-
-Also: Battery → DC directly to 12V loads (lights, USB, fan)
-    </div>
 
     <figure class="dg" id="fig-solar">
       <svg viewBox="0 0 444 342" role="img" aria-label="Off-grid solar wiring: panels to charge controller to battery bank; the battery feeds DC loads directly and AC loads through an inverter; a fuse on every positive wire"><defs><marker id="ah-so" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><g data-hl="pv"><rect class="dg-water" x="8" y="44" width="112" height="78" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="64.0" y="62">SOLAR PANELS</text><text class="dg-ts dg-mid" x="64.0" y="76">12–48 V DC</text><text class="dg-ts dg-mid" x="64.0" y="88">series or parallel</text></g><g data-hl="pv"><rect class="dg-line" x="22" y="94" width="22" height="10" fill="none" stroke-width="1"/><rect class="dg-line" x="22" y="107" width="22" height="10" fill="none" stroke-width="1"/><rect class="dg-line" x="50" y="94" width="22" height="10" fill="none" stroke-width="1"/><rect class="dg-line" x="50" y="107" width="22" height="10" fill="none" stroke-width="1"/><rect class="dg-line" x="78" y="94" width="22" height="10" fill="none" stroke-width="1"/><rect class="dg-line" x="78" y="107" width="22" height="10" fill="none" stroke-width="1"/></g><g data-hl="cc"><rect class="dg-panel" x="166" y="44" width="112" height="78" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="222.0" y="62">CHARGE</text><text class="dg-ts dg-mid" x="222.0" y="76">CONTROLLER</text><text class="dg-ts dg-mid" x="222.0" y="88">MPPT or PWM</text><text class="dg-ts dg-mid" x="222.0" y="100">stops overcharging</text></g><g data-hl="bat"><rect class="dg-key" x="324" y="44" width="112" height="78" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="380.0" y="62">BATTERY BANK</text><text class="dg-ts dg-mid" x="380.0" y="76">12 / 24 / 48 V</text><text class="dg-ts dg-mid" x="380.0" y="88">lead-acid or LiFePO₄</text><text class="dg-ts dg-mid" x="380.0" y="100">100–400 Ah</text></g><g data-hl="inv"><rect class="dg-panel" x="166" y="196" width="112" height="78" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="222.0" y="214">INVERTER</text><text class="dg-ts dg-mid" x="222.0" y="228">DC → AC</text><text class="dg-ts dg-mid" x="222.0" y="240">pure sine for</text><text class="dg-ts dg-mid" x="222.0" y="252">everything</text></g><g data-hl="ac"><rect class="dg-panel" x="8" y="196" width="112" height="78" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="64.0" y="214">AC LOADS</text><text class="dg-ts dg-mid" x="64.0" y="228">120 / 240 V</text><text class="dg-ts dg-mid" x="64.0" y="240">appliances</text></g><g data-hl="dc"><rect class="dg-panel" x="324" y="196" width="112" height="78" rx="8"/><text class="dg-tb dg-tb-sm dg-mid" x="380.0" y="214">DC LOADS</text><text class="dg-ts dg-mid" x="380.0" y="228">12 V lights,</text><text class="dg-ts dg-mid" x="380.0" y="240">USB, fans</text></g><path class="dg-red-s" d="M120 74 L166 74"/><path class="dg-line" d="M120 92 L166 92"/><rect class="dg-key" x="135" y="70" width="16" height="8" rx="2"/><path class="dg-red-s" d="M278 74 L324 74"/><path class="dg-line" d="M278 92 L324 92"/><rect class="dg-key" x="293" y="70" width="16" height="8" rx="2"/><path class="dg-red-s" d="M360 122 L360 164 L248 164 L248 196"/><path class="dg-line" d="M372 122 L372 176 L262 176 L262 196"/><rect class="dg-key" x="356" y="134" width="8" height="16" rx="2"/><path class="dg-red-s" d="M400 122 L400 196"/><path class="dg-line" d="M412 122 L412 196"/><rect class="dg-key" x="396" y="152" width="8" height="16" rx="2"/><path class="dg-key-s" d="M166 235 L120 235" stroke-width="3"/><path class="dg-key-s" d="M166 245 L120 245" stroke-width="3" stroke-dasharray="2 3"/><text class="dg-th dg-mid" x="222" y="22">OFF-GRID SOLAR — HOW IT IS WIRED</text><path class="dg-red-s" d="M10 300 l20 0"/><text class="dg-ts" x="36" y="304">positive (+)</text><path class="dg-line" d="M110 300 l20 0"/><text class="dg-ts" x="136" y="304">negative (−)</text><path class="dg-key-s" d="M210 300 l20 0" stroke-width="3"/><text class="dg-ts" x="236" y="304">AC</text><rect class="dg-key" x="264" y="296" width="16" height="8" rx="2"/><text class="dg-ts" x="286" y="304">fuse or breaker</text><text class="dg-ts" x="8" y="322">Fuse every positive wire, as close to the battery as you can.</text><text class="dg-ts" x="8" y="334">Size each wire for the current it carries.</text></svg>
@@ -218,14 +204,16 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     <div class="ratio-box">Example: 10m head × 3 L/s × 5.5 = 165 Watts continuous</div>
 
     <h3>Basic Pelton Wheel System</h3>
-    <div class="diagram">
-   Intake Screen ─── Penstock (pipe) ─── Nozzle ──→ [Pelton Wheel] ──→ Generator
-        │                                                  │                  │
-    (stream)           (long pipe carries             (water jets           (AC or DC
-                       water downhill)                 hit cups,             output)
-                                                       spinning wheel)
-   Tailrace ←─────── (water exits back to stream after turbine) ──────────────┘
-    </div>
+    <!--fig-hydro-en-->
+    <figure class="dg" id="fig-hydro-en">
+      <svg viewBox="0 0 444 240" role="img" aria-label="Micro-hydro: water taken from a screened intake passes through a settling tank into a penstock pipe running downhill to a nozzle that drives a Pelton wheel and generator; the water returns to the stream by a tailrace; the head is the vertical drop from intake to nozzle"><defs><marker id="ah-fig-hydro-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><text class="dg-th dg-mid" x="222" y="18">MICRO-HYDRO LAYOUT</text><path class="dg-blue-s" d="M10 82 H32" stroke-width="6" opacity=".7"/><text class="dg-ts" x="10" y="66">stream</text><rect class="dg-water" x="30" y="72" width="40" height="22"/><text class="dg-ts dg-mid" x="50" y="108">intake + screen</text><rect class="dg-panel" x="84" y="74" width="40" height="26"/><text class="dg-ts dg-mid" x="104" y="66">settling tank</text><path class="dg-line" d="M124 88 C200 96 260 140 316 186" fill="none" stroke-width="5"/><text class="dg-ts" x="208" y="112">penstock pipe — few bends, no air traps</text><circle class="dg-panel" cx="336" cy="192" r="18"/><circle class="dg-key" cx="352" cy="192" r="3.5"/><circle class="dg-key" cx="348.944" cy="201.405" r="3.5"/><circle class="dg-key" cx="340.944" cy="207.217" r="3.5"/><circle class="dg-key" cx="331.056" cy="207.217" r="3.5"/><circle class="dg-key" cx="323.056" cy="201.405" r="3.5"/><circle class="dg-key" cx="320" cy="192" r="3.5"/><circle class="dg-key" cx="323.056" cy="182.595" r="3.5"/><circle class="dg-key" cx="331.056" cy="176.783" r="3.5"/><circle class="dg-key" cx="340.944" cy="176.783" r="3.5"/><circle class="dg-key" cx="348.944" cy="182.595" r="3.5"/><line class="dg-blue-s" x1="316" y1="186" x2="326" y2="190"/><text class="dg-ts dg-end" x="314" y="232">nozzle → Pelton wheel</text><rect class="dg-key" x="366" y="182" width="40" height="20" rx="4"/><text class="dg-ts dg-end" x="410" y="178">generator</text><path class="dg-blue-s" d="M340 212 q20 10 60 6" marker-end="url(#ah-fig-hydro-en)" fill="none"/><text class="dg-ts dg-end" x="440" y="236">tailrace</text><line class="dg-thin" x1="20" y1="72" x2="20" y2="192" marker-end="url(#ah-fig-hydro-en)"/><line class="dg-thin" x1="20" y1="192" x2="20" y2="72" marker-end="url(#ah-fig-hydro-en)"/><line class="dg-guide" x1="14" y1="192" x2="318" y2="192"/><text class="dg-tb dg-tb-sm" x="28" y="140">HEAD</text><text class="dg-ts" x="28" y="154">(vertical drop)</text></svg>
+      <figcaption>Power ≈ head (m) × flow (L/s) × 5 watts, roughly. The head counts, not the pipe length — but a long, narrow pipe loses much of it to friction.</figcaption>
+    </figure>
+
+
+
+
+
 
     <ol class="steps">
       <li><strong>Intake:</strong> Build a small weir (low dam) in the stream. Divert water into a settling tank (removes sediment), then into the penstock pipe.</li>
@@ -274,30 +262,11 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     </div>
 
     <h3>Downdraft (Imbert) Gasifier — Preferred Design</h3>
-    <div class="diagram">
-  ┌─────────────────────┐
-  │   FUEL HOPPER       │ ← Wood chips, blocks (dry, &lt;20% moisture)
-  │   (top loading)     │
-  ├─────────────────────┤
-  │   COMBUSTION ZONE   │ ← Air nozzles inject here; hottest zone (900–1100°C)
-  │   (pyrolysis+       │   Tars cracked into gas here
-  │    oxidation)       │
-  ├─────────────────────┤
-  │   REDUCTION ZONE    │ ← CO2 + H2O reduced to CO + H2 by hot charcoal
-  ├─────────────────────┤
-  │   ASH GRATE         │ ← Shake periodically to drop ash; clean every few hours
-  └──────────┬──────────┘
-             │ RAW GAS (hot, contains tar + particulates)
-             ▼
-  ┌─────────────────────┐
-  │  COOLING + FILTER   │ ← Cool gas to &lt;40°C; filter through sawdust/wood chips/cloth
-  │  (cyclone + packed  │   Remove tar and water
-  │   bed filter)       │
-  └──────────┬──────────┘
-             │ CLEAN GAS
-             ▼
-         ENGINE / BURNER
-    </div>
+    <!--fig-gasifier-en-->
+    <figure class="dg" id="fig-gasifier-en">
+      <svg viewBox="0 0 444 356" role="img" aria-label="Downdraft wood gasifier: fuel dries, chars, burns at the throat and is reduced to fuel gas, which is cooled, trapped and filtered before the engine"><defs><marker id="ah-gas-fig-gasifier-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><path class="dg-line" d="M40 22 L160 22 L160 150 L124 182 L140 216 L160 216 L160 252 L40 252 L40 216 L60 216 L76 182 L40 150 Z"/><path class="dg-earth" d="M42 24 L158 24 L158 86 L42 86 Z"/><text class="dg-tb dg-mid" x="100" y="46">FUEL HOPPER</text><text class="dg-ts dg-mid" x="100" y="60">hardwood chunks,</text><text class="dg-ts dg-mid" x="100" y="73">2–3 in across</text><path class="dg-debris" d="M42 88 L158 88 L158 118 L42 118 Z" opacity=".75"/><text class="dg-tb dg-mid" x="100" y="107">DRYING</text><path class="dg-debris" d="M42 120 L158 120 L158 149 L42 149 Z"/><text class="dg-tb dg-mid" x="100" y="139">PYROLYSIS</text><path class="dg-red" d="M44 152 L156 152 L123 181 L77 181 Z"/><text class="dg-tb dg-mid" x="100" y="171">BURN</text><path class="dg-key" d="M77 184 L123 184 L138 214 L62 214 Z"/><text class="dg-tb dg-mid" x="100" y="204">REDUCE</text><line class="dg-line" x1="50" y1="218" x2="150" y2="218" stroke-dasharray="6 4"/><text class="dg-ts dg-mid" x="100" y="240">ash</text><path class="dg-blue-s" d="M8 166 L62 166" marker-end="url(#ah-gas-fig-gasifier-en)"/><text class="dg-ts" x="6" y="158">air in</text><text class="dg-t" x="168" y="107">100–300 °C</text><text class="dg-ts" x="168" y="120">moisture driven out</text><text class="dg-t" x="168" y="139">300–500 °C</text><text class="dg-ts" x="168" y="152">wood gives off tar gas</text><text class="dg-t" x="168" y="171">900–1100 °C at the throat</text><text class="dg-ts" x="168" y="184">tar is burnt up</text><text class="dg-t" x="168" y="203">CO₂ + H₂O + C → CO + H₂</text><text class="dg-ts" x="168" y="216">the useful gas is made here</text><text class="dg-ts" x="168" y="240">perforated steel grate</text><path class="dg-key-s" d="M160 262 L160 280 L206 280" marker-end="url(#ah-gas-fig-gasifier-en)"/><path class="dg-key-s" d="M214 280 q6 -16 12 0 t12 0 t12 0 t12 0 t12 0"/><circle class="dg-keyf" cx="244" cy="302" r="9"/><text class="dg-num dg-mid" x="244" y="306">1</text><text class="dg-tb dg-mid" x="244" y="326">cooling pipe</text><text class="dg-ts dg-mid" x="244" y="339">10–15 ft of 2 in</text><path class="dg-key-s" d="M276 280 L296 280"/><path class="dg-water" d="M296 272 h22 v22 q-11 8 -22 0 z"/><circle class="dg-keyf" cx="307" cy="312" r="9"/><text class="dg-num dg-mid" x="307" y="316">2</text><text class="dg-tb dg-mid" x="307" y="336">trap</text><text class="dg-ts dg-mid" x="307" y="349">drain daily</text><path class="dg-key-s" d="M318 280 L356 280"/><rect class="dg-panel" x="356" y="264" width="50" height="32" rx="5"/><circle class="dg-guide" cx="364" cy="272" r="1.6"/><circle class="dg-guide" cx="372" cy="272" r="1.6"/><circle class="dg-guide" cx="380" cy="272" r="1.6"/><circle class="dg-guide" cx="388" cy="272" r="1.6"/><circle class="dg-guide" cx="396" cy="272" r="1.6"/><circle class="dg-guide" cx="364" cy="280" r="1.6"/><circle class="dg-guide" cx="372" cy="280" r="1.6"/><circle class="dg-guide" cx="380" cy="280" r="1.6"/><circle class="dg-guide" cx="388" cy="280" r="1.6"/><circle class="dg-guide" cx="396" cy="280" r="1.6"/><circle class="dg-guide" cx="364" cy="288" r="1.6"/><circle class="dg-guide" cx="372" cy="288" r="1.6"/><circle class="dg-guide" cx="380" cy="288" r="1.6"/><circle class="dg-guide" cx="388" cy="288" r="1.6"/><circle class="dg-guide" cx="396" cy="288" r="1.6"/><circle class="dg-keyf" cx="381" cy="312" r="9"/><text class="dg-num dg-mid" x="381" y="316">3</text><text class="dg-tb dg-mid" x="381" y="336">filter</text><text class="dg-ts dg-mid" x="381" y="349">sawdust or hay</text><path class="dg-key-s" d="M406 280 L436 280" marker-end="url(#ah-gas-fig-gasifier-en)"/><text class="dg-tb dg-end" x="436" y="244">to engine</text><text class="dg-ts dg-end" x="436" y="257">air intake</text><text class="dg-ts dg-mid" x="120" y="296">hot gas out</text></svg>
+      <figcaption>Wood moves <strong>down</strong> through four zones and the gas leaves at the bottom, so tar has to pass through the hottest part and is burnt. This throat type ran over a million vehicles in the 1940s; FEMA’s 1989 emergency design is a simpler, throatless version of the same idea. The gas is mostly <strong>carbon monoxide: it kills</strong>. Run it outdoors only.</figcaption>
+    </figure>
 
     <h3>Engine Adaptation</h3>
     <p>Standard gasoline engines can run on producer gas with carburetor modification (add a gas mixing valve in the intake). Power output drops 30–40% vs gasoline. Diesel engines can dual-fuel (70% producer gas, 30% diesel pilot injection) — requires no carburetor modification.</p>
@@ -606,22 +575,6 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     </ul>
 
     <h3>Basic L-Shaped Combustion Principle</h3>
-    <div class="diagram">
-  ┌──────────────────────────────────┐
-  │           Hot gases rise         │
-  │     [Cooking pot sits here]      │
-  │               ↑                  │
-  │    ┌──────────┤ Chimney          │
-  │    │          │ (vertical        │
-  │    │ Burn     │  chamber)        │
-  │    │ chamber  │                  │
-  │ ───┤          │                  │
-  │Air →  L-shaped junction         │
-  │    │                             │
-  │    └── Feed tube (horizontal) ──→ Insert small sticks here
-  │         [Air gap below wood]     │
-  └──────────────────────────────────┘
-    </div>
 
     <p>The key insight: the horizontal feed tube angles slightly downward at the L-junction, creating an air gap beneath the wood. Air is drawn through this gap, over the fuel, and into the vertical chimney — creating an intense, self-sustaining draft.</p>
 
@@ -667,23 +620,16 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     <p><strong>Reaches:</strong> 120–150°C (250–300°F) in full sun.</p>
 
     <h4>Build</h4>
-    <div class="diagram">
-  ┌─────────────────────────────────┐
-  │  Reflective flap (angled       │
-  │  to direct extra light in)     │
-  │ ┌─────────────────────────┐    │
-  │ │    Glass or plastic lid │    │
-  │ │  ┌───────────────────┐  │    │
-  │ │  │   Black pot       │  │    │
-  │ │  │   with food       │  │    │
-  │ │  └───────────────────┘  │    │
-  │ │                         │    │
-  │ │  Inner box (foil-lined) │    │
-  │ └─────────────────────────┘    │
-  │   Insulation between boxes     │
-  │  (newspaper, wool, straw)      │
-  └─────────────────────────────────┘
-    </div>
+    <!--fig-boxcooker-->
+    <figure class="dg" id="fig-boxcooker">
+      <svg viewBox="0 0 444 220" role="img" aria-label="Solar box cooker: an inner foil-lined box sits inside an outer box with insulation between, a black pot inside, a clear glass lid on top, and a foil reflector flap angled to throw more sun in"><defs><marker id="ah-fig-boxcooker" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><text class="dg-th dg-mid" x="222" y="18">SOLAR BOX COOKER — CROSS-SECTION</text><rect class="dg-wood" x="90" y="100" width="264" height="100"/><rect class="" x="112" y="112" width="220" height="84" style="fill:#2a2a24;stroke:#888"/><rect class="" x="116" y="116" width="212" height="76" style="fill:#c9ced4"/><text class="dg-ts dg-mid" x="222" y="130" style="fill:#223">foil-lined inner box</text><rect class="" x="186" y="150" width="72" height="40" rx="6" style="fill:#111;stroke:#555"/><text class="dg-ts dg-mid" x="222" y="174">black pot</text><line class="dg-blue-s" x1="96" y1="100" x2="348" y2="100" stroke-width="3"/><text class="dg-ts dg-end" x="86" y="98">glass / clear lid</text><path class="dg-line" d="M348 100 L410 36" stroke-width="4"/><text class="dg-ts dg-end" x="396" y="30">reflector</text><line class="dg-key-s" x1="150" y1="30" x2="210" y2="96" marker-end="url(#ah-fig-boxcooker)"/><line class="dg-key-s" x1="200" y1="30" x2="250" y2="96" marker-end="url(#ah-fig-boxcooker)"/><line class="dg-key-s" x1="250" y1="30" x2="290" y2="96" marker-end="url(#ah-fig-boxcooker)"/><path class="dg-key-s" d="M380 52 L300 140" marker-end="url(#ah-fig-boxcooker)"/><text class="dg-ts" x="100" y="214">insulation (paper, straw, wool) between the boxes</text><line class="dg-thin" x1="100" y1="204" x2="100" y2="190"/></svg>
+      <figcaption>Reaches about 120–150 °C in full sun — enough to cook slowly and to pasteurise water. Turn it to face the sun every half hour or so.</figcaption>
+    </figure>
+
+
+
+
+
 
     <ol class="steps">
       <li>Make two nested boxes — inner box slightly smaller than outer. The gap between them (4–8cm) is filled with insulation: crumpled newspaper, dried grass, wool scraps, or straw.</li>
@@ -736,21 +682,11 @@ Also: Battery → DC directly to 12V loads (lights, USB, fan)
     </div>
 
     <h3>Fixed-Dome Digester (Low-Tech)</h3>
-    <div class="diagram">
-  ┌──────────────────────────────────┐
-  │  Gas outlet → cooking stove      │
-  │      │                           │
-  │  ┌───┴───────────────────────┐   │
-  │  │   Gas dome (sealed)       │   │
-  │  │   ~~~ gas layer ~~~       │   │
-  │  │                           │   │
-  │  │   Slurry (active)         │   │
-  │  │                           │   │
-  │  └─────────────────────────-─┘   │
-  │  Inlet pipe ←    → Outlet/slurry │
-  │  (manure + water)  (as fertilizer)│
-  └──────────────────────────────────┘
-    </div>
+    <!--fig-biogas-en-->
+    <figure class="dg" id="fig-biogas-en">
+      <svg viewBox="0 0 444 252" role="img" aria-label="Fixed-dome biogas digester: a buried brick dome where slurry makes gas, with an inlet, a gas outlet and a displacement chamber"><defs><marker id="ah-bg-fig-biogas-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><path class="dg-earth" d="M2 70 L442 70 L442 246 L2 246 Z"/><path class="dg-panel" d="M126 214 L126 140 Q126 92 220 92 Q314 92 314 140 L314 214 Z"/><path class="dg-debris" d="M128 150 L312 150 L312 212 L128 212 Z"/><text class="dg-tb dg-mid" x="226" y="174">SLURRY</text><text class="dg-ts dg-mid" x="226" y="188">manure, food scraps,</text><text class="dg-ts dg-mid" x="226" y="200">crop waste + water</text><path class="dg-key" d="M128 148 L128 140 Q128 94 220 94 Q312 94 312 140 L312 148 Z" style="fill-opacity:.35"/><text class="dg-tb dg-mid" x="220" y="124">GAS  CH₄ + CO₂</text><rect class="dg-panel" x="18" y="48" width="62" height="22" rx="3"/><text class="dg-ts dg-mid" x="49" y="40">mixing pit</text><path class="dg-line" d="M66 70 L136 200" stroke-width="7" style="opacity:.6"/><rect class="dg-panel" x="334" y="96" width="78" height="118"/><rect class="dg-debris" x="336" y="116" width="74" height="96"/><path class="dg-line" d="M314 200 L336 200" stroke-width="10" style="opacity:.6"/><path class="dg-arrow" d="M374 112 L374 70 L434 70" marker-end="url(#ah-bg-fig-biogas-en)"/><text class="dg-tb dg-end" x="436" y="48">slurry out</text><text class="dg-ts dg-end" x="436" y="61">= fertiliser</text><path class="dg-key-s" d="M220 94 L220 22 L300 22" marker-end="url(#ah-bg-fig-biogas-en)"/><rect class="dg-key" x="212" y="38" width="16" height="12" rx="2"/><text class="dg-tb" x="304" y="18">gas to stove</text><text class="dg-ts" x="304" y="31">pressure-relief valve</text><path class="dg-red-s" d="M296 168 L330 150" marker-end="url(#ah-bg-fig-biogas-en)"/><text class="dg-ts dg-mid" x="373" y="228">gas pushes slurry</text><text class="dg-ts dg-mid" x="373" y="240">up into here</text><path class="dg-thin" d="M104 70 L104 214 M98 70 h12 M98 214 h12"/><text class="dg-tb dg-end" x="96" y="146">1–2 m</text><text class="dg-tb" x="10" y="128">inlet:</text><text class="dg-ts" x="10" y="141">waste +</text><text class="dg-ts" x="10" y="153">water</text></svg>
+      <figcaption>As gas collects under the dome it pushes slurry up into the outlet chamber; as you burn the gas, the slurry flows back and keeps the pressure steady. Sealed except for the gas pipe. Biogas burns: <strong>no flames near the dome</strong>, and never go into an empty digester.</figcaption>
+    </figure>
 
     <h3>Basic Floating-Drum Digester (Easiest Build)</h3>
     <p>Use a large buried container (500–2,000L) as the digestion tank and a smaller inverted drum or barrel floating in it to collect gas. As gas accumulates, the drum rises; as it's used, the drum falls.</p>
