@@ -166,6 +166,7 @@
     wrapTables();
     stackTables();
     setupSectionArt();
+    setupHomeSky();
     setupOnThisPage();
     setupReveal();
     setupPlayers();
@@ -742,6 +743,60 @@
       `<circle class="bat bm bm-ripple" style="${O(0, 0)};--t:3s" r="20"/>`
   };
 
+  /* =================== LIVING HOME SKY ===================
+     Behind the home page title: a sky that follows this device's clock (night, dawn,
+     day, dusk), twinkling stars, the sun crossing by day, tonight's real moon phase
+     (worked out offline from the date), and a hillside shelter whose lantern glows
+     brighter after dark. Refreshes every minute. Still for reduced motion. */
+  function moonNow(d) {
+    const P = 29.530588853, age = (((d - Date.UTC(2000, 0, 6, 18, 14)) / 864e5) % P + P) % P;
+    const lit = (1 - Math.cos(2 * Math.PI * age / P)) / 2;
+    const wax = age < P / 2;                         // named by how much is lit, as people see it
+    const name = lit < .03 ? 'new moon' : lit > .97 ? 'full moon' : lit < .45 ? (wax ? 'waxing crescent' : 'waning crescent') : lit <= .55 ? (wax ? 'first quarter' : 'last quarter') : (wax ? 'waxing gibbous' : 'waning gibbous');
+    return { age, lit, P, name };
+  }
+  function setupHomeSky() {
+    const hero = document.querySelector('.hero-dashboard'); if (!hero || hero.querySelector('.home-sky')) return;
+    const sky = document.createElement('div'); sky.className = 'home-sky no-flip'; sky.setAttribute('aria-hidden', 'true');
+    hero.classList.add('has-sky'); hero.insertBefore(sky, hero.firstChild);
+    const note = document.createElement('p'); note.className = 'sky-note';
+    const sub = hero.querySelector('.hero-subtitle'); if (sub) sub.after(note);
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const stars = Array.from({ length: 70 }, () => [rnd() * 800, rnd() * 190, .4 + rnd() * 1.1, rnd() * 6]);
+    const KEYS = [[0, '#05080f', '#0a1324'], [4.5, '#05080f', '#0b1426'], [6, '#141a36', '#7a4a5a'], [7.3, '#1f3150', '#b8735a'], [9, '#1c3756', '#3d6c92'], [16, '#1c3756', '#3d6c92'],
+                  [18, '#241f45', '#c46c45'], [19.5, '#120f2a', '#4a2e52'], [21, '#070b18', '#121a33'], [24, '#05080f', '#0a1324']];
+    const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+    const mix = (a, b, t) => '#' + hex(a).map((v, i) => Math.round(v + (hex(b)[i] - v) * t).toString(16).padStart(2, '0')).join('');
+    function draw() {
+      const now = new Date(), h = now.getHours() + now.getMinutes() / 60;
+      let j = 0; while (j < KEYS.length - 2 && h >= KEYS[j + 1][0]) j++;
+      const [h0, t0, b0] = KEYS[j], [h1, t1, b1] = KEYS[j + 1], t = (h - h0) / (h1 - h0);
+      const top = mix(t0, t1, t), bot = mix(b0, b1, t);
+      const night = h < 5 || h >= 21 ? 1 : h < 7 ? (7 - h) / 2 : h >= 19 ? (h - 19) / 2 : 0;            // 0 by day, 1 at night
+      const sunUp = h > 6 && h < 18.5, sf = (h - 6) / 12.5, sx = 60 + 680 * sf, sy = 180 - 118 * Math.sin(Math.PI * Math.min(1, Math.max(0, sf))) - (Math.abs(sx - 400) < 140 ? 0 : 0);
+      const m = moonNow(now), k = Math.cos(2 * Math.PI * m.age / m.P), waxing = m.age < m.P / 2, R = 15;
+      const mx = 120 + 560 * ((h + 6) % 24) / 24, my = 46 + 30 * Math.abs(((h + 6) % 24) / 12 - 1);
+      const moonLit = 'M0 ' + -R + ' A' + R + ' ' + R + ' 0 0 1 0 ' + R + ' A' + (R * Math.abs(k)).toFixed(2) + ' ' + R + ' 0 0 ' + (k > 0 ? 0 : 1) + ' 0 ' + -R + 'Z';
+      const glow = .3 + .7 * night;
+      sky.innerHTML = '<svg viewBox="0 0 800 260" preserveAspectRatio="xMidYMax slice">' +
+        '<defs><linearGradient id="hs-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + top + '"/><stop offset="1" stop-color="' + bot + '"/></linearGradient>' +
+        '<radialGradient id="hs-l"><stop offset="0" stop-color="#ffcf6a" stop-opacity=".9"/><stop offset=".35" stop-color="#ffb347" stop-opacity=".35"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>' +
+        '<radialGradient id="hs-s"><stop offset="0" stop-color="#fff2c0"/><stop offset=".4" stop-color="#ffd25a" stop-opacity=".6"/><stop offset="1" stop-color="#ffd25a" stop-opacity="0"/></radialGradient></defs>' +
+        '<rect width="800" height="260" fill="url(#hs-g)"/>' +
+        '<g opacity="' + night.toFixed(2) + '">' + stars.map(([x, y, r, d]) => '<circle class="hs-star" cx="' + x.toFixed(0) + '" cy="' + y.toFixed(0) + '" r="' + r.toFixed(1) + '" style="--dl:-' + d.toFixed(1) + 's"/>').join('') + '</g>' +
+        (sunUp ? '<circle cx="' + sx.toFixed(0) + '" cy="' + sy.toFixed(0) + '" r="46" fill="url(#hs-s)" opacity="' + (.75 * (1 - night)).toFixed(2) + '"/><circle cx="' + sx.toFixed(0) + '" cy="' + sy.toFixed(0) + '" r="10" fill="#fff0b8" opacity="' + (.85 * (1 - night)).toFixed(2) + '"/>' : '') +
+        (night > .15 && m.lit > .02 ? '<g transform="translate(' + mx.toFixed(0) + ' ' + my.toFixed(0) + ')' + (waxing ? '' : ' scale(-1 1)') + '" opacity="' + Math.min(1, night * 1.2).toFixed(2) + '"><circle r="' + R + '" fill="#1a2238" opacity=".8"/><path d="' + moonLit + '" fill="#efe7cf"/><circle r="' + (R + 9) + '" fill="#efe7cf" opacity="' + (.06 + .1 * m.lit).toFixed(2) + '"/></g>' : '') +
+        '<path d="M0 214 C120 186 220 200 330 182 C440 164 520 194 620 178 C700 166 760 176 800 170 V260 H0Z" fill="#0d1410" opacity=".85"/>' +
+        '<path d="M0 236 C160 214 300 232 420 220 C560 206 680 230 800 214 V260 H0Z" fill="#070b08"/>' +
+        '<g transform="translate(560 168)"><path d="M-22 14 L0 -6 L22 14 Z" fill="#0a0f0b"/><rect x="-16" y="12" width="32" height="18" fill="#0a0f0b"/>' +
+        '<circle class="hs-glow" cy="20" r="46" fill="url(#hs-l)" opacity="' + glow.toFixed(2) + '"/><rect x="-4" y="16" width="8" height="9" rx="1" fill="#ffcf6a" opacity="' + (.45 + .55 * night).toFixed(2) + '"/></g>' +
+        '</svg>';
+      const greet = h < 5 ? 'Still up' : h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
+      note.textContent = greet + ' · ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' · ' + (h >= 17 || h < 7 ? 'tonight: ' : 'moon: ') + m.name + ', ' + Math.round(m.lit * 100) + '% lit';
+    }
+    draw(); setInterval(draw, 60000);
+  }
+
   /* =================== SECTION BANNER ART =================== */
   /* A small animated scene on every section header, generated from the
      page's own menu icon and its group's colour: drifting contour lines
@@ -860,7 +915,7 @@
         Off for "reduce motion" and when printing.
      3. Parts tagged data-hl="key" light up together with their label when
         you hover, tap or focus either one. */
-  const DG_SKIP = 'h1, h2, h3, a, button, .kn-tie, .sec-art, .sos, .palette, .otp-bar, .dg-lb, [class*="icon"], .hero-stat';
+  const DG_SKIP = 'h1, h2, h3, a, button, .kn-tie, .home-sky, .sec-art, .sos, .palette, .otp-bar, .dg-lb, [class*="icon"], .hero-stat';
   function isDiagram(svg) {
     if (svg.closest(DG_SKIP)) return false;
     const vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);

@@ -299,6 +299,23 @@ order), `fig-fever` (thresholds).
 
 ---
 
+## Plant-or-lookalike game, machines that run, living home sky (November 2026)
+
+- **Plant or lookalike?** (Climate › Deadly lookalikes): flip cards made from the guide's own nine
+  lookalike panels (wild garlic group, carrot family, chanterelles), copied into a template by
+  `tools/lookalike_game.py`. The front shows only the plant; pick which one it is and the card turns
+  to the full panel with its verdict and tells. Score, streak, and a "look again at" list.
+- **Machines that run** (`machine()` in calc.js): a four-stroke engine (Vehicles: slider-crank
+  piston, valves, spark, gas colours), bellows and forge (Metalworking: single chamber, flap valve,
+  the fire flares on the push), a hand piston pump (Water Systems: foot valve and piston valve), and
+  a hydraulic ram (Projects: drive flow, waste valve slam, delivery surge, air chamber). Run/Pause,
+  speed, Next stage; stage tabs explain each part; pause off screen; start paused for reduced motion.
+- **Living home sky**: the home title sits in a sky that follows the device clock, with twinkling
+  stars, the sun by day, tonight's real moon phase (from the date, named by how much is lit) and a
+  hillside shelter whose lantern glows after dark. A line under the subtitle says the moon phase.
+
+---
+
 ## Living section badges (November 2026)
 
 Every section's header badge now holds its own small looping scene instead of the static menu

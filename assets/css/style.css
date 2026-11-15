@@ -3417,3 +3417,61 @@ body.mode-day > .mo-torch { filter: none !important; }
 @keyframes bm-sway { 0%, 100% { transform: skewX(-8deg); } 50% { transform: skewX(8deg); } }
 @media (prefers-reduced-motion: reduce) { .sa-live .bm { animation: none !important; opacity: 1 !important; } }
 @media print { .sa-live .bm { animation: none !important; } }
+
+/* Plant or lookalike? flip-card game (calc.js lookalike). */
+.lk-play { display: grid; grid-template-columns: minmax(180px, 250px) 1fr; gap: 1.1rem; align-items: start; }
+.lk-stage { perspective: 1200px; }
+.lk-card { display: grid; transition: transform .7s cubic-bezier(.4, .1, .2, 1); transform-style: preserve-3d; }
+.lk-card.turned { transform: rotateY(180deg); }
+.lk-face { grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.lk-face svg { display: block; width: 100%; height: auto; }
+.lk-back { transform: rotateY(180deg); }
+.lk-q { margin: 0 0 .5rem; font: 800 .95rem var(--font); color: var(--text-0); }
+.lk-choices { display: grid; gap: .45rem; }
+.lk-choice { min-height: 46px; padding: .4rem .8rem; text-align: left; font: 700 .95rem var(--font); color: var(--text-0); background: var(--bg-1); border: 1px solid var(--border-hi); border-radius: 10px; cursor: pointer; transition: transform .1s, background .2s, border-color .2s; }
+.lk-choice:hover:not(:disabled) { border-color: var(--amber); }
+.lk-choice:disabled { cursor: default; opacity: .75; }
+.lk-choice.ok { opacity: 1; background: color-mix(in srgb, #6cc08f 30%, var(--bg-1)); border-color: #6cc08f; animation: mo-pop .35s ease; }
+.lk-choice.bad { opacity: 1; background: color-mix(in srgb, #e06060 30%, var(--bg-1)); border-color: #e06060; animation: mo-shake .35s ease; }
+.lk-res { margin: .6rem 0 0; font-size: .92rem; color: var(--text-1); line-height: 1.5; min-height: 1.4em; }
+.lk-safe { color: #6cc08f; font-weight: 700; } .lk-toxic { color: #ff8a8a; font-weight: 700; }
+.lk-tells { color: var(--text-2); font-size: .85rem; }
+.lk-score { margin: .4rem 0 0; font-size: .82rem; color: var(--text-3); }
+.lk-done { display: grid; place-items: center; gap: .4rem; min-height: 260px; padding: 1rem; text-align: center; background: var(--bg-1); border: 1px solid var(--border-hi); border-radius: 12px; }
+.lk-done b { font: 800 2.4rem var(--font); color: var(--amber-light); }
+.lk-done span { color: var(--text-1); }
+body.mode-day .lk-face svg { filter: invert(1) hue-rotate(180deg); }
+@media (max-width: 600px) { .lk-play { grid-template-columns: 1fr; } .lk-stage { max-width: 240px; margin: 0 auto; } }
+@media (prefers-reduced-motion: reduce) { .lk-card { transition: none; } .lk-choice.ok, .lk-choice.bad { animation: none; } }
+
+/* Machines that run (calc.js machine()). */
+.mc-phases { display: flex; flex-wrap: wrap; gap: 6px; margin: .2rem 0 .3rem; }
+.mc-phases span { padding: .25rem .6rem; font: 700 .78rem var(--font); color: var(--text-3); background: var(--bg-1); border: 1px solid var(--border); border-radius: 999px; transition: background .2s, color .2s, border-color .2s; }
+.mc-phases span b { color: var(--amber); margin-right: .15rem; }
+.mc-phases span.on { color: var(--bg-0); background: var(--amber); border-color: var(--amber); }
+.mc-phases span.on b { color: var(--bg-0); }
+.mc-now { min-height: 2.8em; margin: .3rem 0 .2rem; font-size: .92rem; color: var(--text-1); }
+.mc-speed { display: inline-flex; align-items: center; gap: .4rem; font-size: .8rem; color: var(--text-2); }
+.mc-speed input { width: 120px; accent-color: var(--amber); }
+.calc-gas-in { fill: #6fa3d8; } .calc-gas-burn { fill: #ff8a3a; } .calc-gas-out { fill: #8a8f96; }
+.calc-spark { fill: #fff6b0; stroke: #ffd25a; stroke-width: 1.2; filter: drop-shadow(0 0 6px #ffd25a); }
+.calc-dotin { fill: #9cc4ee; } .calc-dotout { fill: #a7a9ad; }
+.calc-coal { fill: #ff7a2a; filter: blur(4px); }
+.calc-flame { fill: #ffb347; stroke: #ff7a2a; stroke-width: 1.2; }
+.calc-spk { fill: #ffd25a; }
+.mc-bang { fill: #ff8a8a; }
+@media print { .calc-coal { filter: none; } }
+
+/* Living home sky (app.js setupHomeSky). */
+.hero-dashboard.has-sky { position: relative; isolation: isolate; overflow: hidden; border-radius: 0 0 18px 18px; margin-top: -1rem; padding-top: calc(var(--sp-2xl, 2.5rem) + 1rem); }
+.home-sky { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.home-sky svg { width: 100%; height: 100%; display: block; }
+.home-sky::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5, 8, 15, .15) 0%, rgba(5, 8, 15, .35) 55%, var(--bg-0) 100%); }
+.hs-star { fill: #f5f1e0; animation: hs-tw 5s ease-in-out var(--dl, 0s) infinite; }
+@keyframes hs-tw { 0%, 100% { opacity: .9; } 50% { opacity: .25; } }
+.hs-glow { transform-box: fill-box; transform-origin: center; animation: hs-flick 2.6s ease-in-out infinite; }
+@keyframes hs-flick { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.06); } 55% { transform: scale(.96); } 80% { transform: scale(1.03); } }
+.has-sky h1, .has-sky .hero-subtitle { text-shadow: 0 2px 14px rgba(0, 0, 0, .6); }
+.sky-note { margin: 0 auto var(--sp-sm, .6rem); font: 600 .8rem var(--font); letter-spacing: .02em; color: var(--text-2); }
+@media (prefers-reduced-motion: reduce) { .hs-star, .hs-glow { animation: none; } }
+@media print { .home-sky, .sky-note { display: none !important; } }

@@ -388,7 +388,228 @@
     render(); drawKeys();
   }
 
-  const KINDS = { fallout, bleach, rain, solar, sun, morse };
+  /* ── Plant or lookalike? A flip-card game using the guide's own lookalike drawings ──
+     The front shows only the plant (name, verdict and the tell-tale notes hidden); pick
+     which one it is and the card turns over to the full panel. Cards come from the
+     <template id="lk-cards"> written by tools/lookalike_game.py. */
+  function lookalike(box) {
+    const tpl = document.getElementById('lk-cards'); if (!tpl) return;
+    const all = [...tpl.content.querySelectorAll('svg')].map(svg => ({ svg, group: svg.dataset.group, name: svg.dataset.name, verdict: svg.dataset.verdict, safe: svg.dataset.safe === '1' }));
+    box.innerHTML =
+      '<p class="calc-title">Plant or lookalike?</p><p class="calc-sub">Look at the plant, decide which one it is, then turn the card. Practice for your eye only: in the field, be 100% certain or don’t eat it.</p>' +
+      '<div class="lk-play"><div class="lk-stage"><div class="lk-card"><div class="lk-face lk-front"></div><div class="lk-face lk-back"></div></div></div>' +
+      '<div class="lk-side"><p class="lk-q">Which is it?</p><div class="lk-choices"></div><div class="lk-res" aria-live="polite"></div>' +
+      '<div class="calc-btns"><button type="button" class="dg-ctl-btn lk-next" hidden>Next card →</button></div>' +
+      '<p class="lk-score"></p></div></div>';
+    const card = $(box, '.lk-card'), front = $(box, '.lk-front'), back = $(box, '.lk-back'), choices = $(box, '.lk-choices'), res = $(box, '.lk-res'), next = $(box, '.lk-next'), score = $(box, '.lk-score');
+    let deck = [], k = 0, right = 0, missed = [], streak = 0;
+    const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    function frontOf(svg) {
+      const c = svg.cloneNode(true);
+      c.querySelectorAll('text').forEach(t => { const y = +t.getAttribute('y'); if (y < 62 || y > 186) t.remove(); });
+      c.querySelectorAll('.dg-okbg, .dg-badbg').forEach(r => r.remove());
+      c.removeAttribute('aria-label'); c.setAttribute('aria-label', 'A plant to identify');
+      return c;
+    }
+    function deal() {
+      if (k >= deck.length) return finish();
+      const cur = deck[k];
+      card.classList.remove('turned'); res.innerHTML = ''; next.hidden = true;
+      front.innerHTML = ''; front.appendChild(frontOf(cur.svg));
+      back.innerHTML = ''; back.appendChild(cur.svg.cloneNode(true));
+      $(box, '.lk-q').textContent = 'Card ' + (k + 1) + ' of ' + deck.length + ': which is it?';
+      choices.innerHTML = shuffle(all.filter(c => c.group === cur.group)).map(c => '<button type="button" class="lk-choice" data-n="' + c.name + '">' + c.name + '</button>').join('');
+      choices.querySelectorAll('button').forEach(b => b.disabled = false);
+      score.textContent = 'Score ' + right + ' / ' + k + (streak > 2 ? ' · streak ' + streak : '');
+    }
+    function answer(btn) {
+      const cur = deck[k], ok = btn.dataset.n === cur.name;
+      choices.querySelectorAll('button').forEach(b => { b.disabled = true; if (b.dataset.n === cur.name) b.classList.add('ok'); });
+      if (!ok) { btn.classList.add('bad'); missed.push(cur.name); streak = 0; } else { right++; streak++; }
+      card.classList.add('turned');
+      const tells = [...cur.svg.querySelectorAll('text')].filter(t => +t.getAttribute('y') > 186).map(t => t.textContent.trim()).filter(Boolean).reduce((acc, t) => acc ? acc + (/^[a-z(]/.test(t) ? ' ' : ' · ') + t : t, '');
+      res.innerHTML = (ok ? '<b class="mo-yes">Right.</b> ' : '<b class="mo-no">No</b> — ') + 'it’s <b>' + cur.name + '</b>: <span class="' + (cur.safe ? 'lk-safe' : 'lk-toxic') + '">' + cur.verdict.toLowerCase() + '</span>.<br><span class="lk-tells">Tells: ' + tells + '</span>';
+      k++; next.hidden = false; next.textContent = k >= deck.length ? 'See your score →' : 'Next card →';
+      score.textContent = 'Score ' + right + ' / ' + k + (streak > 2 ? ' · streak ' + streak : '');
+      next.focus({ preventScroll: true });
+    }
+    function finish() {
+      card.classList.remove('turned');
+      front.innerHTML = '<div class="lk-done"><b>' + right + ' / ' + deck.length + '</b><span>' + (right === deck.length ? 'Every one right.' : 'Look again at: ' + missed.join(', ')) + '</span></div>';
+      choices.innerHTML = ''; res.innerHTML = 'Even a perfect score here is not enough to forage on. Use every tell together, and if any one doesn’t fit, leave it.';
+      $(box, '.lk-q').textContent = 'Finished';
+      next.hidden = false; next.textContent = '↺ Play again';
+    }
+    function start() { deck = shuffle(all.slice()); k = 0; right = 0; missed = []; streak = 0; deal(); }
+    choices.addEventListener('click', e => { const b = e.target.closest('.lk-choice'); if (b && !b.disabled) answer(b); });
+    next.addEventListener('click', () => { if (k >= deck.length && $(box, '.lk-done')) start(); else deal(); });
+    start();
+  }
+
+  /* ── Machines that run: one cycle position f (0…1) drives every part of the drawing ──
+     machine() gives each one Play/Pause, a speed slider and a phase readout; it pauses
+     itself off screen and starts paused for reduced motion. Each drawing follows the
+     diagram and text it sits beside. */
+  function machine(box, o) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    box.innerHTML = '<p class="calc-title">' + o.title + '</p><p class="calc-sub">' + o.sub + '</p>' +
+      '<svg class="calc-chart mc-svg" viewBox="' + o.vb + '" role="img" aria-label="' + o.label + '"></svg>' +
+      '<div class="mc-phases">' + o.phases.map((ph, i) => '<span data-p="' + i + '"><b>' + (i + 1) + '</b> ' + ph[0] + '</span>').join('') + '</div>' +
+      '<p class="mc-now" aria-live="polite"></p>' +
+      '<div class="calc-btns"><button type="button" class="dg-ctl-btn mc-play"></button>' +
+      '<label class="mc-speed">speed <input type="range" min="0.1" max="1" step="0.05" value="' + (o.speed || 0.5) + '" aria-label="Speed"></label>' +
+      '<button type="button" class="dg-ctl-btn mc-step">Next stage ▸</button></div>';
+    const svg = $(box, '.mc-svg'), now = $(box, '.mc-now'), play = $(box, '.mc-play'), sp = $(box, '.mc-speed input');
+    let f = 0, run = !reduce, visible = true, last = null, raf = null, shown = -1;
+    const stages = o.phases.map(ph => ph[2]);            // start of each stage, as a fraction of the cycle
+    function stageOf(x) { let k = 0; stages.forEach((a, i) => { if (x >= a) k = i; }); return k; }
+    function paint() {
+      svg.innerHTML = o.draw(f);
+      const k = stageOf(f);
+      if (k !== shown) { shown = k; box.querySelectorAll('.mc-phases span').forEach((e, i) => e.classList.toggle('on', i === k)); now.textContent = o.phases[k][1]; }
+    }
+    function tick(t) {
+      raf = null;
+      if (last != null) f = (f + (t - last) / 1000 / o.period * +sp.value) % 1;
+      last = t; paint();
+      if (run && visible) raf = requestAnimationFrame(tick); else last = null;
+    }
+    const setBtn = () => { play.textContent = run ? '❚❚ Pause' : '▶ Run'; };
+    play.addEventListener('click', () => { run = !run; setBtn(); if (run && !raf) raf = requestAnimationFrame(tick); });
+    $(box, '.mc-step').addEventListener('click', () => { run = false; setBtn(); const k = (stageOf(f) + 1) % stages.length; f = stages[k] + 0.001; paint(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible && run && !raf) { last = null; raf = requestAnimationFrame(tick); } }).observe(svg);
+    setBtn(); paint(); if (run) raf = requestAnimationFrame(tick);
+  }
+  const P = (x, y) => x.toFixed(1) + ' ' + y.toFixed(1);
+  const TX = (x, y, t, c, a) => '<text class="' + (c || 'dg-ts') + (a ? ' dg-' + a : '') + '" x="' + x + '" y="' + y + '">' + t + '</text>';
+
+  // Four-stroke engine: crank angle 0–720°, TDC at 0. Slider-crank geometry for the piston.
+  function engine(box) {
+    const cx = 222, cy = 252, r = 34, L = 100, head = 66;
+    machine(box, { title: 'Four-stroke engine, running', sub: 'Two turns of the crank for every power stroke. Watch the valves and the spark.', vb: '0 0 444 320', label: 'A four-stroke engine running: intake, compression, power and exhaust', period: 2.4, speed: 0.35,
+      phases: [['Intake', 'Intake: the piston goes down and draws in fuel and air through the open intake valve.', 0], ['Compression', 'Compression: both valves shut; the piston squeezes the mixture.', .25],
+               ['Power', 'Power: the spark fires; burning gas drives the piston down — the only stroke that makes work.', .5], ['Exhaust', 'Exhaust: the exhaust valve opens; the piston pushes the burnt gas out.', .75]],
+      draw(f) {
+        const th = f * 720, a = th * Math.PI / 180;
+        const pinY = cy - (r * Math.cos(a) + Math.sqrt(L * L - Math.pow(r * Math.sin(a), 2))), top = pinY - 16;
+        const kx = cx + r * Math.sin(a), ky = cy - r * Math.cos(a);
+        const lift = (lo, hi) => th > lo && th < hi ? 9 * Math.sin((th - lo) / (hi - lo) * Math.PI) : 0;
+        const vi = lift(0, 190), ve = lift(530, 720);
+        const ph = th < 180 ? 0 : th < 360 ? 1 : th < 540 ? 2 : 3;
+        const gas = ['calc-gas-in', 'calc-gas-in', 'calc-gas-burn', 'calc-gas-out'][ph], gop = ph === 1 ? .55 + .4 * (th - 180) / 180 : ph === 2 ? 1 - .7 * (th - 360) / 180 : ph === 3 ? .5 : .35 + .3 * th / 180;
+        let g = '';
+        g += '<rect class="dg-panel" x="150" y="40" width="144" height="200" rx="4"/>';                                   // block
+        g += '<rect class="' + gas + '" x="172" y="' + head + '" width="100" height="' + (top - head).toFixed(1) + '" opacity="' + gop.toFixed(2) + '"/>';
+        g += '<path class="dg-line" d="M170 ' + head + ' V230 M274 ' + head + ' V230"/>';                                     // cylinder walls
+        g += '<path class="dg-line" d="M150 ' + head + ' H190 M204 ' + head + ' H240 M254 ' + head + ' H294"/>';             // head with two ports
+        g += '<path class="dg-water" d="M120 26 H182 V' + head + ' H170 V38 H120 Z" opacity=".5"/><path class="dg-earth" d="M262 ' + head + ' V26 H324 V38 H274 V' + head + ' Z" opacity=".5"/>';
+        g += TX(124, 20, 'intake', 'dg-ts') + TX(320, 20, 'exhaust', 'dg-ts', 'end');
+        g += '<g class="mc-valve"><path class="dg-line" d="M197 18 V' + (head - 2 + vi).toFixed(1) + '"/><path class="dg-key" d="M189 ' + (head - 4 + vi).toFixed(1) + ' H205 L201 ' + (head + vi).toFixed(1) + ' H193 Z"/></g>';
+        g += '<g class="mc-valve"><path class="dg-line" d="M247 18 V' + (head - 2 + ve).toFixed(1) + '"/><path class="dg-key" d="M239 ' + (head - 4 + ve).toFixed(1) + ' H255 L251 ' + (head + ve).toFixed(1) + ' H243 Z"/></g>';
+        g += '<rect class="dg-white" x="216" y="44" width="12" height="20" rx="2" opacity=".8"/>';                           // spark plug
+        if (th > 352 && th < 392) g += '<path class="calc-spark" d="M222 70 l4 7 l7 -1 l-5 6 l4 7 l-8 -3 l-5 6 l0 -8 l-7 -3 l7 -3 z"/>';
+        if (vi > 2) for (let k = 0; k < 3; k++) { const yy = 30 + ((f * 2400 + k * 13) % 36); g += '<circle class="calc-dotin" cx="' + (176 + k * 3) + '" cy="' + yy.toFixed(1) + '" r="2"/>'; }
+        if (ve > 2) for (let k = 0; k < 3; k++) { const yy = 60 - ((f * 2400 + k * 13) % 36); g += '<circle class="calc-dotout" cx="' + (266 + k * 3) + '" cy="' + yy.toFixed(1) + '" r="2"/>'; }
+        g += '<rect class="dg-key" x="174" y="' + top.toFixed(1) + '" width="96" height="30" rx="3"/><path class="dg-thin" d="M174 ' + (top + 7).toFixed(1) + ' H270 M174 ' + (top + 12).toFixed(1) + ' H270"/>';  // piston + rings
+        g += '<circle class="dg-panel" cx="' + cx + '" cy="' + cy + '" r="48"/><circle class="dg-line" cx="' + cx + '" cy="' + cy + '" r="48" fill="none"/>';
+        g += '<path class="dg-wood" d="M' + P(cx - 5, cy) + ' L' + P(kx - 5, ky) + ' L' + P(kx + 5, ky) + ' L' + P(cx + 5, cy) + ' Z" opacity=".9"/>';
+        g += '<path class="dg-line" style="stroke-width:7" d="M' + P(kx, ky) + ' L' + P(cx, pinY) + '"/><circle class="dg-keyf" cx="' + cx + '" cy="' + pinY.toFixed(1) + '" r="4"/><circle class="dg-keyf" cx="' + kx.toFixed(1) + '" cy="' + ky.toFixed(1) + '" r="4.5"/><circle class="dg-line" cx="' + cx + '" cy="' + cy + '" r="5"/>';
+        g += TX(330, 120, 'piston', 'dg-tb') + TX(330, 200, 'connecting rod', 'dg-ts') + TX(330, 264, 'crankshaft', 'dg-ts') + TX(36, 120, 'cylinder', 'dg-ts') + TX(36, 60, 'spark plug ↘', 'dg-ts');
+        g += TX(222, 316, 'crank ' + Math.round(th % 720) + '° of 720°', 'dg-ts', 'mid');
+        return g;
+      } });
+  }
+
+  // Single-chamber bellows feeding a forge: lift (flap opens, air in), push (flap shuts, air out).
+  function forge(box) {
+    machine(box, { title: 'Bellows and forge, working', sub: 'One bellows blows only on the push. Watch the flap valve and the fire.', vb: '0 0 444 250', label: 'A single-chamber bellows blowing a forge fire', period: 2.6, speed: 0.6,
+      phases: [['Lift', 'Lift: the top board rises, the intake flap swings open and air fills the bellows.', 0], ['Push', 'Push: the flap shuts, air is forced out of the nozzle into the fire and the coals flare.', .5]],
+      draw(f) {
+        const push = f >= .5, k = push ? (f - .5) / .5 : f / .5;
+        const ang = push ? 22 * (1 - k) : 22 * k;           // top board angle about the hinge at the nozzle end
+        const hx = 226, hy = 150, len = 190, rad = ang * Math.PI / 180;
+        const tx = hx - len * Math.cos(rad), ty = hy - 18 - len * Math.sin(rad);
+        const blast = push ? Math.sin(k * Math.PI) : 0;
+        let g = '<rect class="dg-earth" x="0" y="214" width="444" height="36" opacity=".5"/>';
+        g += '<path class="dg-leather" d="M' + P(hx, hy - 18) + ' L' + P(tx, ty) + ' L' + P(hx - len, hy) + ' L' + P(hx, hy) + ' Z" opacity=".55"/>';    // leather sides
+        g += '<path class="dg-wood" d="M' + P(hx - len, hy) + ' L' + P(hx, hy) + ' L' + P(hx, hy + 8) + ' L' + P(hx - len, hy + 8) + ' Z"/>';               // bottom board
+        g += '<path class="dg-wood-s" style="stroke-width:8" d="M' + P(hx, hy - 18) + ' L' + P(tx, ty) + '"/>';                                           // top board
+        const vx = hx - 120 * Math.cos(rad), vy = hy - 18 - 120 * Math.sin(rad);
+        const open = !push && k < .95;
+        g += '<path class="dg-leather" d="M' + P(vx - 8, vy + 2) + ' l' + (open ? '4 12' : '16 0') + '" style="stroke:#c9a15a;stroke-width:3;fill:none"/>' + TX(vx - 30, vy - 14, open ? 'flap open' : 'flap shut', 'dg-ts');
+        if (open) for (let i = 0; i < 3; i++) { const t2 = (f * 6 + i / 3) % 1; g += '<circle class="calc-dotin" cx="' + (vx - 6 + i * 4).toFixed(1) + '" cy="' + (vy - 26 + 26 * t2).toFixed(1) + '" r="2"/>'; }
+        g += '<path class="dg-line" d="M' + hx + ' ' + (hy - 12) + ' H300 V176 H318" style="stroke-width:6"/>';                                         // nozzle + tuyere
+        if (blast > .05) for (let i = 0; i < 4; i++) { const t2 = (f * 8 + i / 4) % 1; const x = hx + 90 * t2; g += '<circle class="calc-dotin" cx="' + Math.min(x, 300).toFixed(1) + '" cy="' + (x < 300 ? hy - 12 : hy - 12 + (x - 300) * 1.4).toFixed(1) + '" r="2.2"/>'; }
+        g += '<path class="dg-panel" d="M308 150 H430 V214 H308 Z"/><path class="dg-line" d="M308 150 H430 V214 H308 Z" fill="none"/>';                  // forge
+        const glow = .35 + .65 * blast;
+        g += '<ellipse class="calc-coal" cx="369" cy="158" rx="54" ry="14" opacity="' + glow.toFixed(2) + '"/>';
+        for (let i = 0; i < 9; i++) g += '<circle class="dg-debris" cx="' + (322 + i * 11) + '" cy="' + (158 + (i % 2) * 4) + '" r="6"/>';
+        g += '<path class="calc-flame" d="M330 150 q10 ' + (-22 - 40 * blast).toFixed(1) + ' 20 0 q10 ' + (-28 - 46 * blast).toFixed(1) + ' 20 0 q10 ' + (-20 - 40 * blast).toFixed(1) + ' 20 0 q10 ' + (-26 - 36 * blast).toFixed(1) + ' 18 0 Z" opacity="' + (.5 + .5 * blast).toFixed(2) + '"/>';
+        if (blast > .4) for (let i = 0; i < 4; i++) { const t2 = (f * 5 + i / 4) % 1; g += '<circle class="calc-spk" cx="' + (340 + i * 18 + 8 * Math.sin(i + f * 20)).toFixed(1) + '" cy="' + (140 - 70 * t2).toFixed(1) + '" r="1.6" opacity="' + (1 - t2).toFixed(2) + '"/>'; }
+        g += TX(36, 200, 'hinged at the nozzle end', 'dg-ts') + TX(318, 236, 'air in through the tuyere', 'dg-ts') + TX(36, 24, push ? 'PUSH' : 'LIFT', 'dg-big');
+        return g;
+      } });
+  }
+
+  // Lift pump: piston with a flap valve, foot valve at the bottom of the cylinder.
+  function handpump(box) {
+    machine(box, { title: 'Hand pump, working', sub: 'A piston and two flap valves. The handle lifts the piston; water comes out on every upstroke.', vb: '0 0 444 300', label: 'A hand piston pump: foot valve and piston valve lifting water', period: 2.4, speed: 0.6,
+      phases: [['Upstroke', 'Upstroke: the piston valve shuts and lifts the water above it out of the spout; the foot valve opens and fresh water follows the piston up.', 0],
+               ['Downstroke', 'Downstroke: the foot valve shuts; the piston valve opens and the piston slides down through the water, ready to lift again.', .5]],
+      draw(f) {
+        const up = f < .5, k = up ? f / .5 : (f - .5) / .5;
+        const py = up ? 190 - 90 * (.5 - .5 * Math.cos(k * Math.PI)) : 100 + 90 * (.5 - .5 * Math.cos(k * Math.PI));   // piston position
+        let g = '<rect class="dg-earth" x="0" y="232" width="444" height="68" opacity=".45"/><rect class="dg-water" x="130" y="262" width="184" height="36" opacity=".55"/>';
+        g += '<rect class="dg-water" x="204" y="200" width="36" height="96" opacity=".6"/>';                               // water in the riser below the foot valve
+        g += '<rect class="dg-water" x="194" y="' + (py + 10).toFixed(1) + '" width="56" height="' + (200 - py - 10).toFixed(1) + '" opacity=".6"/>';      // water following the piston
+        if (py > 130) g += '<rect class="dg-water" x="194" y="128" width="56" height="' + (py - 128).toFixed(1) + '" opacity=".6"/>';   // water above the piston, up to the spout
+        g += '<path class="dg-line" d="M192 40 V200 M252 40 V128 M252 140 V200 M192 200 H204 M240 200 H252 M204 200 V296 M240 200 V296" style="stroke-width:3"/>';
+        g += '<path class="dg-line" d="M252 128 H290 L298 140 M252 140 H286" style="stroke-width:3"/>';                         // spout
+        if (up && k > .1) { g += '<path class="dg-blue-s mc-pour" d="M294 140 Q300 170 302 230" style="stroke-width:' + (2 + 4 * Math.sin(k * Math.PI)).toFixed(1) + '"/>'; }
+        g += '<rect class="dg-water" x="282" y="232" width="40" height="10" rx="3" opacity=".5"/>';
+        const fo = up ? 1 : 0, po = up ? 0 : 1;          // foot valve open on the upstroke, piston valve open on the downstroke
+        g += '<path class="dg-key-s" d="M206 200 ' + (fo ? 'L214 188' : 'L222 200') + ' M238 200 ' + (fo ? 'L230 188' : 'L222 200') + '" style="stroke-width:3"/>';
+        g += '<rect class="dg-key" x="194" y="' + py.toFixed(1) + '" width="56" height="10" rx="2"/>';
+        g += '<path class="dg-panel" d="M216 ' + py.toFixed(1) + ' h12 v10 h-12 z"/><path class="dg-key-s" d="M216 ' + py.toFixed(1) + (po ? ' l6 -8 M228 ' + py.toFixed(1) + ' l-6 -8' : ' l12 0') + '" style="stroke-width:2.5"/>';
+        const rt = py - 70;                                   // the rod moves with the piston
+        g += '<path class="dg-line" d="M222 ' + py.toFixed(1) + ' V' + rt.toFixed(1) + '" style="stroke-width:3"/>';
+        const px0 = 160, py0 = 60, hx = px0 - (222 - px0) * 1.6, hy = py0 - (rt - py0) * 1.6;   // lever about a pivot: handle down, rod up
+        g += '<path class="dg-line" d="M160 60 L150 108 M160 60 L170 108" style="stroke-width:2.5"/>';
+        g += '<path class="dg-wood-s" style="stroke-width:7" d="M' + P(hx, hy) + ' L' + P(222, rt) + '"/><circle class="dg-keyf" cx="160" cy="60" r="4.5"/>';
+        g += TX(20, 74, 'handle', 'dg-tb') + TX(300, 70, 'piston valve', 'dg-ts') + TX(300, 84, (po ? 'open' : 'shut'), 'dg-tb') + TX(300, 200, 'foot valve', 'dg-ts') + TX(300, 214, (fo ? 'open' : 'shut'), 'dg-tb') + TX(136, 290, 'well water', 'dg-ts');
+        return g;
+      } });
+  }
+
+  // Hydraulic ram: drive water speeds up, slams the waste valve, the surge opens the delivery valve.
+  function ram(box) {
+    machine(box, { title: 'Hydraulic ram pump, working', sub: 'Two moving valves, no power. Each beat sends a little water uphill; most runs to waste.', vb: '0 0 444 260', label: 'A hydraulic ram pump: drive pipe, waste valve, delivery valve and air chamber', period: 1.6, speed: 0.4,
+      phases: [['Water speeds up', 'Water rushes down the drive pipe and out through the open waste valve, getting faster.', 0],
+               ['Waste valve slams', 'The flow gets fast enough to slam the waste valve shut. The moving water has to stop suddenly…', .45],
+               ['Surge goes uphill', '…so the pressure jumps, forces the delivery valve open, and pushes water into the air chamber and up the delivery pipe.', .52],
+               ['Reset', 'The surge is spent: the delivery valve drops shut, the waste valve falls open, and it all starts again.', .8]],
+      draw(f) {
+        const speed = f < .45 ? f / .45 : f < .52 ? 1 : f < .8 ? .2 : .1;
+        const waste = f < .45 ? 1 : f < .8 ? 0 : (f - .8) / .2;            // 1 open, 0 shut
+        const deliv = f >= .52 && f < .8 ? Math.sin((f - .52) / .28 * Math.PI) : 0;
+        let g = '<path class="dg-earth" d="M0 60 L120 60 L330 200 L444 200 L444 260 L0 260 Z" opacity=".45"/>';
+        g += '<rect class="dg-water" x="8" y="40" width="96" height="24" opacity=".7"/>' + TX(12, 34, 'stream / source', 'dg-ts');
+        g += '<path class="dg-water" d="M96 58 L276 178 L276 192 L92 68 Z" opacity=".55"/>';     // drive pipe
+        g += '<path class="dg-blue-s mc-flow" d="M98 63 L272 184" style="--fs:' + (speed > .05 ? (1.2 / speed).toFixed(2) : 99) + 's;stroke-dashoffset:' + (-f * 600 * speed).toFixed(1) + '" stroke-dasharray="6 9"/>';
+        g += '<rect class="dg-panel" x="270" y="170" width="70" height="30" rx="4"/><rect class="dg-line" x="270" y="170" width="70" height="30" rx="4" fill="none"/>';
+        g += '<path class="dg-key" d="M282 ' + (164 - 6 * (1 - waste)).toFixed(1) + ' h20 v6 h-20 z"/>' + TX(264, 224, 'waste valve: ' + (waste > .5 ? 'open' : 'SHUT'), waste > .5 ? 'dg-ts' : 'dg-tb', 'end');
+        if (waste > .5 && speed > .2) for (let i = 0; i < 4; i++) { const t2 = (f * 8 + i / 4) % 1; g += '<circle class="calc-dotin" cx="' + (292 + (i - 1.5) * 4).toFixed(1) + '" cy="' + (162 - 26 * t2 * speed).toFixed(1) + '" r="2"/>'; }
+        const lvl = 112 - 26 * (f >= .52 && f < .9 ? Math.sin(Math.min(1, (f - .52) / .3) * Math.PI / 2) : 0);
+        g += '<rect class="dg-line" x="312" y="80" width="26" height="90" rx="10" fill="none"/><rect class="dg-water" x="314" y="' + lvl.toFixed(1) + '" width="22" height="' + (168 - lvl).toFixed(1) + '" opacity=".7"/>' + TX(344, 92, 'air chamber', 'dg-ts') + TX(344, 106, 'air squeezed,', 'dg-ts') + TX(344, 120, 'keeps flow steady', 'dg-ts');
+        g += '<path class="dg-key" d="M316 ' + (172 - 6 * deliv).toFixed(1) + ' h18 v5 h-18 z"/>' + TX(344, 186, 'delivery valve: ' + (deliv > .1 ? 'OPEN' : 'shut'), deliv > .1 ? 'dg-tb' : 'dg-ts');
+        g += '<path class="dg-line" d="M325 80 V40 L430 10" style="stroke-width:5"/><path class="dg-blue-s" d="M325 80 V40 L430 10" stroke-dasharray="4 7" style="stroke-dashoffset:' + (-f * 60).toFixed(1) + ';stroke-width:2"/>';
+        g += TX(436, 50, 'up to the tank', 'dg-ts', 'end') + TX(150, 140, 'drive pipe', 'dg-ts');
+        if (f >= .45 && f < .55) g += '<text class="dg-big dg-mid mc-bang" x="306" y="244">CLACK</text>';
+        return g;
+      } });
+  }
+
+  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram };
   document.querySelectorAll('.calc[data-calc]').forEach(box => {
     const f = KINDS[box.dataset.calc]; if (!f || box.dataset.ready) return;
     box.dataset.ready = '1'; f(box);

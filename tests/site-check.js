@@ -359,6 +359,31 @@ async function browserChecks() {
     if (!r.shown || r.notLaid) fail('knots', `${id}: tie view ${r.shown ? '' : 'not shown, '}${r.notLaid} rope pieces not laid at the end`);
   }
 
+  // Plant or lookalike?: nine cards; answering turns the card and scores it.
+  await desk.goto(BASE_URL + 'sections/climate.html');
+  if (!(await desk.waitForSelector('.calc[data-calc=lookalike] .lk-choice', { timeout: 5000 }).catch(() => null))) fail('game', 'climate.html: lookalike game did not deal a card');
+  else {
+    const n = await desk.$eval('#lk-cards', t => t.content.querySelectorAll('svg').length);
+    if (n !== 9) fail('game', `lookalike game has ${n} cards, expected 9`);
+    const hidden = await desk.$eval('.lk-front svg', s => [...s.querySelectorAll('text')].some(t => +t.getAttribute('y') < 62));
+    if (hidden) fail('game', 'the front of a lookalike card still shows its name or verdict');
+    await desk.click('.lk-choice >> nth=0');
+    if (!(await desk.$('.lk-card.turned'))) fail('game', 'answering did not turn the card');
+  }
+  // Machines run and step through their stages.
+  for (const [pg, kind] of [['vehicles', 'engine'], ['metallurgy', 'forge'], ['build-water', 'handpump'], ['projects', 'ram']]) {
+    await desk.goto(BASE_URL + 'sections/' + pg + '.html');
+    if (!(await desk.waitForSelector(`.calc[data-calc=${kind}] .mc-svg *`, { timeout: 5000 }).catch(() => null))) { fail('machines', `${pg}.html: ${kind} did not draw`); continue; }
+    const a = await desk.$eval(`.calc[data-calc=${kind}] .mc-phases .on`, e => e.textContent);
+    await desk.click(`.calc[data-calc=${kind}] .mc-step`);
+    const b = await desk.$eval(`.calc[data-calc=${kind}] .mc-phases .on`, e => e.textContent);
+    if (a === b) fail('machines', `${kind}: "Next stage" did not move on`);
+  }
+  // Home sky: draws, says the moon phase, and is not treated as an enlargeable diagram.
+  await desk.goto(BASE_URL + 'index.html'); await desk.waitForTimeout(300);
+  const sky = await desk.evaluate(() => ({ svg: !!document.querySelector('.home-sky svg'), note: (document.querySelector('.sky-note') || {}).textContent || '', zoom: !!document.querySelector('.home-sky .dg-zoomable, .hero-dashboard > .dg-enlarge') }));
+  if (!sky.svg || !/moon|lit/.test(sky.note) || sky.zoom) fail('home-sky', `home sky: drawn ${sky.svg}, note "${sky.note}", enlarge ${sky.zoom}`);
+
   // New step players exist and have controls.
   await desk.goto(BASE_URL + 'sections/medical.html'); await desk.waitForTimeout(300);
   for (const id of ['fig-cpr-steps', 'fig-choking-steps', 'fig-splint-steps', 'fig-tourniquet-steps', 'fig-recovery-steps'])
