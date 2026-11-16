@@ -89,6 +89,15 @@ for (const page of sectionPages) {
   if (!/assets\/js\/app\.js/.test(html)) fail('layout', `${page}: doesn't load app.js`);
 }
 
+/* ── 3b. Search metadata (tools/seo.py) on every public page ────── */
+for (const page of htmlPages.filter(p => p !== 'pdfs/index.html')) {
+  const head = read(page).split('</head>')[0];
+  if (!/<meta name="description" content="[^"]{50,}">/.test(head)) fail('seo', `${page}: no meta description (50+ characters)`);
+  if ((head.match(/rel="canonical"/g) || []).length !== 1 || !head.includes('<!-- seo:start'))
+    fail('seo', `${page}: search metadata missing or duplicated — run python3 tools/seo.py`);
+}
+for (const f of ['sitemap.xml', 'llms.txt']) if (!exists(f)) fail('seo', `${f} missing — run python3 tools/seo.py`);
+
 /* ── 4. Emergency cards and urgent search entries point at real sections ── */
 {
   const em = loadScript('assets/js/emergency.js', { LastLight: {} });
@@ -113,7 +122,7 @@ for (const b of books) if (!exists('assets/covers/' + b.file.replace(/\.pdf$/, '
 /* ── 6. Counts on the site match reality ────────────────────────── */
 {
   const truth = { sections: sectionPages.length, books: books.length };
-  const files = [...htmlPages, 'README.md', 'manifest.json', 'build-packages.sh', 'assets/js/bunker-bot.js']
+  const files = [...htmlPages, 'llms.txt', 'README.md', 'manifest.json', 'build-packages.sh', 'assets/js/bunker-bot.js']
     .filter(f => !/changelog|RELEASE-NOTES/i.test(f));                     // history describes past releases
   const rules = [
     { re: /\b(\d+) (?:main |core |guide )?sections\b/g, want: truth.sections, what: 'sections' },

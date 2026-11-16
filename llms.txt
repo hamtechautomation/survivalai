@@ -1,0 +1,71 @@
+# The Last Light Survival Guide
+
+> A free, fully-offline survival and emergency-preparedness library: 30 guide sections (medical and first aid, water, food, shelter, power, fuel, navigation, communications, security, rebuilding), 33 bundled public-domain reference books, printable emergency cards, calculators, offline maps, and a local AI assistant that cites its sources. Runs from a USB stick or a Raspberry Pi with no internet. Licensed CC BY-SA 4.0.
+
+Content is cross-checked against the bundled reference books and cited inline. The medical material has not yet been reviewed by a licensed clinician; in a real emergency with services available, call them first.
+
+## Start here
+
+- [The Last Light Survival Guide — Free Offline Survival Library](https://bunkerbot.co.uk/): The Last Light Survival Guide — a complete, fully-offline survival library. 30 sections, 33 reference books, an AI that cites its sources, and offline maps. Free. Runs off a USB stick, even a Raspberry Pi.
+- [The Last Light Survival Guide — Offline Survival Manual, Maps & AI](https://bunkerbot.co.uk/index.html): Open the full offline survival guide: 30 sections on medical care, water, food, shelter, power, fuel, navigation and rebuilding, emergency cards, calculators, maps and an AI that cites its sources.
+- [Emergency Quick Reference](https://bunkerbot.co.uk/quick-reference.html): Emergency Quick Reference Card — critical survival information on one printable page.
+- [Download & Support](https://bunkerbot.co.uk/download.html): Download The Last Light Survival Guide — a free offline copy you can keep on a USB drive forever. Pick a package, add the offline AI, and support the project if it's useful.
+- [About](https://bunkerbot.co.uk/about.html): About The Last Light Survival Guide — a complete, fully-offline survival library built to keep working when the grid doesn't. Offline-first, zero dependencies, private, and free.
+
+## Guide sections
+
+- [Agriculture](https://bunkerbot.co.uk/sections/agriculture.html): Agriculture & Food Production — soil science, seed saving, irrigation, livestock, beekeeping, aquaponics, and community-scale farming with SVG diagrams.
+- [Animal Husbandry](https://bunkerbot.co.uk/sections/animal.html): Animal Husbandry — raising chickens, goats, and rabbits for eggs, milk, and meat; basic veterinary care; slaughter and butchering.
+- [Power Generation](https://bunkerbot.co.uk/sections/build-power.html): Build your own power generation from scratch: pedal generators, water wheels, wind turbines, biogas digesters, thermoelectric generators, and steam engines.
+- [Building & Structures](https://bunkerbot.co.uk/sections/build-structures.html): Post-collapse building guide: emergency debris huts, cob construction, earthbag domes, timber frame joinery, and layered defensive perimeter design.
+- [Water Systems](https://bunkerbot.co.uk/sections/build-water.html): Complete water systems for long-term survival: rainwater harvesting, tank construction, well digging, gravity distribution, purification, and irrigation.
+- [Chemistry & Materials](https://bunkerbot.co.uk/sections/chemistry.html): Making essentials from raw materials: soap, alcohol, charcoal and activated charcoal, candles and oil lamps, tanned hides, lime mortar, glues — and which chemicals must never be mixed.
+- [Climate & Regional Survival](https://bunkerbot.co.uk/sections/climate.html): Climate & Regional Survival — zone-specific survival strategies, UK wild edibles, foraging calendar, and country-specific hazards.
+- [Communications & Signals](https://bunkerbot.co.uk/sections/communications.html): Communications & Signals — ham radio, Baofeng setup, Morse code, signal fires, Meshtastic/LoRa mesh networks, NOAA weather radio, and dead drops.
+- [Disaster Playbooks](https://bunkerbot.co.uk/sections/disasters.html): Disaster playbooks — specific survival protocols for earthquakes, hurricanes, wildfires, floods, pandemics, grid-down EMP, nuclear events, civil unrest, and chemical spills.
+- [Energy Creation & Management](https://bunkerbot.co.uk/sections/energy.html): Energy Creation & Management — solar power, generators, micro-hydro, wind, wood gasification, batteries, Faraday cages, and fuel storage.
+- [Food, Water & Sanitation](https://bunkerbot.co.uk/sections/food.html): Food, Water & Sanitation — purification, preservation, foraging, hunting, and sanitation without running water.
+- [Making Fuel](https://bunkerbot.co.uk/sections/fuel.html): Making fuel when the pumps are dry: which fuels suit which engines, biodiesel from used cooking oil (with a batch calculator), straight veg oil, fuel ethanol, wood gas, biogas, dry wood and charcoal, and keeping fuel usable.
+- [Community Governance](https://bunkerbot.co.uk/sections/governance.html): Forming and running a community through a long crisis: group roles, vetting strangers, governance models, justice, property, trade, record keeping and printable charter templates.
+- [Knots & Rope](https://bunkerbot.co.uk/sections/knots.html): Six knots that do nine-tenths of the work — bowline, clove hitch, taut-line hitch, sheet bend, trucker's hitch and reef knot — each tied step by step, with what it is for and how it fails.
+- [Knowledge & Preservation](https://bunkerbot.co.uk/sections/knowledge.html): Knowledge & Preservation — preserving books, essential reading list, community libraries, teaching systems, record keeping, digital archiving, and teaching children.
+- [Pregnancy & Infant Care](https://bunkerbot.co.uk/sections/maternal.html): Pregnancy, birth, and infant care without a hospital — prenatal checks, normal labour and delivery, danger signs, postpartum and newborn care, breastfeeding, and infant illness warning signs.
+- [Medical & First Aid](https://bunkerbot.co.uk/sections/medical.html): Medical & First Aid — wound care, fractures, burns, emergency childbirth, herbal medicine, triage, and mental health in survival situations.
+- [Medicine Making](https://bunkerbot.co.uk/sections/medicine-making.html): Emergency herbal medicine: tinctures, salves, improvised antiseptics, ORS formula, pain management, fever treatment, and medicinal plant identification for when pharmaceuticals are unavailable.
+- [Metallurgy](https://bunkerbot.co.uk/sections/metallurgy.html): Metallurgy & Blacksmithing — forge building, heat treating, tool making from scrap, casting aluminum and bronze, and working iron and steel without modern infrastructure.
+- [Navigation & Maps](https://bunkerbot.co.uk/sections/navigation.html): Navigation & Maps — topographic maps, compass use, celestial navigation, natural navigation, map-making, and urban navigation.
+- [NBC Threats](https://bunkerbot.co.uk/sections/nbc.html): Nuclear, biological and chemical threats: fallout shelter, an improvised fallout meter, potassium iodide dosing, radiation sickness, EMP and Faraday cages, disease outbreaks and decontamination.
+- [Practical Projects](https://bunkerbot.co.uk/sections/projects.html): Practical build projects for self-reliance: evaporative cooling/aircon, air filtration, dams & hydro power, pumping water without power, toilets & sanitation, checking for radiation, building a grain mill, breeding herd animals & chickens, and long-term food storage.
+- [Psychology & Morale](https://bunkerbot.co.uk/sections/psychology.html): Mental health in a prolonged crisis: the stress response, tactical breathing, grief, PTSD and peer support, suicide risk, decisions under stress, group morale, children and withdrawal.
+- [Salvage & Rebuild](https://bunkerbot.co.uk/sections/salvage.html): Salvage, rebuild and fuel-making — where to find parts when there are no shops, how to strip machines safely, maintain and rebuild generators, salvage and rebuild batteries, and where to find the fuel-making guide.
+- [First Principles](https://bunkerbot.co.uk/sections/science.html): First principles for rebuilding: the periodic table, core physics and chemistry, the equations that actually matter in the field, and a method for inventing your own tools and systems from scratch.
+- [Security & Defense](https://bunkerbot.co.uk/sections/security.html): Security & Defense — community organization, perimeter security, de-escalation, firearms, non-lethal defense, OPSEC, fortification, and bug-out decisions.
+- [Shelter & Construction](https://bunkerbot.co.uk/sections/shelter.html): Shelter & Construction — site selection, emergency shelters, timber framing, earthbag, cob building, passive solar, insulation, and tools.
+- [Textiles & Clothing](https://bunkerbot.co.uk/sections/textiles.html): Clothing without factories: fibre sources, spinning, weaving, knitting, sewing, leatherwork, boot making, repairs and layering for warmth — from raw material to finished garment.
+- [Vehicles & Transport](https://bunkerbot.co.uk/sections/vehicles.html): Vehicles & Transport — transport hierarchy, bicycle maintenance, engine basics, alternative fuels (wood gas, biodiesel, ethanol), animal transport, and watercraft construction.
+- [Veterinary Care](https://bunkerbot.co.uk/sections/veterinary.html): Keeping livestock healthy without a vet — vital signs, recognising sickness, common diseases by species, parasites, wounds and hoof care, birthing complications, biosecurity, and humane culling.
+
+## Reference and tools
+
+- [Calculators & Tools](https://bunkerbot.co.uk/tools.html): Offline survival calculators: food and water needs for a group, off-grid power sizing, supply tracker, planting calendar, stay-or-go decision, radio frequencies, antibiotic dosing and firewood estimates.
+- [Emergency Cards](https://bunkerbot.co.uk/cards.html): Printable wallet-size emergency cards — CPR, bleeding control, water purification, signals and key numbers. Print on cardstock, cut out, laminate and keep in a wallet or go-bag.
+- [Master Gear List](https://bunkerbot.co.uk/gear.html): Master Gear List — every item in The Last Light Survival Guide organized by category, priority tier, and preparedness progress.
+- [Practical Skills](https://bunkerbot.co.uk/skills.html): Practical Skills — interactive step-by-step visual guides for every critical survival skill. Fire, knots, navigation, first aid, hunting, plants, construction.
+- [Reference Library](https://bunkerbot.co.uk/literature.html): The reference library: 33 public-domain survival, medical and engineering books bundled as searchable PDFs, plus 60 curated titles worth owning, with acquisition tracking.
+- [Offline Maps](https://bunkerbot.co.uk/maps.html): Offline interactive map — renders OpenStreetMap vector data (PMTiles) right in your browser with no internet and no map server. Prototype region: Northern England & Yorkshire.
+- [Expansion Library](https://bunkerbot.co.uk/expansion.html): Expand the guide with the entire offline knowledge of humanity — all of Wikipedia, all of Project Gutenberg, medical encyclopedias, repair guides and more, via Kiwix ZIM files. Download once, read forever offline.
+- [Print the Essentials](https://bunkerbot.co.uk/print-essentials.html): Every emergency step card on a few printable sheets — bleeding, CPR, choking, burns and more. Print, cut out and keep in your first-aid kit.
+- [Master Index (Printable)](https://bunkerbot.co.uk/index-print.html): Printable master index of The Last Light Survival Guide — every section, tool, and bundled reference book, so the whole archive is navigable on paper.
+
+## Offline AI (Bunker Bot)
+
+- [Bunker Bot AI Setup](https://bunkerbot.co.uk/ai-setup.html): Bunker Bot AI Setup — how to install Ollama, pull models, and run the offline AI assistant with The Last Light Survival Guide.
+- [Bunker Bot System Prompt](https://bunkerbot.co.uk/bunker-bot-prompt.html): Bunker Bot System Prompt — copy Bunker Bot's instructions into ChatGPT, Claude.ai, or any other AI tool.
+
+## Optional
+
+- [Changelog](https://bunkerbot.co.uk/changelog.html): Changelog — version history and update notes for The Last Light Survival Guide.
+
+## Source
+
+- [GitHub repository](https://github.com/hamtechautomation/survivalai): source, issue tracker for corrections, releases

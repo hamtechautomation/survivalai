@@ -36,6 +36,9 @@ if [ -z "$BUCKET" ]; then
 fi
 command -v aws >/dev/null 2>&1 || { echo "AWS CLI not found — install it and run 'aws configure'."; exit 2; }
 
+echo "0/3  Refreshing search metadata, sitemap.xml and llms.txt…"
+python3 tools/seo.py
+
 EXCLUDES="--exclude .git/* --exclude .claude/* --exclude node_modules/* \
   --exclude .DS_Store --exclude */.DS_Store --exclude .gitignore \
   --exclude .env* --exclude *.sh --exclude *.md --exclude docs/* \

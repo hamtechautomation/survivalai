@@ -4,6 +4,8 @@
 Every rope drawing comes from knots.py through rope.py, which refuses to draw a knot
 whose crossings do not check out. Text and drawings are generated together so the
 numbered steps always match the frames.
+
+Afterwards run  python3 tools/seo.py  to put the search metadata back.
 """
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
