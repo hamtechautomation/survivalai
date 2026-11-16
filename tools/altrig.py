@@ -17,7 +17,7 @@ a('<rect class="dg-panel" x="22" y="84" width="128" height="130" rx="8"/>')
 for i in range(7): a('<line class="dg-thin" x1="30" y1="%d" x2="58" y2="%d"/>' % (96 + i * 8, 96 + i * 8))
 a('<rect class="dg-panel" x="40" y="58" width="44" height="26" rx="4"/>'); T(62, 75, 'fuel', 'dg-ts', 'mid')
 T(86, 206, 'small engine', 'dg-tb dg-tb-sm', 'mid')
-T(86, 248, 'mower or tiller, 2 hp+, ~3,000 RPM', 'dg-ts', 'mid')
+T(96, 248, 'mower/tiller, 2 hp+, ~3,000 RPM', 'dg-ts', 'mid')
 # pulleys and belt
 X1, X2, Y, R1, R2 = 108, 300, 146, 40, 15
 al = math.asin((R1 - R2) / (X2 - X1))
