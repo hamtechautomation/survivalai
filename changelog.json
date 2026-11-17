@@ -1,7 +1,24 @@
 {
-  "version": "1.1.0",
-  "lastUpdated": "2026-07-04",
+  "version": "1.2.0",
+  "lastUpdated": "2026-11-17",
   "sections": [
+    {
+      "version": "1.2.0",
+      "date": "2026-11-17",
+      "title": "Diagrams, accuracy & phone-first",
+      "changes": [
+        "New sections: Knots & Rope (six self-tying knots) and Making Fuel (with a biodiesel calculator)",
+        "Medical: CPR with a beat guide, poisoning, head injury; animated first-aid steps",
+        "Accuracy sweep of every section (about 150 corrections, safety-critical pages first)",
+        "A fact-checked diagram for every section; step players, sun clock, Morse trainer, moon dial, seasons wheel, constellation finder",
+        "Emergency mode and emergency-first search",
+        "Install on your phone button at the foot of the menu; real offline-saved status",
+        "New look: self-hosted fonts, line icons, book covers, daylight and true-red night modes",
+        "Navigation: collapsible groups, quick-access row, On this page, search palette",
+        "Accessibility and phone layout fixes; SEO metadata, llms.txt and a 404 page",
+        "Animated landing page restored as the front door"
+      ]
+    },
     {
       "version": "1.1.0",
       "date": "2026-07-04",

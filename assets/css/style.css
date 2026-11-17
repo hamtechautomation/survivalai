@@ -2115,6 +2115,26 @@ body.mode-hc .shelf-book-title { font-size: 0.75rem; }
 .sidebar-minor a:hover { color: var(--amber); }
 .sidebar-minor svg { width: 13px; height: 13px; }
 
+/* Install on your phone — the nav's last call to action */
+.sidebar-install {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--amber-dim);
+  border-radius: 10px;
+  background: var(--bg-2);
+  color: var(--text-1);
+  text-decoration: none;
+  transition: border-color .15s, background .15s;
+}
+.sidebar-install:hover,
+.sidebar-install:focus-visible { border-color: var(--amber); color: var(--text-0); }
+.sidebar-install svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--amber); }
+.si-text { display: flex; flex-direction: column; line-height: 1.2; }
+.si-text strong { font-size: var(--fs-sm); font-weight: 700; }
+.si-text small { font-size: var(--fs-2xs); color: var(--text-3); }
+
 /* =============================================
    DISPLAY CONTROL (header button + panel)
    ============================================= */

@@ -44,6 +44,7 @@
     cloud:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 17.5a4 4 0 00-1.3-7.78A6 6 0 005 9.5a4.5 4.5 0 00.5 8h11"/><path d="M12 12v6m0 0l-2.5-2.5M12 18l2.5-2.5"/></svg>`,
     projects: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l5-5"/><path d="M14.5 5.5l4 4M12.8 7.2l4 4-7.3 7.3a1.5 1.5 0 01-.7.4l-3.3.8.8-3.3a1.5 1.5 0 01.4-.7z"/><path d="M14.5 5.5l1.8-1.8a2 2 0 012.8 0l1.2 1.2a2 2 0 010 2.8L18.5 9.5z"/></svg>`,
     download: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
+    phone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="11" y1="18" x2="13" y2="18"/></svg>`,
     atom:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/></svg>`,
     // UI
     print:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M9 18v4h6v-4H9z"/></svg>`,
@@ -1636,8 +1637,17 @@
     /* Footer: one compact block. The Emergency Card lives in the quick row
        above and the Gear Checklist in Tools & Library, so the list gets the
        height back on phones. */
+    /* "Install on your phone" sits at the foot of the nav so it's always one
+       tap away. Uses the browser's own install prompt when it offers one;
+       otherwise (iPhone, Firefox…) it opens the step-by-step for this device.
+       Hidden once running as the installed app. */
+    const pf = detectPlatform();
+    const installHTML = pf.standalone ? '' : `
+        <a href="${base}download.html#install-phone" class="sidebar-install" id="sidebar-install">
+          ${ICONS.phone}<span class="si-text"><strong>Install on your phone</strong><small>Works with no signal</small></span>
+        </a>`;
     const footerHTML = `
-      <div class="sidebar-footer">
+      <div class="sidebar-footer">${installHTML}
         <div class="sidebar-minor">
           <a href="${base}ai-setup.html">${ICONS.robot} Bunker Bot setup</a>
           <a href="${base}about.html">${ICONS.info} About</a>
@@ -1662,6 +1672,18 @@
         try { localStorage.setItem('nav-groups', JSON.stringify(st)); } catch (e) {}
       });
     });
+    const installBtn = sidebar.querySelector('#sidebar-install');
+    if (installBtn) {
+      installBtn.addEventListener('click', e => {
+        // Follow the link to the guide unless this phone's browser can install directly.
+        if (pf.os === 'desktop' || !window.LastLight.canPrompt()) return;
+        e.preventDefault();
+        window.LastLight.promptInstall();
+      });
+      document.addEventListener('ll-installable', () => {
+        if (installState.installed) installBtn.remove();
+      });
+    }
     // "Bunker Bot" quick tile opens the panel when this page has one.
     const botTile = sidebar.querySelector('.quick-bot');
     const botToggle = document.getElementById('aria-toggle');
