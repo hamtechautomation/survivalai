@@ -42,7 +42,9 @@ python3 tools/seo.py
 EXCLUDES="--exclude .git/* --exclude .claude/* --exclude node_modules/* \
   --exclude .DS_Store --exclude */.DS_Store --exclude .gitignore \
   --exclude .env* --exclude *.sh --exclude *.md --exclude docs/* \
-  --exclude infra/* --exclude marketing/* --exclude LICENSE* --exclude pmtiles"
+  --exclude infra/* --exclude marketing/* --exclude LICENSE* --exclude pmtiles \
+  --exclude .github/* --exclude tests/* --exclude tools/* \
+  --exclude __pycache__/* --exclude */__pycache__/*"
 
 echo "1/3  Syncing site to s3://$BUCKET (1-year cache)…"
 # Long cache on everything — filenames are stable and you update rarely.

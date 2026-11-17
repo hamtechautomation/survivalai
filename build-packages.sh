@@ -4,8 +4,8 @@
 #   sh build-packages.sh
 #
 # Produces, in downloads/ (gitignored, uploaded by deploy-s3.sh):
-#   last-light-survival-guide-lite.zip      ~2 MB    — the app only (no PDFs/maps/AI index)
-#   last-light-survival-guide-standard.zip  ~580 MB  — app + 33 PDFs + AI index + a regional map
+#   last-light-survival-guide-lite.zip      ~2.5 MB  — the app only (no PDFs/maps/AI index)
+#   last-light-survival-guide-standard.zip  ~590 MB  — app + 33 PDFs + AI index + a regional map
 #
 # Both extract to a folder named last-light-survival-guide/.
 
@@ -26,7 +26,8 @@ rsync -a \
   --exclude '.DS_Store' --exclude '.env*' --exclude 'downloads' \
   --exclude 'dist' --exclude 'pmtiles' --exclude '*.zip' \
   --exclude 'marketing' --exclude 'home.html' --exclude 'docs' \
-  --exclude 'TESTING.md' \
+  --exclude 'TESTING.md' --exclude '.github' --exclude '.gitignore' \
+  --exclude '/tests' --exclude '/tools' --exclude '__pycache__' \
   ./ "$STAGE"/
 
 # Regenerate MANIFEST.sha256 for exactly the files in a stage, so `sh verify.sh`
