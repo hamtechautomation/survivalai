@@ -543,8 +543,8 @@ hosting is just an upload.
 2. **Create a CloudFront distribution** with that bucket as the origin:
    - Origin access: **Origin Access Control (OAC)**, and let it update the bucket
      policy so only CloudFront can read.
-   - **Default root object:** `home.html` (the landing page; search metadata
-     treats it as `/`, and the guide itself as `/index.html`)
+   - **Default root object:** `index.html` (the guide's home page; search metadata
+     treats it as `/` — set by `ROOT_PAGE` in `tools/seo.py`, keep the two in step)
    - **Viewer protocol policy:** Redirect HTTP → HTTPS
    - (Optional) attach your domain + an ACM certificate (in `us-east-1`).
    - **Custom error responses:** 403 and 404 → `/404.html`, response code **404**.

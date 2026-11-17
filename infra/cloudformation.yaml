@@ -76,7 +76,7 @@ Resources:
       DistributionConfig:
         Enabled: true
         Comment: The Last Light Survival Guide
-        DefaultRootObject: home.html
+        DefaultRootObject: index.html
         # A missing file comes back from S3 as 403 (the bucket is private). Serve
         # the 404 page with a real 404 status instead, so search engines drop
         # dead URLs rather than logging them as access errors.

@@ -3482,19 +3482,18 @@ body.mode-day .lk-face svg { filter: invert(1) hue-rotate(180deg); }
 .mc-bang { fill: #ff8a8a; }
 @media print { .calc-coal { filter: none; } }
 
-/* Living home sky (app.js setupHomeSky). */
-.hero-dashboard.has-sky { position: relative; isolation: isolate; overflow: hidden; border-radius: 0 0 18px 18px; margin-top: -1rem; padding-top: calc(var(--sp-2xl, 2.5rem) + 1rem); }
+/* Living sky panel on Navigation (app.js setupHomeSky). */
+.sky-panel { position: relative; isolation: isolate; overflow: hidden; min-height: 190px; margin: var(--sp-md, 1rem) 0 var(--sp-lg, 1.5rem); padding: var(--sp-md, 1rem) var(--sp-lg, 1.25rem); display: flex; flex-direction: column; justify-content: flex-start; border: 1px solid var(--border); border-radius: 14px; }
 .home-sky { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
 .home-sky svg { width: 100%; height: 100%; display: block; }
-.home-sky::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5, 8, 15, .15) 0%, rgba(5, 8, 15, .35) 55%, var(--bg-0) 100%); }
+.home-sky::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5, 8, 15, .45) 0%, rgba(5, 8, 15, 0) 45%); }
 .hs-star { fill: #f5f1e0; animation: hs-tw 5s ease-in-out var(--dl, 0s) infinite; }
 @keyframes hs-tw { 0%, 100% { opacity: .9; } 50% { opacity: .25; } }
 .hs-glow { transform-box: fill-box; transform-origin: center; animation: hs-flick 2.6s ease-in-out infinite; }
 @keyframes hs-flick { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.06); } 55% { transform: scale(.96); } 80% { transform: scale(1.03); } }
-.has-sky h1, .has-sky .hero-subtitle { text-shadow: 0 2px 14px rgba(0, 0, 0, .6); }
-.sky-note { margin: 0 auto var(--sp-sm, .6rem); font: 600 .8rem var(--font); letter-spacing: .02em; color: var(--text-2); }
+.sky-note { margin: 0; font: 600 .85rem var(--font); letter-spacing: .02em; color: #e8e2cc; text-shadow: 0 1px 8px rgba(0, 0, 0, .7); }
 @media (prefers-reduced-motion: reduce) { .hs-star, .hs-glow { animation: none; } }
-@media print { .home-sky, .sky-note { display: none !important; } }
+@media print { .sky-panel { display: none !important; } }
 /* Weather fronts and fire lays (calc.js fronts, firelay). */
 .wf-cl { fill: #dfe5ee; } .wf-cl.wf-hi { fill: #f0f3f7; } .wf-cl.wf-dark { fill: #6b7380; }
 .wf-rain { stroke: #9cc4ee; stroke-width: 1.4; stroke-linecap: round; opacity: .8; }

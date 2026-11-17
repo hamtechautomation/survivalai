@@ -455,10 +455,15 @@ async function browserChecks() {
     const b = await desk.$eval(`.calc[data-calc=${kind}] .mc-phases .on`, e => e.textContent);
     if (a === b) fail('machines', `${kind}: "Next stage" did not move on`);
   }
-  // Home sky: draws, says the moon phase, and is not treated as an enlargeable diagram.
+  // Living sky (Navigation): draws, says the moon phase, and is not treated as an enlargeable diagram.
+  await desk.goto(BASE_URL + 'sections/navigation.html'); await desk.waitForTimeout(300);
+  const sky = await desk.evaluate(() => ({ svg: !!document.querySelector('.sky-panel .home-sky svg'), note: (document.querySelector('.sky-panel .sky-note') || {}).textContent || '', zoom: !!document.querySelector('.home-sky .dg-zoomable, .sky-panel > .dg-enlarge') }));
+  if (!sky.svg || !/moon|lit/.test(sky.note) || sky.zoom) fail('home-sky', `navigation sky: drawn ${sky.svg}, note "${sky.note}", enlarge ${sky.zoom}`);
+
+  // Home bunker scene: animating, and not treated as an enlargeable diagram.
   await desk.goto(BASE_URL + 'index.html'); await desk.waitForTimeout(300);
-  const sky = await desk.evaluate(() => ({ svg: !!document.querySelector('.home-sky svg'), note: (document.querySelector('.sky-note') || {}).textContent || '', zoom: !!document.querySelector('.home-sky .dg-zoomable, .hero-dashboard > .dg-enlarge') }));
-  if (!sky.svg || !/moon|lit/.test(sky.note) || sky.zoom) fail('home-sky', `home sky: drawn ${sky.svg}, note "${sky.note}", enlarge ${sky.zoom}`);
+  const hero = await desk.evaluate(() => ({ svg: !!document.querySelector('.hero-scene svg.scene'), running: document.getAnimations().filter(a => a.effect && a.effect.target && a.effect.target.closest && a.effect.target.closest('.hero-scene')).length, zoom: !!document.querySelector('.hero-scene .dg-zoomable, .hero-scene .dg-enlarge') }));
+  if (!hero.svg || !hero.running || hero.zoom) fail('home-scene', `home scene: drawn ${hero.svg}, ${hero.running} animations, enlarge ${hero.zoom}`);
 
   // New step players exist and have controls.
   await desk.goto(BASE_URL + 'sections/medical.html'); await desk.waitForTimeout(300);

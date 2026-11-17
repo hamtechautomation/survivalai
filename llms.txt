@@ -6,8 +6,8 @@ Content is cross-checked against the bundled reference books and cited inline. T
 
 ## Start here
 
-- [The Last Light Survival Guide — Free Offline Survival Library](https://bunkerbot.co.uk/): The Last Light Survival Guide — a complete, fully-offline survival library. 30 sections, 33 reference books, an AI that cites its sources, and offline maps. Free. Runs off a USB stick, even a Raspberry Pi.
-- [The Last Light Survival Guide — Offline Survival Manual, Maps & AI](https://bunkerbot.co.uk/index.html): Open the full offline survival guide: 30 sections on medical care, water, food, shelter, power, fuel, navigation and rebuilding, emergency cards, calculators, maps and an AI that cites its sources.
+- [The Last Light Survival Guide — Offline Survival Manual, Maps & AI](https://bunkerbot.co.uk/): Open the full offline survival guide: 30 sections on medical care, water, food, shelter, power, fuel, navigation and rebuilding, emergency cards, calculators, maps and an AI that cites its sources.
+- [The Last Light Survival Guide — Free Offline Survival Library](https://bunkerbot.co.uk/home.html): The Last Light Survival Guide — a complete, fully-offline survival library. 30 sections, 33 reference books, an AI that cites its sources, and offline maps. Free. Runs off a USB stick, even a Raspberry Pi.
 - [Emergency Quick Reference](https://bunkerbot.co.uk/quick-reference.html): Emergency Quick Reference Card — critical survival information on one printable page.
 - [Download & Support](https://bunkerbot.co.uk/download.html): Download The Last Light Survival Guide — a free offline copy you can keep on a USB drive forever. Pick a package, add the offline AI, and support the project if it's useful.
 - [About](https://bunkerbot.co.uk/about.html): About The Last Light Survival Guide — a complete, fully-offline survival library built to keep working when the grid doesn't. Offline-first, zero dependencies, private, and free.

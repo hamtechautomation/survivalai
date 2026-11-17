@@ -748,8 +748,8 @@
       `<circle class="bat bm bm-ripple" style="${O(0, 0)};--t:3s" r="20"/>`
   };
 
-  /* =================== LIVING HOME SKY ===================
-     Behind the home page title: a sky that follows this device's clock (night, dawn,
+  /* =================== LIVING SKY ===================
+     On Navigation (.sky-panel): a sky that follows this device's clock (night, dawn,
      day, dusk), twinkling stars, the sun crossing by day, tonight's real moon phase
      (worked out offline from the date), and a hillside shelter whose lantern glows
      brighter after dark. Refreshes every minute. Still for reduced motion. */
@@ -761,11 +761,11 @@
     return { age, lit, P, name };
   }
   function setupHomeSky() {
-    const hero = document.querySelector('.hero-dashboard'); if (!hero || hero.querySelector('.home-sky')) return;
+    const panel = document.querySelector('.sky-panel'); if (!panel || panel.querySelector('.home-sky')) return;
     const sky = document.createElement('div'); sky.className = 'home-sky no-flip'; sky.setAttribute('aria-hidden', 'true');
-    hero.classList.add('has-sky'); hero.insertBefore(sky, hero.firstChild);
+    panel.insertBefore(sky, panel.firstChild);
     const note = document.createElement('p'); note.className = 'sky-note';
-    const sub = hero.querySelector('.hero-subtitle'); if (sub) sub.after(note);
+    panel.appendChild(note);
     let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
     const stars = Array.from({ length: 70 }, () => [rnd() * 800, rnd() * 190, .4 + rnd() * 1.1, rnd() * 6]);
     const KEYS = [[0, '#05080f', '#0a1324'], [4.5, '#05080f', '#0b1426'], [6, '#141a36', '#7a4a5a'], [7.3, '#1f3150', '#b8735a'], [9, '#1c3756', '#3d6c92'], [16, '#1c3756', '#3d6c92'],
@@ -920,7 +920,7 @@
         Off for "reduce motion" and when printing.
      3. Parts tagged data-hl="key" light up together with their label when
         you hover, tap or focus either one. */
-  const DG_SKIP = 'h1, h2, h3, a, button, .kn-tie, .home-sky, .sec-art, .sos, .palette, .otp-bar, .dg-lb, [class*="icon"], .hero-stat';
+  const DG_SKIP = 'h1, h2, h3, a, button, .kn-tie, .home-sky, .hero-scene, .sec-art, .sos, .palette, .otp-bar, .dg-lb, [class*="icon"], .hero-stat';
   function isDiagram(svg) {
     if (svg.closest(DG_SKIP)) return false;
     const vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
@@ -1580,7 +1580,7 @@
     //  to avoid a dead link.)
     const onLive = /(^|\.)bunkerbot\.co\.uk$/.test(location.hostname);
     const homeLinkHTML = onLive
-      ? `<a href="/" class="sidebar-toplink" title="Back to the front page"
+      ? `<a href="/home.html" class="sidebar-toplink" title="Back to the front page"
            style="display:flex;align-items:center;gap:.4rem;padding:.45rem .9rem;font-size:.76rem;color:var(--text-3);text-decoration:none;border-bottom:1px solid var(--border);transition:color .15s"
            onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--text-3)'">← Home</a>`
       : '';

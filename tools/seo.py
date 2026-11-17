@@ -32,8 +32,11 @@ IMAGE = SITE + '/assets/og-image.png'
 REPO = 'https://github.com/hamtechautomation/survivalai'
 LICENSE = 'https://creativecommons.org/licenses/by-sa/4.0/'
 
+# The page CloudFront serves at / (its default root object — keep the two in step).
+ROOT_PAGE = 'index.html'
+
 # Pages served at a URL other than their file path.
-URL_FOR = {'home.html': '/'}
+URL_FOR = {ROOT_PAGE: '/'}
 
 # Kept out of search results and the sitemap.
 NOINDEX = {'offline.html', '404.html'}
@@ -103,9 +106,9 @@ def block(page, title, desc, date):
          'logo': SITE + '/assets/icons/apple-touch-icon.png', 'sameAs': [REPO]},
     ]
     trail = [('Home', SITE + '/')]
-    if page != 'home.html':
-        if section:
-            trail.append(('Guide', SITE + '/index.html'))
+    if page != ROOT_PAGE:
+        if section and ROOT_PAGE != 'index.html':
+            trail.append(('Guide', url_of('index.html')))
         trail.append((short, url))
     crumbs = {'@type': 'BreadcrumbList', '@id': url + '#breadcrumb', 'itemListElement': [
         {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': u} for i, (n, u) in enumerate(trail)]}
@@ -206,11 +209,11 @@ def process(page):
 
 def sitemap(all_pages):
     rows = []
-    order = ['home.html', 'index.html'] + [p for p in all_pages if p not in ('home.html', 'index.html')]
+    order = [ROOT_PAGE] + [p for p in all_pages if p != ROOT_PAGE]
     for p in order:
         if p in NOINDEX or p not in all_pages:
             continue
-        pri = '1.0' if p == 'home.html' else '0.9' if p == 'index.html' or p.startswith('sections/') else '0.7'
+        pri = '1.0' if p == ROOT_PAGE else '0.9' if p == 'index.html' or p.startswith('sections/') else '0.7'
         date = git_date(p)
         rows.append('  <url>\n    <loc>%s</loc>\n%s    <priority>%s</priority>\n  </url>' % (
             url_of(p), f'    <lastmod>{date}</lastmod>\n' if date else '', pri))
@@ -228,7 +231,7 @@ def page_info(page):
 
 
 LLMS_GROUPS = [
-    ('Start here', ['home.html', 'index.html', 'quick-reference.html', 'download.html', 'about.html']),
+    ('Start here', ['index.html', 'home.html', 'quick-reference.html', 'download.html', 'about.html']),
     ('Guide sections', None),  # every page in sections/
     ('Reference and tools', ['tools.html', 'cards.html', 'gear.html', 'skills.html', 'literature.html',
                              'maps.html', 'expansion.html', 'print-essentials.html', 'index-print.html']),
