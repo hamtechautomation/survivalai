@@ -3,53 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="The Last Light Survival Guide — comprehensive offline emergency preparedness reference. No internet required.">
+  <meta name="description" content="Open the full offline survival guide: 30 sections on medical care, water, food, shelter, power, fuel, navigation and rebuilding, emergency cards, calculators, maps and an AI that cites its sources.">
   <meta name="theme-color" content="#070a09">
-  <link rel="canonical" href="https://bunkerbot.co.uk/">
-  <meta property="og:title" content="The Last Light Survival Guide">
-  <meta property="og:description" content="A complete, fully-offline survival library — 28 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://bunkerbot.co.uk/">
-  <meta property="og:site_name" content="The Last Light Survival Guide">
-  <meta property="og:image" content="https://bunkerbot.co.uk/assets/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="The Last Light Survival Guide — a complete, fully-offline survival library.">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The Last Light Survival Guide">
-  <meta name="twitter:description" content="A complete, fully-offline survival library — 28 sections, 33 reference books, an AI that cites them, and offline maps. Free.">
-  <meta name="twitter:image" content="https://bunkerbot.co.uk/assets/og-image.png">
-  <title>The Last Light Survival Guide</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+  <title>The Last Light Survival Guide — Offline Survival Manual, Maps &amp; AI</title>
+  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://bunkerbot.co.uk/#website",
-        "url": "https://bunkerbot.co.uk/",
-        "name": "The Last Light Survival Guide",
-        "description": "A complete, fully-offline survival reference and library.",
-        "inLanguage": "en",
-        "license": "https://creativecommons.org/licenses/by-sa/4.0/"
-      },
-      {
-        "@type": "SoftwareApplication",
-        "name": "The Last Light Survival Guide",
-        "applicationCategory": "ReferenceApplication",
-        "operatingSystem": "Any (web browser, offline-capable)",
-        "url": "https://bunkerbot.co.uk/",
-        "downloadUrl": "https://bunkerbot.co.uk/download.html",
-        "description": "A complete, fully-offline survival library — 28 sections, 33 reference books, an offline AI assistant that cites its sources, and offline maps. Works with no internet, on anything down to a Raspberry Pi.",
-        "image": "https://bunkerbot.co.uk/assets/og-image.png",
-        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" }
-      }
-    ]
-  }
-  </script>
   <style>
     /* Index-specific overrides */
     .main-content { margin-left: var(--sidebar-w); }
@@ -182,9 +141,9 @@
       line-height: 1.1;
       margin-bottom: 4px;
     }
-    .rc-value.rc-val-green { color: #4b9e6a; }
-    .rc-value.rc-val-amber { color: #c9a94e; }
-    .rc-value.rc-val-red   { color: #c84848; }
+    .rc-value.rc-val-green { color: var(--green); }
+    .rc-value.rc-val-amber { color: var(--amber); }
+    .rc-value.rc-val-red   { color: var(--red); }
     .rc-value.rc-val-gray  { color: var(--text-3); font-size: var(--fs-md); font-weight: 500; }
     .rc-sub {
       font-size: var(--fs-sm);
@@ -261,7 +220,7 @@
     }
     .qa-link {
       font-size: var(--fs-sm);
-      color: #c9a94e;
+      color: var(--amber);
       text-decoration: none;
       font-weight: 600;
       transition: color var(--ease);
@@ -270,7 +229,7 @@
     .qa-btn {
       display: inline-block;
       font-size: var(--fs-sm);
-      color: #c9a94e;
+      color: var(--amber);
       background: rgba(201,169,78,0.1);
       border: 1px solid var(--amber-dim);
       border-radius: 6px;
@@ -317,7 +276,7 @@
       border-color: var(--amber-dim);
     }
     .sg-card.start-here:hover {
-      border-color: #c9a94e;
+      border-color: var(--amber);
     }
     .sg-card.start-here::after {
       content: 'START HERE';
@@ -326,7 +285,7 @@
       font-size: 0.58rem;
       font-weight: 800;
       letter-spacing: 0.1em;
-      color: #c9a94e;
+      color: var(--amber);
       background: rgba(201,169,78,0.1);
       border: 1px solid var(--amber-dim);
       border-radius: 4px;
@@ -353,7 +312,7 @@
       align-self: center;
       transition: color var(--ease);
     }
-    .sg-card:hover .sg-arrow { color: #c9a94e; }
+    .sg-card:hover .sg-arrow { color: var(--amber); }
 
     /* === TOOLS ROW === */
     .tools-row {
@@ -477,6 +436,25 @@
       background: var(--border);
     }
   </style>
+<!-- seo:start — generated by tools/seo.py; edit that, not this -->
+<link rel="canonical" href="https://bunkerbot.co.uk/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Last Light Survival Guide">
+<meta property="og:title" content="The Last Light Survival Guide — Offline Survival Manual, Maps &amp; AI">
+<meta property="og:description" content="Open the full offline survival guide: 30 sections on medical care, water, food, shelter, power, fuel, navigation and rebuilding, emergency cards, calculators, maps and an AI that cites its sources.">
+<meta property="og:url" content="https://bunkerbot.co.uk/index.html">
+<meta property="og:image" content="https://bunkerbot.co.uk/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Last Light Survival Guide — a complete, fully-offline survival library.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Last Light Survival Guide — Offline Survival Manual, Maps &amp; AI">
+<meta name="twitter:description" content="Open the full offline survival guide: 30 sections on medical care, water, food, shelter, power, fuel, navigation and rebuilding, emergency cards, calculators, maps and an AI that cites its sources.">
+<meta name="twitter:image" content="https://bunkerbot.co.uk/assets/og-image.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://bunkerbot.co.uk/#website","url":"https://bunkerbot.co.uk/","name":"The Last Light Survival Guide","description":"A complete, fully-offline survival reference and library.","inLanguage":"en","license":"https://creativecommons.org/licenses/by-sa/4.0/","publisher":{"@id":"https://bunkerbot.co.uk/#org"}},{"@type":"Organization","@id":"https://bunkerbot.co.uk/#org","name":"The Last Light Survival Guide","url":"https://bunkerbot.co.uk/","logo":"https://bunkerbot.co.uk/assets/icons/apple-touch-icon.png","sameAs":["https://github.com/hamtechautomation/survivalai"]},{"@type":"WebPage","@id":"https://bunkerbot.co.uk/index.html#page","url":"https://bunkerbot.co.uk/index.html","name":"The Last Light Survival Guide — Offline Survival Manual, Maps & AI","description":"Open the full offline survival guide: 30 sections on medical care, water, food, shelter, power, fuel, navigation and rebuilding, emergency cards, calculators, maps and an AI that cites its sources.","inLanguage":"en","image":"https://bunkerbot.co.uk/assets/og-image.png","isPartOf":{"@id":"https://bunkerbot.co.uk/#website"},"breadcrumb":{"@id":"https://bunkerbot.co.uk/index.html#breadcrumb"},"license":"https://creativecommons.org/licenses/by-sa/4.0/","dateModified":"2026-11-15"},{"@type":"BreadcrumbList","@id":"https://bunkerbot.co.uk/index.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://bunkerbot.co.uk/"},{"@type":"ListItem","position":2,"name":"The Last Light Survival Guide — Offline Survival Manual, Maps & AI","item":"https://bunkerbot.co.uk/index.html"}]},{"@type":"SoftwareApplication","name":"The Last Light Survival Guide","applicationCategory":"ReferenceApplication","operatingSystem":"Any (web browser, offline-capable)","url":"https://bunkerbot.co.uk/","downloadUrl":"https://bunkerbot.co.uk/download.html","description":"A complete, fully-offline survival library — 30 sections, 33 reference books, an offline AI assistant that cites its sources, and offline maps. Works with no internet, on anything down to a Raspberry Pi.","image":"https://bunkerbot.co.uk/assets/og-image.png","license":"https://creativecommons.org/licenses/by-sa/4.0/","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"}}]}
+</script>
+<!-- seo:end -->
 </head>
 <body>
 
@@ -507,7 +485,7 @@
       <h1>The Last Light<br>Survival Guide</h1>
       <p class="hero-subtitle">The complete offline emergency preparedness reference</p>
       <div class="hero-stats">
-        <span class="hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:inline;width:12px;height:12px;vertical-align:middle;margin-right:3px"><path d="M4 19V5a2 2 0 012-2h12v14H6a2 2 0 000 4h12v-2"/></svg>28 sections</span>
+        <span class="hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:inline;width:12px;height:12px;vertical-align:middle;margin-right:3px"><path d="M4 19V5a2 2 0 012-2h12v14H6a2 2 0 000 4h12v-2"/></svg>30 sections</span>
         <span class="hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:inline;width:12px;height:12px;vertical-align:middle;margin-right:3px"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>33 bundled PDFs</span>
         <span class="hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:inline;width:12px;height:12px;vertical-align:middle;margin-right:3px"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M8 10V8a4 4 0 018 0v2"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/></svg>AI-powered</span>
         <span class="hero-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:inline;width:12px;height:12px;vertical-align:middle;margin-right:3px"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Works offline</span>
@@ -861,8 +839,17 @@
         <a href="sections/salvage.html" class="sg-card">
           <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 00-6.4 5.6L3 17.2V21h3.8l5.3-5.3a4.5 4.5 0 005.6-6.4l-3 3-2.4-.6-.6-2.4 3-3z"/></svg></span>
           <div class="sg-body">
-            <div class="sg-title">Salvage, Rebuild &amp; Fuel</div>
-            <div class="sg-desc">Parts, generators, batteries, biodiesel</div>
+            <div class="sg-title">Salvage &amp; Rebuild</div>
+            <div class="sg-desc">Parts, generators, batteries</div>
+          </div>
+          <span class="sg-arrow">→</span>
+        </a>
+
+        <a href="sections/fuel.html" class="sg-card">
+          <span class="sg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11l3 3v10H4z"/><path d="M7 7V4h5"/><path d="M8 13l5 4M13 13l-5 4"/></svg></span>
+          <div class="sg-body">
+            <div class="sg-title">Making Fuel</div>
+            <div class="sg-desc">Biodiesel, ethanol, wood gas</div>
           </div>
           <span class="sg-arrow">→</span>
         </a>
@@ -1071,8 +1058,6 @@
 <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">↑</button>
 
 <script src="assets/js/app.js"></script>
-<script src="assets/js/search.js"></script>
-<script src="assets/js/bunker-bot.js"></script>
 
 <script>
 (function () {

@@ -10,6 +10,26 @@
   /* Pre-built index of all guide content.
      Each entry: { id, title, section, sectionLabel, file, anchor, content, tags } */
   const SEARCH_INDEX = [
+    /* ── Life-threatening emergencies: ranked first, written in everyday words ── */
+    { id:'sos-bleeding', title:'Stop Heavy Bleeding — Pressure, Tourniquet, Wound Packing', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#wound-care', content:'severe bleeding blood loss haemorrhage hemorrhage direct pressure tourniquet improvised windlass wound packing gauze arterial spurting shock', tags:['bleeding','tourniquet','haemorrhage','hemorrhage','blood','pressure','shock'], urgent:true, sos:'bleeding' },
+    { id:'sos-cpr', title:'CPR — Unresponsive and Not Breathing', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#cpr', content:'cpr cardiopulmonary resuscitation chest compressions rescue breaths 30 2 not breathing unresponsive collapsed cardiac arrest heart stopped defibrillator aed recovery position', tags:['cpr','resuscitation','compressions','breathing','unresponsive','cardiac arrest'], urgent:true, sos:'cpr' },
+    { id:'sos-choking', title:'Choking — Back Blows & Abdominal Thrusts', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#choking', content:'choking airway obstruction back blows abdominal thrusts heimlich infant baby chest thrusts cannot breathe cough', tags:['choking','heimlich','airway','back blows'], urgent:true, sos:'choking' },
+    { id:'sos-anaphylaxis', title:'Severe Allergic Reaction (Anaphylaxis) — Use Adrenaline', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#anaphylaxis', content:'anaphylaxis severe allergy allergic reaction epipen epinephrine adrenaline auto-injector sting bee wasp nut swelling throat', tags:['anaphylaxis','allergy','epipen','adrenaline','epinephrine','sting'], urgent:true, sos:'allergy' },
+    { id:'sos-burns', title:'Burns — Cool, Cover, Don’t Pop Blisters', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#burns', content:'burn burns scald fire hot water cool running water 20 minutes cling film dressing blisters', tags:['burn','burns','scald'], urgent:true, sos:'burn' },
+    { id:'sos-hypothermia', title:'Hypothermia — Warm the Core Gently', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#temperature', content:'hypothermia cold exposure freezing shivering wet rewarming armpits groin afterdrop not dead until warm', tags:['hypothermia','cold','freezing','shivering'], urgent:true, sos:'cold' },
+    { id:'sos-heatstroke', title:'Heat Stroke — Cool Them Fast', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#temperature', content:'heat stroke heatstroke heat exhaustion overheating hot dry skin confused cool water immersion ice packs', tags:['heat stroke','heatstroke','heat exhaustion','overheating'], urgent:true, sos:'heat' },
+    { id:'sos-seizure', title:'Seizure — Protect, Time It, Recovery Position', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#seizures', content:'seizure fit fitting convulsion epilepsy status epilepticus recovery position time', tags:['seizure','fit','convulsion','epilepsy'], urgent:true, sos:'seizure' },
+    { id:'sos-stroke', title:'Stroke — FAST Check', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#stroke', content:'stroke fast face drooping arm weakness slurred speech time', tags:['stroke','fast'], urgent:true, sos:'stroke' },
+    { id:'sos-hypo', title:'Low Blood Sugar (Hypoglycaemia) — Give Sugar', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#diabetic', content:'diabetic hypoglycaemia hypoglycemia low blood sugar hypo insulin glucose honey confused shaky sweating', tags:['diabetic','hypoglycemia','hypo','sugar','insulin'], urgent:true, sos:'sugar' },
+    { id:'sos-fracture', title:'Broken Bone — Check, Splint As Found, Recheck', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#fractures', content:'broken bone fracture splint immobilise open fracture circulation sensation movement', tags:['fracture','broken','splint','bone'], urgent:true, sos:'fracture' },
+    { id:'sos-snakebite', title:'Snakebite — Keep Still, No Cutting or Tourniquet', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#snakebite', content:'snakebite snake bite venom adder viper rattlesnake antivenom immobilise', tags:['snakebite','snake','venom'], urgent:true, sos:'snake' },
+    { id:'sos-drowning', title:'Drowning — Rescue Safely, Breaths First', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#drowning', content:'drowning drowned submersion rescue reach throw rescue breaths cold water', tags:['drowning'], urgent:true, sos:'cpr' },
+    { id:'sos-chest', title:'Chest Wound — Seal It, Watch Breathing', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#chest-wounds', content:'chest wound sucking chest wound stab gunshot seal occlusive dressing pneumothorax', tags:['chest wound','pneumothorax'], urgent:true, sos:'bleeding' },
+    { id:'sos-poison', title:'Poisoning & Overdose — Don’t Induce Vomiting', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#poisoning', content:'poisoning poison overdose swallowed chemical bleach carbon monoxide fumes generator indoors activated charcoal naloxone opioid paracetamol mushroom plant', tags:['poisoning','poison','overdose','carbon monoxide','naloxone'], urgent:true, sos:'poison' },
+    { id:'sos-head', title:'Head Injury & Concussion — Danger Signs', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#head-injury', content:'head injury concussion knocked out unconscious fall blow skull fracture drowsy vomiting pupils scalp bleeding', tags:['head injury','concussion','skull','knocked out'], urgent:true, sos:'head' },
+    { id:'sos-ors', title:'Diarrhoea & Dehydration — Rehydration Solution (ORS)', section:'food', sectionLabel:'Emergency Card', file:'quick-reference.html', anchor:'', content:'oral rehydration solution ors diarrhoea diarrhea vomiting dehydration sugar salt water recipe', tags:['ors','rehydration','dehydration','diarrhea','diarrhoea'], urgent:true, sos:'dehydration' },
+    { id:'sos-water', title:'Make Water Safe to Drink — Boil, Bleach, Filter', section:'food', sectionLabel:'Food & Water', file:'sections/food.html', anchor:'#water-purification', content:'purify water boil bleach drops gallon litre iodine sodis filter safe drinking water', tags:['water purification','purify','boil','bleach','drinking water'], urgent:true, sos:'dehydration' },
+    { id:'sos-birth', title:'Emergency Childbirth', section:'medical', sectionLabel:'Medical', file:'sections/medical.html', anchor:'#childbirth', content:'childbirth birth labour labor delivery baby pregnant contractions cord', tags:['childbirth','birth','labour','labor','delivery'], urgent:true },
     /* HOME */
     { id:'home-intro', title:'Survival Guide Home', section:'home', sectionLabel:'Home', file:'index.html', anchor:'', content:'survival guide emergency preparedness offline last light introduction overview dashboard', tags:['survival','guide','home','intro'] },
 
@@ -121,6 +141,14 @@
     { id:'sci-chemistry', title:'Chemistry First Principles', section:'science', sectionLabel:'First Principles', file:'sections/science.html', anchor:'#chemistry', content:'chemistry acids bases pH scale neutralisation oxidation rust fire combustion preservation salt sugar fermentation distillation states of matter', tags:['chemistry','pH','acid','base','oxidation','distillation']},
     { id:'sci-maths', title:'Field Mathematics', section:'science', sectionLabel:'First Principles', file:'sections/science.html', anchor:'#maths', content:'field mathematics estimation measuring body span pace right angle 3-4-5 tree height river width area circle volume tank angles fist latitude geometry', tags:['maths','estimation','geometry','measuring','angles'] },
     { id:'sci-invention', title:'The Invention Method', section:'science', sectionLabel:'First Principles', file:'sections/science.html', anchor:'#invention', content:'invention method first principles thinking design loop prototype reverse engineering materials substitution analogy testing to failure safety factor improvise build your own systems workarounds', tags:['invention','design','prototype','first principles','improvise'] },
+    { id:'knots-overview', title:'Knots & Rope — Six Knots That Do the Work', section:'knots', sectionLabel:'Knots & Rope', file:'sections/knots.html', anchor:'', content:'knots rope cordage tying which knot to use bowline clove hitch taut line hitch sheet bend truckers hitch reef knot square knot dressed and set standing part working end bight loop turn', tags:['knots','rope','tie','cordage','hitch'] },
+    { id:'knots-bowline', title:'Bowline — A Loop That Won\'t Slip', section:'knots', sectionLabel:'Knots & Rope', file:'sections/knots.html', anchor:'#bowline', content:'bowline fixed loop end of rope rabbit hole tree will not slip or jam tie to tree post ring bucket rescue loop collar tail inside loop how it fails shaken loose', tags:['bowline','loop','fixed loop','rabbit'] },
+    { id:'knots-clove', title:'Clove Hitch — Tie to a Post', section:'knots', sectionLabel:'Knots & Rope', file:'sections/knots.html', anchor:'#clove', content:'clove hitch tie rope to post pole rail stake start lashing two turns crossing rolls slips smooth post half hitches round turn and two half hitches tether', tags:['clove hitch','post','hitch','lashing'] },
+    { id:'knots-tautline', title:'Taut-Line Hitch — Adjustable Guy Line', section:'knots', sectionLabel:'Knots & Rope', file:'sections/knots.html', anchor:'#tautline', content:'taut line hitch tautline adjustable knot tent guy line tarp tighten slide grips washing line peg rolling hitch midshipman slipping cord', tags:['taut-line','guy line','tent','adjustable','tarp'] },
+    { id:'knots-sheetbend', title:'Sheet Bend — Join Two Ropes', section:'knots', sectionLabel:'Knots & Rope', file:'sections/knots.html', anchor:'#sheetbend', content:'sheet bend join two ropes different thickness sizes bend tie rope to tarp corner blanket double sheet bend bight thicker rope lengthen extend line', tags:['sheet bend','join ropes','bend'] },
+    { id:'knots-trucker', title:'Trucker\'s Hitch — Lash a Load Tight', section:'knots', sectionLabel:'Knots & Rope', file:'sections/knots.html', anchor:'#trucker', content:'truckers hitch lash load down tight cart roof rack ridge line tension pulley mechanical advantage three to one two half hitches tie down strap cargo', tags:['trucker','lashing','tie down','load','tension'] },
+    { id:'knots-reef', title:'Reef Knot (Square Knot) & the Granny', section:'knots', sectionLabel:'Knots & Rope', file:'sections/knots.html', anchor:'#reef', content:'reef knot square knot granny knot bandage sling bundle parcel right over left left over right binding never join two ropes capsizes slips shoelaces', tags:['reef knot','square knot','granny','bandage'] },
+    { id:'knots-care', title:'Rope Strength & Care', section:'knots', sectionLabel:'Knots & Rope', file:'sections/knots.html', anchor:'#rope-care', content:'rope strength knot weakens rope by a third to half working load fifth of breaking strength sharp edges whipping melt ends store dry sunlight retire damaged rope coil', tags:['rope care','strength','whipping','working load'] },
 
     /* NBC / EMP */
     { id:'nbc-overview', title:'NBC & EMP Threats Overview', section:'nbc', sectionLabel:'NBC Threats', file:'sections/nbc.html', anchor:'', content:'nuclear biological chemical EMP threats CBRN overview', tags:['NBC','nuclear','biological','chemical','EMP'] },
@@ -215,19 +243,22 @@
     { id:'text-waterproof', title:'Waterproofing & Treatment', section:'textiles', sectionLabel:'Textiles', file:'sections/textiles.html', anchor:'#waterproof', content:'waterproofing wax canvas oilskin lanolin pine tar linseed oil treatment clothing repellent wet cotton hypothermia warning', tags:['waterproofing','wax','oilskin','lanolin','pine tar','wet cotton'] },
 
     /* SALVAGE, REBUILD & FUEL */
-    { id:'salvage-overview', title:'Salvage, Rebuild & Fuel Overview', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'', content:'salvage rebuild fuel scavenge parts strip machines priorities recycling', tags:['salvage','rebuild','fuel','parts'] },
-    { id:'salvage-map', title:'Where to Find Parts — Salvage Map', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#where', content:'salvage map cars washing machines fridges microwaves water heaters appliances motors alternator compressor parts sources scrap', tags:['salvage','parts','scavenging','appliances'] },
-    { id:'salvage-safety', title:'Safe Stripping — Salvage Dangers', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#safety', content:'capacitor discharge airbag fuel tank explosion refrigerant asbestos lead CRT stripping safety danger', tags:['safety','capacitor','airbag','asbestos'] },
-    { id:'salvage-generator-maintenance', title:'Generator Maintenance', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#gen-maintenance', content:'generator maintenance oil change spark plug air filter valve clearance storage carburetor drain stabilizer exercise load carbon monoxide', tags:['generator','maintenance','oil','spark plug'] },
-    { id:'salvage-generator-rebuild', title:'Generator Troubleshooting & Rebuild', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#gen-rebuild', content:'generator no output troubleshooting field flashing residual magnetism AVR brushes slip rings capacitor windings diesel bleed injector glow plug repair rebuild', tags:['generator','repair','AVR','field flashing','diesel'] },
-    { id:'salvage-alternator', title:'Car Alternator Generator Build', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#alternator', content:'car alternator generator build pulley excitation battery charging 12v inverter belt small engine', tags:['alternator','generator','12v','charging'] },
-    { id:'salvage-batteries', title:'Salvaging & Rebuilding Batteries', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#batteries', content:'battery salvage lead acid recondition desulfation equalization 18650 lithium harvest laptop pack tool pack BMS spot weld thermal runaway NiMH voltage triage', tags:['battery','18650','lead-acid','lithium','BMS'] },
-    { id:'salvage-fuel-overview', title:'Making Fuel — What You Can & Cannot Make', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#fuel-overview', content:'make fuel diesel petrol gasoline substitute biodiesel ethanol wood gas biogas kerosene waste motor oil honest overview', tags:['fuel','diesel','substitutes'] },
-    { id:'salvage-biodiesel', title:'Biodiesel from Waste Vegetable Oil', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#biodiesel', content:'biodiesel waste vegetable oil WVO transesterification titration lye methanol methoxide glycerine wash dry quality test gelling winter', tags:['biodiesel','WVO','methanol','lye'] },
-    { id:'salvage-svo', title:'Straight Vegetable Oil Diesel Conversion', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#svo', content:'straight vegetable oil SVO WVO two tank conversion heated diesel indirect injection mercedes tractor', tags:['SVO','vegetable oil','diesel'] },
-    { id:'salvage-ethanol', title:'Alcohol Fuel — Ethanol', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#ethanol', content:'ethanol alcohol fuel ferment distill still mash azeotrope jetting carburetor legal permit fuel from farms', tags:['ethanol','alcohol','distilling','fuel'] },
-    { id:'salvage-woodgas', title:'Wood Gas for Engines', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#woodgas', content:'wood gas gasifier FEMA engine dual fuel producer gas tar filter carbon monoxide', tags:['wood gas','gasifier','FEMA'] },
-    { id:'salvage-fuel-storage', title:'Fuel Storage & Stabilising', section:'salvage', sectionLabel:'Salvage & Fuel', file:'sections/salvage.html', anchor:'#storage', content:'fuel storage stabilizer petrol gasoline diesel biocide diesel bug kerosene shelf life rotation stale fuel', tags:['fuel storage','stabilizer','rotation'] },
+    { id:'salvage-overview', title:'Salvage, Rebuild & Fuel Overview', section:'salvage', sectionLabel:'Salvage & Rebuild', file:'sections/salvage.html', anchor:'', content:'salvage rebuild fuel scavenge parts strip machines priorities recycling', tags:['salvage','rebuild','fuel','parts'] },
+    { id:'salvage-map', title:'Where to Find Parts — Salvage Map', section:'salvage', sectionLabel:'Salvage & Rebuild', file:'sections/salvage.html', anchor:'#where', content:'salvage map cars washing machines fridges microwaves water heaters appliances motors alternator compressor parts sources scrap', tags:['salvage','parts','scavenging','appliances'] },
+    { id:'salvage-safety', title:'Safe Stripping — Salvage Dangers', section:'salvage', sectionLabel:'Salvage & Rebuild', file:'sections/salvage.html', anchor:'#safety', content:'capacitor discharge airbag fuel tank explosion refrigerant asbestos lead CRT stripping safety danger', tags:['safety','capacitor','airbag','asbestos'] },
+    { id:'salvage-generator-maintenance', title:'Generator Maintenance', section:'salvage', sectionLabel:'Salvage & Rebuild', file:'sections/salvage.html', anchor:'#gen-maintenance', content:'generator maintenance oil change spark plug air filter valve clearance storage carburetor drain stabilizer exercise load carbon monoxide', tags:['generator','maintenance','oil','spark plug'] },
+    { id:'salvage-generator-rebuild', title:'Generator Troubleshooting & Rebuild', section:'salvage', sectionLabel:'Salvage & Rebuild', file:'sections/salvage.html', anchor:'#gen-rebuild', content:'generator no output troubleshooting field flashing residual magnetism AVR brushes slip rings capacitor windings diesel bleed injector glow plug repair rebuild', tags:['generator','repair','AVR','field flashing','diesel'] },
+    { id:'salvage-alternator', title:'Car Alternator Generator Build', section:'salvage', sectionLabel:'Salvage & Rebuild', file:'sections/salvage.html', anchor:'#alternator', content:'car alternator generator build pulley excitation battery charging 12v inverter belt small engine', tags:['alternator','generator','12v','charging'] },
+    { id:'salvage-batteries', title:'Salvaging & Rebuilding Batteries', section:'salvage', sectionLabel:'Salvage & Rebuild', file:'sections/salvage.html', anchor:'#batteries', content:'battery salvage lead acid recondition desulfation equalization 18650 lithium harvest laptop pack tool pack BMS spot weld thermal runaway NiMH voltage triage', tags:['battery','18650','lead-acid','lithium','BMS'] },
+    { id:'salvage-fuel-overview', title:'Making Fuel — What You Can & Cannot Make', section:'fuel', sectionLabel:'Making Fuel', file:'sections/fuel.html', anchor:'#which-fuel', content:'make fuel diesel petrol gasoline substitute biodiesel ethanol wood gas biogas kerosene waste motor oil honest overview', tags:['fuel','diesel','substitutes'] },
+    { id:'salvage-biodiesel', title:'Biodiesel from Waste Vegetable Oil', section:'fuel', sectionLabel:'Making Fuel', file:'sections/fuel.html', anchor:'#biodiesel', content:'biodiesel waste vegetable oil WVO transesterification titration lye methanol methoxide glycerine wash dry quality test gelling winter', tags:['biodiesel','WVO','methanol','lye'] },
+    { id:'salvage-svo', title:'Straight Vegetable Oil Diesel Conversion', section:'fuel', sectionLabel:'Making Fuel', file:'sections/fuel.html', anchor:'#svo', content:'straight vegetable oil SVO WVO two tank conversion heated diesel indirect injection mercedes tractor', tags:['SVO','vegetable oil','diesel'] },
+    { id:'salvage-ethanol', title:'Alcohol Fuel — Ethanol', section:'fuel', sectionLabel:'Making Fuel', file:'sections/fuel.html', anchor:'#ethanol', content:'ethanol alcohol fuel ferment distill still mash azeotrope jetting carburetor legal permit fuel from farms', tags:['ethanol','alcohol','distilling','fuel'] },
+    { id:'salvage-woodgas', title:'Wood Gas for Engines', section:'fuel', sectionLabel:'Making Fuel', file:'sections/fuel.html', anchor:'#woodgas', content:'wood gas gasifier FEMA engine dual fuel producer gas tar filter carbon monoxide', tags:['wood gas','gasifier','FEMA'] },
+    { id:'salvage-fuel-storage', title:'Fuel Storage & Stabilising', section:'fuel', sectionLabel:'Making Fuel', file:'sections/fuel.html', anchor:'#storage', content:'fuel storage stabilizer petrol gasoline diesel biocide diesel bug kerosene shelf life rotation stale fuel', tags:['fuel storage','stabilizer','rotation'] },
+    { id:'fuel-biogas', title:'Biogas as Fuel', section:'fuel', sectionLabel:'Making Fuel', file:'sections/fuel.html', anchor:'#biogas', content:'biogas methane digester fuel engine cooking burner scrub hydrogen sulphide gas mixer', tags:['biogas','methane'] },
+    { id:'fuel-wood', title:'Dry Wood and Charcoal as Fuel', section:'fuel', sectionLabel:'Making Fuel', file:'sections/fuel.html', anchor:'#wood', content:'firewood seasoning moisture charcoal retort fuel hardwood softwood', tags:['firewood','charcoal'] },
+    { id:'fuel-biodiesel-calc', title:'Biodiesel Batch Calculator', section:'fuel', sectionLabel:'Making Fuel', file:'sections/fuel.html', anchor:'#biodiesel', content:'biodiesel calculator lye methanol titration batch amounts NaOH KOH', tags:['biodiesel calculator','titration'] },
 
     /* VEHICLES */
     { id:'veh-overview', title:'Vehicles & Transport Overview', section:'vehicles', sectionLabel:'Vehicles', file:'sections/vehicles.html', anchor:'', content:'vehicles transport engine repair fuel biodiesel wood gas ethanol bicycle animal boat', tags:['vehicles','transport','engine','fuel','bicycle','biodiesel'] },
@@ -376,13 +407,85 @@
     return score;
   }
 
+  /* Everyday words → the words the guide uses. A panicked "my kid is
+     bleeding bad" or "heart stopped" should still land on the right page. */
+  const SYNONYMS = {
+    knot:'knots bowline', tie:'knots', tying:'knots', lash:'knots trucker lashing', lashing:'knots clove', guyline:'taut-line', guy:'taut-line', square:'reef', granny:'reef',
+    bleed:'bleeding tourniquet', bleeds:'bleeding tourniquet', blood:'bleeding', haemorrhage:'bleeding', hemorrhage:'bleeding',
+    gash:'bleeding wound', cut:'bleeding wound', laceration:'bleeding wound', spurting:'bleeding tourniquet', stab:'bleeding chest wound',
+    unconscious:'cpr unresponsive', unresponsive:'cpr', collapsed:'cpr', collapse:'cpr', heart:'cpr cardiac', cardiac:'cpr',
+    breathing:'cpr choking', breathe:'cpr choking', resus:'cpr', resuscitation:'cpr', pulse:'cpr', dead:'cpr', dying:'cpr bleeding',
+    choke:'choking', heimlich:'choking', swallowed:'poisoning choking',
+    poison:'poisoning', poisoned:'poisoning', overdose:'poisoning', od:'poisoning', fumes:'poisoning carbon monoxide', bleach:'poisoning', mushroom:'poisoning', drank:'poisoning', ate:'poisoning',
+    head:'head injury', concussion:'head injury', knocked:'head injury', skull:'head injury', fell:'head injury fracture', fall:'head injury fracture',
+    allergic:'anaphylaxis allergy', allergy:'anaphylaxis', anaphylactic:'anaphylaxis', epipen:'anaphylaxis', sting:'anaphylaxis', stung:'anaphylaxis', bee:'anaphylaxis', wasp:'anaphylaxis', swelling:'anaphylaxis',
+    burnt:'burns', burned:'burns', scald:'burns', scalded:'burns',
+    freezing:'hypothermia', frozen:'hypothermia', shivering:'hypothermia', cold:'hypothermia', frostbite:'hypothermia',
+    overheating:'heat heatstroke', heatstroke:'heat', sunstroke:'heat heatstroke', hot:'heat',
+    fit:'seizure', fits:'seizure', fitting:'seizure', convulsion:'seizure', convulsions:'seizure', epileptic:'seizure epilepsy',
+    droop:'stroke', drooping:'stroke', slurred:'stroke',
+    hypo:'hypoglycemia diabetic', diabetes:'diabetic', hypoglycaemia:'hypoglycemia diabetic', insulin:'diabetic',
+    broken:'fracture', break:'fracture', fractured:'fracture', splint:'fracture',
+    snake:'snakebite', adder:'snakebite', viper:'snakebite', rattlesnake:'snakebite', venom:'snakebite',
+    diarrhoea:'diarrhea dehydration ors', diarrhea:'dehydration ors', dehydrated:'dehydration ors', vomiting:'dehydration ors', rehydration:'ors',
+    drown:'drowning', drowned:'drowning',
+    purify:'purification', purifying:'purification', drinkable:'purification', boil:'purification'
+  };
+  /* Which emergency-mode card a query points to (palette shows it first). */
+  const EMERGENCY_TERMS = {
+    bleeding:'bleeding', tourniquet:'bleeding', cpr:'cpr', unresponsive:'cpr', drowning:'cpr', choking:'choking',
+    anaphylaxis:'allergy', allergy:'allergy', burns:'burn', burn:'burn', hypothermia:'cold', heat:'heat', stroke:'stroke',
+    seizure:'seizure', hypoglycemia:'sugar', diabetic:'sugar', fracture:'fracture', snakebite:'snake', dehydration:'dehydration', ors:'dehydration', poisoning:'poison', overdose:'poison', concussion:'head', head:'head'
+  };
+  const EMERGENCY_TITLES = { bleeding:'Heavy bleeding', cpr:'Not breathing (CPR)', choking:'Choking', allergy:'Severe allergy', burn:'Burn',
+    cold:'Too cold (hypothermia)', heat:'Too hot (heat stroke)', seizure:'Seizure', stroke:'Stroke', sugar:'Low blood sugar',
+    fracture:'Broken bone', snake:'Snakebite', dehydration:'Diarrhoea & dehydration', poison:'Poisoning', head:'Head injury' };
+
+  /* Typo tolerance: snap an unknown word to a known one 1 edit away
+     ("bleding" → "bleeding", "hypotermia" → "hypothermia"). */
+  let VOCAB = null;
+  function vocab() {
+    if (VOCAB) return VOCAB;
+    VOCAB = new Set(Object.keys(SYNONYMS));
+    SEARCH_INDEX.forEach(e => { tokenize(e.title).forEach(t => VOCAB.add(t)); e.tags.forEach(t => tokenize(t).forEach(x => VOCAB.add(x))); });
+    return VOCAB;
+  }
+  function within1(a, b) {
+    if (Math.abs(a.length - b.length) > 1) return false;
+    let i = 0, j = 0, edits = 0;
+    while (i < a.length && j < b.length) {
+      if (a[i] === b[j]) { i++; j++; continue; }
+      if (++edits > 1) return false;
+      if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; }
+    }
+    return edits + (a.length - i) + (b.length - j) <= 1;
+  }
+  function correct(t) {
+    const v = vocab();
+    if (t.length < 4 || v.has(t)) return t;
+    for (const w of v) if (w.startsWith(t)) return t;          // a prefix is fine as typed
+    for (const w of v) if (w.length >= 4 && within1(t, w)) return w;
+    return t;
+  }
+  function expand(tokens) {
+    const extra = [];
+    tokens.forEach(t => (SYNONYMS[t] || '').split(' ').forEach(x => { if (x && !tokens.includes(x) && !extra.includes(x)) extra.push(x); }));
+    return extra;
+  }
+
   function search(query) {
     if (!query || query.trim().length < 2) return [];
-    const tokens = tokenize(query);
+    const tokens = tokenize(query).map(correct);
     if (tokens.length === 0) return [];
+    const extra = expand(tokens);
 
     const results = SEARCH_INDEX
-      .map(entry => ({ entry, score: scoreEntry(entry, tokens) }))
+      .map(entry => {
+        let score = scoreEntry(entry, tokens);
+        if (extra.length) score += Math.round(scoreEntry(entry, extra) * 0.6);
+        if (entry.urgent && score >= 10) score += 25;            // life-threatening topics first
+        return { entry, score };
+      })
       .filter(r => r.score > 0)
       .sort((a, b) => b.score - a.score)
       .slice(0, 10)
@@ -390,6 +493,14 @@
 
     return results;
   }
+  /* Emergency-mode cards matching a query, best first. */
+  search.emergency = function (query) {
+    const tokens = tokenize(query || '').map(correct);
+    const all = tokens.concat(expand(tokens));
+    const ids = [];
+    all.forEach(t => { const id = EMERGENCY_TERMS[t]; if (id && !ids.includes(id)) ids.push(id); });
+    return ids.map(id => ({ id, title: EMERGENCY_TITLES[id] }));
+  };
 
   /* =================== UI =================== */
   function renderResults(results, query) {
@@ -402,8 +513,7 @@
       return;
     }
 
-    const isSection = window.location.pathname.includes('/sections/');
-    const base = isSection ? '../' : '';
+    const base = /\/(sections|pdfs)\//.test(window.location.pathname) ? '../' : '';
 
     /* Group by section */
     const groups = {};
@@ -418,7 +528,7 @@
       html += `<div class="search-group-label">${escapeHtml(label)}</div>`;
       items.forEach(r => {
         html += `<a href="${base}${r.file}${r.anchor}" class="search-result-item" data-idx="${globalIdx++}" role="option">
-          <div class="result-title">${highlightMatch(r.title, query)}</div>
+          <div class="result-title">${r.urgent ? '<span class="result-urgent">Urgent</span> ' : ''}${highlightMatch(r.title, query)}</div>
         </a>`;
       });
     });
@@ -446,9 +556,11 @@
   }
 
   /* =================== INIT =================== */
-  document.addEventListener('DOMContentLoaded', function () {
-    setupSearch();
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setupSearch(); });
+  } else {
+    setupSearch();   // loaded on demand by app.js after the page was ready
+  }
 
   /* Re-run when sidebar is dynamically built by app.js */
   document.addEventListener('click', function () {
@@ -510,14 +622,7 @@
       }
     });
 
-    /* Cmd+K / Ctrl+K to focus search from anywhere on the page */
-    document.addEventListener('keydown', e => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        input.focus();
-        input.select();
-      }
-    });
+    /* Cmd/Ctrl+K and "/" open the search palette — handled in app.js. */
   }
 
   function updateFocus(items, idx) {

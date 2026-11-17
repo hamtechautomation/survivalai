@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Clothing without factories: fibre sources, spinning, weaving, knitting, sewing, leatherwork, boot making, repairs and layering for warmth — from raw material to finished garment.">
   <title>Textiles &amp; Clothing — The Last Light Survival Guide</title>
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
@@ -11,18 +12,18 @@
     .tex-nav a:hover { background: var(--amber); color: var(--bg-0); }
 
     .process-steps { counter-reset: step; }
-    .process-step { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.75rem 1rem; margin: 0.5rem 0; counter-increment: step; position: relative; padding-left: 3rem; }
+    .process-step { background: var(--bg-1); border: 1px solid var(--border); border-radius: 4px; padding: 0.75rem 1rem; margin: 0.5rem 0; counter-increment: step; position: relative; padding-left: 3rem; }
     .process-step::before { content: counter(step); position: absolute; left: 0.85rem; top: 0.75rem; color: var(--amber); font-weight: 700; font-size: 1.1em; }
 
-    .fiber-card { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 6px; padding: 0.85rem 1rem; margin: 0.5rem 0; }
+    .fiber-card { background: var(--bg-1); border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem 1rem; margin: 0.5rem 0; }
     .fiber-card h4 { color: var(--amber); margin: 0 0 0.4rem; font-size: 0.95em; }
-    .fiber-card p { margin: 0.25rem 0; font-size: 0.88em; color: #ccc; }
+    .fiber-card p { margin: 0.25rem 0; font-size: 0.88em; color: var(--text-1); }
 
     .stitch-demo { font-family: monospace; font-size: 0.82em; background: #050a05; border: 1px solid #2a4a2a; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.5rem 0; color: #aad4aa; }
     .stitch-demo .stitch-name { color: var(--amber); font-weight: 700; font-size: 1em; display: block; margin-bottom: 0.4rem; }
 
     .priority-list { list-style: none; padding: 0; margin: 0.75rem 0; counter-reset: priority; }
-    .priority-list li { counter-increment: priority; background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.6rem 0.9rem 0.6rem 3rem; margin: 0.4rem 0; position: relative; font-size: 0.9em; }
+    .priority-list li { counter-increment: priority; background: var(--bg-1); border: 1px solid var(--border); border-radius: 4px; padding: 0.6rem 0.9rem 0.6rem 3rem; margin: 0.4rem 0; position: relative; font-size: 0.9em; }
     .priority-list li::before { content: "#" counter(priority); position: absolute; left: 0.75rem; top: 0.6rem; color: var(--amber); font-weight: 700; font-size: 0.85em; }
 
     .callout-warn { background: #1a1000; border: 1px solid #8b6000; border-left: 4px solid #c09a00; border-radius: 4px; padding: 0.85rem 1rem; margin: 0.75rem 0; font-size: 0.9em; }
@@ -35,21 +36,21 @@
     .callout-critical strong { color: #e05050; }
 
     .svg-figure { margin: 1.5rem 0; text-align: center; }
-    .svg-figure figcaption { font-size: 0.82em; color: #888; margin-top: 0.5rem; font-style: italic; }
+    .svg-figure figcaption { font-size: 0.82em; color: var(--text-2); margin-top: 0.5rem; font-style: italic; }
 
     .wpi-bar { display: flex; align-items: center; gap: 0.75rem; margin: 0.35rem 0; }
     .wpi-fill { height: 12px; background: linear-gradient(90deg, var(--amber), #5c3a0e); border-radius: 2px; }
-    .wpi-label { font-size: 0.82em; color: #bbb; min-width: 90px; }
+    .wpi-label { font-size: 0.82em; color: var(--text-1); min-width: 90px; }
     .wpi-val { font-size: 0.82em; color: var(--amber); font-weight: 600; min-width: 60px; }
 
     .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.6rem; margin: 0.75rem 0; }
-    .tool-item { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 4px; padding: 0.6rem 0.8rem; font-size: 0.88em; }
+    .tool-item { background: var(--bg-1); border: 1px solid var(--border); border-radius: 4px; padding: 0.6rem 0.8rem; font-size: 0.88em; }
     .tool-item strong { color: var(--amber); display: block; margin-bottom: 0.2rem; font-size: 0.9em; }
 
     .repair-math { background: #050a14; border: 1px solid #1a2a5c; border-radius: 6px; padding: 1rem; margin: 0.75rem 0; }
     .repair-math .math-line { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; border-bottom: 1px solid #1a2a3a; font-size: 0.9em; }
     .repair-math .math-line:last-child { border-bottom: none; color: var(--amber); font-weight: 700; }
-    .repair-math .math-label { color: #bbb; }
+    .repair-math .math-label { color: var(--text-1); }
     .repair-math .math-val { color: #7aaccc; font-weight: 600; }
 
     details { margin: 0.5rem 0; }
@@ -57,17 +58,42 @@
     details summary:hover { opacity: 0.8; }
     details[open] summary { margin-bottom: 0.5rem; }
   </style>
+<!-- seo:start — generated by tools/seo.py; edit that, not this -->
+<link rel="canonical" href="https://bunkerbot.co.uk/sections/textiles.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Last Light Survival Guide">
+<meta property="og:title" content="Textiles &amp; Clothing">
+<meta property="og:description" content="Clothing without factories: fibre sources, spinning, weaving, knitting, sewing, leatherwork, boot making, repairs and layering for warmth — from raw material to finished garment.">
+<meta property="og:url" content="https://bunkerbot.co.uk/sections/textiles.html">
+<meta property="og:image" content="https://bunkerbot.co.uk/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Last Light Survival Guide — a complete, fully-offline survival library.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Textiles &amp; Clothing">
+<meta name="twitter:description" content="Clothing without factories: fibre sources, spinning, weaving, knitting, sewing, leatherwork, boot making, repairs and layering for warmth — from raw material to finished garment.">
+<meta name="twitter:image" content="https://bunkerbot.co.uk/assets/og-image.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://bunkerbot.co.uk/#website","url":"https://bunkerbot.co.uk/","name":"The Last Light Survival Guide","description":"A complete, fully-offline survival reference and library.","inLanguage":"en","license":"https://creativecommons.org/licenses/by-sa/4.0/","publisher":{"@id":"https://bunkerbot.co.uk/#org"}},{"@type":"Organization","@id":"https://bunkerbot.co.uk/#org","name":"The Last Light Survival Guide","url":"https://bunkerbot.co.uk/","logo":"https://bunkerbot.co.uk/assets/icons/apple-touch-icon.png","sameAs":["https://github.com/hamtechautomation/survivalai"]},{"@type":"Article","@id":"https://bunkerbot.co.uk/sections/textiles.html#page","url":"https://bunkerbot.co.uk/sections/textiles.html","name":"Textiles & Clothing","description":"Clothing without factories: fibre sources, spinning, weaving, knitting, sewing, leatherwork, boot making, repairs and layering for warmth — from raw material to finished garment.","inLanguage":"en","image":"https://bunkerbot.co.uk/assets/og-image.png","isPartOf":{"@id":"https://bunkerbot.co.uk/#website"},"breadcrumb":{"@id":"https://bunkerbot.co.uk/sections/textiles.html#breadcrumb"},"license":"https://creativecommons.org/licenses/by-sa/4.0/","headline":"Textiles & Clothing","author":{"@id":"https://bunkerbot.co.uk/#org"},"publisher":{"@id":"https://bunkerbot.co.uk/#org"},"mainEntityOfPage":"https://bunkerbot.co.uk/sections/textiles.html","dateModified":"2026-11-15"},{"@type":"BreadcrumbList","@id":"https://bunkerbot.co.uk/sections/textiles.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://bunkerbot.co.uk/"},{"@type":"ListItem","position":2,"name":"Guide","item":"https://bunkerbot.co.uk/index.html"},{"@type":"ListItem","position":3,"name":"Textiles & Clothing","item":"https://bunkerbot.co.uk/sections/textiles.html"}]}]}
+</script>
+<!-- seo:end -->
 </head>
 <body>
   <div id="app-shell">
-    <nav id="sidebar" aria-label="Main navigation"></nav>
+    <nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
     <div id="overlay" class="overlay"></div>
-    <div class="main-content">
-      <header class="top-bar">
-        <button id="menu-toggle" class="btn-icon" aria-label="Open navigation">☰</button>
-        <div class="breadcrumb"><a href="../index.html">Home</a> › Textiles &amp; Clothing</div>
-        <button id="aria-toggle" class="btn btn-sm btn-ghost">🤖 Bunker Bot</button>
-      </header>
+    <header class="site-header">
+      <button id="menu-toggle" class="btn-icon" aria-label="Toggle navigation">☰</button>
+      <div class="header-breadcrumb">
+        <a href="../index.html" class="crumb-parent">Last Light Guide</a>
+        <span class="page-title">Textiles &amp; Clothing</span>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-sm btn-outline" data-print>Print</button>
+        <button id="aria-toggle" class="btn btn-sm btn-primary">Bunker Bot</button>
+      </div>
+    </header>
+    <main class="main-content" id="main-content">
       <div class="content-wrapper">
 
         <!-- ═══ PAGE HEADER ═══ -->
@@ -118,7 +144,7 @@
           <h4>Sinew — Strongest Natural Thread</h4>
           <p><strong>Sources:</strong> Leg tendons and backstrap (dorsal fascia) of large game — deer, elk, bison, cow. Backstrap sinew is finest and longest.</p>
           <p><strong>Processing:</strong> Remove while fresh (before rigor). Split into thread-width strands with fingernails or dull blade. Dry flat. Dry sinew revives by soaking 10–15 min in warm water.</p>
-          <p><strong>Properties:</strong> Self-waxing from natural fat content. Waterproof when dry. Shrinks when dry — tightens knots and wraps. Stronger than any plant fiber thread. Used for bowstrings, lashing, and fine leather sewing.</p>
+          <p><strong>Properties:</strong> Self-waxing from natural fat content. Softens and stretches when wet — protect sinew joins with pitch or glue. Shrinks as it dries — tightens knots and wraps. Stronger than any plant fiber thread. Used for bowstrings, lashing, and fine leather sewing.</p>
         </div>
 
         <div class="fiber-card">
@@ -166,7 +192,7 @@
 
         <div class="fiber-card">
           <h4>Milkweed</h4>
-          <p>Seed floss is approximately 6× warmer than wool by weight when dry. Naturally water-resistant. Too slippery to spin alone — blend 20–30% with clean wool, or use alone as insulation fill. Harvest pods just as they split open; dry completely before using. Historically used as life-jacket filler in WWII.</p>
+          <p>Seed floss is roughly as warm as down when dry (claims vary). Naturally water-resistant. Too slippery to spin alone — blend 20–30% with clean wool, or use alone as insulation fill. Harvest pods just as they split open; dry completely before using. Historically used as life-jacket filler in WWII.</p>
         </div>
 
         <h3>Fiber Comparison</h3>
@@ -205,46 +231,19 @@
         </div>
 
         <!-- SVG 1: Drop Spindle -->
-        <figure class="svg-figure">
-          <svg viewBox="0 0 300 430" width="260" height="430" xmlns="http://www.w3.org/2000/svg" aria-label="Drop spindle diagram with labeled parts: hook, shaft, yarn cop, whorl, and spin direction">
-            <rect width="300" height="430" fill="#070a09" rx="6"/>
-            <!-- Shaft -->
-            <rect x="146" y="28" width="8" height="350" fill="#8B6914" rx="2"/>
-            <!-- Hook at top -->
-            <path d="M150 28 Q150 12 163 12 Q176 12 176 24" stroke="#c9a94e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <!-- Whorl disc (3D look) -->
-            <ellipse cx="150" cy="338" rx="42" ry="10" fill="#5c4010" stroke="#c9a94e" stroke-width="1.5"/>
-            <rect x="108" y="328" width="84" height="14" fill="#6B4E10"/>
-            <ellipse cx="150" cy="328" rx="42" ry="10" fill="#6B4E10" stroke="#c9a94e" stroke-width="1.5"/>
-            <text x="150" y="333" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle">3" disc</text>
-            <!-- Yarn cop (wound on shaft) -->
-            <path d="M148 75 Q167 85 148 100 Q129 112 148 127 Q167 139 148 154 Q130 166 148 181 Q166 193 148 208" stroke="#c9a94e" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.75"/>
-            <!-- Spin direction arrow -->
-            <path d="M178 200 Q195 185 192 210 Q189 230 178 225" stroke="#3abf7a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-            <polygon points="178,220 172,232 184,228" fill="#3abf7a"/>
-            <text x="198" y="212" fill="#3abf7a" font-size="9" font-family="monospace">Z-twist</text>
-            <text x="196" y="223" fill="#3abf7a" font-size="9" font-family="monospace">(clockwise)</text>
-            <!-- Labels -->
-            <text x="190" y="20" fill="#c9a94e" font-size="11" font-family="monospace">Hook</text>
-            <line x1="176" y1="18" x2="188" y2="18" stroke="#c9a94e" stroke-width="1"/>
-            <text x="190" y="145" fill="#c9a94e" font-size="11" font-family="monospace">Yarn cop</text>
-            <line x1="163" y1="145" x2="188" y2="143" stroke="#c9a94e" stroke-width="1"/>
-            <text x="40" y="80" fill="#8B6914" font-size="11" font-family="monospace">Shaft</text>
-            <text x="40" y="93" fill="#555" font-size="9" font-family="monospace">10–12" long</text>
-            <line x1="72" y1="88" x2="144" y2="88" stroke="#8B6914" stroke-width="1"/>
-            <text x="45" y="332" fill="#c9a94e" font-size="11" font-family="monospace">Whorl</text>
-            <line x1="80" y1="330" x2="106" y2="330" stroke="#c9a94e" stroke-width="1"/>
-            <text x="100" y="415" fill="#555" font-size="10" font-family="monospace" text-anchor="middle">Bottom-whorl drop spindle</text>
-            <text x="100" y="427" fill="#444" font-size="9" font-family="monospace" text-anchor="middle">Build time: 20–30 minutes</text>
-          </svg>
-          <figcaption>Bottom-whorl drop spindle: shaft 10–12", whorl 3" diameter disc, hook at top. Z-twist (clockwise spin) for singles; S-twist for plying.</figcaption>
-        </figure>
+        <figure class="dg dg-multi" id="fig-spindle">
+      <div class="dg-cols" style="--cols:2;--cols-sm:1" role="group" aria-label="Bottom-whorl drop spindle: hook at the top, 10 to 12 inch shaft, yarn cop above a 3 inch whorl; Z twist spun clockwise for singles, S twist anticlockwise for plying">
+        <svg viewBox="0 0 224 304" role="img" aria-label="BOTTOM-WHORL SPINDLE"><defs><marker id="ah-sp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"></path></marker></defs><rect class="dg-panel" x="2" y="2" width="220" height="300" rx="9"></rect><text class="dg-th dg-mid" x="112.0" y="22">BOTTOM-WHORL SPINDLE</text><text class="dg-ts dg-mid" x="112.0" y="36">build time 20–30 minutes</text><g data-hl="fib"><path class="dg-white" d="M60 52 Q40 62 52 80 Q66 96 92 92 Q104 70 92 56 Q78 46 60 52 Z" opacity=".75"></path></g><path class="dg-key-s" d="M88 88 Q100 104 108 112 L112 120" stroke-width="1.6"></path><g data-hl="shaft"><rect class="dg-wood" x="108" y="118" width="8" height="166" rx="3"></rect><path class="dg-line" d="M112 118 q0 -10 8 -8 q6 2 2 8" stroke-width="1.6"></path></g><g data-hl="cop"><path class="dg-key" d="M108 196 Q90 222 108 244 L116 244 Q134 222 116 196 Z"></path></g><g data-hl="whorl"><ellipse class="dg-wood" cx="112" cy="252" rx="46" ry="10"></ellipse><ellipse class="dg-wood" cx="112" cy="248" rx="46" ry="10"></ellipse></g><path class="dg-key-s" d="M146 140 a 34 10 0 1 1 -10 -6" stroke-width="1.6"></path><path class="dg-ah" d="M136 128 l8 4 l-8 4z"></path><text class="dg-tb" x="10" y="112" data-hl="fib">FIBRE</text><text class="dg-ts" x="10" y="125" data-hl="fib">drafted out</text><text class="dg-ts" x="10" y="137" data-hl="fib">by hand</text><text class="dg-tb dg-end" x="214" y="116" data-hl="shaft">HOOK</text><line class="dg-thin" x1="180" y1="112" x2="122" y2="112"></line><circle class="dg-keyf" cx="122" cy="112" r="2.2"></circle><text class="dg-tb dg-end" x="214" y="168" data-hl="shaft">SHAFT</text><text class="dg-ts dg-end" x="214" y="181" data-hl="shaft">10–12 in</text><line class="dg-thin" x1="178" y1="172" x2="118" y2="172"></line><circle class="dg-keyf" cx="118" cy="172" r="2.2"></circle><text class="dg-tb" x="10" y="210" data-hl="cop">COP: spun</text><text class="dg-ts" x="10" y="223" data-hl="cop">yarn wound on</text><line class="dg-thin" x1="76" y1="214" x2="100" y2="218"></line><circle class="dg-keyf" cx="100" cy="218" r="2.2"></circle><text class="dg-tb dg-end" x="214" y="278" data-hl="whorl">WHORL</text><text class="dg-ts dg-end" x="214" y="291" data-hl="whorl">3 in disc</text><line class="dg-thin" x1="168" y1="280" x2="150" y2="256"></line><circle class="dg-keyf" cx="150" cy="256" r="2.2"></circle><text class="dg-ts" x="160" y="150">spin</text></svg>
+        <svg viewBox="224 0 220 304" role="img" aria-label="WHICH WAY TO SPIN"><rect class="dg-panel" x="226" y="2" width="216" height="300" rx="9"></rect><text class="dg-th dg-mid" x="334.0" y="22">WHICH WAY TO SPIN</text><text class="dg-ts dg-mid" x="334.0" y="36">looking down the shaft</text><g data-hl="z"><rect class="dg-white" x="263" y="70" width="34" height="150" rx="17" opacity=".85"></rect><line class="dg-key-s" x1="268" y1="88" x2="292" y2="76" stroke-width="2.6"></line><line class="dg-key-s" x1="268" y1="103" x2="292" y2="91" stroke-width="2.6"></line><line class="dg-key-s" x1="268" y1="118" x2="292" y2="106" stroke-width="2.6"></line><line class="dg-key-s" x1="268" y1="133" x2="292" y2="121" stroke-width="2.6"></line><line class="dg-key-s" x1="268" y1="148" x2="292" y2="136" stroke-width="2.6"></line><line class="dg-key-s" x1="268" y1="163" x2="292" y2="151" stroke-width="2.6"></line><line class="dg-key-s" x1="268" y1="178" x2="292" y2="166" stroke-width="2.6"></line><line class="dg-key-s" x1="268" y1="193" x2="292" y2="181" stroke-width="2.6"></line><line class="dg-key-s" x1="268" y1="208" x2="292" y2="196" stroke-width="2.6"></line><text class="dg-big dg-mid" x="280" y="244">Z</text><text class="dg-tb dg-mid" x="280" y="262">clockwise</text><text class="dg-ts dg-mid" x="280" y="276">singles</text></g><g data-hl="s"><rect class="dg-white" x="371" y="70" width="34" height="150" rx="17" opacity=".85"></rect><line class="dg-blue-s" x1="376" y1="76" x2="400" y2="88" stroke-width="2.6"></line><line class="dg-blue-s" x1="376" y1="91" x2="400" y2="103" stroke-width="2.6"></line><line class="dg-blue-s" x1="376" y1="106" x2="400" y2="118" stroke-width="2.6"></line><line class="dg-blue-s" x1="376" y1="121" x2="400" y2="133" stroke-width="2.6"></line><line class="dg-blue-s" x1="376" y1="136" x2="400" y2="148" stroke-width="2.6"></line><line class="dg-blue-s" x1="376" y1="151" x2="400" y2="163" stroke-width="2.6"></line><line class="dg-blue-s" x1="376" y1="166" x2="400" y2="178" stroke-width="2.6"></line><line class="dg-blue-s" x1="376" y1="181" x2="400" y2="193" stroke-width="2.6"></line><line class="dg-blue-s" x1="376" y1="196" x2="400" y2="208" stroke-width="2.6"></line><text class="dg-big dg-mid" x="388" y="244">S</text><text class="dg-tb dg-mid" x="388" y="262">anticlockwise</text><text class="dg-ts dg-mid" x="388" y="276">plying</text></g><text class="dg-ts dg-mid" x="334" y="140">slant</text><text class="dg-ts dg-mid" x="334" y="152">matches the</text><text class="dg-ts dg-mid" x="334" y="164">letter’s middle</text></svg>
+      </div>
+      <figcaption>Spin <strong>clockwise for Z-twist singles</strong>, then ply two singles together <strong>anticlockwise (S)</strong>: the opposite twists lock together and the yarn stops snarling.</figcaption>
+    </figure>
 
         <h3>Spinning Technique</h3>
         <div class="two-col">
           <div>
             <h4>Park and Draft (Beginners)</h4>
-            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+            <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
               <li>Spin spindle, then "park" it under your arm or between knees</li>
               <li>With both hands free, draft (pull out) a length of fiber</li>
               <li>Release spindle — twist runs up into drafted fiber</li>
@@ -254,7 +253,7 @@
           </div>
           <div>
             <h4>Long Draw (Speed)</h4>
-            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+            <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
               <li>Set spindle spinning with one hand</li>
               <li>Back-draft fiber quickly with other hand over 12–18"</li>
               <li>Let twist chase into drafted zone</li>
@@ -274,6 +273,11 @@
           <p><strong>3-ply:</strong> Very round and even. Ideal for socks and durable items. Takes three times the spinning time but worth it for hard-wear goods.</p>
         </div>
 
+    <figure class="dg" id="fig-twist">
+      <svg viewBox="-8 0 428 188" role="img" aria-label="Yarn twist: Z twist slants like the middle of a letter Z, S twist like an S; a 2-ply yarn is two Z singles plied together in the S direction"><rect class="dg-key" x="48" y="24" width="24" height="110" rx="12"/><line class="dg-line" x1="50" y1="38" x2="70" y2="30"/><line class="dg-line" x1="50" y1="50" x2="70" y2="42"/><line class="dg-line" x1="50" y1="62" x2="70" y2="54"/><line class="dg-line" x1="50" y1="74" x2="70" y2="66"/><line class="dg-line" x1="50" y1="86" x2="70" y2="78"/><line class="dg-line" x1="50" y1="98" x2="70" y2="90"/><line class="dg-line" x1="50" y1="110" x2="70" y2="102"/><line class="dg-line" x1="50" y1="122" x2="70" y2="114"/><line class="dg-line" x1="50" y1="134" x2="70" y2="126"/><text class="dg-tb dg-mid" x="60" y="154">Z twist</text><text class="dg-ts dg-mid" x="60" y="168">slants like the middle of Z</text><text class="dg-ts dg-mid" x="60" y="181">spindle turned clockwise</text><rect class="dg-key" x="188" y="24" width="24" height="110" rx="12"/><line class="dg-line" x1="190" y1="30" x2="210" y2="38"/><line class="dg-line" x1="190" y1="42" x2="210" y2="50"/><line class="dg-line" x1="190" y1="54" x2="210" y2="62"/><line class="dg-line" x1="190" y1="66" x2="210" y2="74"/><line class="dg-line" x1="190" y1="78" x2="210" y2="86"/><line class="dg-line" x1="190" y1="90" x2="210" y2="98"/><line class="dg-line" x1="190" y1="102" x2="210" y2="110"/><line class="dg-line" x1="190" y1="114" x2="210" y2="122"/><line class="dg-line" x1="190" y1="126" x2="210" y2="134"/><text class="dg-tb dg-mid" x="200" y="154">S twist</text><text class="dg-ts dg-mid" x="200" y="168">slants like the middle of S</text><text class="dg-ts dg-mid" x="200" y="181">spindle anticlockwise</text><path class="dg-key" d="M332 24 Q352 29 356 35 Q336 40 332 46" /><path class="dg-water" d="M356 35 Q336 40 332 46 Q352 51 356 57" /><path class="dg-key" d="M332 46 Q352 51 356 57 Q336 62 332 68" /><path class="dg-water" d="M356 57 Q336 62 332 68 Q352 73 356 79" /><path class="dg-key" d="M332 68 Q352 73 356 79 Q336 84 332 90" /><path class="dg-water" d="M356 79 Q336 84 332 90 Q352 95 356 101" /><path class="dg-key" d="M332 90 Q352 95 356 101 Q336 106 332 112" /><path class="dg-water" d="M356 101 Q336 106 332 112 Q352 117 356 123" /><path class="dg-key" d="M332 112 Q352 117 356 123 Q336 128 332 134" /><path class="dg-water" d="M356 123 Q336 128 332 134 Q352 139 356 145" /><text class="dg-tb dg-mid" x="344" y="154">2-ply</text><text class="dg-ts dg-mid" x="344" y="168">two Z singles plied S</text><text class="dg-ts dg-mid" x="344" y="181">= balanced, won’t kink</text></svg>
+      <figcaption>Ply in the <strong>opposite</strong> direction to the singles: the opposing twists cancel, so the yarn hangs straight instead of snarling.</figcaption>
+    </figure>
+
         <h3>Yarn Weight Reference (Wraps Per Inch)</h3>
         <div class="wpi-bar"><span class="wpi-label">Lace weight</span><div class="wpi-fill" style="width:170px"></div><span class="wpi-val">30+ wpi</span></div>
         <div class="wpi-bar"><span class="wpi-label">Fingering/sock</span><div class="wpi-fill" style="width:135px"></div><span class="wpi-val">18–22 wpi</span></div>
@@ -281,7 +285,7 @@
         <div class="wpi-bar"><span class="wpi-label">Worsted</span><div class="wpi-fill" style="width:70px"></div><span class="wpi-val">9–12 wpi</span></div>
         <div class="wpi-bar"><span class="wpi-label">Bulky</span><div class="wpi-fill" style="width:40px"></div><span class="wpi-val">5–8 wpi</span></div>
         <div class="wpi-bar"><span class="wpi-label">Super bulky</span><div class="wpi-fill" style="width:20px"></div><span class="wpi-val">under 5 wpi</span></div>
-        <p style="font-size:0.82em;color:#888;margin-top:0.4rem;">Measure WPI: wrap yarn around a ruler for 1 inch, count wraps. Wrap snugly but not stretched.</p>
+        <p style="font-size:0.82em;color:var(--text-2);margin-top:0.4rem;">Measure WPI: wrap yarn around a ruler for 1 inch, count wraps. Wrap snugly but not stretched.</p>
 
         <div class="callout-tip">
           <strong>Yield:</strong> 1 lb (450g) raw wool → ~¾ lb (340g) clean scoured fiber → approximately one adult sweater worth of yarn at worsted weight. Plan fiber gathering accordingly.
@@ -290,20 +294,20 @@
         <details>
           <summary>Supported Spindle (for short fibers: cotton, angora, cashmere)</summary>
           <div style="padding:0.5rem 0 0 1rem;">
-            <p style="font-size:0.9em;color:#ccc;">Short-staple fibers break under the tension of a hanging drop spindle. A supported spindle rests in a bowl or ceramic plate — removes downward tension while spinning.</p>
-            <p style="font-size:0.9em;color:#ccc;"><strong>Tahkli:</strong> Tiny brass or wooden spindle spun in a small bowl. Traditional for cotton in India. Very fast once mastered.</p>
-            <p style="font-size:0.9em;color:#ccc;"><strong>Akha:</strong> Longer supported spindle on a flat plate. Common in Southeast Asia for short fiber work.</p>
-            <p style="font-size:0.9em;color:#ccc;">For improvised cotton spinning: any smooth-tipped spindle resting in a smooth bowl works. Spin between palms while drafting with the other hand.</p>
+            <p style="font-size:0.9em;color:var(--text-1);">Short-staple fibers break under the tension of a hanging drop spindle. A supported spindle rests in a bowl or ceramic plate — removes downward tension while spinning.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Tahkli:</strong> Tiny brass or wooden spindle spun in a small bowl. Traditional for cotton in India. Very fast once mastered.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Akha:</strong> Longer supported spindle on a flat plate. Common in Southeast Asia for short fiber work.</p>
+            <p style="font-size:0.9em;color:var(--text-1);">For improvised cotton spinning: any smooth-tipped spindle resting in a smooth bowl works. Spin between palms while drafting with the other hand.</p>
           </div>
         </details>
 
         <details>
           <summary>Spinning Wheel Notes (if you have or can build one)</summary>
           <div style="padding:0.5rem 0 0 1rem;">
-            <p style="font-size:0.9em;color:#ccc;"><strong>Saxony wheel (treadle):</strong> Most common traditional European style. Horizontal, large drive wheel connected by drive band to flyer assembly. Good all-purpose wheel.</p>
-            <p style="font-size:0.9em;color:#ccc;"><strong>Castle wheel:</strong> Vertical arrangement — compact footprint. Same mechanics, smaller space.</p>
-            <p style="font-size:0.9em;color:#ccc;"><strong>Great wheel / walking wheel:</strong> No treadle — spinner walks back while drafting. Fastest output for woolen yarns. Simplest construction; good first build.</p>
-            <p style="font-size:0.9em;color:#ccc;"><strong>Maintenance:</strong> Drive band (leather strip or twisted cord) stretches and needs periodic replacement. Oil all moving parts with linseed oil or mineral oil. Clean fiber debris from orifice and flyer hooks. Drive ratio determines twist speed — higher ratio = finer yarn.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Saxony wheel (treadle):</strong> Most common traditional European style. Horizontal, large drive wheel connected by drive band to flyer assembly. Good all-purpose wheel.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Castle wheel:</strong> Vertical arrangement — compact footprint. Same mechanics, smaller space.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Great wheel / walking wheel:</strong> No treadle — spinner walks back while drafting. Fastest output for woolen yarns. Simplest construction; good first build.</p>
+            <p style="font-size:0.9em;color:var(--text-1);"><strong>Maintenance:</strong> Drive band (leather strip or twisted cord) stretches and needs periodic replacement. Oil all moving parts with linseed oil or mineral oil. Clean fiber debris from orifice and flyer hooks. Drive ratio determines twist speed — higher ratio = finer yarn.</p>
           </div>
         </details>
 
@@ -314,65 +318,15 @@
         <h3>Frame Loom — Build First</h3>
 
         <!-- SVG 2: Frame Loom -->
-        <figure class="svg-figure">
-          <svg viewBox="0 0 460 320" width="440" height="320" xmlns="http://www.w3.org/2000/svg" aria-label="Frame loom overhead view showing frame, warp threads, shed stick, and shuttle with weft">
-            <rect width="460" height="320" fill="#070a09" rx="6"/>
-            <!-- Outer frame -->
-            <rect x="40" y="30" width="280" height="250" fill="none" stroke="#8B6914" stroke-width="8" rx="4"/>
-            <text x="180" y="22" fill="#8B6914" font-size="11" font-family="monospace" text-anchor="middle">Wooden Frame (2×2 lumber)</text>
-            <!-- Warp threads (vertical) -->
-            <g stroke="#c9a94e" stroke-width="1.2" opacity="0.85">
-              <line x1="64" y1="38" x2="64" y2="272"/><line x1="79" y1="38" x2="79" y2="272"/>
-              <line x1="94" y1="38" x2="94" y2="272"/><line x1="109" y1="38" x2="109" y2="272"/>
-              <line x1="124" y1="38" x2="124" y2="272"/><line x1="139" y1="38" x2="139" y2="272"/>
-              <line x1="154" y1="38" x2="154" y2="272"/><line x1="169" y1="38" x2="169" y2="272"/>
-              <line x1="184" y1="38" x2="184" y2="272"/><line x1="199" y1="38" x2="199" y2="272"/>
-              <line x1="214" y1="38" x2="214" y2="272"/><line x1="229" y1="38" x2="229" y2="272"/>
-              <line x1="244" y1="38" x2="244" y2="272"/><line x1="259" y1="38" x2="259" y2="272"/>
-              <line x1="274" y1="38" x2="274" y2="272"/><line x1="304" y1="38" x2="304" y2="272"/>
-            </g>
-            <!-- Nail marks top/bottom -->
-            <text x="180" y="55" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle" opacity="0.6">▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾ ▾</text>
-            <text x="180" y="264" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle" opacity="0.6">▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴ ▴</text>
-            <!-- Weft rows (horizontal) -->
-            <path d="M48 105 Q64 100 79 105 Q94 110 109 105 Q124 100 139 105 Q154 110 169 105 Q184 100 199 105 Q214 110 229 105 Q244 100 259 105 Q274 110 312 105" stroke="#7a5a20" stroke-width="2.5" fill="none"/>
-            <path d="M48 121 Q64 126 79 121 Q94 116 109 121 Q124 126 139 121 Q154 116 169 121 Q184 126 199 121 Q214 116 229 121 Q244 126 259 121 Q274 116 312 121" stroke="#7a5a20" stroke-width="2.5" fill="none"/>
-            <path d="M48 137 Q64 132 79 137 Q94 142 109 137 Q124 132 139 137 Q154 142 169 137 Q184 132 199 137 Q214 142 229 137 Q244 132 259 137 Q274 142 312 137" stroke="#7a5a20" stroke-width="2.5" fill="none"/>
-            <!-- Shed stick -->
-            <rect x="48" y="165" width="268" height="8" rx="4" fill="#3a2000" stroke="#8B6914" stroke-width="1.5"/>
-            <text x="182" y="161" fill="#8B6914" font-size="9" font-family="monospace" text-anchor="middle">shed stick</text>
-            <!-- Shuttle -->
-            <rect x="148" y="195" width="65" height="14" rx="7" fill="#5c3a08" stroke="#c9a94e" stroke-width="1.5"/>
-            <text x="180" y="206" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle">SHUTTLE</text>
-            <!-- Beat arrow -->
-            <line x1="182" y1="220" x2="182" y2="145" stroke="#3abf7a" stroke-width="1.5" stroke-dasharray="4,2"/>
-            <polygon points="182,140 177,150 187,150" fill="#3abf7a"/>
-            <text x="188" y="185" fill="#3abf7a" font-size="9" font-family="monospace">beat ↑</text>
-            <!-- Key panel -->
-            <rect x="345" y="40" width="105" height="240" fill="#0f1410" rx="4" stroke="#2a2a2a" stroke-width="1"/>
-            <text x="397" y="60" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">TERMS</text>
-            <text x="352" y="80" fill="#888" font-size="9" font-family="monospace">WARP: vertical</text>
-            <text x="352" y="93" fill="#888" font-size="9" font-family="monospace">threads held</text>
-            <text x="352" y="106" fill="#888" font-size="9" font-family="monospace">under tension</text>
-            <text x="352" y="124" fill="#888" font-size="9" font-family="monospace">WEFT: horizontal</text>
-            <text x="352" y="137" fill="#888" font-size="9" font-family="monospace">thread on shuttle</text>
-            <text x="352" y="155" fill="#888" font-size="9" font-family="monospace">SHED: opening</text>
-            <text x="352" y="168" fill="#888" font-size="9" font-family="monospace">between warp</text>
-            <text x="352" y="181" fill="#888" font-size="9" font-family="monospace">threads; shuttle</text>
-            <text x="352" y="194" fill="#888" font-size="9" font-family="monospace">passes through</text>
-            <text x="352" y="212" fill="#888" font-size="9" font-family="monospace">SETT: warp ends</text>
-            <text x="352" y="225" fill="#888" font-size="9" font-family="monospace">per inch (epi)</text>
-            <text x="352" y="243" fill="#888" font-size="9" font-family="monospace">BEAT: press weft</text>
-            <text x="352" y="256" fill="#888" font-size="9" font-family="monospace">rows together</text>
-            <text x="352" y="269" fill="#888" font-size="9" font-family="monospace">with comb/fork</text>
-          </svg>
-          <figcaption>Frame loom: 4 lumber pieces, nails/notches every ½" at top and bottom. Shed stick creates alternating sheds. Shuttle carries weft. Beat each pass with a comb or fork.</figcaption>
-        </figure>
+        <figure class="dg" id="fig-loom">
+      <svg viewBox="0 0 444 320" role="img" aria-label="Frame loom: warp threads stretched between nails on a wooden frame, a shed stick woven through, a shuttle carrying weft across, and finished plain weave at the bottom"><defs><marker id="ah-lm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><g data-hl="frame"><path class="dg-wood" d="M20 40 L280 40 L280 290 L20 290 Z M36 56 L264 56 L264 274 L36 274 Z" fill-rule="evenodd"/></g><g data-hl="warp"><line class="dg-line" x1="48" y1="48" x2="48" y2="282" stroke-width="1.6"/><line class="dg-line" x1="61" y1="48" x2="61" y2="282" stroke-width="1.6"/><line class="dg-line" x1="74" y1="48" x2="74" y2="282" stroke-width="1.6"/><line class="dg-line" x1="87" y1="48" x2="87" y2="282" stroke-width="1.6"/><line class="dg-line" x1="100" y1="48" x2="100" y2="282" stroke-width="1.6"/><line class="dg-line" x1="113" y1="48" x2="113" y2="282" stroke-width="1.6"/><line class="dg-line" x1="126" y1="48" x2="126" y2="282" stroke-width="1.6"/><line class="dg-line" x1="139" y1="48" x2="139" y2="282" stroke-width="1.6"/><line class="dg-line" x1="152" y1="48" x2="152" y2="282" stroke-width="1.6"/><line class="dg-line" x1="165" y1="48" x2="165" y2="282" stroke-width="1.6"/><line class="dg-line" x1="178" y1="48" x2="178" y2="282" stroke-width="1.6"/><line class="dg-line" x1="191" y1="48" x2="191" y2="282" stroke-width="1.6"/><line class="dg-line" x1="204" y1="48" x2="204" y2="282" stroke-width="1.6"/><line class="dg-line" x1="217" y1="48" x2="217" y2="282" stroke-width="1.6"/><line class="dg-line" x1="230" y1="48" x2="230" y2="282" stroke-width="1.6"/><line class="dg-line" x1="243" y1="48" x2="243" y2="282" stroke-width="1.6"/><circle class="dg-keyf" cx="48" cy="48" r="2.4"/><circle class="dg-keyf" cx="48" cy="282" r="2.4"/><circle class="dg-keyf" cx="61" cy="48" r="2.4"/><circle class="dg-keyf" cx="61" cy="282" r="2.4"/><circle class="dg-keyf" cx="74" cy="48" r="2.4"/><circle class="dg-keyf" cx="74" cy="282" r="2.4"/><circle class="dg-keyf" cx="87" cy="48" r="2.4"/><circle class="dg-keyf" cx="87" cy="282" r="2.4"/><circle class="dg-keyf" cx="100" cy="48" r="2.4"/><circle class="dg-keyf" cx="100" cy="282" r="2.4"/><circle class="dg-keyf" cx="113" cy="48" r="2.4"/><circle class="dg-keyf" cx="113" cy="282" r="2.4"/><circle class="dg-keyf" cx="126" cy="48" r="2.4"/><circle class="dg-keyf" cx="126" cy="282" r="2.4"/><circle class="dg-keyf" cx="139" cy="48" r="2.4"/><circle class="dg-keyf" cx="139" cy="282" r="2.4"/><circle class="dg-keyf" cx="152" cy="48" r="2.4"/><circle class="dg-keyf" cx="152" cy="282" r="2.4"/><circle class="dg-keyf" cx="165" cy="48" r="2.4"/><circle class="dg-keyf" cx="165" cy="282" r="2.4"/><circle class="dg-keyf" cx="178" cy="48" r="2.4"/><circle class="dg-keyf" cx="178" cy="282" r="2.4"/><circle class="dg-keyf" cx="191" cy="48" r="2.4"/><circle class="dg-keyf" cx="191" cy="282" r="2.4"/><circle class="dg-keyf" cx="204" cy="48" r="2.4"/><circle class="dg-keyf" cx="204" cy="282" r="2.4"/><circle class="dg-keyf" cx="217" cy="48" r="2.4"/><circle class="dg-keyf" cx="217" cy="282" r="2.4"/><circle class="dg-keyf" cx="230" cy="48" r="2.4"/><circle class="dg-keyf" cx="230" cy="282" r="2.4"/><circle class="dg-keyf" cx="243" cy="48" r="2.4"/><circle class="dg-keyf" cx="243" cy="282" r="2.4"/></g><g data-hl="weft"><line class="dg-key-s" x1="44" y1="264" x2="247" y2="264" stroke-width="4"/><line class="dg-line" x1="48" y1="261" x2="48" y2="267" stroke-width="1.6"/><line class="dg-line" x1="74" y1="261" x2="74" y2="267" stroke-width="1.6"/><line class="dg-line" x1="100" y1="261" x2="100" y2="267" stroke-width="1.6"/><line class="dg-line" x1="126" y1="261" x2="126" y2="267" stroke-width="1.6"/><line class="dg-line" x1="152" y1="261" x2="152" y2="267" stroke-width="1.6"/><line class="dg-line" x1="178" y1="261" x2="178" y2="267" stroke-width="1.6"/><line class="dg-line" x1="204" y1="261" x2="204" y2="267" stroke-width="1.6"/><line class="dg-line" x1="230" y1="261" x2="230" y2="267" stroke-width="1.6"/><line class="dg-key-s" x1="44" y1="258" x2="247" y2="258" stroke-width="4"/><line class="dg-line" x1="61" y1="255" x2="61" y2="261" stroke-width="1.6"/><line class="dg-line" x1="87" y1="255" x2="87" y2="261" stroke-width="1.6"/><line class="dg-line" x1="113" y1="255" x2="113" y2="261" stroke-width="1.6"/><line class="dg-line" x1="139" y1="255" x2="139" y2="261" stroke-width="1.6"/><line class="dg-line" x1="165" y1="255" x2="165" y2="261" stroke-width="1.6"/><line class="dg-line" x1="191" y1="255" x2="191" y2="261" stroke-width="1.6"/><line class="dg-line" x1="217" y1="255" x2="217" y2="261" stroke-width="1.6"/><line class="dg-line" x1="243" y1="255" x2="243" y2="261" stroke-width="1.6"/><line class="dg-key-s" x1="44" y1="252" x2="247" y2="252" stroke-width="4"/><line class="dg-line" x1="48" y1="249" x2="48" y2="255" stroke-width="1.6"/><line class="dg-line" x1="74" y1="249" x2="74" y2="255" stroke-width="1.6"/><line class="dg-line" x1="100" y1="249" x2="100" y2="255" stroke-width="1.6"/><line class="dg-line" x1="126" y1="249" x2="126" y2="255" stroke-width="1.6"/><line class="dg-line" x1="152" y1="249" x2="152" y2="255" stroke-width="1.6"/><line class="dg-line" x1="178" y1="249" x2="178" y2="255" stroke-width="1.6"/><line class="dg-line" x1="204" y1="249" x2="204" y2="255" stroke-width="1.6"/><line class="dg-line" x1="230" y1="249" x2="230" y2="255" stroke-width="1.6"/><line class="dg-key-s" x1="44" y1="246" x2="247" y2="246" stroke-width="4"/><line class="dg-line" x1="61" y1="243" x2="61" y2="249" stroke-width="1.6"/><line class="dg-line" x1="87" y1="243" x2="87" y2="249" stroke-width="1.6"/><line class="dg-line" x1="113" y1="243" x2="113" y2="249" stroke-width="1.6"/><line class="dg-line" x1="139" y1="243" x2="139" y2="249" stroke-width="1.6"/><line class="dg-line" x1="165" y1="243" x2="165" y2="249" stroke-width="1.6"/><line class="dg-line" x1="191" y1="243" x2="191" y2="249" stroke-width="1.6"/><line class="dg-line" x1="217" y1="243" x2="217" y2="249" stroke-width="1.6"/><line class="dg-line" x1="243" y1="243" x2="243" y2="249" stroke-width="1.6"/><line class="dg-key-s" x1="44" y1="240" x2="247" y2="240" stroke-width="4"/><line class="dg-line" x1="48" y1="237" x2="48" y2="243" stroke-width="1.6"/><line class="dg-line" x1="74" y1="237" x2="74" y2="243" stroke-width="1.6"/><line class="dg-line" x1="100" y1="237" x2="100" y2="243" stroke-width="1.6"/><line class="dg-line" x1="126" y1="237" x2="126" y2="243" stroke-width="1.6"/><line class="dg-line" x1="152" y1="237" x2="152" y2="243" stroke-width="1.6"/><line class="dg-line" x1="178" y1="237" x2="178" y2="243" stroke-width="1.6"/><line class="dg-line" x1="204" y1="237" x2="204" y2="243" stroke-width="1.6"/><line class="dg-line" x1="230" y1="237" x2="230" y2="243" stroke-width="1.6"/><line class="dg-key-s" x1="44" y1="234" x2="247" y2="234" stroke-width="4"/><line class="dg-line" x1="61" y1="231" x2="61" y2="237" stroke-width="1.6"/><line class="dg-line" x1="87" y1="231" x2="87" y2="237" stroke-width="1.6"/><line class="dg-line" x1="113" y1="231" x2="113" y2="237" stroke-width="1.6"/><line class="dg-line" x1="139" y1="231" x2="139" y2="237" stroke-width="1.6"/><line class="dg-line" x1="165" y1="231" x2="165" y2="237" stroke-width="1.6"/><line class="dg-line" x1="191" y1="231" x2="191" y2="237" stroke-width="1.6"/><line class="dg-line" x1="217" y1="231" x2="217" y2="237" stroke-width="1.6"/><line class="dg-line" x1="243" y1="231" x2="243" y2="237" stroke-width="1.6"/><line class="dg-key-s" x1="44" y1="228" x2="247" y2="228" stroke-width="4"/><line class="dg-line" x1="48" y1="225" x2="48" y2="231" stroke-width="1.6"/><line class="dg-line" x1="74" y1="225" x2="74" y2="231" stroke-width="1.6"/><line class="dg-line" x1="100" y1="225" x2="100" y2="231" stroke-width="1.6"/><line class="dg-line" x1="126" y1="225" x2="126" y2="231" stroke-width="1.6"/><line class="dg-line" x1="152" y1="225" x2="152" y2="231" stroke-width="1.6"/><line class="dg-line" x1="178" y1="225" x2="178" y2="231" stroke-width="1.6"/><line class="dg-line" x1="204" y1="225" x2="204" y2="231" stroke-width="1.6"/><line class="dg-line" x1="230" y1="225" x2="230" y2="231" stroke-width="1.6"/><line class="dg-key-s" x1="44" y1="222" x2="247" y2="222" stroke-width="4"/><line class="dg-line" x1="61" y1="219" x2="61" y2="225" stroke-width="1.6"/><line class="dg-line" x1="87" y1="219" x2="87" y2="225" stroke-width="1.6"/><line class="dg-line" x1="113" y1="219" x2="113" y2="225" stroke-width="1.6"/><line class="dg-line" x1="139" y1="219" x2="139" y2="225" stroke-width="1.6"/><line class="dg-line" x1="165" y1="219" x2="165" y2="225" stroke-width="1.6"/><line class="dg-line" x1="191" y1="219" x2="191" y2="225" stroke-width="1.6"/><line class="dg-line" x1="217" y1="219" x2="217" y2="225" stroke-width="1.6"/><line class="dg-line" x1="243" y1="219" x2="243" y2="225" stroke-width="1.6"/><line class="dg-key-s" x1="44" y1="216" x2="247" y2="216" stroke-width="4"/><line class="dg-line" x1="48" y1="213" x2="48" y2="219" stroke-width="1.6"/><line class="dg-line" x1="74" y1="213" x2="74" y2="219" stroke-width="1.6"/><line class="dg-line" x1="100" y1="213" x2="100" y2="219" stroke-width="1.6"/><line class="dg-line" x1="126" y1="213" x2="126" y2="219" stroke-width="1.6"/><line class="dg-line" x1="152" y1="213" x2="152" y2="219" stroke-width="1.6"/><line class="dg-line" x1="178" y1="213" x2="178" y2="219" stroke-width="1.6"/><line class="dg-line" x1="204" y1="213" x2="204" y2="219" stroke-width="1.6"/><line class="dg-line" x1="230" y1="213" x2="230" y2="219" stroke-width="1.6"/></g><g data-hl="shed"><rect class="dg-wood" x="34" y="120" width="234" height="10" rx="4"/><line class="dg-line" x1="48" y1="118" x2="48" y2="132" stroke-width="1.6"/><line class="dg-line" x1="74" y1="118" x2="74" y2="132" stroke-width="1.6"/><line class="dg-line" x1="100" y1="118" x2="100" y2="132" stroke-width="1.6"/><line class="dg-line" x1="126" y1="118" x2="126" y2="132" stroke-width="1.6"/><line class="dg-line" x1="152" y1="118" x2="152" y2="132" stroke-width="1.6"/><line class="dg-line" x1="178" y1="118" x2="178" y2="132" stroke-width="1.6"/><line class="dg-line" x1="204" y1="118" x2="204" y2="132" stroke-width="1.6"/><line class="dg-line" x1="230" y1="118" x2="230" y2="132" stroke-width="1.6"/></g><g data-hl="shut"><rect class="dg-key" x="96" y="186" width="120" height="14" rx="7"/><path class="dg-arrow" d="M220 193 L262 193" marker-end="url(#ah-lm)"/></g><rect class="dg-panel" x="112" y="205" width="76" height="18" rx="4"/><text class="dg-tb dg-tb-sm dg-mid" x="150" y="218" data-hl="weft">beat down ↓</text><text class="dg-th dg-mid" x="150" y="30">FRAME LOOM</text><rect class="dg-panel" x="112" y="137" width="76" height="18" rx="4"/><text class="dg-tb dg-mid" x="150" y="150" data-hl="shed">SHED STICK</text><text class="dg-tb dg-mid" x="156" y="197" data-hl="shut">SHUTTLE</text><text class="dg-ts dg-mid" x="150" y="312" data-hl="warp">nails every ½ in, top and bottom · learning size 12 × 18 in</text><text class="dg-tb" x="296" y="56" data-hl="warp">WARP</text><text class="dg-ts" x="296" y="69" data-hl="warp">threads held tight</text><text class="dg-ts" x="296" y="81" data-hl="warp">top to bottom</text><text class="dg-tb" x="296" y="104" data-hl="weft">WEFT</text><text class="dg-ts" x="296" y="117" data-hl="weft">thread carried across</text><text class="dg-ts" x="296" y="129" data-hl="weft">by the shuttle</text><text class="dg-tb" x="296" y="152" data-hl="shed">SHED</text><text class="dg-ts" x="296" y="165" data-hl="shed">the gap opened between</text><text class="dg-ts" x="296" y="177" data-hl="shed">odd and even warps</text><text class="dg-tb" x="296" y="200" data-hl="warp">SETT</text><text class="dg-ts" x="296" y="213" data-hl="warp">warp ends per inch</text><text class="dg-ts" x="296" y="225" data-hl="warp">(epi)</text><text class="dg-tb" x="296" y="248" data-hl="weft">BEAT</text><text class="dg-ts" x="296" y="261" data-hl="weft">push each pass down</text><text class="dg-ts" x="296" y="273" data-hl="weft">with a comb or fork</text></svg>
+      <figcaption>Four lengths of 2×2 lumber and a row of nails top and bottom. Turn the shed stick on edge to lift alternate warps, pass the shuttle through, then lay it flat and pick up the other set by hand for the return pass. Beat each pass down.</figcaption>
+    </figure>
 
         <div class="two-col">
           <div>
             <h4>Construction</h4>
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li>4 pieces 2×2 (or 1×3) lumber, screwed or nailed at corners</li>
               <li>Notches or nails every ½" along top and bottom bars</li>
               <li>Learning size: 12"×18"; fabric-width: 24"×36"</li>
@@ -382,7 +336,7 @@
           </div>
           <div>
             <h4>Sett (Warp Density)</h4>
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li><strong>Bulky yarn:</strong> 4–6 epi</li>
               <li><strong>Worsted:</strong> 8–10 epi</li>
               <li><strong>DK:</strong> 10–12 epi</li>
@@ -393,22 +347,16 @@
         </div>
 
         <h3>Basic Weave Structures</h3>
-        <pre class="diagram">
-PLAIN WEAVE (over 1, under 1) — balanced cloth:
-  ━━━━━━━━━━━━━━━━━━━━━━  ← weft pass
-  │ │ │ │ │ │ │ │ │ │ │  ← warp threads
-  ━━━━━━━━━━━━━━━━━━━━━━
-  │ │ │ │ │ │ │ │ │ │ │
-  Pass 1: shuttle over odd warps, under even
-  Pass 2: shuttle over even warps, under odd
+    <!--fig-weaves-->
+    <figure class="dg" id="fig-weaves">
+      <svg viewBox="0 0 444 204" class="dg-truecolor" role="img" aria-label="Plain weave: each weft thread goes over one warp and under the next, alternating each row, giving a checkerboard; twill: over two, under one, shifting one thread each row, giving diagonal ribs"><defs><marker id="ah-fig-weaves" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><text class="dg-th dg-mid" x="222" y="18">PLAIN WEAVE vs TWILL</text><text class="dg-tb dg-tb-sm dg-mid" x="112" y="40">PLAIN — over 1, under 1</text><rect class="" x="20" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="41" y="50" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="56" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="77" y="50" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="92" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="113" y="50" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="128" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="149" y="50" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="164" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="185" y="50" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="23" y="66" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="38" y="68" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="59" y="66" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="74" y="68" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="95" y="66" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="110" y="68" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="131" y="66" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="146" y="68" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="167" y="66" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="182" y="68" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="20" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="41" y="82" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="56" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="77" y="82" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="92" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="113" y="82" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="128" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="149" y="82" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="164" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="185" y="82" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="23" y="98" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="38" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="59" y="98" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="74" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="95" y="98" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="110" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="131" y="98" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="146" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="167" y="98" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="182" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="20" y="116" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="41" y="114" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="56" y="116" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="77" y="114" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="92" y="116" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="113" y="114" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="128" y="116" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="149" y="114" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="164" y="116" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="185" y="114" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="23" y="130" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="38" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="59" y="130" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="74" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="95" y="130" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="110" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="131" y="130" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="146" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="167" y="130" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="182" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="20" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="41" y="146" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="56" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="77" y="146" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="92" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="113" y="146" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="128" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="149" y="146" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="164" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="185" y="146" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="23" y="162" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="38" y="164" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="59" y="162" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="74" y="164" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="95" y="162" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="110" y="164" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="131" y="162" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="146" y="164" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="167" y="162" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="182" y="164" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><text class="dg-tb dg-tb-sm dg-mid" x="326" y="40">TWILL — over 2, under 1, step 1</text><rect class="" x="234" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="252" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="273" y="50" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="288" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="306" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="327" y="50" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="342" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="360" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="381" y="50" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="396" y="52" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="237" y="66" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="252" y="68" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="270" y="68" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="291" y="66" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="306" y="68" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="324" y="68" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="345" y="66" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="360" y="68" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="378" y="68" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="399" y="66" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="234" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="255" y="82" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="270" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="288" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="309" y="82" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="324" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="342" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="363" y="82" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="378" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="396" y="84" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="234" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="252" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="273" y="98" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="288" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="306" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="327" y="98" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="342" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="360" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="381" y="98" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="396" y="100" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="237" y="114" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="252" y="116" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="270" y="116" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="291" y="114" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="306" y="116" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="324" y="116" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="345" y="114" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="360" y="116" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="378" y="116" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="399" y="114" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="234" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="255" y="130" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="270" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="288" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="309" y="130" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="324" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="342" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="363" y="130" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="378" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="396" y="132" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="234" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="252" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="273" y="146" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="288" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="306" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="327" y="146" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="342" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="360" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="381" y="146" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="396" y="148" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="237" y="162" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="252" y="164" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="270" y="164" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="291" y="162" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="306" y="164" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="324" y="164" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="345" y="162" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><rect class="" x="360" y="164" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="378" y="164" width="18" height="12" style="fill:#d4a843;stroke:#7a5a1a"/><rect class="" x="399" y="162" width="12" height="16" style="fill:#6fa3d8;stroke:#2a4a6a"/><text class="dg-ts dg-mid" x="222" y="198">blue = warp (on the loom), gold = weft (the shuttle thread)</text></svg>
+      <figcaption>Plain weave is the easiest and toughest for its weight. Twill drapes better and hides dirt — denim and most work cloth are twill.</figcaption>
+    </figure>
 
-TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
-  ━━━━━━━━━━━━━━━━━━━━━━
-  █ │ │ █ │ │ █ │ │ █ │  ← thread goes over 2
-  ━━━━━━━━━━━━━━━━━━━━━━
-    █ │ │ █ │ │ █ │ │ █  ← pattern shifts 1 warp each row
-  Result: diagonal rib — stronger, more drapey fabric
-  Denim, canvas, and most workwear are twill weave</pre>
+
+
+
+
 
         <h3>Other Loom Types</h3>
         <div class="info-grid">
@@ -422,7 +370,7 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
           </div>
           <div class="card">
             <h3>Warp-Weighted Loom</h3>
-            <p>Stands upright against wall. Warp hangs from top beam; clay, stone, or ceramic weights hang from warp groups to maintain tension. Weave from top down, pushing weft up. Excellent for heavy wool fabrics, rugs, and blankets. Nearly every European textile until 1200 AD was made on this loom.</p>
+            <p>Stands upright against wall. Warp hangs from top beam; clay, stone, or ceramic weights hang from warp groups to maintain tension. Weave from top down, pushing weft up. Excellent for heavy wool fabrics, rugs, and blankets. Much northern European cloth was woven on it until the treadle loom spread in the 11th–13th centuries.</p>
           </div>
           <div class="card">
             <h3>Rigid Heddle Loom</h3>
@@ -458,9 +406,9 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
         <div class="two-col">
           <div>
             <h4>Long-Tail Cast-On (Fastest, Most Stable)</h4>
-            <p style="font-size:0.88em;color:#ccc;">Make a slip knot leaving a long tail (about 1" per stitch needed). Loop tail over thumb, working yarn over index finger. Insert needle under thumb loop, catch working yarn, pull through loop on thumb. Adjust tension. Repeat. Creates a firm, elastic edge.</p>
+            <p style="font-size:0.88em;color:var(--text-1);">Make a slip knot leaving a long tail (about 1" per stitch needed). Loop tail over thumb, working yarn over index finger. Insert needle under thumb loop, catch working yarn, pull through loop on thumb. Adjust tension. Repeat. Creates a firm, elastic edge.</p>
             <h4>The Two Core Stitches</h4>
-            <ul style="font-size:0.88em;color:#ccc;">
+            <ul style="font-size:0.88em;color:var(--text-1);">
               <li><strong>Knit (k):</strong> Needle enters stitch from left to right; pull loop through front</li>
               <li><strong>Purl (p):</strong> Needle enters stitch from right to left from front; pull loop through back</li>
               <li>All knitting is combinations of these two</li>
@@ -468,7 +416,7 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
           </div>
           <div>
             <h4>Fabric Types by Stitch Pattern</h4>
-            <ul style="font-size:0.88em;color:#ccc;">
+            <ul style="font-size:0.88em;color:var(--text-1);">
               <li><strong>Stockinette</strong> (k RS, p WS): Smooth, stretchy, most common. Curls at edges.</li>
               <li><strong>Garter</strong> (k every row): Flat, textured, reversible. Good for borders and scarves.</li>
               <li><strong>Rib</strong> (k1p1 or k2p2): Very elastic. Essential for cuffs, hat brims, sock tops.</li>
@@ -481,7 +429,7 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
         <ul class="priority-list">
           <li><strong>Socks</strong> — Most critical. Foot wounds are disabling and slow to heal. Machine-knit socks wear out first. Knit toe-up on DPNs. One pair: 6–8 hours. Use thick wool worsted for durability.</li>
           <li><strong>Mittens</strong> — Warmer than gloves (shared heat between fingers). Faster to knit. Cold hands lose dexterity rapidly. A pair takes 3–5 hours.</li>
-          <li><strong>Hat</strong> — Up to 30% of body heat lost through an uncovered head. Simple hat (knit in round, decrease at crown) takes 2–4 hours.</li>
+          <li><strong>Hat</strong> — the head loses heat roughly in proportion to its area (about a tenth), more when it’s the only part left uncovered. Simple hat (knit in round, decrease at crown) takes 2–4 hours.</li>
           <li><strong>Sweater</strong> — 40–60 hours of work for adult size. Labor-intensive but irreplaceable warmth return per hour. Work bottom-up in one piece when possible to minimize seaming.</li>
         </ul>
 
@@ -500,7 +448,100 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
         </div>
 
         <h3>Priority Crochet Items</h3>
-        <ul style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+        <ul style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
+          <li><strong>Net bags / market bags:</strong> Chain stitch grid, no pattern needed. Strong, stretchy, minimal yarn. Essential for foraging and storage.</li>
+          <li><strong>Baskets:</strong> Work in the round with bulky yarn or multiple strands, over a core of rope or twine. Structural without pattern.</li>
+          <li><strong>Dishcloths and pot holders:</strong> Quick, practical, high turnover. 20–30 minutes each. Use cotton or linen fiber.</li>
+          <li><strong>Granny squares from scraps:</strong> Build from waste yarn; join into blankets or patch garments. Nothing wasted.</li>
+        </ul>
+
+        <!-- ═══ SECTION 5: SEWING ═══ -->
+        <h2 id="sewing">5. Sewing</h2>
+        <p>Hand sewing requires only a needle and thread and can repair and create any garment. Six stitches cover essentially every need.</p>
+
+        <h3>Six Essential Hand Stitches</h3>
+
+        <!--fig-stitches-->
+    <figure class="dg" id="fig-stitches">
+      <svg viewBox="0 0 444 300" role="img" aria-label="Six hand stitches: running stitch in and out; backstitch with each stitch going back to meet the last; whipstitch wrapping over two edges; blanket stitch looping along an edge; darning weaving across a hole; ladder stitch alternating between two folded edges"><defs><marker id="ah-fig-stitches" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><text class="dg-th dg-mid" x="222" y="18">SIX HAND STITCHES</text><rect class="dg-panel" x="10" y="28" width="208" height="84" rx="8"/><text class="dg-tb dg-tb-sm" x="20" y="44">1 Running</text><rect class="dg-earth" x="24" y="64" width="180" height="24"/><line class="dg-key-s" x1="30" y1="76" x2="46" y2="76"/><line class="dg-key-s" x1="60" y1="76" x2="76" y2="76"/><line class="dg-key-s" x1="90" y1="76" x2="106" y2="76"/><line class="dg-key-s" x1="120" y1="76" x2="136" y2="76"/><line class="dg-key-s" x1="150" y1="76" x2="166" y2="76"/><line class="dg-key-s" x1="180" y1="76" x2="196" y2="76"/><rect class="dg-panel" x="226" y="28" width="208" height="84" rx="8"/><text class="dg-tb dg-tb-sm" x="236" y="44">2 Backstitch</text><rect class="dg-earth" x="240" y="64" width="180" height="24"/><line class="dg-key-s" x1="246" y1="76" x2="270" y2="76"/><line class="dg-key-s" x1="272" y1="76" x2="296" y2="76"/><line class="dg-key-s" x1="298" y1="76" x2="322" y2="76"/><line class="dg-key-s" x1="324" y1="76" x2="348" y2="76"/><line class="dg-key-s" x1="350" y1="76" x2="374" y2="76"/><line class="dg-key-s" x1="376" y1="76" x2="400" y2="76"/><text class="dg-ts dg-mid" x="346" y="104">each stitch goes back to meet the last</text><rect class="dg-panel" x="10" y="118" width="208" height="84" rx="8"/><text class="dg-tb dg-tb-sm" x="20" y="134">3 Whipstitch</text><rect class="dg-earth" x="24" y="148" width="180" height="14"/><rect class="dg-wood" x="24" y="164" width="180" height="14"/><line class="dg-key-s" x1="34" y1="182" x2="44" y2="144"/><line class="dg-key-s" x1="56" y1="182" x2="66" y2="144"/><line class="dg-key-s" x1="78" y1="182" x2="88" y2="144"/><line class="dg-key-s" x1="100" y1="182" x2="110" y2="144"/><line class="dg-key-s" x1="122" y1="182" x2="132" y2="144"/><line class="dg-key-s" x1="144" y1="182" x2="154" y2="144"/><line class="dg-key-s" x1="166" y1="182" x2="176" y2="144"/><line class="dg-key-s" x1="188" y1="182" x2="198" y2="144"/><rect class="dg-panel" x="226" y="118" width="208" height="84" rx="8"/><text class="dg-tb dg-tb-sm" x="236" y="134">4 Blanket</text><rect class="dg-earth" x="240" y="148" width="180" height="24"/><path class="dg-key-s" d="M246 172 l0 -16 l0 16 h22 l0 -16 l0 16 h22 l0 -16 l0 16 h22 l0 -16 l0 16 h22 l0 -16 l0 16 h22 l0 -16 l0 16 h22 l0 -16 l0 16 h22" fill="none"/><text class="dg-ts dg-mid" x="330" y="194">loops lock along the edge</text><rect class="dg-panel" x="10" y="208" width="208" height="84" rx="8"/><text class="dg-tb dg-tb-sm" x="20" y="224">5 Darning</text><circle class="dg-panel" cx="114" cy="258" r="22"/><line class="dg-blue-s" x1="92" y1="236" x2="92" y2="280" stroke-width="1.5"/><line class="dg-blue-s" x1="98" y1="236" x2="98" y2="280" stroke-width="1.5"/><line class="dg-blue-s" x1="104" y1="236" x2="104" y2="280" stroke-width="1.5"/><line class="dg-blue-s" x1="110" y1="236" x2="110" y2="280" stroke-width="1.5"/><line class="dg-blue-s" x1="116" y1="236" x2="116" y2="280" stroke-width="1.5"/><line class="dg-blue-s" x1="122" y1="236" x2="122" y2="280" stroke-width="1.5"/><line class="dg-blue-s" x1="128" y1="236" x2="128" y2="280" stroke-width="1.5"/><line class="dg-blue-s" x1="134" y1="236" x2="134" y2="280" stroke-width="1.5"/><line class="dg-key-s" x1="90" y1="240" x2="138" y2="240" stroke-width="1.5" stroke-dasharray="6 6" stroke-dashoffset="6"/><line class="dg-key-s" x1="90" y1="246" x2="138" y2="246" stroke-width="1.5" stroke-dasharray="6 6"/><line class="dg-key-s" x1="90" y1="252" x2="138" y2="252" stroke-width="1.5" stroke-dasharray="6 6" stroke-dashoffset="6"/><line class="dg-key-s" x1="90" y1="258" x2="138" y2="258" stroke-width="1.5" stroke-dasharray="6 6"/><line class="dg-key-s" x1="90" y1="264" x2="138" y2="264" stroke-width="1.5" stroke-dasharray="6 6" stroke-dashoffset="6"/><line class="dg-key-s" x1="90" y1="270" x2="138" y2="270" stroke-width="1.5" stroke-dasharray="6 6"/><line class="dg-key-s" x1="90" y1="276" x2="138" y2="276" stroke-width="1.5" stroke-dasharray="6 6" stroke-dashoffset="6"/><text class="dg-ts" x="144" y="260">weave across</text><rect class="dg-panel" x="226" y="208" width="208" height="84" rx="8"/><text class="dg-tb dg-tb-sm" x="236" y="224">6 Ladder</text><rect class="dg-earth" x="240" y="238" width="180" height="12"/><rect class="dg-earth" x="240" y="262" width="180" height="12"/><path class="dg-key-s" d="M248 250 l0 12 l20 0 l0 -12 l20 0 l0 12 l20 0 l0 -12 l20 0 l0 12 l20 0 l0 -12 l20 0 l0 12 l20 0 l0 -12 l20 0" fill="none"/><text class="dg-ts dg-mid" x="330" y="288">pull tight: the seam vanishes</text></svg>
+      <figcaption>Backstitch is the strong seam; running stitch is quick but weak; blanket stitch stops edges fraying; ladder stitch closes a seam invisibly.</figcaption>
+    </figure>
+
+
+
+
+
+        <ul>
+
+        </ul>
+
+        <h3>Making Needles</h3>
+        <div class="tool-grid">
+          <div class="tool-item">
+            <strong>Straight Needles (wood)</strong>
+            Sand dowels smooth; sharpen one end to gentle taper (not sharp — snags yarn). Diameter = needle size: 3mm sock, 5mm worsted, 8mm bulky. 9–14" length. Finish with beeswax for smooth yarn flow.
+          </div>
+          <div class="tool-item">
+            <strong>DPNs (double-pointed)</strong>
+            6–8" length, pointed both ends. Set of 4–5 needed. For tubes: socks, mittens, hats in the round. Bamboo skewers work in a pinch for fine yarn. Mark one needle with a rubber band to track round starts.
+          </div>
+          <div class="tool-item">
+            <strong>Circular (wire)</strong>
+            Straighten coat hanger wire; file ends smooth; slight bend at each end as tips. Flexible thinner wire in middle for large-circumference knitting. For sweater bodies, large hats, blanket edges.
+          </div>
+          <div class="tool-item">
+            <strong>Crochet Hook</strong>
+            Any smooth hardwood dowel. Carve or sand a smooth hook curve at one end; groove below hook catches yarn. Hook depth and throat shape matter — practice until yarn slides easily without catching.
+          </div>
+        </div>
+
+        <h3>Essential Knitting</h3>
+        <div class="two-col">
+          <div>
+            <h4>Long-Tail Cast-On (Fastest, Most Stable)</h4>
+            <p style="font-size:0.88em;color:var(--text-1);">Make a slip knot leaving a long tail (about 1" per stitch needed). Loop tail over thumb, working yarn over index finger. Insert needle under thumb loop, catch working yarn, pull through loop on thumb. Adjust tension. Repeat. Creates a firm, elastic edge.</p>
+            <h4>The Two Core Stitches</h4>
+            <ul style="font-size:0.88em;color:var(--text-1);">
+              <li><strong>Knit (k):</strong> Needle enters stitch from left to right; pull loop through front</li>
+              <li><strong>Purl (p):</strong> Needle enters stitch from right to left from front; pull loop through back</li>
+              <li>All knitting is combinations of these two</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Fabric Types by Stitch Pattern</h4>
+            <ul style="font-size:0.88em;color:var(--text-1);">
+              <li><strong>Stockinette</strong> (k RS, p WS): Smooth, stretchy, most common. Curls at edges.</li>
+              <li><strong>Garter</strong> (k every row): Flat, textured, reversible. Good for borders and scarves.</li>
+              <li><strong>Rib</strong> (k1p1 or k2p2): Very elastic. Essential for cuffs, hat brims, sock tops.</li>
+              <li><strong>Seed stitch</strong> (k1p1, alternate each row): Dense, flat-lying, textured. Good insulation and warmth.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Priority Knitting Projects</h3>
+        <ul class="priority-list">
+          <li><strong>Socks</strong> — Most critical. Foot wounds are disabling and slow to heal. Machine-knit socks wear out first. Knit toe-up on DPNs. One pair: 6–8 hours. Use thick wool worsted for durability.</li>
+          <li><strong>Mittens</strong> — Warmer than gloves (shared heat between fingers). Faster to knit. Cold hands lose dexterity rapidly. A pair takes 3–5 hours.</li>
+          <li><strong>Hat</strong> — the head loses heat roughly in proportion to its area (about a tenth), more when it’s the only part left uncovered. Simple hat (knit in round, decrease at crown) takes 2–4 hours.</li>
+          <li><strong>Sweater</strong> — 40–60 hours of work for adult size. Labor-intensive but irreplaceable warmth return per hour. Work bottom-up in one piece when possible to minimize seaming.</li>
+        </ul>
+
+        <h3>Crochet</h3>
+        <div class="fiber-card">
+          <h4>Hook Making</h4>
+          <p>Any smooth hardwood dowel. Carve or sand a smooth hook curve at one end; cut a groove below the hook to catch yarn; finish with fine sandpaper. The hook depth and throat angle matter — test with scrap yarn before committing to a project.</p>
+        </div>
+        <div class="fiber-card">
+          <h4>Two Stitches That Cover Most Needs</h4>
+          <p><strong>Single crochet (sc):</strong> Insert hook, yarn over, pull through (2 loops on hook), yarn over, pull through both loops. Short dense stitch. Good for bags, pot holders, baskets.</p>
+          <p><strong>Double crochet (dc):</strong> Yarn over first, insert hook, pull through (3 loops on hook), [yarn over, pull through 2 loops] twice. Taller stitch, faster work, more drape. Good for blankets and garment fabric.</p>
+        </div>
+        <div class="callout-tip">
+          <strong>Crochet structural advantage:</strong> Crochet cannot unravel from a single broken stitch the way knitting can. Each crochet stitch holds independently. More forgiving for repairs and better suited to rough-use items.
+        </div>
+
+        <h3>Priority Crochet Items</h3>
+        <ul style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
           <li><strong>Net bags / market bags:</strong> Chain stitch grid, no pattern needed. Strong, stretchy, minimal yarn. Essential for foraging and storage.</li>
           <li><strong>Baskets:</strong> Work in the round with bulky yarn or multiple strands, over a core of rope or twine. Structural without pattern.</li>
           <li><strong>Dishcloths and pot holders:</strong> Quick, practical, high turnover. 20–30 minutes each. Use cotton or linen fiber.</li>
@@ -604,45 +645,11 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
           <summary>Medieval Tunic — The Universal Garment</summary>
           <div style="padding:0.75rem 0 0 0;">
             <!-- SVG 3: Tunic Cutting Diagram -->
-            <figure class="svg-figure">
-              <svg viewBox="0 0 480 270" width="450" height="270" xmlns="http://www.w3.org/2000/svg" aria-label="Medieval tunic cutting layout: front body, back body, two sleeves, two gusset squares">
-                <rect width="480" height="270" fill="#070a09" rx="4"/>
-                <!-- Front body -->
-                <rect x="20" y="40" width="105" height="185" fill="#1a0d00" stroke="#c9a94e" stroke-width="1.5"/>
-                <text x="72" y="130" fill="#c9a94e" font-size="12" font-family="monospace" text-anchor="middle">FRONT</text>
-                <text x="72" y="146" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">shoulder-to-</text>
-                <text x="72" y="158" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">shoulder + 4"</text>
-                <!-- Neck cut on front -->
-                <ellipse cx="72" cy="40" rx="18" ry="10" fill="#070a09" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
-                <text x="72" y="30" fill="#888" font-size="8" font-family="monospace" text-anchor="middle">cut neck</text>
-                <!-- Back body -->
-                <rect x="140" y="40" width="105" height="185" fill="#1a0d00" stroke="#c9a94e" stroke-width="1.5"/>
-                <text x="192" y="130" fill="#c9a94e" font-size="12" font-family="monospace" text-anchor="middle">BACK</text>
-                <text x="192" y="146" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">same width</text>
-                <text x="192" y="158" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">as front</text>
-                <!-- Sleeve 1 (tapered) -->
-                <path d="M264 50 L354 50 L334 210 L264 210 Z" fill="#120800" stroke="#c9a94e" stroke-width="1.5"/>
-                <text x="305" y="128" fill="#c9a94e" font-size="12" font-family="monospace" text-anchor="middle">SLEEVE</text>
-                <text x="305" y="143" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">× 2</text>
-                <text x="305" y="156" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">tapers to</text>
-                <text x="305" y="168" fill="#888" font-size="9" font-family="monospace" text-anchor="middle">wrist width</text>
-                <!-- Gusset squares -->
-                <rect x="374" y="80" width="48" height="48" fill="#050a00" stroke="#c9a94e" stroke-width="1.5"/>
-                <text x="398" y="102" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle">GUSSET</text>
-                <text x="398" y="115" fill="#888" font-size="8" font-family="monospace" text-anchor="middle">× 2</text>
-                <rect x="430" y="80" width="40" height="40" fill="#050a00" stroke="#5c4010" stroke-width="1" stroke-dasharray="3,2"/>
-                <!-- Dimension callouts -->
-                <line x1="20" y1="238" x2="125" y2="238" stroke="#5c4a1e" stroke-width="1"/>
-                <text x="72" y="252" fill="#5c4a1e" font-size="9" font-family="monospace" text-anchor="middle">~22–28"</text>
-                <line x1="10" y1="40" x2="10" y2="225" stroke="#5c4a1e" stroke-width="1"/>
-                <text x="6" y="140" fill="#5c4a1e" font-size="8" font-family="monospace" text-anchor="middle" transform="rotate(-90,6,140)">knee or hip length</text>
-                <!-- Fold line indicators -->
-                <line x1="140" y1="133" x2="245" y2="133" stroke="#3a2a00" stroke-width="1" stroke-dasharray="4,3"/>
-                <text x="192" y="250" fill="#555" font-size="9" font-family="monospace" text-anchor="middle">sew front to back at shoulder, then sides</text>
-              </svg>
-              <figcaption>Medieval tunic layout — 2 body rectangles + 2 tapered sleeves + 2 underarm gussets. All straight cuts. Only curved cut is the neck opening.</figcaption>
-            </figure>
-            <ul style="font-size:0.9em;color:#ccc;">
+            <figure class="dg" id="fig-tunic">
+      <svg viewBox="0 0 444 300" role="img" aria-label="Tunic from rectangles: front and back body pieces, two tapered sleeves and two small square gussets; sewn up, with a gusset under each arm"><rect class="dg-panel" x="2" y="2" width="270" height="296" rx="9"/><text class="dg-th dg-mid" x="137.0" y="22">CUTTING LAYOUT</text><text class="dg-ts dg-mid" x="137.0" y="36">all straight cuts except the neck</text><g data-hl="body"><rect class="dg-key" x="18" y="48" width="74" height="180" rx="2"/><rect class="dg-key" x="100" y="48" width="74" height="180" rx="2"/></g><path class="dg-panel" d="M42 48 Q55 66 68 48 Z"/><text class="dg-tb dg-tb-sm dg-mid" x="55" y="140" data-hl="body">FRONT</text><text class="dg-tb dg-tb-sm dg-mid" x="137" y="140" data-hl="body">BACK</text><g data-hl="sleeve"><path class="dg-earth" d="M184 48 L258 48 L246 154 L196 154 Z"/><path class="dg-earth" d="M184 160 L258 160 L246 266 L196 266 Z" opacity=".8"/></g><text class="dg-tb dg-tb-sm dg-mid" x="221" y="100" data-hl="sleeve">SLEEVE</text><text class="dg-tb dg-tb-sm dg-mid" x="221" y="214" data-hl="sleeve">SLEEVE</text><g data-hl="gusset"><rect class="dg-green" x="40" y="256" width="24" height="24"/><rect class="dg-green" x="72" y="256" width="24" height="24"/></g><text class="dg-ts" x="104" y="272" data-hl="gusset">GUSSETS ~4 in square</text><text class="dg-ts dg-mid" x="55" y="70">neck</text><text class="dg-ts dg-mid" x="96" y="244" data-hl="body">each: shoulders + 4 in wide</text><rect class="dg-panel" x="278" y="2" width="164" height="296" rx="9"/><text class="dg-th dg-mid" x="360.0" y="22">SEWN UP</text><g data-hl="body"><path class="dg-key" d="M330 70 L390 70 L390 250 L330 250 Z"/></g><g data-hl="sleeve"><path class="dg-earth" d="M330 70 L290 160 L306 166 L330 116 Z M390 70 L430 160 L414 166 L390 116 Z"/></g><g data-hl="gusset"><path class="dg-green" d="M330 116 L322 104 L330 96 Z M390 116 L398 104 L390 96 Z"/></g><path class="dg-panel" d="M348 70 Q360 84 372 70 Z"/><text class="dg-ts dg-mid" x="360" y="270" data-hl="gusset">gusset in each armpit</text><text class="dg-ts dg-mid" x="360" y="282" data-hl="gusset">lets the arm move freely</text></svg>
+      <figcaption>Two body rectangles, two tapered sleeves, two small square gussets. Sew front to back at the shoulders, set in the sleeves with a gusset at each armpit, then sew the sides and sleeve seams. Scale the rectangles to fit anyone; belt it at the waist.</figcaption>
+    </figure>
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li><strong>Body:</strong> Two rectangles (front/back). Width = shoulder-to-shoulder + 4" ease. Length = desired hem from shoulder.</li>
               <li><strong>Sleeves:</strong> Two rectangles, tapered from armhole width to wrist width. Sew into tube; attach to body.</li>
               <li><strong>Gussets:</strong> Two small squares (~4"×4") inserted at each armpit. Critical for arm mobility without tearing the seam.</li>
@@ -655,7 +662,7 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
         <details>
           <summary>Norse Trousers — Four Rectangles + Two Gussets</summary>
           <div style="padding:0.75rem 0 0 0;">
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li><strong>Four leg panels:</strong> Two per leg. Width = thigh circumference ÷ 2 + 2" ease. Length = waist to ankle + 2" hem allowance.</li>
               <li><strong>Crotch gusset:</strong> Two triangles or diamonds sewn between front and back panels at crotch. Provides mobility without fitted shaping.</li>
               <li><strong>Waist:</strong> Fold top edge, sew channel, thread drawstring (cord or leather strip). Fits any waist size.</li>
@@ -667,7 +674,7 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
         <details>
           <summary>Drawstring Smock — Zero Fitting Required</summary>
           <div style="padding:0.75rem 0 0 0;">
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li><strong>Single large rectangle:</strong> Width = 2× desired shoulder-to-shoulder. Length = shoulder to hip or knee.</li>
               <li><strong>Neck channel:</strong> Fold top edge 2–3" and sew, leaving gaps on each side for drawstring. Insert cord and cinch to neck size.</li>
               <li>Works as pullover for any body size. Add rectangle sleeves for cold weather.</li>
@@ -682,7 +689,7 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
 
         <h3>Brain Tanning Process — Softest Leather</h3>
         <div class="callout-tip">
-          <strong>Every animal has enough brain to tan its own hide.</strong> This is literally true — the fat-to-hide ratio is consistent across mammals. Brain tanning produces the softest, most pliable leather; ideal for clothing, moccasins, and gloves.
+          <strong>Every animal has enough brain to tan its own hide.</strong> That is an old saying, roughly true for deer-sized animals; eggs work as a substitute. Brain tanning produces the softest, most pliable leather; ideal for clothing, moccasins, and gloves.
         </div>
         <div class="process-steps">
           <div class="process-step"><strong>Flesh the hide:</strong> Drape hide over a fleshing beam (smooth log). Remove all fat, membrane, and meat scraps with a fleshing tool — dull knife or shaped bone scraper. Work from center outward. Any remaining fat causes uneven tanning.</div>
@@ -707,24 +714,16 @@ TWILL WEAVE (over 2, under 1) — diagonal rib, more drape:
           <p><strong>Never single-thread leather.</strong> Saddle stitch uses two needles on one thread — each stitch passes both directions through every hole. If one thread breaks, all other stitches still hold. A machine stitch breaks at one point and the entire seam unzips.</p>
         </div>
 
-        <pre class="diagram">
-SADDLE STITCH — Two Needle Method:
+    <!--fig-saddle-->
+    <figure class="dg" id="fig-saddle">
+      <svg viewBox="0 0 444 160" role="img" aria-label="Saddle stitch: one thread with a needle at each end; both needles pass through every pre-punched hole from opposite sides, so the stitches on top and underneath are continuous"><defs><marker id="ah-fig-saddle" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"/></marker></defs><text class="dg-th dg-mid" x="222" y="18">SADDLE STITCH — TWO NEEDLES, ONE THREAD</text><rect class="dg-wood" x="30" y="60" width="384" height="40" rx="4"/><text class="dg-ts dg-mid" x="222" y="126">pre-punched holes 3–4 mm apart</text><circle class="dg-panel" cx="60" cy="80" r="3"/><line class="dg-key-s" x1="63" y1="62" x2="101" y2="62" stroke-width="3"/><line class="dg-blue-s" x1="63" y1="98" x2="101" y2="98" stroke-width="3"/><circle class="dg-panel" cx="104" cy="80" r="3"/><line class="dg-key-s" x1="107" y1="62" x2="145" y2="62" stroke-width="3"/><line class="dg-blue-s" x1="107" y1="98" x2="145" y2="98" stroke-width="3"/><circle class="dg-panel" cx="148" cy="80" r="3"/><line class="dg-key-s" x1="151" y1="62" x2="189" y2="62" stroke-width="3"/><line class="dg-blue-s" x1="151" y1="98" x2="189" y2="98" stroke-width="3"/><circle class="dg-panel" cx="192" cy="80" r="3"/><line class="dg-key-s" x1="195" y1="62" x2="233" y2="62" stroke-width="3"/><line class="dg-blue-s" x1="195" y1="98" x2="233" y2="98" stroke-width="3"/><circle class="dg-panel" cx="236" cy="80" r="3"/><line class="dg-key-s" x1="239" y1="62" x2="277" y2="62" stroke-width="3"/><line class="dg-blue-s" x1="239" y1="98" x2="277" y2="98" stroke-width="3"/><circle class="dg-panel" cx="280" cy="80" r="3"/><line class="dg-key-s" x1="283" y1="62" x2="321" y2="62" stroke-width="3"/><line class="dg-blue-s" x1="283" y1="98" x2="321" y2="98" stroke-width="3"/><circle class="dg-panel" cx="324" cy="80" r="3"/><line class="dg-key-s" x1="327" y1="62" x2="365" y2="62" stroke-width="3"/><line class="dg-blue-s" x1="327" y1="98" x2="365" y2="98" stroke-width="3"/><circle class="dg-panel" cx="368" cy="80" r="3"/><text class="dg-ts" x="30" y="52">needle A (top)</text><text class="dg-ts" x="30" y="116">needle B (bottom)</text><text class="dg-ts dg-mid" x="222" y="150">Both needles go through every hole: one broken stitch can’t unzip it.</text></svg>
+      <figcaption>Wax the thread well; finish by backstitching two or three holes. This is why hand-sewn leather outlasts machine stitching.</figcaption>
+    </figure>
 
-Needle A → →  ●  ← ← Needle B
-              │
-         [leather]
-              │
-Needle A ← ← ●  → → Needle B
 
-Step 1: Pre-punch ALL holes with awl before sewing (entire seam)
-Step 2: Thread both ends of ONE long piece of thread, one needle each end
-Step 3: Pass Needle A through first hole left-to-right
-Step 4: Pass Needle B through SAME hole right-to-left
-Step 5: Pull both snug. Move to next hole. Repeat.
-Step 6: Lock final stitch by backstitching 2–3 holes
 
-Spacing: 3–4mm for general work; 2mm for fine items (sheaths, wallets)
-Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre>
+
+
 
         <h3>Essential Leather Tools (All Can Be Made)</h3>
         <table class="data-table">
@@ -755,7 +754,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
 
         <h3>Making a Last (Foot Form)</h3>
         <p>A last is the foot-shaped form shoes are built on. Without one, shoes won't fit correctly and will cause blisters and injury.</p>
-        <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+        <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
           <li>Trace foot on paper. Transfer to wood. Cut foot silhouette from 1" thick board.</li>
           <li>Laminate boards or carve scrap wood to approximate foot depth — roughly 3–4" at ball, 2" at heel.</li>
           <li>Shape with knife and rasp. Must be slightly LARGER than foot (~3/8" at toe, ¼" at sides) to allow wearing.</li>
@@ -766,42 +765,13 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         <h3>Simple Moccasin — One Piece, 30–60 Minutes</h3>
 
         <!-- SVG 4: Moccasin Cutting Pattern -->
-        <figure class="svg-figure">
-          <svg viewBox="0 0 400 270" width="370" height="270" xmlns="http://www.w3.org/2000/svg" aria-label="Moccasin one-piece cutting pattern showing foot trace inside 2-inch margin, gather at toe, heel seam line">
-            <rect width="400" height="270" fill="#070a09" rx="4"/>
-            <!-- Outer cut line (2" margin all around) — dashed amber -->
-            <path d="M62 228 Q50 196 52 162 Q54 130 58 110 Q66 82 80 68 Q98 52 122 46 Q144 40 165 40 Q188 40 208 46 Q228 56 240 74 Q252 94 254 120 Q254 148 250 174 Q244 200 234 220 Q220 240 200 250 Q180 258 162 258 Q138 258 114 248 Q84 236 62 228 Z"
-              fill="#1a0d00" stroke="#c9a94e" stroke-width="2" stroke-dasharray="7,3"/>
-            <!-- Foot outline (inner) -->
-            <path d="M88 220 Q82 194 84 166 Q86 140 90 122 Q98 100 114 86 Q130 72 152 68 Q172 64 190 70 Q208 78 218 96 Q226 114 226 138 Q224 162 218 186 Q210 210 200 222 Q186 238 164 244 Q144 244 120 236 Q100 228 88 220 Z"
-              fill="#0a0500" stroke="#8B6914" stroke-width="1.5"/>
-            <!-- Foot label -->
-            <text x="165" y="158" fill="#8B6914" font-size="12" font-family="monospace" text-anchor="middle">foot trace</text>
-            <text x="165" y="174" fill="#555" font-size="10" font-family="monospace" text-anchor="middle">(your actual foot)</text>
-            <!-- 2" margin arrow -->
-            <line x1="88" y1="155" x2="62" y2="155" stroke="#c9a94e" stroke-width="1" stroke-dasharray="2,2"/>
-            <line x1="62" y1="145" x2="62" y2="165" stroke="#c9a94e" stroke-width="1"/>
-            <text x="34" y="158" fill="#c9a94e" font-size="10" font-family="monospace">2"</text>
-            <!-- Toe gather point -->
-            <circle cx="165" cy="40" r="6" fill="none" stroke="#e05050" stroke-width="2.5"/>
-            <text x="178" y="32" fill="#e05050" font-size="10" font-family="monospace">gather toe here</text>
-            <!-- Small cuts at toe (allow gathering) -->
-            <line x1="148" y1="40" x2="140" y2="52" stroke="#e05050" stroke-width="1.5" stroke-dasharray="3,2"/>
-            <line x1="182" y1="40" x2="190" y2="52" stroke="#e05050" stroke-width="1.5" stroke-dasharray="3,2"/>
-            <!-- Heel seam -->
-            <line x1="86" y1="222" x2="60" y2="230" stroke="#e05050" stroke-width="2.5"/>
-            <text x="18" y="246" fill="#e05050" font-size="10" font-family="monospace">heel seam ↑</text>
-            <!-- Labels -->
-            <text x="282" y="85" fill="#c9a94e" font-size="10" font-family="monospace">- - - cut line</text>
-            <text x="282" y="105" fill="#8B6914" font-size="10" font-family="monospace">─── foot outline</text>
-            <text x="282" y="125" fill="#e05050" font-size="10" font-family="monospace">─── seam lines</text>
-            <text x="282" y="160" fill="#888" font-size="9" font-family="monospace">One piece of hide.</text>
-            <text x="282" y="174" fill="#888" font-size="9" font-family="monospace">Two seams only:</text>
-            <text x="282" y="188" fill="#888" font-size="9" font-family="monospace">gathered toe +</text>
-            <text x="282" y="202" fill="#888" font-size="9" font-family="monospace">back heel seam.</text>
-          </svg>
-          <figcaption>Moccasin one-piece pattern: trace foot with 2" margin all around. Gather excess at toe; whipstitch heel seam up back. Single cut, two seams. Build time: 30–60 minutes.</figcaption>
-        </figure>
+        <figure class="dg dg-multi" id="fig-moccasin">
+      <div class="dg-cols" style="--cols:2;--cols-sm:1" role="group" aria-label="One-piece moccasin: the foot traced on hide with a 2 inch margin, small cuts round the toe, and the heel edges sewn up the back; the finished shoe with a gathered toe">
+        <svg viewBox="0 0 244 304" role="img" aria-label="THE PATTERN"><defs><marker id="ah-mc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="dg-ah" d="M0 0L10 5L0 10z"></path></marker></defs><rect class="dg-panel" x="2" y="2" width="240" height="300" rx="9"></rect><text class="dg-th dg-mid" x="122.0" y="22">THE PATTERN</text><text class="dg-ts dg-mid" x="122.0" y="36">one piece of hide</text><g data-hl="cut"><path class="dg-leather" d="M122 46 C168 44 188 92 184 136 C182 180 178 214 176 240 L140 262 L140 288 L98 288 L98 262 L62 240 C62 212 60 182 60 142 C58 92 76 48 122 46 Z" opacity=".55"></path><path class="dg-key-s" d="M122 46 C168 44 188 92 184 136 C182 180 178 214 176 240 L140 262 L140 288 L98 288 L98 262 L62 240 C62 212 60 182 60 142 C58 92 76 48 122 46 Z" stroke-dasharray="6 4"></path></g><g data-hl="foot"><path class="dg-line" d="M122 72 C146 70 158 96 156 130 C154 168 150 196 148 222 C146 250 134 262 118 262 C100 262 90 248 92 226 C94 196 90 170 88 140 C86 100 96 74 122 72 Z"></path></g><g data-hl="toe"><line class="dg-red-s" x1="169.5" y1="68.1" x2="160.3" y2="75.9" stroke-width="1.6"></line><line class="dg-red-s" x1="158.4" y1="57.8" x2="151.4" y2="67.5" stroke-width="1.6"></line><line class="dg-red-s" x1="145.2" y1="50.5" x2="140.7" y2="61.6" stroke-width="1.6"></line><line class="dg-red-s" x1="130.6" y1="46.6" x2="129.0" y2="58.5" stroke-width="1.6"></line><line class="dg-red-s" x1="115.5" y1="46.3" x2="116.8" y2="58.3" stroke-width="1.6"></line><line class="dg-red-s" x1="100.8" y1="49.7" x2="104.9" y2="61.0" stroke-width="1.6"></line><line class="dg-red-s" x1="87.3" y1="56.6" x2="94.0" y2="66.5" stroke-width="1.6"></line><line class="dg-red-s" x1="75.9" y1="66.5" x2="84.8" y2="74.5" stroke-width="1.6"></line></g><g data-hl="heel"><path class="dg-red-s" d="M98 262 L98 288 M140 262 L140 288"></path></g><text class="dg-tb dg-mid" x="122" y="170" data-hl="foot">FOOT</text><text class="dg-ts dg-mid" x="122" y="183" data-hl="foot">trace</text><path class="dg-thin" d="M156 132 L184 132 M156 128 l0 8 M184 128 l0 8"></path><text class="dg-ts dg-mid" x="170.0" y="126">2 in</text><text class="dg-tb" x="10" y="60" data-hl="toe">small cuts</text><text class="dg-ts" x="10" y="73" data-hl="toe">let the toe</text><text class="dg-ts" x="10" y="85" data-hl="toe">gather</text><text class="dg-tb" x="10" y="256" data-hl="heel">heel edges</text><text class="dg-ts" x="10" y="269" data-hl="heel">meet; sewn</text><text class="dg-ts" x="10" y="281" data-hl="heel">up the back</text><line class="dg-thin" x1="70" y1="274" x2="96" y2="276"></line><circle class="dg-keyf" cx="96" cy="276" r="2.2"></circle><text class="dg-tb dg-end" x="236" y="190" data-hl="cut">cut line</text><text class="dg-ts dg-end" x="236" y="203" data-hl="cut">(dashed)</text></svg>
+        <svg viewBox="244 0 200 304" role="img" aria-label="SEWN UP"><rect class="dg-panel" x="246" y="2" width="196" height="300" rx="9"></rect><text class="dg-th dg-mid" x="344.0" y="22">SEWN UP</text><text class="dg-ts dg-mid" x="344.0" y="36">two seams only</text><g data-hl="toe"><path class="dg-leather" d="M268 214 Q262 168 300 160 L360 160 Q404 162 414 196 Q420 214 400 220 L280 222 Q268 220 268 214 Z"></path><path class="dg-red-s" d="M318 164 Q352 150 396 184" stroke-width="1.6"></path><line class="dg-red-s" x1="326" y1="163" x2="328" y2="173" stroke-width="1.2"></line><line class="dg-red-s" x1="335" y1="167" x2="337" y2="177" stroke-width="1.2"></line><line class="dg-red-s" x1="344" y1="171" x2="346" y2="181" stroke-width="1.2"></line><line class="dg-red-s" x1="353" y1="175" x2="355" y2="185" stroke-width="1.2"></line><line class="dg-red-s" x1="362" y1="179" x2="364" y2="189" stroke-width="1.2"></line><line class="dg-red-s" x1="371" y1="183" x2="373" y2="193" stroke-width="1.2"></line><line class="dg-red-s" x1="380" y1="187" x2="382" y2="197" stroke-width="1.2"></line><line class="dg-red-s" x1="389" y1="191" x2="391" y2="201" stroke-width="1.2"></line></g><g data-hl="heel"><path class="dg-red-s" d="M272 168 L270 214" stroke-dasharray="3 3"></path></g><text class="dg-tb dg-mid" x="380" y="120" data-hl="toe">gathered toe</text><line class="dg-thin" x1="380" y1="126" x2="370" y2="160"></line><circle class="dg-keyf" cx="370" cy="160" r="2.2"></circle><text class="dg-tb" x="258" y="246" data-hl="heel">heel seam</text><text class="dg-ts" x="258" y="259" data-hl="heel">whipstitch or</text><text class="dg-ts" x="258" y="271" data-hl="heel">backstitch</text><line class="dg-thin" x1="270" y1="240" x2="271" y2="200"></line><circle class="dg-keyf" cx="271" cy="200" r="2.2"></circle><text class="dg-ts dg-mid" x="344" y="64">for ankle cover, leave</text><text class="dg-ts dg-mid" x="344" y="76">extra at the heel to</text><text class="dg-ts dg-mid" x="344" y="88">fold up and tie</text></svg>
+      </div>
+      <figcaption>Trace the foot with about 2&nbsp;in to spare all round, cut one piece, dampen it, gather the toe over the foot and sew the heel up the back. 30–60 minutes. On rough ground, stitch a hard sole of heavy leather or tyre tread underneath.</figcaption>
+    </figure>
 
         <div class="process-steps">
           <div class="process-step">Trace foot on brain-tanned hide with ~2" margin all around. This extra material becomes the upper sides.</div>
@@ -816,7 +786,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         </div>
 
         <h3>Tire Sandal — Indestructible Emergency Footwear</h3>
-        <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+        <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
           <li>Use flat tread section of old tire — avoid curved sidewall area.</li>
           <li>Trace foot outline on tread. Cut with sharp knife using hard sawing pressure. Score deeply first; don't try to cut through in one stroke.</li>
           <li>Punch 4–6 holes around perimeter with nail and hammer.</li>
@@ -828,65 +798,11 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           <summary>Boot Cross-Section: Welt Construction (Full Soled Shoe)</summary>
           <div style="padding:0.75rem 0 0 0;">
             <!-- SVG 6: Boot cross-section -->
-            <figure class="svg-figure">
-              <svg viewBox="0 0 440 260" width="420" height="260" xmlns="http://www.w3.org/2000/svg" aria-label="Boot cross-section diagram showing layers: upper, insole, welt strip, outsole, and stitch lines">
-                <rect width="440" height="260" fill="#070a09" rx="4"/>
-                <!-- Last shape (foot silhouette side view) -->
-                <path d="M60 60 Q62 40 100 36 Q160 30 220 34 Q270 36 300 46 Q320 54 326 68 Q330 82 322 90 Q310 98 280 100 L80 100 Q62 100 60 82 Z"
-                  fill="#3a2800" stroke="#5c4010" stroke-width="1.5" stroke-dasharray="4,2"/>
-                <text x="190" y="72" fill="#5c4010" font-size="10" font-family="monospace" text-anchor="middle">LAST (foot form — removed after)</text>
-                <!-- Upper leather layer -->
-                <path d="M60 100 L280 100 Q310 100 322 90 Q330 82 332 100 L332 115 Q330 125 310 128 L80 128 Q62 128 60 115 Z"
-                  fill="#5c3a10" stroke="#c9a94e" stroke-width="1.5"/>
-                <text x="195" y="118" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">UPPER (medium-weight leather, wetformed)</text>
-                <!-- Insole -->
-                <rect x="60" y="128" width="272" height="14" fill="#3a2000" stroke="#8B6914" stroke-width="1.5"/>
-                <text x="196" y="140" fill="#8B6914" font-size="10" font-family="monospace" text-anchor="middle">INSOLE (medium leather, attached to last)</text>
-                <!-- Welt strip -->
-                <rect x="52" y="142" width="288" height="10" fill="#6B4E10" stroke="#e6a020" stroke-width="2"/>
-                <text x="200" y="152" fill="#e6a020" font-size="10" font-family="monospace" text-anchor="middle">WELT (narrow leather strip — joins all layers)</text>
-                <!-- Stitch line through welt -->
-                <g stroke="#c9a94e" stroke-width="1.2" stroke-dasharray="3,2" opacity="0.7">
-                  <line x1="70" y1="136" x2="70" y2="152"/><line x1="90" y1="136" x2="90" y2="152"/>
-                  <line x1="110" y1="136" x2="110" y2="152"/><line x1="130" y1="136" x2="130" y2="152"/>
-                  <line x1="150" y1="136" x2="150" y2="152"/><line x1="170" y1="136" x2="170" y2="152"/>
-                  <line x1="190" y1="136" x2="190" y2="152"/><line x1="210" y1="136" x2="210" y2="152"/>
-                  <line x1="230" y1="136" x2="230" y2="152"/><line x1="250" y1="136" x2="250" y2="152"/>
-                  <line x1="270" y1="136" x2="270" y2="152"/><line x1="290" y1="136" x2="290" y2="152"/>
-                  <line x1="310" y1="136" x2="310" y2="152"/>
-                </g>
-                <!-- Outsole -->
-                <rect x="48" y="152" width="296" height="28" fill="#1a0e00" stroke="#c9a94e" stroke-width="2"/>
-                <text x="196" y="170" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">OUTSOLE (heavy 8–10 oz veg-tanned leather or tire rubber)</text>
-                <!-- Stitch line through outsole/welt -->
-                <g stroke="#8B6914" stroke-width="1.2" stroke-dasharray="3,2" opacity="0.7">
-                  <line x1="70" y1="152" x2="70" y2="180"/><line x1="90" y1="152" x2="90" y2="180"/>
-                  <line x1="110" y1="152" x2="110" y2="180"/><line x1="130" y1="152" x2="130" y2="180"/>
-                  <line x1="150" y1="152" x2="150" y2="180"/><line x1="170" y1="152" x2="170" y2="180"/>
-                  <line x1="190" y1="152" x2="190" y2="180"/><line x1="210" y1="152" x2="210" y2="180"/>
-                  <line x1="230" y1="152" x2="230" y2="180"/><line x1="250" y1="152" x2="250" y2="180"/>
-                  <line x1="270" y1="152" x2="270" y2="180"/><line x1="290" y1="152" x2="290" y2="180"/>
-                  <line x1="310" y1="152" x2="310" y2="180"/>
-                </g>
-                <!-- Labels panel right -->
-                <rect x="358" y="90" width="74" height="150" fill="#0f1410" rx="3" stroke="#2a2a2a" stroke-width="1"/>
-                <text x="395" y="108" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle">WELT</text>
-                <text x="395" y="120" fill="#c9a94e" font-size="9" font-family="monospace" text-anchor="middle">ADVANTAGE:</text>
-                <text x="362" y="136" fill="#888" font-size="8" font-family="monospace">When outsole</text>
-                <text x="362" y="148" fill="#888" font-size="8" font-family="monospace">wears through,</text>
-                <text x="362" y="160" fill="#888" font-size="8" font-family="monospace">replace it alone</text>
-                <text x="362" y="172" fill="#888" font-size="8" font-family="monospace">without damaging</text>
-                <text x="362" y="184" fill="#888" font-size="8" font-family="monospace">the upper.</text>
-                <text x="362" y="200" fill="#888" font-size="8" font-family="monospace">Upper lasts</text>
-                <text x="362" y="212" fill="#888" font-size="8" font-family="monospace">many sole</text>
-                <text x="362" y="224" fill="#888" font-size="8" font-family="monospace">replacements.</text>
-                <!-- Ground line -->
-                <line x1="40" y1="188" x2="355" y2="188" stroke="#2a2a2a" stroke-width="2"/>
-                <text x="195" y="205" fill="#444" font-size="9" font-family="monospace" text-anchor="middle">ground surface</text>
-              </svg>
-              <figcaption>Welt construction boot: upper wraps over last, stitched to insole via welt strip. Outsole stitched to welt. When sole wears out, replace it without destroying the upper.</figcaption>
-            </figure>
-            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+            <figure class="dg" id="fig-welt">
+      <svg viewBox="0 0 444 234" role="img" aria-label="Welted boot in cross-section: upper, insole, welt and outsole, with the two rows of stitching"><path class="dg-guide" d="M150 118 Q150 46 222 44 Q294 46 294 118 Z"/><text class="dg-ts dg-mid" x="222" y="92">last</text><text class="dg-ts dg-mid" x="222" y="105">(foot form, taken out)</text><g data-hl="upper"><path class="dg-leather" d="M124 150 L124 118 Q124 26 222 24 Q320 26 320 118 L320 150 L308 150 L308 122 Q308 38 222 36 Q136 38 136 122 L136 150 Z"/><path class="dg-leather" d="M124 150 L152 150 L152 142 L136 142 Z M320 150 L292 150 L292 142 L308 142 Z"/></g><g data-hl="insole"><rect class="dg-key" x="140" y="126" width="164" height="14" rx="2"/></g><g data-hl="welt"><rect class="dg-green" x="92" y="150" width="62" height="9" rx="2"/><rect class="dg-green" x="290" y="150" width="62" height="9" rx="2"/></g><g data-hl="outsole"><rect class="dg-debris" x="88" y="161" width="268" height="17" rx="3"/></g><g data-hl="s1"><path class="dg-stitch" d="M146 128 L146 158 M298 128 L298 158"/></g><g data-hl="s2"><path class="dg-stitch dg-stitch2" d="M106 151 L106 177 M338 151 L338 177"/></g><line class="dg-line" x1="40" y1="186" x2="404" y2="186"/><text class="dg-tb" x="8" y="30" data-hl="upper">UPPER</text><text class="dg-ts" x="8" y="43" data-hl="upper">wet-formed</text><text class="dg-ts" x="8" y="55" data-hl="upper">leather, edge</text><text class="dg-ts" x="8" y="67" data-hl="upper">tucked under</text><line class="dg-thin" x1="62" y1="26" x2="130" y2="60"/><circle class="dg-keyf" cx="130" cy="60" r="2.2"/><text class="dg-tb dg-end" x="436" y="100" data-hl="insole">INSOLE</text><text class="dg-ts dg-end" x="436" y="113" data-hl="insole">medium leather</text><line class="dg-thin" x1="366" y1="104" x2="300" y2="132"/><circle class="dg-keyf" cx="300" cy="132" r="2.2"/><text class="dg-tb" x="8" y="122" data-hl="welt">WELT</text><text class="dg-ts" x="8" y="135" data-hl="welt">narrow strip all</text><text class="dg-ts" x="8" y="147" data-hl="welt">round the edge</text><line class="dg-thin" x1="74" y1="150" x2="96" y2="154"/><circle class="dg-keyf" cx="96" cy="154" r="2.2"/><text class="dg-tb dg-end" x="436" y="212" data-hl="outsole">OUTSOLE</text><text class="dg-ts dg-end" x="436" y="225" data-hl="outsole">heavy veg-tan leather or tyre rubber</text><line class="dg-thin" x1="340" y1="208" x2="320" y2="172"/><circle class="dg-keyf" cx="320" cy="172" r="2.2"/><text class="dg-ts" x="8" y="212" data-hl="s1">stitch 1: upper + insole + welt</text><text class="dg-tb" x="8" y="226" data-hl="s2">stitch 2: welt + outsole only</text></svg>
+      <figcaption>The welt is the trick. The outsole is sewn <strong>only to the welt</strong>, never to the upper. When the sole wears through, cut stitch 2, sew on a new sole, and the upper carries on for many more soles.</figcaption>
+    </figure>
+            <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
               <li><strong>Last:</strong> Build or acquire a foot form. Stuff inside with paper to maintain shape while building.</li>
               <li><strong>Insole:</strong> Cut medium-weight leather to foot shape; attach to bottom of last temporarily.</li>
               <li><strong>Upper:</strong> Cut from lighter leather. Wet; stretch over last; tack around bottom edge to insole. Let dry in shape.</li>
@@ -915,7 +831,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </div>
           <div class="math-line">
             <span class="math-label">→ Repair first. Always repair at first sign of wear — not after failure.</span>
-            <span class="math-val">200:1 ratio</span>
+            <span class="math-val">~120:1 ratio</span>
           </div>
         </div>
 
@@ -927,7 +843,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         <div class="two-col">
           <div>
             <h4>Tools Needed</h4>
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li>Darning mushroom or dome — supports fabric over hole (lightbulb, smooth stone, rounded bottle all work)</li>
               <li>Yarn or thread matching original fabric weight</li>
               <li>Needle with eye large enough for yarn</li>
@@ -936,7 +852,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </div>
           <div>
             <h4>Technique</h4>
-            <ol style="font-size:0.9em;color:#ccc;padding-left:1.2rem;">
+            <ol style="font-size:0.9em;color:var(--text-1);padding-left:1.2rem;">
               <li>Stretch fabric over dome, hole centered</li>
               <li>Run parallel threads across hole (warp) — extend ¼" past hole edges into sound fabric each side</li>
               <li>Turn work 90°; weave perpendicular thread over-under through warp threads and existing fabric</li>
@@ -949,88 +865,10 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         <h3>Sashiko-Style Preventive Reinforcement</h3>
 
         <!-- SVG 5: Sashiko Stitch Patterns -->
-        <figure class="svg-figure">
-          <svg viewBox="0 0 420 210" width="420" height="210" xmlns="http://www.w3.org/2000/svg" aria-label="Three sashiko reinforcement patterns: straight grid, diagonal grid, and wave pattern">
-            <rect width="420" height="210" fill="#041408" rx="4" stroke="#0c4020" stroke-width="1"/>
-            <!-- PATTERN 1: Straight grid -->
-            <rect x="10" y="10" width="118" height="118" fill="#050a08" stroke="#0c4020" stroke-width="1" rx="2"/>
-            <text x="69" y="142" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">Straight Grid</text>
-            <!-- Horizontal stitches -->
-            <g stroke="#c9a94e" stroke-width="1.8" stroke-linecap="round">
-              <line x1="16" y1="25" x2="28" y2="25"/><line x1="32" y1="25" x2="44" y2="25"/>
-              <line x1="48" y1="25" x2="60" y2="25"/><line x1="64" y1="25" x2="76" y2="25"/>
-              <line x1="80" y1="25" x2="92" y2="25"/><line x1="96" y1="25" x2="108" y2="25"/>
-              <line x1="16" y1="45" x2="28" y2="45"/><line x1="32" y1="45" x2="44" y2="45"/>
-              <line x1="48" y1="45" x2="60" y2="45"/><line x1="64" y1="45" x2="76" y2="45"/>
-              <line x1="80" y1="45" x2="92" y2="45"/><line x1="96" y1="45" x2="108" y2="45"/>
-              <line x1="16" y1="65" x2="28" y2="65"/><line x1="32" y1="65" x2="44" y2="65"/>
-              <line x1="48" y1="65" x2="60" y2="65"/><line x1="64" y1="65" x2="76" y2="65"/>
-              <line x1="80" y1="65" x2="92" y2="65"/><line x1="96" y1="65" x2="108" y2="65"/>
-              <line x1="16" y1="85" x2="28" y2="85"/><line x1="32" y1="85" x2="44" y2="85"/>
-              <line x1="48" y1="85" x2="60" y2="85"/><line x1="64" y1="85" x2="76" y2="85"/>
-              <line x1="80" y1="85" x2="92" y2="85"/><line x1="96" y1="85" x2="108" y2="85"/>
-              <line x1="16" y1="105" x2="28" y2="105"/><line x1="32" y1="105" x2="44" y2="105"/>
-              <line x1="48" y1="105" x2="60" y2="105"/><line x1="64" y1="105" x2="76" y2="105"/>
-              <line x1="80" y1="105" x2="92" y2="105"/><line x1="96" y1="105" x2="108" y2="105"/>
-            </g>
-            <!-- Vertical stitches -->
-            <g stroke="#7aaccc" stroke-width="1.5" stroke-linecap="round" opacity="0.8">
-              <line x1="30" y1="18" x2="30" y2="30"/><line x1="30" y1="38" x2="30" y2="50"/>
-              <line x1="30" y1="58" x2="30" y2="70"/><line x1="30" y1="78" x2="30" y2="90"/>
-              <line x1="30" y1="98" x2="30" y2="110"/>
-              <line x1="62" y1="18" x2="62" y2="30"/><line x1="62" y1="38" x2="62" y2="50"/>
-              <line x1="62" y1="58" x2="62" y2="70"/><line x1="62" y1="78" x2="62" y2="90"/>
-              <line x1="62" y1="98" x2="62" y2="110"/>
-              <line x1="94" y1="18" x2="94" y2="30"/><line x1="94" y1="38" x2="94" y2="50"/>
-              <line x1="94" y1="58" x2="94" y2="70"/><line x1="94" y1="78" x2="94" y2="90"/>
-              <line x1="94" y1="98" x2="94" y2="110"/>
-            </g>
-            <!-- PATTERN 2: Diagonal grid -->
-            <rect x="145" y="10" width="118" height="118" fill="#050a08" stroke="#0c4020" stroke-width="1" rx="2"/>
-            <text x="204" y="142" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">Diagonal Grid</text>
-            <g stroke="#c9a94e" stroke-width="1.8" stroke-linecap="round">
-              <line x1="152" y1="18" x2="162" y2="28"/><line x1="165" y1="31" x2="175" y2="41"/>
-              <line x1="178" y1="44" x2="188" y2="54"/><line x1="191" y1="57" x2="201" y2="67"/>
-              <line x1="204" y1="70" x2="214" y2="80"/><line x1="217" y1="83" x2="227" y2="93"/>
-              <line x1="230" y1="96" x2="240" y2="106"/>
-              <line x1="152" y1="38" x2="162" y2="48"/><line x1="165" y1="51" x2="175" y2="61"/>
-              <line x1="178" y1="64" x2="188" y2="74"/><line x1="191" y1="77" x2="201" y2="87"/>
-              <line x1="204" y1="90" x2="214" y2="100"/><line x1="217" y1="103" x2="227" y2="113"/>
-              <line x1="152" y1="58" x2="162" y2="68"/><line x1="165" y1="71" x2="175" y2="81"/>
-              <line x1="178" y1="84" x2="188" y2="94"/><line x1="191" y1="97" x2="201" y2="107"/>
-              <line x1="152" y1="78" x2="162" y2="88"/><line x1="165" y1="91" x2="175" y2="101"/>
-              <line x1="178" y1="104" x2="188" y2="114"/>
-            </g>
-            <g stroke="#7aaccc" stroke-width="1.5" stroke-linecap="round" opacity="0.8">
-              <line x1="240" y1="18" x2="230" y2="28"/><line x1="227" y1="31" x2="217" y2="41"/>
-              <line x1="214" y1="44" x2="204" y2="54"/><line x1="201" y1="57" x2="191" y2="67"/>
-              <line x1="188" y1="70" x2="178" y2="80"/><line x1="175" y1="83" x2="165" y2="93"/>
-              <line x1="162" y1="96" x2="152" y2="106"/>
-              <line x1="240" y1="38" x2="230" y2="48"/><line x1="227" y1="51" x2="217" y2="61"/>
-              <line x1="214" y1="64" x2="204" y2="74"/><line x1="201" y1="77" x2="191" y2="87"/>
-              <line x1="188" y1="90" x2="178" y2="100"/><line x1="175" y1="103" x2="165" y2="113"/>
-              <line x1="240" y1="58" x2="230" y2="68"/><line x1="227" y1="71" x2="217" y2="81"/>
-              <line x1="214" y1="84" x2="204" y2="94"/><line x1="201" y1="97" x2="191" y2="107"/>
-              <line x1="240" y1="78" x2="230" y2="88"/><line x1="227" y1="91" x2="217" y2="101"/>
-            </g>
-            <!-- PATTERN 3: Wave / seikaiha -->
-            <rect x="280" y="10" width="130" height="118" fill="#050a08" stroke="#0c4020" stroke-width="1" rx="2"/>
-            <text x="345" y="142" fill="#c9a94e" font-size="10" font-family="monospace" text-anchor="middle">Wave (seikaiha)</text>
-            <g stroke="#c9a94e" stroke-width="1.8" fill="none" stroke-linecap="round">
-              <path d="M286 30 Q298 18 310 30 Q322 42 334 30 Q346 18 358 30 Q370 42 382 30 Q394 18 404 30"/>
-              <path d="M286 50 Q298 38 310 50 Q322 62 334 50 Q346 38 358 50 Q370 62 382 50 Q394 38 404 50"/>
-              <path d="M286 70 Q298 58 310 70 Q322 82 334 70 Q346 58 358 70 Q370 82 382 70 Q394 58 404 70"/>
-              <path d="M286 90 Q298 78 310 90 Q322 102 334 90 Q346 78 358 90 Q370 102 382 90 Q394 78 404 90"/>
-              <path d="M286 110 Q298 98 310 110 Q322 122 334 110 Q346 98 358 110 Q370 122 382 110 Q394 98 404 110"/>
-            </g>
-            <!-- Legend -->
-            <rect x="10" y="160" width="400" height="42" fill="#050a08" rx="3" stroke="#0c4020" stroke-width="1"/>
-            <line x1="20" y1="175" x2="50" y2="175" stroke="#c9a94e" stroke-width="2" stroke-linecap="round"/>
-            <text x="58" y="179" fill="#ccc" font-size="9" font-family="monospace">Running stitches in contrasting thread</text>
-            <text x="58" y="195" fill="#888" font-size="9" font-family="monospace">Apply BEFORE fabric fails — at thin spots, knees, elbows, seat. Japanese "boro" tradition of layered repair extends garment life by years.</text>
-          </svg>
-          <figcaption>Three sashiko reinforcement patterns. Applied to high-wear areas before failure. A 20-minute investment prevents reconstruction.</figcaption>
-        </figure>
+        <figure class="dg" id="fig-sashiko">
+      <svg viewBox="0 0 444 214" role="img" aria-label="Three sashiko reinforcement patterns in running stitch: a straight grid, a diagonal grid, and overlapping waves (seikaiha)"><g data-hl="s1"><rect class="dg-water" x="6" y="30" width="134" height="134" rx="6" opacity=".55"/><clipPath id="sk-c1"><rect x="6" y="30" width="134" height="134" rx="6"/></clipPath><g clip-path="url(#sk-c1)"><g transform="translate(6 0)"><line class="dg-thin" stroke-dasharray="6 4" x1="24" y1="30" x2="24" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="43" y1="30" x2="43" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="62" y1="30" x2="62" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="81" y1="30" x2="81" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="100" y1="30" x2="100" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="119" y1="30" x2="119" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="12" y1="49" x2="126" y2="49" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="12" y1="68" x2="126" y2="68" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="12" y1="87" x2="126" y2="87" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="12" y1="106" x2="126" y2="106" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="12" y1="125" x2="126" y2="125" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="12" y1="144" x2="126" y2="144" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="12" y1="163" x2="126" y2="163" style="stroke:#f4f1e8;stroke-width:2"/></g></g><text class="dg-tb dg-mid" x="73" y="184">Straight grid</text></g><g data-hl="s2"><rect class="dg-water" x="155" y="30" width="134" height="134" rx="6" opacity=".55"/><clipPath id="sk-c2"><rect x="155" y="30" width="134" height="134" rx="6"/></clipPath><g clip-path="url(#sk-c2)"><g transform="translate(155 0)"><line class="dg-thin" stroke-dasharray="6 4" x1="-90" y1="30" x2="24" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="-68" y1="30" x2="46" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="-46" y1="30" x2="68" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="-24" y1="30" x2="90" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="-2" y1="30" x2="112" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="20" y1="30" x2="134" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="42" y1="30" x2="156" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="64" y1="30" x2="178" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="86" y1="30" x2="200" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="108" y1="30" x2="222" y2="164" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="-90" y1="154" x2="24" y2="40" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="-68" y1="154" x2="46" y2="40" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="-46" y1="154" x2="68" y2="40" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="-24" y1="154" x2="90" y2="40" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="-2" y1="154" x2="112" y2="40" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="20" y1="154" x2="134" y2="40" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="42" y1="154" x2="156" y2="40" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="64" y1="154" x2="178" y2="40" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="86" y1="154" x2="200" y2="40" style="stroke:#f4f1e8;stroke-width:2"/><line class="dg-thin" stroke-dasharray="6 4" x1="108" y1="154" x2="222" y2="40" style="stroke:#f4f1e8;stroke-width:2"/></g></g><text class="dg-tb dg-mid" x="222" y="184">Diagonal grid</text></g><g data-hl="s3"><rect class="dg-water" x="304" y="30" width="134" height="134" rx="6" opacity=".55"/><clipPath id="sk-c3"><rect x="304" y="30" width="134" height="134" rx="6"/></clipPath><g clip-path="url(#sk-c3)"><g transform="translate(304 0)"><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M-1.0 58.0 A 13.0 13.0 0 0 1 25.0 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M4.0 58.0 A 8.0 8.0 0 0 1 20.0 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M8.5 58.0 A 3.5 3.5 0 0 1 15.5 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M27.0 58.0 A 13.0 13.0 0 0 1 53.0 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M32.0 58.0 A 8.0 8.0 0 0 1 48.0 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M36.5 58.0 A 3.5 3.5 0 0 1 43.5 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M55.0 58.0 A 13.0 13.0 0 0 1 81.0 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M60.0 58.0 A 8.0 8.0 0 0 1 76.0 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M64.5 58.0 A 3.5 3.5 0 0 1 71.5 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M83.0 58.0 A 13.0 13.0 0 0 1 109.0 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M88.0 58.0 A 8.0 8.0 0 0 1 104.0 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M92.5 58.0 A 3.5 3.5 0 0 1 99.5 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M111.0 58.0 A 13.0 13.0 0 0 1 137.0 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M116.0 58.0 A 8.0 8.0 0 0 1 132.0 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M120.5 58.0 A 3.5 3.5 0 0 1 127.5 58.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M13.0 82.0 A 13.0 13.0 0 0 1 39.0 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M18.0 82.0 A 8.0 8.0 0 0 1 34.0 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M22.5 82.0 A 3.5 3.5 0 0 1 29.5 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M41.0 82.0 A 13.0 13.0 0 0 1 67.0 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M46.0 82.0 A 8.0 8.0 0 0 1 62.0 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M50.5 82.0 A 3.5 3.5 0 0 1 57.5 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M69.0 82.0 A 13.0 13.0 0 0 1 95.0 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M74.0 82.0 A 8.0 8.0 0 0 1 90.0 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M78.5 82.0 A 3.5 3.5 0 0 1 85.5 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M97.0 82.0 A 13.0 13.0 0 0 1 123.0 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M102.0 82.0 A 8.0 8.0 0 0 1 118.0 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M106.5 82.0 A 3.5 3.5 0 0 1 113.5 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M125.0 82.0 A 13.0 13.0 0 0 1 151.0 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M130.0 82.0 A 8.0 8.0 0 0 1 146.0 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M134.5 82.0 A 3.5 3.5 0 0 1 141.5 82.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M-1.0 106.0 A 13.0 13.0 0 0 1 25.0 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M4.0 106.0 A 8.0 8.0 0 0 1 20.0 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M8.5 106.0 A 3.5 3.5 0 0 1 15.5 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M27.0 106.0 A 13.0 13.0 0 0 1 53.0 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M32.0 106.0 A 8.0 8.0 0 0 1 48.0 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M36.5 106.0 A 3.5 3.5 0 0 1 43.5 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M55.0 106.0 A 13.0 13.0 0 0 1 81.0 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M60.0 106.0 A 8.0 8.0 0 0 1 76.0 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M64.5 106.0 A 3.5 3.5 0 0 1 71.5 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M83.0 106.0 A 13.0 13.0 0 0 1 109.0 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M88.0 106.0 A 8.0 8.0 0 0 1 104.0 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M92.5 106.0 A 3.5 3.5 0 0 1 99.5 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M111.0 106.0 A 13.0 13.0 0 0 1 137.0 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M116.0 106.0 A 8.0 8.0 0 0 1 132.0 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M120.5 106.0 A 3.5 3.5 0 0 1 127.5 106.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M13.0 130.0 A 13.0 13.0 0 0 1 39.0 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M18.0 130.0 A 8.0 8.0 0 0 1 34.0 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M22.5 130.0 A 3.5 3.5 0 0 1 29.5 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M41.0 130.0 A 13.0 13.0 0 0 1 67.0 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M46.0 130.0 A 8.0 8.0 0 0 1 62.0 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M50.5 130.0 A 3.5 3.5 0 0 1 57.5 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M69.0 130.0 A 13.0 13.0 0 0 1 95.0 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M74.0 130.0 A 8.0 8.0 0 0 1 90.0 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M78.5 130.0 A 3.5 3.5 0 0 1 85.5 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M97.0 130.0 A 13.0 13.0 0 0 1 123.0 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M102.0 130.0 A 8.0 8.0 0 0 1 118.0 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M106.5 130.0 A 3.5 3.5 0 0 1 113.5 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M125.0 130.0 A 13.0 13.0 0 0 1 151.0 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M130.0 130.0 A 8.0 8.0 0 0 1 146.0 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M134.5 130.0 A 3.5 3.5 0 0 1 141.5 130.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M-1.0 154.0 A 13.0 13.0 0 0 1 25.0 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M4.0 154.0 A 8.0 8.0 0 0 1 20.0 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M8.5 154.0 A 3.5 3.5 0 0 1 15.5 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M27.0 154.0 A 13.0 13.0 0 0 1 53.0 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M32.0 154.0 A 8.0 8.0 0 0 1 48.0 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M36.5 154.0 A 3.5 3.5 0 0 1 43.5 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M55.0 154.0 A 13.0 13.0 0 0 1 81.0 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M60.0 154.0 A 8.0 8.0 0 0 1 76.0 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M64.5 154.0 A 3.5 3.5 0 0 1 71.5 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M83.0 154.0 A 13.0 13.0 0 0 1 109.0 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M88.0 154.0 A 8.0 8.0 0 0 1 104.0 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M92.5 154.0 A 3.5 3.5 0 0 1 99.5 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M111.0 154.0 A 13.0 13.0 0 0 1 137.0 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M116.0 154.0 A 8.0 8.0 0 0 1 132.0 154.0"/><path class="dg-thin" stroke-dasharray="6 4" style="stroke:#f4f1e8;stroke-width:2" d="M120.5 154.0 A 3.5 3.5 0 0 1 127.5 154.0"/></g></g><text class="dg-tb dg-mid" x="371" y="184">Waves (seikaiha)</text></g><text class="dg-th dg-mid" x="222" y="18">RUNNING STITCH OVER A PATCH OR THIN SPOT</text><text class="dg-ts dg-mid" x="222" y="206">stitch before the cloth fails: knees, elbows, seat</text></svg>
+      <figcaption>Twenty minutes of running stitch at a thin spot saves rebuilding a garment later. Layer patches underneath and stitch through them all (Japanese <em>boro</em> repair) to keep clothes going for years.</figcaption>
+    </figure>
 
         <h3>Waterproofing Treatments</h3>
         <table class="data-table">
@@ -1048,7 +886,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         <div class="two-col">
           <div>
             <h4>Methods</h4>
-            <ul style="font-size:0.9em;color:#ccc;">
+            <ul style="font-size:0.9em;color:var(--text-1);">
               <li><strong>Washboard:</strong> Wooden board with ridges or corrugated bark. Soap and scrub. Effective for heavy soil.</li>
               <li><strong>Plunger bucket:</strong> 5-gallon bucket + standard plunger. Surprisingly effective agitation. Better than hand-squeezing alone.</li>
               <li><strong>Stream rock:</strong> Beat soapy wet clothing against flat rocks at stream edge. Traditional worldwide.</li>
@@ -1057,8 +895,8 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </div>
           <div>
             <h4>Rules by Fiber</h4>
-            <ul style="font-size:0.9em;color:#ccc;">
-              <li><strong>Wool:</strong> Cold water ONLY. Hot water + agitation = felting (irreversible). Squeeze gently; never wring. Rinse at same temperature. Dry flat — never hang (stretches). No direct sun.</li>
+            <ul style="font-size:0.9em;color:var(--text-1);">
+              <li><strong>Wool:</strong> lukewarm or cold water. It is agitation plus sudden temperature change that felts it (irreversible) — hot scouring of raw fleece is fine if you don’t stir it. Squeeze gently; never wring. Rinse at same temperature. Dry flat — never hang (stretches). No direct sun.</li>
               <li><strong>Cotton/linen:</strong> Tolerates hot water and scrubbing. Can boil. Wringing is fine. Sun bleaches and disinfects.</li>
               <li><strong>Leather:</strong> Do not wash in water. Wipe clean with damp cloth; re-oil immediately after.</li>
             </ul>
@@ -1075,7 +913,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </thead>
           <tbody>
             <tr><td>Down (reference)</td><td>100%</td><td>Poor (clumps, loses loft)</td><td>Very light</td><td>Harvest from geese/ducks</td></tr>
-            <tr><td>Milkweed floss</td><td>~150% by weight</td><td>Moderate</td><td>Very light</td><td>Common (disturbed areas)</td></tr>
+            <tr><td>Milkweed floss</td><td>~100% (claims vary)</td><td>Moderate</td><td>Very light</td><td>Common (disturbed areas)</td></tr>
             <tr><td>Cattail fluff</td><td>~70%</td><td>Very poor (clumps)</td><td>Light</td><td>Very common (wetlands)</td></tr>
             <tr><td>Wool batting</td><td>~60%</td><td>Excellent (warm when wet)</td><td>Moderate</td><td>Good if sheep available</td></tr>
             <tr><td>Dog/rabbit fur</td><td>~50%</td><td>Moderate</td><td>Light–moderate</td><td>Variable</td></tr>
@@ -1113,7 +951,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         <div class="info-grid">
           <div class="card">
             <h3>Newspaper Between Layers</h3>
-            <p>Newspapers tucked between shirt and jacket trap air and provide surprisingly effective insulation — the dead air in the paper is the mechanism. Multiple layers work better. Works only while dry. A newspaper vest extends warmth by an estimated 20–30% in an emergency.</p>
+            <p>Newspapers tucked between shirt and jacket trap air and provide surprisingly effective insulation — the dead air in the paper is the mechanism. Multiple layers work better. Works only while dry. A newspaper vest adds noticeable warmth in an emergency.</p>
           </div>
           <div class="card">
             <h3>Dry Leaves in a Bag</h3>
@@ -1134,7 +972,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         <div class="info-grid">
           <div class="card">
             <h3>First Things to Make (Priority Order)</h3>
-            <ol style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+            <ol style="font-size:0.88em;color:var(--text-1);padding-left:1.2rem;margin:0;">
               <li>Drop spindle (30 min, any scrap wood)</li>
               <li>Frame loom (4–6 hours, scrap lumber)</li>
               <li>Repair existing clothing before making new</li>
@@ -1146,7 +984,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </div>
           <div class="card">
             <h3>Cache Before Collapse</h3>
-            <ul style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+            <ul style="font-size:0.88em;color:var(--text-1);padding-left:1.2rem;margin:0;">
               <li>Dental floss (1 lb+ per person — extraordinary thread)</li>
               <li>Needles (sewing, darning, tapestry sizes)</li>
               <li>Beeswax blocks (waterproofing + thread wax)</li>
@@ -1158,7 +996,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </div>
           <div class="card">
             <h3>Rules That Matter Most</h3>
-            <ul style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+            <ul style="font-size:0.88em;color:var(--text-1);padding-left:1.2rem;margin:0;">
               <li>Repair at first sign of wear — not after failure</li>
               <li>No cotton base layers in cold or wet</li>
               <li>Wool warm when wet; cotton is a hazard</li>
@@ -1170,7 +1008,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
           </div>
           <div class="card">
             <h3>Time Estimates</h3>
-            <ul style="font-size:0.88em;color:#ccc;padding-left:1.2rem;margin:0;">
+            <ul style="font-size:0.88em;color:var(--text-1);padding-left:1.2rem;margin:0;">
               <li>Drop spindle: 30 min to build</li>
               <li>Frame loom: 4–6 hours to build</li>
               <li>Darning a sock hole: 20 min</li>
@@ -1194,7 +1032,7 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
         <a href="vehicles.html" class="pagination-btn pagination-next">Vehicles →</a>
       </nav>
       </div><!-- /content-wrapper -->
-    </div><!-- /main-content -->
+    </main><!-- /main-content -->
 
     <aside id="aria-panel" class="aria-panel" aria-label="Bunker Bot">
     <div class="aria-header">
@@ -1214,7 +1052,5 @@ Thread:  Waxed linen or sinew — wax heavily with beeswax before stitching</pre
 
   <button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
   <script src="../assets/js/app.js"></script>
-  <script src="../assets/js/search.js"></script>
-  <script src="../assets/js/bunker-bot.js"></script>
 </body>
 </html>

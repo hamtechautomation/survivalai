@@ -3,81 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="The reference library: 33 public-domain survival, medical and engineering books bundled as searchable PDFs, plus 60 curated titles worth owning, with acquisition tracking.">
   <title>Reference Library — The Last Light Survival Guide</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
     .lib-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 1rem; align-items: center; }
     .lib-controls label { color: var(--amber); font-size: 0.85em; margin-right: 0.25rem; }
-    .filter-btn { background: var(--bg-1); border: 1px solid #444; color: #aaa; padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.82em; transition: all 0.15s; }
+    .filter-btn { font: inherit; background: var(--bg-1); border: 1px solid var(--border-hi); color: var(--text-2); padding: 0.3rem 0.8rem; border-radius: 999px; cursor: pointer; font-size: 0.82em; transition: all 0.15s; }
     .filter-btn:hover { border-color: var(--amber); color: var(--amber); }
     .filter-btn.active { background: var(--amber); color: var(--bg-0); border-color: var(--amber); font-weight: 600; }
-    .filter-btn.tier-critical.active { background: #c0392b; border-color: #c0392b; color: #fff; }
-    .filter-btn.tier-important.active { background: #e67e22; border-color: #e67e22; color: #fff; }
-    .filter-btn.tier-nice.active { background: #27ae60; border-color: #27ae60; color: #fff; }
+    .filter-btn.tier-critical.active { background: var(--red); border-color: var(--red); color: #fff; }
+    .filter-btn.tier-important.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+    .filter-btn.tier-nice.active { background: var(--green); border-color: var(--green); color: #fff; }
     .book-grid { display: grid; gap: 0.75rem; margin-top: 1rem; }
-    .book-card { background: var(--bg-1); border: 1px solid #2a2a2a; border-radius: 6px; padding: 1rem 1.1rem; position: relative; transition: border-color 0.15s; }
-    .book-card:hover { border-color: #444; }
-    .book-card.obtained { border-left: 3px solid #27ae60; }
-    .book-card[data-tier="CRITICAL"] { border-top: 2px solid #c0392b; }
-    .book-card[data-tier="IMPORTANT"] { border-top: 2px solid #e67e22; }
-    .book-card[data-tier="NICE"] { border-top: 2px solid #27ae60; }
+    .book-card { background: var(--bg-1); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.1rem; position: relative; transition: border-color 0.15s; }
+    .book-card:hover { border-color: var(--border-hi); }
+    .book-card.obtained { border-left: 3px solid var(--green); }
+    .book-card[data-tier="CRITICAL"] { border-top: 2px solid var(--red); }
+    .book-card[data-tier="IMPORTANT"] { border-top: 2px solid var(--orange); }
+    .book-card[data-tier="NICE"] { border-top: 2px solid var(--green); }
     .book-card.hidden { display: none; }
     .book-header { display: flex; align-items: flex-start; gap: 0.75rem; }
-    .book-check { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; cursor: pointer; accent-color: #27ae60; }
+    .book-check { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; cursor: pointer; accent-color: var(--green); }
     .book-title { font-weight: 600; color: var(--amber); font-size: 0.95em; line-height: 1.3; }
-    .book-author { color: #888; font-size: 0.82em; margin-top: 0.1rem; }
+    .book-author { color: var(--text-2); font-size: 0.82em; margin-top: 0.1rem; }
     .book-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0; }
     .tag { font-size: 0.75em; padding: 0.15rem 0.5rem; border-radius: 3px; font-weight: 500; }
-    .tag-critical { background: #3d1212; color: #e74c3c; border: 1px solid #5a1a1a; }
-    .tag-important { background: #2d1a08; color: #e67e22; border: 1px solid #4a2a0a; }
-    .tag-nice { background: #0d2a14; color: #27ae60; border: 1px solid #1a4a22; }
+    .tag-critical { background: #3d1212; color: var(--red); border: 1px solid #5a1a1a; }
+    .tag-important { background: #2d1a08; color: var(--orange); border: 1px solid #4a2a0a; }
+    .tag-nice { background: #0d2a14; color: var(--green); border: 1px solid #1a4a22; }
     .tag-free { background: rgba(74,128,181,0.1); color: var(--blue); border: 1px solid var(--blue-dim); }
     .tag-cat { background: #1a1a2a; color: #8a8aaa; border: 1px solid #2a2a3a; }
-    .tag-level { background: #1a1a1a; color: #888; border: 1px solid #333; }
-    .book-desc { font-size: 0.85em; color: #bbb; line-height: 1.55; margin: 0.4rem 0; }
-    .book-keychapters { font-size: 0.8em; color: #888; margin: 0.3rem 0; }
-    .book-keychapters strong { color: #aaa; }
+    .tag-level { background: var(--bg-3); color: var(--text-2); border: 1px solid var(--border); }
+    .book-desc { font-size: 0.85em; color: var(--text-1); line-height: 1.55; margin: 0.4rem 0; }
+    .book-keychapters { font-size: 0.8em; color: var(--text-2); margin: 0.3rem 0; }
+    .book-keychapters strong { color: var(--text-2); }
     .book-link { display: inline-block; font-size: 0.78em; color: var(--blue); text-decoration: none; margin-top: 0.4rem; border: 1px solid var(--blue-dim); padding: 0.2rem 0.5rem; border-radius: 3px; background: rgba(74,128,181,0.1); }
     .book-link:hover { background: var(--blue); color: var(--bg-0); border-color: var(--blue); }
-    .section-divider { color: var(--amber); font-size: 1.1em; font-weight: 700; border-bottom: 1px solid #2a2a2a; padding-bottom: 0.4rem; margin: 1.5rem 0 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
-    .section-count { font-size: 0.8em; color: #666; font-weight: normal; }
-    .reading-box { background: #0a1a0a; border: 1px solid #27ae60; border-radius: 6px; padding: 1rem 1.2rem; margin: 1rem 0; }
-    .reading-box h3 { color: #27ae60; margin: 0 0 0.75rem; font-size: 1em; }
+    .section-divider { color: var(--amber); font-size: 1.1em; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin: 1.5rem 0 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
+    .section-count { font-size: 0.8em; color: var(--text-3); font-weight: normal; }
+    .reading-box { background: #0a1a0a; border: 1px solid var(--green); border-radius: 6px; padding: 1rem 1.2rem; margin: 1rem 0; }
+    .reading-box h3 { color: var(--green); margin: 0 0 0.75rem; font-size: 1em; }
     .reading-box ol { margin: 0; padding-left: 1.3rem; }
-    .reading-box li { color: #bbb; font-size: 0.9em; margin: 0.35rem 0; }
-    .reading-box li strong { color: #ddd; }
-    .reading-72 { background: #1a0a0a; border: 1px solid #c0392b; border-radius: 6px; padding: 1rem 1.2rem; margin: 1rem 0; }
-    .reading-72 h3 { color: #e74c3c; margin: 0 0 0.75rem; font-size: 1em; }
+    .reading-box li { color: var(--text-1); font-size: 0.9em; margin: 0.35rem 0; }
+    .reading-box li strong { color: var(--text-1); }
+    .reading-72 { background: #1a0a0a; border: 1px solid var(--red); border-radius: 6px; padding: 1rem 1.2rem; margin: 1rem 0; }
+    .reading-72 h3 { color: var(--red); margin: 0 0 0.75rem; font-size: 1em; }
     .lib-stats { display: flex; gap: 1rem; flex-wrap: wrap; margin: 0.75rem 0; font-size: 0.85em; }
-    .stat-pill { background: var(--bg-1); border: 1px solid #333; padding: 0.3rem 0.75rem; border-radius: 20px; color: #aaa; }
+    .stat-pill { background: var(--bg-1); border: 1px solid var(--border); padding: 0.3rem 0.75rem; border-radius: 20px; color: var(--text-2); }
     .stat-pill span { color: var(--amber); font-weight: 600; }
-    .print-btn { background: #1a2a1a; border: 1px solid #27ae60; color: #27ae60; padding: 0.4rem 1rem; border-radius: 4px; cursor: pointer; font-size: 0.85em; }
-    .print-btn:hover { background: #27ae60; color: #fff; }
-    .clear-btn { background: #1a0a0a; border: 1px solid #c0392b; color: #e74c3c; padding: 0.4rem 1rem; border-radius: 4px; cursor: pointer; font-size: 0.85em; }
-    .clear-btn:hover { background: #c0392b; color: #fff; }
-    #lib-search { background: var(--bg-1); border: 1px solid #444; color: #ddd; padding: 0.4rem 0.75rem; border-radius: 4px; font-size: 0.85em; width: 200px; }
-    #lib-search::placeholder { color: #555; }
-    #result-count { color: #666; font-size: 0.82em; }
+    .print-btn, .clear-btn { font: inherit; font-size: var(--fs-sm); font-weight: 600; background: transparent; border: 1px solid var(--border-hi); color: var(--text-1); padding: 0.4rem 0.9rem; border-radius: 6px; cursor: pointer; transition: background var(--ease), color var(--ease), border-color var(--ease); }
+    .print-btn:hover { border-color: var(--amber-dim); color: var(--amber-light); background: rgba(201,169,78,0.08); }
+    .clear-btn { color: var(--text-2); border-color: transparent; }
+    .clear-btn:hover { color: var(--red); background: rgba(200,72,72,0.08); }
+    #lib-search:focus { outline: none; border-color: var(--amber); }
+    #lib-search { font: inherit; background: var(--bg-1); border: 1px solid var(--border-hi); color: var(--text-1); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.85em; width: 200px; }
+    #lib-search::placeholder { color: var(--text-3); }
+    #result-count { color: var(--text-3); font-size: 0.82em; }
     /* ── Bundled PDF section ─────────────────────────────── */
     .pdf-section-header { color: var(--amber); font-size: 1.05em; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin: 1.5rem 0 0.75rem; display: flex; align-items: center; gap: 0.6rem; }
     .pdf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
-    .pdf-card { background: var(--bg-1); border: 1px solid #2a2a2a; border-top: 2px solid var(--amber); border-radius: 6px; padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 0.35rem; transition: border-color 0.15s; }
-    .pdf-card:hover { border-color: #444; border-top-color: var(--amber); }
-    .pdf-card-title { font-weight: 600; color: var(--amber); font-size: 0.92em; line-height: 1.3; }
-    .pdf-card-author { color: #888; font-size: 0.78em; }
-    .pdf-card-desc { color: #bbb; font-size: 0.82em; line-height: 1.5; flex: 1; }
+    .pdf-card { background: var(--bg-1); border: 1px solid var(--border); border-top: 2px solid var(--amber); border-radius: 6px; padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 0.35rem; transition: border-color 0.15s; }
+    .pdf-card:hover { border-color: var(--border-hi); border-top-color: var(--amber); }
+    .pdf-card-head { display: flex; gap: 0.8rem; align-items: flex-start; }
+    .pdf-cover { flex: 0 0 auto; width: 60px; height: 80px; object-fit: cover; object-position: top; border-radius: 3px; background: var(--bg-3); box-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06); }
+    .pdf-card-title { font-family: var(--font-display); font-weight: 600; color: var(--amber); font-size: 0.92em; line-height: 1.3; }
+    .pdf-card-author { color: var(--text-2); font-size: 0.78em; }
+    .pdf-card-desc { color: var(--text-1); font-size: 0.82em; line-height: 1.5; flex: 1; }
     .pdf-card-meta { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.25rem; }
     .pdf-badge { font-size: 0.72em; padding: 0.1rem 0.45rem; border-radius: 3px; font-weight: 500; }
     .pdf-badge-size { background: #1a1a2a; color: #8a8aff; border: 1px solid #2a2a4a; }
     .pdf-badge-domain { background: rgba(74,128,181,0.1); color: var(--blue); border: 1px solid var(--blue-dim); }
-    .pdf-badge-uk { background: #0d2a14; color: #27ae60; border: 1px solid #1a4a22; }
+    .pdf-badge-uk { background: #0d2a14; color: var(--green); border: 1px solid #1a4a22; }
     .pdf-card-actions { display: flex; gap: 0.5rem; margin-top: 0.4rem; }
     .pdf-open-btn { flex: 1; background: #1a1a0a; border: 1px solid var(--amber); color: var(--amber); padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.8em; text-align: center; text-decoration: none; transition: all 0.15s; }
     .pdf-open-btn:hover { background: var(--amber); color: var(--bg-0); }
-    .pdf-viewer-wrap { border: 1px solid #2a2a2a; border-radius: 6px; overflow: hidden; margin-bottom: 1.5rem; background: #111; }
-    .pdf-viewer-bar { background: #1a1a1a; border-bottom: 1px solid #2a2a2a; padding: 0.5rem 0.85rem; display: flex; align-items: center; gap: 0.75rem; font-size: 0.8em; color: #888; }
+    .pdf-viewer-wrap { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 1.5rem; background: var(--bg-2); }
+    .pdf-viewer-bar { background: var(--bg-3); border-bottom: 1px solid var(--border); padding: 0.5rem 0.85rem; display: flex; align-items: center; gap: 0.75rem; font-size: 0.8em; color: var(--text-2); }
     .pdf-viewer-bar span { color: var(--amber); font-weight: 600; }
-    #pdf-viewer-close { margin-left: auto; background: none; border: none; color: #666; cursor: pointer; font-size: 1.1em; padding: 0; }
+    #pdf-viewer-close { margin-left: auto; background: none; border: none; color: var(--text-3); cursor: pointer; font-size: 1.1em; padding: 0; }
     #pdf-viewer-close:hover { color: #fff; }
     #pdf-iframe { width: 100%; height: 75vh; border: none; display: block; }
     .pdf-viewer-wrap.hidden { display: none; }
@@ -98,6 +102,25 @@
       .section-divider { color: #000 !important; border-bottom: 1px solid #000 !important; }
     }
   </style>
+<!-- seo:start — generated by tools/seo.py; edit that, not this -->
+<link rel="canonical" href="https://bunkerbot.co.uk/literature.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Last Light Survival Guide">
+<meta property="og:title" content="Reference Library">
+<meta property="og:description" content="The reference library: 33 public-domain survival, medical and engineering books bundled as searchable PDFs, plus 60 curated titles worth owning, with acquisition tracking.">
+<meta property="og:url" content="https://bunkerbot.co.uk/literature.html">
+<meta property="og:image" content="https://bunkerbot.co.uk/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Last Light Survival Guide — a complete, fully-offline survival library.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reference Library">
+<meta name="twitter:description" content="The reference library: 33 public-domain survival, medical and engineering books bundled as searchable PDFs, plus 60 curated titles worth owning, with acquisition tracking.">
+<meta name="twitter:image" content="https://bunkerbot.co.uk/assets/og-image.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://bunkerbot.co.uk/#website","url":"https://bunkerbot.co.uk/","name":"The Last Light Survival Guide","description":"A complete, fully-offline survival reference and library.","inLanguage":"en","license":"https://creativecommons.org/licenses/by-sa/4.0/","publisher":{"@id":"https://bunkerbot.co.uk/#org"}},{"@type":"Organization","@id":"https://bunkerbot.co.uk/#org","name":"The Last Light Survival Guide","url":"https://bunkerbot.co.uk/","logo":"https://bunkerbot.co.uk/assets/icons/apple-touch-icon.png","sameAs":["https://github.com/hamtechautomation/survivalai"]},{"@type":"WebPage","@id":"https://bunkerbot.co.uk/literature.html#page","url":"https://bunkerbot.co.uk/literature.html","name":"Reference Library","description":"The reference library: 33 public-domain survival, medical and engineering books bundled as searchable PDFs, plus 60 curated titles worth owning, with acquisition tracking.","inLanguage":"en","image":"https://bunkerbot.co.uk/assets/og-image.png","isPartOf":{"@id":"https://bunkerbot.co.uk/#website"},"breadcrumb":{"@id":"https://bunkerbot.co.uk/literature.html#breadcrumb"},"license":"https://creativecommons.org/licenses/by-sa/4.0/","dateModified":"2026-11-12"},{"@type":"BreadcrumbList","@id":"https://bunkerbot.co.uk/literature.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://bunkerbot.co.uk/"},{"@type":"ListItem","position":2,"name":"Reference Library","item":"https://bunkerbot.co.uk/literature.html"}]}]}
+</script>
+<!-- seo:end -->
 </head>
 <body>
   <nav id="sidebar" class="sidebar" aria-label="Main navigation"></nav>
@@ -120,7 +143,7 @@
 
     <header class="section-header">
       <div class="section-badges">
-        <span class="badge">14 Bundled PDFs</span>
+        <span class="badge"><span data-count="bundled">33</span> Bundled Books</span>
         <span class="badge">60 Curated Books</span>
         <span class="badge">Offline Reference</span>
       </div>
@@ -131,223 +154,12 @@
     <!-- ── BUNDLED PDF LIBRARY ─────────────────────────────── -->
     <div class="pdf-section-header">
       📥 Bundled PDFs — Available Offline
-      <button onclick="downloadAllPdfs()" class="btn btn-sm" style="margin-left:auto;font-size:0.75rem;padding:0.25rem 0.75rem;" title="Download all 6 PDFs to your device">⬇ Download All</button>
+      <button onclick="downloadAllPdfs()" class="btn btn-sm" style="margin-left:auto;font-size:0.75rem;padding:0.25rem 0.75rem;" title="Download every bundled book to your device">⬇ Download All</button>
     </div>
-    <p style="color:#888;font-size:0.84em;margin:-0.25rem 0 0.85rem;">These files are included with the app and open directly in your browser — no internet required.</p>
+    <p style="color:var(--text-2);font-size:0.84em;margin:-0.25rem 0 0.85rem;">These files are included with the app and open directly in your browser — no internet required.</p>
 
-    <div class="pdf-grid">
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">Bunker Bot Compendium — Master Index &amp; Quick-Reference</div>
-        <div class="pdf-card-author">The Last Light Survival Guide · 2026</div>
-        <div class="pdf-card-desc">A single-volume master index and quick-reference to the entire library: how to read it by goal, the fastest route to each answer, and condensed cross-references across every bundled book. 477 pages.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">4.2 MB</span>
-          <span class="pdf-badge pdf-badge-domain">CC BY-SA</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/bunkerbot-compendium.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/bunkerbot-compendium.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">US Army Survival Manual FM 3-05.70</div>
-        <div class="pdf-card-author">US Department of the Army · 2002</div>
-        <div class="pdf-card-desc">The definitive military survival reference: shelters, water procurement, fire, food, navigation, signalling, and SERE in every climate on Earth. 676 pages.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">20 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Public Domain</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/fm-3-05-70-survival.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/fm-3-05-70-survival.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">First Aid — FM 4-25.11</div>
-        <div class="pdf-card-author">US Army / Navy / Air Force / USMC · 2004</div>
-        <div class="pdf-card-desc">Military first aid covering trauma, wounds, fractures, burns, airway management, hypothermia, and mass-casualty triage. 227 pages.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">2.5 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Public Domain</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/fm-4-25-11-first-aid.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/fm-4-25-11-first-aid.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">Field Hygiene &amp; Sanitation FM 21-10</div>
-        <div class="pdf-card-author">US Army / USMC · 2000</div>
-        <div class="pdf-card-desc">Water purification, latrines, waste disposal, pest control, and disease prevention in austere environments. Critical for avoiding the illnesses that kill most disaster survivors.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">2.8 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Public Domain</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/fm-21-10-field-hygiene.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/fm-21-10-field-hygiene.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">Nuclear War Survival Skills</div>
-        <div class="pdf-card-author">Cresson H. Kearny · Oak Ridge National Lab · 1987</div>
-        <div class="pdf-card-desc">Peer-reviewed by nuclear physicists. Expedient blast and fallout shelters, KFM dosimeter construction, food and water decontamination, medical effects of radiation. Released to public domain by ORNL.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">70 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Public Domain</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/nuclear-war-survival.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/nuclear-war-survival.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">Aerie Backcountry Medicine (15th Ed.)</div>
-        <div class="pdf-card-author">Aerie Backcountry Medicine · 2025</div>
-        <div class="pdf-card-desc">Current wilderness medicine curriculum: patient assessment, trauma, environmental injuries, altitude sickness, and evacuation decision-making. Used by WEMT certification courses.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">13 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Free — Educator License</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/aerie-backcountry-medicine.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/aerie-backcountry-medicine.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">UK Emergency Preparedness Guide</div>
-        <div class="pdf-card-author">UK Cabinet Office · 2016</div>
-        <div class="pdf-card-desc">Official UK government guidance for individuals, families, and communities. Covers household planning, emergency kit, evacuation, flooding, power cuts, and community resilience.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">285 KB</span>
-          <span class="pdf-badge pdf-badge-uk">UK Gov · Crown Copyright</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/uk-emergency-preparedness.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/uk-emergency-preparedness.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">Where There Is No Doctor</div>
-        <div class="pdf-card-author">David Werner et al. — Hesperian Health Guides · 2012</div>
-        <div class="pdf-card-desc">The world's most-used community health guide. Diagnosis, treatment, and prevention for remote areas without medical professionals. Used by villages and aid organisations globally.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">8.3 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Free — Hesperian License</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/where-there-is-no-doctor.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/where-there-is-no-doctor.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">Where There Is No Dentist</div>
-        <div class="pdf-card-author">Murray Dickson — Hesperian Health Guides · 2012</div>
-        <div class="pdf-card-desc">Practical dental care without a dentist: tooth extraction, fillings, infections, pain relief, and preventive care. Illustrated step-by-step procedures.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">7.2 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Free — Hesperian License</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/where-there-is-no-dentist.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/where-there-is-no-dentist.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">Emergency War Surgery (5th Ed.)</div>
-        <div class="pdf-card-author">US Army Borden Institute · 2018</div>
-        <div class="pdf-card-desc">Advanced trauma surgery in austere conditions: haemorrhage control, damage-control surgery, blast injuries, burns, amputations, and field anaesthesia. Written for surgeons without hospital infrastructure.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">29 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Public Domain</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/emergency-war-surgery.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/emergency-war-surgery.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">The Humanure Handbook (3rd Ed.)</div>
-        <div class="pdf-card-author">Joseph Jenkins · 2005</div>
-        <div class="pdf-card-desc">Safe composting of human waste into fertile soil. Essential sanitation when sewage infrastructure fails. Covers pathogens, thermophilic composting, and system construction.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">22 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Free — Author Released</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/humanure-handbook.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/humanure-handbook.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">US Army Survival Manual FM 21-76 (1957)</div>
-        <div class="pdf-card-author">US Department of the Army · 1957</div>
-        <div class="pdf-card-desc">The original survival field manual — predecessor to FM 3-05.70. Covers evasion and escape, survival in enemy territory, and primitive techniques not always in the modern edition.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">18 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Public Domain</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/fm-21-76-survival-1957.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/fm-21-76-survival-1957.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">US Army Ranger Handbook SH 21-76</div>
-        <div class="pdf-card-author">US Army · 2006</div>
-        <div class="pdf-card-desc">Small-unit tactics, combat operations, demolitions, reconnaissance, and battle drills. The standard Ranger field reference — concise and action-oriented.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">3.7 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Public Domain</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/ranger-handbook.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/ranger-handbook.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">US Army Signal Operations FM 6-02</div>
-        <div class="pdf-card-author">US Department of the Army · 2019</div>
-        <div class="pdf-card-desc">Military communications: radio networks, encryption, frequencies, antenna theory, and maintaining comms under degraded conditions. Relevant to any long-range comms planning.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">5.3 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Public Domain</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/fm-6-02-signal-ops.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/fm-6-02-signal-ops.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-      <div class="pdf-card">
-        <div class="pdf-card-title">The Art of War</div>
-        <div class="pdf-card-author">Sun Tzu — trans. Lionel Giles · c.500 BCE</div>
-        <div class="pdf-card-desc">Strategic thinking, deception, intelligence, and leadership under pressure. Foundational text on conflict, negotiation, and resource management. Applies to security and community defence planning.</div>
-        <div class="pdf-card-meta">
-          <span class="pdf-badge pdf-badge-size">0.9 MB</span>
-          <span class="pdf-badge pdf-badge-domain">Public Domain</span>
-        </div>
-        <div class="pdf-card-actions">
-          <a href="pdfs/art-of-war-sun-tzu.pdf" target="_blank" class="pdf-open-btn">Open PDF</a>
-          <a href="pdfs/art-of-war-sun-tzu.pdf" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a>
-        </div>
-      </div>
-
-    </div>
+    <!-- Filled from assets/js/library-data.js (the one list of bundled books) -->
+    <div class="pdf-grid" id="bundled-grid"></div>
 
     <!-- ── PERSONAL LIBRARY ──────────────────────────────── -->
     <div class="pdf-section-header" style="margin-top:2rem;">
@@ -358,10 +170,10 @@
         <label class="btn btn-sm" style="font-size:0.75rem;padding:0.25rem 0.75rem;cursor:pointer;" title="Import from JSON">Import<input type="file" accept=".json" style="display:none" onchange="importLibraryFile(event)"></label>
       </div>
     </div>
-    <p style="color:#888;font-size:0.84em;margin:-0.25rem 0 0.85rem;">Add your own books, links, and notes. Bunker Bot can reference your notes when answering questions.</p>
+    <p style="color:var(--text-2);font-size:0.84em;margin:-0.25rem 0 0.85rem;">Add your own books, links, and notes. Bunker Bot can reference your notes when answering questions.</p>
 
     <div id="my-library-grid" class="pdf-grid">
-      <div id="lib-empty-msg" style="color:#555;font-size:0.85em;padding:1rem 0;grid-column:1/-1;">
+      <div id="lib-empty-msg" style="color:var(--text-3);font-size:0.85em;padding:1rem 0;grid-column:1/-1;">
         No entries yet. Click <strong style="color:var(--amber)">+ Add Resource</strong> to build your library.
       </div>
     </div>
@@ -370,77 +182,36 @@
     <div class="pdf-section-header" style="margin-top:1.5rem;">
       🤖 Bunker Bot Knowledge Base
     </div>
-    <p style="color:#888;font-size:0.84em;margin:-0.25rem 0 0.85rem;">
+    <p style="color:var(--text-2);font-size:0.84em;margin:-0.25rem 0 0.85rem;">
       Index the bundled PDFs so Bunker Bot can quote them when answering your questions. This uses keyword search — no internet needed.
     </p>
 
-    <div style="background:var(--bg-1);border:1px solid #2a2a2a;border-radius:6px;padding:1rem 1.1rem;margin-bottom:1rem;">
+    <div style="background:var(--bg-1);border:1px solid var(--border);border-radius:6px;padding:1rem 1.1rem;margin-bottom:1rem;">
       <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
         <div id="rag-status-dot" style="width:10px;height:10px;border-radius:50%;background:#555;flex-shrink:0;"></div>
-        <span id="rag-status-text" style="font-size:0.85em;color:#888;">PDF index not loaded</span>
+        <span id="rag-status-text" style="font-size:0.85em;color:var(--text-2);">PDF index not loaded</span>
         <button class="btn btn-sm" id="rag-load-btn" onclick="loadPdfIndex()" style="font-size:0.75rem;padding:0.25rem 0.75rem;margin-left:auto;">Load Index</button>
       </div>
-      <p style="color:#666;font-size:0.78em;margin:0.75rem 0 0;">
+      <p style="color:var(--text-3);font-size:0.78em;margin:0.75rem 0 0;">
         No index file yet? Run this once from your <code>pdfs/</code> folder:<br>
         <code style="color:var(--amber);font-size:0.95em;">pip3 install pypdf &amp;&amp; python3 extract.py</code>
       </p>
     </div>
 
-    <div style="background:var(--bg-1);border:1px solid #2a2a2a;border-radius:6px;padding:1rem 1.1rem;margin-bottom:2rem;">
+    <div style="background:var(--bg-1);border:1px solid var(--border);border-radius:6px;padding:1rem 1.1rem;margin-bottom:2rem;">
       <div style="font-size:0.82em;color:var(--amber);font-weight:600;margin-bottom:0.5rem;">Personal Notes (always searched by Bunker Bot)</div>
       <textarea id="kb-notes" rows="5" placeholder="Paste key passages, personal notes, or summaries here. Bunker Bot will search this whenever it's relevant to your question..."
-        style="width:100%;background:var(--bg-3);border:1px solid #333;border-radius:4px;color:var(--text-1);font-size:0.82em;padding:0.5rem;resize:vertical;box-sizing:border-box;font-family:inherit;"
+        style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:4px;color:var(--text-1);font-size:0.82em;padding:0.5rem;resize:vertical;box-sizing:border-box;font-family:inherit;"
         oninput="Librarian.saveNotes(this.value)"></textarea>
-      <div style="font-size:0.75em;color:#555;margin-top:0.35rem;">Auto-saved to browser storage.</div>
+      <div style="font-size:0.75em;color:var(--text-3);margin-top:0.35rem;">Auto-saved to browser storage.</div>
     </div>
 
     <!-- ── ADD RESOURCE MODAL ────────────────────────────── -->
-    <div id="add-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9000;align-items:center;justify-content:center;">
-      <div style="background:var(--bg-2);border:1px solid #333;border-radius:8px;padding:1.5rem;width:min(500px,92vw);max-height:90vh;overflow-y:auto;">
-        <h3 id="modal-title" style="margin:0 0 1rem;color:var(--amber);font-size:1rem;">Add Resource</h3>
-        <input type="hidden" id="modal-edit-id">
 
-        <label style="display:block;margin-bottom:0.75rem;">
-          <span style="font-size:0.8em;color:#888;display:block;margin-bottom:0.25rem;">Title *</span>
-          <input id="modal-title-input" type="text" placeholder="e.g. SAS Survival Handbook"
-            style="width:100%;background:var(--bg-3);border:1px solid #333;border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.85em;box-sizing:border-box;">
-        </label>
-        <label style="display:block;margin-bottom:0.75rem;">
-          <span style="font-size:0.8em;color:#888;display:block;margin-bottom:0.25rem;">Author / Publisher</span>
-          <input id="modal-author-input" type="text" placeholder="e.g. John 'Lofty' Wiseman"
-            style="width:100%;background:var(--bg-3);border:1px solid #333;border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.85em;box-sizing:border-box;">
-        </label>
-        <label style="display:block;margin-bottom:0.75rem;">
-          <span style="font-size:0.8em;color:#888;display:block;margin-bottom:0.25rem;">URL or file path (optional)</span>
-          <input id="modal-url-input" type="text" placeholder="https:// or /path/to/file.pdf"
-            style="width:100%;background:var(--bg-3);border:1px solid #333;border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.85em;box-sizing:border-box;">
-        </label>
-        <label style="display:block;margin-bottom:0.75rem;">
-          <span style="font-size:0.8em;color:#888;display:block;margin-bottom:0.25rem;">Description</span>
-          <textarea id="modal-desc-input" rows="2" placeholder="Brief description of what this covers..."
-            style="width:100%;background:var(--bg-3);border:1px solid #333;border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.85em;box-sizing:border-box;resize:vertical;font-family:inherit;"></textarea>
-        </label>
-        <label style="display:block;margin-bottom:0.75rem;">
-          <span style="font-size:0.8em;color:#888;display:block;margin-bottom:0.25rem;">Tags (comma-separated)</span>
-          <input id="modal-tags-input" type="text" placeholder="e.g. first aid, wilderness, UK"
-            style="width:100%;background:var(--bg-3);border:1px solid #333;border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.85em;box-sizing:border-box;">
-        </label>
-        <label style="display:block;margin-bottom:1rem;">
-          <span style="font-size:0.8em;color:#888;display:block;margin-bottom:0.25rem;">Notes for Bunker Bot (key passages, summaries — Bunker Bot will search these)</span>
-          <textarea id="modal-notes-input" rows="4" placeholder="Paste important quotes or summaries here. Bunker Bot will cite this when relevant..."
-            style="width:100%;background:var(--bg-3);border:1px solid #333;border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.82em;box-sizing:border-box;resize:vertical;font-family:inherit;"></textarea>
-        </label>
-
-        <div style="display:flex;gap:0.5rem;justify-content:flex-end;">
-          <button class="btn" onclick="closeAddModal()" style="font-size:0.85em;padding:0.35rem 0.85rem;background:var(--bg-3);border-color:#444;">Cancel</button>
-          <button class="btn" onclick="saveModalEntry()" style="font-size:0.85em;padding:0.35rem 0.85rem;border-color:var(--amber);color:var(--amber);">Save</button>
-        </div>
-      </div>
-    </div>
 
     <div class="reading-72">
       <h3>72-Hour Reading List — If You Only Have a Week</h3>
-      <p style="color:#bbb;font-size:0.85em;margin:0 0 0.6rem;">If something is imminent and you need the 5 most critical books right now:</p>
+      <p style="color:var(--text-1);font-size:0.85em;margin:0 0 0.6rem;">If something is imminent and you need the 5 most critical books right now:</p>
       <ol>
         <li><strong>Where There Is No Doctor</strong> (Werner) — Medical emergencies without hospitals. Free PDF.</li>
         <li><strong>Nuclear War Survival Skills</strong> (Kearny) — Shelter, fallout, KFM meter. Free PDF.</li>
@@ -467,17 +238,17 @@
     </div>
 
     <div class="lib-stats">
-      <div class="stat-pill">Books obtained: <span id="stat-obtained">0</span> / 60</div>
-      <div class="stat-pill">Bundled PDFs: <span style="color:#27ae60">14</span></div>
-      <div class="stat-pill">Critical tier: <span style="color:#e74c3c">22</span></div>
+      <div class="stat-pill">Books obtained: <span id="stat-obtained">0</span> / <span data-count="curated">60</span></div>
+      <div class="stat-pill">Bundled books: <span style="color:var(--green)" data-count="bundled">33</span></div>
+      <div class="stat-pill">Critical tier: <span style="color:var(--red)" data-count="tier-CRITICAL">21</span></div>
     </div>
 
     <div class="lib-controls">
       <label>Filter:</label>
-      <button class="filter-btn active" data-filter="all">All (60)</button>
-      <button class="filter-btn tier-critical" data-filter="tier-CRITICAL">Critical (22)</button>
-      <button class="filter-btn tier-important" data-filter="tier-IMPORTANT">Important (27)</button>
-      <button class="filter-btn tier-nice" data-filter="tier-NICE">Nice to Have (11)</button>
+      <button class="filter-btn active" data-filter="all">All (<span data-count="curated">60</span>)</button>
+      <button class="filter-btn tier-critical" data-filter="tier-CRITICAL">Critical (<span data-count="tier-CRITICAL">21</span>)</button>
+      <button class="filter-btn tier-important" data-filter="tier-IMPORTANT">Important (<span data-count="tier-IMPORTANT">26</span>)</button>
+      <button class="filter-btn tier-nice" data-filter="tier-NICE">Nice to Have (<span data-count="tier-NICE">13</span>)</button>
       <button class="filter-btn" data-filter="cat-medicine">Medicine</button>
       <button class="filter-btn" data-filter="cat-agriculture">Agriculture</button>
       <button class="filter-btn" data-filter="cat-engineering">Engineering</button>
@@ -1544,6 +1315,50 @@
   </div><!-- /content-wrapper -->
   </main>
 
+  <!-- kept outside <main> so Night mode's content filter cannot re-anchor this fixed overlay -->
+  <div id="add-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9000;align-items:center;justify-content:center;">
+    <div style="background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:1.5rem;width:min(500px,92vw);max-height:90vh;overflow-y:auto;">
+      <h3 id="modal-title" style="margin:0 0 1rem;color:var(--amber);font-size:1rem;">Add Resource</h3>
+      <input type="hidden" id="modal-edit-id">
+
+      <label style="display:block;margin-bottom:0.75rem;">
+        <span style="font-size:0.8em;color:var(--text-2);display:block;margin-bottom:0.25rem;">Title *</span>
+        <input id="modal-title-input" type="text" placeholder="e.g. SAS Survival Handbook"
+          style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.85em;box-sizing:border-box;">
+      </label>
+      <label style="display:block;margin-bottom:0.75rem;">
+        <span style="font-size:0.8em;color:var(--text-2);display:block;margin-bottom:0.25rem;">Author / Publisher</span>
+        <input id="modal-author-input" type="text" placeholder="e.g. John 'Lofty' Wiseman"
+          style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.85em;box-sizing:border-box;">
+      </label>
+      <label style="display:block;margin-bottom:0.75rem;">
+        <span style="font-size:0.8em;color:var(--text-2);display:block;margin-bottom:0.25rem;">URL or file path (optional)</span>
+        <input id="modal-url-input" type="text" placeholder="https:// or /path/to/file.pdf"
+          style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.85em;box-sizing:border-box;">
+      </label>
+      <label style="display:block;margin-bottom:0.75rem;">
+        <span style="font-size:0.8em;color:var(--text-2);display:block;margin-bottom:0.25rem;">Description</span>
+        <textarea id="modal-desc-input" rows="2" placeholder="Brief description of what this covers..."
+          style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.85em;box-sizing:border-box;resize:vertical;font-family:inherit;"></textarea>
+      </label>
+      <label style="display:block;margin-bottom:0.75rem;">
+        <span style="font-size:0.8em;color:var(--text-2);display:block;margin-bottom:0.25rem;">Tags (comma-separated)</span>
+        <input id="modal-tags-input" type="text" placeholder="e.g. first aid, wilderness, UK"
+          style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.85em;box-sizing:border-box;">
+      </label>
+      <label style="display:block;margin-bottom:1rem;">
+        <span style="font-size:0.8em;color:var(--text-2);display:block;margin-bottom:0.25rem;">Notes for Bunker Bot (key passages, summaries — Bunker Bot will search these)</span>
+        <textarea id="modal-notes-input" rows="4" placeholder="Paste important quotes or summaries here. Bunker Bot will cite this when relevant..."
+          style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:4px;color:var(--text-1);padding:0.4rem 0.6rem;font-size:0.82em;box-sizing:border-box;resize:vertical;font-family:inherit;"></textarea>
+      </label>
+
+      <div style="display:flex;gap:0.5rem;justify-content:flex-end;">
+        <button class="btn" onclick="closeAddModal()" style="font-size:0.85em;padding:0.35rem 0.85rem;background:var(--bg-3);border-color:var(--border-hi);">Cancel</button>
+        <button class="btn" onclick="saveModalEntry()" style="font-size:0.85em;padding:0.35rem 0.85rem;border-color:var(--amber);color:var(--amber);">Save</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Individual download confirmation modal ───── -->
   <div id="dl-confirm" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9200;align-items:center;justify-content:center;" onclick="if(event.target===this)cancelDownload()">
     <div style="background:var(--bg-2);border:1px solid var(--border-hi);border-top:2px solid var(--amber);border-radius:8px;padding:1.4rem 1.6rem;width:min(400px,92vw);">
@@ -1562,7 +1377,7 @@
     <div style="background:var(--bg-2);border:1px solid var(--border-hi);border-top:2px solid var(--amber);border-radius:8px;padding:1.5rem 1.75rem;width:min(480px,92vw);max-height:90vh;overflow-y:auto;">
       <h3 style="margin:0 0 0.75rem;color:var(--amber);font-size:1rem;">⬇ How to Download All PDFs</h3>
       <p style="font-size:0.85em;color:var(--text-1);line-height:1.6;margin:0 0 1rem;">
-        Browsers block automatic multi-file downloads as a security measure — clicking a single button can't reliably trigger 14 downloads at once.
+        Browsers block automatic multi-file downloads as a security measure — clicking a single button can't reliably trigger <span data-count="bundled">33</span> downloads at once.
       </p>
       <div style="background:var(--bg-3);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:4px;padding:0.85rem 1rem;margin-bottom:1rem;">
         <div style="font-size:0.8em;color:var(--green);font-weight:700;margin-bottom:0.4rem;">BEST WAY — PDF Library page</div>
@@ -1614,9 +1429,39 @@
     </div>
   </aside>
 
+  <script src="assets/js/library-data.js"></script>
+  <script>
+  /* Bundled-book cards, built from the shared catalogue so this page can't
+     fall out of step with the PDF Library page or the counts. */
+  (function () {
+    var grid = document.getElementById('bundled-grid');
+    var L = window.LIBRARY_PDFS || [];
+    if (!grid) return;
+    var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
+    grid.innerHTML = L.map(function (b) {
+      var name = b.file.replace(/\.pdf$/, '');
+      var lic = /crown|uk gov/i.test(b.license) ? 'pdf-badge-uk' : 'pdf-badge-domain';
+      return '<div class="pdf-card" data-file="' + esc(b.file) + '">' +
+        '<div class="pdf-card-head"><img class="pdf-cover" src="assets/covers/' + name + '.jpg" alt="" loading="lazy" width="60" height="80" onerror="this.remove()">' +
+        '<div><div class="pdf-card-title">' + esc(b.title) + '</div><div class="pdf-card-author">' + esc(b.author) + '</div></div></div>' +
+        '<div class="pdf-card-desc">' + esc(b.desc) + '</div>' +
+        '<div class="pdf-card-meta"><span class="pdf-badge pdf-badge-size">' + esc(b.size) + '</span><span class="pdf-badge ' + lic + '">' + esc(b.license) + '</span></div>' +
+        '<div class="pdf-card-actions"><a href="pdfs/' + esc(b.file) + '" target="_blank" class="pdf-open-btn">Open PDF</a>' +
+        '<a href="pdfs/' + esc(b.file) + '" download class="pdf-open-btn" style="flex:0;padding:0.3rem 0.5rem;" title="Download">⬇</a></div></div>';
+    }).join('');
+    document.querySelectorAll('[data-count="bundled"]').forEach(function (el) { el.textContent = L.length; });
+    // Curated-list counts come from the cards themselves.
+    var cards = document.querySelectorAll('.book-card');
+    var counts = { curated: cards.length };
+    [].forEach.call(cards, function (c) { var k = 'tier-' + c.dataset.tier; counts[k] = (counts[k] || 0) + 1; });
+    Object.keys(counts).forEach(function (k) {
+      document.querySelectorAll('[data-count="' + k + '"]').forEach(function (el) { el.textContent = counts[k]; });
+    });
+  })();
+  </script>
   <script src="assets/js/app.js"></script>
   <script src="assets/js/librarian.js"></script>
-  <script src="assets/js/bunker-bot.js"></script>
+  <script src="assets/js/bookshelf.js"></script>
   <script>
     const STORAGE_KEY = 'lib-obtained';
     let obtained = new Set();
@@ -1684,7 +1529,7 @@
         if (show) visible++;
       });
       const rc = document.getElementById('result-count');
-      rc.textContent = visible === 60 ? '' : visible + ' books shown';
+      rc.textContent = visible === cards.length ? '' : visible + ' books shown';
     }
 
     function initUI() {
@@ -1721,24 +1566,168 @@
     document.addEventListener('DOMContentLoaded', initUI);
   </script>
 
+  <!-- ── Bookshelf view (hover / tap a spine to read its blurb) ── -->
+  <script>
+  (function () {
+    if (!window.Bookshelf) return;
+    function txt(root, sel) { var n = root.querySelector(sel); return n ? n.textContent.trim() : ''; }
+
+    // ---- Bundled PDFs ------------------------------------------------------
+    var pdfGrid = document.querySelector('.pdf-grid:not(#my-library-grid)');
+    if (pdfGrid) {
+      function pdfHue(t) {
+        t = t.toLowerCase();
+        if (/compendium/.test(t)) return 'cream';
+        if (/doctor|dentist|medicine|first aid|surgery/.test(t)) return 'red';
+        if (/nuclear/.test(t)) return 'ochre';
+        if (/uk /.test(t + ' ')) return 'navy';
+        if (/humanure|hygiene/.test(t)) return 'green';
+        if (/art of war/.test(t)) return 'plum';
+        if (/signal/.test(t)) return 'teal';
+        return 'olive';
+      }
+      function mb(s) {
+        var m = /([\d.]+)\s*(KB|MB|GB)/i.exec(s || ''); if (!m) return 5;
+        var v = parseFloat(m[1]); var u = m[2].toUpperCase();
+        return u === 'KB' ? v / 1024 : u === 'GB' ? v * 1024 : v;
+      }
+      var pdfItems = [].map.call(pdfGrid.querySelectorAll('.pdf-card'), function (card) {
+        var title = txt(card, '.pdf-card-title');
+        var badges = [].map.call(card.querySelectorAll('.pdf-badge'), function (b) { return b.textContent.trim(); });
+        var links = card.querySelectorAll('.pdf-card-actions a');
+        var href = links[0] ? links[0].getAttribute('href') : '#';
+        var pages = /(\d[\d,]*) pages/.exec(card.textContent);
+        var coverImg = card.querySelector('.pdf-cover');
+        return {
+          title: title,
+          cover: coverImg ? coverImg.getAttribute('src') : null,
+          author: txt(card, '.pdf-card-author'),
+          desc: txt(card, '.pdf-card-desc'),
+          tags: badges.map(function (b, i) { return { text: b, tone: i === 0 ? 'muted' : (/uk/i.test(b) ? 'ok' : 'info') }; }),
+          actions: [{ text: 'Open PDF', href: href, primary: true }, { text: 'Download', href: href, download: true }],
+          hue: pdfHue(title),
+          size: Math.min(1, Math.log10(1 + mb(badges[0])) / 1.9),
+          spineNote: pages ? pages[1].replace(',', '') + 'p' : ''
+        };
+      });
+      var pdfHost = document.createElement('div');
+      pdfGrid.parentNode.insertBefore(pdfHost, pdfGrid);
+      Bookshelf.mount(pdfHost, pdfItems, { label: 'Bundled PDFs bookshelf' });
+      var pdfHeader = pdfGrid.previousElementSibling;
+      while (pdfHeader && !pdfHeader.classList.contains('pdf-section-header')) pdfHeader = pdfHeader.previousElementSibling;
+      var pdfToggle = Bookshelf.viewToggle('library-pdfs', function (mode) {
+        pdfHost.classList.toggle('is-shelf-hidden', mode !== 'shelf');
+        pdfGrid.classList.toggle('is-shelf-hidden', mode === 'shelf');
+      });
+      if (pdfHeader) {
+        var dl = pdfHeader.querySelector('button');
+        if (dl) { dl.style.marginLeft = '0'; pdfToggle.style.marginLeft = 'auto'; }
+        pdfHeader.insertBefore(pdfToggle, dl || null);
+      }
+    }
+
+    // ---- Curated 60 books, one shelf per subject ---------------------------
+    var bookGrid = document.getElementById('book-grid');
+    if (!bookGrid) return;
+    var firstDivider = bookGrid.previousElementSibling;
+    var TIER = { CRITICAL: ['Critical', 'critical'], IMPORTANT: ['Important', 'important'], NICE: ['Nice to have', 'nice'] };
+    var HUES = { medicine: ['red', 'rust', 'plum'], agriculture: ['green', 'olive', 'ochre'], engineering: ['slate', 'navy', 'rust'],
+                 comms: ['teal', 'navy', 'slate'], security: ['olive', 'slate', 'rust'], psychology: ['plum', 'navy', 'cream'], history: ['ochre', 'cream', 'rust'] };
+
+    var groups = [], group = null;
+    var label = firstDivider && firstDivider.classList.contains('section-divider') ? firstDivider.firstChild.textContent.trim() : 'Books';
+    [].forEach.call(bookGrid.children, function (node) {
+      if (node.classList.contains('section-divider')) { label = node.firstChild.textContent.trim(); group = null; return; }
+      if (!node.classList.contains('book-card')) return;
+      if (!group) { group = { label: label, cards: [] }; groups.push(group); }
+      group.cards.push(node);
+    });
+
+    function itemFor(card, i) {
+      var tier = TIER[card.dataset.tier] || ['', 'muted'];
+      var cb = card.querySelector('.book-check');
+      var link = card.querySelector('.book-link');
+      var tags = [].map.call(card.querySelectorAll('.book-meta .tag'), function (t) {
+        var c = t.className;
+        return { text: t.textContent.trim(), tone: /critical/.test(c) ? 'critical' : /important/.test(c) ? 'important' : /nice/.test(c) ? 'nice' : /free/.test(c) ? 'info' : 'muted' };
+      });
+      var hues = HUES[card.dataset.cat] || ['slate'];
+      var rank = card.dataset.tier === 'CRITICAL' ? 0 : card.dataset.tier === 'IMPORTANT' ? 1 : 2;
+      return {
+        title: txt(card, '.book-title'),
+        author: txt(card, '.book-author'),
+        desc: txt(card, '.book-desc'),
+        note: txt(card, '.book-keychapters'),
+        tags: tags,
+        hue: hues[(rank + i) % hues.length],
+        tall: rank === 0 ? 0.85 + (i % 3) * 0.05 : rank === 1 ? 0.45 + (i % 4) * 0.1 : 0.15 + (i % 3) * 0.1,
+        hidden: card.classList.contains('hidden'),
+        ribbon: cb && cb.checked,
+        spineNote: card.dataset.tier === 'CRITICAL' ? '★' : '',
+        actions: link ? [{ text: link.textContent.trim(), href: link.getAttribute('href') }] : [],
+        check: cb ? { label: 'I have this', checked: cb.checked, onChange: function (on) {
+          cb.checked = on; toggleObtained(cb, card.dataset.id); redraw();
+        } } : null
+      };
+    }
+
+    var host = document.createElement('div');
+    host.className = 'book-shelves';
+    bookGrid.parentNode.insertBefore(host, firstDivider || bookGrid);
+    var shelves = groups.map(function (g) {
+      var head = document.createElement('div');
+      head.className = 'shelf-heading';
+      head.textContent = g.label + ' ';
+      var count = document.createElement('span');
+      head.appendChild(count);
+      host.appendChild(head);
+      var wrap = document.createElement('div');
+      host.appendChild(wrap);
+      var items = g.cards.map(itemFor);
+      return { g: g, head: head, count: count, shelf: Bookshelf.mount(wrap, items, { label: g.label + ' shelf' }) };
+    });
+
+    function redraw() {
+      var any = false;
+      shelves.forEach(function (s) {
+        var items = s.g.cards.map(itemFor);
+        var n = items.filter(function (it) { return !it.hidden; }).length;
+        var have = items.filter(function (it) { return it.ribbon; }).length;
+        s.count.textContent = n + (n === 1 ? ' book' : ' books') + (have ? ' · ' + have + ' obtained' : '');
+        var hide = n === 0;
+        s.head.style.display = s.shelf.el.parentNode.style.display = hide ? 'none' : '';
+        if (!hide) { s.shelf.update(items); any = true; }
+      });
+      empty.style.display = any ? 'none' : '';
+    }
+    var empty = document.createElement('p');
+    empty.className = 'shelf-empty';
+    empty.textContent = 'No books match this filter or search.';
+    host.appendChild(empty);
+
+    // Keep the shelf in step with the existing filters, search and checkboxes.
+    var origApply = window.applyFilters;
+    window.applyFilters = function () { origApply.apply(this, arguments); redraw(); };
+    var origClear = window.clearAll;
+    window.clearAll = function () { origClear.apply(this, arguments); redraw(); };
+    bookGrid.addEventListener('change', redraw);
+    document.addEventListener('DOMContentLoaded', redraw);
+
+    var toggle = Bookshelf.viewToggle('library-books', function (mode) {
+      var shelf = mode === 'shelf';
+      host.classList.toggle('is-shelf-hidden', !shelf);
+      bookGrid.classList.toggle('is-shelf-hidden', shelf);
+      if (firstDivider) firstDivider.classList.toggle('is-shelf-hidden', shelf);
+    });
+    var searchRow = document.getElementById('lib-search');
+    if (searchRow) searchRow.parentNode.insertBefore(toggle, searchRow);
+    redraw();
+  })();
+  </script>
+
   <!-- ── Personal Library & PDF RAG scripts ─────────────── -->
   <script>
-    const PDF_FILES = [
-      'pdfs/fm-3-05-70-survival.pdf',
-      'pdfs/fm-4-25-11-first-aid.pdf',
-      'pdfs/fm-21-10-field-hygiene.pdf',
-      'pdfs/nuclear-war-survival.pdf',
-      'pdfs/aerie-backcountry-medicine.pdf',
-      'pdfs/uk-emergency-preparedness.pdf',
-      'pdfs/where-there-is-no-doctor.pdf',
-      'pdfs/where-there-is-no-dentist.pdf',
-      'pdfs/emergency-war-surgery.pdf',
-      'pdfs/humanure-handbook.pdf',
-      'pdfs/fm-21-76-survival-1957.pdf',
-      'pdfs/ranger-handbook.pdf',
-      'pdfs/fm-6-02-signal-ops.pdf',
-      'pdfs/art-of-war-sun-tzu.pdf',
-    ];
+    const PDF_FILES = (window.LIBRARY_PDFS || []).map(b => 'pdfs/' + b.file);
 
     function downloadAllPdfs() {
       // Browsers block programmatic multi-file downloads after the first.
@@ -1752,22 +1741,7 @@
     }
 
     // ── Individual download confirmation ──────────────────
-    const PDF_META = {
-      'fm-3-05-70-survival.pdf':       { title: 'US Army Survival Manual FM 3-05.70',      size: '20 MB' },
-      'fm-4-25-11-first-aid.pdf':      { title: 'First Aid FM 4-25.11',                    size: '2.5 MB' },
-      'fm-21-10-field-hygiene.pdf':    { title: 'Field Hygiene & Sanitation FM 21-10',     size: '2.8 MB' },
-      'nuclear-war-survival.pdf':      { title: 'Nuclear War Survival Skills',              size: '70 MB' },
-      'aerie-backcountry-medicine.pdf':{ title: 'Aerie Wilderness Medicine (15th Ed.)',    size: '13 MB' },
-      'uk-emergency-preparedness.pdf': { title: 'UK Emergency Preparedness Guide',         size: '285 KB' },
-      'where-there-is-no-doctor.pdf':  { title: 'Where There Is No Doctor',                size: '8.3 MB' },
-      'where-there-is-no-dentist.pdf': { title: 'Where There Is No Dentist',               size: '7.2 MB' },
-      'emergency-war-surgery.pdf':     { title: 'Emergency War Surgery (5th Ed.)',          size: '29 MB' },
-      'humanure-handbook.pdf':         { title: 'The Humanure Handbook',                   size: '22 MB' },
-      'fm-21-76-survival-1957.pdf':    { title: 'US Army Survival Manual FM 21-76 (1957)', size: '18 MB' },
-      'ranger-handbook.pdf':           { title: 'US Army Ranger Handbook SH 21-76',        size: '3.7 MB' },
-      'fm-6-02-signal-ops.pdf':        { title: 'US Army Signal Operations FM 6-02',       size: '5.3 MB' },
-      'art-of-war-sun-tzu.pdf':        { title: 'The Art of War',                          size: '0.9 MB' },
-    };
+    const PDF_META = Object.fromEntries((window.LIBRARY_PDFS || []).map(b => [b.file, { title: b.title, size: b.size }]));
 
     let _pendingHref = null;
 
@@ -1826,11 +1800,11 @@
           ${e.desc   ? `<div class="pdf-card-desc">${escHtml(e.desc)}</div>` : ''}
           ${e.tags.length ? `<div class="pdf-card-meta">${e.tags.map(t => `<span class="pdf-badge" style="background:#1a1a2a;color:#8a8aaa;border:1px solid #2a2a3a;">${escHtml(t)}</span>`).join('')}</div>` : ''}
           ${e.notes ? `<div style="font-size:0.74em;color:var(--blue);margin-top:0.3rem;">📖 Notes saved — Bunker Bot can reference these</div>` : ''}
-          <div style="font-size:0.72em;color:#444;margin-top:0.3rem;">Added ${e.added}</div>
+          <div style="font-size:0.72em;color:var(--text-3);margin-top:0.3rem;">Added ${e.added}</div>
           <div class="pdf-card-actions" style="margin-top:0.5rem;">
             ${e.url ? `<a href="${escHtml(e.url)}" target="_blank" rel="noopener" class="pdf-open-btn">Open</a>` : ''}
-            <button class="pdf-open-btn" onclick="editEntry('${e.id}')" style="background:#1a1a2a;border-color:#444;color:#aaa;">Edit</button>
-            <button class="pdf-open-btn" onclick="deleteEntry('${e.id}')" style="background:#1a0a0a;border-color:#5a1a1a;color:#e74c3c;flex:0;padding:0.3rem 0.5rem;" title="Remove">✕</button>
+            <button class="pdf-open-btn" onclick="editEntry('${e.id}')" style="background:#1a1a2a;border-color:var(--border-hi);color:var(--text-2);">Edit</button>
+            <button class="pdf-open-btn" onclick="deleteEntry('${e.id}')" style="background:#1a0a0a;border-color:#5a1a1a;color:var(--red);flex:0;padding:0.3rem 0.5rem;" title="Remove">✕</button>
           </div>`;
         grid.appendChild(card);
       });

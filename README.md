@@ -2,7 +2,7 @@
 
 ![The Last Light Survival Guide](assets/og-image.png)
 
-> **A complete, fully-offline survival library — 27 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
+> **A complete, fully-offline survival library — 30 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
 
 ### See it in action
 
@@ -317,7 +317,7 @@ last-light-survival-guide/
 ├── deploy-s3.sh                ← Publish to AWS S3 + CloudFront
 ├── build-packages.sh           ← Build the downloadable ZIPs
 ├── rebuild-index.sh            ← Rebuild the PDF search index after adding books
-├── sections/                   ← 28 content section pages
+├── sections/                   ← 29 content section pages
 │   ├── food.html               medical.html        energy.html
 │   ├── shelter.html            communications.html navigation.html
 │   ├── security.html           knowledge.html      science.html (First Principles)
@@ -543,10 +543,14 @@ hosting is just an upload.
 2. **Create a CloudFront distribution** with that bucket as the origin:
    - Origin access: **Origin Access Control (OAC)**, and let it update the bucket
      policy so only CloudFront can read.
-   - **Default root object:** `index.html`
+   - **Default root object:** `home.html` (the landing page; search metadata
+     treats it as `/`, and the guide itself as `/index.html`)
    - **Viewer protocol policy:** Redirect HTTP → HTTPS
    - (Optional) attach your domain + an ACM certificate (in `us-east-1`).
-   - (Optional) Custom error response: 403/404 → `/offline.html` (200).
+   - **Custom error responses:** 403 and 404 → `/404.html`, response code **404**.
+     (S3 answers 403 for a missing file in a private bucket; passing that on, or
+     serving a page with status 200, makes search engines log errors or index junk.)
+   - Or skip the clicking: `infra/cloudformation.yaml` sets all of this up.
 3. **Configure the AWS CLI** locally: `aws configure` with write access to the bucket.
 
 ### Deploy / update
@@ -556,6 +560,16 @@ BUCKET=my-survival-guide  CF_DIST=E1234ABCD  sh deploy-s3.sh
 `deploy-s3.sh` syncs the whole folder (including the gitignored `pdfs/` and
 `maps/`, since they're on your disk), sets long cache for big assets, **no-cache
 for `sw.js`** so updates propagate, and invalidates CloudFront if `CF_DIST` is set.
+
+### Search engines & AI assistants
+`python3 tools/seo.py` gives every page its canonical URL, link-preview tags
+(Open Graph / Twitter) and schema.org structured data, fills in any missing
+meta description, and rewrites `sitemap.xml` and `llms.txt` (a plain map of the
+site for AI assistants — [llmstxt.org](https://llmstxt.org)). It is idempotent,
+`deploy-s3.sh` runs it first, and the site checks fail if a page is missing its
+metadata — so run it after adding a page or re-running a page generator.
+After a deploy, resubmit `https://<your-domain>/sitemap.xml` in Google Search
+Console and Bing Webmaster Tools.
 
 ### Caching & how updates reach people
 Everything is cached for **1 year** (cheap, fast — `deploy-s3.sh` sets it).

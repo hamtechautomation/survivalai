@@ -77,6 +77,18 @@ Resources:
         Enabled: true
         Comment: The Last Light Survival Guide
         DefaultRootObject: home.html
+        # A missing file comes back from S3 as 403 (the bucket is private). Serve
+        # the 404 page with a real 404 status instead, so search engines drop
+        # dead URLs rather than logging them as access errors.
+        CustomErrorResponses:
+          - ErrorCode: 403
+            ResponseCode: 404
+            ResponsePagePath: /404.html
+            ErrorCachingMinTTL: 60
+          - ErrorCode: 404
+            ResponseCode: 404
+            ResponsePagePath: /404.html
+            ErrorCachingMinTTL: 60
         HttpVersion: http2and3
         Logging:
           Bucket: !GetAtt LogBucket.DomainName
