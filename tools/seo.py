@@ -46,7 +46,7 @@ SKIP = {'pdfs/index.html'}
 
 # Pages that had no meta description of their own.
 DESCRIPTIONS = {
-    'index.html': 'Open the full offline survival guide: 39 sections on medical care, water, food, shelter, power, fuel, navigation and rebuilding, emergency cards, calculators, maps and an AI that cites its sources.',
+    'index.html': 'Open the full offline survival guide: 59 sections on medical care, water, food, shelter, power, fuel, navigation and rebuilding, emergency cards, calculators, maps and an AI that cites its sources.',
     'offline.html': 'You are offline. Every section of the Last Light Survival Guide is still available on this device.',
     'cards.html': 'Printable wallet-size emergency cards — CPR, bleeding control, water purification, signals and key numbers. Print on cardstock, cut out, laminate and keep in a wallet or go-bag.',
     'literature.html': 'The reference library: 33 public-domain survival, medical and engineering books bundled as searchable PDFs, plus 60 curated titles worth owning, with acquisition tracking.',
@@ -130,7 +130,7 @@ def block(page, title, desc, date):
             'applicationCategory': 'ReferenceApplication',
             'operatingSystem': 'Any (web browser, offline-capable)',
             'url': SITE + '/', 'downloadUrl': SITE + '/download.html',
-            'description': 'A complete, fully-offline survival library — 39 sections, 33 reference books, '
+            'description': 'A complete, fully-offline survival library — 59 sections, 33 reference books, '
                            'an offline AI assistant that cites its sources, and offline maps. Works with no '
                            'internet, on anything down to a Raspberry Pi.',
             'image': IMAGE, 'license': LICENSE,

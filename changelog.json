@@ -1,7 +1,22 @@
 {
-  "version": "1.3.0",
-  "lastUpdated": "2026-11-20",
+  "version": "1.4.0",
+  "lastUpdated": "2026-11-23",
   "sections": [
+    {
+      "version": "1.4.0",
+      "date": "2026-11-23",
+      "title": "Field skills, food & land, British regions",
+      "changes": [
+        "Twenty new sections from the BunkerBot survival pack, 59 in all",
+        "Field Skills group: Fire & Warmth, Field Shelters, Field Water, Field First Aid, Map & Compass (UK), Signals & Radio",
+        "Prepping adds Bags: EDC to INCH and Family & Dependants",
+        "Food & land, UK law first: Smallholding Livestock, Hunting & Trapping, Fishing, Butchery & Game, Food Preservation; Solar & Off-Grid Power",
+        "British Regions: interactive maps and guides for Yorkshire, Cumbria & the Lakes, the Peak District, Wales and the Scottish Highlands",
+        "43 rendered 3D scenes, 24 step-through animations, 4 turntables and 3 before/after sliders; Morse trainer, season wheel and solar sizer",
+        "Pictures are cached as you view them, or all at once from the Download page",
+        "Legal warnings added to Food & Water (snares, deadfalls, unattended lines) and Communications (Baofeng licence, UK frequencies)"
+      ]
+    },
     {
       "version": "1.3.0",
       "date": "2026-11-20",

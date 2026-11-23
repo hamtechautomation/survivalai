@@ -2,7 +2,7 @@
 
 ![The Last Light Survival Guide](assets/og-image.png)
 
-> **A complete, fully-offline survival library — 39 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
+> **A complete, fully-offline survival library — 59 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
 
 ### See it in action
 
@@ -201,7 +201,7 @@ Python 3 standard library only — nothing to install. Runs on a Raspberry Pi.
 
 ## Content Overview
 
-### 39 Content Sections
+### 59 Content Sections
 
 | Section | Key Topics |
 |---------|-----------|
@@ -221,16 +221,30 @@ Python 3 standard library only — nothing to install. Runs on a Raspberry Pi.
 | Bunkers & Shelter Rooms | Refuge rooms to buried shelters, shelter air calculator, earth cover, radon, planning law, container myth |
 | Stockpile & Rotation | Stockpile planner, shelf lives, best before vs use by, Mylar sealing, rotation tracker |
 | What to Buy | Everyday kit that doubles as emergency kit, vital items, safety standards to look for, what to skip, budget shopping list, 3D 72-hour kit |
+| Bags: EDC to INCH | Everyday carry, get-home and 72-hour bags, packing animation, UK knife law, evacuation plan, INCH bags |
+| Family & Dependants | Family plan, children by age, children's grab bags, babies in power cuts, older relatives, gentle drills |
+| Fire & Warmth | UK fire law, ignition, tinder, fire lays, bow drill, hypothermia, layering, winter blackout heating, heatwaves |
+| Field Shelters | UK camping law, site choice, tarp pitches, debris hut, lean-to; turntable of a lean-to |
+| Field Water | Finding and treating water, UK hazards, improvised filters, before/after comparison |
+| Field First Aid | Primary survey, CPR, catastrophic bleeding, hypothermia, splints, UK bites and stings, kits |
+| Map & Compass (UK) | OS maps, grid references, bearings, pacing, finding north without a compass |
+| Signals & Radio | UK radio law, frequencies, antennas, Morse trainer, distress, mirror, smoke and ground-to-air signals |
 | Knowledge & Literacy | Education continuity, skill transfer, library curation |
-| Knots & Rope | Six knots that tie themselves step by step |
+| Knots & Rope | Six knots that tie themselves step by step, tarp ridgelines, lashings, cordage from plants |
 | First Principles | Periodic table, physics/chemistry, key equations, the invention method |
 | Agriculture | Seed saving, planting calendars, soil health, crop rotation |
 | Animal Husbandry | Chickens, goats, rabbits, bees, housing and feeding |
 | Veterinary Care | Vital signs, diseases by species, parasites, birthing, biosecurity |
+| Smallholding Livestock | UK registration, hens to cows, kitchen-scraps ban, home slaughter law |
+| Hunting & Trapping (UK) | Licences, seasons wheel, legal traps, air rifles, deer, collapse-only methods clearly fenced |
+| Fishing (UK) | Rod licences, sea limits, rigs, shellfish, processing |
+| Butchery & Game | Rabbit, birds, deer, pig, lamb and beef cut guides, hygiene |
+| Food Preservation | Drying, curing, smoking, pickling, bottling, root stores, power-cut rules |
 | Pregnancy & Infant Care | Prenatal, labour, birth danger signs, newborn & infant care |
 | NBC / EMP Threats | Radiation exposure limits, decontamination, Faraday cages |
 | Disaster Playbooks | Hurricane, earthquake, wildfire, pandemic, nuclear event |
 | Climate & Regional | Zone-by-zone survival, UK foraging calendar, wild edibles |
+| British Regions | Hub map plus Yorkshire, Cumbria & the Lakes, Peak District, Wales and the Scottish Highlands: interactive maps, hazards, floods, rescue, local law |
 | Metallurgy | JABOD forge, blacksmithing, smelting, nail making |
 | Governance | Community organization, conflict resolution, resource allocation |
 | Psychology & Morale | Stress management, group dynamics, box breathing, grief |
@@ -240,6 +254,7 @@ Python 3 standard library only — nothing to install. Runs on a Raspberry Pi.
 | Salvage, Rebuild & Fuel | Parts salvage & safe stripping, generator maintenance/rebuild, battery salvage (lead-acid, 18650), biodiesel, SVO, ethanol, wood gas |
 | Making Fuel | Biodiesel (with calculator), straight veg oil, ethanol, wood gas, biogas, charcoal, fuel storage |
 | Power Generation | Pedal generators, water wheels, wind, biogas, steam |
+| Solar & Off-Grid Power | Sizing for UK winter, 2026 rules, roof retrofit, batteries, plug-in solar, generators, solar sizer |
 | Building & Structures | Cob, earthbag, timber frame, defences, site selection |
 | Medicine Making | Tinctures, ORS, antiseptics, medicinal plants |
 | Water Systems | Rainwater harvesting, wells, gravity distribution, irrigation |

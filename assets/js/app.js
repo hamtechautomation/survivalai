@@ -97,6 +97,26 @@
     bunker:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9h20"/><path d="M5 9v2M19 9v2"/><path d="M4 21v-6a8 5 0 0116 0v6z"/><path d="M10 21v-4h4v4M16 5v4M14 5h4"/></svg>`,
     jar:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v3H8z"/><path d="M7 6h10l1 3v10a2 2 0 01-2 2H8a2 2 0 01-2-2V9z"/><path d="M6 12h12"/></svg>`,
     basket:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18l-2 9H5z"/><path d="M8 6l2-3M16 6l-2-3"/><circle cx="8" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/><path d="M9 10v2M12 10v2M15 10v2"/></svg>`,
+    sun:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M12 1v1M17 6h1M6 6h1M15.5 2.5l-.7.7M8.5 2.5l.7.7"/><path d="M3 21l2-9h14l2 9z"/><path d="M4 16.5h16M10 12l-1 9M14 12l1 9"/></svg>`,
+    pack:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><rect x="4" y="6" width="16" height="15" rx="3"/><path d="M4 12h16M10 12v2h4v-2"/></svg>`,
+    family:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="6" r="2.5"/><circle cx="16.5" cy="8" r="2"/><path d="M4 21v-6a4 4 0 018 0v6M13 21v-4a3.5 3.5 0 017 0v4"/></svg>`,
+    flame:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 4 5 6 5 11a5 5 0 01-10 0c0-3 2-4 2-7 2 1 3 3 3 5"/><path d="M4 21h16"/></svg>`,
+    tarp:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20L12 5l10 15z"/><path d="M12 5v15M8 20l4-6 4 6"/></svg>`,
+    drop2:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 7 5 11 5 15a7 7 0 0014 0c0-4-4-8-7-13z"/><path d="M9 15a3 3 0 003 3"/></svg>`,
+    aidkit:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M9 6V4h6v2M12 10v6M9 13h6"/></svg>`,
+    osmap:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg>`,
+    antenna:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12v9M9 21h6"/><circle cx="12" cy="10" r="2"/><path d="M8 6a6 6 0 000 8M16 6a6 6 0 010 8M5 3a10 10 0 000 14M19 3a10 10 0 010 14"/></svg>`,
+    arrow:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l16-16"/><path d="M14 4h6v6"/><path d="M4 14l6 6M3 17l4 4"/></svg>`,
+    cleaver:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l9-9 4 4-9 9H3z"/><path d="M14 6l2-2 4 4-2 2"/><path d="M7 17h.01"/></svg>`,
+    fish:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-4 8-5 12-3l4-3v12l-4-3c-4 2-9 1-12-3z"/><circle cx="8" cy="11" r=".8"/></svg>`,
+    farm:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-8l8-6 8 6v8"/><path d="M9 20v-5h6v5"/><path d="M2 12l2 0M20 12h2"/></svg>`,
+    preserve: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v3H7z"/><path d="M6 6h12v13a2 2 0 01-2 2H8a2 2 0 01-2-2z"/><path d="M9 11h6M9 15h6"/></svg>`,
+    uk:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 4-1 4 3 3-2 5-5 4-4-3 2-4-2-4 3-3z"/></svg>`,
+    hills:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l5-8 4 5 3-4 6 7z"/><path d="M3 18h18"/></svg>`,
+    fells:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l5-9 3 4 4-7 6 12z"/><path d="M6 20h12"/></svg>`,
+    peak:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 19l6-9 4 5 3-3 7 7z"/><path d="M8 10l2-2"/></svg>`,
+    wales:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20c0-6 3-8 3-12 2-2 6-3 9-1-1 3 2 5 2 8-3 3-8 5-14 5z"/></svg>`,
+    munro:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 19l5-10 3 5 4-9 8 14z"/><path d="M12 5l1-2"/></svg>`,
   };
   window.ICONS = ICONS;
 
@@ -119,6 +139,7 @@
     { id: 'medicine-making',  href: 'sections/medicine-making.html',   icon: ICONS.mortar,   label: 'Medicine Making' },
     { id: 'energy',           href: 'sections/energy.html',            icon: ICONS.energy,   label: 'Energy' },
     { id: 'build-power',      href: 'sections/build-power.html',       icon: ICONS.gear,     label: 'Power Generation' },
+    { id: 'solar-power',       href: 'sections/solar-power.html',             icon: ICONS.sun, label: 'Solar & Off-Grid Power' },
     { id: 'shelter',          href: 'sections/shelter.html',           icon: ICONS.shelter,  label: 'Shelter & Construction' },
     { id: 'build-structures', href: 'sections/build-structures.html',  icon: ICONS.building, label: 'Building & Structures' },
     { id: 'communications',   href: 'sections/communications.html',    icon: ICONS.comms,    label: 'Communications' },
@@ -134,6 +155,15 @@
     { id: 'prep-bunkers',    href: 'sections/prep-bunkers.html',     icon: ICONS.bunker,  label: 'Bunkers & Shelter Rooms' },
     { id: 'prep-stockpile',  href: 'sections/prep-stockpile.html',   icon: ICONS.jar,     label: 'Stockpile & Rotation' },
     { id: 'prep-buy',        href: 'sections/prep-buy.html',         icon: ICONS.basket,  label: 'What to Buy' },
+    { id: 'bug-out-bag',       href: 'sections/bug-out-bag.html',             icon: ICONS.pack, label: 'Bags: EDC to INCH' },
+    { id: 'family-prepping',   href: 'sections/family-prepping.html',         icon: ICONS.family, label: 'Family & Dependants' },
+
+    { id: 'fire-warmth',       href: 'sections/fire-warmth.html',             icon: ICONS.flame, label: 'Fire & Warmth', section: 'Field Skills' },
+    { id: 'field-shelter',     href: 'sections/field-shelter.html',           icon: ICONS.tarp, label: 'Field Shelters' },
+    { id: 'field-water',       href: 'sections/field-water.html',             icon: ICONS.drop2, label: 'Field Water' },
+    { id: 'field-first-aid',   href: 'sections/field-first-aid.html',         icon: ICONS.aidkit, label: 'Field First Aid' },
+    { id: 'navigation-no-gps', href: 'sections/navigation-no-gps.html',       icon: ICONS.osmap, label: 'Map & Compass (UK)' },
+    { id: 'signals-radio',     href: 'sections/signals-radio.html',           icon: ICONS.antenna, label: 'Signals & Radio' },
 
     { id: 'knowledge',        href: 'sections/knowledge.html',         icon: ICONS.book,     label: 'Knowledge & Literacy', section: 'Knowledge & Skills' },
     { id: 'science',          href: 'sections/science.html',           icon: ICONS.atom,     label: 'First Principles' },
@@ -142,11 +172,23 @@
     { id: 'agriculture',      href: 'sections/agriculture.html',       icon: ICONS.leaf,     label: 'Agriculture', section: 'Homesteading & Animals' },
     { id: 'animal',           href: 'sections/animal.html',            icon: ICONS.paw,      label: 'Animal Husbandry' },
     { id: 'veterinary',       href: 'sections/veterinary.html',        icon: ICONS.vet,      label: 'Veterinary Care' },
+    { id: 'smallholding',      href: 'sections/smallholding.html',            icon: ICONS.farm, label: 'Smallholding Livestock' },
+    { id: 'hunting-trapping',  href: 'sections/hunting-trapping.html',        icon: ICONS.arrow, label: 'Hunting & Trapping (UK)' },
+    { id: 'fishing',           href: 'sections/fishing.html',                 icon: ICONS.fish, label: 'Fishing (UK)' },
+    { id: 'butchery',          href: 'sections/butchery.html',                icon: ICONS.cleaver, label: 'Butchery & Game' },
+    { id: 'food-preservation', href: 'sections/food-preservation.html',       icon: ICONS.preserve, label: 'Food Preservation' },
     { id: 'maternal',         href: 'sections/maternal.html',          icon: ICONS.baby,     label: 'Pregnancy & Infant Care' },
 
     { id: 'nbc',              href: 'sections/nbc.html',               icon: ICONS.nbc,      label: 'NBC / EMP Threats', section: 'Threats & Disasters' },
     { id: 'disasters',        href: 'sections/disasters.html',         icon: ICONS.tornado,  label: 'Disaster Playbooks' },
     { id: 'climate',          href: 'sections/climate.html',           icon: ICONS.globe,    label: 'Climate & Regional' },
+
+    { id: 'regions',           href: 'sections/regions.html',                 icon: ICONS.uk, label: 'British Regions', section: 'British Regions' },
+    { id: 'region-yorkshire',  href: 'sections/region-yorkshire.html',        icon: ICONS.hills, label: 'Yorkshire' },
+    { id: 'region-cumbria',    href: 'sections/region-cumbria.html',          icon: ICONS.fells, label: 'Cumbria & the Lakes' },
+    { id: 'region-peak-district', href: 'sections/region-peak-district.html',    icon: ICONS.peak, label: 'Peak District' },
+    { id: 'region-wales',      href: 'sections/region-wales.html',            icon: ICONS.wales, label: 'Wales' },
+    { id: 'region-scottish-highlands', href: 'sections/region-scottish-highlands.html', icon: ICONS.munro, label: 'Scottish Highlands' },
 
     { id: 'metallurgy',       href: 'sections/metallurgy.html',        icon: ICONS.hammer,   label: 'Metallurgy', section: 'Trades & Materials' },
     { id: 'chemistry',        href: 'sections/chemistry.html',         icon: ICONS.flask,    label: 'Chemistry & Materials' },
@@ -197,6 +239,7 @@
     setupNowStrip();
     if (document.querySelector('.calc[data-calc]')) loadScript('calc.js').catch(() => {});
     if (document.querySelector('.m3d[data-model]')) loadScript('model3d.js').catch(() => {});
+    if (document.querySelector('figure.mv, figure.mv-compare, figure.mv-turn, .bbt[data-bb-tool], .bb-map[data-region]')) loadScript('media.js').catch(() => {});
     iconifyEmoji(document.body);
     setupSidebar();
     setupARIAToggle();
@@ -668,6 +711,26 @@
     'prep-rural': ['start', [['#fuel', 'Fuel and the law', '30 L and 275 L limits', 'fuel', 'red'], ['#water', 'Your water', 'Springs, wells, pumps', 'water', 'blue'], ['#heat', 'Heat for a winter', 'Wood and stoves', 'fire', 'orange'], ['#cut-off', 'Cut off', 'When help is far', 'alert', 'amber']]],
     'prep-bunkers': ['start', [['#refuge', 'Refuge room', 'Start here, for little', 'home', 'amber'], ['#air', 'Air', 'The thing that kills first', 'alert', 'red'], ['#container', 'Shipping containers', 'Why they collapse', 'box', 'orange'], ['#law', 'The law', 'Planning and building rules', 'columns', 'amber']]],
     'prep-buy': ['start', [['#everyday', 'Everyday kit', 'Use it, and it’s ready', 'check', 'amber'], ['#vital', 'Vital kit', 'Buy once, keep', 'alert', 'red'], ['#budget-list', 'My shopping list', 'For your budget', 'wallet', 'amber'], ['#skip', 'Don’t bother', 'What to skip', 'stop', 'orange']]],
+    'solar-power': ['start', [['#plan', 'Blackout power plan', 'What to buy first', 'energy', 'amber'], ['#generators', 'Generator safety', 'Outdoors only, no back-feeding', 'alert', 'red'], ['#batteries', 'Battery banks', 'Size them safely', 'solar', 'amber'], ['#law', 'The rules', 'Plug-in solar and planning', 'clipboard', 'amber']]],
+    'bug-out-bag': ['start', [['#bob', '72-hour bag', 'What goes in', 'pack', 'amber'], ['#pack', 'Pack it right', 'Heavy against your back', 'bag', 'amber'], ['#knives', 'Knife law', 'What you can carry', 'alert', 'red'], ['#plan', 'Evacuation plan', 'Where, how, who', 'map', 'amber']]],
+    'family-prepping': ['start', [['#family-emergency', 'Family plan', 'Meeting points, contacts', 'family', 'amber'], ['#childrens-grab', 'Children’s bags', 'By age', 'bag', 'amber'], ['#babies-power', 'Babies in a power cut', 'Feeds, warmth', 'baby', 'red'], ['#older-disabled', 'Older relatives', 'Medicines, care, power', 'users', 'amber']]],
+    'fire-warmth': ['now', [['#hypothermia', 'Someone’s too cold', 'Recognise and treat', 'alert', 'red'], ['#heat', 'Heatwave', 'Cool down, spot heatstroke', 'alert', 'orange'], ['#wet', 'Fire in the rain', 'Dry fuel from wet woods', 'flame', 'amber'], ['#home', 'Heat a home', 'Winter blackout', 'home', 'amber']]],
+    'field-shelter': ['start', [['#law', 'Where can I sleep?', 'UK camping law', 'clipboard', 'amber'], ['#site', 'Pick a spot', 'The 5 Ws', 'map', 'amber'], ['#tarp', 'Tarp pitches', 'Wind and rain', 'tarp', 'amber'], ['#debris', 'No kit at all', 'Debris hut', 'leaf', 'green']]],
+    'field-water': ['now', [['#treat', 'Make water safe', 'Filter, then disinfect', 'drop2', 'blue'], ['#outage', 'Taps stopped', 'What to do', 'water', 'red'], ['#hazards', 'UK water hazards', 'Algae, run-off, mines', 'alert', 'orange'], ['#find', 'Find water', 'Where to look', 'map', 'amber']]],
+    'field-first-aid': ['now', [['#catastrophic-bleeding', 'Heavy bleeding', 'Pressure, packing, tourniquet', 'firstaid', 'red'], ['#cpr-choking', 'Not breathing', 'CPR and choking', 'heart', 'red'], ['#hypothermia', 'Too cold', 'Hypothermia', 'alert', 'orange'], ['#primary-survey', 'First checks', 'DRSABC', 'aidkit', 'amber']]],
+    'navigation-no-gps': ['start', [['#grid-references', 'Grid references', 'Tell rescuers where you are', 'osmap', 'red'], ['#compass-skills', 'Take a bearing', 'Map to ground', 'compass', 'amber'], ['#distance-pacing', 'How far?', 'Pacing and timing', 'map', 'amber'], ['#finding-direction', 'No compass', 'Find north', 'compass', 'amber']]],
+    'signals-radio': ['now', [['#distress', 'Call for help', 'Six blasts, then wait', 'alert', 'red'], ['#groundair', 'Signal a helicopter', 'Ground-to-air codes', 'target', 'orange'], ['#law', 'Which radio?', 'What’s legal in the UK', 'antenna', 'amber'], ['#freqs', 'Frequencies', 'Write these down', 'radio', 'amber']]],
+    'hunting-trapping': ['start', [['#law', 'The law first', 'Licences, seasons, Sundays', 'clipboard', 'red'], ['#quarry', 'What and when', 'UK quarry and seasons', 'calendar', 'amber'], ['#legal-traps', 'Legal traps', 'Approved and humane', 'arrow', 'amber'], ['#processing', 'Kill to kitchen', 'Handle it safely', 'cleaver', 'amber']]],
+    'butchery': ['start', [['#safety', 'Is it safe to eat?', 'Hygiene and inspection', 'alert', 'red'], ['#rabbit', 'Rabbit', 'Paunch, skin, joint', 'cleaver', 'amber'], ['#birds', 'Pigeon and pheasant', 'Breast or pluck', 'cleaver', 'amber'], ['#deer', 'Deer', 'Hang and break down', 'cleaver', 'amber']]],
+    fishing: ['start', [['#law', 'Licence and rules', 'Before you cast', 'clipboard', 'red'], ['#methods', 'Simple methods', 'Float, ledger, lure', 'fish', 'amber'], ['#sea', 'Sea fishing', 'No licence, size limits', 'water', 'blue'], ['#shellfish', 'Shellfish', 'Safe gathering', 'alert', 'orange']]],
+    smallholding: ['start', [['#law', 'Register first', 'CPH, flocks, scraps ban', 'clipboard', 'red'], ['#compare', 'Which animals?', 'Side by side', 'paw', 'amber'], ['#chickens', 'Chickens', 'The easy start', 'farm', 'amber'], ['#slaughter', 'Home slaughter', 'What the law allows', 'alert', 'orange']]],
+    'food-preservation': ['now', [['#power-cut-rules', 'Power cut', 'Freezer and fridge rules', 'alert', 'red'], ['#methods-glance', 'Which method?', 'At a glance', 'preserve', 'amber'], ['#drying', 'Drying', 'Air, sun, oven', 'preserve', 'amber'], ['#bottling-canning', 'Bottling', 'Do it safely', 'alert', 'orange']]],
+    regions: ['start', [['#regions', 'Pick a region', 'Map of Britain', 'uk', 'amber'], ['#use-regional', 'How to use them', 'Maps and guides', 'map', 'amber'], ['#same-rules', 'The same everywhere', 'Rules that don’t change', 'clipboard', 'amber']]],
+    'region-yorkshire': ['start', [['#floods', 'Floods', 'Where and when', 'water', 'red'], ['#hazards', 'Hazards', 'Moors, mines, coast', 'alert', 'orange'], ['#rescue', 'Rescue', 'Teams and A&E', 'firstaid', 'amber'], ['#bugout', 'Bugging out', 'Routes and bottlenecks', 'map', 'amber']]],
+    'region-cumbria': ['start', [['#floods', 'Floods', 'Where and when', 'water', 'red'], ['#hazards', 'Hazards', 'Fells and lakes', 'alert', 'orange'], ['#rescue-local', 'Rescue', 'Teams and local info', 'firstaid', 'amber'], ['#bugging-out', 'Bugging out', 'Routes out', 'map', 'amber']]],
+    'region-peak-district': ['start', [['#hazards', 'Hazards', 'Moors, peat, quarries', 'alert', 'red'], ['#floods', 'Floods', 'Where and when', 'water', 'blue'], ['#rescue-local', 'Rescue', 'Teams and local info', 'firstaid', 'amber'], ['#bugging-out', 'Bugging out', 'Routes out', 'map', 'amber']]],
+    'region-wales': ['start', [['#law', 'Welsh law', 'What’s different', 'clipboard', 'red'], ['#hazards', 'Hazards', 'Coal tips, tides, hills', 'alert', 'orange'], ['#welsh', 'Welsh map words', 'Water, danger, terrain', 'osmap', 'amber'], ['#rescue-local', 'Rescue', 'Teams and local info', 'firstaid', 'amber']]],
+    'region-scottish-highlands': ['start', [['#law', 'Scottish law', 'Access, deer, snares', 'clipboard', 'red'], ['#hazards', 'Hazards', 'Winter, rivers, midges', 'alert', 'orange'], ['#bothies', 'Bothies', 'Shelter in the hills', 'home', 'amber'], ['#rescue-local', 'Rescue', 'Teams and local info', 'firstaid', 'amber']]],
     'prep-stockpile': ['start', [['#planner', 'How much?', 'Stockpile planner', 'food', 'amber'], ['#shelf-life', 'How long?', 'Shelf-life table', 'clock', 'amber'], ['#dates', 'Best before?', 'And when to bin it', 'alert', 'red'], ['#rotation', 'Rotate', 'Oldest first tracker', 'calendar', 'amber']]],
     fuel: ['start', [['#which-fuel', 'Which fuel?', 'For your engine', 'fire', 'orange'], ['#biodiesel', 'Biodiesel', 'From used cooking oil', 'flask', 'amber'], ['#woodgas', 'Wood gas', 'Run an engine on wood', 'fire', 'amber'], ['#storage', 'Keep fuel usable', 'Storage and rotation', 'alert', 'amber']]],
     science: ['start', [['#ptable', 'Periodic table', 'Elements you can use', 'atom', 'blue'], ['#equations', 'Key equations', 'Physics and chemistry', 'atom', 'amber'], ['#maths', 'Maths', 'Practical methods', 'grid4', 'amber'], ['#constants', 'Constants', 'Numbers to know', 'clipboard', 'amber']]],
@@ -863,7 +926,7 @@
      (a map), a glowing badge, rising embers. Pure SVG + CSS, no images. */
   const GROUP_TONE = {
     'Core Survival': 'amber', 'Knowledge & Skills': 'blue', 'Homesteading & Animals': 'green',
-    'Prepping': 'khaki', 'Threats & Disasters': 'red', 'Trades & Materials': 'orange', 'Community & Mind': 'violet', 'Tools & Library': 'teal'
+    'Prepping': 'khaki', 'Field Skills': 'moss', 'British Regions': 'slate', 'Threats & Disasters': 'red', 'Trades & Materials': 'orange', 'Community & Mind': 'violet', 'Tools & Library': 'teal'
   };
   function seeded(str) {
     let h = 2166136261;
@@ -2162,10 +2225,31 @@
     document.addEventListener('ll-installable', e => { if (e.detail) showBanner('prompt'); });
   }
 
+  /* =================== SAVE PICTURES (download page) =================== */
+  /* Pictures and videos sit in their own cache (see sw.js MEDIA_CACHE): saved as they're
+     viewed, or all at once from here. */
+  function setupSaveMedia() {
+    const box = document.querySelector('[data-save-media]');
+    if (!box || location.protocol === 'file:' || !('serviceWorker' in navigator)) return;
+    const btn = box.querySelector('[data-save-media-btn]'), out = box.querySelector('[data-media-status]');
+    const send = type => navigator.serviceWorker.ready.then(reg => { const sw = navigator.serviceWorker.controller || reg.active; if (sw) sw.postMessage({ type }); });
+    navigator.serviceWorker.addEventListener('message', e => {
+      const d = e.data || {}; if (d.type !== 'media-status') return;
+      box.hidden = false;
+      const all = d.saved >= d.total;
+      out.textContent = all ? 'All ' + d.total + ' are saved on this device.' : d.saved + ' of ' + d.total + ' saved' + (d.busy ? '…' : '.');
+      btn.disabled = all || d.busy;
+      btn.textContent = all ? 'All pictures saved ✓' : d.busy ? 'Saving…' : 'Save all pictures for offline (about 12 MB)';
+    });
+    btn.addEventListener('click', () => { btn.disabled = true; btn.textContent = 'Saving…'; send('save-media'); });
+    send('media-status');
+  }
+
   /* =================== OFFLINE STATUS =================== */
   /* The sidebar used to say "offline ready" unconditionally. Now it asks the
      service worker whether every file is actually saved on this device. */
   function setupOfflineStatus() {
+    setupSaveMedia();
     const set = (text, state) => {
       document.querySelectorAll('[data-offline-status]').forEach(el => {
         el.textContent = text;

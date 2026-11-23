@@ -1,0 +1,48 @@
+/* BunkerBot interactive tools: shared styles (matches region-map theme). Override the variables to re-theme. */
+.bb-tool {
+  --bb-bg: #0b0f0e; --bb-panel: #121816; --bb-panel2: #18201d; --bb-line: rgba(255,255,255,.12);
+  --bb-text: #ece8dc; --bb-mute: #a9b0a8; --bb-accent: #f59e0b; --bb-red: #dc3c32; --bb-green: #3fae5a; --bb-blue: #4a9fd8;
+  background: var(--bb-bg); color: var(--bb-text); border: 1px solid var(--bb-line); border-radius: 14px;
+  padding: 18px; margin: 18px 0; font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Inter, sans-serif;
+}
+.bb-tool, .bb-tool * { box-sizing: border-box; }
+.bb-tool h3 { margin: 0 0 4px; font-size: 19px; }
+.bb-tool .bb-sub { color: var(--bb-mute); font-size: 13.5px; margin: 0 0 14px; }
+.bb-tool .bb-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin: 8px 0; }
+.bb-tool .bb-field { display: flex; flex-direction: column; gap: 4px; min-width: 120px; flex: 1 1 140px; }
+.bb-tool label, .bb-tool .bb-lbl { font-size: 12.5px; color: var(--bb-mute); }
+.bb-tool input[type=number], .bb-tool input[type=text], .bb-tool select, .bb-tool textarea {
+  background: var(--bb-panel2); color: var(--bb-text); border: 1px solid var(--bb-line); border-radius: 9px;
+  padding: 8px 10px; font: inherit; width: 100%; min-height: 40px;
+}
+.bb-tool input[type=range] { width: 100%; accent-color: var(--bb-accent); }
+.bb-tool input[type=checkbox] { accent-color: var(--bb-accent); width: 18px; height: 18px; }
+.bb-tool button, .bb-tool .bb-b {
+  background: var(--bb-panel2); color: var(--bb-text); border: 1px solid var(--bb-line); border-radius: 9px;
+  padding: 8px 14px; font: inherit; font-size: 14px; cursor: pointer; min-height: 40px;
+}
+.bb-tool button:hover { border-color: rgba(245,158,11,.6); }
+.bb-tool button.on, .bb-tool button.bb-primary { background: var(--bb-accent); color: #14100a; border-color: var(--bb-accent); font-weight: 600; }
+.bb-tool :focus-visible { outline: 2px solid var(--bb-accent); outline-offset: 2px; }
+.bb-tool .bb-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.bb-tool .bb-card { background: var(--bb-panel); border: 1px solid var(--bb-line); border-radius: 12px; padding: 14px; }
+.bb-tool .bb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.bb-tool .bb-stat { background: var(--bb-panel); border: 1px solid var(--bb-line); border-radius: 12px; padding: 12px; }
+.bb-tool .bb-stat b { display: block; font-size: 24px; color: var(--bb-accent); line-height: 1.2; }
+.bb-tool .bb-stat span { font-size: 12.5px; color: var(--bb-mute); }
+.bb-tool table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.bb-tool th, .bb-tool td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--bb-line); vertical-align: top; }
+.bb-tool th { color: var(--bb-mute); font-weight: 600; font-size: 12.5px; }
+.bb-tool .bb-num { text-align: right; font-variant-numeric: tabular-nums; }
+.bb-tool .bb-note { font-size: 13px; color: var(--bb-mute); margin-top: 10px; }
+.bb-tool .bb-warn { background: rgba(220,60,50,.12); border: 1px solid rgba(220,60,50,.45); border-radius: 10px; padding: 9px 12px; margin-top: 10px; font-size: 13.5px; }
+.bb-tool .bb-ok { background: rgba(63,174,90,.12); border: 1px solid rgba(63,174,90,.45); border-radius: 10px; padding: 9px 12px; margin-top: 10px; font-size: 13.5px; }
+.bb-tool .bb-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.bb-tool .bb-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media print {
+  .bb-tool { border: 0; background: #fff; color: #000; padding: 0; }
+  .bb-tool button, .bb-tool .bb-tabs, .bb-tool .bb-noprint { display: none !important; }
+  .bb-tool .bb-card, .bb-tool .bb-stat { background: #fff; border-color: #999; }
+  .bb-tool .bb-stat b { color: #000; }
+}
+@media (prefers-reduced-motion: reduce) { .bb-tool * { transition: none !important; animation: none !important; } }
