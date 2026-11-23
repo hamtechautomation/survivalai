@@ -1,5 +1,5 @@
 /* The Last Light Survival Guide — Service Worker v4 */
-const CACHE = 'last-light-v110';
+const CACHE = 'last-light-v111';
 /* Pictures and videos live in their own cache that survives version bumps: they are
    saved the first time they're viewed, or all at once from Download → Save pictures. */
 const MEDIA_CACHE = 'last-light-media-v1';

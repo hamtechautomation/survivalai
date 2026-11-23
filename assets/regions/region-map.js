@@ -14,9 +14,10 @@
   'use strict';
 
   var CAT = {
-    station:  { label: 'Weather stations', icon: '🌡️', color: '#4cc9f0', on: true },
-    wildlife: { label: 'Wildlife & game',  icon: '🦌', color: '#f4a261', on: true },
-    fishing:  { label: 'Fishing',          icon: '🎣', color: '#3a86ff', on: false },
+    wildlife: { label: 'Deer, game & wildlife', icon: '🦌', color: '#f4a261', on: true },
+    river:    { label: 'Rivers & lakes',   icon: '🐟', color: '#3a86ff', on: true },
+    fishing:  { label: 'Sea fishing marks', icon: '🎣', color: '#2ec4b6', on: false },
+    station:  { label: 'Weather stations', icon: '🌡️', color: '#4cc9f0', on: false },
     forage:   { label: 'Foraging',         icon: '🌿', color: '#90be6d', on: false },
     water:    { label: 'Water sources',    icon: '💧', color: '#00b4d8', on: false },
     hazard:   { label: 'Hazards',          icon: '⚠️', color: '#e63946', on: true },
@@ -219,7 +220,7 @@
     function build(D) {
       var map = L.map(mapEl, { zoomControl: true, attributionControl: true, scrollWheelZoom: false, tap: true, minZoom: 6, maxZoom: 17 });
       api.map = map;
-      map.setView(D.center, D.zoom);
+      if (D.bounds) map.fitBounds(D.bounds, { padding: [8, 8] }); else map.setView(D.center, D.zoom);
       if (D.bounds) map.setMaxBounds(L.latLngBounds(D.bounds).pad(0.6));
 
       // ---- basemaps
@@ -274,7 +275,7 @@
             m = L.marker(latlng, { icon: L.divIcon({ className: 'bb-summit', html: '▲', iconSize: [14, 14] }), keyboard: true, title: p.name });
           } else {
             m = L.marker(latlng, { icon: L.divIcon({ className: 'bb-pin bb-' + p.cat + (p.protected ? ' bb-protected' : ''),
-              html: '<span>' + c.icon + '</span>', iconSize: [26, 26], iconAnchor: [13, 13] }), keyboard: true, title: p.name });
+              html: '<span>' + c.icon + '</span>', iconSize: [22, 22], iconAnchor: [11, 11] }), keyboard: true, title: p.name });
           }
           return m;
         },
@@ -299,6 +300,7 @@
             + (p.frost_days != null ? '<tr><th>Air frost days</th><td>' + p.frost_days + '</td></tr>' : '')
             + (p.sun_h != null ? '<tr><th>Sunshine</th><td>' + p.sun_h.toLocaleString('en-GB') + ' h/yr</td></tr>' : '') + '</table>';
         }
+        if (p.fish) h += fishChips(p.fish);
         if (p.note) h += '<p>' + esc(p.note) + '</p>';
         if (p.months) h += '<div class="bb-months">' + MONTHS.map(function (m, i) { return '<span class="' + (p.months.indexOf(i + 1) >= 0 ? 'on' : '') + '">' + m[0] + '</span>'; }).join('') + '</div>';
         return h + '</div>';
@@ -347,69 +349,108 @@
         btn.classList.remove('on'); btn.setAttribute('aria-pressed', 'false');
       }
 
-      // ---- UI: controls
+      // ---- sea areas: what lives offshore, by month
+      var seaLayer = L.geoJSON({ type: 'FeatureCollection', features: (D.seas || []).map(function (s) { return { type: 'Feature', geometry: s.geometry, properties: s }; }) }, {
+        style: { color: '#4fa3c7', weight: 1.2, dashArray: '4 4', fillColor: '#2b7bb9', fillOpacity: 0.1 },
+        onEachFeature: function (f, layer) {
+          layer.on('click', function (e) { showSea(f.properties); if (e.originalEvent) L.DomEvent.stopPropagation(e); });
+          if (layer.bindTooltip) layer.bindTooltip('🌊 ' + esc(f.properties.name) + ': tap for sea fish', { sticky: true, className: 'bb-tip' });
+        }
+      });
+      var seaLabels = L.layerGroup();
+      (D.seas || []).forEach(function (s) {
+        var m = L.marker(s.label, { icon: L.divIcon({ className: 'bb-sea-label', html: '<span>🌊 ' + esc(s.name.split(':')[0]) + '</span>', iconSize: null }), keyboard: true, title: s.name });
+        m.on('click', function () { showSea(s); });
+        seaLabels.addLayer(m);
+      });
+      state.cats.sea = true;
+      if ((D.seas || []).length) { seaLayer.addTo(map); seaLabels.addTo(map); }
+
+      // ---- UI: one toolbar, two drop-down menus
       var bar = el('div', 'bb-bar');
       var modeSel = el('div', 'bb-seg', '');
-      [['terrain', '⛰️ Terrain zones'], ['rain', '🌧️ Rainfall'], ['snow', '❄️ Snow days']].forEach(function (m) {
-        var b = el('button', 'bb-btn' + (m[0] === state.mode ? ' on' : ''), m[1]); b.type = 'button';
+      [['terrain', '⛰️', 'Zones'], ['rain', '🌧️', 'Rain'], ['snow', '❄️', 'Snow']].forEach(function (m) {
+        var b = el('button', 'bb-btn' + (m[0] === state.mode ? ' on' : ''), m[1] + '<span class="bb-lbl"> ' + m[2] + '</span>'); b.type = 'button';
+        b.title = { terrain: 'Landscape zones', rain: 'Average rainfall', snow: 'Days with snow lying' }[m[0]];
         b.addEventListener('click', function () { state.mode = m[0]; modeSel.querySelectorAll('button').forEach(function (x) { x.classList.remove('on'); }); b.classList.add('on'); restyleZones(); });
         modeSel.appendChild(b);
       });
       bar.appendChild(modeSel);
-      var radarBtn = el('button', 'bb-btn bb-radar', '📡 Live rain radar'); radarBtn.type = 'button'; radarBtn.setAttribute('aria-pressed', 'false');
-      radarBtn.addEventListener('click', function () { if (state.radarTimer) stopRadar(radarBtn); else startRadar(radarBtn); });
-      bar.appendChild(radarBtn);
+      var lifeBtn = el('button', 'bb-btn bb-life', '🐟<span class="bb-lbl"> Fish &amp; game</span>'); lifeBtn.type = 'button';
+      lifeBtn.title = 'What lives here: deer, game, river and sea fish by month';
+      lifeBtn.addEventListener('click', function () { closeMenus(); showGuide(); });
+      bar.appendChild(lifeBtn);
+      var menus = [];
+      function menu(label, title) {
+        var wrap = el('div', 'bb-menu-wrap'), b = el('button', 'bb-btn', label + ' <span class="bb-caret">▾</span>'), box = el('div', 'bb-menu');
+        b.type = 'button'; b.title = title; b.setAttribute('aria-expanded', 'false');
+        b.addEventListener('click', function (e) { e.stopPropagation(); var open = !box.classList.contains('open'); closeMenus(); if (open) { box.classList.add('open'); b.classList.add('on'); b.setAttribute('aria-expanded', 'true'); } });
+        box.addEventListener('click', function (e) { e.stopPropagation(); });
+        wrap.appendChild(b); wrap.appendChild(box); bar.appendChild(wrap); menus.push([b, box]);
+        return box;
+      }
+      function closeMenus() { menus.forEach(function (m) { m[1].classList.remove('open'); m[0].classList.remove('on'); m[0].setAttribute('aria-expanded', 'false'); }); }
+      map.on('click movestart', closeMenus);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenus(); });
+      var layersBox = menu('☰<span class="bb-lbl"> Layers</span>', 'Choose what to show');
+      var toolsBox = menu('🧭<span class="bb-lbl"> Tools</span>', 'Location, planning and view tools');
+      ui.appendChild(bar);
+
+      layersBox.appendChild(el('div', 'bb-menu-h', 'Show on map'));
+      var chips = el('div', 'bb-chips');
+      var present = {}; D.points.features.forEach(function (f) { present[f.properties.cat] = 1; });
+      function chip(k, label, icon, color, on, toggle) {
+        var b = el('button', 'bb-chip' + (on ? ' on' : ''), '<i style="--c:' + color + '"></i>' + icon + ' ' + label);
+        b.type = 'button'; b.setAttribute('aria-pressed', String(on));
+        b.addEventListener('click', function () { state.cats[k] = !state.cats[k]; b.classList.toggle('on', state.cats[k]); b.setAttribute('aria-pressed', String(state.cats[k])); toggle(state.cats[k]); });
+        chips.appendChild(b);
+      }
+      Object.keys(CAT).forEach(function (k) {
+        if (!present[k]) return; // only offer layers this region actually has
+        chip(k, CAT[k].label, CAT[k].icon, CAT[k].color, state.cats[k], function (on) { if (on) groups[k].addTo(map); else map.removeLayer(groups[k]); });
+      });
+      if ((D.seas || []).length) chip('sea', 'Sea areas', '🌊', '#4fa3c7', true, function (on) { [seaLayer, seaLabels].forEach(function (l) { if (on) l.addTo(map); else map.removeLayer(l); }); });
+      layersBox.appendChild(chips);
+
+      var season = el('div', 'bb-season');
+      season.innerHTML = '<label>📅 Season: <b class="bb-mon">All year</b></label><input type="range" min="0" max="12" step="1" value="0" aria-label="Filter by month"><small>Greys out what is out of season.</small>';
+      var slider = season.querySelector('input'), monLbl = season.querySelector('.bb-mon');
+      slider.addEventListener('input', function () { state.month = +slider.value; monLbl.textContent = state.month ? MONTHS[state.month - 1] : 'All year'; applyMonth(); });
+      layersBox.appendChild(season);
+
+      layersBox.appendChild(el('div', 'bb-menu-h', 'Background'));
+      var bgRow = el('div', 'bb-menu-row');
       var baseSel = el('select', 'bb-select'); baseSel.setAttribute('aria-label', 'Background map');
       Object.keys(base).forEach(function (k) { var o = el('option', null, k); o.value = k; baseSel.appendChild(o); });
       baseSel.addEventListener('change', function () { map.removeLayer(currentBase); currentBase = base[baseSel.value].addTo(map); if (currentBase.bringToBack) currentBase.bringToBack(); });
-      bar.appendChild(baseSel);
       var hsBtn = el('button', 'bb-btn', '🏔️ Hillshade'); hsBtn.type = 'button';
       hsBtn.addEventListener('click', function () { if (map.hasLayer(hillshade)) { map.removeLayer(hillshade); hsBtn.classList.remove('on'); } else { hillshade.addTo(map); hsBtn.classList.add('on'); } });
-      bar.appendChild(hsBtn);
-      var uiToggle = el('button', 'bb-btn bb-ui-toggle', '☰ Layers'); uiToggle.type = 'button';
-      uiToggle.addEventListener('click', function () { ui.classList.toggle('bb-collapsed'); uiToggle.classList.toggle('on', !ui.classList.contains('bb-collapsed')); });
-      bar.appendChild(uiToggle);
-      if (global.matchMedia && global.matchMedia('(max-width: 759px)').matches) ui.classList.add('bb-collapsed');
-      ui.appendChild(bar);
-
-      var chips = el('div', 'bb-chips');
-      var present = {}; D.points.features.forEach(function (f) { present[f.properties.cat] = 1; });
-      Object.keys(CAT).forEach(function (k) {
-        if (!present[k]) return; // only offer layers this region actually has
-        var b = el('button', 'bb-chip' + (state.cats[k] ? ' on' : ''), '<i style="--c:' + CAT[k].color + '"></i>' + CAT[k].icon + ' ' + CAT[k].label);
-        b.type = 'button'; b.setAttribute('aria-pressed', String(state.cats[k]));
-        b.addEventListener('click', function () {
-          state.cats[k] = !state.cats[k]; b.classList.toggle('on', state.cats[k]); b.setAttribute('aria-pressed', String(state.cats[k]));
-          if (state.cats[k]) groups[k].addTo(map); else map.removeLayer(groups[k]);
-        });
-        chips.appendChild(b);
-      });
-      ui.appendChild(chips);
-
-      var season = el('div', 'bb-season');
-      season.innerHTML = '<label>📅 Season: <b class="bb-mon">All year</b></label><input type="range" min="0" max="12" step="1" value="0" aria-label="Filter by month">';
-      var slider = season.querySelector('input'), monLbl = season.querySelector('.bb-mon');
-      slider.addEventListener('input', function () { state.month = +slider.value; monLbl.textContent = state.month ? MONTHS[state.month - 1] : 'All year'; applyMonth(); });
-      ui.appendChild(season);
+      var radarBtn = el('button', 'bb-btn bb-radar', '📡 Live rain radar'); radarBtn.type = 'button'; radarBtn.setAttribute('aria-pressed', 'false');
+      radarBtn.addEventListener('click', function () { if (state.radarTimer) stopRadar(radarBtn); else startRadar(radarBtn); });
+      [baseSel, hsBtn, radarBtn].forEach(function (x) { bgRow.appendChild(x); });
+      layersBox.appendChild(bgRow);
 
       var tools = el('div', 'bb-tools');
       var locBtn = el('button', 'bb-btn', '📍 My location'); locBtn.type = 'button';
       locBtn.addEventListener('click', function () {
+        closeMenus();
         if (!navigator.geolocation) return;
         navigator.geolocation.getCurrentPosition(function (pos) { var ll = L.latLng(pos.coords.latitude, pos.coords.longitude); map.setView(ll, 12); showPoint(ll); },
           function () { notice.textContent = 'Location permission denied.'; notice.classList.add('show'); }, { enableHighAccuracy: true, timeout: 10000 });
       });
       var fsBtn = el('button', 'bb-btn', '⛶ Full screen'); fsBtn.type = 'button';
-      fsBtn.addEventListener('click', function () { container.classList.toggle('bb-full'); setTimeout(function () { map.invalidateSize(); }, 200); });
+      fsBtn.addEventListener('click', function () { closeMenus(); container.classList.toggle('bb-full'); setTimeout(function () { map.invalidateSize(); }, 200); });
       var resetBtn = el('button', 'bb-btn', '⟲ Reset view'); resetBtn.type = 'button';
-      resetBtn.addEventListener('click', function () { map.setView(D.center, D.zoom); });
+      resetBtn.addEventListener('click', function () { closeMenus(); if (D.bounds) map.fitBounds(D.bounds, { padding: [8, 8] }); else map.setView(D.center, D.zoom); });
       tools.appendChild(locBtn); tools.appendChild(fsBtn); tools.appendChild(resetBtn);
       var losBtn = el('button', 'bb-btn', '📡 Line of sight'), rteBtn = el('button', 'bb-btn', '🥾 Route check'), relBtn = el('button', 'bb-btn', '📶 Relay hills');
-      [losBtn, rteBtn, relBtn].forEach(function (b) { b.type = 'button'; tools.appendChild(b); });
-      ui.appendChild(tools);
+      [losBtn, rteBtn, relBtn].forEach(function (b) { b.type = 'button'; b.addEventListener('click', closeMenus); tools.appendChild(b); });
+      toolsBox.appendChild(tools);
 
       var radarTime = el('div', 'bb-radar-time'); container.appendChild(radarTime);
       var legend = el('div', 'bb-legend'); container.appendChild(legend);
+      if (global.matchMedia && global.matchMedia('(max-width: 759px)').matches) legend.classList.add('bb-leg-closed');
+      legend.addEventListener('click', function (e) { if (!e.target.closest('.bb-leg-t')) return; legend.classList.toggle('bb-leg-closed'); e.target.closest('.bb-leg-t').setAttribute('aria-expanded', String(!legend.classList.contains('bb-leg-closed'))); });
       function renderLegend() {
         var h = '';
         if (state.mode === 'terrain') {
@@ -420,17 +461,127 @@
         } else {
           h = '<b>Days with snow lying (approx.)</b><div class="bb-ramp" style="background:linear-gradient(90deg,' + SNOW_RAMP.join(',') + ')"></div><div class="bb-ramp-l"><span>&lt;5</span><span>45+</span></div><small>Typical winter; varies hugely year to year.</small>';
         }
-        legend.innerHTML = h;
+        legend.innerHTML = '<button type="button" class="bb-leg-t" aria-expanded="' + !legend.classList.contains('bb-leg-closed') + '">🗺️ Key</button><div class="bb-leg-b">' + h + '</div>';
       }
       renderLegend();
+
+      // ---- fish & game: chips, month strips, sea calendar, region guide
+      function curMonth() { return state.month || new Date().getMonth() + 1; }
+      function fishChips(list) {
+        return '<div class="bb-fish">' + list.map(function (f) { return '<span' + (/protected|release|return|invasive/i.test(f) ? ' class="bb-warn"' : '') + '>' + esc(f) + '</span>'; }).join('') + '</div>';
+      }
+      function monthStrip(months) {
+        var cm = curMonth();
+        if (!months || !months.length) return '<div class="bb-ms bb-ms-none">Not to be taken</div>';
+        return '<div class="bb-ms" aria-label="Best months: ' + months.map(function (m) { return MONTHS[m - 1]; }).join(', ') + '">' + MONTHS.map(function (m, i) {
+          return '<span class="' + (months.indexOf(i + 1) >= 0 ? 'on' : '') + (i + 1 === cm ? ' now' : '') + '">' + m[0] + '</span>'; }).join('') + '</div>';
+      }
+      function spRows(list) {
+        return '<div class="bb-sp">' + list.map(function (x) {
+          return '<div class="bb-sp-row"><div class="bb-sp-n"><b>' + esc(x.sp) + '</b>' + (x.note ? '<small>' + esc(x.note) + '</small>' : '') + '</div>' + monthStrip(x.months) + '</div>'; }).join('') + '</div>';
+      }
+      function inSeason(list) { var cm = curMonth(); return list.filter(function (x) { return x.months && x.months.indexOf(cm) >= 0; }); }
+      function openPanel(h) {
+        ++reqId; stopPlanner && planner && stopPlanner();
+        panel.innerHTML = '<button class="bb-close" type="button" aria-label="Close">×</button>' + h;
+        panel.classList.add('open'); panel.scrollTop = 0;
+        panel.querySelector('.bb-close').addEventListener('click', function () { panel.classList.remove('open'); });
+      }
+      function monthPicker() {
+        return '<label class="bb-mpick">Month <select>' + MONTHS.map(function (m, i) { return '<option value="' + (i + 1) + '"' + (i + 1 === curMonth() ? ' selected' : '') + '>' + m + '</option>'; }).join('') + '</select></label>';
+      }
+      function bindMonthPicker(rerender) {
+        var s = panel.querySelector('.bb-mpick select');
+        if (s) s.addEventListener('change', function () { slider.value = s.value; slider.dispatchEvent(new Event('input')); rerender(); });
+      }
+      function showSea(s) {
+        openPanel('<div class="bb-p-head"><div class="bb-p-sub">Sea area</div><div class="bb-p-zname">🌊 ' + esc(s.name) + '</div>'
+          + '<p class="bb-small">Best months to catch each species from the shore or a small boat. ' + monthPicker() + '</p></div>'
+          + '<div class="bb-p-sub">Fish</div>' + spRows(s.fish)
+          + (s.shell && s.shell.length ? '<div class="bb-p-sub">Shellfish &amp; seaweed</div>' + spRows(s.shell) : '')
+          + (s.note ? '<div class="bb-adv bb-adv-info">' + esc(s.note) + '</div>' : '')
+          + rulesHtml() + '<p><button type="button" class="bb-mini bb-to-guide">🐟 Whole region: deer, game, rivers</button></p>');
+        bindMonthPicker(function () { showSea(s); });
+        panel.querySelector('.bb-to-guide').addEventListener('click', function () { showGuide('rivers'); });
+      }
+      function rulesHtml() {
+        return D.rules ? '<details class="bb-rules"><summary>⚖️ The rules here</summary><ul>' + D.rules.map(function (r) { return '<li>' + esc(r) + '</li>'; }).join('') + '</ul></details>' : '';
+      }
+      function rivers() { return D.points.features.filter(function (f) { return f.properties.cat === 'river'; }); }
+      function flyTo(name) {
+        markers.forEach(function (o) {
+          if (o.f.properties.name !== name) return;
+          var k = o.f.properties.cat;
+          if (!state.cats[k]) { state.cats[k] = true; groups[k].addTo(map); chips.querySelectorAll('.bb-chip').forEach(function (c) { if (c.textContent.indexOf(CAT[k].label) >= 0) { c.classList.add('on'); c.setAttribute('aria-pressed', 'true'); } }); }
+          if (global.matchMedia && global.matchMedia('(max-width: 759px)').matches) panel.classList.remove('open');
+          map.setView(o.layer.getLatLng(), Math.max(map.getZoom(), 11)); o.layer.openPopup();
+        });
+      }
+      var guideTab = 'rivers';
+      function showGuide(tab) {
+        guideTab = tab || guideTab;
+        var T = [['deer', '🦌 Deer'], ['game', '🐦 Game'], ['rivers', '🐟 Rivers'], ['sea', '🌊 Sea'], ['protected', '🚫 Protected']]
+          .filter(function (t) { return t[0] !== 'sea' || (D.seas || []).length; });
+        var h = '<div class="bb-p-head"><div class="bb-p-sub">' + esc(D.title || '') + '</div><div class="bb-p-zname">What lives here</div>'
+          + '<p class="bb-small">Highlighted months are open seasons or the best time to catch. ' + monthPicker() + '</p></div>'
+          + '<div class="bb-tabs" role="tablist">' + T.map(function (t) { return '<button type="button" role="tab" data-t="' + t[0] + '" aria-selected="' + (t[0] === guideTab) + '" class="' + (t[0] === guideTab ? 'on' : '') + '">' + t[1] + '</button>'; }).join('') + '</div>';
+        if (guideTab === 'deer') {
+          h += (D.deer || []).map(function (d) { return '<div class="bb-card"><b>' + esc(d.sp) + '</b><div>' + esc(d.where) + '</div><div class="bb-season-t">Open season: ' + esc(d.season) + '</div></div>'; }).join('')
+            + '<div class="bb-adv bb-adv-info">Deer need a firearm certificate, a legal calibre and the landowner\'s permission. Never at night. Rut: red and sika Sep–Oct, fallow Oct–Nov, roe Jul–Aug: stags and bucks can charge.</div>';
+        } else if (guideTab === 'game') {
+          h += spRows(D.game || []) + '<p class="bb-small">Shotgun certificate and the landowner\'s permission. Game birds can\'t be shot on Sundays or Christmas Day in England and Wales.</p>';
+        } else if (guideTab === 'rivers') {
+          h += rivers().map(function (f) { var p = f.properties;
+            return '<div class="bb-card"><button type="button" class="bb-link" data-fly="' + esc(p.name) + '">📍 ' + esc(p.name) + '</button>' + fishChips(p.fish || []) + (p.note ? '<small>' + esc(p.note) + '</small>' : '') + (p.months ? monthStrip(p.months) : '') + '</div>'; }).join('');
+        } else if (guideTab === 'sea') {
+          h += (D.seas || []).map(function (s, i) { var now = inSeason(s.fish.concat(s.shell || []));
+            return '<div class="bb-card"><button type="button" class="bb-link" data-sea="' + i + '">🌊 ' + esc(s.name) + ' →</button><div class="bb-small">In ' + MONTHS[curMonth() - 1] + ':</div>'
+              + (now.length ? fishChips(now.map(function (x) { return x.sp; })) : '<div class="bb-small">Quiet month.</div>') + '</div>'; }).join('')
+            + '<p class="bb-small">Tap a sea area for the full month-by-month calendar.</p>';
+        } else {
+          h += '<div class="bb-fish bb-prot">' + (D.protected || []).map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div>'
+            + '<div class="bb-adv bb-adv-warn">Leave these alone. Killing, taking or disturbing most of them is a crime, even in a crisis, and many are too rare to recover.</div>';
+        }
+        openPanel(h + rulesHtml());
+        bindMonthPicker(function () { showGuide(); });
+        panel.querySelectorAll('.bb-tabs button').forEach(function (b) { b.addEventListener('click', function () { showGuide(b.getAttribute('data-t')); }); });
+        panel.querySelectorAll('[data-fly]').forEach(function (b) { b.addEventListener('click', function () { flyTo(b.getAttribute('data-fly')); }); });
+        panel.querySelectorAll('[data-sea]').forEach(function (b) { b.addEventListener('click', function () { showSea(D.seas[+b.getAttribute('data-sea')]); }); });
+      }
+      function nearSea(lat, lon) {
+        var best = null;
+        (D.seas || []).forEach(function (s) { s.geometry.coordinates[0].forEach(function (c) { var d = haversine([lat, lon], [c[1], c[0]]); if (!best || d < best.d) best = { d: d, s: s }; }); });
+        return best && best.d < 15 ? best.s : null;
+      }
+      function lifeNearHtml(lat, lon) {
+        var rs = rivers().map(function (f) { var ll = [f.geometry.coordinates[1], f.geometry.coordinates[0]]; return { f: f, d: haversine([lat, lon], ll), b: bearing([lat, lon], ll) }; })
+          .filter(function (r) { return r.d < 20; }).sort(function (a, b) { return a.d - b.d; }).slice(0, 3);
+        var sea = nearSea(lat, lon);
+        var h = '<div class="bb-p-life"><div class="bb-p-sub">Fish &amp; game near here</div>';
+        rs.forEach(function (r) { h += '<div class="bb-near-r"><button type="button" class="bb-link" data-fly="' + esc(r.f.properties.name) + '">🐟 ' + esc(r.f.properties.name) + '</button> <b>' + r.d.toFixed(1) + ' km ' + compass(r.b) + '</b>' + fishChips(r.f.properties.fish || []) + '</div>'; });
+        if (!rs.length) h += '<div class="bb-small">No mapped river or lake within 20 km.</div>';
+        if (sea) { var now = inSeason(sea.fish.concat(sea.shell || []));
+          h += '<div class="bb-near-r"><button type="button" class="bb-link" data-sea-id="' + esc(sea.id) + '">🌊 ' + esc(sea.name) + ' →</button><div class="bb-small">In ' + MONTHS[curMonth() - 1] + ':</div>' + fishChips(now.map(function (x) { return x.sp; })) + '</div>'; }
+        if (D.deer && D.deer.length) h += '<div class="bb-near-r">🦌 Deer in the region: ' + D.deer.map(function (d) { return esc(d.sp.replace(' deer', '')); }).join(', ') + '</div>';
+        return h + '<button type="button" class="bb-mini bb-to-guide">Full guide: seasons and rules</button></div>';
+      }
+      function bindLife() {
+        panel.querySelectorAll('.bb-p-life [data-fly]').forEach(function (b) { b.addEventListener('click', function () { flyTo(b.getAttribute('data-fly')); }); });
+        panel.querySelectorAll('[data-sea-id]').forEach(function (b) { b.addEventListener('click', function () { showSea((D.seas || []).filter(function (s) { return s.id === b.getAttribute('data-sea-id'); })[0]); }); });
+        var g = panel.querySelector('.bb-p-life .bb-to-guide'); if (g) g.addEventListener('click', function () { showGuide(); });
+      }
 
       // ---- click anywhere: location report
       var planner = null;
       map.on('click', function (e) { if (planner && planner.click(e.latlng)) return; showPoint(e.latlng); });
       var reqId = 0;
+      function inGeom(pt, g) { // Polygon or MultiPolygon, holes ignored
+        return (g.type === 'MultiPolygon' ? g.coordinates : [g.coordinates]).some(function (poly) { return pointInRing(pt, poly[0]); });
+      }
+      function seaAt(lat, lon) { return (D.seas || []).filter(function (s) { return inGeom([lon, lat], s.geometry); })[0] || null; }
       function zoneAt(lat, lon) {
         var feats = D.zones.features.slice().reverse();
-        for (var i = 0; i < feats.length; i++) { if (pointInRing([lon, lat], feats[i].geometry.coordinates[0])) return feats[i]; }
+        for (var i = 0; i < feats.length; i++) { if (inGeom([lon, lat], feats[i].geometry)) return feats[i]; }
         return null;
       }
       function nearest(cat, lat, lon, filt) {
@@ -554,18 +705,21 @@
             + '<div class="bb-p-stats"><span>⛰️ ' + range(p.elev, ' m') + '</span><span>🌧️ ' + range(p.rain_mm, ' mm/yr') + '</span><span>❄️ ' + range(p.snow_days, ' snow days') + '</span></div>'
             + '<details open><summary>Terrain</summary><p>' + esc(p.terrain) + '</p></details>'
             + '<details open><summary>Weather pattern</summary><p>' + esc(p.weather) + '</p></details>'
-            + '<details><summary>Food: game, fish, forage</summary><p>' + esc(p.food) + '</p></details>'
+            + '<details><summary>Food in this zone</summary><p>' + esc(p.food) + '</p></details>'
             + '<details><summary>Water</summary><p>' + esc(p.water) + '</p></details>'
             + '<details><summary>Shelter</summary><p>' + esc(p.shelter) + '</p></details>'
             + '<details><summary>Hazards</summary><p>' + esc(p.hazards) + '</p></details>'
             + '<details><summary>Seasons & access</summary><p>' + esc(p.seasons) + ' ' + esc(p.access) + '</p></details></div>';
         } else {
-          h += '<div class="bb-p-zone"><div class="bb-p-zname">Outside the mapped region</div></div>';
+          var atSea = seaAt(lat, lon);
+          h += atSea ? '<div class="bb-p-zone" style="--c:#4fa3c7"><div class="bb-p-zname">🌊 ' + esc(atSea.name) + ' <small>At sea</small></div></div>'
+            : '<div class="bb-p-zone"><div class="bb-p-zname">Outside the mapped region</div></div>';
         }
+        h += lifeNearHtml(lat, lon);
         h += '<div class="bb-p-live"><div class="bb-p-sub">Live conditions</div><div class="bb-wx">Loading…</div></div>';
         h += '<div class="bb-p-flood"><div class="bb-p-sub">Flood warnings & river levels</div><div class="bb-fl">' + (D.flood_provider && D.flood_provider !== 'ea' ? '…' : 'Checking Environment Agency…') + '</div></div>';
         var lifeboat = nearest('rescue', lat, lon, function (p) { return /^RNLI/.test(p.name); });
-        var coastal = (zf && (zf.properties.coastal || /holderness|cleveland/.test(zf.properties.id))) || (lifeboat && lifeboat.d < 10);
+        var coastal = (zf && (zf.properties.coastal || /holderness|cleveland/.test(zf.properties.id))) || (lifeboat && lifeboat.d < 10) || !!nearSea(lat, lon);
         if (coastal) h += '<div class="bb-p-marine"><div class="bb-p-sub">Sea & tide (estimate)</div><div class="bb-sea">Loading…</div></div>';
         var help = nearest('rescue', lat, lon, function (p) { return /MRT|FRA|Rescue|SRT/.test(p.name); });
         var ae = nearest('rescue', lat, lon, function (p) { return /^A&E/.test(p.name); });
@@ -596,6 +750,7 @@
           panel.querySelectorAll('details').forEach(function (d) { d.open = true; });
           container.classList.add('bb-printing'); global.print(); setTimeout(function () { container.classList.remove('bb-printing'); }, 500);
         });
+        bindLife();
         loadFlood(lat, lon, my, panel.querySelector('.bb-fl'));
         if (coastal) loadMarine(lat, lon, my, panel.querySelector('.bb-sea'));
 

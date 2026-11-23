@@ -15,9 +15,20 @@
 .bb-map-root .leaflet-control-attribution a { color: #cbd3c9; }
 
 /* top UI */
-.bb-map-ui { position: absolute; top: 10px; left: 56px; right: 10px; z-index: 1000; display: flex; flex-direction: column; gap: 6px; pointer-events: none; }
+.bb-map-ui { position: absolute; top: 10px; left: 56px; right: 10px; z-index: 1000; pointer-events: none; }
 .bb-map-ui > * { pointer-events: auto; }
-.bb-bar, .bb-tools { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.bb-bar { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; }
+.bb-menu-wrap { position: relative; }
+.bb-caret { font-size: 10px; opacity: .7; }
+.bb-menu { display: none; position: absolute; top: calc(100% + 6px); left: 0; width: min(340px, calc(100vw - 80px)); max-height: 60vh; overflow: auto;
+  background: var(--bb-panel); border: 1px solid var(--bb-line); border-radius: 12px; padding: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+.bb-menu.open { display: block; }
+.bb-menu-h { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: var(--bb-accent); font-weight: 700; margin: 2px 0 6px; }
+.bb-menu-h:not(:first-child) { margin-top: 12px; }
+.bb-menu-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.bb-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.bb-tools .bb-btn { text-align: left; }
+.bb-life { border-color: rgba(58, 134, 255, .55); }
 .bb-seg { display: inline-flex; background: var(--bb-panel); border: 1px solid var(--bb-line); border-radius: 10px; overflow: hidden; }
 .bb-seg .bb-btn { border: 0; border-radius: 0; }
 .bb-btn, .bb-select {
@@ -27,7 +38,7 @@
 .bb-btn:hover { border-color: rgba(245, 158, 11, 0.6); }
 .bb-btn.on { background: var(--bb-accent); color: #14100a; font-weight: 600; }
 .bb-btn:focus-visible, .bb-chip:focus-visible, .bb-select:focus-visible { outline: 2px solid var(--bb-accent); outline-offset: 2px; }
-.bb-chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.bb-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .bb-chips::-webkit-scrollbar { display: none; }
 .bb-chip {
   flex: 0 0 auto; display: inline-flex; align-items: center; gap: 5px; background: var(--bb-panel); color: var(--bb-mute);
@@ -36,15 +47,18 @@
 .bb-chip i { width: 9px; height: 9px; border-radius: 50%; background: var(--c); opacity: 0.35; }
 .bb-chip.on { color: var(--bb-text); border-color: rgba(255, 255, 255, 0.3); }
 .bb-chip.on i { opacity: 1; }
-.bb-season { display: inline-flex; align-items: center; gap: 10px; background: var(--bb-panel); border: 1px solid var(--bb-line); border-radius: 10px; padding: 4px 12px; align-self: flex-start; }
+.bb-season { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-items: center; margin-top: 12px; }
 .bb-season label { font-size: 13px; white-space: nowrap; }
-.bb-season input { width: 160px; accent-color: var(--bb-accent); }
-.bb-tools { position: absolute; top: 0; right: 0; flex-direction: column; align-items: flex-end; }
-.bb-ui-toggle { display: none; }
+.bb-season input { width: 100%; accent-color: var(--bb-accent); }
+.bb-season small { grid-column: 1 / -1; color: var(--bb-mute); font-size: 11.5px; }
 
 /* legend + radar time */
 .bb-legend { position: absolute; left: 10px; bottom: 26px; z-index: 900; background: var(--bb-panel); border: 1px solid var(--bb-line); border-radius: 10px;
   padding: 8px 10px; font-size: 12px; max-width: 230px; max-height: 40%; overflow: auto; }
+.bb-leg-t { display: none; background: none; border: 0; color: inherit; font: inherit; font-weight: 600; padding: 0; cursor: pointer; }
+.bb-legend.bb-leg-closed { padding: 6px 10px; }
+.bb-legend.bb-leg-closed .bb-leg-t { display: block; }
+.bb-legend.bb-leg-closed .bb-leg-b { display: none; }
 .bb-legend b { display: block; margin-bottom: 4px; font-size: 12.5px; }
 .bb-legend div i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
 .bb-legend small { color: var(--bb-mute); display: block; margin-top: 4px; }
@@ -59,7 +73,7 @@
 /* markers */
 .bb-pin { display: grid; place-items: center; border-radius: 50%; background: rgba(12, 16, 15, 0.9); border: 2px solid var(--c, #fff); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); }
 .bb-pin span { font-size: 14px; line-height: 1; }
-.bb-station { --c: #4cc9f0; } .bb-wildlife { --c: #f4a261; } .bb-fishing { --c: #3a86ff; } .bb-forage { --c: #90be6d; } .bb-water { --c: #00b4d8; }
+.bb-station { --c: #4cc9f0; } .bb-wildlife { --c: #f4a261; } .bb-forage { --c: #90be6d; } .bb-water { --c: #00b4d8; }
 .bb-hazard { --c: #e63946; } .bb-flood { --c: #9d4edd; } .bb-rescue { --c: #ffffff; }
 .bb-protected { border-style: dashed; }
 .bb-off-season { opacity: 0.25; filter: grayscale(1); }
@@ -122,19 +136,18 @@
 .bb-hub-pin.live span { background: #f59e0b; color: #14100a; border-color: #f59e0b; box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6); animation: bbpulse 2s infinite; font-size: 13.5px; }
 @keyframes bbpulse { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6); } 70% { box-shadow: 0 0 0 14px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
-@media (min-width: 760px) { .bb-map-ui { right: 160px; } }
 @media (max-width: 759px) {
   .bb-map-root { height: 82vh; }
   .bb-map-ui { left: 50px; right: 8px; top: 8px; }
-  .bb-bar .bb-select, .bb-bar .bb-btn:not(.bb-radar):not(.bb-ui-toggle) { display: none; }
-  .bb-tools { position: static; flex-direction: row; align-items: center; }
-  .bb-ui-toggle { display: inline-block; }
-  .bb-map-ui.bb-collapsed .bb-chips, .bb-map-ui.bb-collapsed .bb-season, .bb-map-ui.bb-collapsed .bb-tools { display: none; }
-  .bb-tools .bb-btn { font-size: 12px; padding: 5px 8px; min-height: 30px; }
-  .bb-seg .bb-btn { display: inline-block !important; font-size: 12px; padding: 6px 8px; }
+  .bb-bar { gap: 4px; flex-wrap: nowrap; }
+  .bb-bar .bb-btn { padding: 6px 8px; font-size: 12.5px; }
+  .bb-lbl, .bb-caret { display: none; }
+  .bb-life .bb-lbl { display: inline; }
+  .bb-menu-wrap { position: static; }
+  .bb-menu { left: 0; right: 0; width: auto; }
   .bb-panel { left: 0; right: 0; bottom: 0; top: auto; width: 100%; max-height: 62%; border-radius: 16px 16px 0 0; transform: translateY(105%); }
   .bb-panel.open { transform: none; }
-  .bb-legend { bottom: 24px; max-width: 180px; font-size: 11px; }
+  .bb-legend { bottom: 24px; max-width: 200px; font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) { .bb-panel { transition: none; } .bb-hub-pin.live span { animation: none; } }
 @media print { .bb-map-ui, .bb-panel, .bb-legend { display: none; } }
@@ -174,3 +187,37 @@
 .bb-mini[disabled] { opacity: .45; cursor: not-allowed; }
 @media (max-width: 759px) { .bb-sunchip { bottom: 30px; top: auto; right: 10px; } }
 @media print { .bb-map-root.bb-printing .bb-sunchip { display: none !important; } }
+
+/* --- v4: fish & game guide, sea areas --- */
+.bb-sea-label span { display: inline-block; transform: translate(-50%, -50%); white-space: nowrap; color: #bfe3f5; font-size: 11.5px; font-weight: 600;
+  background: rgba(10, 30, 45, .75); border: 1px solid rgba(79, 163, 199, .5); border-radius: 999px; padding: 2px 8px; cursor: pointer; }
+.bb-pin.bb-river { --c: #3a86ff; } .bb-pin.bb-fishing { --c: #2ec4b6; }
+.bb-fish { display: flex; flex-wrap: wrap; gap: 4px; margin: 5px 0 2px; }
+.bb-fish span { font-size: 11.5px; padding: 2px 7px; border-radius: 999px; background: rgba(58, 134, 255, .16); border: 1px solid rgba(58, 134, 255, .35); color: #dbe7ff; }
+.bb-fish span.bb-warn, .bb-prot span { background: rgba(220, 60, 50, .14); border-color: rgba(220, 60, 50, .45); color: #ffd9d6; }
+.bb-ms { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; min-width: 132px; }
+.bb-ms span { text-align: center; font-size: 9.5px; padding: 2px 0; border-radius: 3px; background: rgba(255,255,255,.06); color: #6f776f; }
+.bb-ms span.on { background: #3a86ff; color: #fff; font-weight: 700; }
+.bb-ms span.now { outline: 1.5px solid var(--bb-accent); outline-offset: -1px; }
+.bb-ms-none { display: block; font-size: 11px; color: #ffb4ad; min-width: 0; }
+.bb-sp-row { display: grid; grid-template-columns: 1fr 150px; gap: 8px; align-items: center; padding: 6px 0; border-top: 1px solid var(--bb-line); }
+.bb-sp-n b { font-size: 13px; }
+.bb-sp-n small { display: block; color: var(--bb-mute); font-size: 11.5px; line-height: 1.35; }
+.bb-tabs { display: flex; flex-wrap: wrap; gap: 4px; margin: 10px 0 8px; }
+.bb-tabs button { font: inherit; font-size: 12.5px; padding: 5px 9px; border-radius: 999px; border: 1px solid var(--bb-line); background: rgba(255,255,255,.05); color: var(--bb-text); cursor: pointer; }
+.bb-tabs button.on { background: var(--bb-accent); color: #14100a; border-color: var(--bb-accent); font-weight: 700; }
+.bb-card { border-top: 1px solid var(--bb-line); padding: 8px 0; font-size: 13px; }
+.bb-card > small { display: block; color: var(--bb-mute); margin: 3px 0 5px; }
+.bb-season-t { color: #f3dfb6; font-size: 12.5px; margin-top: 3px; }
+.bb-link { background: none; border: 0; padding: 0; font: inherit; font-weight: 700; color: #8fc1ff; cursor: pointer; text-align: left; }
+.bb-link:hover, .bb-link:focus-visible { text-decoration: underline; }
+.bb-mpick { white-space: nowrap; }
+.bb-mpick select { background: rgba(255,255,255,.06); color: inherit; border: 1px solid var(--bb-line); border-radius: 6px; padding: 2px 4px; font: inherit; }
+.bb-mpick option { background: #121816; }
+.bb-rules { margin-top: 12px; border-top: 1px solid var(--bb-line); padding-top: 6px; font-size: 12.5px; }
+.bb-rules ul { margin: 4px 0 0 16px; padding: 0; }
+.bb-rules li { margin: 3px 0; }
+.bb-p-life { margin-top: 10px; }
+.bb-near-r { font-size: 12.5px; margin: 6px 0; }
+@media (max-width: 759px) { .bb-sp-row { grid-template-columns: 1fr 120px; } .bb-ms { min-width: 120px; } }
+@media print { .bb-map-root.bb-printing .bb-to-guide, .bb-map-root.bb-printing .bb-mpick { display: none !important; } }
