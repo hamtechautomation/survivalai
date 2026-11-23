@@ -30,8 +30,10 @@ Your purpose:
 - Answer ONLY questions related to survival, emergency preparedness, first aid, food/water, energy, shelter, navigation, security, and community resilience.
 - For off-topic questions, politely redirect: "I'm specialized in survival and preparedness topics. Can I help you with something in that area?"
 
-The guide contains 30 sections covering:
+The guide contains 39 sections covering:
 Food & Water, Medical & First Aid, Energy, Shelter & Construction, Communications, Navigation, Security & Defense, Knowledge & Literacy, First Principles (science/maths/invention), Agriculture, Animal Husbandry, Veterinary Care, Pregnancy & Infant Care, NBC/EMP Threats, Disaster Playbooks, Climate & Regional, Metallurgy, Governance, Psychology & Morale, Chemistry & Materials, Textiles & Clothing, Vehicles & Transport, Salvage & Rebuild (parts salvage, generator maintenance/rebuild, batteries), Making Fuel (biodiesel, veg oil, ethanol, wood gas, biogas, charcoal, fuel storage), Power Generation, Building & Structures, Medicine Making, Water Systems, Practical Projects (cooling/air filters/dams/pumps/toilets/radiation/mills/breeding/food storage).
+Prepping (preparing before an emergency, written for UK households first): Prepping: Start Here (the government's 72-hour advice, readiness tiers, household plan, practice drills), First 24 Hours (step-by-step first day of a power cut, flood, gas leak or CO alarm, water outage, evacuation, stuck in snow), The Prepped Home, Urban & Flats, Campervan & Mobile, Rural & Homestead, Bunkers & Shelter Rooms, Stockpile & Rotation, What to Buy (everyday kit that doubles as emergency kit, vital items, safety standards, budget lists).
+For prepping questions, start with the basics (water, food, light, warmth, medicines, a plan) before specialist kit. Use UK terms, metric units and UK rules (gov.uk 72-hour advice, the Priority Services Register, 999/105/111) unless the user says they are elsewhere. For anything structural (bunkers, cellars, floor loads) give principles and say a structural engineer must design it.
 
 Using the bundled library (CRITICAL):
 - When a "REFERENCE MATERIAL" block is provided below, treat it as your most authoritative source. Base your answer on it and prefer it over your own training when they conflict.
@@ -547,7 +549,9 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
   ────────────────────────────────────────── */
   // Returns system prompt augmented with any relevant library context
   function buildSystemPrompt(userText) {
-    const base = emergencyMode ? EMERGENCY_SYSTEM_PROMPT : SYSTEM_PROMPT;
+    let base = emergencyMode ? EMERGENCY_SYSTEM_PROMPT : SYSTEM_PROMPT;
+    /* On a Prepping page, tell the model which one, so answers fit the reader's home. */
+    if (!emergencyMode && /\/sections\/prep/.test(location.pathname)) base += '\n\nThe reader is on the guide\'s "' + document.title.split(' — ')[0] + '" page.';
     if (typeof Librarian === 'undefined') return base;
     const ctx = Librarian.getContext(userText);
     if (!ctx) return base;
@@ -568,6 +572,15 @@ You cover: first aid, water purification, shelter, fire, signalling for rescue, 
     const msgs = $('aria-messages');
     if (msgs) msgs.appendChild(badge);
   }
+
+  /* Starter questions in the welcome message: tap to ask. */
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('.aria-ask');
+    const input = $('aria-input');
+    if (!b || !input || isStreaming) return;
+    input.value = b.textContent;
+    sendMessage();
+  });
 
   async function sendMessage() {
     const input = $('aria-input');

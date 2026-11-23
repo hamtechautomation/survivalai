@@ -2,7 +2,7 @@
 
 ![The Last Light Survival Guide](assets/og-image.png)
 
-> **A complete, fully-offline survival library — 30 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
+> **A complete, fully-offline survival library — 39 sections, 33 reference books, an AI that cites them, and offline maps. Runs off a USB stick. Free.**
 
 ### See it in action
 
@@ -201,7 +201,7 @@ Python 3 standard library only — nothing to install. Runs on a Raspberry Pi.
 
 ## Content Overview
 
-### 28 Content Sections
+### 39 Content Sections
 
 | Section | Key Topics |
 |---------|-----------|
@@ -212,7 +212,17 @@ Python 3 standard library only — nothing to install. Runs on a Raspberry Pi.
 | Communications | Ham radio, Morse code, signal mirrors, frequency reference |
 | Navigation & Maps | Celestial navigation, star charts, map reading, dead reckoning |
 | Security & Defense | Physical hardening, bug-out decision tree, threat assessment |
+| Prepping: Start Here | UK 72-hour advice, readiness ladder, power-cut timeline, budget plan, printable household plan, practice drills |
+| First 24 Hours | Step players for the first day of a power cut, flood, gas leak or CO alarm, water outage, evacuation, stuck in snow; also in Emergency mode |
+| The Prepped Home | Shut-offs, hidden water, warmth without the boiler, bucket toilet, medicines, Priority Services Register, grab bag |
+| Urban & Flats | Small-space storage, floor-load checker, high-rises (3D block of flats), get-home bag (3D, layer by layer) and walk-home calculator |
+| Campervan & Mobile | 3D van, choosing a van, payload and licence checker, power and water autonomy, 12 V wiring and water diagrams, gas and CO safety, UK stopping rules, security, living in it, spares, range calculator, winter, bug-out |
+| Rural & Homestead | Private water, UK petrol storage limits, heating, backup power, livestock rules, community plans |
+| Bunkers & Shelter Rooms | Refuge rooms to buried shelters, shelter air calculator, earth cover, radon, planning law, container myth |
+| Stockpile & Rotation | Stockpile planner, shelf lives, best before vs use by, Mylar sealing, rotation tracker |
+| What to Buy | Everyday kit that doubles as emergency kit, vital items, safety standards to look for, what to skip, budget shopping list, 3D 72-hour kit |
 | Knowledge & Literacy | Education continuity, skill transfer, library curation |
+| Knots & Rope | Six knots that tie themselves step by step |
 | First Principles | Periodic table, physics/chemistry, key equations, the invention method |
 | Agriculture | Seed saving, planting calendars, soil health, crop rotation |
 | Animal Husbandry | Chickens, goats, rabbits, bees, housing and feeding |
@@ -228,6 +238,7 @@ Python 3 standard library only — nothing to install. Runs on a Raspberry Pi.
 | Textiles & Clothing | Spinning, weaving, leather tanning, pattern cutting |
 | Vehicles & Transport | Fuel stabilization, EMP hardening, bicycle maintenance |
 | Salvage, Rebuild & Fuel | Parts salvage & safe stripping, generator maintenance/rebuild, battery salvage (lead-acid, 18650), biodiesel, SVO, ethanol, wood gas |
+| Making Fuel | Biodiesel (with calculator), straight veg oil, ethanol, wood gas, biogas, charcoal, fuel storage |
 | Power Generation | Pedal generators, water wheels, wind, biogas, steam |
 | Building & Structures | Cob, earthbag, timber frame, defences, site selection |
 | Medicine Making | Tinctures, ORS, antiseptics, medicinal plants |

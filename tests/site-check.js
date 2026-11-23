@@ -47,7 +47,8 @@ function loadScript(file, extra = {}) {
 }
 const idsIn = html => new Set([...html.matchAll(/\sid=["']([^"']+)["']/g)].map(m => m[1]));
 function resolveTarget(fromFile, href) {
-  const [file, anchor] = href.split('#');
+  const [path_, anchor] = href.split('#');
+  const file = path_.split('?')[0];          // gear.html?for=van → gear.html
   const target = file ? path.posix.normalize(path.posix.join(path.posix.dirname(fromFile), file)) : fromFile;
   return { target, anchor };
 }
@@ -65,6 +66,9 @@ for (const page of htmlPages) {
     if (/^(https?:|mailto:|tel:|data:|javascript:|\/\/)/.test(href) || href === '#' || href.startsWith('/')) continue;
     // PDFs, map data and release zips are built/shipped separately (gitignored)
     if (/\.pdf(#|$)/.test(href) || /\.pmtiles$/.test(href) || href.startsWith('downloads/')) continue;
+    // #sos and #sos-<card> open Emergency mode (emergency.js), so they must name a real card.
+    const sos = /^#sos(?:-([a-z]+))?$/.exec(href);
+    if (sos) { if (sos[1] && !new RegExp("id: ['\"]" + sos[1] + "['\"]").test(read('assets/js/emergency.js'))) fail('links', `${page} → ${href}: no emergency card "${sos[1]}"`); continue; }
     checkTarget('links', page, href);
   }
 }

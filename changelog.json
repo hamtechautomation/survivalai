@@ -1,7 +1,23 @@
 {
-  "version": "1.2.0",
-  "lastUpdated": "2026-11-17",
+  "version": "1.3.0",
+  "lastUpdated": "2026-11-20",
   "sections": [
+    {
+      "version": "1.3.0",
+      "date": "2026-11-20",
+      "title": "Prepping",
+      "changes": [
+        "New Prepping group: nine sections on preparing before an emergency, written for UK households first",
+        "Prepping: Start Here, with a readiness ladder, a 'where do you live?' picker, a printable household plan and five practice drills",
+        "First 24 Hours: step players for the first day of a power cut, flood, gas leak or CO alarm, water outage, evacuation and being stuck in snow, also added to Emergency mode",
+        "The Prepped Home, Urban & Flats, Campervan & Mobile, Rural & Homestead, Bunkers & Shelter Rooms, Stockpile & Rotation, What to Buy",
+        "3D models you can turn and tap: a campervan, a buried shelter, a house's shut-offs, a block of flats, a fallout refuge room, a rain butt with first flush, a wood stove and flue, a get-home bag and a 72-hour kit",
+        "Extended campervan guide: choosing a van, payload and licences, 12 V wiring, water system, security, living in it, spares and FLOWER checks, range",
+        "New calculators: stockpile, van autonomy, van payload, van range, floor load, shelter air, bag weight; shopping list by budget; stock rotation tracker",
+        "Reliability check of every prepping page against primary sources, with a sources box on each",
+        "Gear Checklist filters by where you live; Bunker Bot knows the prepping pages and offers starter questions"
+      ]
+    },
     {
       "version": "1.2.0",
       "date": "2026-11-17",
@@ -24,10 +40,10 @@
       "date": "2026-07-04",
       "title": "Post-launch expansion",
       "changes": [
-        "New section: Salvage, Rebuild & Fuel \u2014 parts salvage, generator maintenance/rebuild, battery salvage (lead-acid + 18650), biodiesel/SVO/ethanol/wood gas",
+        "New section: Salvage, Rebuild & Fuel — parts salvage, generator maintenance/rebuild, battery salvage (lead-acid + 18650), biodiesel/SVO/ethanol/wood gas",
         "Four new bundled books (33 total): TM 5-685 Generators, FEMA Wood Gas plans, NREL Biodiesel Guide, Fuel from Farms",
         "Bunker Bot retrieval upgrade: survival-domain query expansion + domain routing (browser and CLI)",
-        "Terminal Bunker Bot (bunkerbot.py) \u2014 zero-dependency CLI with the same citations",
+        "Terminal Bunker Bot (bunkerbot.py) — zero-dependency CLI with the same citations",
         "29th bundled book: Bunker Bot Compendium (master index & quick-reference)",
         "New sections: Power Systems, Structures, Water Systems, Medicine-Making builds",
         "Medical additions: choking, spinal injury; weather prediction; electronics repair & solar salvage",

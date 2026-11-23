@@ -1321,7 +1321,481 @@
     box.addEventListener('input', calc); calc();
   }
 
-  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram, fronts, firelay, moon, waterflow, seasons, explode, stars, genwave, genmatch, watertreat, biodiesel };
+  /* ── Prepping: saved state. Everything stays in this browser; reads and writes are
+     wrapped because private windows and file:// can refuse storage. ───────────────── */
+  const store = {
+    get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
+  const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const tierOf = d => d <= 3 ? 'Tier 1: the 72 hours the UK government asks for' : d <= 14 ? 'Tier 2: two weeks' : d <= 90 ? 'Tier 3: three months' : 'Tier 4: a year';
+
+  /* ── Stockpile planner. Water 3 L drinking per person per day (UK government advice),
+     plus 2 L for cooking and washing; dog 1 L, cat 0.25 L. Food 2,200 kcal per adult,
+     1,600 per child; dry staples ~3,600 kcal/kg, a mixed 400 g tin ~350 kcal. A 220 g gas
+     canister boils ~20 L, ~10 person-days of hot food and drinks. ─────────────────── */
+  function stockpile(box) {
+    const u = 'sp' + (++uid);
+    const days = [[3, '3 days (Tier 1)'], [7, '1 week'], [14, '2 weeks (Tier 2)'], [30, '1 month'], [90, '3 months (Tier 3)'], [180, '6 months'], [365, '1 year (Tier 4)']];
+    box.innerHTML =
+      '<p class="calc-title">Stockpile planner</p><p class="calc-sub">How much to store for your household. Water follows the UK government’s 3 litres per person per day for drinking.</p>' +
+      '<div class="calc-in">' +
+        field(u + 'a', 'Adults', '<input id="' + u + 'a" type="number" min="0" step="1" value="2" inputmode="numeric">') +
+        field(u + 'c', 'Children', '<input id="' + u + 'c" type="number" min="0" step="1" value="0" inputmode="numeric">') +
+        field(u + 'g', 'Dogs', '<input id="' + u + 'g" type="number" min="0" step="1" value="0" inputmode="numeric">') +
+        field(u + 'k', 'Cats', '<input id="' + u + 'k" type="number" min="0" step="1" value="0" inputmode="numeric">') +
+        field(u + 'd', 'How long', select(u + 'd', days, 14)) + '</div>' +
+      '<p class="calc-note sp-tier"></p>' +
+      '<div class="calc-outs">' + out('dw', 'Drinking water', 'calc-big') + out('ww', 'Plus cooking &amp; washing') + out('cans', 'In 25 L jerrycans') +
+        out('kcal', 'Food energy', 'calc-big') + out('dry', 'As dry staples') + out('tins', 'Or as tins') +
+        out('gas', 'Camping-stove gas') + out('loo', 'Bucket-toilet bags') + out('abs', 'Sawdust or cat litter') + '</div>' +
+      '<p class="calc-note">Water weighs 1 kg a litre, so check where it goes (see the <a href="prep-urban.html#floor-load">floor-load checker</a>). Mix tins and dry food: tins need no water or fuel to eat.</p>';
+    const I = k => $(box, '#' + u + k);
+    function calc() {
+      const a = num(I('a')), c = num(I('c')), g = num(I('g')), k = num(I('k')), d = num(I('d')), p = a + c;
+      const dw = (p * 3 + g + k * 0.25) * d, ww = p * 2 * d, kcal = (a * 2200 + c * 1600) * d;
+      const o = (n, t) => { $(box, '[data-o=' + n + ']').innerHTML = t; };
+      $(box, '.sp-tier').textContent = tierOf(d) + '.';
+      o('dw', fmt(dw, 0) + ' L'); o('ww', fmt(ww, 0) + ' L more'); o('cans', fmt(Math.ceil((dw + ww) / 25), 0) + ' cans · ' + fmt(dw + ww, 0) + ' kg');
+      o('kcal', fmt(kcal / 1000, 0) + 'k kcal'); o('dry', fmt(kcal / 3600, 1) + ' kg rice, pasta, oats'); o('tins', 'about ' + fmt(Math.ceil(kcal / 350), 0) + ' × 400 g');
+      o('gas', fmt(Math.ceil(p * d / 10), 0) + ' × 220 g canisters'); o('loo', fmt(p * d, 0) + ' heavy-duty bags'); o('abs', fmt(p * d * 0.5, 0) + ' kg');
+    }
+    box.addEventListener('input', calc); box.addEventListener('change', calc); calc();
+  }
+
+  /* ── Van power and water: how long the van lasts parked. Usable battery = Ah × 50%
+     (lead-acid/AGM) or 90% (lithium). Solar Ah/day = watts × peak sun hours × 0.75 ÷ 12.5 V;
+     UK peak sun hours ~4.5 summer, 2.5 spring/autumn, 0.7 winter. Victron advise sizing
+     for 2–3 days with no sun. ─────────────────────────────────────────────────────── */
+  function vanpower(box) {
+    const u = 'vp' + (++uid);
+    const LOADS = [['fr', 'Compressor fridge', 35, 1], ['li', 'LED lights', 4, 1], ['pu', 'Water pump', 2, 1], ['ph', 'Phones &amp; laptop', 8, 1], ['he', 'Diesel heater (winter)', 15, 0], ['tv', 'Inverter, small loads', 10, 0]];
+    box.innerHTML =
+      '<p class="calc-title">Van autonomy calculator</p><p class="calc-sub">How many days the van lasts parked up, and what runs out first: battery, fresh water or grey tank.</p>' +
+      '<div class="calc-in">' +
+        field(u + 'b', 'Leisure battery', '<input id="' + u + 'b" type="number" min="10" step="10" value="100" inputmode="numeric"><span class="calc-u">Ah</span>') +
+        field(u + 't', 'Battery type', select(u + 't', [['0.5', 'Lead-acid or AGM (use 50%)'], ['0.9', 'Lithium LiFePO4 (use 90%)']], '0.5')) +
+        field(u + 's', 'Solar', '<input id="' + u + 's" type="number" min="0" step="10" value="100" inputmode="numeric"><span class="calc-u">W</span>') +
+        field(u + 'm', 'Season (UK)', select(u + 'm', [['4.5', 'Summer'], ['2.5', 'Spring / autumn'], ['0.7', 'Winter']], '2.5')) +
+        field(u + 'r', 'Driving per day', '<input id="' + u + 'r" type="number" min="0" step="0.5" value="0" inputmode="decimal"><span class="calc-u">hours</span>') +
+        field(u + 'x', 'Battery-to-battery charger', '<input id="' + u + 'x" type="number" min="0" step="5" value="20" inputmode="numeric"><span class="calc-u">A</span>', '0 if you have none') +
+        field(u + 'f', 'Fresh water tank', '<input id="' + u + 'f" type="number" min="0" step="5" value="70" inputmode="numeric"><span class="calc-u">L</span>') +
+        field(u + 'g', 'Grey water tank', '<input id="' + u + 'g" type="number" min="0" step="5" value="50" inputmode="numeric"><span class="calc-u">L</span>') +
+        field(u + 'p', 'People', '<input id="' + u + 'p" type="number" min="1" step="1" value="2" inputmode="numeric">') +
+        field(u + 'w', 'Water each per day', '<input id="' + u + 'w" type="number" min="1" step="1" value="8" inputmode="numeric"><span class="calc-u">L</span>', 'careful use 6–10 L; showers 20+ L') + '</div>' +
+      '<fieldset class="calc-checks"><legend class="calc-l">What runs each day (amp-hours at 12 V)</legend>' +
+        LOADS.map(([k, t, ah, on]) => '<label><input type="checkbox" data-ah="' + ah + '"' + (on ? ' checked' : '') + '> ' + t + ' <span class="calc-u">' + ah + ' Ah</span></label>').join('') +
+        '<label class="calc-f" for="' + u + 'o"><span class="calc-u">Other</span><input id="' + u + 'o" type="number" min="0" step="1" value="0" inputmode="numeric"><span class="calc-u">Ah</span></label></fieldset>' +
+      '<div class="vp-bars" aria-hidden="true"></div>' +
+      '<div class="calc-outs">' + out('first', 'Runs out first', 'calc-big') + out('nosun', 'Battery with no charging') + out('bat', 'Battery with your charging') +
+        out('h2o', 'Fresh water lasts') + out('grey', 'Grey tank full in') + out('use', 'Using / making each day') + '</div>' +
+      '<p class="calc-note vp-warn" aria-live="polite"></p>';
+    const I = k => $(box, '#' + u + k);
+    function calc() {
+      const use = [...box.querySelectorAll('[data-ah]')].reduce((t, c) => t + (c.checked ? +c.dataset.ah : 0), 0) + num(I('o'));
+      const usable = num(I('b')) * parseFloat(I('t').value);
+      const make = num(I('s')) * parseFloat(I('m').value) * 0.75 / 12.5 + num(I('r')) * num(I('x'));
+      const net = use - make, p = Math.max(1, num(I('p'))), w = Math.max(0.1, num(I('w')));
+      const dBat = net > 0.05 ? usable / net : Infinity, dNo = use > 0 ? usable / use : Infinity;
+      const dW = num(I('f')) / (p * w), dG = num(I('g')) / (p * w * 0.8);
+      const days = x => isFinite(x) ? fmt(x, 1) + (fmt(x, 1) === '1' ? ' day' : ' days') : 'keeps up';
+      const list = [['Battery', dBat], ['Fresh water', dW], ['Grey tank', dG]].sort((a, b) => a[1] - b[1]);
+      $(box, '[data-o=first]').textContent = isFinite(list[0][1]) ? list[0][0] + ' · ' + days(list[0][1]) : 'Nothing: you’re self-sufficient';
+      $(box, '[data-o=nosun]').textContent = days(dNo); $(box, '[data-o=bat]').textContent = days(dBat);
+      $(box, '[data-o=h2o]').textContent = days(dW); $(box, '[data-o=grey]').textContent = days(dG);
+      $(box, '[data-o=use]').textContent = fmt(use, 0) + ' Ah / ' + fmt(make, 0) + ' Ah';
+      const max = Math.max(7, ...list.map(l => isFinite(l[1]) ? l[1] : 0));
+      $(box, '.vp-bars').innerHTML = [['Battery', dBat, 'k'], ['Fresh water', dW, 'b'], ['Grey tank', dG, 'g']].map(([t, v, c]) =>
+        '<div class="vp-bar vp-' + c + '"><span>' + t + '</span><i style="--f:' + (isFinite(v) ? Math.min(1, v / max) : 1).toFixed(3) + '"></i></div>').join('');
+      const warn = [];
+      if (dNo < 2) warn.push('Under 2 days with no sun or driving: Victron and most installers size for 2–3. Add battery or cut loads.');
+      if (I('t').value === '0.5' && parseFloat(I('m').value) < 1) warn.push('Lead-acid batteries lose about a third of their capacity in the cold, and solar barely helps in a UK winter.');
+      $(box, '.vp-warn').textContent = warn.join(' ');
+    }
+    box.addEventListener('input', calc); box.addEventListener('change', calc); calc();
+  }
+
+  /* ── Floor-load checker. UK homes are designed for an imposed load of 1.5 kN/m² spread
+     over the floor and 2.0 kN (~200 kg) on one small spot (Eurocode 1, UK annex, category A).
+     1 L of water = 1 kg ≈ 0.0098 kN. ───────────────────────────────────────────── */
+  function floorload(box) {
+    const u = 'fl' + (++uid);
+    const C = { jc: ['25 L jerrycan', 25, 1.3, 0.065], bt: ['6 × 2 L bottle pack', 12, 0.3, 0.06], wb: ['20 L water box', 20, 1, 0.08], bar: ['200 L barrel', 200, 9, 0.264], ibc: ['1,000 L IBC tote', 1000, 60, 1.2] };
+    box.innerHTML =
+      '<p class="calc-title">Floor-load checker</p><p class="calc-sub">Is it safe to store this much water here? Compares the weight with what UK floors are designed to carry.</p>' +
+      '<div class="calc-in">' +
+        field(u + 'c', 'Container', select(u + 'c', Object.entries(C).map(([k, v]) => [k, v[0]]), 'jc')) +
+        field(u + 'n', 'How many, side by side', '<input id="' + u + 'n" type="number" min="1" step="1" value="8" inputmode="numeric">') +
+        field(u + 'w', 'Where', select(u + 'w', [['g', 'Ground floor on concrete'], ['t', 'Upstairs: timber joists'], ['f', 'Flat: concrete floor slab']], 't')) + '</div>' +
+      '<div class="fl-meter" aria-hidden="true"><i></i><b></b><span>design load</span></div>' +
+      '<div class="calc-outs">' + out('kg', 'Total weight', 'calc-big') + out('kn', 'Load on that patch', 'calc-big') + out('pct', 'Of the design load') + out('one', 'Each container') + '</div>' +
+      '<p class="calc-note fl-say" aria-live="polite"></p>';
+    const I = k => $(box, '#' + u + k);
+    function calc() {
+      const [, L, tare, A] = C[I('c').value], n = Math.max(1, num(I('n'))), where = I('w').value;
+      const kg = n * (L + tare), kn = kg * 0.00981 / (n * A), pct = kn / 1.5, one = (L + tare) * 0.00981;
+      $(box, '[data-o=kg]').textContent = fmt(kg, 0) + ' kg';
+      $(box, '[data-o=kn]').textContent = fmt(kn, 1) + ' kN/m²';
+      $(box, '[data-o=pct]').textContent = where === 'g' ? 'n/a on the ground' : fmt(pct * 100, 0) + '%';
+      $(box, '[data-o=one]').textContent = fmt(L + tare, 0) + ' kg' + (one > 2 ? ' · over the 200 kg point load' : '');
+      $(box, '.fl-meter i').style.setProperty('--f', Math.min(1, pct / 3).toFixed(3));
+      $(box, '.fl-meter').classList.toggle('over', where !== 'g' && pct > 1);
+      $(box, '.fl-say').textContent = where === 'g'
+        ? 'A ground-bearing concrete floor takes this easily. This is the best place for heavy water storage.'
+        : pct <= 1 && one <= 2 ? 'Within the design load. Keep it against a wall, where joists or the slab are best supported, and away from the middle of a room.'
+        : 'Over what the floor is designed for. Floors have safety margins, but they also carry furniture and people: don’t count on it. Spread the containers out across rooms, keep them by load-bearing walls, use smaller containers, or move them downstairs.'
+          + (where === 't' ? ' Timber floors also sag and creak first; cracks in the ceiling below are a warning.' : '');
+    }
+    box.addEventListener('input', calc); box.addEventListener('change', calc); calc();
+  }
+
+  /* ── Shelter air. Fresh air per person from Kearny, Nuclear War Survival Skills:
+     at least 3 cfm (5 m³/h) in cool weather, 12 cfm (20 m³/h) mild, and size a pump for
+     40 cfm (68 m³/h) for hot weather. A resting adult breathes out ~19 L CO₂ an hour;
+     outdoor air is 0.04%. 1% is stuffy and drowsy; 3% brings headaches and panting. ── */
+  function bunkerair(box) {
+    const u = 'ba' + (++uid);
+    box.innerHTML =
+      '<p class="calc-title">Shelter air calculator</p><p class="calc-sub">How long the air lasts in a sealed room, and how much fresh air to pump in.</p>' +
+      '<div class="calc-in">' +
+        field(u + 'n', 'People', '<input id="' + u + 'n" type="number" min="1" step="1" value="4" inputmode="numeric">') +
+        field(u + 'l', 'Room length', '<input id="' + u + 'l" type="number" min="0.5" step="0.1" value="3" inputmode="decimal"><span class="calc-u">m</span>') +
+        field(u + 'w', 'Room width', '<input id="' + u + 'w" type="number" min="0.5" step="0.1" value="2.4" inputmode="decimal"><span class="calc-u">m</span>') +
+        field(u + 'h', 'Ceiling height', '<input id="' + u + 'h" type="number" min="1" step="0.1" value="2.2" inputmode="decimal"><span class="calc-u">m</span>') +
+        field(u + 'c', 'Weather outside', select(u + 'c', [['5', 'Cold (under 10 °C)'], ['20', 'Mild'], ['68', 'Hot or humid']], '20')) + '</div>' +
+      '<div class="ba-gauge" aria-hidden="true"><i></i><span class="ba-m1">1%</span><span class="ba-m3">3%</span></div>' +
+      '<div class="calc-outs">' + out('one', 'Sealed: stuffy (1% CO₂) in', 'calc-big') + out('three', 'Sealed: dangerous (3%) in', 'calc-big') +
+        out('air', 'Fresh air to pump in') + out('area', 'Floor space each') + out('vol', 'Air volume each') + out('heat', 'Body heat, like a heater of') + '</div>' +
+      '<p class="calc-note ba-warn" aria-live="polite"></p>' +
+      '<p class="calc-note">Times are for people resting. Moving about doubles CO₂. Never run a stove, heater or generator in a shelter: carbon monoxide kills long before CO₂ does.</p>';
+    const I = k => $(box, '#' + u + k);
+    const hm = h => h < 1 ? fmt(h * 60, 0) + ' min' : h < 48 ? fmt(h, 1) + ' hours' : fmt(h / 24, 1) + ' days';
+    function calc() {
+      const n = Math.max(1, num(I('n'))), A = num(I('l')) * num(I('w')), V = A * num(I('h')), q = num(I('c')) * n;
+      const t1 = V * 0.0096 / (n * 0.019), t3 = V * 0.0296 / (n * 0.019);
+      $(box, '[data-o=one]').textContent = hm(t1); $(box, '[data-o=three]').textContent = hm(t3);
+      $(box, '[data-o=air]').textContent = fmt(q, 0) + ' m³/h (' + fmt(q / 3.6, 0) + ' L/s)';
+      $(box, '[data-o=area]').textContent = fmt(A / n, 1) + ' m²'; $(box, '[data-o=vol]').textContent = fmt(V / n, 1) + ' m³';
+      $(box, '[data-o=heat]').textContent = fmt(n * 100, 0) + ' W';
+      $(box, '.ba-gauge i').style.setProperty('--t', Math.max(4, Math.min(40, t3 / 2)).toFixed(1) + 's');
+      $(box, '.ba-warn').textContent = A / n < 1 ? 'Under 1 m² each: too crowded to lie down. Kearny’s bare minimum was about 1 m² (10 sq ft) a person.' : '';
+    }
+    box.addEventListener('input', calc); box.addEventListener('change', calc); calc();
+  }
+
+  /* ── Bag weight and the walk home. Comfortable load ≤10% of body weight, fit adults
+     up to ~20%; children no more than 10%. Walking ~5 km/h unloaded on paths, ~4 loaded,
+     ~3 on rough ground; water ~0.5 L/h cool, ~1 L/h hot. ────────────────────────── */
+  function bagweight(box) {
+    const u = 'bw' + (++uid);
+    box.innerHTML =
+      '<p class="calc-title">Bag weight &amp; the walk home</p><p class="calc-sub">Is your bag too heavy, how long will the walk take, and how much water will you need?</p>' +
+      '<div class="calc-in">' +
+        field(u + 'm', 'Your weight', '<input id="' + u + 'm" type="number" min="20" step="1" value="75" inputmode="numeric"><span class="calc-u">kg</span>') +
+        field(u + 'b', 'Packed bag, with water', '<input id="' + u + 'b" type="number" min="0" step="0.5" value="9" inputmode="decimal"><span class="calc-u">kg</span>') +
+        field(u + 'd', 'Distance to walk', '<input id="' + u + 'd" type="number" min="0" step="1" value="30" inputmode="numeric"><span class="calc-u">km</span>') +
+        field(u + 'g', 'Ground', select(u + 'g', [['5', 'Pavements and paths'], ['3', 'Rough ground, hills, crowds']], '5')) +
+        field(u + 'x', 'Walking per day', '<input id="' + u + 'x" type="number" min="1" max="14" step="1" value="8" inputmode="numeric"><span class="calc-u">hours</span>') +
+        field(u + 'w', 'Weather', select(u + 'w', [['0.5', 'Cool'], ['1', 'Hot']], '0.5')) + '</div>' +
+      '<div class="bw-meter" aria-hidden="true"><i></i><span style="left:33.3%">10%</span><span style="left:66.6%">20%</span></div>' +
+      '<div class="calc-outs">' + out('pct', 'Of your body weight', 'calc-big') + out('time', 'Walking time', 'calc-big') + out('days', 'At your pace') + out('water', 'Water for the trip') + '</div>' +
+      '<p class="calc-note bw-say" aria-live="polite"></p>';
+    const I = k => $(box, '#' + u + k);
+    function calc() {
+      const m = Math.max(20, num(I('m'))), b = num(I('b')), pct = b / m * 100;
+      const v = Math.max(1, num(I('g')) - (pct > 10 ? 1 : 0) - (pct > 20 ? 1 : 0)), h = num(I('d')) / v, per = Math.max(1, num(I('x')));
+      $(box, '[data-o=pct]').textContent = fmt(pct, 0) + '%';
+      $(box, '[data-o=time]').textContent = fmt(h, 1) + ' hours at ' + fmt(v, 0) + ' km/h';
+      $(box, '[data-o=days]').textContent = h <= per ? 'one day' : fmt(Math.ceil(h / per), 0) + ' days, ' + fmt(Math.ceil(h / per) - 1, 0) + ' nights out';
+      $(box, '[data-o=water]').textContent = fmt(h * num(I('w')), 1) + ' L: carry 1–2 L and a filter';
+      $(box, '.bw-meter i').style.setProperty('--f', Math.min(1, pct / 30).toFixed(3));
+      $(box, '.bw-meter').dataset.band = pct <= 10 ? 'ok' : pct <= 20 ? 'mid' : 'bad';
+      $(box, '.bw-say').textContent = pct <= 10 ? 'Comfortable all day. This is the target for a get-home bag.'
+        : pct <= 20 ? 'Manageable for a fit adult who has walked with it. Train with it before you need it. Too heavy for a child.'
+        : 'Too heavy to walk far: you will slow down, get blisters and risk injury. Cut weight: water you can filter, spare clothes, tins.';
+    }
+    box.addEventListener('input', calc); box.addEventListener('change', calc); calc();
+  }
+
+  /* ── Rotation tracker: what you have, where, and what to eat next. Oldest first. ── */
+  function rotation(box) {
+    const K = 'prep-rotation';
+    let items = store.get(K, []);
+    const today = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
+    box.innerHTML =
+      '<p class="calc-title">Stock rotation tracker</p><p class="calc-sub">Add what you store and its best-before date. The list keeps the oldest at the top, so you eat it first. Saved in this browser only.</p>' +
+      '<form class="rt-add calc-in"><label class="calc-f"><span class="calc-l">Item</span><input name="n" required maxlength="60" placeholder="Tinned tomatoes"></label>' +
+        '<label class="calc-f"><span class="calc-l">How many</span><input name="q" type="number" min="1" value="1" inputmode="numeric"></label>' +
+        '<label class="calc-f"><span class="calc-l">Best before</span><input name="d" type="date" required></label>' +
+        '<label class="calc-f"><span class="calc-l">Where</span><input name="w" maxlength="40" placeholder="Under the stairs"></label>' +
+        '<button class="btn btn-primary btn-sm" type="submit">Add</button></form>' +
+      '<div class="calc-outs">' + out('n', 'Items tracked') + out('next', 'Use within 2 months', 'calc-big') + out('gone', 'Past best before') + '</div>' +
+      '<ul class="rt-list"></ul>' +
+      '<p class="calc-note"><button type="button" class="btn btn-sm btn-outline rt-csv">Save as a spreadsheet (CSV)</button> <button type="button" class="btn btn-sm btn-outline rt-print">Print the list</button></p>';
+    const list = $(box, '.rt-list');
+    function draw() {
+      items.sort((a, b) => a.d.localeCompare(b.d));
+      const t = today(), soon = new Date(t); soon.setDate(soon.getDate() + 60);
+      let nN = 0, nG = 0;
+      list.innerHTML = items.length ? items.map((it, i) => {
+        const d = new Date(it.d + 'T00:00:00'), st = d < t ? 'gone' : d < soon ? 'next' : 'ok';
+        if (st === 'gone') nG++; else if (st === 'next') nN++;
+        const left = Math.round((d - t) / 864e5);
+        return '<li class="rt-' + st + '"><span class="rt-name">' + esc(it.n) + ' <span class="calc-u">× ' + esc(it.q) + '</span></span>' +
+          '<span class="rt-when">' + d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' }) + ' · ' + (left < 0 ? 'past by ' + -left + ' days' : left + ' days left') + '</span>' +
+          '<span class="rt-where">' + esc(it.w || '') + '</span><button type="button" class="rt-del" data-i="' + i + '" aria-label="Remove ' + esc(it.n) + '">✕</button></li>';
+      }).join('') : '<li class="rt-empty">Nothing yet. Start with what’s in the cupboard now.</li>';
+      $(box, '[data-o=n]').textContent = items.length; $(box, '[data-o=next]').textContent = nN; $(box, '[data-o=gone]').textContent = nG;
+      store.set(K, items);
+    }
+    $(box, '.rt-add').addEventListener('submit', e => {
+      e.preventDefault(); const f = e.target;
+      items.push({ n: f.n.value.trim(), q: f.q.value || 1, d: f.d.value, w: f.w.value.trim() }); f.n.value = ''; f.n.focus(); draw();
+    });
+    list.addEventListener('click', e => { const b = e.target.closest('.rt-del'); if (b) { items.splice(+b.dataset.i, 1); draw(); } });
+    $(box, '.rt-csv').addEventListener('click', () => {
+      const q = v => '"' + String(v).replace(/"/g, '""') + '"';
+      const csv = 'Item,Quantity,Best before,Where\n' + items.map(i => [i.n, i.q, i.d, i.w].map(q).join(',')).join('\n');
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'stock-rotation.csv'; a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    });
+    $(box, '.rt-print').addEventListener('click', () => { document.body.classList.add('print-only-calc'); box.classList.add('print-me'); window.print(); });
+    window.addEventListener('afterprint', () => { document.body.classList.remove('print-only-calc'); box.classList.remove('print-me'); });
+    draw();
+  }
+
+  /* ── My Prep Plan: the household's plan on one printable page. ─────────────────── */
+  function prepplan(box) {
+    const K = 'prep-plan', P = store.get(K, {});
+    const F = [
+      ['Your household', [['who', 'Who lives here (names, ages)', 'textarea'], ['med', 'Medicines, allergies, needs', 'textarea'], ['pets', 'Pets', 'text']]],
+      ['Meeting points', [['m1', 'Near home, if you can’t get in', 'text', 'The postbox at the end of the road'], ['m2', 'Out of the area, if you can’t get home', 'text', 'Aunt Sue’s, 12 Mill Lane'], ['oc', 'Out-of-area contact everyone calls', 'text', 'Name and number']]],
+      ['Shut-offs in this home', [['st', 'Water stopcock', 'text', 'Under the kitchen sink'], ['gm', 'Gas meter and valve', 'text'], ['fb', 'Fuse box (consumer unit)', 'text']]],
+      ['Where things are', [['gb', 'Grab bags', 'text'], ['ws', 'Stored water', 'text'], ['tk', 'Torches, radio, first aid', 'text'], ['dc', 'Copies of documents, cash', 'text']]],
+      ['Who does what', [['sc', 'Who collects the children (and from where)', 'textarea'], ['nb', 'Neighbours who need checking on', 'textarea'], ['rd', 'Local radio station', 'text', 'BBC local radio, FM']]],
+      ['Numbers', [['nums', 'GP, school, work, insurer, power cut 105, NHS 111', 'textarea']]]
+    ];
+    box.innerHTML = '<p class="calc-title">My Prep Plan</p><p class="calc-sub">Fill this in together as a household, then print a copy for the fridge, each grab bag and the car. It’s saved only in this browser: nothing is sent anywhere.</p>' +
+      '<form class="pp-form">' + F.map(([h, fs]) => '<fieldset><legend>' + h + '</legend><div class="calc-in">' + fs.map(([k, l, t, ph]) =>
+        '<label class="calc-f pp-f' + (t === 'textarea' ? ' pp-wide' : '') + '"><span class="calc-l">' + l + '</span>' + (t === 'textarea'
+          ? '<textarea name="' + k + '" rows="2" placeholder="' + esc(ph || '') + '">' + esc(P[k]) + '</textarea>'
+          : '<input name="' + k + '" value="' + esc(P[k]) + '" placeholder="' + esc(ph || '') + '">') + '</label>').join('') + '</div></fieldset>').join('') + '</form>' +
+      '<p class="calc-note"><button type="button" class="btn btn-primary btn-sm pp-print">Print my plan</button> <button type="button" class="btn btn-sm btn-outline pp-clear">Clear</button></p>' +
+      '<div class="pp-sheet" aria-label="Your plan, as it will print"></div>';
+    const form = $(box, '.pp-form'), sheet = $(box, '.pp-sheet');
+    function draw() {
+      const v = {}; [...form.elements].forEach(e => { if (e.name) v[e.name] = e.value; }); store.set(K, v);
+      sheet.innerHTML = '<h3>Our Emergency Plan</h3>' + F.map(([h, fs]) => {
+        const rows = fs.filter(([k]) => v[k]).map(([k, l]) => '<div><dt>' + l + '</dt><dd>' + esc(v[k]).replace(/\n/g, '<br>') + '</dd></div>').join('');
+        return rows ? '<section><h4>' + h + '</h4><dl>' + rows + '</dl></section>' : '';
+      }).join('') + '<p class="pp-foot">999 for emergencies · 105 power cut · 111 NHS · 0345 988 1188 floodline · Printed ' + new Date().toLocaleDateString() + '</p>';
+    }
+    form.addEventListener('input', draw);
+    $(box, '.pp-print').addEventListener('click', () => { draw(); document.body.classList.add('print-only-plan'); window.print(); });
+    window.addEventListener('afterprint', () => document.body.classList.remove('print-only-plan'));
+    $(box, '.pp-clear').addEventListener('click', () => { [...form.elements].forEach(e => { if (e.name) e.value = ''; }); draw(); });
+    draw();
+  }
+
+  /* ── Readiness ladder: four tiers, ticked off as you go. Saved in this browser. ──── */
+  function ladder(box) {
+    const K = 'prep-ladder', done = store.get(K, {});
+    const T = [
+      ['72 hours', 'What the UK government asks every home to have', ['9 L of water per person (3 L a day)', 'Three days of food you normally eat, and a tin opener', 'Torch and spare batteries', 'Wind-up or battery radio', 'Power bank, charged', 'First aid kit and a week of your medicines', 'Cash in small notes', 'Copies of documents, spare keys', 'A grab bag by the door', 'Signed up to the Priority Services Register, if eligible']],
+      ['Two weeks', 'A long power cut, a snowed-in fortnight, a water outage', ['14 days of water, or a way to treat collected water', 'Two weeks of food that needs little cooking', 'A camping stove and fuel, used outdoors', 'A bucket toilet: bags and absorbent', 'A way to keep one room warm without mains power', 'Know where the stopcock, gas valve and fuse box are', 'A written household plan and meeting points', 'Get-home bag at work or in the car']],
+      ['Three months', 'Job loss, shortages, a long crisis', ['Three months of rotated food', 'Rainwater collection and a good filter', 'Repeat prescriptions kept a little ahead', 'Solar or other backup power for lights, phones, radio', 'Seeds and somewhere to grow some food', 'Hygiene stock: soap, bleach, sanitary products, nappies', 'An agreement with neighbours: who has what skills', 'Practised a weekend with the power off']],
+      ['A year', 'The long road: rebuilding normal life', ['A year of staples (grains, beans, oil, salt, sugar)', 'Reliable water: well, spring or large storage', 'Growing a real share of your own food', 'Heating fuel for a winter', 'Hand tools and the skills to use them', 'Medical training beyond first aid', 'A group: family, neighbours, a mutual-aid plan', 'This whole guide downloaded, printed in parts']]
+    ];
+    box.innerHTML = '<p class="calc-title">Your readiness ladder</p><p class="calc-sub">Climb one rung at a time. Each rung builds on the one below; don’t skip to a bunker before you have three days of water.</p>' +
+      '<div class="ld-wrap"><svg class="ld-art" viewBox="0 0 120 260" aria-hidden="true"><path class="ld-rail" d="M20 250 V10 M100 250 V10"/>' +
+        T.map((_, i) => '<g class="ld-rung" data-r="' + i + '"><rect x="20" y="' + (196 - i * 60) + '" width="80" height="14" rx="3" class="ld-bg"/><rect x="20" y="' + (196 - i * 60) + '" width="80" height="14" rx="3" class="ld-fill"/><text x="60" y="' + (192 - i * 60) + '" class="ld-t">' + T[i][0] + '</text></g>').join('') + '</svg>' +
+      '<div class="ld-tiers">' + T.map(([t, s, items], i) => '<details class="ld-tier"' + (i === 0 ? ' open' : '') + '><summary><b>Tier ' + (i + 1) + ': ' + t + '</b> <span class="ld-pc" data-t="' + i + '"></span><span class="ld-sub">' + s + '</span></summary><ul>' +
+        items.map((x, j) => '<li><label><input type="checkbox" data-k="' + i + '-' + j + '"' + (done[i + '-' + j] ? ' checked' : '') + '> ' + x + '</label></li>').join('') + '</ul></details>').join('') + '</div></div>' +
+      '<div class="calc-outs">' + out('score', 'Overall readiness', 'calc-big') + out('next', 'Next step') + '</div>';
+    function draw() {
+      let all = 0, got = 0, next = '';
+      T.forEach(([t, , items], i) => {
+        const n = items.filter((_, j) => done[i + '-' + j]).length; all += items.length; got += n;
+        if (!next) { const j = items.findIndex((_, j) => !done[i + '-' + j]); if (j >= 0) next = 'Tier ' + (i + 1) + ': ' + items[j]; }
+        $(box, '[data-t="' + i + '"]').textContent = n + ' / ' + items.length;
+        $(box, '.ld-rung[data-r="' + i + '"] .ld-fill').style.setProperty('--f', (n / items.length).toFixed(3));
+      });
+      $(box, '[data-o=score]').textContent = Math.round(got / all * 100) + '%';
+      $(box, '[data-o=next]').textContent = next || 'Every rung done. Now keep it rotated, and help a neighbour start.';
+      store.set(K, done);
+    }
+    box.addEventListener('change', e => { const k = e.target.dataset && e.target.dataset.k; if (k) { if (e.target.checked) done[k] = 1; else delete done[k]; draw(); } });
+    draw();
+  }
+
+  /* ── Saved checklist: turns the <li> items already in the placeholder into ticks that
+     are remembered. <div class="calc" data-calc="checklist" data-key="drill-blackout"
+     data-title="…"><ul><li>…</li></ul></div>. Used for drills and packing lists. ───── */
+  function checklist(box) {
+    const K = 'prep-check-' + (box.dataset.key || 'list'), done = store.get(K, {});
+    const items = [...box.querySelectorAll('li')].map(li => li.innerHTML);
+    box.innerHTML = (box.dataset.title ? '<p class="calc-title">' + esc(box.dataset.title) + '</p>' : '') +
+      '<ul class="ck-list">' + items.map((t, i) => '<li><label><input type="checkbox" data-i="' + i + '"' + (done[i] ? ' checked' : '') + '> <span>' + t + '</span></label></li>').join('') + '</ul>' +
+      '<p class="calc-note"><span class="ck-n"></span> <button type="button" class="btn btn-sm btn-outline ck-reset">Untick all</button></p>';
+    const draw = () => { $(box, '.ck-n').textContent = Object.keys(done).length + ' of ' + items.length + ' done.'; store.set(K, done); };
+    box.addEventListener('change', e => { const i = e.target.dataset.i; if (i != null) { if (e.target.checked) done[i] = 1; else delete done[i]; draw(); } });
+    $(box, '.ck-reset').addEventListener('click', () => { Object.keys(done).forEach(k => delete done[k]); box.querySelectorAll('input').forEach(c => { c.checked = false; }); draw(); });
+    draw();
+  }
+
+  /* ── Situation picker: where you live → what to read and do first. ─────────────── */
+  function situation(box) {
+    const K = 'prep-situation';
+    const S = {
+      house: ['A house', 'prep-home.html', ['Find the stopcock, gas valve and fuse box today', 'Store water on the ground floor: 25 L cans under the stairs', 'Choose one room to keep warm in a winter power cut', 'Plan a bucket toilet for when the mains stop', 'Look at a refuge room before you think about a bunker']],
+      flat: ['A flat or city', 'prep-urban.html', ['Check your floor load before storing lots of water', 'Know both stair routes: lifts stop in a power cut', 'Keep a get-home bag at work', 'Agree a meeting point outside the city centre', 'Plan to stay put unless the building itself is unsafe']],
+      van: ['A campervan or caravan', 'prep-van.html', ['Fit a carbon monoxide alarm and keep gas vents clear', 'Work out how many days your battery and water last', 'Keep the van half-packed and the fuel tank at least half full', 'Learn quiet, legal places to stop', 'Carry a 72-hour bag you can walk with if the van stops']],
+      rural: ['Rural or a smallholding', 'prep-rural.html', ['Know your water: mains, spring, well or tank', 'Store fuel legally: up to 30 L of petrol without notifying', 'Season a winter of firewood ahead', 'Save seed and keep a few hardy animals', 'Get to know neighbours: you’re the help that arrives first']]
+    };
+    let cur = store.get(K, 'house'); if (!S[cur]) cur = 'house';
+    box.innerHTML = '<p class="calc-title">Where do you live?</p><p class="calc-sub">Pick one. The first five things to do change with your home.</p>' +
+      '<div class="st-pick" role="radiogroup">' + Object.entries(S).map(([k, [t]]) => '<button type="button" role="radio" class="st-btn" data-k="' + k + '">' + t + '</button>').join('') + '</div><div class="st-out" aria-live="polite"></div>';
+    function draw() {
+      const [t, href, list] = S[cur];
+      box.querySelectorAll('.st-btn').forEach(b => { const on = b.dataset.k === cur; b.classList.toggle('on', on); b.setAttribute('aria-checked', on); });
+      $(box, '.st-out').innerHTML = '<ol class="st-list">' + list.map(x => '<li>' + x + '</li>').join('') + '</ol><p class="calc-note"><a class="btn btn-sm btn-primary" href="' + href + '">Read the ' + t.toLowerCase() + ' guide →</a> <a class="btn btn-sm btn-outline" href="../gear.html?for=' + cur + '">Gear list for this home</a></p>';
+      store.set(K, cur);
+    }
+    box.addEventListener('click', e => { const b = e.target.closest('.st-btn'); if (b) { cur = b.dataset.k; draw(); } });
+    draw();
+  }
+
+  /* ── What to buy, for your budget. Greedy by priority: the most important things that fit
+     what's left. Ticked items (already owned) cost nothing. Prices are rough 2026 UK mid-range
+     figures from the What to Buy table. ───────────────────────────────────────────── */
+  function buylist(box) {
+    const K = 'prep-buy-have', have = store.get(K, {});
+    const A = 'house flat van rural';
+    const I = [
+      ['smoke', 'Smoke alarms, one per floor (BS EN 14604)', 20, 1, 'v', 'house flat rural'],
+      ['co', 'Carbon monoxide alarm (BS EN 50291; -2 for vans)', 20, 1, 'v', A],
+      ['water', '2 × 25 L water containers', 25, 1, 'v', A],
+      ['food', 'Three days of food you already eat, plus a tin opener', 30, 1, 'v', A],
+      ['torch', 'Head torch for each person', 20, 1, 'd', A],
+      ['bank', '20,000 mAh power bank', 25, 1, 'd', A],
+      ['cash', 'Set aside cash in small notes (not spent: kept)', 0, 1, 'v', A],
+      ['radio', 'Wind-up / solar FM radio', 30, 2, 'v', A],
+      ['aid', 'First aid kit', 25, 2, 'v', A],
+      ['docs', 'Waterproof pouch with copies of documents', 5, 2, 'v', A],
+      ['treat', 'Water treatment tablets or plain unscented bleach', 8, 2, 'v', A],
+      ['stove', 'Camping stove and 4 gas cartridges', 35, 2, 'd', A],
+      ['blanket', 'Fire blanket for the kitchen', 15, 2, 'v', A],
+      ['inflate', '12 V tyre inflator', 35, 3, 'd', 'van rural'],
+      ['jump', 'Lithium jump starter', 60, 3, 'd', 'van rural'],
+      ['loo', 'Bucket toilet kit: buckets, lid, heavy bags, absorbent', 20, 3, 'v', 'house flat rural'],
+      ['lantern', 'Rechargeable LED lantern', 20, 3, 'd', A],
+      ['filter', 'Water filter (gravity or bottle)', 35, 3, 'd', A],
+      ['batts', 'Lithium AA/AAA batteries', 15, 3, 'v', A],
+      ['glasses', 'Spare pair of glasses (if you wear them)', 25, 3, 'v', A],
+      ['foil', 'Foil blankets', 5, 3, 'v', A],
+      ['flask', 'Vacuum flask, 1 L', 20, 4, 'd', A],
+      ['bladder', 'Bath water storage bladder', 30, 4, 'v', 'flat house'],
+      ['bags', 'Sleeping bags rated for a cold house', 50, 4, 'd', A],
+      ['layers', 'Wool or thermal base layers', 30, 4, 'd', A],
+      ['recharge', 'Rechargeable batteries and charger', 25, 4, 'd', A],
+      ['masks', 'FFP3 dust masks', 10, 4, 'v', A],
+      ['tape', 'Duct tape and heavy plastic sheet', 12, 4, 'v', A],
+      ['trauma', 'Trauma dressing (and a first aid course)', 10, 4, 'v', A],
+      ['pressure', 'Pressure cooker (saves fuel and time)', 60, 5, 'd', A],
+      ['tool', 'Multi-tool', 40, 5, 'd', A],
+      ['butt', 'Rain butt', 45, 5, 'd', 'house rural'],
+      ['station', 'Portable power station, about 300 Wh', 280, 5, 'd', A],
+      ['solar', 'Folding solar panel, about 100 W', 120, 6, 'd', A],
+      ['pot', 'Cast-iron pot that works on a fire', 40, 6, 'd', 'house rural van'],
+      ['cool', 'Large cool box', 40, 6, 'd', A],
+      ['tools', 'Basic hand tool kit', 50, 6, 'd', 'house rural van']
+    ];
+    let where = store.get('prep-situation', 'house'); if (!/^(house|flat|van|rural)$/.test(where)) where = 'house';
+    box.innerHTML = '<p class="calc-title">Shopping list for your budget</p><p class="calc-sub">Pick a budget and your home. The list fills with the most important things first; tick what you already own and it moves on to the next. Prices are rough 2026 UK figures.</p>' +
+      '<div class="calc-in">' + field('bl-b', 'Budget', select('bl-b', [[25, '£25'], [50, '£50'], [100, '£100'], [250, '£250'], [500, '£500'], [1000, '£1,000']], 100)) +
+        field('bl-w', 'Where you live', select('bl-w', [['house', 'House'], ['flat', 'Flat'], ['van', 'Campervan'], ['rural', 'Rural']], where)) + '</div>' +
+      '<div class="calc-outs">' + out('spend', 'This list costs about', 'calc-big') + out('n', 'Things to buy') + out('got', 'Already have') + '</div>' +
+      '<div class="bl-cols"><div><p class="bl-h">Buy now</p><ul class="bl-list bl-now"></ul></div><div><p class="bl-h">Next, when you can</p><ul class="bl-list bl-next"></ul></div></div>' +
+      '<p class="calc-note"><span class="bl-tag bl-v">Vital</span> keep for emergencies · <span class="bl-tag bl-d">Everyday</span> use it all the time, it’s ready when you need it</p>';
+    const row = (it, on) => '<li><label><input type="checkbox" data-id="' + it[0] + '"' + (on ? ' checked' : '') + '> <span>' + esc(it[1]) + '</span></label><span class="bl-tag bl-' + it[4] + '">' + (it[4] === 'v' ? 'Vital' : 'Everyday') + '</span><b>' + (it[2] ? '£' + it[2] : '—') + '</b></li>';
+    function draw() {
+      const b = num($(box, '#bl-b')), w = $(box, '#bl-w').value;
+      const fit = I.filter(it => it[5].split(' ').includes(w)).sort((a, c) => a[3] - c[3] || a[2] - c[2]);
+      let left = b; const now = [], next = [], got = [];
+      fit.forEach(it => { if (have[it[0]]) got.push(it); else if (it[2] <= left) { now.push(it); left -= it[2]; } else next.push(it); });
+      $(box, '.bl-now').innerHTML = now.map(it => row(it, false)).join('') + got.map(it => row(it, true)).join('') || '<li>Nothing fits: start with the free things (cash, a plan).</li>';
+      $(box, '.bl-next').innerHTML = next.slice(0, 12).map(it => row(it, false)).join('') || '<li>That’s the full list. Now practise with it.</li>';
+      $(box, '[data-o=spend]').textContent = '£' + (b - left);
+      $(box, '[data-o=n]').textContent = now.length; $(box, '[data-o=got]').textContent = got.length + ' of ' + fit.length;
+      store.set(K, have);
+    }
+    box.addEventListener('change', e => {
+      const id = e.target.dataset && e.target.dataset.id;
+      if (id) { if (e.target.checked) have[id] = 1; else delete have[id]; }
+      draw();
+    });
+    draw();
+  }
+
+  /* ── Van payload. UK category B licences cover up to 3,500 kg maximum authorised mass;
+     the van's "mass in running order" usually includes a 75 kg driver and 90% fuel.
+     A full propane bottle is about 13 kg (6 kg gas). Water 1 kg per litre. ────────── */
+  function vanload(box) {
+    const u = 'vl' + (++uid);
+    box.innerHTML = '<p class="calc-title">Van payload checker</p><p class="calc-sub">How much you can put in the van before it’s overloaded. The two weights are on the plate by the door or in the handbook.</p>' +
+      '<div class="calc-in">' +
+        field(u + 'm', 'Maximum authorised mass (MAM)', '<input id="' + u + 'm" type="number" min="1000" step="50" value="3500" inputmode="numeric"><span class="calc-u">kg</span>') +
+        field(u + 'r', 'Mass in running order', '<input id="' + u + 'r" type="number" min="500" step="10" value="2950" inputmode="numeric"><span class="calc-u">kg</span>', 'usually includes a 75 kg driver and 90% fuel') +
+        field(u + 'p', 'Passengers (besides the driver)', '<input id="' + u + 'p" type="number" min="0" step="1" value="1" inputmode="numeric">') +
+        field(u + 'w', 'Fresh water carried', '<input id="' + u + 'w" type="number" min="0" step="5" value="70" inputmode="numeric"><span class="calc-u">L</span>') +
+        field(u + 'g', 'Gas bottles', '<input id="' + u + 'g" type="number" min="0" step="1" value="2" inputmode="numeric">') +
+        field(u + 'a', 'Added kit (rack, bikes, extra battery)', '<input id="' + u + 'a" type="number" min="0" step="5" value="60" inputmode="numeric"><span class="calc-u">kg</span>') +
+        field(u + 'k', 'Food, clothes, bedding, tools', '<input id="' + u + 'k" type="number" min="0" step="5" value="150" inputmode="numeric"><span class="calc-u">kg</span>') + '</div>' +
+      '<div class="vl-bar" aria-hidden="true"><i class="vl-base"></i><i class="vl-load"></i><b></b></div>' +
+      '<div class="calc-outs">' + out('tot', 'Loaded weight', 'calc-big') + out('left', 'Payload left', 'calc-big') + out('use', 'Payload used') + '</div>' +
+      '<p class="calc-note vl-say" aria-live="polite"></p>';
+    const I = k => num($(box, '#' + u + k));
+    function calc() {
+      const mam = Math.max(1, I('m')), miro = I('r'), load = I('p') * 75 + I('w') + I('g') * 13 + I('a') + I('k'), tot = miro + load, pay = mam - miro;
+      $(box, '[data-o=tot]').textContent = fmt(tot, 0) + ' kg'; $(box, '[data-o=left]').textContent = fmt(mam - tot, 0) + ' kg';
+      $(box, '[data-o=use]').textContent = pay > 0 ? fmt(load / pay * 100, 0) + '% of ' + fmt(pay, 0) + ' kg' : '—';
+      const sc = Math.max(mam, tot) * 1.05;
+      $(box, '.vl-base').style.width = (miro / sc * 100).toFixed(1) + '%';
+      $(box, '.vl-load').style.cssText = 'left:' + (miro / sc * 100).toFixed(1) + '%;width:' + (load / sc * 100).toFixed(1) + '%';
+      $(box, '.vl-bar b').style.left = (mam / sc * 100).toFixed(1) + '%';
+      $(box, '.vl-bar').classList.toggle('over', tot > mam);
+      $(box, '.vl-say').textContent = (tot > mam ? 'Overloaded by ' + fmt(tot - mam, 0) + ' kg. That is an offence, it can void your insurance, and it makes braking and tyres unsafe. Carry less water while driving and fill up where you stop. '
+        : mam - tot < 100 ? 'Under 100 kg spare: weigh the loaded van at a public weighbridge before a long trip. ' : 'Within the limit. Check the axle limits too: a heavy back end can overload the rear axle on its own. ')
+        + (mam > 3500 ? 'Over 3,500 kg MAM needs a C1 licence (most people who passed before 1997 have it).' : '');
+    }
+    box.addEventListener('input', calc); calc();
+  }
+
+  /* ── Van range: how far on what's in the tank and the cans, minus what the diesel
+     heater burns at night (~0.15 L/h). UK mpg: litres/100 km = 282.5 ÷ mpg. ────────── */
+  function vanrange(box) {
+    const u = 'vr' + (++uid);
+    box.innerHTML = '<p class="calc-title">Range calculator</p><p class="calc-sub">How far you can get on the fuel you have, if the pumps are dry.</p>' +
+      '<div class="calc-in">' +
+        field(u + 't', 'Fuel in the tank', '<input id="' + u + 't" type="number" min="0" step="1" value="45" inputmode="numeric"><span class="calc-u">L</span>') +
+        field(u + 'j', 'Fuel in cans', '<input id="' + u + 'j" type="number" min="0" step="5" value="20" inputmode="numeric"><span class="calc-u">L</span>') +
+        field(u + 'e', 'Economy', '<input id="' + u + 'e" type="number" min="5" step="1" value="28" inputmode="numeric">' + select(u + 'u', [['mpg', 'mpg (UK)'], ['l', 'L/100 km']], 'mpg')) +
+        field(u + 'n', 'Nights using the diesel heater', '<input id="' + u + 'n" type="number" min="0" step="1" value="2" inputmode="numeric">') +
+        field(u + 'h', 'Heater hours a night', '<input id="' + u + 'h" type="number" min="0" step="1" value="8" inputmode="numeric">') + '</div>' +
+      '<div class="calc-outs">' + out('km', 'Range', 'calc-big') + out('mi', 'In miles') + out('heat', 'Heater uses') + out('per', 'Every 100 km uses') + '</div>' +
+      '<p class="calc-note">Fully loaded, into a headwind or on hills, expect 10–20% less. Keep the tank at least half full: in a crisis, stations without power can’t pump.</p>';
+    const I = k => $(box, '#' + u + k);
+    function calc() {
+      const e = num(I('e')), lp = I('u').value === 'mpg' ? 282.5 / Math.max(1, e) : e;
+      const heat = num(I('n')) * num(I('h')) * 0.15, fuel = Math.max(0, num(I('t')) + num(I('j')) - heat), km = fuel / lp * 100;
+      $(box, '[data-o=km]').textContent = fmt(km, 0) + ' km'; $(box, '[data-o=mi]').textContent = fmt(km / 1.609, 0) + ' miles';
+      $(box, '[data-o=heat]').textContent = fmt(heat, 1) + ' L'; $(box, '[data-o=per]').textContent = fmt(lp, 1) + ' L';
+    }
+    box.addEventListener('input', calc); box.addEventListener('change', calc); calc();
+  }
+
+  const KINDS = { fallout, bleach, rain, solar, sun, morse, lookalike, engine, forge, handpump, ram, fronts, firelay, moon, waterflow, seasons, explode, stars, genwave, genmatch, watertreat, biodiesel,
+    stockpile, vanpower, floorload, bunkerair, bagweight, rotation, prepplan, ladder, checklist, situation, buylist, vanload, vanrange };
   document.querySelectorAll('.calc[data-calc]').forEach(box => {
     const f = KINDS[box.dataset.calc]; if (!f || box.dataset.ready) return;
     box.dataset.ready = '1'; f(box);

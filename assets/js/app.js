@@ -90,6 +90,13 @@
     display:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18z" fill="currentColor"/></svg>`,
     back:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>`,
     snow:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4.9 7l14.2 10M4.9 17L19.1 7"/><path d="M9.5 3.5L12 6l2.5-2.5M9.5 20.5L12 18l2.5 2.5"/></svg>`,
+    prep:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>`,
+    van:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17V8a2 2 0 012-2h11l5 5v6h-2"/><path d="M6 17h8"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="16.5" cy="17.5" r="2"/><path d="M15 6v5h5M6 9h5"/></svg>`,
+    flats:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="10" height="18"/><path d="M14 9h6v12h-6M7 7h1M10 7h1M7 11h1M10 11h1M7 15h1M10 15h1M17 13h0M17 17h0"/></svg>`,
+    barn:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6v11H3z"/><path d="M9 21v-7h6v7M9 14l6 7M15 14l-6 7"/></svg>`,
+    bunker:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9h20"/><path d="M5 9v2M19 9v2"/><path d="M4 21v-6a8 5 0 0116 0v6z"/><path d="M10 21v-4h4v4M16 5v4M14 5h4"/></svg>`,
+    jar:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v3H8z"/><path d="M7 6h10l1 3v10a2 2 0 01-2 2H8a2 2 0 01-2-2V9z"/><path d="M6 12h12"/></svg>`,
+    basket:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18l-2 9H5z"/><path d="M8 6l2-3M16 6l-2-3"/><circle cx="8" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/><path d="M9 10v2M12 10v2M15 10v2"/></svg>`,
   };
   window.ICONS = ICONS;
 
@@ -117,6 +124,16 @@
     { id: 'communications',   href: 'sections/communications.html',    icon: ICONS.comms,    label: 'Communications' },
     { id: 'navigation',       href: 'sections/navigation.html',        icon: ICONS.compass,  label: 'Navigation & Maps' },
     { id: 'security',         href: 'sections/security.html',          icon: ICONS.shield,   label: 'Security & Defense' },
+
+    { id: 'prepping',        href: 'sections/prepping.html',         icon: ICONS.prep,    label: 'Prepping: Start Here', section: 'Prepping' },
+    { id: 'prep-24h',        href: 'sections/prep-24h.html',         icon: ICONS.clock,   label: 'First 24 Hours' },
+    { id: 'prep-home',       href: 'sections/prep-home.html',        icon: ICONS.home,    label: 'The Prepped Home' },
+    { id: 'prep-urban',      href: 'sections/prep-urban.html',       icon: ICONS.flats,   label: 'Urban & Flats' },
+    { id: 'prep-van',        href: 'sections/prep-van.html',         icon: ICONS.van,     label: 'Campervan & Mobile' },
+    { id: 'prep-rural',      href: 'sections/prep-rural.html',       icon: ICONS.barn,    label: 'Rural & Homestead' },
+    { id: 'prep-bunkers',    href: 'sections/prep-bunkers.html',     icon: ICONS.bunker,  label: 'Bunkers & Shelter Rooms' },
+    { id: 'prep-stockpile',  href: 'sections/prep-stockpile.html',   icon: ICONS.jar,     label: 'Stockpile & Rotation' },
+    { id: 'prep-buy',        href: 'sections/prep-buy.html',         icon: ICONS.basket,  label: 'What to Buy' },
 
     { id: 'knowledge',        href: 'sections/knowledge.html',         icon: ICONS.book,     label: 'Knowledge & Literacy', section: 'Knowledge & Skills' },
     { id: 'science',          href: 'sections/science.html',           icon: ICONS.atom,     label: 'First Principles' },
@@ -179,6 +196,7 @@
     setupEmergency();
     setupNowStrip();
     if (document.querySelector('.calc[data-calc]')) loadScript('calc.js').catch(() => {});
+    if (document.querySelector('.m3d[data-model]')) loadScript('model3d.js').catch(() => {});
     iconifyEmoji(document.body);
     setupSidebar();
     setupARIAToggle();
@@ -585,6 +603,8 @@
     const tile = document.querySelector('.quick-emergency');
     if (tile) tile.addEventListener('click', e => { e.preventDefault(); openSOS(); });
     if (/^#sos/.test(location.hash)) loadEmergency();
+    // In-page links like #sos-powercut open Emergency mode even before it has loaded.
+    window.addEventListener('hashchange', () => { const m = /^#sos(?:-([a-z]+))?$/.exec(location.hash); if (m) openSOS(m[1]); });
     // Warm the cache so it's there offline even if never opened online.
     if ('requestIdleCallback' in window) requestIdleCallback(() => loadEmergency().catch(() => {}), { timeout: 4000 });
     else setTimeout(() => loadEmergency().catch(() => {}), 2500);
@@ -640,6 +660,15 @@
     metallurgy: ['start', [['#building-forge', 'Build a forge', 'Brake drum, bellows', 'fire', 'orange'], ['#basic-techniques', 'Basic forging', 'Draw, upset, bend', 'hammer', 'amber'], ['#heat-treating', 'Harden & temper', 'Colours and quench', 'fire', 'red'], ['#knife-making', 'Make a knife', 'Five stages', 'hammer', 'amber']]],
     projects: ['start', [['#waterfilter', 'Water filter', 'Biosand build', 'water', 'blue'], ['#toilets', 'Toilets', 'Latrines that work', 'home', 'amber'], ['#cooling', 'Cool food', 'Without power', 'snow', 'blue'], ['#firefighting', 'Fight a fire', 'Bucket brigade and more', 'fire', 'red']]],
     salvage: ['start', [['#safety', 'Stay safe', 'Before you salvage', 'alert', 'red'], ['#where', 'Where to look', 'Best sources', 'map', 'amber'], ['#gen-maintenance', 'Keep a generator going', 'Maintenance', 'wrench', 'amber'], ['#batteries', 'Rescue batteries', 'Test and revive', 'wrench', 'amber']]],
+    prepping: ['start', [['#ladder', 'Where am I?', 'The readiness ladder', 'check', 'amber'], ['#where', 'My home', 'First five things to do', 'home', 'amber'], ['#plan', 'Make a plan', 'Print it for the fridge', 'clipboard', 'amber'], ['#drills', 'Practise', 'Weekend drills', 'clock', 'amber']]],
+    'prep-24h': ['now', [['#powercut', 'Power cut', 'First steps', 'energy', 'amber'], ['#flood', 'Flood warning', 'Act at the warning', 'water', 'blue'], ['#gas', 'Gas leak or CO alarm', 'Out, then call', 'fire', 'red'], ['#snow', 'Stuck in snow', 'Stay with the car', 'snow', 'blue']]],
+    'prep-home': ['start', [['#shutoffs', 'Find the shut-offs', 'Stopcock, gas, fuse box', 'alert', 'red'], ['#water', 'Water', 'How much, and where it hides', 'water', 'blue'], ['#warmth', 'No heating', 'Keep one room warm', 'fire', 'orange'], ['#grab-bag', 'Grab bag', 'What to pack', 'bag', 'amber']]],
+    'prep-urban': ['start', [['#floor-load', 'Is my floor OK?', 'Water weight checker', 'alert', 'red'], ['#high-rise', 'High-rise', 'Lifts, pumps, fire', 'building', 'orange'], ['#get-home', 'Walk home', 'Bag and route', 'map', 'amber'], ['#stay-go', 'Stay or go?', 'When to leave a city', 'compass', 'amber']]],
+    'prep-van': ['start', [['#gas-safety', 'Gas and CO', 'The things that kill', 'alert', 'red'], ['#power', 'How long can I last?', 'Battery and water', 'solar', 'amber'], ['#packing', 'Keep it packed', 'Always in the van', 'bag', 'amber'], ['#stopping', 'Where to stop', 'UK rules', 'map', 'amber']]],
+    'prep-rural': ['start', [['#fuel', 'Fuel and the law', '30 L and 275 L limits', 'fuel', 'red'], ['#water', 'Your water', 'Springs, wells, pumps', 'water', 'blue'], ['#heat', 'Heat for a winter', 'Wood and stoves', 'fire', 'orange'], ['#cut-off', 'Cut off', 'When help is far', 'alert', 'amber']]],
+    'prep-bunkers': ['start', [['#refuge', 'Refuge room', 'Start here, for little', 'home', 'amber'], ['#air', 'Air', 'The thing that kills first', 'alert', 'red'], ['#container', 'Shipping containers', 'Why they collapse', 'box', 'orange'], ['#law', 'The law', 'Planning and building rules', 'columns', 'amber']]],
+    'prep-buy': ['start', [['#everyday', 'Everyday kit', 'Use it, and it’s ready', 'check', 'amber'], ['#vital', 'Vital kit', 'Buy once, keep', 'alert', 'red'], ['#budget-list', 'My shopping list', 'For your budget', 'wallet', 'amber'], ['#skip', 'Don’t bother', 'What to skip', 'stop', 'orange']]],
+    'prep-stockpile': ['start', [['#planner', 'How much?', 'Stockpile planner', 'food', 'amber'], ['#shelf-life', 'How long?', 'Shelf-life table', 'clock', 'amber'], ['#dates', 'Best before?', 'And when to bin it', 'alert', 'red'], ['#rotation', 'Rotate', 'Oldest first tracker', 'calendar', 'amber']]],
     fuel: ['start', [['#which-fuel', 'Which fuel?', 'For your engine', 'fire', 'orange'], ['#biodiesel', 'Biodiesel', 'From used cooking oil', 'flask', 'amber'], ['#woodgas', 'Wood gas', 'Run an engine on wood', 'fire', 'amber'], ['#storage', 'Keep fuel usable', 'Storage and rotation', 'alert', 'amber']]],
     science: ['start', [['#ptable', 'Periodic table', 'Elements you can use', 'atom', 'blue'], ['#equations', 'Key equations', 'Physics and chemistry', 'atom', 'amber'], ['#maths', 'Maths', 'Practical methods', 'grid4', 'amber'], ['#constants', 'Constants', 'Numbers to know', 'clipboard', 'amber']]],
     textiles: ['start', [['#repair', 'Mend clothes', 'Patch and darn', 'scissors', 'amber'], ['#sewing', 'Sewing', 'Stitches that hold', 'scissors', 'amber'], ['#boots', 'Footwear', 'Repair or make', 'scissors', 'orange'], ['#quick-ref', 'Quick reference', 'At a glance', 'clipboard', 'amber']]],
@@ -745,7 +774,33 @@
       [[-8, 0], [0, .5], [8, 1]].map(([x, d]) => `<path class="bat bm bm-rain" style="--t:1.5s;--dl:${d}s" d="M${x} 6 L${x - 2} 12"/>`).join(''),
     disasters: `<g class="bm bm-sway" style="${O(0, 18)};--t:3s">` + [[-16, -16, 32], [-13, -9, 26], [-10, -2, 20], [-7, 5, 14], [-4, 11, 8], [-2, 17, 4]].map(([x, y, w], i) => `<path class="ba bm bm-flow" style="--t:${(1 + i * .15).toFixed(2)}s" stroke-dasharray="${(w * .9).toFixed(0)} 4" d="M${x} ${y} H${x + w}"/>`).join('') + `</g>`,
     nbc: `<circle class="baf" r="3"/><g class="bm bm-spin" style="${O(0, 0)};--t:12s">` + [0, 120, 240].map(a => `<path class="baf" transform="rotate(${a})" d="M-5.2 -9 A10.4 10.4 0 0 1 5.2 -9 L9 -15.6 A18 18 0 0 0 -9 -15.6 Z"/>`).join('') + `</g>` +
-      `<circle class="bat bm bm-ripple" style="${O(0, 0)};--t:3s" r="20"/>`
+      `<circle class="bat bm bm-ripple" style="${O(0, 0)};--t:3s" r="20"/>`,
+    prepping: [
+      `<path class="ba" d="M-16 0 L0 -14 L16 0 M-12 -3 V16 H12 V-3"/><path class="bat" d="M-3 16 V8 H3 V16"/>`,
+      `<path class="ba" d="M-14 16 V-17 H2 V16 M2 -6 H14 V16 M-18 16 H18"/><path class="bat" d="M-9 -11 h2 M-3 -11 h2 M-9 -4 h2 M-3 -4 h2 M-9 3 h2 M-3 3 h2 M7 0 h2 M7 7 h2"/>`,
+      `<path class="ba" d="M-20 9 V-6 C-20 -9 -18 -10 -16 -10 H6 L16 -1 H18 C20 -1 21 1 21 3 V9 H-20 Z"/><path class="bat" d="M-15 -5 H-4 M6 -10 V-1 H16"/><circle class="ba" cx="-11" cy="11" r="4"/><circle class="ba" cx="11" cy="11" r="4"/>`,
+      `<path class="bat" d="M-22 -4 H22"/><path class="ba" d="M-14 17 V7 C-14 -1 14 -1 14 7 V17 Z M-3 17 V10 H3 V17"/><path class="ba" d="M9 -4 V-14 H14"/>`
+    ].map((g, k) => `<g class="bm bm-cycle4${k ? ' bm-alt' : ''}" style="--t:10s;--dl:${k * 2.5 - 10}s">${g}</g>`).join(''),
+    'prep-24h': `<circle class="ba" r="18"/>` + [0, 90, 180, 270].map(a => `<path class="bat" transform="rotate(${a})" d="M0 -18 V-14"/>`).join('') +
+      `<g class="bm bm-spin" style="${O(0, 0)};--t:6s"><path class="ba" d="M0 0 V-13"/></g><g class="bm bm-spin" style="${O(0, 0)};--t:72s"><path class="ba" style="stroke-width:3" d="M0 0 H8"/></g><circle class="baf" r="2.4"/>`,
+    'prep-home': `<path class="ba" d="M-17 1 L0 -14 L17 1 M-12 -3 V17 H12 V-3"/><rect class="bat" x="-8" y="2" width="7" height="7"/>` +
+      `<rect class="baf bm bm-twinkle" style="${O(-4.5, 5.5)};--t:3s" x="-8" y="2" width="7" height="7" opacity=".55"/>` +
+      `<path class="ba bm bm-grow" style="--t:4s" pathLength="100" d="M2 9 L5.5 12.5 L12 5"/>`,
+    'prep-urban': `<path class="ba" d="M-15 18 V-18 H1 V18 M1 -7 H15 V18 M-20 18 H20"/>` +
+      [[-10, -13], [-4, -13], [-10, -6], [-4, -6], [-10, 1], [-4, 1], [-10, 8], [6, -2], [10, 5], [6, 11]].map(([x, y], k) =>
+        `<rect class="baf bm bm-step" style="--t:4s;--dl:${(k * .37).toFixed(2)}s" x="${x}" y="${y}" width="3" height="3"/>`).join(''),
+    'prep-van': `<g class="bm bm-bob" style="--t:.7s"><path class="ba" d="M-20 7 V-8 C-20 -11 -18 -12 -16 -12 H6 L16 -3 H18 C20 -3 21 -1 21 1 V7 H-20 Z"/><path class="bat" d="M-15 -7 H-4 M6 -12 V-3 H16"/></g>` +
+      `<g class="bm bm-spin" style="${O(-11, 9)};--t:.8s"><circle class="ba" cx="-11" cy="9" r="4"/><path class="bat" d="M-11 5 V13"/></g><g class="bm bm-spin" style="${O(11, 9)};--t:.8s"><circle class="ba" cx="11" cy="9" r="4"/><path class="bat" d="M11 5 V13"/></g>` +
+      `<path class="bat bm bm-flow" style="--t:.6s" stroke-dasharray="6 5" d="M-22 17 H22"/>`,
+    'prep-rural': `<path class="ba" d="M-20 17 V0 L-10 -8 L0 0 V17 Z M-14 17 V9 H-6 V17"/><path class="ba" d="M11 17 L13 -6 H15 L17 17 M-22 17 H22"/>` +
+      `<g class="bm bm-spin" style="${O(14, -7)};--t:4s">` + [0, 90, 180, 270].map(a => `<path class="ba" transform="rotate(${a} 14 -7)" d="M14 -7 V-19"/>`).join('') + `</g>`,
+    'prep-bunkers': `<path class="bat" d="M-22 -4 H22"/><path class="ba" d="M-15 18 V8 C-15 -1 15 -1 15 8 V18 Z"/><path class="ba" d="M-9 -4 V-14 H-4 M9 -4 V-11"/><path class="bat" d="M-3 18 V11 H3 V18"/>` +
+      `<path class="bat bm bm-flow" style="--t:1.2s" stroke-dasharray="3 3" d="M-6.5 -12 V4"/><path class="bat bm bm-flow" style="--t:1.2s" stroke-dasharray="3 3" d="M9 4 V-12"/>`,
+    'prep-buy': `<path class="ba" d="M-18 -8 H18 L14 10 H-14 Z"/><path class="bat" d="M-9 -8 L-5 -16 M9 -8 L5 -16"/><circle class="baf" cx="-8" cy="16" r="2.4"/><circle class="baf" cx="9" cy="16" r="2.4"/>` +
+      [[-8, 0], [0, .6], [8, 1.2]].map(([x, d]) => `<rect class="baf bm bm-stack" style="--t:4s;--dl:${d}s" x="${x - 3}" y="-6" width="6" height="12" rx="1.5" opacity=".8"/>`).join(''),
+    'prep-stockpile': [[-15, 9, 0], [1, 9, .3], [-7, 1, .6], [-15, -7, .9], [1, -7, 1.2]].map(([x, y, d]) =>
+      `<g class="bm bm-stack" style="--t:5s;--dl:${d}s"><rect class="ba" x="${x + 1}" y="${y}" width="12" height="7" rx="1.5"/><path class="bat" d="M${x + 1} ${y + 3.5} H${x + 13}"/></g>`).join('') +
+      `<path class="ba" d="M-18 17 H18"/>`
   };
 
   /* =================== LIVING SKY ===================
@@ -808,7 +863,7 @@
      (a map), a glowing badge, rising embers. Pure SVG + CSS, no images. */
   const GROUP_TONE = {
     'Core Survival': 'amber', 'Knowledge & Skills': 'blue', 'Homesteading & Animals': 'green',
-    'Threats & Disasters': 'red', 'Trades & Materials': 'orange', 'Community & Mind': 'violet', 'Tools & Library': 'teal'
+    'Prepping': 'khaki', 'Threats & Disasters': 'red', 'Trades & Materials': 'orange', 'Community & Mind': 'violet', 'Tools & Library': 'teal'
   };
   function seeded(str) {
     let h = 2166136261;

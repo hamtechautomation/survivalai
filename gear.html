@@ -124,6 +124,7 @@
     .filter-btn.f-critical.active { background: var(--red); border-color: var(--red); color: #fff; }
     .filter-btn.f-important.active { background: #d68910; border-color: #d68910; color: var(--bg-0); }
     .filter-btn.f-nice.active { background: #2980b9; border-color: #2980b9; color: #fff; }
+    .gear-for { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; flex-basis: 100%; }
 
     .gear-actions {
       display: flex;
@@ -357,7 +358,7 @@
     <p class="section-desc">Every piece of equipment referenced in The Last Light Survival Guide, organized by category and priority tier. Check items as you acquire them — your progress saves automatically.</p>
     <div class="section-meta">
       <span class="meta-item">📅 Updated: <span data-updated="2025-06"></span></span>
-      <span class="meta-item">📖 Compiled from all 30 sections</span>
+      <span class="meta-item">📖 Compiled from all 39 sections</span>
     </div>
   </div>
 
@@ -400,6 +401,15 @@
     <button class="filter-btn f-critical" data-filter="critical" onclick="setFilter('critical', this)">🔴 Critical</button>
     <button class="filter-btn f-important" data-filter="important" onclick="setFilter('important', this)">🟡 Important</button>
     <button class="filter-btn f-nice" data-filter="nice" onclick="setFilter('nice', this)">🔵 Nice to Have</button>
+    <div class="gear-for" role="group" aria-label="Where you live">
+      <span class="gear-controls-label">For:</span>
+      <button class="filter-btn for-btn active" data-for="all" onclick="setFor('all', this)">Everyone</button>
+      <button class="filter-btn for-btn" data-for="house" onclick="setFor('house', this)">🏠 House</button>
+      <button class="filter-btn for-btn" data-for="flat" onclick="setFor('flat', this)">🏢 Flat</button>
+      <button class="filter-btn for-btn" data-for="van" onclick="setFor('van', this)">🚐 Van</button>
+      <button class="filter-btn for-btn" data-for="rural" onclick="setFor('rural', this)">🌾 Rural</button>
+      <button class="filter-btn for-btn" data-for="shelter" onclick="setFor('shelter', this)">🛡️ Shelter room</button>
+    </div>
     <div class="gear-actions">
       <button onclick="checkAll()" class="btn btn-sm btn-ghost">Check All</button>
       <button onclick="uncheckAll()" class="btn btn-sm btn-ghost">Uncheck All</button>
@@ -803,9 +813,30 @@
   }
 
   /* =================== FILTER =================== */
+  /* Which items suit where you live (from the Prepping pages). Rural and "everyone"
+     show the whole list; a shelter room shows only what belongs inside one. */
+  const FOR = {
+    house: { not: ['e12', 'f12', 't11'] },
+    flat:  { not: ['e12', 'f11', 'f12', 't03', 't04', 't11', 't12', 'sec06', 'sec07', 'h07'] },
+    van:   { not: ['e12', 'f07', 'f09', 'f12', 't06', 't10', 't11', 't12', 'sec01', 'sec02', 'sec06', 'sec07', 'sec08', 'h07', 'k11', 'w07'] },
+    rural: { not: [] },
+    shelter: { only: ['w01', 'w02', 'w03', 'w04', 'w05', 'f01', 'f03', 'f04', 'f05', 'm01', 'm02', 'm03', 'm04', 'm07', 'm08', 'm09', 'm10', 'm11', 'm17', 'm19',
+      'e04', 'e05', 'e08', 'e09', 's03', 's04', 's10', 's14', 'c01', 'c02', 'c03', 'c04', 'c10', 'n04', 'h01', 'h02', 'h03', 'h04', 'h05', 'h06', 'h08',
+      'k01', 'k02', 'k03', 'k04', 'k06', 'k09', 'k10', 'b14'] }
+  };
+  let currentFor = 'all';
+  try { const q = new URLSearchParams(location.search).get('for') || localStorage.getItem('gear-for'); if (FOR[q]) currentFor = q; } catch (e) {}
+  const fits = item => { const f = FOR[currentFor]; return !f || (f.only ? f.only.includes(item.id) : !f.not.includes(item.id)); };
+  const visible = item => (currentFilter === 'all' || item.priority === currentFilter) && fits(item);
+  window.setFor = function (where, btn) {
+    currentFor = FOR[where] ? where : 'all';
+    try { localStorage.setItem('gear-for', currentFor); } catch (e) {}
+    document.querySelectorAll('.for-btn').forEach(b => b.classList.toggle('active', b.dataset.for === currentFor));
+    applyFilter(currentFilter);
+  };
   window.setFilter = function (filter, btn) {
     currentFilter = filter;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-btn:not(.for-btn)').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
     applyFilter(filter);
   };
@@ -818,7 +849,7 @@
       cat.items.forEach(item => {
         const itemEl = document.getElementById('item-' + item.id);
         if (!itemEl) return;
-        const show = filter === 'all' || item.priority === filter;
+        const show = (filter === 'all' || item.priority === filter) && fits(item);
         itemEl.classList.toggle('hidden-by-filter', !show);
         if (show) visibleCount++;
       });
@@ -830,8 +861,7 @@
   window.checkAll = function () {
     GEAR_DATA.forEach(cat => {
       cat.items.forEach(item => {
-        const visible = currentFilter === 'all' || item.priority === currentFilter;
-        if (!visible) return;
+        if (!visible(item)) return;
         setState(item.id, true);
         const el = document.getElementById('item-' + item.id);
         const chk = document.getElementById('chk-' + item.id);
@@ -846,8 +876,7 @@
   window.uncheckAll = function () {
     GEAR_DATA.forEach(cat => {
       cat.items.forEach(item => {
-        const visible = currentFilter === 'all' || item.priority === currentFilter;
-        if (!visible) return;
+        if (!visible(item)) return;
         setState(item.id, false);
         const el = document.getElementById('item-' + item.id);
         const chk = document.getElementById('chk-' + item.id);
@@ -886,7 +915,7 @@
   };
 
   /* =================== BOOT =================== */
-  document.addEventListener('DOMContentLoaded', render);
+  document.addEventListener('DOMContentLoaded', () => { render(); window.setFor(currentFor); });
 
 })();
 </script>

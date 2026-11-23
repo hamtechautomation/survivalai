@@ -59,7 +59,7 @@
   <div class="toolbar"><button onclick="window.print()">⎙ Print this index</button></div>
 
   <h1>The Last Light Survival Guide</h1>
-  <p class="sub">Master Index — v1.2 · the whole archive at a glance, for paper</p>
+  <p class="sub">Master Index — v1.3 · the whole archive at a glance, for paper</p>
 
   <div class="lead">
     <strong>If the screens are dead and the power is gone:</strong> this folder still works. Open <strong>index.html</strong> in any web browser — no internet needed. The reference books live in the <strong>pdfs/</strong> folder. The offline AI (<strong>Bunker Bot</strong>) needs a local model — see <strong>ai-setup.html</strong>. Print this page and keep it with the drive so the catalogue survives even if nothing will switch on.
@@ -95,6 +95,15 @@ const SECTIONS=[
  ['Communications','Ham radio, Baofeng setup, Morse, visual signals, mesh/LoRa, NOAA weather, Faraday, dead drops, no-power crystal radio'],
  ['Navigation &amp; Maps','Topo maps, compass &amp; triangulation, celestial, natural navigation, map-making, urban, star charts'],
  ['Security &amp; Defense','Community watch, perimeter, de-escalation, firearms basics, non-lethal, OPSEC, fortification, bug-out vs bug-in, caching supplies'],
+ ['Prepping: Start Here','The 72-hour advice and readiness tiers, what fails in a power cut, myths, budget plan, household plan, practice drills'],
+ ['First 24 Hours','Step-by-step first day of a power cut, flood warning, gas leak or CO alarm, water outage or boil notice, evacuation order, and being stuck in snow'],
+ ['The Prepped Home','Shut-offs, hidden water, food in a power cut, light and generator safety, keeping warm, cooking, bucket toilet, medicines, documents, PSR, grab bag'],
+ ['Urban &amp; Flats','Small-space storage, floor loads, high-rise risks, staying or leaving, get-home bag and route, low profile, organising your building'],
+ ['Campervan &amp; Mobile','Van systems in 3D, choosing a van, payload and licences, power and water autonomy, 12 V wiring, gas and CO safety, water system, where to stop, security, living in it, spares and FLOWER checks, winter, range, bug-out, car kit'],
+ ['Rural &amp; Homestead','Cut off, private water, petrol storage law, heating oil and LPG, firewood, backup power, food, livestock rules, community plans'],
+ ['Bunkers &amp; Shelter Rooms','Refuge rooms, cellars, buried pods, the shipping-container myth, ventilation and CO₂, earth cover, damp, radon, exits, planning law, cost'],
+ ['Stockpile &amp; Rotation','Stockpile planner, what to store, shelf lives, best before vs use by, storage, Mylar and oxygen absorbers, rotation tracker, non-food'],
+ ['What to Buy','Everyday kit that doubles as emergency kit, vital items to keep, safety standards to look for, what to skip, shopping list by budget'],
  ['Knowledge &amp; Literacy','Preserving books, reading lists, community library, teaching, digital archiving, records, teaching children'],
  ['First Principles','Periodic table, constants &amp; conversions, key equations, physics &amp; chemistry first principles, field maths, the invention method'],
  ['Agriculture','Soil, planting, crop rotation, seed saving, calendars'],
@@ -173,7 +182,7 @@ $('sections').innerHTML=SECTIONS.map((s,i)=>`<tr><td class="n">${i+1}</td><td cl
 $('tools').innerHTML=TOOLS.map((t,i)=>`<tr><td class="n">${i+1}</td><td class="t">${t[0]}</td><td class="d">${t[1]}</td></tr>`).join('');
 $('pdfs').innerHTML=PDFS.map(p=>`<tr><td class="t">${p[0]}</td><td class="d">${p[1]}</td></tr>`).join('');
 $('quick').innerHTML=QUICK.map(q=>`<tr><td class="t">${q[0]}</td><td class="d">${q[1]}</td></tr>`).join('');
-$('foot').innerHTML=`${SECTIONS.length} sections · ${TOOLS.length} tools · 36 practical skills · ${PDFS.length} bundled reference books &nbsp;·&nbsp; The Last Light Survival Guide v1.2 · printed master index. Distribute freely (CC BY-SA 4.0).`;
+$('foot').innerHTML=`${SECTIONS.length} sections · ${TOOLS.length} tools · 36 practical skills · ${PDFS.length} bundled reference books &nbsp;·&nbsp; The Last Light Survival Guide v1.3 · printed master index. Distribute freely (CC BY-SA 4.0).`;
 </script>
 </body>
 </html>

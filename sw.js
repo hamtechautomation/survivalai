@@ -1,5 +1,5 @@
 /* The Last Light Survival Guide — Service Worker v4 */
-const CACHE = 'last-light-v106';
+const CACHE = 'last-light-v109';
 
 /* Pre-cache: all HTML, CSS, JS, icons, manifest.
    pdf-chunks.json (~30MB) is intentionally excluded from pre-cache to avoid
@@ -49,6 +49,15 @@ const PRECACHE = [
   '/sections/vehicles.html',
   '/sections/salvage.html',
   '/sections/fuel.html',
+  '/sections/prepping.html',
+  '/sections/prep-24h.html',
+  '/sections/prep-home.html',
+  '/sections/prep-urban.html',
+  '/sections/prep-van.html',
+  '/sections/prep-rural.html',
+  '/sections/prep-bunkers.html',
+  '/sections/prep-stockpile.html',
+  '/sections/prep-buy.html',
   '/sections/build-power.html',
   '/sections/build-structures.html',
   '/sections/medicine-making.html',
@@ -100,6 +109,7 @@ const PRECACHE = [
   '/assets/js/library-data.js',
   '/assets/js/emergency.js',
   '/assets/js/calc.js',
+  '/assets/js/model3d.js',
   '/assets/js/emergency-figs.js',
   '/assets/js/tools.js',
   '/assets/js/shared-progress.js',
