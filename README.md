@@ -44,7 +44,7 @@ The content is broad and AI-assisted, and the **medical material has not yet bee
 ```bash
 sh make-usb.sh /Volumes/MYUSB           # macOS
 sh make-usb.sh /media/$USER/MYUSB       # Linux
-sh make-usb.sh /Volumes/MYUSB --lite    # app only, ~4 MB (no PDFs/maps/AI index)
+sh make-usb.sh /Volumes/MYUSB --lite    # app only, ~15 MB (no PDFs/maps/AI index)
 ```
 
 It copies the guide, then **re-reads every byte on the stick** against fresh
@@ -439,7 +439,7 @@ On supported browsers (Chrome, Edge, Safari iOS), the guide can be installed as 
 
 ## Expanding the Library — Wikipedia, Gutenberg & Maps
 
-The guide app itself is tiny (~2.5 MB); with the ~30 MB AI index it still fits anywhere. When you
+The guide app itself is small (~15 MB, most of it pictures); with the ~30 MB AI index it still fits anywhere. When you
 have internet, the **Expansion Library** (`expansion.html`) turns it into a
 launchpad for the rest of recorded knowledge — all read **offline** afterwards:
 
@@ -655,5 +655,5 @@ You are free to share and adapt the content for any purpose, even commercially, 
 
 ---
 
-*The Last Light Survival Guide — v1.0.0 — June 2026*  
-*Lite app ~2.5 MB · full bundle (33 PDFs + AI index + a regional map) ~590 MB · fits any pen drive — and expands to all of Wikipedia, Gutenberg and world maps on demand.*
+*The Last Light Survival Guide — v1.4.0 — November 2026*  
+*Lite app ~15 MB · full bundle (33 PDFs + AI index + a regional map) ~600 MB · fits any pen drive — and expands to all of Wikipedia, Gutenberg and world maps on demand.*

@@ -370,7 +370,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  /* pdf-chunks.json is 5.7MB — network-first, cache on demand only */
+  /* pdf-chunks.json is ~30 MB — network-first, cache on demand only */
   if (url.pathname.endsWith('pdf-chunks.json')) {
     event.respondWith(networkFirstWithCache(event.request));
     return;

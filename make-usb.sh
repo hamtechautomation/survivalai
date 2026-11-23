@@ -3,7 +3,7 @@
 #
 #   sh make-usb.sh /Volumes/MYUSB              (macOS)
 #   sh make-usb.sh /media/$USER/MYUSB          (Linux)
-#   sh make-usb.sh /Volumes/MYUSB --lite       (skip PDFs / maps / AI index, ~2 MB)
+#   sh make-usb.sh /Volumes/MYUSB --lite       (skip PDFs / maps / AI index, ~15 MB)
 #
 # Copies the guide into <target>/last-light-survival-guide/, writes a fresh
 # SHA-256 manifest computed from the SOURCE files, then re-reads every byte on

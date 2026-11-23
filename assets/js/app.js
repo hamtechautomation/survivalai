@@ -382,8 +382,8 @@
   }
 
   /* Heavy scripts load only when needed (lighter, faster pages on old
-     phones): search.js (~107 KB) when idle or as soon as you search;
-     bunker-bot.js (~48 KB) the first time the Bunker Bot panel opens.
+     phones): search.js (~240 KB) when idle or as soon as you search;
+     bunker-bot.js (~52 KB) the first time the Bunker Bot panel opens.
      Both are pre-cached by the service worker, so this works offline. */
   const scriptLoads = {};
   function loadScript(name) {
